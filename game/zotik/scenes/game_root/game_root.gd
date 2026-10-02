@@ -283,6 +283,10 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	area = WorldArea.new()
 	world.add_child(area)
 	area.build(area_id, factories)
+	if ZotikTestModel.SHOW_IN_GAME:
+		var test := ZotikTestModel.showcase()
+		area.add_child(test)
+		test.global_position = player.global_position
 	area.exit_requested.connect(_on_exit_requested, CONNECT_DEFERRED)
 	GameState.player.area = area_id
 	_sync_state()

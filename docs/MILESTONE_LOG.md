@@ -594,3 +594,25 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - The loaded state is identical to the saved one (play_time excluded, because it keeps counting).
 - No game bugs found. The two failures during writing were test-script mistakes: the savepoint step was missing, and the valve order was wrong (the solution is valves 1 and 2).
 - Regression: 195/195 tests plus restart checks for chapters 1–3: PASS.
+
+## C02 Hunyuan3D test model of Zotik – DONE as PLACEHOLDER (owner request 2026-10-02)
+- **Generation.** Hugging Face Space `WorldzTech/Hunyuan3D-2.1-Demo`, from `reference/derived/ZOTIK_FRONT_CROP.png`, with seed 1234 and background removal on.
+  - The textured run was rejected by the anonymous ZeroGPU quota (needs HF PRO), so the mesh is the shape-only output.
+  - The reference image is projected on as vertex colours (C-33a).
+- **Post-processing** (`tools/models/hunyuan_postprocess.py`):
+  - ground plate removed
+  - 321,656 → 24,000 triangles
+  - feet at y = 0
+  - output: `game/zotik/assets/characters/custom/zotik_test.glb`
+- **Rigging** (`game/zotik/tools/bake_zotik_test_skin.gd`, ~5 s offline):
+  - Fitted onto the shared Quaternius human skeleton used by `ZotikVisual`.
+  - Bind pose Idle_Loop frame 0; bone rests refitted to Zotik's proportions.
+  - Weights transferred from the CC0 human body and smoothed; tail, blade and sash are rigid on the torso.
+  - Saved as `zotik_test_skinned.res`, so nothing is computed at runtime.
+  - All human animations play. Fused tail and blade bend with the torso in run and attack.
+- **In game.** `ZotikTestModel.showcase()` puts the static and the rigged copy to Zotik's right on every area load (`SHOW_IN_GAME`).
+- **Renders.** `tests/screenshots_zotik_test.gd` → `docs/screenshots/zotik_test/` (stored as JPEG) (front, side, back, walk, run, attack, cheer, village).
+- **Licence.** The Hunyuan 3D 2.1 licence excludes the EU, the UK and South Korea. Owner decision before any distribution (C-33b).
+- **Regression.**
+  - 195/195 plus restart check: PASS (run before the new test file was added).
+  - New `test_c02_zotik_test_model`: 3/3 PASS.
