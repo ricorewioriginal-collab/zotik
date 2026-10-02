@@ -12,10 +12,12 @@ func _ready() -> void:
 	bg.color = Color(0.035, 0.055, 0.09)
 	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(bg)
+	var center := CenterContainer.new()
+	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	add_child(center)
 	var box := VBoxContainer.new()
-	box.set_anchors_preset(Control.PRESET_CENTER)
 	box.add_theme_constant_override("separation", 12)
-	add_child(box)
+	center.add_child(box)
 	var title := Label.new()
 	title.text = "ZOTIK\nDie Splitter der Welten"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER

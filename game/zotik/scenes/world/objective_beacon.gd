@@ -4,7 +4,7 @@ extends Node3D
 ## PLACEHOLDER visual: translucent light pillar + bobbing arrow.
 
 var pillar: MeshInstance3D
-var arrow: Label3D
+var arrow: MeshInstance3D
 var _t := 0.0
 
 
@@ -23,13 +23,16 @@ func _ready() -> void:
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	pillar.material_override = mat
 	add_child(pillar)
-	arrow = Label3D.new()
-	arrow.text = "▼"
-	arrow.font_size = 160
-	arrow.modulate = Color(1.0, 0.85, 0.3)
-	arrow.outline_size = 24
-	arrow.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	arrow.no_depth_test = true
+	arrow = MeshInstance3D.new()
+	var cone := CylinderMesh.new()
+	cone.top_radius = 0.45
+	cone.bottom_radius = 0.0
+	cone.height = 0.8
+	arrow.mesh = cone
+	var amat := StandardMaterial3D.new()
+	amat.albedo_color = Color(1.0, 0.85, 0.3)
+	amat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	arrow.material_override = amat
 	add_child(arrow)
 	hide()
 
@@ -37,3 +40,4 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	_t += delta
 	arrow.position.y = 3.2 + sin(_t * 3.0) * 0.25
+	arrow.rotation.y = _t * 2.0

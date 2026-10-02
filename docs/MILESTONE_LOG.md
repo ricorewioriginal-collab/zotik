@@ -206,3 +206,13 @@ The project owner authorised autonomous work and merging on 2026-10-02. Phase 2 
 - **Test guard:** every autoload in `project.godot` must compile and be instanced. Before this, a broken autoload only showed up as follow-up errors.
 - Tests: `tests/unit/test_p01_playability.gd` (6 tests). Rendered check: `docs/screenshots/04b_village_beacon_on_mira.png`.
 - Level sanity test `tests/unit/test_p02_reachability.gd`: with all gates open, every entity, exit and spawn of every area is reachable on foot from the default spawn. It uses a grid flood fill with the player radius. A mutation check confirmed that it detects a walled-in NPC.
+
+## P2 Builds and web check – PASSED
+- `build` workflow: exports Windows (38 MB), Linux (28 MB) and Web (10 MB) and smoke-tests the Linux build (boot + `CONTENT OK`). Release `phase1-latest` is published on every merge to `main`.
+- GitHub Pages deploy needs a one-time repository setting (Settings → Pages → Source: GitHub Actions). The workflow token is not allowed to enable it ("Resource not accessible by integration").
+- The web build from the release was loaded in headless Chromium (WebGL2 via SwiftShader). Booting, content validation, New Game, the intro and walking into the village all worked.
+- That run found issues that only appear without system fonts or in real layouts. All are fixed:
+  - ★ ← → ✓ ▼ glyphs showed as boxes. They were replaced, and the beacon arrow is now a 3D cone.
+  - The controls overlay overlapped the dialogue box. It now sits under the HP bar and hides during dialogues.
+  - The title menu was off-centre.
+- New test `tests/unit/test_p03_glyphs.gd`: every string literal in game scripts and every data string must render with the built-in font. A mutation check confirmed it fails on "★".

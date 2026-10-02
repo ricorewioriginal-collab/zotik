@@ -1,5 +1,14 @@
 # ZOTIK – Die Splitter der Welten
 
+## Jetzt spielen (Phase 1 – Lunaris)
+- **Windows:** [ZOTIK-windows-x86_64.zip](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-windows-x86_64.zip) herunterladen, entpacken und `ZOTIK.exe` starten. Windows SmartScreen warnt eventuell, weil die Datei nicht signiert ist: „Weitere Informationen → Trotzdem ausführen“.
+- **Linux:** [ZOTIK-linux-x86_64.zip](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-linux-x86_64.zip), dann `ZOTIK.x86_64` starten.
+- **Browser:** Die Web-Version wird automatisch auf GitHub Pages veröffentlicht, sobald Pages einmalig aktiviert ist: *Settings → Pages → Build and deployment → Source: GitHub Actions*. Danach läuft sie unter `https://ricorewioriginal-collab.github.io/zotik/`.
+- Steuerung: F1 im Spiel blendet die Tastenhilfe ein und aus (Details in `game/zotik/README.md`).
+- Alle Grafiken, Sounds und Dialogtexte sind Platzhalter.
+
+Jeder Merge auf `main` baut die Downloads neu (Release `phase1-latest`).
+
 Gesamter bisher ausgearbeiteter Projektstand.
 
 ## Wichtig

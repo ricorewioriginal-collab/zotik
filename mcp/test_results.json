@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T09:04:08",
+  "last_run": "2026-10-02T09:23:49",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 98,
+  "passed": 100,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -397,6 +397,14 @@
     },
     {
       "id": "test_p01_playability::test_feedback_sfx_and_hit",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p02_reachability::test_everything_reachable_from_spawn",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p03_glyphs::test_all_visible_strings_render_with_builtin_font",
       "result": "PASS"
     }
   ]
