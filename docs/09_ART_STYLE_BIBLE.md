@@ -1,0 +1,2 @@
+# Art Style Bible 1.0
+Stylized 3D fantasy action-JRPG: warm, expressive, readable silhouettes, family-accessible but not childish, stylized PBR, scalable to Windows/Android/Web. Zotik is anthropomorphic, never human. Lunaris uses moon motifs, wood/stone/nature and warm light; world-rift corruption uses controlled blue-violet energy. In-engine cutscenes are preferred so customized Zotik remains visible. Avoid full-body realtime fur; use mesh silhouette, textures/normals and selected fur tufts. Cosmetics are visual only.

@@ -1,0 +1,6 @@
+{
+  "healing_potion": {"name": "Heiltrank", "type": "item", "effect": {"hp": 50}, "stack": 99},
+  "moon_pendant": {"name": "Mondanhänger", "type": "accessory", "effect": {"max_hp": 5}, "stack": 1},
+  "moonblade": {"name": "Mondklinge", "type": "weapon", "effect": {"strength": 8, "rift_damage_percent": 8}, "stack": 1},
+  "rift_shard": {"name": "Weltenkernsplitter", "type": "key", "stack": 99}
+}

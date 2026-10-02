@@ -1,0 +1,7 @@
+{
+  "phase": 1,
+  "milestone": "M00_REPOSITORY_AUDIT",
+  "status": "NOT_STARTED",
+  "next_allowed": "M01_BOOT",
+  "phase_2_allowed": false
+}

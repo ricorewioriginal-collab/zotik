@@ -1,0 +1,11 @@
+{
+  "project": "ZOTIK – Die Splitter der Welten",
+  "version": "Master Update 2026-09-24",
+  "engine": "Godot 4.x",
+  "primary_platform": "Windows PC",
+  "additional_platforms": ["Browser", "Android", "Consoles"],
+  "architecture": ["Local-First", "Optional Cloud Save", "Multiplayer", "Community Servers", "MCP Hub"],
+  "size_target": "Base client preferably <= 2 GB",
+  "major_new_systems": ["My Zotik", "Housing & City Builder", "Live Events", "Creator Marketplace", "Giftcodes", "Premium/DLC", "Game Manual", "Legal/Safety/Compliance"],
+  "visual_references": "19_VISUAL_REFERENCES"
+}
