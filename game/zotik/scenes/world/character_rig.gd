@@ -74,7 +74,7 @@ static func create_human(spec: Dictionary, height: float) -> CharacterRig:
 	r.skeleton = r.model.find_children("*", "Skeleton3D", true, false)[0]
 	var tint: Color = spec.get("tint", Color.WHITE)
 	if tint != Color.WHITE:
-		r.tint(tint)  # clothes only: the body is added afterwards
+		r.tint_clothes(tint)
 	# human head from the base character (skipped for non-human heads, e.g. Zotik)
 	if spec.get("human_head", true):
 		var body: Node3D = (load(HUMAN_DIR % ("Superhero_%s_FullBody" % spec.get("body", "Male"))) as PackedScene).instantiate()
@@ -256,6 +256,18 @@ func recolor(key: String, rules: Array) -> void:
 			if m is StandardMaterial3D:
 				var dup := (m as StandardMaterial3D).duplicate() as StandardMaterial3D
 				dup.albedo_texture = tex
+				mi.set_surface_override_material(s, dup)
+
+
+## Tints clothing surfaces only; the outfits' exposed-skin surfaces use the
+## "MI_Regular_*" materials and keep their skin colour.
+func tint_clothes(c: Color) -> void:
+	for mi in meshes():
+		for s in mi.mesh.get_surface_count():
+			var m: Material = mi.get_active_material(s)
+			if m is StandardMaterial3D and not m.resource_name.contains("Regular"):
+				var dup := (m as StandardMaterial3D).duplicate() as StandardMaterial3D
+				dup.albedo_color = c
 				mi.set_surface_override_material(s, dup)
 
 

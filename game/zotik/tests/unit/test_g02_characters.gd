@@ -57,5 +57,19 @@ func test_companions_and_npcs_use_rigs() -> void:
 	eq(lyra.rig.kind, "human_female_peasant", "Lyra uses a human model (C01)")
 	check(lyra.rig.skeleton.find_child("Weapon_staff", true, false) != null, "with her staff")
 	check(lyra.rig.anim.has_animation("Idle_Loop") and lyra.rig.state == "idle", "animated from the shared library")
+	var ranger := CharacterRig.create_human({"outfit": "Male_Ranger", "body": "Male", "tint": Color.RED}, 1.8)
+	var skin_tinted := false
+	var cloth_tinted := false
+	for mi in ranger.meshes():
+		for i in mi.mesh.get_surface_count():
+			var m := mi.get_active_material(i) as StandardMaterial3D
+			if m == null:
+				continue
+			if m.resource_name.contains("Regular"):
+				skin_tinted = skin_tinted or m.albedo_color != Color.WHITE
+			elif m.albedo_color == Color.RED:
+				cloth_tinted = true
+	check(cloth_tinted and not skin_tinted, "outfit tint colours clothes, not exposed skin")
+	ranger.free()
 	var mira: Npc = game.area.entities["NPC_MIRA_001"]
 	check(mira.find_children("*", "CharacterRig", true, false).size() == 1, "NPC rig")
