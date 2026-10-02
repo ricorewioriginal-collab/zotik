@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T10:06:06",
+  "last_run": "2026-10-02T10:16:56",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 136,
+  "passed": 140,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -45,6 +45,10 @@
     },
     {
       "id": "test_e02_party::test_passive_during_dialogue_and_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_companions_spread_into_formation",
       "result": "PASS"
     },
     {
@@ -149,6 +153,10 @@
     },
     {
       "id": "test_e07_queen::test_death_resets_fight_and_hazards",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e08_golden_elaris::test_golden_path_chapter_two",
       "result": "PASS"
     },
     {
@@ -541,6 +549,14 @@
     },
     {
       "id": "test_p01_playability::test_feedback_sfx_and_hit",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_hud_fills_screen_and_centres_notifications",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_hurt_flash_covers_screen",
       "result": "PASS"
     },
     {

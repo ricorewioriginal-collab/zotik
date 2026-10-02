@@ -46,3 +46,38 @@ Last local run on 2026-10-02: **92/92 tests passed + restart check PASS**.
 - **Art**: every visual is a labelled PLACEHOLDER (see `docs/ASSET_GAPS.md`). There is no audio.
 - **Dialogue**: all text is placeholder (C-10). The final story text must come from the project owner.
 - **Manual play-feel tuning** (camera, combat timing) was only checked by automated tests and screenshots, not by a human playtest.
+
+# Phase 2 – Elaris acceptance
+
+Last local run on 2026-10-02: **140/140 tests + restart checks PASS for both chapters.**
+
+## Chapter-2 golden path
+`tests/unit/test_e08_golden_elaris.gd` starts from a real **schema-v1 Phase-1 save** (end of chapter 1) and plays through real interactions. Its final save is verified in a **separate process** by `tests/restart_check.gd`, alongside the chapter-1 golden path.
+
+| Step | Covered |
+|---|---|
+| Load the Phase-1 save via the title (v1 → v2 migration) | title button, migrated party |
+| Weltenstein → Weltkarte → Elaris | travel point, world map, arrival scene, Lyra joins, chapter-2 quest starts |
+| Mara → Nia joins → Sela's side quest | NPC dialogues, quest step effects |
+| Living forest: 3 Pilzlinge, chest, ride the moving path, Rovan joins | melee with light/strong attacks, platform physics |
+| Turm der Erinnerung: wrong start resets, Mond → Blatt → Kristall → Flamme | symbol pillars, spec epilogue |
+| Heart of the forest: chest, Weltenanker save, Wurzelkriecher | savepoint save menu, miniboss gate |
+| Wurzelkönigin: intro, 3-phase fight, memory vision, return to town | boss, travel effect |
+| Report to Mara, hand in spores | chapter complete, side quest complete |
+| Save → new process → load → identical state | restart check (`golden_expected_ela.json`) |
+
+## Phase-2 systems
+| System | Tests |
+|---|---|
+| World travel, unlocks, cross-world beacon | `test_e01_travel` |
+| Save schema v2 + v1 migration | `test_e01_travel::test_v1_save_migrates_to_v2`, chapter-2 golden path |
+| Party AI (follow, formation, ranged/melee, heal, passive in dialogue, persistence) | `test_e02_party`, `test_e04_elaris::test_rovan_fights_in_melee` |
+| Break (light/strong/party, stun window, interrupts, exactly-once signals) | `test_e03_break` |
+| Elaris areas, moving paths, gates, shop, miniboss | `test_e04_elaris`, `test_p02_reachability` |
+| ELARIS_TURM_01 per spec | `test_e05_tower` |
+| Chapter-2 quests + side quest | `test_e06_quests` |
+| Wurzelkönigin incl. root eruptions | `test_e07_queen` |
+
+## Open (Phase 2)
+- All art and audio are placeholders. Dialogue is placeholder except the spec epilogue of the tower.
+- Story assumptions C-15 to C-19 need owner review: Phase-2 scope, when Nia and Rovan join, NPC roles.

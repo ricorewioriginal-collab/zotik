@@ -47,4 +47,21 @@ func _run() -> void:
 	gs.set_flag("FLAG_LUN_ORUN_MET")
 	game.player.global_position = Vector3(0, 0, 4)
 	await _shot("06_orun_arena")
+	for f in ["FLAG_LUN_CHAPTER_COMPLETE", "FLAG_ELA_ARRIVED", "FLAG_ELA_FOREST_OPEN", "FLAG_ELA_ROOTS_PARTED", "FLAG_ELA_QUEEN_MET"]:
+		gs.set_flag(f)
+	for m in ["PARTY_LYRA_001", "PARTY_NIA_001", "PARTY_ROVAN_001"]:
+		gs.party.append(m)
+	game.player.camera_pivot.rotation.y = 0.0
+	game.enter_area("AREA_ELA_TOWN", "default")
+	game.player.global_position = Vector3(0, 0, 16)
+	await _shot("07_elaris_town_party")
+	game.enter_area("AREA_ELA_FOREST", "default")
+	game.player.global_position = Vector3(0, 0, 11)
+	await _shot("08_elaris_moving_paths")
+	game.enter_area("AREA_ELA_TOWER", "default")
+	game.player.global_position = Vector3(0, 0, 3)
+	await _shot("09_elaris_tower_pillars")
+	game.enter_area("AREA_ELA_ROOT_ARENA", "default")
+	game.player.global_position = Vector3(0, 0, 7)
+	await _shot("10_wurzelkoenigin")
 	quit()

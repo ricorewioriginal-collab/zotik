@@ -76,8 +76,10 @@ func setup(entry: Dictionary) -> void:
 	add_child(body_mesh)
 	label = Label3D.new()
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 72
-	label.outline_size = 16
+	label.font_size = 48
+	label.outline_size = 12
+	label.fixed_size = true
+	label.pixel_size = 0.0009
 	label.position.y = 1.9 * s
 	add_child(label)
 	_update_label()

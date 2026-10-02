@@ -109,3 +109,19 @@ func test_passive_during_dialogue_and_persists() -> void:
 	game = tree.current_scene
 	await physics_frames(2)
 	check(game.companions.has(LYRA), "Lyra back after loading")
+
+
+func test_companions_spread_into_formation() -> void:
+	game.enter_area("AREA_LUN_VILLAGE", "default")
+	await physics_frames(2)
+	for m in ["PARTY_LYRA_001", "PARTY_NIA_001", "PARTY_ROVAN_001"]:
+		Effects.apply({"type": "join_party", "id": m})
+	await physics_frames(90)
+	var cs: Array = game.companions.values()
+	eq(cs.size(), 3, "three companions")
+	for i in cs.size():
+		for j in range(i + 1, cs.size()):
+			check(cs[i].global_position.distance_to(cs[j].global_position) > 1.5, "companions %d/%d do not overlap" % [i, j])
+	var cam_fwd := Vector3(0, 0, -1).rotated(Vector3.UP, game.player.camera_pivot.rotation.y)
+	for c in cs:
+		check((c.global_position - game.player.global_position).dot(cam_fwd) < 0.0, "%s stays behind Zotik (camera side)" % c.member_id)

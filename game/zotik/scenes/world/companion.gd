@@ -9,6 +9,8 @@ signal healed_player(amount: int)
 
 const FOLLOW_MIN := 2.5
 const FOLLOW_MAX := 4.0
+## Formation slots behind Zotik (x = right, z = back), by party index.
+const SLOTS := [Vector3(-1.8, 0, 2.0), Vector3(1.8, 0, 2.0), Vector3(0, 0, 3.4)]
 const TELEPORT_DIST := 25.0
 const ENGAGE_RADIUS := 10.0
 const GRAVITY := 18.0
@@ -49,8 +51,10 @@ static func create(id: String, p: Player) -> Companion:
 	c.add_child(c.body)
 	var label := Label3D.new()
 	label.text = str(c.data.get("name", id))
-	label.font_size = 64
-	label.outline_size = 14
+	label.font_size = 48
+	label.outline_size = 12
+	label.fixed_size = true
+	label.pixel_size = 0.0009
 	label.position.y = 2.1
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	c.add_child(label)
@@ -90,21 +94,28 @@ func _physics_process(delta: float) -> void:
 			attacked.emit(target)
 		_face(to_t)
 	else:
+		var to_slot := slot_position() - global_position
+		to_slot.y = 0.0
+		if to_slot.length() > 0.6:
+			goal = to_slot.normalized() * minf(float(data.move_speed), to_slot.length() * 3.0)
 		var flat := Vector3(to_player.x, 0, to_player.z)
-		if flat.length() > FOLLOW_MAX:
-			goal = flat.normalized() * float(data.move_speed)
-		elif flat.length() < FOLLOW_MIN * 0.5:
-			goal = -flat.normalized() * 2.0
 		if flat.length() > 0.1:
 			_face(flat)
 	_move(goal, delta)
 
 
+## Formation point for this member: behind Zotik relative to the camera, so
+## companions never stand between the camera and Zotik.
+func slot_position() -> Vector3:
+	var idx := maxi(0, GameState.party.find(member_id)) % SLOTS.size()
+	var yaw: float = player.camera_pivot.rotation.y if player.camera_pivot else 0.0
+	return player.global_position + (SLOTS[idx] as Vector3).rotated(Vector3.UP, yaw)
+
+
 func snap_to_player() -> void:
 	if not is_instance_valid(player):
 		return
-	var back := Vector3(0, 0, 1).rotated(Vector3.UP, player.visual.rotation.y) * FOLLOW_MIN
-	global_position = player.global_position + back + Vector3(0.8, 0.2, 0)
+	global_position = slot_position() + Vector3(0, 0.2, 0)
 	velocity = Vector3.ZERO
 
 

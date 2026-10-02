@@ -314,3 +314,14 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
 - **Root eruptions:** a data-defined phase hazard. A telegraphed disc appears under Zotik and hits after a delay unless he leaves it (or dodges with i-frames). Eruptions pause during cutscenes, while the boss is broken or idle, and are cleared on defeat and on death or reset.
 - One-time intro `CUT_ELA_QUEEN_001`. Defeat sets `FLAG_BOSS_ELA_QUEEN_DEFEATED` (persistent), plays the memory vision `CUT_ELA_QUEEN_DEFEAT_001` and brings the party back to Elaris town to report to Mara.
 - Tests: `tests/unit/test_e07_queen.gd` (6 tests).
+
+## E08 Chapter-2 regression – PASSED
+- Chapter-2 golden path from a real v1 Phase-1 save through the whole chapter, using real interactions. The restart check now verifies **both** chapters in a fresh process, each with its own save directory.
+- The rendered check of Elaris found and fixed four UI issues:
+  - Companions stood on one spot and in front of the camera. They now use formation slots behind Zotik, with a test for it.
+  - 3D name labels became huge up close. They now have a fixed screen size.
+  - **The HUD root and other full-screen controls had size 0**, because `set_anchors_preset` does not move offsets. As a result, notifications were never centred and the red hurt flash never covered the screen. Fixed everywhere; tests now check the HUD and flash sizes.
+  - Notifications overlapped the controls overlay; they were moved below it and centred.
+- `docs/ACCEPTANCE_MATRIX.md` gained the Phase-2 section. Screenshots 07–10 show Elaris.
+
+**Phase 2 (Elaris) milestones E00–E08: PASSED.** Further chapters (Valdoria, …) need owner approval and story input.

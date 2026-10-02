@@ -3,8 +3,8 @@
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
 CURRENT PHASE: Phase 2 – Elaris (authorised by the owner on 2026-10-02, see docs/PHASE_2_PLAN.md)
-CURRENT MILESTONE: E00_PHASE_2_PLAN
-STATUS: Phase 1 PASSED (M00–M15); Phase 2 IN_PROGRESS (docs/MILESTONE_LOG.md)
+CURRENT MILESTONE: E08_CHAPTER2_REGRESSION
+STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 requires explicit owner approval
 
 ## Mandatory workflow
 1. Audit before implementation. Do not rebuild from scratch.

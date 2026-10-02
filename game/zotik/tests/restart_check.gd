@@ -10,10 +10,31 @@ func _initialize() -> void:
 
 func _run() -> void:
 	await process_frame
+	var all_ok := true
+	var ran := 0
+	var cases := {"user://golden_expected.json": "user://golden_saves/", "user://golden_expected_ela.json": "user://golden_saves_ela/"}
+	for exp_path in cases:
+		if FileAccess.file_exists(exp_path):
+			ran += 1
+			var ok: bool = await _check(exp_path, cases[exp_path])
+			print("RESTART_CHECK %s %s" % [exp_path.get_file(), "PASS" if ok else "FAIL"])
+			all_ok = all_ok and ok
+			DirAccess.remove_absolute(exp_path)
+	all_ok = all_ok and ran > 0
+	print("RESTART_CHECK ", "PASS" if all_ok else "FAIL")
+	var save_system = root.get_node("SaveSystem")
+	for dir in cases.values():
+		save_system.save_dir = dir
+		for s in range(1, 4):
+			save_system.delete_slot(s)
+	quit(0 if all_ok else 1)
+
+
+func _check(exp_path: String, save_dir: String) -> bool:
 	var save_system = root.get_node("SaveSystem")
 	var game_state = root.get_node("GameState")
-	save_system.save_dir = "user://golden_saves/"
-	var expected = JSON.parse_string(FileAccess.get_file_as_string("user://golden_expected.json"))
+	save_system.save_dir = save_dir
+	var expected = JSON.parse_string(FileAccess.get_file_as_string(exp_path))
 	var ok := expected is Dictionary
 	root.get_node("App").goto_scene("res://scenes/title/title.tscn")
 	for i in 3:
@@ -40,8 +61,4 @@ func _run() -> void:
 				if actual.get(k) != expected[k]:
 					print("DIFF ", k, ": expected ", expected[k], " got ", actual.get(k))
 		ok = ok and current_scene.name == &"GameRoot" and current_scene.area.area_id == expected.player.area
-	print("RESTART_CHECK ", "PASS" if ok else "FAIL")
-	for s in range(1, 4):
-		save_system.delete_slot(s)
-	DirAccess.remove_absolute("user://golden_expected.json")
-	quit(0 if ok else 1)
+	return ok
