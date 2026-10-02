@@ -53,7 +53,7 @@ func set_objective(text: String) -> void:
 
 func show_notification(text: String) -> void:
 	notify_label.text = text
-	_notify_time = 2.5
+	_notify_time = 2.5 + text.length() * 0.03
 
 
 func _label(pos: Vector2, size: int) -> Label:

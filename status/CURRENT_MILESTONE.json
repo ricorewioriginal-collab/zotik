@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M09_MAIN_QUEST",
+  "milestone": "M10_PUZZLE_FRAMEWORK",
   "status": "PASSED",
-  "next_allowed": "M10_PUZZLE_FRAMEWORK",
+  "next_allowed": "M11_DUNGEON_RESONANCE_BRIDGE",
   "phase_2_allowed": false
 }

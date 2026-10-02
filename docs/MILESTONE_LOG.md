@@ -124,3 +124,13 @@ See `docs/PHASE_1_AUDIT.md`.
 - HUD shows the main (★) and side (•) objectives. Read-only quest log (key L).
 - `QUEST_MAIN_LUN_001` (13 steps) and `QUEST_SIDE_LUN_001` (2 steps) are completable end to end by events.
 - Tests: `tests/unit/test_m09_quests.gd` (7 tests).
+
+## M10 Puzzle Framework – PASSED
+- `PuzzleLogic` is data-driven:
+  - `dials`: rotate (wraps after 4), then submit. A wrong submit gives feedback and keeps the state.
+  - `sequence`: a wrong crystal clears the attempt.
+  - Manual reset returns to the initial state. Hints come in 3 tiers, the last tier repeats, and unlocked tiers survive a reset.
+  - The solved state is final and idempotent: effects and the `puzzle_solved` event happen exactly once.
+- Partial puzzle state (dials, sequence progress, hints) survives save and load.
+- `PuzzleNode` in the world (PLACEHOLDER): Mondtor with 3 moon-phase dials and an activation plate, Resonanzbrücke with 4 crystals. The `puzzle_reset` (T) and `puzzle_hint` (H) keys work within 9 m. Solving opens the gate or bridge through flags.
+- Tests: `tests/unit/test_m10_puzzles.gd` (7 tests, including Moon Gate wrong/reset/correct in the world).
