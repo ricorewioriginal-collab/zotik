@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:46:37",
+  "last_run": "2026-10-02T09:04:08",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 92,
+  "passed": 98,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -373,6 +373,30 @@
     },
     {
       "id": "test_m15_golden_path::test_golden_path",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_next_hop_bfs",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_beacon_guides_through_main_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_beacon_follows_side_quest_after_main",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_no_beacon_without_active_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_controls_bound_and_help_toggles",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_feedback_sfx_and_hit",
       "result": "PASS"
     }
   ]

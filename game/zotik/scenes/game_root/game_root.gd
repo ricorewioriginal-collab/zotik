@@ -21,6 +21,8 @@ var shop_menu: ShopMenu
 var quest_log: QuestLog
 var save_menu: SaveMenu
 var pause_menu: PauseMenu
+var beacon: ObjectiveBeacon
+var beacon_target := ""  # entity key or "exit:<area>"
 var factories := {}
 var _entry_spawn := Vector3.ZERO
 
@@ -55,9 +57,15 @@ func _ready() -> void:
 	Dialogue.finished.connect(_on_dialogue_finished)
 	player = PLAYER_SCENE.instantiate()
 	world.add_child(player)
+	beacon = ObjectiveBeacon.new()
+	world.add_child(beacon)
+	EventBus.flag_changed.connect(func(_f, _v): update_beacon.call_deferred())
+	EventBus.enemy_defeated.connect(func(_e): update_beacon.call_deferred())
+	EventBus.chest_opened.connect(func(_c): update_beacon.call_deferred())
 	player.interactable_changed.connect(hud.set_prompt)
 	inventory_menu.player = player
 	player.died.connect(_on_player_died)
+	player.damaged.connect(func(_d): hud.flash_hurt())
 	EventBus.sync_state.connect(_sync_state)
 	EventBus.travel_requested.connect(func(a, s): enter_area.call_deferred(a, s))
 	if App.pending_load:
@@ -89,6 +97,52 @@ func is_menu_open() -> bool:
 func _update_control() -> void:
 	if is_instance_valid(player):
 		player.control_enabled = not Dialogue.is_active() and not is_menu_open()
+		_update_mouse()
+
+
+## Mouse is captured for camera control while playing, free in menus.
+func _update_mouse() -> void:
+	if DisplayServer.get_name() == "headless":
+		return
+	var want := Input.MOUSE_MODE_CAPTURED if player.control_enabled and not player.dead else Input.MOUSE_MODE_VISIBLE
+	if Input.mouse_mode != want:
+		Input.mouse_mode = want
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_APPLICATION_FOCUS_IN and is_instance_valid(player):
+		_update_mouse()
+
+
+## Places the beacon on the guided objective, or on the exit towards it.
+func update_beacon() -> void:
+	if not is_instance_valid(area):
+		return
+	beacon_target = ""
+	var target := Navigator.step_target(Navigator.guided_quest())
+	var pos = null
+	if not target.is_empty():
+		if target.area == area.area_id:
+			var key: String = target.entity
+			if key.begins_with("enemy:"):
+				var best: Enemy = null
+				for n in get_tree().get_nodes_in_group("enemy"):
+					var e := n as Enemy
+					if e and e.enemy_id == key.trim_prefix("enemy:") and not e.is_dead() and (best == null or e.global_position.distance_to(player.global_position) < best.global_position.distance_to(player.global_position)):
+						best = e
+				if best:
+					pos = best.global_position
+			elif area.entities.has(key) and is_instance_valid(area.entities[key]):
+				pos = area.entities[key].global_position
+			beacon_target = key
+		else:
+			var hop := Navigator.next_hop(area.area_id, target.area)
+			if area.exits.has(hop):
+				pos = area.exits[hop].trigger.global_position - Vector3(0, 1.5, 0)
+				beacon_target = "exit:" + hop
+	beacon.visible = pos != null
+	if pos != null:
+		beacon.global_position = pos
 
 
 func open_shop(shop_id: String) -> void:
@@ -128,6 +182,7 @@ func _update_objective() -> void:
 	for id in Quests.active_quests():
 		lines.append(("★ " if id == Quests.MAIN else "• ") + Quests.objective(id))
 	hud.set_objective("\n".join(lines))
+	update_beacon.call_deferred()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -135,6 +190,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_inventory()
 	elif event.is_action_pressed("quest_log"):
 		toggle_quest_log()
+	elif event.is_action_pressed("help"):
+		hud.toggle_help()
+	elif event is InputEventMouseButton and event.pressed and player.control_enabled and DisplayServer.get_name() != "headless":
+		_update_mouse()
 	elif event.is_action_pressed("menu") and not is_menu_open() and not Dialogue.is_active():
 		get_viewport().set_input_as_handled()
 		pause_menu.open()
@@ -143,6 +202,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	GameState.play_time += delta
+	if beacon.visible and beacon_target.begins_with("enemy:"):
+		update_beacon()
 
 
 func _physics_process(_delta: float) -> void:

@@ -167,6 +167,8 @@ func attack() -> int:
 			continue
 		e.take_hit(Stats.attack())
 		hits += 1
+	visual.swing()
+	Sfx.play("hit" if hits > 0 else "swing")
 	attacked.emit(hits)
 	return hits
 
@@ -215,6 +217,7 @@ func take_damage(raw_attack: int) -> int:
 	if is_blocking:
 		dmg = maxi(1, int(round(dmg * (1.0 - float(stats.block_reduction)))))
 	GameState.player.hp = maxi(0, int(GameState.player.hp) - dmg)
+	Sfx.play("hurt")
 	damaged.emit(dmg)
 	if GameState.player.hp == 0:
 		dead = true

@@ -65,6 +65,7 @@ func advance() -> void:
 	index += 1
 	if index < lines.size():
 		line_shown.emit(Content.speaker_name(lines[index][0]), lines[index][1])
+		Sfx.play("blip")
 		return
 	var id := active_id
 	var npc := active_npc

@@ -1,11 +1,18 @@
 extends TestCase
 
-const REQUIRED_ACTIONS := ["move_forward", "move_back", "move_left", "move_right", "attack", "dodge", "block", "lock_on", "jump", "interact", "camera_left", "camera_right", "use_item", "menu", "inventory", "quest_log", "puzzle_reset", "puzzle_hint"]
+const REQUIRED_ACTIONS := ["move_forward", "move_back", "move_left", "move_right", "attack", "dodge", "block", "lock_on", "jump", "interact", "camera_left", "camera_right", "use_item", "menu", "inventory", "quest_log", "puzzle_reset", "puzzle_hint", "help"]
 
 
 func test_autoloads_present() -> void:
-	check(tree.root.has_node("EventBus"), "EventBus autoload missing")
-	check(tree.root.has_node("App"), "App autoload missing")
+	# Every autoload in project.godot must have compiled and been instanced.
+	var count := 0
+	for prop in ProjectSettings.get_property_list():
+		var key: String = prop.name
+		if key.begins_with("autoload/"):
+			count += 1
+			var node_name := key.trim_prefix("autoload/")
+			check(tree.root.has_node(node_name) and tree.root.get_node(node_name).get_script() != null, "autoload %s missing or failed to compile" % node_name)
+	check(count >= 9, "autoloads registered: %d" % count)
 
 
 func test_input_actions_defined() -> void:
