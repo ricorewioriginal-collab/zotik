@@ -168,3 +168,13 @@ See `docs/PHASE_1_AUDIT.md`.
   3. `CUT_LUN_LYRA_BRIDGE_001` plays and Lyra is present afterwards.
 - Mira and Lyra stay separate characters with their own dialogues (MIGRATION_DECISIONS). An end-of-chapter notice is shown.
 - Tests: `tests/unit/test_m13_story_end.gd` (4 tests, the ending runs through the real dialogues).
+
+## M14 Sidequest & World Reactions – PASSED
+- "Saris verlorene Lieferung" plays through in the world: Sari gives the quest, the delivery is in `CHEST_LUN_002` in the Mondwald, Zotik hands it back for 60 Lun and the Mondanhänger, and Sari gets a waiting line, a thank-you line and a follow-up line.
+- NPC reactions: Toren, Boro, Elwen and Finn switch to reaction dialogues after Orun's defeat. Mira, Sari, the Professorium and Lyra react through their quest-dependent dialogues.
+- Visual world reactions are data-driven (`requires_flag` / `hidden_by_flag` on layout props) and persist after save and load:
+  - the rift glow in the Mondwald calms after the victory
+  - banners appear in the village
+  - the Professorium's machine appears on his arrival
+  - Sari's crates appear after the delivery
+- Tests: `tests/unit/test_m14_side_reactions.gd` (3 tests).

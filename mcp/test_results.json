@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:39:31",
+  "last_run": "2026-10-02T08:41:16",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 88,
+  "passed": 91,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -357,6 +357,18 @@
     },
     {
       "id": "test_m13_story_end::test_ending_mira_professorium_lyra",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m14_side_reactions::test_side_quest_in_world",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m14_side_reactions::test_npcs_react_to_orun",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m14_side_reactions::test_visual_world_reactions_persist",
       "result": "PASS"
     }
   ]

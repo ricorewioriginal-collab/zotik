@@ -1,51 +1,882 @@
 {
-  "AREA_LUN_HOME": {"size": [16, 16], "ground": "#6b5a44", "ambient": "#ffd9a8",
-    "spawns": {"default": [0, 0, 1], "AREA_LUN_VILLAGE": [0, 0, -4]},
-    "exits": [{"to": "AREA_LUN_VILLAGE", "pos": [0, 0, -7]}],
-    "props": [{"name": "bed", "pos": [-5, 0.5, 4], "size": [3, 1, 2], "color": "#8a4a3a"}, {"name": "table", "pos": [4, 0.5, 4], "size": [2, 1, 2], "color": "#7a5634"}],
-    "entities": []},
-  "AREA_LUN_VILLAGE": {"size": [60, 60], "ground": "#5d7a45", "ambient": "#ffe2b8",
-    "spawns": {"default": [0, 0, 20], "return": [0, 0, 2], "AREA_LUN_HOME": [0, 0, 24], "AREA_LUN_FOREST": [0, 0, -24]},
-    "exits": [{"to": "AREA_LUN_HOME", "pos": [0, 0, 28]}, {"to": "AREA_LUN_FOREST", "pos": [0, 0, -28]}],
-    "props": [{"name": "house_zotik", "pos": [-15, 2, 15], "size": [8, 4, 8], "color": "#a07850"}, {"name": "house_mira", "pos": [15, 2, 15], "size": [8, 4, 8], "color": "#9a7a5a"}, {"name": "house_elwen", "pos": [-20, 2, -8], "size": [8, 4, 8], "color": "#8a7060"}, {"name": "shop_boro", "pos": [21, 2, -2], "size": [6, 4, 8], "color": "#b08040"}, {"name": "training_fence", "pos": [16, 0.5, -21], "size": [10, 1, 0.4], "color": "#6a4a2a"}],
+  "AREA_LUN_HOME": {
+    "size": [
+      16,
+      16
+    ],
+    "ground": "#6b5a44",
+    "ambient": "#ffd9a8",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        1
+      ],
+      "AREA_LUN_VILLAGE": [
+        0,
+        0,
+        -4
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_LUN_VILLAGE",
+        "pos": [
+          0,
+          0,
+          -7
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "bed",
+        "pos": [
+          -5,
+          0.5,
+          4
+        ],
+        "size": [
+          3,
+          1,
+          2
+        ],
+        "color": "#8a4a3a"
+      },
+      {
+        "name": "table",
+        "pos": [
+          4,
+          0.5,
+          4
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "color": "#7a5634"
+      }
+    ],
+    "entities": []
+  },
+  "AREA_LUN_VILLAGE": {
+    "size": [
+      60,
+      60
+    ],
+    "ground": "#5d7a45",
+    "ambient": "#ffe2b8",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        20
+      ],
+      "return": [
+        0,
+        0,
+        2
+      ],
+      "AREA_LUN_HOME": [
+        0,
+        0,
+        24
+      ],
+      "AREA_LUN_FOREST": [
+        0,
+        0,
+        -24
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_LUN_HOME",
+        "pos": [
+          0,
+          0,
+          28
+        ]
+      },
+      {
+        "to": "AREA_LUN_FOREST",
+        "pos": [
+          0,
+          0,
+          -28
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "house_zotik",
+        "pos": [
+          -15,
+          2,
+          15
+        ],
+        "size": [
+          8,
+          4,
+          8
+        ],
+        "color": "#a07850"
+      },
+      {
+        "name": "house_mira",
+        "pos": [
+          15,
+          2,
+          15
+        ],
+        "size": [
+          8,
+          4,
+          8
+        ],
+        "color": "#9a7a5a"
+      },
+      {
+        "name": "house_elwen",
+        "pos": [
+          -20,
+          2,
+          -8
+        ],
+        "size": [
+          8,
+          4,
+          8
+        ],
+        "color": "#8a7060"
+      },
+      {
+        "name": "shop_boro",
+        "pos": [
+          21,
+          2,
+          -2
+        ],
+        "size": [
+          6,
+          4,
+          8
+        ],
+        "color": "#b08040"
+      },
+      {
+        "name": "training_fence",
+        "pos": [
+          16,
+          0.5,
+          -21
+        ],
+        "size": [
+          10,
+          1,
+          0.4
+        ],
+        "color": "#6a4a2a"
+      },
+      {
+        "name": "celebration_banner",
+        "pos": [
+          -6,
+          3,
+          -14
+        ],
+        "size": [
+          6,
+          2,
+          0.2
+        ],
+        "color": "#e0b040",
+        "collision": false,
+        "requires_flag": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+      },
+      {
+        "name": "celebration_banner",
+        "pos": [
+          6,
+          3,
+          -14
+        ],
+        "size": [
+          6,
+          2,
+          0.2
+        ],
+        "color": "#4060e0",
+        "collision": false,
+        "requires_flag": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+      },
+      {
+        "name": "professorium_machine",
+        "pos": [
+          6,
+          1,
+          -6
+        ],
+        "size": [
+          2,
+          2,
+          3
+        ],
+        "color": "#8a8a9a",
+        "requires_flag": "FLAG_LUN_PROFESSORIUM_ARRIVED"
+      },
+      {
+        "name": "sari_crates",
+        "pos": [
+          -10,
+          0.5,
+          8
+        ],
+        "size": [
+          2,
+          1,
+          1.2
+        ],
+        "color": "#a07040",
+        "requires_flag": "FLAG_LUN_SARI_DELIVERY_RETURNED"
+      }
+    ],
     "entities": [
-      {"type": "npc", "id": "NPC_MIRA_001", "pos": [-4, 0, 14]}, {"type": "npc", "id": "NPC_TOREN_001", "pos": [12, 0, -12]},
-      {"type": "npc", "id": "NPC_BORO_001", "pos": [16, 0, -2]}, {"type": "npc", "id": "NPC_ELWEN_001", "pos": [-14, 0, -2]},
-      {"type": "npc", "id": "NPC_FINN_001", "pos": [5, 0, 5]}, {"type": "npc", "id": "NPC_SARI_001", "pos": [-8, 0, 5]},
-      {"type": "npc", "id": "NPC_PROFESSORIUM_001", "pos": [3, 0, -4]}, {"type": "npc", "id": "NPC_LYRA_001", "pos": [-3, 0, -6]},
-      {"type": "enemy", "spawn": "SPAWN_LUN_DUMMY_001", "enemy": "ENEMY_TRAINING_DUMMY_001", "pos": [16, 0, -17]}]},
-  "AREA_LUN_FOREST": {"size": [70, 70], "ground": "#2f4a3a", "ambient": "#9fb4e0",
-    "spawns": {"default": [0, 0, 30], "AREA_LUN_VILLAGE": [0, 0, 30], "AREA_LUN_RUINS": [0, 0, -30]},
-    "exits": [{"to": "AREA_LUN_VILLAGE", "pos": [0, 0, 34]}, {"to": "AREA_LUN_RUINS", "pos": [0, 0, -34]}],
-    "props": [{"name": "tree", "pos": [-12, 3, 24], "size": [2, 6, 2], "color": "#3d2b1f"}, {"name": "tree", "pos": [14, 3, 20], "size": [2, 6, 2], "color": "#3d2b1f"}, {"name": "tree", "pos": [-20, 3, 0], "size": [2, 6, 2], "color": "#3d2b1f"}, {"name": "tree", "pos": [20, 3, 2], "size": [2, 6, 2], "color": "#3d2b1f"}, {"name": "tree", "pos": [-6, 3, -20], "size": [2, 6, 2], "color": "#3d2b1f"}, {"name": "tree", "pos": [8, 3, -24], "size": [2, 6, 2], "color": "#3d2b1f"}, {"name": "stream", "pos": [0, 0.05, -14], "size": [40, 0.1, 3], "color": "#4a7ab0", "collision": false}],
+      {
+        "type": "npc",
+        "id": "NPC_MIRA_001",
+        "pos": [
+          -4,
+          0,
+          14
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_TOREN_001",
+        "pos": [
+          12,
+          0,
+          -12
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_BORO_001",
+        "pos": [
+          16,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_ELWEN_001",
+        "pos": [
+          -14,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_FINN_001",
+        "pos": [
+          5,
+          0,
+          5
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_SARI_001",
+        "pos": [
+          -8,
+          0,
+          5
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_PROFESSORIUM_001",
+        "pos": [
+          3,
+          0,
+          -4
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_LYRA_001",
+        "pos": [
+          -3,
+          0,
+          -6
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_DUMMY_001",
+        "enemy": "ENEMY_TRAINING_DUMMY_001",
+        "pos": [
+          16,
+          0,
+          -17
+        ]
+      }
+    ]
+  },
+  "AREA_LUN_FOREST": {
+    "size": [
+      70,
+      70
+    ],
+    "ground": "#2f4a3a",
+    "ambient": "#9fb4e0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_LUN_VILLAGE": [
+        0,
+        0,
+        30
+      ],
+      "AREA_LUN_RUINS": [
+        0,
+        0,
+        -30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_LUN_VILLAGE",
+        "pos": [
+          0,
+          0,
+          34
+        ]
+      },
+      {
+        "to": "AREA_LUN_RUINS",
+        "pos": [
+          0,
+          0,
+          -34
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "tree",
+        "pos": [
+          -12,
+          3,
+          24
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          14,
+          3,
+          20
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          -20,
+          3,
+          0
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          20,
+          3,
+          2
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          -6,
+          3,
+          -20
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          8,
+          3,
+          -24
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "stream",
+        "pos": [
+          0,
+          0.05,
+          -14
+        ],
+        "size": [
+          40,
+          0.1,
+          3
+        ],
+        "color": "#4a7ab0",
+        "collision": false
+      },
+      {
+        "name": "rift_glow",
+        "pos": [
+          0,
+          2,
+          -28
+        ],
+        "size": [
+          4,
+          4,
+          0.3
+        ],
+        "color": "#a070ff",
+        "collision": false,
+        "hidden_by_flag": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+      }
+    ],
     "entities": [
-      {"type": "enemy", "spawn": "SPAWN_LUN_FOREST_RIFTLING_1", "enemy": "ENEMY_RIFTLING_001", "pos": [-8, 0, 15]},
-      {"type": "enemy", "spawn": "SPAWN_LUN_FOREST_RIFTLING_2", "enemy": "ENEMY_RIFTLING_001", "pos": [8, 0, 12]},
-      {"type": "enemy", "spawn": "SPAWN_LUN_FOREST_RIFTLING_3", "enemy": "ENEMY_RIFTLING_001", "pos": [0, 0, 4]},
-      {"type": "enemy", "spawn": "SPAWN_LUN_FOREST_RIFTLING_4", "enemy": "ENEMY_RIFTLING_001", "pos": [-10, 0, -6]},
-      {"type": "enemy", "spawn": "SPAWN_LUN_FOREST_RIFTLING_5", "enemy": "ENEMY_RIFTLING_001", "pos": [10, 0, -8]},
-      {"type": "chest", "id": "CHEST_LUN_001", "pos": [-25, 0, 20]}, {"type": "chest", "id": "CHEST_LUN_002", "pos": [25, 0, -18]}]},
-  "AREA_LUN_RUINS": {"size": [40, 40], "ground": "#4a4a55", "ambient": "#a0a8d0",
-    "spawns": {"default": [0, 0, 16], "AREA_LUN_FOREST": [0, 0, 16], "AREA_LUN_RIFT_CAVE": [0, 0, -14]},
-    "exits": [{"to": "AREA_LUN_FOREST", "pos": [0, 0, 19]}, {"to": "AREA_LUN_RIFT_CAVE", "pos": [0, 0, -19]}],
-    "props": [{"name": "pillar", "pos": [-8, 2, 4], "size": [1.5, 4, 1.5], "color": "#77778a"}, {"name": "pillar", "pos": [8, 2, 4], "size": [1.5, 4, 1.5], "color": "#77778a"}, {"name": "gate_wall_l", "pos": [-11, 2.5, -17], "size": [17, 5, 1], "color": "#5a5a6a"}, {"name": "gate_wall_r", "pos": [11, 2.5, -17], "size": [17, 5, 1], "color": "#5a5a6a"}],
-    "entities": [{"type": "puzzle", "id": "PUZ_LUN_MOONGATE_001", "pos": [0, 0, -9]}]},
-  "AREA_LUN_RIFT_CAVE": {"size": [40, 60], "ground": "#2a2440", "ambient": "#8a70d0",
-    "floors": [{"pos": [0, -0.5, 17], "size": [40, 1, 26]}, {"pos": [0, -0.5, -17], "size": [40, 1, 26]}],
-    "spawns": {"default": [0, 0, 26], "AREA_LUN_RUINS": [0, 0, 26], "AREA_LUN_ORUN_ARENA": [0, 0, -25]},
-    "exits": [{"to": "AREA_LUN_RUINS", "pos": [0, 0, 29]}, {"to": "AREA_LUN_ORUN_ARENA", "pos": [0, 0, -29]}],
-    "props": [{"name": "resonance_bridge", "pos": [0, -0.5, 0], "size": [4, 1, 9], "color": "#8fd0ff", "requires_flag": "FLAG_LUN_BRIDGE_ACTIVE"}],
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_FOREST_RIFTLING_1",
+        "enemy": "ENEMY_RIFTLING_001",
+        "pos": [
+          -8,
+          0,
+          15
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_FOREST_RIFTLING_2",
+        "enemy": "ENEMY_RIFTLING_001",
+        "pos": [
+          8,
+          0,
+          12
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_FOREST_RIFTLING_3",
+        "enemy": "ENEMY_RIFTLING_001",
+        "pos": [
+          0,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_FOREST_RIFTLING_4",
+        "enemy": "ENEMY_RIFTLING_001",
+        "pos": [
+          -10,
+          0,
+          -6
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_FOREST_RIFTLING_5",
+        "enemy": "ENEMY_RIFTLING_001",
+        "pos": [
+          10,
+          0,
+          -8
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_LUN_001",
+        "pos": [
+          -25,
+          0,
+          20
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_LUN_002",
+        "pos": [
+          25,
+          0,
+          -18
+        ]
+      }
+    ]
+  },
+  "AREA_LUN_RUINS": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#4a4a55",
+    "ambient": "#a0a8d0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_LUN_FOREST": [
+        0,
+        0,
+        16
+      ],
+      "AREA_LUN_RIFT_CAVE": [
+        0,
+        0,
+        -14
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_LUN_FOREST",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      },
+      {
+        "to": "AREA_LUN_RIFT_CAVE",
+        "pos": [
+          0,
+          0,
+          -19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "pillar",
+        "pos": [
+          -8,
+          2,
+          4
+        ],
+        "size": [
+          1.5,
+          4,
+          1.5
+        ],
+        "color": "#77778a"
+      },
+      {
+        "name": "pillar",
+        "pos": [
+          8,
+          2,
+          4
+        ],
+        "size": [
+          1.5,
+          4,
+          1.5
+        ],
+        "color": "#77778a"
+      },
+      {
+        "name": "gate_wall_l",
+        "pos": [
+          -11,
+          2.5,
+          -17
+        ],
+        "size": [
+          17,
+          5,
+          1
+        ],
+        "color": "#5a5a6a"
+      },
+      {
+        "name": "gate_wall_r",
+        "pos": [
+          11,
+          2.5,
+          -17
+        ],
+        "size": [
+          17,
+          5,
+          1
+        ],
+        "color": "#5a5a6a"
+      }
+    ],
     "entities": [
-      {"type": "puzzle", "id": "PUZ_LUN_RESONANCE_BRIDGE_001", "pos": [0, 0, 9]},
-      {"type": "chest", "id": "CHEST_LUN_003", "pos": [14, 0, 20]},
-      {"type": "enemy", "spawn": "SPAWN_LUN_CAVE_MOONWOLF_1", "enemy": "ENEMY_MOONWOLF_001", "pos": [0, 0, -9], "persistent": true},
-      {"type": "savepoint", "id": "SAVEPOINT_LUN_RIFT_001", "pos": [0, 0, -19]}]},
-  "AREA_LUN_ORUN_ARENA": {"size": [40, 40], "ground": "#1e1830", "ambient": "#7a5ad8",
-    "spawns": {"default": [0, 0, 15], "AREA_LUN_RIFT_CAVE": [0, 0, 15]},
-    "exits": [{"to": "AREA_LUN_RIFT_CAVE", "pos": [0, 0, 19]}],
-    "props": [{"name": "great_rift", "pos": [0, 4, -18], "size": [10, 8, 0.5], "color": "#b080ff", "collision": false}],
+      {
+        "type": "puzzle",
+        "id": "PUZ_LUN_MOONGATE_001",
+        "pos": [
+          0,
+          0,
+          -9
+        ]
+      }
+    ]
+  },
+  "AREA_LUN_RIFT_CAVE": {
+    "size": [
+      40,
+      60
+    ],
+    "ground": "#2a2440",
+    "ambient": "#8a70d0",
+    "floors": [
+      {
+        "pos": [
+          0,
+          -0.5,
+          17
+        ],
+        "size": [
+          40,
+          1,
+          26
+        ]
+      },
+      {
+        "pos": [
+          0,
+          -0.5,
+          -17
+        ],
+        "size": [
+          40,
+          1,
+          26
+        ]
+      }
+    ],
+    "spawns": {
+      "default": [
+        0,
+        0,
+        26
+      ],
+      "AREA_LUN_RUINS": [
+        0,
+        0,
+        26
+      ],
+      "AREA_LUN_ORUN_ARENA": [
+        0,
+        0,
+        -25
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_LUN_RUINS",
+        "pos": [
+          0,
+          0,
+          29
+        ]
+      },
+      {
+        "to": "AREA_LUN_ORUN_ARENA",
+        "pos": [
+          0,
+          0,
+          -29
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "resonance_bridge",
+        "pos": [
+          0,
+          -0.5,
+          0
+        ],
+        "size": [
+          4,
+          1,
+          9
+        ],
+        "color": "#8fd0ff",
+        "requires_flag": "FLAG_LUN_BRIDGE_ACTIVE"
+      }
+    ],
     "entities": [
-      {"type": "trigger", "id": "TRIGGER_LUN_ORUN_INTRO", "pos": [0, 1, 9], "size": [20, 3, 3], "cutscene": "CUT_LUN_ORUN_001", "once_flag": "FLAG_LUN_ORUN_MET"},
-      {"type": "enemy", "spawn": "SPAWN_LUN_ARENA_ORUN", "enemy": "BOSS_ORUN_001", "pos": [0, 0, -4], "persistent": true},
-      {"type": "unique", "id": "WEAPON_WORLD_BLADE_001", "pos": [0, 0, -12]}]}
+      {
+        "type": "puzzle",
+        "id": "PUZ_LUN_RESONANCE_BRIDGE_001",
+        "pos": [
+          0,
+          0,
+          9
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_LUN_003",
+        "pos": [
+          14,
+          0,
+          20
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_CAVE_MOONWOLF_1",
+        "enemy": "ENEMY_MOONWOLF_001",
+        "pos": [
+          0,
+          0,
+          -9
+        ],
+        "persistent": true
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_LUN_RIFT_001",
+        "pos": [
+          0,
+          0,
+          -19
+        ]
+      }
+    ]
+  },
+  "AREA_LUN_ORUN_ARENA": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#1e1830",
+    "ambient": "#7a5ad8",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        15
+      ],
+      "AREA_LUN_RIFT_CAVE": [
+        0,
+        0,
+        15
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_LUN_RIFT_CAVE",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "great_rift",
+        "pos": [
+          0,
+          4,
+          -18
+        ],
+        "size": [
+          10,
+          8,
+          0.5
+        ],
+        "color": "#b080ff",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_LUN_ORUN_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_LUN_ORUN_001",
+        "once_flag": "FLAG_LUN_ORUN_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_LUN_ARENA_ORUN",
+        "enemy": "BOSS_ORUN_001",
+        "pos": [
+          0,
+          0,
+          -4
+        ],
+        "persistent": true
+      },
+      {
+        "type": "unique",
+        "id": "WEAPON_WORLD_BLADE_001",
+        "pos": [
+          0,
+          0,
+          -12
+        ]
+      }
+    ]
+  }
 }

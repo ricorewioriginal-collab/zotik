@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M13_RIFT_WELTENKLINGE_STORY_END",
+  "milestone": "M14_SIDEQUEST_WORLD_REACTIONS",
   "status": "PASSED",
-  "next_allowed": "M14_SIDEQUEST_WORLD_REACTIONS",
+  "next_allowed": "M15_COMPLETE_REGRESSION",
   "phase_2_allowed": false
 }

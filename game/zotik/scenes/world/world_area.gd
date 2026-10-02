@@ -36,7 +36,9 @@ func build(id: String, factories: Dictionary) -> void:
 	for p in layout.get("props", []):
 		var node := _box("PLACEHOLDER_" + str(p.name), _v(p.pos), _v(p.size), Color.html(p.color), p.get("collision", true))
 		if p.has("requires_flag"):
-			flag_props.append({"node": node, "flag": p.requires_flag})
+			flag_props.append({"node": node, "flag": p.requires_flag, "invert": false})
+		elif p.has("hidden_by_flag"):
+			flag_props.append({"node": node, "flag": p.hidden_by_flag, "invert": true})
 	for x in layout.get("exits", []):
 		_exit(x)
 	for en in layout.get("entities", []):
@@ -72,7 +74,7 @@ func refresh_gates() -> void:
 		b.process_mode = Node.PROCESS_MODE_DISABLED if open else Node.PROCESS_MODE_INHERIT
 		(b.get_child(0) as CollisionShape3D).disabled = open
 	for fp in flag_props:
-		var on := GameState.has_flag(fp.flag)
+		var on: bool = GameState.has_flag(fp.flag) != fp.invert
 		fp.node.visible = on
 		for c in fp.node.find_children("*", "CollisionShape3D", true, false):
 			c.disabled = not on

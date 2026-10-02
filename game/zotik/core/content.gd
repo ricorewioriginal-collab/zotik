@@ -276,8 +276,9 @@ func _validate_layouts(e: Array[String]) -> void:
 			if not x in exits:
 				e.append("%s: declared exit %s has no layout exit" % [area, x])
 		for p in l.get("props", []):
-			if p.has("requires_flag"):
-				_ref(e, "flags", p.requires_flag, area)
+			for k in ["requires_flag", "hidden_by_flag"]:
+				if p.has(k):
+					_ref(e, "flags", p[k], area)
 		for en in l.get("entities", []):
 			var ty: String = en.get("type", "")
 			if not ty in ENTITY_TYPES:
