@@ -205,3 +205,4 @@ The project owner authorised autonomous work and merging on 2026-10-02. Phase 2 
 - **Placeholder sound effects** synthesised in code (`Sfx` autoload, no audio assets): swing, hit, hurt, pickup, puzzle solved/wrong, dialogue blip, enemy defeated, save.
 - **Test guard:** every autoload in `project.godot` must compile and be instanced. Before this, a broken autoload only showed up as follow-up errors.
 - Tests: `tests/unit/test_p01_playability.gd` (6 tests). Rendered check: `docs/screenshots/04b_village_beacon_on_mira.png`.
+- Level sanity test `tests/unit/test_p02_reachability.gd`: with all gates open, every entity, exit and spawn of every area is reachable on foot from the default spawn. It uses a grid flood fill with the player radius. A mutation check confirmed that it detects a walled-in NPC.
