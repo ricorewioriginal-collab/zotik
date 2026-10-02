@@ -21,6 +21,7 @@ func after_each() -> void:
 
 
 func _walk_into_exit(target: String) -> void:
+	await tree.create_timer(WorldArea.EXIT_GRACE_MSEC / 1000.0 + 0.05).timeout
 	var trig: Area3D = game.area.exits[target].trigger
 	game.player.global_position = trig.global_position - Vector3(0, 1.5, 0)
 	await physics_frames(4)
@@ -125,3 +126,12 @@ func test_interaction_picks_nearest() -> void:
 	eq(used, ["a"], "interact called once on nearest")
 	a.queue_free()
 	b.queue_free()
+
+
+func test_stale_position_does_not_chain_transitions() -> void:
+	game.enter_area("AREA_LUN_FOREST", "default")
+	await physics_frames(2)
+	game.player.global_position = Vector3(0, 0, 29)
+	game.enter_area("AREA_LUN_RIFT_CAVE", "AREA_LUN_ORUN_ARENA")
+	await physics_frames(5)
+	eq(game.area.area_id, "AREA_LUN_RIFT_CAVE", "no chained exit into the ruins")

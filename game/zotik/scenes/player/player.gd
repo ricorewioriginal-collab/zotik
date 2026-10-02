@@ -8,6 +8,8 @@ signal damaged(amount: int)
 signal healed(amount: int)
 signal died
 signal interactable_changed(target: Interactable)
+signal attacked(hits: int)
+signal lock_changed(target: Node3D)
 
 const JUMP_VELOCITY := 6.5
 const GRAVITY := 18.0
@@ -23,6 +25,11 @@ var dodge_time_left := 0.0
 var dodge_dir := Vector3.ZERO
 var dead := false
 var current_interactable: Interactable
+var attack_cooldown := 0.0
+var lock_target: Enemy
+
+const ATTACK_CONE_DOT := 0.3
+const LOCK_RANGE := 15.0
 
 var stats := {}
 var visual: ZotikVisual
@@ -71,6 +78,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	invulnerable_time = maxf(0.0, invulnerable_time - delta)
+	attack_cooldown = maxf(0.0, attack_cooldown - delta)
+	if lock_target and (not is_instance_valid(lock_target) or lock_target.is_dead() or lock_target.global_position.distance_to(global_position) > LOCK_RANGE):
+		set_lock(null)
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
 	var input := Vector2.ZERO
@@ -95,13 +105,19 @@ func _physics_process(delta: float) -> void:
 		var speed := float(stats.move_speed) * (0.4 if is_blocking else 1.0)
 		velocity.x = move_toward(velocity.x, dir.x * speed, ACCEL * delta)
 		velocity.z = move_toward(velocity.z, dir.z * speed, ACCEL * delta)
-		if dir.length() > 0.01:
+		if lock_target:
+			face(lock_target.global_position - global_position)
+		elif dir.length() > 0.01:
 			face(dir)
 	move_and_slide()
 	camera_pivot.global_position = global_position + Vector3(0, 1.4, 0)
 	_update_interactable()
 	if control_enabled and not dead and current_interactable and Input.is_action_just_pressed("interact"):
 		current_interactable.interact(self)
+	if control_enabled and not dead and Input.is_action_just_pressed("attack"):
+		attack()
+	if control_enabled and not dead and Input.is_action_just_pressed("lock_on"):
+		set_lock(null if lock_target else nearest_enemy(LOCK_RANGE))
 	if control_enabled and not dead and Input.is_action_just_pressed("use_item"):
 		var id := Inventory.first_consumable()
 		if id == "" or not Inventory.use(id, self):
@@ -129,6 +145,49 @@ func move_direction(input: Vector2) -> Vector3:
 	if input.length() < 0.01:
 		return Vector3.ZERO
 	return Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, camera_pivot.rotation.y).normalized() * minf(input.length(), 1.0)
+
+
+## Melee attack against all enemies in a frontal cone. Returns hits.
+func attack() -> int:
+	if attack_cooldown > 0.0 or is_dodging or dead:
+		return 0
+	attack_cooldown = float(stats.attack_cooldown)
+	if lock_target:
+		face(lock_target.global_position - global_position)
+	var hits := 0
+	for n in get_tree().get_nodes_in_group("enemy"):
+		var e := n as Enemy
+		if e == null or e.is_dead():
+			continue
+		var to := e.global_position - global_position
+		to.y = 0.0
+		if to.length() > float(stats.attack_range) + 0.5:
+			continue
+		if to.length() > 0.3 and forward().dot(to.normalized()) < ATTACK_CONE_DOT:
+			continue
+		e.take_hit(Stats.attack())
+		hits += 1
+	attacked.emit(hits)
+	return hits
+
+
+func nearest_enemy(max_range: float) -> Enemy:
+	var best: Enemy = null
+	var best_d := max_range
+	for n in get_tree().get_nodes_in_group("enemy"):
+		var e := n as Enemy
+		if e == null or e.is_dead():
+			continue
+		var d := e.global_position.distance_to(global_position)
+		if d < best_d:
+			best_d = d
+			best = e
+	return best
+
+
+func set_lock(e: Enemy) -> void:
+	lock_target = e
+	lock_changed.emit(e)
 
 
 func face(dir: Vector3) -> void:
@@ -174,5 +233,7 @@ func heal(amount: int) -> int:
 
 func revive_full() -> void:
 	dead = false
+	is_dodging = false
+	set_lock(null)
 	GameState.player.max_hp = Stats.max_hp()
 	GameState.player.hp = Stats.max_hp()

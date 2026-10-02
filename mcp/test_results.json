@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:24:04",
+  "last_run": "2026-10-02T08:28:30",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 52,
+  "passed": 60,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -160,6 +160,10 @@
       "result": "PASS"
     },
     {
+      "id": "test_m05_greybox::test_stale_position_does_not_chain_transitions",
+      "result": "PASS"
+    },
+    {
       "id": "test_m06_dialogue::test_dialogue_selection_follows_state",
       "result": "PASS"
     },
@@ -213,6 +217,34 @@
     },
     {
       "id": "test_m07_inventory_shop::test_inventory_menu_equip_changes_stats",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_dummy_defeated_by_attacks_with_event",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_attack_respects_cone_and_cooldown",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_riftling_chases_attacks_and_drops",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_telegraphed_attack_can_be_dodged",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_lock_on_picks_nearest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_persistent_and_respawning_enemies",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_death_resets_encounter_and_keeps_progress",
       "result": "PASS"
     }
   ]

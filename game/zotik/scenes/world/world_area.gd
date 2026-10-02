@@ -6,6 +6,9 @@ extends Node3D
 signal exit_requested(target_area: String)
 
 const WALL_HEIGHT := 5.0
+## Exits ignore the player for this long after the area was built, so a
+## stale position from the previous area can never chain a transition.
+const EXIT_GRACE_MSEC := 250
 
 var area_id := ""
 var layout := {}
@@ -13,11 +16,13 @@ var exits := {}          # target -> {trigger, barrier, gate_flag}
 var flag_props := []     # [{node, body, flag}]
 var entities := {}       # spawn/id -> node
 var skipped := []
+var _built_msec := 0
 
 
 func build(id: String, factories: Dictionary) -> void:
 	area_id = id
 	name = id
+	_built_msec = Time.get_ticks_msec()
 	layout = Content.layout(id)
 	_environment()
 	var size: Array = layout.get("size", [20, 20])
@@ -96,7 +101,7 @@ func _exit(x: Dictionary) -> void:
 
 
 func _on_exit_body(body: Node, target: String) -> void:
-	if not body.is_in_group("player"):
+	if not body.is_in_group("player") or Time.get_ticks_msec() - _built_msec < EXIT_GRACE_MSEC:
 		return
 	if is_exit_open(target):
 		exit_requested.emit(target)

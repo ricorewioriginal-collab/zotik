@@ -98,3 +98,16 @@ See `docs/PHASE_1_AUDIT.md`.
   - The shop menu opens after Boro's dialogue (`open_shop` effect).
   - Player control is locked while a menu is open.
 - Tests: `tests/unit/test_m07_inventory_shop.gd` (7 tests).
+
+## M08 Combat Foundation – PASSED
+- Player melee hits every enemy in a frontal cone within range, with a cooldown and damage `max(1, attack − defense)`. Lock-on targets the nearest enemy, Zotik faces it, and the lock is released on death or distance.
+- `Enemy` is data-driven and has the states IDLE → CHASE → WINDUP (a telegraphed strike, 0.5 s) → RECOVER.
+  - Strikes can be dodged (i-frames) and blocked.
+  - Drops and Lun are paid on defeat, and `enemy_defeated` is emitted.
+  - Regular enemies respawn when the area is re-entered. Persistent spawns (Mondwolf, Orun) stay defeated across save and load.
+- `Boss` base: data-defined phases change attack and cooldown multipliers and can summon helpers. It is completed in M12.
+- Death: Zotik falls, and after 1.5 s the area encounter resets (enemy HP, boss phase, summons). Zotik respawns at the area entry with full HP. Quest and world progress is kept.
+- Fixes found while testing:
+  1. **Chained area transitions.** A stale position from the previous area could trigger an exit of the new area immediately (Mondwald → Höhle → Ruinen). The player is now placed before the area is built, and exits have a 250 ms grace period. A regression test covers it.
+  2. **Silent test passes.** A GDScript runtime error used to abort a test without failing it. The runner now records script errors through `Logger` and fails the test.
+- Tests: `tests/unit/test_m08_combat.gd` (7 tests) and 1 new regression test in M05.

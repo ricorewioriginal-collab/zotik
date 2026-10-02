@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M07_INVENTORY_EQUIPMENT_SHOP",
+  "milestone": "M08_COMBAT_FOUNDATION",
   "status": "PASSED",
-  "next_allowed": "M08_COMBAT_FOUNDATION",
+  "next_allowed": "M09_MAIN_QUEST",
   "phase_2_allowed": false
 }

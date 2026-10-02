@@ -23,7 +23,7 @@ var _entry_spawn := Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
@@ -42,6 +42,7 @@ func _ready() -> void:
 	world.add_child(player)
 	player.interactable_changed.connect(hud.set_prompt)
 	inventory_menu.player = player
+	player.died.connect(_on_player_died)
 	EventBus.sync_state.connect(_sync_state)
 	EventBus.travel_requested.connect(func(a, s): enter_area.call_deferred(a, s))
 	if App.pending_load:
@@ -110,17 +111,32 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	if area:
 		world.remove_child(area)
 		area.queue_free()
+	_entry_spawn = WorldArea._v(Content.layout(area_id).get("spawns", {}).get(spawn, Content.layout(area_id).get("spawns", {}).get("default", [0, 0, 0])))
+	player.global_position = pos_override if pos_override != null else _entry_spawn
+	player.velocity = Vector3.ZERO
 	area = WorldArea.new()
 	world.add_child(area)
 	area.build(area_id, factories)
 	area.exit_requested.connect(_on_exit_requested, CONNECT_DEFERRED)
 	GameState.player.area = area_id
-	_entry_spawn = area.spawn_point(spawn)
-	player.global_position = pos_override if pos_override != null else _entry_spawn
-	player.velocity = Vector3.ZERO
 	_sync_state()
 	area_loaded.emit(area_id)
 	EventBus.area_entered.emit(area_id)
+
+
+## Death: the encounter in the current area resets, the player respawns at
+## the area entry with full health. Quest/world progress is kept.
+func _on_player_died() -> void:
+	EventBus.notify.emit("Zotik ist gefallen …")
+	await get_tree().create_timer(1.5).timeout
+	if not is_instance_valid(player):
+		return
+	for n in get_tree().get_nodes_in_group("enemy"):
+		(n as Enemy).reset_encounter()
+	player.revive_full()
+	player.global_position = _entry_spawn
+	player.velocity = Vector3.ZERO
+	EventBus.notify.emit("Zotik steht wieder auf.")
 
 
 func _on_exit_requested(target: String) -> void:

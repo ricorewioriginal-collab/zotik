@@ -6,12 +6,37 @@ extends SceneTree
 const DIR := "res://tests/unit/"
 
 
+## Records GDScript runtime errors so a test that aborts on an error fails
+## instead of silently passing.
+class ErrorCollector extends Logger:
+	var script_errors: Array[String] = []
+	var mutex := Mutex.new()
+
+	func _log_error(_function: String, file: String, line: int, code: String, rationale: String, _editor_notify: bool, error_type: int, _script_backtraces: Array[ScriptBacktrace]) -> void:
+		if error_type == ERROR_TYPE_SCRIPT:
+			mutex.lock()
+			script_errors.append("%s (%s:%d) %s" % [code, file, line, rationale])
+			mutex.unlock()
+
+	func _log_message(_message: String, _error: bool) -> void:
+		pass
+
+	func take() -> Array[String]:
+		mutex.lock()
+		var out := script_errors.duplicate()
+		script_errors.clear()
+		mutex.unlock()
+		return out
+
+
 func _initialize() -> void:
 	_run.call_deferred()
 
 
 func _run() -> void:
 	await process_frame
+	var collector := ErrorCollector.new()
+	OS.add_logger(collector)
 	var filter := ""
 	var json_path := ""
 	for a in OS.get_cmdline_user_args():
@@ -30,6 +55,7 @@ func _run() -> void:
 		var script: GDScript = load(DIR + f)
 		var methods := script.get_script_method_list().map(func(m): return m.name).filter(func(n): return n.begins_with("test_"))
 		for m in methods:
+			collector.take()
 			var t: TestCase = script.new()
 			t.tree = self
 			await t.before_each()
@@ -38,6 +64,8 @@ func _run() -> void:
 			if current_scene:
 				unload_current_scene()
 			await process_frame
+			for err in collector.take():
+				t.failures.append("script error: " + err)
 			if t.failures.is_empty():
 				passed += 1
 				results.append({"id": "%s::%s" % [f.get_basename(), m], "result": "PASS"})
