@@ -100,5 +100,27 @@
     "exits": [
       "AREA_ELA_DUNGEON"
     ]
+  },
+  "AREA_VAL_MARKET": {
+    "name": "Valdoria – Markt & Hafen",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_GUILD",
+      "AREA_VAL_CANAL_GATE"
+    ]
+  },
+  "AREA_VAL_GUILD": {
+    "name": "Valdoria – Gildenviertel",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_MARKET"
+    ]
+  },
+  "AREA_VAL_CANAL_GATE": {
+    "name": "Valdoria – Kanaltor",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_MARKET"
+    ]
   }
 }

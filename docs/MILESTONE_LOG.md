@@ -325,3 +325,18 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
 - `docs/ACCEPTANCE_MATRIX.md` gained the Phase-2 section. Screenshots 07–10 show Elaris.
 
 **Phase 2 (Elaris) milestones E00–E08: PASSED.** Further chapters (Valdoria, …) need owner approval and story input.
+
+# Phase 3 – Valdoria
+
+## V00 Phase-3 plan – PASSED
+Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is in `docs/PHASE_3_PLAN.md`; assumptions are logged as C-20 and C-21.
+
+## V01 Valdoria hub – PASSED
+- World Valdoria (chapter 3), unlocked by `FLAG_ELA_CHAPTER_COMPLETE`, with a one-time arrival scene. Solmera is added as a sealed placeholder for chapter 4.
+- Three districts:
+  - **Markt & Hafen:** Weltenstein; Haldor's smithy; Ysmé the alchemist; Lotte at the harbour; a closed casino (C-20)
+  - **Gildenviertel:** Veyr's guild hall, library and arena wall
+  - **Kanaltor:** Tibor at the canal gate
+- New **armour slot** (`ARMOR_`, C-22): Lederwams and Kanalmantel. Also new: Stahlschwert and Elixier.
+- `data/lore.json` + `LoreBook` entity: readable library books shown in the dialogue box and validated like dialogue.
+- Tests: `tests/unit/test_v01_valdoria.gd` (4 tests).

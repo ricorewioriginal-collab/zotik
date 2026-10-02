@@ -417,5 +417,62 @@
         "Siehst du das Licht? Das bist du gewesen."
       ]
     ]
+  },
+  "DLG_HALDOR_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_HALDOR_001",
+        "Valdorianischer Stahl! Schwerter, Wämser, Mäntel – nichts rostet hier, außer den Kanälen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_VAL_SMITH_001"
+      }
+    ]
+  },
+  "DLG_YSME_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_YSME_001",
+        "Tränke und Elixiere. Frisch gebraut, garantiert ohne Kanalwasser."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_VAL_ALCHEMIST_001"
+      }
+    ]
+  },
+  "DLG_LOTTE_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_LOTTE_001",
+        "Der Hafen schläft nie. Nur die Schiffe aus dem Süden kommen seit Wochen nicht mehr."
+      ]
+    ]
+  },
+  "DLG_VEYR_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYR_001",
+        "Die Monsterjäger-Gilde nimmt jeden, der eine Klinge halten kann."
+      ]
+    ]
+  },
+  "DLG_TIBOR_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TIBOR_001",
+        "Das Kanaltor bleibt zu. Da unten wohnt etwas, das niemand mehr gesehen haben will."
+      ]
+    ]
   }
 }

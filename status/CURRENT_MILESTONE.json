@@ -1,8 +1,7 @@
 {
-  "phase": 2,
-  "milestone": "E08_CHAPTER2_REGRESSION",
+  "phase": 3,
+  "milestone": "V01_VALDORIA_HUB",
   "status": "PASSED",
-  "next_allowed": "PHASE_3_REQUIRES_OWNER_APPROVAL",
-  "phase_2_allowed": true,
-  "phase_3_allowed": false
+  "next_allowed": "V02_GUILD_BESTIARY",
+  "standing_owner_approval": true
 }

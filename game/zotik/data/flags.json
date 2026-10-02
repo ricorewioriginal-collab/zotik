@@ -70,5 +70,11 @@
   },
   "FLAG_ELA_QUEEN_MET": {
     "desc": "Begegnung mit der Wurzelkönigin gesehen"
+  },
+  "FLAG_VAL_ARRIVED": {
+    "desc": "Erste Ankunft in Valdoria gesehen"
+  },
+  "FLAG_VAL_CANALS_OPEN": {
+    "desc": "Tibor öffnet das Kanaltor"
   }
 }

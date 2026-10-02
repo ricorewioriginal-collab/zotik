@@ -18,6 +18,14 @@
     "name": "Valdoria",
     "chapter": 3,
     "subtitle": "Die Stadt, die niemals schläft",
+    "hub_area": "AREA_VAL_MARKET",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_ELA_CHAPTER_COMPLETE"
+  },
+  "WORLD_SOLMERA": {
+    "name": "Solmera",
+    "chapter": 4,
+    "subtitle": "Wo der Sand sich erinnert",
     "sealed": true
   }
 }

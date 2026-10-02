@@ -41,6 +41,10 @@ func play_cutscene(cut_id: String) -> void:
 	_request(cut_id, "", "cutscenes")
 
 
+func read_lore(lore_id: String) -> void:
+	_request(lore_id, "", "lore")
+
+
 func _request(id: String, npc: String, table: String) -> void:
 	if is_active():
 		queue.append({"id": id, "npc": npc, "table": table})

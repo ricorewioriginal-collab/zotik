@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T10:16:56",
+  "last_run": "2026-10-02T10:43:46",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 140,
+  "passed": 144,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -565,6 +565,22 @@
     },
     {
       "id": "test_p03_glyphs::test_all_visible_strings_render_with_builtin_font",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v01_valdoria::test_unlocked_by_chapter_two_and_travel",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v01_valdoria::test_districts_connect",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v01_valdoria::test_library_books_readable",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v01_valdoria::test_smithy_armor_slot",
       "result": "PASS"
     }
   ]

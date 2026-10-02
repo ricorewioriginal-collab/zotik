@@ -21,3 +21,6 @@ Format: ID – description – status / interim handling. Interim handling is th
 - C-17 – Combat doc lists MP, magic, elements and timeline. – Interim for Phase 2: Break and party AI only; elements, MP and timeline stay deferred.
 - C-18 – The legacy village attack (BUILD_01) remains deferred; not part of chapter 2.
 - C-19 – Elaris NPC roles are not specified. – Interim: Mara (research quarter), Elio (craftsman/shop) and Sela (townsperson) reuse names from the legacy NPC list. All dialogue is placeholder.
+- C-20 – `04_WORLDS` lists a casino in Valdoria. The addendum forbids real-money casinos, and the Phase-1 master design deferred the casino. – Interim: the casino is deferred, and Valdoria shows a closed casino building.
+- C-21 – Valdoria NPC roles are not specified. – Interim: names come from the legacy NPC list where possible (Veyr, Elio is already used) plus clearly marked placeholder roles. All dialogue is placeholder.
+- C-22 – `06_SYSTEMS` lists armour and headgear slots, but `docs/03` has no armour namespace. – Interim: added `ARMOR_` (slot `armor`) for Valdoria's smithy. Headgear is still deferred.

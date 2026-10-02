@@ -5,14 +5,14 @@ extends Node
 
 const DATA_DIR := "res://data/"
 const TABLES := {
-	"flags": ["FLAG_"], "areas": ["AREA_"], "items": ["ITEM_", "WEAPON_"],
+	"flags": ["FLAG_"], "areas": ["AREA_"], "items": ["ITEM_", "WEAPON_", "ARMOR_"],
 	"cosmetics": ["COS_"], "enemies": ["ENEMY_", "BOSS_"], "chests": ["CHEST_"],
 	"shops": ["SHOP_"], "puzzles": ["PUZ_"], "quests": ["QUEST_"], "npcs": ["NPC_"],
-	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"],
+	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"], "lore": ["LORE_"],
 }
 const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOONGATE_001", "PUZ_LUN_RESONANCE_BRIDGE_001", "ENEMY_RIFTLING_001", "ENEMY_MOONWOLF_001", "BOSS_ORUN_001", "WEAPON_WORLD_BLADE_001", "CHEST_LUN_001", "CHEST_LUN_002", "SAVEPOINT_LUN_RIFT_001", "FLAG_LUN_FOREST_UNLOCKED", "FLAG_BOSS_LUN_ORUN_DEFEATED", "CHAR_ZOTIK_MASTER_001", "CHAR_MIRA_MASTER_001", "CHAR_LYRA_MASTER_001", "CHAR_PROFESSORIUM_MASTER_001"]
 const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party"]
-const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform"]
+const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform", "lore"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
 const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
 
@@ -121,7 +121,7 @@ func validate() -> Array[String]:
 		_ref(e, "npcs", table("party")[id].get("npc", ""), id)
 	for id in table("items"):
 		var it: Dictionary = table("items")[id]
-		if it.get("type") in ["weapon", "accessory"] and not it.has("slot"):
+		if it.get("type") in ["weapon", "accessory", "armor"] and not it.has("slot"):
 			e.append("%s: equipment without slot" % id)
 	var defaults := {}
 	for id in table("cosmetics"):
@@ -183,7 +183,7 @@ func validate() -> Array[String]:
 			_ref(e, "dialogues", d.dialogue, id)
 			for g in d.when:
 				_gate(e, g, id)
-	for t in ["dialogues", "cutscenes"]:
+	for t in ["dialogues", "cutscenes", "lore"]:
 		for id in table(t):
 			var dl: Dictionary = table(t)[id]
 			if dl.get("lines", []).is_empty():
@@ -330,6 +330,8 @@ func _validate_layouts(e: Array[String]) -> void:
 				"unique":
 					if world.get("uniques", {}).get(en.id, {}).get("area") != area:
 						e.append("%s placed outside its area" % en.id)
+				"lore":
+					_ref(e, "lore", en.id, area)
 				"platform":
 					if not key.begins_with("PLATFORM_") or not en.has("to") or float(en.get("period", 0)) <= 0.0:
 						e.append("%s: invalid moving platform %s" % [area, key])

@@ -38,7 +38,7 @@ func test_world_map_travel_to_elaris_and_back() -> void:
 	game.area.entities["TRAVEL_LUN_001"].interact(game.player)
 	check(game.world_map.visible and not game.player.control_enabled, "world map open")
 	var rows := game.world_map.list.get_child_count()
-	eq(rows, 3, "three worlds listed")
+	eq(rows, Content.table("worlds").size(), "every world listed")
 	game.world_map.travel("WORLD_ELARIS")
 	await frames(3)
 	eq(game.area.area_id, "AREA_LUN_VILLAGE", "locked world: no travel")

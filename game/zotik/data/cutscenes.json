@@ -176,5 +176,22 @@
         "spawn": "return"
       }
     ]
+  },
+  "CUT_VAL_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Valdoria. Lichter, Stimmen, Glocken – eine Stadt, die niemals schläft."
+      ],
+      [
+        "NPC_NIA_001",
+        "So viele Leute! Hier verliert man sich schneller als im lebenden Wald."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Die Risse wurden auch hier gemeldet. Unter der Stadt, in den alten Kanälen."
+      ]
+    ]
   }
 }

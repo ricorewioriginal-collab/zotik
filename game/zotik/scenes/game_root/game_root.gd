@@ -31,7 +31,7 @@ var _entry_spawn := Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create, "lore": LoreBook.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)

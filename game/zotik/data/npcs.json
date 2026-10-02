@@ -358,5 +358,55 @@
         "dialogue": "DLG_ROVAN_IDLE_001"
       }
     ]
+  },
+  "NPC_HALDOR_001": {
+    "name": "Haldor",
+    "area": "AREA_VAL_MARKET",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_HALDOR_SHOP_001"
+      }
+    ]
+  },
+  "NPC_YSME_001": {
+    "name": "Ysmé",
+    "area": "AREA_VAL_MARKET",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_YSME_SHOP_001"
+      }
+    ]
+  },
+  "NPC_LOTTE_001": {
+    "name": "Lotte",
+    "area": "AREA_VAL_MARKET",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_LOTTE_IDLE_001"
+      }
+    ]
+  },
+  "NPC_VEYR_001": {
+    "name": "Veyr",
+    "area": "AREA_VAL_GUILD",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_VEYR_IDLE_001"
+      }
+    ]
+  },
+  "NPC_TIBOR_001": {
+    "name": "Tibor",
+    "area": "AREA_VAL_CANAL_GATE",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_TIBOR_IDLE_001"
+      }
+    ]
   }
 }

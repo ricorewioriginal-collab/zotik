@@ -1586,5 +1586,364 @@
         "persistent": true
       }
     ]
+  },
+  "AREA_VAL_MARKET": {
+    "size": [
+      70,
+      60
+    ],
+    "ground": "#7a6a5a",
+    "ambient": "#ffe0b0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        20
+      ],
+      "travel": [
+        0,
+        0,
+        20
+      ],
+      "AREA_VAL_GUILD": [
+        -29,
+        0,
+        0
+      ],
+      "AREA_VAL_CANAL_GATE": [
+        29,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_GUILD",
+        "pos": [
+          -33,
+          0,
+          0
+        ]
+      },
+      {
+        "to": "AREA_VAL_CANAL_GATE",
+        "pos": [
+          33,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "market_stall",
+        "pos": [
+          -12,
+          1,
+          -6
+        ],
+        "size": [
+          6,
+          2,
+          3
+        ],
+        "color": "#b06030"
+      },
+      {
+        "name": "market_stall",
+        "pos": [
+          0,
+          1,
+          -10
+        ],
+        "size": [
+          6,
+          2,
+          3
+        ],
+        "color": "#3060b0"
+      },
+      {
+        "name": "smithy",
+        "pos": [
+          16,
+          2.5,
+          -18
+        ],
+        "size": [
+          10,
+          5,
+          8
+        ],
+        "color": "#5a5a5a"
+      },
+      {
+        "name": "harbour_pier",
+        "pos": [
+          0,
+          0.2,
+          27
+        ],
+        "size": [
+          20,
+          0.4,
+          4
+        ],
+        "color": "#6a4a2a",
+        "collision": false
+      },
+      {
+        "name": "casino_closed",
+        "pos": [
+          -20,
+          3,
+          18
+        ],
+        "size": [
+          10,
+          6,
+          8
+        ],
+        "color": "#7a2a5a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_VAL_001",
+        "pos": [
+          4,
+          0,
+          23
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_VAL_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          19
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_VAL_ARRIVAL_001",
+        "once_flag": "FLAG_VAL_ARRIVED"
+      },
+      {
+        "type": "npc",
+        "id": "NPC_HALDOR_001",
+        "pos": [
+          14,
+          0,
+          -12
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_YSME_001",
+        "pos": [
+          -12,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_LOTTE_001",
+        "pos": [
+          6,
+          0,
+          22
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_GUILD": {
+    "size": [
+      60,
+      60
+    ],
+    "ground": "#6a6a7a",
+    "ambient": "#e0e0ff",
+    "spawns": {
+      "default": [
+        26,
+        0,
+        0
+      ],
+      "AREA_VAL_MARKET": [
+        26,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_MARKET",
+        "pos": [
+          29,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "guild_hall",
+        "pos": [
+          -14,
+          3,
+          -16
+        ],
+        "size": [
+          16,
+          6,
+          10
+        ],
+        "color": "#5a4a3a"
+      },
+      {
+        "name": "library",
+        "pos": [
+          -14,
+          3,
+          16
+        ],
+        "size": [
+          14,
+          6,
+          10
+        ],
+        "color": "#4a5a7a"
+      },
+      {
+        "name": "arena_wall",
+        "pos": [
+          -26,
+          3,
+          0
+        ],
+        "size": [
+          2,
+          6,
+          14
+        ],
+        "color": "#8a7a5a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_VEYR_001",
+        "pos": [
+          -10,
+          0,
+          -9
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_VAL_LIB_001",
+        "pos": [
+          -18,
+          0,
+          9
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_VAL_LIB_002",
+        "pos": [
+          -14,
+          0,
+          9
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_VAL_LIB_003",
+        "pos": [
+          -10,
+          0,
+          9
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_CANAL_GATE": {
+    "size": [
+      50,
+      50
+    ],
+    "ground": "#4a5a5a",
+    "ambient": "#b0d0e0",
+    "spawns": {
+      "default": [
+        -21,
+        0,
+        0
+      ],
+      "AREA_VAL_MARKET": [
+        -21,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_MARKET",
+        "pos": [
+          -24,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "canal_gate",
+        "pos": [
+          0,
+          3,
+          -20
+        ],
+        "size": [
+          12,
+          6,
+          2
+        ],
+        "color": "#3a4a4a"
+      },
+      {
+        "name": "canal_water",
+        "pos": [
+          0,
+          0.05,
+          0
+        ],
+        "size": [
+          6,
+          0.1,
+          30
+        ],
+        "color": "#2a5a8a",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_TIBOR_001",
+        "pos": [
+          -6,
+          0,
+          -12
+        ]
+      }
+    ]
   }
 }
