@@ -582,3 +582,15 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - **Horizon** (Lunaris, Valdoria): a castle far away and floating islands with trees, like the key art (3 on Android/Web, 6 on PC).
 - `backdrop_skip` keeps the town ring out of the harbour.
 - Regression: 194/194 tests plus restart checks: PASS.
+
+## X01 Full playthrough – PASSED (owner: "das Spiel soll spielbar sein in deinen bisherigen Welten in voller Logik")
+- New test `test_x01_full_playthrough`: the whole game in one session, with no prepared saves.
+  - Title → new game → chapter 1 (Lunaris) → Weltenstein to Elaris → chapter 2 → Weltenstein to Valdoria → chapter 3 (guild, bounty, bronze arena, canals, cistern golem, Kanalwächter) → save → reset → load through the title.
+  - Every chapter starts from the state the previous chapter really produced: party, items, flags and quest steps. The golden paths m15/e08/v06 start from hand-written saves; this one does not.
+  - Uses each chapter's savepoint, because doing so is a quest step.
+- Checks:
+  - All 6 main and side quests COMPLETED.
+  - Companions follow across worlds (2 in Elaris, then 3).
+  - The loaded state is identical to the saved one (play_time excluded, because it keeps counting).
+- No game bugs found. The two failures during writing were test-script mistakes: the savepoint step was missing, and the valve order was wrong (the solution is valves 1 and 2).
+- Regression: 195/195 tests plus restart checks for chapters 1–3: PASS.
