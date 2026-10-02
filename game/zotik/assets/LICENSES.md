@@ -7,3 +7,5 @@
 All other visuals are generated in code (placeholders or procedural shapes).
 | `assets/characters/kaykit/*` | KayKit Adventurers Character Pack 1.0 by Kay Lousberg (kaylousberg.com), rigged and animated | CC0 (see `LICENSE.txt` there) |
 | `assets/world/kaykit/*` | KayKit Medieval Hexagon Pack 1.0 by Kay Lousberg (kaylousberg.com): buildings, trees, props (curated subset) | CC0 (see `LICENSE.txt` there) |
+| `assets/fonts/Cinzel.ttf`, `assets/fonts/Exo2.ttf` | Google Fonts (Cinzel, Exo 2) | SIL Open Font License 1.1 (see `OFL_*.txt`) |
+| `assets/ui/title_bg.jpg`, `assets/ui/portraits/*` | Cut from the owner's party poster (`reference/concept_2026-10-02/20_party_poster.jpg`) | Owner's own concept art – interim UI art, not approved final art |

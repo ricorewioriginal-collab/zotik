@@ -13,6 +13,7 @@ enum State { IDLE, CHASE, WINDUP, RECOVER, BROKEN, DEAD }
 
 const WINDUP_TIME := 0.5
 const GRAVITY := 18.0
+const RETARGET_SEC := 0.5
 const COLORS := {"ENEMY_TRAINING_DUMMY_001": "#b08a5a", "ENEMY_RIFTLING_001": "#7a4ad8", "ENEMY_MOONWOLF_001": "#9ab0d8", "BOSS_ORUN_001": "#4a2a7a", "ENEMY_PILZLING_001": "#c87a9a", "ENEMY_DORNENWOLF_001": "#5a7a3a", "ENEMY_WURZELKRIECHER_001": "#5a4a2a", "BOSS_WURZELKOENIGIN_001": "#4a6a2a", "ENEMY_KANALSCHLEIM_001": "#6a9a5a", "ENEMY_SCHLEUSENKRABBE_001": "#a85a3a", "ENEMY_ROSTGOLEM_001": "#8a5a3a", "BOSS_KANALWAECHTER_001": "#2a5a7a"}
 const SIZES := {"ENEMY_TRAINING_DUMMY_001": 0.75, "ENEMY_RIFTLING_001": 0.45, "ENEMY_MOONWOLF_001": 0.9, "BOSS_ORUN_001": 1.9, "ENEMY_PILZLING_001": 0.7, "ENEMY_DORNENWOLF_001": 1.1, "ENEMY_WURZELKRIECHER_001": 1.6, "BOSS_WURZELKOENIGIN_001": 2.4, "ENEMY_KANALSCHLEIM_001": 0.6, "ENEMY_SCHLEUSENKRABBE_001": 0.8, "ENEMY_ROSTGOLEM_001": 1.7, "BOSS_KANALWAECHTER_001": 2.3}
 
@@ -27,7 +28,8 @@ var timer := 0.0
 var cooldown := 0.0
 var attack_mult := 1.0
 var cooldown_mult := 1.0
-var target: Player
+var target: Node3D          # Player or Companion (duck-typed: dead, take_damage)
+var _retarget := 0.0
 var home := Vector3.ZERO
 var break_max := 0.0   # 0 = cannot be broken
 var break_value := 0.0
@@ -98,8 +100,10 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		return
 	cooldown = maxf(0.0, cooldown - delta)
-	if target == null or not is_instance_valid(target):
-		target = get_tree().get_first_node_in_group("player") as Player
+	_retarget -= delta
+	if target == null or not is_instance_valid(target) or target.dead or _retarget <= 0.0:
+		_retarget = RETARGET_SEC
+		target = _choose_target()
 	var dist := INF
 	if target:
 		dist = global_position.distance_to(target.global_position)
@@ -135,6 +139,22 @@ func _physics_process(delta: float) -> void:
 				_end_break()
 	move_and_slide()
 	body_mesh.animate(state, Vector2(velocity.x, velocity.z).length(), delta)
+
+
+## Nearest of Zotik and the companions still standing; Zotik if all are down.
+func _choose_target() -> Node3D:
+	var best: Node3D = get_tree().get_first_node_in_group("player") as Node3D
+	if best == null:
+		return null
+	var best_d := global_position.distance_to(best.global_position) if not best.dead else INF
+	for n in get_tree().get_nodes_in_group("party"):
+		var c := n as Companion
+		if c and not c.dead:
+			var d := global_position.distance_to(c.global_position)
+			if d < best_d - 0.5:
+				best_d = d
+				best = c
+	return best
 
 
 func _move_to(v: Vector3, delta: float) -> void:

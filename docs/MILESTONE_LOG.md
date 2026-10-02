@@ -522,3 +522,30 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - **Bug fixed:** the invisible border colliders were drawn as 5 m fog-coloured walls, which showed as a grey band at the horizon. They are now collision-only.
 - Outdoor borders are a low stone edge, so the forest behind them stays visible.
 - Regression: 186/186 tests plus restart checks: PASS.
+
+## U01 UI overhaul – PASSED (owner request: Final Fantasy / Kingdom Hearts direction)
+- **Design system** `core/ui_style.gd`:
+  - dark navy glass panels with gold trim and crystal-blue highlights
+  - Cinzel for titles, Exo 2 for text (both OFL)
+  - saved as `assets/ui/zotik_theme.tres` and set as the project theme. A theme set only on the root window does not reach controls under a CanvasLayer. A test keeps the file in sync with the builder.
+- **HUD** (same API as before; all tests unchanged):
+  - top left: Zotik frame with a painted portrait, HP and Lun, plus party frames (portrait, name, role, HP, readiness bar)
+  - top right: a round minimap drawn from the layout data (no second 3D render, so it stays cheap on Android). It shows props, exits, NPCs, enemies, the objective and Zotik's facing.
+  - area title and an "Aktuelles Ziel" quest box
+  - boss bar in an ornate frame
+  - interaction prompt chip
+  - icon bar with drawn icons (Inventar, Quests, Bestiarium, Menü). On touch screens it moves under the party frames, and taps on it are not treated as stick or camera input.
+- **Dialogue box:** wide panel with a name plate (hidden for the narrator) and a bobbing continue arrow.
+- **Menus:** centred, themed, with Cinzel titles.
+- **Title screen:** the owner's party poster as key art, with a fade, themed buttons and the version number.
+- The glyph test now checks the UI fonts.
+- Tests: `tests/unit/test_u01_ui.gd` (3 tests).
+
+## U02 Companion HP – PASSED (owner request)
+- Lyra 110, Nia 120, Rovan 190 HP, each with their own defence. Saved in `GameState.party_hp`, an additive save field.
+- Enemies pick the nearest member who is still standing. Boss hazards hit companions too; Zotik's armour bonus is only removed for Zotik.
+- K.O. at 0 HP: a death pose, no actions, ignored by enemies. The companion gets up with 30 % HP once nearby fighting stops. Every full heal (savepoint, respawn, arena) restores the party.
+- Lyra heals the weakest member (Zotik or a companion).
+- HUD party frames show HP and "k.o.".
+- Logged as C-31. Tests: `tests/unit/test_u02_party_hp.gd` (5 tests).
+- Regression: 194/194 tests plus restart checks for chapters 1–3: PASS. The golden paths still pass with vulnerable companions.

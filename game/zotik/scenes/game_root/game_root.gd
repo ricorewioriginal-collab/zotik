@@ -40,6 +40,7 @@ func _ready() -> void:
 	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create, "lore": LoreBook.create, "bounty_board": BountyBoard.create, "casino": CasinoEntrance.create}
 	Dialogue.reset()
 	hud = Hud.new()
+	hud.game = self
 	ui.add_child(hud)
 	dialogue_box = DialogueBox.new()
 	ui.add_child(dialogue_box)

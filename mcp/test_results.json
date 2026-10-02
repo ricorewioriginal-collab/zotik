@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T12:42:31",
+  "last_run": "2026-10-02T13:08:56",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 186,
+  "passed": 194,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -629,6 +629,38 @@
     },
     {
       "id": "test_p03_glyphs::test_all_visible_strings_render_with_builtin_font",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u01_ui::test_project_theme_is_in_sync",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u01_ui::test_hud_shows_frame_minimap_quest_and_icons",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u01_ui::test_dialogue_box_name_plate",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u02_party_hp::test_companions_take_damage_and_get_knocked_out",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u02_party_hp::test_knocked_out_recovers_after_the_fight",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u02_party_hp::test_full_heal_restores_party_and_hp_is_saved",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u02_party_hp::test_enemies_attack_the_nearest_member",
+      "result": "PASS"
+    },
+    {
+      "id": "test_u02_party_hp::test_healer_heals_the_weakest_member",
       "result": "PASS"
     },
     {

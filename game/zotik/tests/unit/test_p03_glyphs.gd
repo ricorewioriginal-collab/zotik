@@ -1,6 +1,7 @@
 extends TestCase
 ## Every player-visible string (string literals in game scripts and all
-## data JSON) must be renderable with the engine's built-in font: the web
+## data JSON) must be renderable with the fonts the UI uses (U01: Exo 2 for
+## text, Cinzel for titles; plus the engine font as fallback): the web
 ## build has no system font fallback, missing glyphs show as boxes.
 
 const DIRS := ["res://core/", "res://scenes/"]
@@ -26,7 +27,7 @@ func _json_strings(v: Variant, out: Array) -> void:
 
 
 func test_all_visible_strings_render_with_builtin_font() -> void:
-	var font := ThemeDB.fallback_font
+	var fonts: Array[Font] = [ThemeDB.fallback_font, UiStyle.body_font(), UiStyle.title_font()]
 	var strings := []
 	var files := []
 	for d in DIRS:
@@ -46,6 +47,7 @@ func test_all_visible_strings_render_with_builtin_font() -> void:
 	for s in strings:
 		for i in s.length():
 			var c: int = s.unicode_at(i)
-			if c > 127 and not font.has_char(c):
-				bad[String.chr(c)] = s
+			for font in fonts:
+				if c > 127 and not font.has_char(c):
+					bad[String.chr(c)] = s
 	eq(bad.size(), 0, "unsupported glyphs: %s" % [bad])

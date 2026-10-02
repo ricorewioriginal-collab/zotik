@@ -1,10 +1,13 @@
 class_name Companion
 extends CharacterBody3D
 ## AI party member (data/party.json). Follows Zotik, attacks enemies near
-## him from range and heals him when his health is low. Enemies target only
-## Zotik, so companions never block progress. PLACEHOLDER visual.
+## him, and the healer heals the weakest member. Companions have their own
+## HP (saved in GameState.party_hp); enemies attack them too. At 0 HP a
+## companion is knocked out and gets up with 30 % HP once the fighting
+## around stops; every full heal (savepoint, respawn) restores everyone.
 
 signal attacked(target: Enemy)
+signal damaged(amount: int)
 signal healed_player(amount: int)
 
 const FOLLOW_MIN := 2.5
@@ -19,6 +22,8 @@ const MODELS := {
 	"PARTY_ROVAN_001": ["barbarian", ["1H_Axe", "Barbarian_Round_Shield"]],
 }
 const TELEPORT_DIST := 25.0
+const KO_RECOVER_SEC := 5.0       # quiet seconds after a fight before a K.O. ends
+const KO_RECOVER_FRACTION := 0.3
 const ENGAGE_RADIUS := 10.0
 const GRAVITY := 18.0
 
@@ -26,6 +31,8 @@ var member_id := ""
 var data := {}
 var player: Player
 var attack_cd := 0.0
+var dead := false        # knocked out (duck-typed like Player.dead for enemies)
+var _ko_quiet := 0.0     # seconds without nearby fighting while knocked out
 var heal_cd := 0.0
 var body: Node3D
 var rig: CharacterRig
@@ -51,6 +58,9 @@ static func create(id: String, p: Player) -> Companion:
 	c.rig.show_weapons(look[1])
 	c.body = c.rig
 	c.add_child(c.rig)
+	if int(GameState.party_hp.get(id, 1)) <= 0:
+		c.dead = true  # still knocked out (loaded save or area change)
+		c.rig.play("death")
 	var label := Label3D.new()
 	label.text = str(c.data.get("name", id))
 	label.font_size = 48
@@ -63,11 +73,66 @@ static func create(id: String, p: Player) -> Companion:
 	return c
 
 
+## Hit points live in GameState.party_hp (missing entry = full), so they are
+## saved and survive area changes.
+func max_hp() -> int:
+	return int(data.get("hp", 100))
+
+
+func hp() -> int:
+	return int(GameState.party_hp.get(member_id, max_hp()))
+
+
+func take_damage(raw_attack: int) -> int:
+	if dead:
+		return 0
+	var dmg := Stats.damage(raw_attack, int(data.get("defense", 0)))
+	GameState.party_hp[member_id] = maxi(0, hp() - dmg)
+	damaged.emit(dmg)
+	if hp() == 0:
+		_knock_out()
+	elif not rig.in_action():
+		rig.action("hit", 1.5)
+	return dmg
+
+
+func heal(amount: int) -> int:
+	if dead:
+		return 0
+	var before := hp()
+	GameState.party_hp[member_id] = mini(max_hp(), before + amount)
+	return hp() - before
+
+
+func _knock_out() -> void:
+	dead = true
+	_ko_quiet = 0.0
+	velocity = Vector3.ZERO
+	rig.play("death")
+	EventBus.notify.emit("%s ist kampfunfähig!" % data.name)
+
+
+## fraction of max HP; used by full heals (savepoint, respawn) and after fights
+func revive(fraction: float) -> void:
+	var was_down := dead
+	dead = false
+	GameState.party_hp[member_id] = maxi(hp() if not was_down else 0, int(ceil(max_hp() * fraction)))
+	if was_down:
+		rig.play("idle")
+		EventBus.notify.emit("%s steht wieder auf." % data.name)
+
+
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(player):
 		return
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
+	if dead:
+		_move(Vector3.ZERO, delta, false)
+		_ko_quiet = 0.0 if _fight_nearby() else _ko_quiet + delta
+		if _ko_quiet >= KO_RECOVER_SEC and not player.dead:
+			revive(KO_RECOVER_FRACTION)
+		return
 	attack_cd = maxf(0.0, attack_cd - delta)
 	heal_cd = maxf(0.0, heal_cd - delta)
 	var to_player := player.global_position - global_position
@@ -77,11 +142,8 @@ func _physics_process(delta: float) -> void:
 	if Dialogue.is_active() or player.dead:
 		_move(Vector3.ZERO, delta)
 		return
-	if int(data.get("heal_amount", 0)) > 0 and heal_cd <= 0.0 and float(GameState.player.hp) / float(maxi(1, Stats.max_hp())) < float(data.heal_threshold):
-		heal_cd = float(data.heal_cooldown)
-		var done := player.heal(int(data.heal_amount))
-		healed_player.emit(done)
-		EventBus.notify.emit("%s heilt dich (+%d)." % [data.name, done])
+	if int(data.get("heal_amount", 0)) > 0 and heal_cd <= 0.0:
+		_heal_weakest()
 	var target := _pick_target()
 	var goal := Vector3.ZERO
 	if target:
@@ -136,11 +198,46 @@ func _pick_target() -> Enemy:
 	return best
 
 
-func _move(v: Vector3, delta: float) -> void:
+func _move(v: Vector3, delta: float, animate: bool = true) -> void:
 	velocity.x = move_toward(velocity.x, v.x, 25.0 * delta)
 	velocity.z = move_toward(velocity.z, v.z, 25.0 * delta)
 	move_and_slide()
-	rig.locomotion(Vector2(velocity.x, velocity.z).length(), float(data.move_speed))
+	if animate:
+		rig.locomotion(Vector2(velocity.x, velocity.z).length(), float(data.move_speed))
+
+
+## Healer: heals whoever (Zotik or a companion) is lowest below the threshold.
+func _heal_weakest() -> void:
+	var best: Node = null
+	var best_ratio := float(data.heal_threshold)
+	var pr := float(GameState.player.hp) / float(maxi(1, Stats.max_hp()))
+	if not player.dead and pr < best_ratio:
+		best = player
+		best_ratio = pr
+	for n in get_tree().get_nodes_in_group("party"):
+		var c := n as Companion
+		var r := float(c.hp()) / float(c.max_hp())
+		if not c.dead and r < best_ratio:
+			best = c
+			best_ratio = r
+	if best == null:
+		return
+	heal_cd = float(data.heal_cooldown)
+	var done: int = best.heal(int(data.heal_amount))
+	if best == player:
+		healed_player.emit(done)
+		EventBus.notify.emit("%s heilt dich (+%d)." % [data.name, done])
+	else:
+		EventBus.notify.emit("%s heilt %s (+%d)." % [data.name, (best as Companion).data.name, done])
+	rig.action("cast", 1.5)
+
+
+func _fight_nearby() -> bool:
+	for n in get_tree().get_nodes_in_group("enemy"):
+		var e := n as Enemy
+		if e and not e.is_dead() and e.state != Enemy.State.IDLE and e.global_position.distance_to(global_position) < 20.0:
+			return true
+	return false
 
 
 func _face(dir: Vector3) -> void:

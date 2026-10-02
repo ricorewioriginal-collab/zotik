@@ -243,6 +243,9 @@ func heal(amount: int) -> int:
 
 
 func revive_full() -> void:
+	if is_inside_tree():
+		for c in get_tree().get_nodes_in_group("party"):
+			(c as Companion).revive(1.0)  # every full heal restores the whole party
 	dead = false
 	is_dodging = false
 	set_lock(null)

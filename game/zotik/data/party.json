@@ -11,7 +11,9 @@
     "heal_cooldown": 10.0,
     "heal_threshold": 0.45,
     "move_speed": 5.8,
-    "break": 6
+    "break": 6,
+    "hp": 110,
+    "defense": 3
   },
   "PARTY_NIA_001": {
     "name": "Nia",
@@ -25,7 +27,9 @@
     "heal_amount": 0,
     "heal_cooldown": 0,
     "heal_threshold": 0,
-    "move_speed": 6.2
+    "move_speed": 6.2,
+    "hp": 120,
+    "defense": 3
   },
   "PARTY_ROVAN_001": {
     "name": "Rovan",
@@ -39,6 +43,8 @@
     "heal_amount": 0,
     "heal_cooldown": 0,
     "heal_threshold": 0,
-    "move_speed": 5.2
+    "move_speed": 5.2,
+    "hp": 190,
+    "defense": 7
   }
 }

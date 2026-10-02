@@ -2,7 +2,7 @@ class_name TouchControls
 extends Control
 ## On-screen controls for Android / touch screens (A01): a virtual stick on
 ## the left, camera swipe on the right half, action buttons bottom-right and
-## menu buttons top-right. Emits the same input actions as keyboard/gamepad
+## the HUD icon bar handles the menus. Emits the same input actions as keyboard/gamepad
 ## (Input.parse_input_event), so gameplay code is unchanged. Hidden during
 ## dialogue (a tap advances it) and while a menu is open (menus are touchable).
 
@@ -15,10 +15,9 @@ const ACTIONS := [
 	["dodge", "Ausweichen", Vector2(110, 300), 54.0],
 	["jump", "Springen", Vector2(260, 260), 50.0],
 	["interact", "Benutzen", Vector2(400, 200), 50.0],
-	["block", "Block", Vector2(110, 440), 46.0],
+	["block", "Block", Vector2(390, 340), 46.0],
 	["use_item", "Trank", Vector2(420, 70), 42.0],
 ]
-const MENU_ACTIONS := [["menu", "Menü"], ["inventory", "Inventar"], ["quest_log", "Quests"], ["bestiary", "Bestiarium"]]
 
 var game: Node
 var force := false  # tests / settings toggle
@@ -45,14 +44,8 @@ func _ready() -> void:
 	_stick_base = _circle(STICK_RADIUS, Color(1, 1, 1, 0.12))
 	_stick_knob = _circle(46.0, Color(1, 1, 1, 0.35))
 	for a in ACTIONS:
-		var p := _circle(a[3], Color(0.1, 0.12, 0.2, 0.45), a[1])
+		var p := _circle(a[3], Color(0.05, 0.09, 0.2, 0.55), a[1])
 		p.set_meta("action", a[0])
-	var x := 20.0
-	for m in MENU_ACTIONS:
-		var p := _pill(m[1])
-		p.set_meta("action", m[0])
-		p.set_meta("menu_x", x)
-		x += 150.0
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 
@@ -104,10 +97,6 @@ func _layout() -> void:
 	for c in get_children():
 		if not c.has_meta("action"):
 			continue
-		if c.has_meta("menu_x"):
-			c.position = Vector2(float(c.get_meta("menu_x")), 96)
-			_rects.append([c.get_meta("action"), c.position + c.size / 2.0, -1.0, Rect2(c.position, c.size)])
-			continue
 		for a in ACTIONS:
 			if a[0] == c.get_meta("action"):
 				var center: Vector2 = size_v - a[2]
@@ -135,6 +124,8 @@ func _input(event: InputEvent) -> void:
 
 
 func _on_press(index: int, pos: Vector2) -> void:
+	if game and game.hud.is_ui_at(pos):
+		return  # HUD buttons (menus) get the tap
 	var hit := action_at(pos)
 	if hit != "":
 		_buttons[index] = hit
@@ -215,8 +206,9 @@ func _circle(r: float, c: Color, text: String = "") -> Panel:
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = c
 	sb.set_corner_radius_all(int(r))
-	sb.border_color = Color(1, 1, 1, 0.5)
-	sb.set_border_width_all(2)
+	sb.border_color = UiStyle.GOLD if text != "" else Color(1, 1, 1, 0.5)
+	sb.set_border_width_all(2 if text != "" else 1)
+	sb.anti_aliasing = true
 	p.add_theme_stylebox_override("panel", sb)
 	if text != "":
 		var l := Label.new()
@@ -228,10 +220,4 @@ func _circle(r: float, c: Color, text: String = "") -> Panel:
 		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		p.add_child(l)
 	add_child(p)
-	return p
-
-
-func _pill(text: String) -> Panel:
-	var p := _circle(28.0, Color(0.1, 0.12, 0.2, 0.55), text)
-	p.size = Vector2(140, 56)
 	return p

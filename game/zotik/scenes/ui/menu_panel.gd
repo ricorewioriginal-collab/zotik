@@ -10,14 +10,25 @@ var list: VBoxContainer
 
 
 func _ready() -> void:
-	position = Vector2(240, 90)
-	custom_minimum_size = Vector2(800, 520)
+	set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	custom_minimum_size = Vector2(820, 540)
+	offset_left = -410
+	offset_right = 410
+	offset_top = -270
+	offset_bottom = 270
+	add_theme_stylebox_override("panel", UiStyle.frame(UiStyle.GOLD, Color(0.03, 0.06, 0.13, 0.94), 14, 2))
 	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 8)
 	add_child(box)
-	title_label = Label.new()
-	title_label.add_theme_font_size_override("font_size", 26)
+	title_label = UiStyle.title("", 28)
 	box.add_child(title_label)
+	var rule := ColorRect.new()
+	rule.color = UiStyle.GOLD_DARK
+	rule.custom_minimum_size = Vector2(0, 2)
+	box.add_child(rule)
 	info_label = Label.new()
+	info_label.add_theme_color_override("font_color", UiStyle.TEXT_DIM)
+	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	box.add_child(info_label)
 	var scroll := ScrollContainer.new()
 	scroll.custom_minimum_size = Vector2(780, 400)

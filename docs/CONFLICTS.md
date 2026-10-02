@@ -34,3 +34,9 @@ Format: ID – description – status / interim handling. Interim handling is th
 - C-27 – Several images show a green creature companion ("Felli" / "Moosling – der Waldgeist"), but the legacy docs list the Moosling as an enemy. – Owner decision needed; not implemented.
 - C-28 – Lyra is pink-haired on two boards and blue-haired and "aus Lunaris" on others. Nia appears both as an archer and as a "Heilerin/naturverbunden". – Interim: keep the written specs (Lyra = researcher/mage/healer, Nia = archer). Placeholder colours are unchanged.
 - C-29 – Interim character models (G02): CC0 KayKit rigs with chibi proportions stand in for companions/NPCs, and Zotik is a fox head/tail/scarf assembly on the same rig. The art bible asks for stylised but not childish proportions, and the owner wants a Kingdom Hearts / Final Fantasy direction. – Interim: accepted as placeholders so animation and readability improve now; the production models (from the master sheets, via an artist or an image-to-3D pipeline that the environment currently blocks) replace them through `ZotikVisual` / `CharacterRig` without gameplay changes. Owner decision on the model source requested.
+- C-30 – UI portraits and the title background are cut from the owner's concept party poster. The poster shows Lyra with blue hair (see C-28) and Rovan as "Schwertkämpfer", while the game data has Rovan with an axe and shield. – Interim: the owner's own art is used because they asked for the original assets. It is marked as concept art (not final), and C-28 stays open.
+- C-31 – Companion HP (owner request 2026-10-02). There is no spec for a party K.O. rule. – Interim:
+  - A companion at 0 HP is knocked out and gets up with 30 % HP after 5 quiet seconds without nearby fighting.
+  - Every full heal (savepoint, respawn, arena) restores the whole party.
+  - The healer heals the weakest member.
+  - Enemies attack the nearest member who is still standing.

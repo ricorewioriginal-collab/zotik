@@ -20,6 +20,7 @@ var npc_states := {}       # NPC_* -> String
 var customization := {}    # option -> String
 var player := {}           # area, position, hp, max_hp
 var party: Array[String] = []  # PARTY_* member ids in join order
+var party_hp := {}             # PARTY_* -> current hp (missing = full)
 var bestiary := {}         # ENEMY_*/BOSS_* -> times defeated
 var bounties := {}         # BOUNTY_* -> {state, progress}
 var arena := {}            # ARENA_* -> times won
@@ -45,6 +46,7 @@ func reset_new_game() -> void:
 	customization = {}
 	player = {"area": START_AREA, "position": [0.0, 0.0, 0.0], "hp": START_HP, "max_hp": START_HP}
 	party = []
+	party_hp = {}
 	bestiary = {}
 	bounties = {}
 	arena = {}
@@ -78,6 +80,7 @@ func to_dict() -> Dictionary:
 		"customization": customization.duplicate(true),
 		"player": player.duplicate(true),
 		"party": party.duplicate(),
+		"party_hp": party_hp.duplicate(),
 		"bestiary": bestiary.duplicate(),
 		"bounties": bounties.duplicate(true),
 		"arena": arena.duplicate(),
@@ -134,6 +137,11 @@ func from_dict(d: Dictionary) -> bool:
 	for m in _arr(d, "party"):
 		if not str(m) in party:
 			party.append(str(m))
+	party_hp = {}
+	var php = d.get("party_hp", {})
+	if php is Dictionary:
+		for k in php:
+			party_hp[str(k)] = int(php[k])
 	for k in _dict(d, "bestiary"):
 		bestiary[str(k)] = int(d.bestiary[k])
 	for k in _dict(d, "bounties"):
