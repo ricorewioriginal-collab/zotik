@@ -113,7 +113,8 @@
     "name": "Valdoria – Gildenviertel",
     "world": "WORLD_VALDORIA",
     "exits": [
-      "AREA_VAL_MARKET"
+      "AREA_VAL_MARKET",
+      "AREA_VAL_ARENA"
     ]
   },
   "AREA_VAL_CANAL_GATE": {
@@ -121,6 +122,13 @@
     "world": "WORLD_VALDORIA",
     "exits": [
       "AREA_VAL_MARKET"
+    ]
+  },
+  "AREA_VAL_ARENA": {
+    "name": "Valdoria – Arena",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_GUILD"
     ]
   }
 }

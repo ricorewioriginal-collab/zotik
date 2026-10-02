@@ -2,7 +2,7 @@ class_name Npc
 extends Interactable
 ## Talkable NPC (PLACEHOLDER capsule + name). Visibility follows appears_when.
 
-const COLORS := {"NPC_MIRA_001": "#d9a066", "NPC_TOREN_001": "#8a6f5a", "NPC_BORO_001": "#c9a227", "NPC_ELWEN_001": "#9a9ab0", "NPC_FINN_001": "#6fa86f", "NPC_SARI_001": "#c46a8a", "NPC_PROFESSORIUM_001": "#b0b0b0", "NPC_LYRA_001": "#6a8ad9", "NPC_MARA_001": "#8aa0b8", "NPC_ELIO_001": "#b8803a", "NPC_SELA_001": "#a0c070", "NPC_NIA_001": "#d9a03a", "NPC_ROVAN_001": "#7a6a5a", "NPC_HALDOR_001": "#6a6a6a", "NPC_YSME_001": "#8a5ab0", "NPC_LOTTE_001": "#3a7ab0", "NPC_VEYR_001": "#7a3a2a", "NPC_TIBOR_001": "#5a7a7a"}
+const COLORS := {"NPC_MIRA_001": "#d9a066", "NPC_TOREN_001": "#8a6f5a", "NPC_BORO_001": "#c9a227", "NPC_ELWEN_001": "#9a9ab0", "NPC_FINN_001": "#6fa86f", "NPC_SARI_001": "#c46a8a", "NPC_PROFESSORIUM_001": "#b0b0b0", "NPC_LYRA_001": "#6a8ad9", "NPC_MARA_001": "#8aa0b8", "NPC_ELIO_001": "#b8803a", "NPC_SELA_001": "#a0c070", "NPC_NIA_001": "#d9a03a", "NPC_ROVAN_001": "#7a6a5a", "NPC_HALDOR_001": "#6a6a6a", "NPC_YSME_001": "#8a5ab0", "NPC_LOTTE_001": "#3a7ab0", "NPC_VEYR_001": "#7a3a2a", "NPC_TIBOR_001": "#5a7a7a", "NPC_KASIMIR_001": "#b05a2a"}
 
 var npc_id := ""
 

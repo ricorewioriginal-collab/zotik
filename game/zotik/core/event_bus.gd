@@ -21,6 +21,7 @@ signal travel_requested(area_id: String, spawn: String)
 signal sync_state
 signal equipment_changed
 signal party_changed
+signal menu_requested(menu_id: String)
 signal shop_requested(shop_id: String)
 signal quest_started(quest_id: String)
 signal dialogue_finished(dialogue_id: String)

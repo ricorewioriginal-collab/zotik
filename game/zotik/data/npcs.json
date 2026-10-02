@@ -408,5 +408,15 @@
         "dialogue": "DLG_TIBOR_IDLE_001"
       }
     ]
+  },
+  "NPC_KASIMIR_001": {
+    "name": "Kasimir",
+    "area": "AREA_VAL_ARENA",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_KASIMIR_ARENA_001"
+      }
+    ]
   }
 }

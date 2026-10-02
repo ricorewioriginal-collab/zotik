@@ -1,7 +1,7 @@
 {
   "phase": 3,
-  "milestone": "V02_GUILD_BESTIARY",
+  "milestone": "V03_ARENA_CASINO",
   "status": "PASSED",
-  "next_allowed": "V03_ARENA_CASINO",
+  "next_allowed": "V04_FORGOTTEN_CANALS",
   "standing_owner_approval": true
 }

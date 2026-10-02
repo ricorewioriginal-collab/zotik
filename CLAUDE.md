@@ -3,7 +3,7 @@
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
 CURRENT PHASE: Phase 3 – Valdoria (standing owner approval, see docs/PHASE_3_PLAN.md)
-CURRENT MILESTONE: V00_PHASE_3_PLAN
+CURRENT MILESTONE: V03_ARENA_CASINO
 STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 IN_PROGRESS
 
 ## Mandatory workflow

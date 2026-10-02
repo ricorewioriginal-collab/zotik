@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T10:52:47",
+  "last_run": "2026-10-02T11:00:01",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 149,
+  "passed": 156,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -601,6 +601,34 @@
     },
     {
       "id": "test_v02_guild::test_board_in_guild_and_persistence",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v03_arena_casino::test_arena_waves_and_first_clear_reward",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v03_arena_casino::test_arena_defeat_is_safe",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v03_arena_casino::test_leaving_arena_aborts_run",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v03_arena_casino::test_kasimir_opens_arena_menu",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v03_arena_casino::test_casino_spin_is_deterministic_and_virtual",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v03_arena_casino::test_casino_guards",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v03_arena_casino::test_casino_entrance_and_persistence",
       "result": "PASS"
     }
   ]

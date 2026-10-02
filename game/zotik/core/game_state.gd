@@ -22,6 +22,8 @@ var player := {}           # area, position, hp, max_hp
 var party: Array[String] = []  # PARTY_* member ids in join order
 var bestiary := {}         # ENEMY_*/BOSS_* -> times defeated
 var bounties := {}         # BOUNTY_* -> {state, progress}
+var arena := {}            # ARENA_* -> times won
+var casino := {"spins": 0, "best_win": 0}
 var play_time := 0.0
 
 
@@ -45,6 +47,8 @@ func reset_new_game() -> void:
 	party = []
 	bestiary = {}
 	bounties = {}
+	arena = {}
+	casino = {"spins": 0, "best_win": 0}
 	play_time = 0.0
 
 
@@ -76,6 +80,8 @@ func to_dict() -> Dictionary:
 		"party": party.duplicate(),
 		"bestiary": bestiary.duplicate(),
 		"bounties": bounties.duplicate(true),
+		"arena": arena.duplicate(),
+		"casino": casino.duplicate(),
 		"play_time": play_time,
 	}
 
@@ -134,6 +140,11 @@ func from_dict(d: Dictionary) -> bool:
 		var b = d.bounties[k]
 		if b is Dictionary:
 			bounties[str(k)] = {"state": str(b.get("state", "ACTIVE")), "progress": int(b.get("progress", 0))}
+	for k in _dict(d, "arena"):
+		arena[str(k)] = int(d.arena[k])
+	var cz = d.get("casino", {})
+	if cz is Dictionary:
+		casino = {"spins": int(cz.get("spins", 0)), "best_win": int(cz.get("best_win", 0))}
 	play_time = float(d.get("play_time", 0.0))
 	return true
 

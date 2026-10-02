@@ -1693,7 +1693,7 @@
         "collision": false
       },
       {
-        "name": "casino_closed",
+        "name": "casino_golden_star",
         "pos": [
           -20,
           3,
@@ -1704,7 +1704,7 @@
           6,
           8
         ],
-        "color": "#7a2a5a"
+        "color": "#b08a2a"
       }
     ],
     "entities": [
@@ -1759,6 +1759,15 @@
           0,
           22
         ]
+      },
+      {
+        "type": "casino",
+        "id": "CASINO_VAL_001",
+        "pos": [
+          -14,
+          0,
+          12
+        ]
       }
     ]
   },
@@ -1779,6 +1788,11 @@
         26,
         0,
         0
+      ],
+      "AREA_VAL_ARENA": [
+        -24,
+        0,
+        0
       ]
     },
     "exits": [
@@ -1786,6 +1800,14 @@
         "to": "AREA_VAL_MARKET",
         "pos": [
           29,
+          0,
+          0
+        ]
+      },
+      {
+        "to": "AREA_VAL_ARENA",
+        "pos": [
+          -29,
           0,
           0
         ]
@@ -1825,12 +1847,12 @@
         "pos": [
           -26,
           3,
-          0
+          -10
         ],
         "size": [
           2,
           6,
-          14
+          10
         ],
         "color": "#8a7a5a"
       }
@@ -1951,6 +1973,68 @@
           -6,
           0,
           -12
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_ARENA": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#8a7a5a",
+    "ambient": "#fff0d0",
+    "spawns": {
+      "default": [
+        18,
+        0,
+        0
+      ],
+      "AREA_VAL_GUILD": [
+        18,
+        0,
+        0
+      ],
+      "arena_center": [
+        0,
+        0,
+        6
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_GUILD",
+        "pos": [
+          21,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "arena_stands",
+        "pos": [
+          0,
+          2,
+          -21
+        ],
+        "size": [
+          40,
+          4,
+          1
+        ],
+        "color": "#6a5a4a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_KASIMIR_001",
+        "pos": [
+          14,
+          0,
+          -6
         ]
       }
     ]

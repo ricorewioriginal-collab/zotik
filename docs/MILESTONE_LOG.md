@@ -358,3 +358,20 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - New canal enemies (data): Kanalschleim and the armoured Schleusenkrabbe (DEF 9, best handled with Break). New items: Altmetall and Jägerabzeichen (+3 ATK).
 - Bestiary and bounty state persist. They are additive fields with defaults, so schema v2 still loads.
 - Tests: `tests/unit/test_v02_guild.gd` (4 tests).
+
+## V03 Arena + casino – PASSED
+- **Arena** (`AREA_VAL_ARENA`, west of the Gildenviertel). Arena master Kasimir opens the challenge menu.
+  - Challenges are defined in `data/arena.json` (namespace `ARENA_`). Each one is a sequence of enemy waves around the arena centre.
+  - Bronze: 2 waves, 120 Lun, Hi-Potions ×2 on the first clear. Clearing it unlocks Silver (`FLAG_VAL_ARENA_BRONZE`).
+  - Silver: 3 waves including the canal enemies, 260 Lun, Kanalmantel on the first clear.
+  - Lun is paid on every win. Items and flags are granted only on the first clear.
+  - Defeat is safe: no loss, full heal, and Zotik returns to the arena entrance. Leaving the area mid-run cancels the challenge.
+- **Golden Star Casino** on the market (C-20 resolution):
+  - Slot machine with virtual Lun only and bets of 10/50/100.
+  - The odds are fixed in code; the expected return is ≈ 93 %, so the house edge is visible and tested.
+  - The pause menu has a "Casino (Familienoption)" toggle. When it is off, the entrance is closed and spinning is blocked.
+  - Spin statistics are saved (`GameState.casino`).
+- New effect `open_menu` (arena/casino) and entity type `casino`, both validated by `Content`.
+- Arena wins and casino statistics are additive save fields with defaults, so schema v2 still loads.
+- Tests: `tests/unit/test_v03_arena_casino.gd` (7 tests).
+- Regression: 156/156 tests plus restart checks for chapters 1 and 2: PASS.

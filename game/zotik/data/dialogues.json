@@ -474,5 +474,20 @@
         "Das Kanaltor bleibt zu. Da unten wohnt etwas, das niemand mehr gesehen haben will."
       ]
     ]
+  },
+  "DLG_KASIMIR_ARENA_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KASIMIR_001",
+        "Willkommen in der Arena von Valdoria! Wellen von Gegnern, Ruhm und Lun – wer wagt es?"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_menu",
+        "id": "arena"
+      }
+    ]
   }
 }

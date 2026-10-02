@@ -36,7 +36,7 @@ func test_districts_connect() -> void:
 	for a in ["AREA_VAL_GUILD", "AREA_VAL_CANAL_GATE"]:
 		check(game.area.is_exit_open(a), "market -> " + a)
 	eq(Navigator.next_hop("AREA_VAL_GUILD", "AREA_VAL_CANAL_GATE"), "AREA_VAL_MARKET", "via the market")
-	check(game.area.find_children("PLACEHOLDER_casino_closed", "", true, false).size() == 1, "closed casino building (C-20)")
+	check(game.area.find_children("PLACEHOLDER_casino_golden_star", "", true, false).size() == 1, "casino building (C-20)")
 
 
 func test_library_books_readable() -> void:
