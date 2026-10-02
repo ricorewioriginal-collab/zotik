@@ -191,3 +191,18 @@ See `docs/PHASE_1_AUDIT.md`.
 - Open items (not part of the passed tests): Windows export not executed, all art and dialogue are placeholders, no human playtest. See the matrix.
 
 **Phase 1 milestones M00–M15: PASSED. Phase 2 is not started and requires explicit project-owner approval (CLAUDE.md rule 8).**
+
+## P1 Playability pass (post-M15, Phase 1 polish) – PASSED
+The project owner authorised autonomous work and merging on 2026-10-02. Phase 2 was **not** started (CLAUDE.md rule 8). This pass makes the existing slice playable for a human:
+- **Mouse camera:** the mouse is captured while playing and freed in menus and dialogues. Before this, the camera could only be turned with a gamepad. The arrow keys ←/→ also turn the camera.
+- **Objective beacon:** a light pillar with an arrow marks the current objective: NPC, puzzle, savepoint, chest, nearest target enemy, or the exit on the shortest path to the target area (`core/navigator.gd`, BFS over area exits). After the main quest it guides the side quest.
+- **Controls overlay** in the HUD, toggled with F1 and persisted in the settings.
+- **Combat feedback:**
+  - weapon swing
+  - enemy hit flash and knockback
+  - floating damage numbers
+  - red screen flash when Zotik takes damage
+- **Placeholder sound effects** synthesised in code (`Sfx` autoload, no audio assets): swing, hit, hurt, pickup, puzzle solved/wrong, dialogue blip, enemy defeated, save.
+- **Test guard:** every autoload in `project.godot` must compile and be instanced. Before this, a broken autoload only showed up as follow-up errors.
+- Tests: `tests/unit/test_p01_playability.gd` (6 tests). Rendered check: `docs/screenshots/04b_village_beacon_on_mira.png`.
+- Level sanity test `tests/unit/test_p02_reachability.gd`: with all gates open, every entity, exit and spawn of every area is reachable on foot from the default spawn. It uses a grid flood fill with the player radius. A mutation check confirmed that it detects a walled-in NPC.

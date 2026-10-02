@@ -53,6 +53,17 @@ func update_weapon() -> void:
 	mat.emission = Color(0.5, 0.4, 1.0)
 
 
+## Short weapon swing animation (placeholder for the attack animation).
+func swing() -> void:
+	var w: MeshInstance3D = parts["PLACEHOLDER_weapon"]
+	if not w.visible or not is_inside_tree():
+		return
+	var tw := create_tween()
+	w.rotation_degrees = Vector3(-20, 0, 0)
+	tw.tween_property(w, "rotation_degrees", Vector3(-110, -60, 0), 0.08)
+	tw.tween_property(w, "rotation_degrees", Vector3(-20, 0, 0), 0.15)
+
+
 func is_weapon_glowing() -> bool:
 	return (parts["PLACEHOLDER_weapon"].material_override as StandardMaterial3D).emission_enabled
 

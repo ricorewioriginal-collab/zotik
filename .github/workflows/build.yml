@@ -1,0 +1,107 @@
+name: build
+
+# Exports playable builds (Windows, Linux, Web). On main they are published
+# as the rolling GitHub release "phase1-latest"; the web build is also
+# deployed to GitHub Pages when Pages is enabled for the repository.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GODOT_VERSION: 4.7-stable
+    steps:
+      - uses: actions/checkout@v4
+      - name: Cache Godot and export templates
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/godot
+            ~/.local/share/godot/export_templates
+          key: godot-export-${{ env.GODOT_VERSION }}
+      - name: Download Godot and templates
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p ~/godot ~/.local/share/godot/export_templates/4.7.stable
+          base="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}"
+          curl -sSL -o /tmp/godot.zip "$base/Godot_v${GODOT_VERSION}_linux.x86_64.zip"
+          unzip -q /tmp/godot.zip -d ~/godot
+          mv ~/godot/Godot_v${GODOT_VERSION}_linux.x86_64 ~/godot/godot
+          curl -sSL -o /tmp/templates.tpz "$base/Godot_v${GODOT_VERSION}_export_templates.tpz"
+          unzip -q /tmp/templates.tpz -d /tmp/tpl
+          for f in windows_release_x86_64.exe linux_release.x86_64 web_nothreads_release.zip version.txt; do
+            mv /tmp/tpl/templates/$f ~/.local/share/godot/export_templates/4.7.stable/
+          done
+          rm -rf /tmp/tpl /tmp/templates.tpz
+      - name: Import project
+        run: ~/godot/godot --headless --path game/zotik --import || true
+      - name: Export
+        run: |
+          mkdir -p build/windows build/linux build/web
+          ~/godot/godot --headless --path game/zotik --export-release "Windows Desktop" ../../build/windows/ZOTIK.exe
+          ~/godot/godot --headless --path game/zotik --export-release "Linux" ../../build/linux/ZOTIK.x86_64
+          ~/godot/godot --headless --path game/zotik --export-release "Web" ../../build/web/index.html
+          ls -la build/*
+          test -s build/windows/ZOTIK.exe && test -s build/linux/ZOTIK.x86_64 && test -s build/web/index.html
+      - name: Smoke test Linux build (boots and reaches the title)
+        run: |
+          out=$(timeout 60 build/linux/ZOTIK.x86_64 --headless --quit-after 120 2>&1 || true)
+          echo "$out"
+          echo "$out" | grep -q "ZOTIK .* – boot"
+          echo "$out" | grep -q "CONTENT OK"
+          ! echo "$out" | grep -q "SCRIPT ERROR"
+      - name: Package
+        run: |
+          cd build
+          (cd windows && zip -qr ../ZOTIK-windows-x86_64.zip .)
+          (cd linux && zip -qr ../ZOTIK-linux-x86_64.zip .)
+          (cd web && zip -qr ../ZOTIK-web.zip .)
+          ls -la *.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: zotik-builds
+          path: build/*.zip
+      - uses: actions/upload-pages-artifact@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: build/web
+      - name: Publish rolling release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete phase1-latest --yes --cleanup-tag || true
+          gh release create phase1-latest build/*.zip \
+            --title "ZOTIK Phase 1 – aktueller Build" \
+            --notes "Automatischer Build von ${GITHUB_SHA::7}. Windows: ZIP entpacken, ZOTIK.exe starten. Linux: ZOTIK.x86_64 starten. Web: im Browser über GitHub Pages (falls aktiviert) oder lokal mit einem Webserver. Alle Grafiken, Sounds und Dialogtexte sind Platzhalter." \
+            --prerelease
+
+  pages:
+    needs: export
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+      - id: deploy
+        uses: actions/deploy-pages@v4

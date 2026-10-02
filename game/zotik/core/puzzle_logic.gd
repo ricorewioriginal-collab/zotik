@@ -46,6 +46,7 @@ static func submit(id: String) -> Result:
 	if _matches(state(id).current, d.solution):
 		return _solve(id)
 	EventBus.notify.emit("Das Tor bleibt verschlossen.")
+	Sfx.play("wrong")
 	return Result.WRONG
 
 
@@ -61,6 +62,7 @@ static func strike(id: String, node: int) -> Result:
 		s.current = [] as Array[int]
 		s.state = "INITIAL"
 		EventBus.notify.emit("Die Resonanz bricht ab.")
+		Sfx.play("wrong")
 		return Result.WRONG
 	cur.append(node)
 	s.state = "IN_PROGRESS"

@@ -10,6 +10,8 @@ var objective_label: Label
 var prompt_label: Label
 var notify_label: Label
 var boss_label: Label
+var help_label: Label
+var hurt_flash: ColorRect
 var boss_bar: ProgressBar
 var _notify_time := 0.0
 
@@ -37,6 +39,14 @@ func _ready() -> void:
 	boss_bar.show_percentage = false
 	_style_bar(boss_bar, Color(0.75, 0.3, 0.9))
 	add_child(boss_bar)
+	hurt_flash = ColorRect.new()
+	hurt_flash.set_anchors_preset(Control.PRESET_FULL_RECT)
+	hurt_flash.color = Color(0.9, 0.1, 0.1, 0.0)
+	hurt_flash.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(hurt_flash)
+	help_label = _label(Vector2(20, 520), 15)
+	help_label.text = HELP_TEXT
+	help_label.visible = Settings.get_value("show_controls")
 	EventBus.notify.connect(show_notification)
 
 
@@ -58,10 +68,24 @@ func _process(delta: float) -> void:
 		boss_label.text = "%s – %s" % [boss.data.name, boss.data.phases[boss.phase].name]
 		boss_bar.max_value = boss.max_hp
 		boss_bar.value = boss.hp
+	hurt_flash.color.a = maxf(0.0, hurt_flash.color.a - delta * 1.2)
 	if _notify_time > 0.0:
 		_notify_time -= delta
 		if _notify_time <= 0.0:
 			notify_label.text = ""
+
+
+const HELP_TEXT := "WASD bewegen · Maus/←→ Kamera · Leertaste springen\nLinksklick/J angreifen · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
+
+
+func toggle_help() -> void:
+	help_label.visible = not help_label.visible
+	Settings.set_value("show_controls", help_label.visible)
+	Settings.save_settings()
+
+
+func flash_hurt() -> void:
+	hurt_flash.color.a = 0.35
 
 
 func set_prompt(target: Interactable) -> void:

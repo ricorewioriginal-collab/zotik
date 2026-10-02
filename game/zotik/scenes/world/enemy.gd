@@ -155,11 +155,39 @@ func take_hit(attack_value: int) -> int:
 	hp = maxi(0, hp - dmg)
 	hp_changed.emit(hp, max_hp)
 	_update_label()
+	_hit_feedback(dmg)
 	if hp == 0:
 		_die()
 	elif state == State.IDLE and float(data.move_speed) > 0.0:
 		state = State.CHASE
 	return dmg
+
+
+## Hit flash, knockback and a floating damage number.
+func _hit_feedback(dmg: int) -> void:
+	if not is_inside_tree():
+		return
+	_set_tint(Color(3, 3, 3))
+	get_tree().create_timer(0.08).timeout.connect(func(): if is_instance_valid(self) and state != State.WINDUP: _set_tint(Color.WHITE))
+	var p := get_tree().get_first_node_in_group("player") as Node3D
+	if p and float(data.move_speed) > 0.0 and not self is Boss:
+		var away := global_position - p.global_position
+		away.y = 0.0
+		velocity += away.normalized() * 4.0
+	var num := Label3D.new()
+	num.text = str(dmg)
+	num.font_size = 96
+	num.outline_size = 18
+	num.modulate = Color(1, 0.9, 0.3)
+	num.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	num.no_depth_test = true
+	get_parent().add_child(num)
+	num.global_position = global_position + Vector3(0, label.position.y + 0.3, 0)
+	var tw := num.create_tween()
+	tw.set_parallel()
+	tw.tween_property(num, "global_position:y", num.global_position.y + 1.2, 0.7)
+	tw.tween_property(num, "modulate:a", 0.0, 0.7)
+	tw.chain().tween_callback(num.queue_free)
 
 
 func _die() -> void:

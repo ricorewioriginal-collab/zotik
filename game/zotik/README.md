@@ -2,7 +2,9 @@
 
 Lunaris vertical slice: New Game → Mein Zotik → Lunaris → Mondwald → Mondtor → Risshöhle/Resonanzbrücke → Mondwolf → Weltenanker → Orun → Weltenklinge → return → Professorium/Lyra.
 
-Open the folder in Godot 4.7, or run `godot --path game/zotik`.
+**Play:** download the latest build from the GitHub release `phase1-latest`. On Windows, unzip `ZOTIK-windows-x86_64.zip` and start `ZOTIK.exe`; on Linux, start `ZOTIK.x86_64`. Builds are produced by `.github/workflows/build.yml` on every merge to `main`. The web build is deployed to GitHub Pages when Pages is enabled for the repository (Settings → Pages → Source: GitHub Actions).
+
+**Develop:** open the folder in Godot 4.7, or run `godot --path game/zotik`.
 
 ## Controls (keyboard / gamepad)
 | Action | Keys |
