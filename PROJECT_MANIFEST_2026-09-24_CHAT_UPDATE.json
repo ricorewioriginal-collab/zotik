@@ -1,0 +1,14 @@
+{
+  "project": "ZOTIK – Die Splitter der Welten",
+  "updated": "2026-09-24",
+  "update": "Chat Addendum",
+  "new_systems": [
+    "central data-driven puzzle system with reset and hints",
+    "cosmetic emotes, victory poses, group poses and gimmicks",
+    "public, event and exclusive giftcode catalog"
+  ],
+  "visual_references_added": [
+    "19_VISUAL_REFERENCES/ZOTIK_Puzzle_Demo_Ingame.png",
+    "19_VISUAL_REFERENCES/ZOTIK_Worldmap_Demo_Ingame.png"
+  ]
+}

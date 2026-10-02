@@ -1,0 +1,51 @@
+{
+  "AREA_LUN_HOME": {
+    "name": "Zotiks Zuhause",
+    "exits": [
+      "AREA_LUN_VILLAGE"
+    ]
+  },
+  "AREA_LUN_VILLAGE": {
+    "name": "Lunaris",
+    "exits": [
+      "AREA_LUN_HOME",
+      "AREA_LUN_FOREST"
+    ],
+    "gate": {
+      "AREA_LUN_FOREST": "FLAG_LUN_FOREST_UNLOCKED"
+    }
+  },
+  "AREA_LUN_FOREST": {
+    "name": "Mondwald",
+    "exits": [
+      "AREA_LUN_VILLAGE",
+      "AREA_LUN_RUINS"
+    ]
+  },
+  "AREA_LUN_RUINS": {
+    "name": "Alte Ruinen",
+    "exits": [
+      "AREA_LUN_FOREST",
+      "AREA_LUN_RIFT_CAVE"
+    ],
+    "gate": {
+      "AREA_LUN_RIFT_CAVE": "FLAG_LUN_MOONGATE_OPEN"
+    }
+  },
+  "AREA_LUN_RIFT_CAVE": {
+    "name": "Risshöhle",
+    "exits": [
+      "AREA_LUN_RUINS",
+      "AREA_LUN_ORUN_ARENA"
+    ],
+    "gate": {
+      "AREA_LUN_ORUN_ARENA": "FLAG_LUN_WELTENANKER_AWAKENED"
+    }
+  },
+  "AREA_LUN_ORUN_ARENA": {
+    "name": "Weltenanker – Großer Riss",
+    "exits": [
+      "AREA_LUN_RIFT_CAVE"
+    ]
+  }
+}

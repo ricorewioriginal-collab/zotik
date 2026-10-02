@@ -1,0 +1,379 @@
+{
+  "engine": "4.7-stable (official)",
+  "failed": 0,
+  "last_run": "2026-10-02T08:46:37",
+  "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
+  "passed": 92,
+  "result": "PASS",
+  "runner": "tools/run_tests.sh",
+  "tests": [
+    {
+      "id": "test_m01_boot::test_autoloads_present",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_input_actions_defined",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_core_scenes_load",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_boot_reaches_title_then_game_root",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_missing_scene_is_rejected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_round_trip_preserves_values_and_types",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_envelope_has_schema_and_checksum",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_second_save_creates_backup_of_previous",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_corrupt_save_recovers_from_backup",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_tampered_save_is_detected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_newer_schema_rejected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_older_schema_is_migrated",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_slots_are_independent",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_settings_persist",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_all_tables_load",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_content_validates_clean",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_validator_detects_broken_reference",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_validator_detects_bad_namespace_and_duplicates",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_canonical_phase1_ids_present",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_legacy_items_migrated",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_dialogues_marked_placeholder",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_customization_defaults_are_valid",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_zotik_visual_is_orange_and_non_human",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_customization_applies_and_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_customization_does_not_change_stats",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_moves_relative_to_camera",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_jump_and_land",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_dodge_grants_invulnerability",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_block_reduces_damage_and_death",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_equipment_bonus",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_new_game_starts_at_home",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_exit_transitions_and_arrival_spawn",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_forest_gate_locked_until_flag",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_bridge_appears_with_flag",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_every_spawn_has_ground",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_fall_into_void_respawns",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_save_and_continue_restores_area_and_position",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_interaction_picks_nearest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_stale_position_does_not_chain_transitions",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m06_dialogue::test_dialogue_selection_follows_state",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m06_dialogue::test_lines_effects_and_talk_event",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m06_dialogue::test_cutscene_queued_behind_dialogue",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m06_dialogue::test_new_game_plays_dream_and_starts_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m06_dialogue::test_talk_to_npc_with_input_without_retrigger",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m06_dialogue::test_npc_appears_only_with_flag",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m06_dialogue::test_unique_effect_is_idempotent",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_buy_rules",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_sell_rules",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_equipped_item_protected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_use_potion",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_chest_opens_once_and_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_boro_dialogue_opens_shop_and_locks_control",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_inventory_menu_equip_changes_stats",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_dummy_defeated_by_attacks_with_event",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_attack_respects_cone_and_cooldown",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_riftling_chases_attacks_and_drops",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_telegraphed_attack_can_be_dodged",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_lock_on_picks_nearest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_persistent_and_respawning_enemies",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m08_combat::test_death_resets_encounter_and_keeps_progress",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_full_main_quest_by_events",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_out_of_order_events_are_ignored",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_kill_progress_objective_and_persistence",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_state_condition_checked_on_step_entry",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_side_quest_with_item_already_owned",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_quests_start_once_and_have_no_force_api",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_hud_objective_and_quest_log",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m10_puzzles::test_moongate_wrong_reset_correct",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m10_puzzles::test_dial_wraps_around",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m10_puzzles::test_bridge_sequence_wrong_clears",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m10_puzzles::test_invalid_inputs",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m10_puzzles::test_hints_are_tiered_and_persist",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m10_puzzles::test_partial_state_survives_save_load",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m10_puzzles::test_in_world_moongate_opens_ruins_exit",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_chasm_blocks_until_bridge_active",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_weltenanker_heals_saves_and_progresses_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_cave_chest_and_wolf_present",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_pause_menu_and_back_to_title",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_three_phases_with_summons",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_big_hit_skips_through_phases_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_defeat_sets_flag_persists_and_clears_summons",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_death_during_boss_resets_fight",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_boss_passive_during_cutscene_and_hud_bar",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_arena_intro_trigger_plays_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_pedestal_hidden_until_orun_defeated",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_take_blade_vision_and_return_home",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_blade_cannot_be_duplicated_after_reload",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_ending_mira_professorium_lyra",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m14_side_reactions::test_side_quest_in_world",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m14_side_reactions::test_npcs_react_to_orun",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m14_side_reactions::test_visual_world_reactions_persist",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m15_golden_path::test_golden_path",
+      "result": "PASS"
+    }
+  ]
+}

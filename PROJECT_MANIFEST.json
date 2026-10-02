@@ -1,0 +1,8 @@
+{
+  "project": "ZOTIK – Die Splitter der Welten",
+  "status": "Master specification package; not the finished game",
+  "engine": "Godot 4.x",
+  "primary_platform": "Windows PC",
+  "dialogue_status": "Dialogue Bible included; full final dialogue database still to be authored",
+  "claude_role": "Autonomous implementation/development agent"
+}

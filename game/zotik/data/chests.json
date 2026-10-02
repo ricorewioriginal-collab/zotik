@@ -1,0 +1,5 @@
+{
+  "CHEST_LUN_001": {"area": "AREA_LUN_FOREST", "contents": [{"id": "ITEM_HEALING_POTION_001", "count": 2}], "currency": 30},
+  "CHEST_LUN_002": {"area": "AREA_LUN_FOREST", "contents": [{"id": "ITEM_LOST_DELIVERY_001", "count": 1}], "currency": 0},
+  "CHEST_LUN_003": {"area": "AREA_LUN_RIFT_CAVE", "contents": [{"id": "ITEM_HEALING_POTION_001", "count": 1}, {"id": "ITEM_RIFT_SHARD_001", "count": 1}], "currency": 50}
+}
