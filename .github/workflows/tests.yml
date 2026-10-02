@@ -27,4 +27,4 @@ jobs:
           unzip -q /tmp/godot.zip -d ~/godot
           mv ~/godot/Godot_v${GODOT_VERSION}_linux.x86_64 ~/godot/godot
       - name: Run tests
-        run: GODOT=~/godot/godot tools/run_tests.sh
+        run: GODOT=~/godot/godot tools/run_regression.sh

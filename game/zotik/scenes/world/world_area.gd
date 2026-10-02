@@ -152,15 +152,8 @@ func _box(nm: String, pos: Vector3, size: Vector3, color: Color, collide: bool) 
 
 
 func _collider(pos: Vector3, size: Vector3) -> void:
-	var body := StaticBody3D.new()
+	var body := _box("PLACEHOLDER_boundary", pos, size, Color.html(layout.get("ground", "#555555")).darkened(0.45), true)
 	body.name = "Boundary"
-	body.position = pos
-	var cs := CollisionShape3D.new()
-	var shape := BoxShape3D.new()
-	shape.size = size
-	cs.shape = shape
-	body.add_child(cs)
-	add_child(body)
 
 
 static func _v(a: Array) -> Vector3:

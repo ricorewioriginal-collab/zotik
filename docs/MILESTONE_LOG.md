@@ -178,3 +178,16 @@ See `docs/PHASE_1_AUDIT.md`.
   - the Professorium's machine appears on his arrival
   - Sari's crates appear after the delivery
 - Tests: `tests/unit/test_m14_side_reactions.gd` (3 tests).
+
+## M15 Complete Regression – PASSED
+- Golden path from `docs/08`, played through real interactions, plus a restart check in a **new Godot process**: the persistent state after loading is identical to the state saved before quitting.
+- `tools/run_regression.sh` (used by CI) runs all 92 tests and then the restart check.
+- Traceability of every acceptance and regression item: `docs/ACCEPTANCE_MATRIX.md`.
+- Rendered visual check (`tests/screenshots.gd` under Xvfb, `docs/screenshots/`) found and fixed four UI issues:
+  - HP bar was unreadable
+  - creator preview faced away from the camera
+  - area boundaries were invisible
+  - 3D name labels were too small
+- Open items (not part of the passed tests): Windows export not executed, all art and dialogue are placeholders, no human playtest. See the matrix.
+
+**Phase 1 milestones M00–M15: PASSED. Phase 2 is not started and requires explicit project-owner approval (CLAUDE.md rule 8).**

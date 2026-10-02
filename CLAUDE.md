@@ -3,8 +3,8 @@
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
 CURRENT PHASE: Phase 1 – Lunaris Vertical Slice
-CURRENT MILESTONE: M00_REPOSITORY_AUDIT
-STATUS: NOT_STARTED
+CURRENT MILESTONE: M15_COMPLETE_REGRESSION
+STATUS: PASSED (Phase 1 milestones M00–M15, see docs/MILESTONE_LOG.md; Phase 2 not authorized)
 
 ## Mandatory workflow
 1. Audit before implementation. Do not rebuild from scratch.

@@ -30,6 +30,7 @@ func _ready() -> void:
 	light.rotation_degrees = Vector3(-40, 30, 0)
 	vp.add_child(light)
 	preview = ZotikVisual.new()
+	preview.rotation.y = PI  # face the preview camera
 	vp.add_child(preview)
 	var cam := Camera3D.new()
 	cam.position = Vector3(0, 1.1, 3.2)

@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M14_SIDEQUEST_WORLD_REACTIONS",
+  "milestone": "M15_COMPLETE_REGRESSION",
   "status": "PASSED",
-  "next_allowed": "M15_COMPLETE_REGRESSION",
+  "next_allowed": "PHASE_2_REQUIRES_OWNER_APPROVAL",
   "phase_2_allowed": false
 }

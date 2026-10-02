@@ -27,6 +27,8 @@ static func create(entry: Dictionary) -> Npc:
 	label.text = str(Content.get_entry("npcs", entry.id).name)
 	label.position.y = 2.2
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.font_size = 72
+	label.outline_size = 16
 	n.add_child(label)
 	var sb := StaticBody3D.new()
 	var cs := CollisionShape3D.new()
