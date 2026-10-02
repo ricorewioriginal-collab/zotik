@@ -19,3 +19,6 @@ signal notify(text: String)
 signal cutscene_requested(cutscene_id: String)
 signal travel_requested(area_id: String, spawn: String)
 signal sync_state
+signal shop_requested(shop_id: String)
+signal quest_started(quest_id: String)
+signal dialogue_finished(dialogue_id: String)

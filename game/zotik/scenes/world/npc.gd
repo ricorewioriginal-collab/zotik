@@ -1,0 +1,61 @@
+class_name Npc
+extends Interactable
+## Talkable NPC (PLACEHOLDER capsule + name). Visibility follows appears_when.
+
+const COLORS := {"NPC_MIRA_001": "#d9a066", "NPC_TOREN_001": "#8a6f5a", "NPC_BORO_001": "#c9a227", "NPC_ELWEN_001": "#9a9ab0", "NPC_FINN_001": "#6fa86f", "NPC_SARI_001": "#c46a8a", "NPC_PROFESSORIUM_001": "#b0b0b0", "NPC_LYRA_001": "#6a8ad9"}
+
+var npc_id := ""
+
+
+static func create(entry: Dictionary) -> Npc:
+	var n := Npc.new()
+	n.npc_id = entry.id
+	n.name = entry.id
+	n.prompt = "Sprechen mit " + str(Content.get_entry("npcs", entry.id).name)
+	var body := MeshInstance3D.new()
+	body.name = "PLACEHOLDER_npc"
+	var m := CapsuleMesh.new()
+	m.radius = 0.35
+	m.height = 1.8
+	body.mesh = m
+	body.position.y = 0.9
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color.html(COLORS.get(entry.id, "#cccccc"))
+	body.material_override = mat
+	n.add_child(body)
+	var label := Label3D.new()
+	label.text = str(Content.get_entry("npcs", entry.id).name)
+	label.position.y = 2.2
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	n.add_child(label)
+	var sb := StaticBody3D.new()
+	var cs := CollisionShape3D.new()
+	var shape := CapsuleShape3D.new()
+	shape.radius = 0.35
+	cs.shape = shape
+	cs.position.y = 0.9
+	sb.add_child(cs)
+	n.add_child(sb)
+	return n
+
+
+func _ready() -> void:
+	EventBus.flag_changed.connect(func(_f, _v): _refresh())
+	_refresh()
+
+
+func _refresh() -> void:
+	var flag: String = Content.get_entry("npcs", npc_id).get("appears_when", "")
+	var present := flag == "" or GameState.has_flag(flag)
+	visible = present
+	for c in find_children("*", "CollisionShape3D", true, false):
+		c.disabled = not present
+
+
+func can_interact() -> bool:
+	return super() and not Dialogue.is_active()
+
+
+func interact(_player: Node) -> void:
+	Dialogue.talk_to(npc_id)
+	interacted.emit()

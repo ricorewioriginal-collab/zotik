@@ -14,15 +14,21 @@ signal area_loaded(area_id: String)
 var player: Player
 var area: WorldArea
 var hud: Hud
+var dialogue_box: DialogueBox
 var factories := {}
 var _entry_spawn := Vector3.ZERO
 
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create}
+	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
+	dialogue_box = DialogueBox.new()
+	ui.add_child(dialogue_box)
+	Dialogue.started.connect(_on_dialogue_started)
+	Dialogue.finished.connect(_on_dialogue_finished)
 	player = PLAYER_SCENE.instantiate()
 	world.add_child(player)
 	player.interactable_changed.connect(hud.set_prompt)
@@ -35,6 +41,20 @@ func _ready() -> void:
 	else:
 		enter_area(GameState.player.area, "default")
 		App.new_game_started.emit()
+		Dialogue.play_cutscene("CUT_LUN_DREAM_001")
+
+
+func _on_dialogue_started(_id: String) -> void:
+	player.control_enabled = false
+
+
+func _on_dialogue_finished(_id: String) -> void:
+	# Wait two physics frames so the key that closed the dialogue cannot
+	# immediately re-trigger an interaction.
+	await get_tree().physics_frame
+	await get_tree().physics_frame
+	if is_instance_valid(player):
+		player.control_enabled = not Dialogue.is_active()
 
 
 func _process(delta: float) -> void:

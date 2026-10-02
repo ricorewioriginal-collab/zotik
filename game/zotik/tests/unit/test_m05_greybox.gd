@@ -11,7 +11,7 @@ func before_each() -> void:
 	App.goto_scene(App.SCENE_GAME_ROOT)
 	await frames(3)
 	game = tree.current_scene
-	await physics_frames(3)
+	await finish_dialogues()
 
 
 func after_each() -> void:

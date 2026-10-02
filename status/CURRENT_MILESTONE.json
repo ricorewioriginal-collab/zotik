@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M05_LUNARIS_GREYBOX",
+  "milestone": "M06_NPC_DIALOGUE",
   "status": "PASSED",
-  "next_allowed": "M06_NPC_DIALOGUE",
+  "next_allowed": "M07_INVENTORY_EQUIPMENT_SHOP",
   "phase_2_allowed": false
 }

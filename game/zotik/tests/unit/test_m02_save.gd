@@ -22,7 +22,7 @@ func _fill_state() -> void:
 	GameState.inventory = {"ITEM_HEALING_POTION_001": 3}
 	GameState.equipment = {"weapon": "WEAPON_WORLD_BLADE_001"}
 	GameState.currency = 137
-	GameState.quests = {"QUEST_MAIN_LUN_001": {"state": "ACTIVE", "step": 4}}
+	GameState.quests = {"QUEST_MAIN_LUN_001": {"state": "ACTIVE", "step": 4, "progress": 2}}
 	GameState.chests_opened = {"CHEST_LUN_001": true}
 	GameState.puzzles = {"PUZ_LUN_MOONGATE_001": {"state": "IN_PROGRESS", "current": [1, 0, 2] as Array[int], "hints": 1}}
 	GameState.unique_rewards = {"WEAPON_WORLD_BLADE_001": true}
@@ -40,6 +40,7 @@ func test_round_trip_preserves_values_and_types() -> void:
 	eq(GameState.currency, 137, "currency int")
 	eq(GameState.inventory["ITEM_HEALING_POTION_001"], 3, "item count int")
 	eq(GameState.quests["QUEST_MAIN_LUN_001"]["step"], 4, "quest step int")
+	eq(GameState.quests["QUEST_MAIN_LUN_001"]["progress"], 2, "quest progress int")
 
 
 func test_envelope_has_schema_and_checksum() -> void:

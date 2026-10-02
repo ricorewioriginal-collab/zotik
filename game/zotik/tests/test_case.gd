@@ -33,3 +33,13 @@ func frames(n: int = 1) -> void:
 func physics_frames(n: int = 1) -> void:
 	for i in n:
 		await tree.physics_frame
+
+
+## Finishes any running dialogue/cutscene and waits until control returns.
+func finish_dialogues() -> void:
+	var dlg := tree.root.get_node("Dialogue")
+	var guard := 0
+	while dlg.is_active() and guard < 100:
+		dlg.advance()
+		guard += 1
+	await physics_frames(3)

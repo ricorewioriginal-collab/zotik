@@ -86,7 +86,7 @@ func from_dict(d: Dictionary) -> bool:
 		var q = d.quests[k]
 		if not q is Dictionary:
 			return false
-		quests[str(k)] = {"state": str(q.get("state", "INACTIVE")), "step": int(q.get("step", 0))}
+		quests[str(k)] = {"state": str(q.get("state", "INACTIVE")), "step": int(q.get("step", 0)), "progress": int(q.get("progress", 0))}
 	for k in _dict(d, "puzzles"):
 		var p = d.puzzles[k]
 		if not p is Dictionary:

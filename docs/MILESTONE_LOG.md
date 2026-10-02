@@ -73,3 +73,16 @@ See `docs/PHASE_1_AUDIT.md`.
   - `tools/audit/m00_checks.sh` uses a separate user directory, because the legacy probes wrote into the save directory of the new game (same project name).
   - The title offers slots that can be recovered from backup.
 - Tests: `tests/unit/test_m05_greybox.gd` (8 tests). One of them raycasts ground under every spawn in every area.
+
+## M06 NPC + Dialogue – PASSED
+- `Dialogue` autoload runs NPC dialogues and in-engine cutscenes. Both are line sequences with effects that run when the sequence ends. Requests that arrive while a sequence is running are queued. `npc_talked` is emitted for NPC dialogues.
+- NPC dialogue selection is data-driven: the first entry whose gates hold wins (quest step/state, flag, not_flag, has_item).
+- `Effects` is the single place where content changes state: flags, items (uniques are idempotent), currency, equip, quest start, shop, cutscene, travel. `Inventory` (stack limits, equipped items protected, unique grants) and `Conditions` were added for this.
+- `Npc` entity: PLACEHOLDER capsule with a name label. Its presence follows `appears_when` (Professorium, Lyra).
+- Dialogue box UI. A new game plays `CUT_LUN_DREAM_001`, which sets the intro flag and starts `QUEST_MAIN_LUN_001`. Player control is locked during sequences.
+- Fixes:
+  - The key that closes a dialogue no longer re-opens it in the same frame (control returns after 2 physics frames).
+  - `tools/run_tests.sh` now has a hard timeout, because a runner that fails to compile used to hang forever.
+  - CI runs once per PR update instead of twice.
+- Content validation: every dialogue must be used by an NPC.
+- Tests: `tests/unit/test_m06_dialogue.gd` (7 tests).

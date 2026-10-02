@@ -183,6 +183,13 @@ func validate() -> Array[String]:
 		_ref(e, "cutscenes", u.cutscene, id)
 		_effects(e, u.get("after", []), id)
 	_validate_layouts(e)
+	var used_dialogues := {}
+	for id in table("npcs"):
+		for d in table("npcs")[id].get("dialogues", []):
+			used_dialogues[d.dialogue] = true
+	for id in table("dialogues"):
+		if not used_dialogues.has(id):
+			e.append("%s is never used by an NPC" % id)
 	var chars := {}
 	for id in table("npcs"):
 		chars[table("npcs")[id].get("character", "")] = true
