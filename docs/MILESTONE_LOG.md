@@ -257,3 +257,18 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
 - `break_started` and `break_ended` are each emitted exactly once, including when the enemy dies while broken. The legacy BreakSystem emitted repeatedly and never signalled the start; that defect was not reproduced.
 - The enemy label shows Break progress and "[BREAK]". The HUD help lists the strong attack.
 - Tests: `tests/unit/test_e03_break.gd` (5 tests). One found a real bug, fixed: `break_ended` was lost when an enemy died while broken.
+
+## E04 Elaris greybox & content – PASSED
+- Five streamed areas in the world Elaris:
+  - Stadt (Forschungsviertel, Werkstatt, Weltenstein, arrival scene)
+  - Der lebende Wald, where "sich bewegende Wege" are two `MovingPlatform`s (AnimatableBody3D, ping-pong) that carry Zotik across a ravine
+  - Turm der Erinnerung
+  - Das Herz des Waldes (dungeon with a Weltenanker)
+  - Thron der Wurzelkönigin
+- Gates: the forest needs `FLAG_ELA_FOREST_OPEN` (E06 quest), the dungeon needs `FLAG_ELA_TOWER_SOLVED` (E05 puzzle), the arena needs `FLAG_ELA_ROOTS_PARTED` (set by the Wurzelkriecher's `on_defeat`).
+- Enemies: Pilzling, Dornenwolf and the persistent Wurzelkriecher miniboss. All have Break gauges.
+- NPCs with placeholder lines: Mara (research), Elio (craftsman shop), Sela, Nia, Rovan. Names come from the legacy NPC/character lists (C-19).
+- New items: Großer Heiltrank, Leuchtspore, Blattamulett (+2 DEF, +10 HP).
+- Party data for Nia (archer) and Rovan (melee guardian with a higher Break value). The companion AI now handles melee and non-healers.
+- Validation: platform entities (`PLATFORM_`, target, period). The reachability test counts platform sweeps as floor. It found a real gap at the ravine edges, fixed by extending the platform travel.
+- Tests: `tests/unit/test_e04_elaris.gd` (6 tests, including a physical platform ride and a ravine fall).

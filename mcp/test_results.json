@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T09:49:28",
+  "last_run": "2026-10-02T09:55:07",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 115,
+  "passed": 121,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -65,6 +65,30 @@
     },
     {
       "id": "test_e03_break::test_strong_attack_key_and_death_while_broken",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_all_elaris_areas_build_completely",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_ride_moving_path_across_ravine",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_falling_into_ravine_respawns",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_forest_gate_and_shop",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_elaris_enemies_and_miniboss_flag",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_rovan_fights_in_melee",
       "result": "PASS"
     },
     {

@@ -98,5 +98,68 @@
     ],
     "break": 120,
     "break_duration": 4.0
+  },
+  "ENEMY_PILZLING_001": {
+    "name": "Pilzling",
+    "hp": 35,
+    "attack": 7,
+    "defense": 1,
+    "move_speed": 2.6,
+    "aggro_range": 8.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.5,
+    "currency": 6,
+    "drops": [
+      {
+        "id": "ITEM_SPORE_001",
+        "count": 1
+      }
+    ],
+    "break": 25,
+    "break_duration": 2.5
+  },
+  "ENEMY_DORNENWOLF_001": {
+    "name": "Dornenwolf",
+    "hp": 60,
+    "attack": 10,
+    "defense": 3,
+    "move_speed": 4.8,
+    "aggro_range": 12.0,
+    "attack_range": 1.9,
+    "attack_cooldown": 1.2,
+    "currency": 12,
+    "drops": [
+      {
+        "id": "ITEM_HEALING_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 40,
+    "break_duration": 2.5
+  },
+  "ENEMY_WURZELKRIECHER_001": {
+    "name": "Wurzelkriecher",
+    "hp": 160,
+    "attack": 13,
+    "defense": 4,
+    "move_speed": 2.4,
+    "aggro_range": 14.0,
+    "attack_range": 2.6,
+    "attack_cooldown": 1.6,
+    "currency": 60,
+    "drops": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 80,
+    "break_duration": 3.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELA_ROOTS_PARTED"
+      }
+    ]
   }
 }

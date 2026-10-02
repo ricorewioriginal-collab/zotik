@@ -20,3 +20,4 @@ Format: ID – description – status / interim handling. Interim handling is th
 - C-16 – `20_RIDDLES` demo dialogue in the Elaris tower features Nia and Rovan, but no document says when they join. – Interim: Nia (young archer) joins in Elaris town and Rovan (former guardian) joins in the living forest. Both are placeholders until the story owner confirms.
 - C-17 – Combat doc lists MP, magic, elements and timeline. – Interim for Phase 2: Break and party AI only; elements, MP and timeline stay deferred.
 - C-18 – The legacy village attack (BUILD_01) remains deferred; not part of chapter 2.
+- C-19 – Elaris NPC roles are not specified. – Interim: Mara (research quarter), Elio (craftsman/shop) and Sela (townsperson) reuse names from the legacy NPC list. All dialogue is placeholder.

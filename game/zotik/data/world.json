@@ -16,6 +16,11 @@
       "area": "AREA_LUN_RIFT_CAVE",
       "name": "Weltenanker",
       "heals": true
+    },
+    "SAVEPOINT_ELA_001": {
+      "area": "AREA_ELA_DUNGEON",
+      "name": "Weltenanker im Herz des Waldes",
+      "heals": true
     }
   },
   "uniques": {

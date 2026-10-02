@@ -46,5 +46,20 @@
   },
   "FLAG_ELA_LYRA_JOINED": {
     "desc": "Lyra ist der Party beigetreten"
+  },
+  "FLAG_ELA_FOREST_OPEN": {
+    "desc": "Mara öffnet den Weg in den lebenden Wald"
+  },
+  "FLAG_ELA_TOWER_SOLVED": {
+    "desc": "Turm der Erinnerung gelöst – innerer Wald offen"
+  },
+  "FLAG_ELA_ROOTS_PARTED": {
+    "desc": "Wurzelkriecher besiegt – Weg zur Wurzelkönigin frei"
+  },
+  "FLAG_ELA_NIA_JOINED": {
+    "desc": "Nia ist der Party beigetreten"
+  },
+  "FLAG_ELA_ROVAN_JOINED": {
+    "desc": "Rovan ist der Party beigetreten"
   }
 }

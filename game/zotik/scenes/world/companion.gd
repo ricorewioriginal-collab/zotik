@@ -71,7 +71,7 @@ func _physics_process(delta: float) -> void:
 	if Dialogue.is_active() or player.dead:
 		_move(Vector3.ZERO, delta)
 		return
-	if heal_cd <= 0.0 and float(GameState.player.hp) / float(maxi(1, Stats.max_hp())) < float(data.heal_threshold):
+	if int(data.get("heal_amount", 0)) > 0 and heal_cd <= 0.0 and float(GameState.player.hp) / float(maxi(1, Stats.max_hp())) < float(data.heal_threshold):
 		heal_cd = float(data.heal_cooldown)
 		var done := player.heal(int(data.heal_amount))
 		healed_player.emit(done)
@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 			goal = to_t.normalized() * float(data.move_speed)
 		elif attack_cd <= 0.0:
 			attack_cd = float(data.attack_cooldown)
-			target.take_hit(int(data.attack), float(Content.combat().get("break_party", 6)))
+			target.take_hit(int(data.attack), float(data.get("break", Content.combat().get("break_party", 6))))
 			_bolt(target.global_position)
 			attacked.emit(target)
 		_face(to_t)

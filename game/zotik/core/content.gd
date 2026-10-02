@@ -12,7 +12,7 @@ const TABLES := {
 }
 const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOONGATE_001", "PUZ_LUN_RESONANCE_BRIDGE_001", "ENEMY_RIFTLING_001", "ENEMY_MOONWOLF_001", "BOSS_ORUN_001", "WEAPON_WORLD_BLADE_001", "CHEST_LUN_001", "CHEST_LUN_002", "SAVEPOINT_LUN_RIFT_001", "FLAG_LUN_FOREST_UNLOCKED", "FLAG_BOSS_LUN_ORUN_DEFEATED", "CHAR_ZOTIK_MASTER_001", "CHAR_MIRA_MASTER_001", "CHAR_LYRA_MASTER_001", "CHAR_PROFESSORIUM_MASTER_001"]
 const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party"]
-const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel"]
+const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
 const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
 
@@ -330,6 +330,9 @@ func _validate_layouts(e: Array[String]) -> void:
 				"unique":
 					if world.get("uniques", {}).get(en.id, {}).get("area") != area:
 						e.append("%s placed outside its area" % en.id)
+				"platform":
+					if not key.begins_with("PLATFORM_") or not en.has("to") or float(en.get("period", 0)) <= 0.0:
+						e.append("%s: invalid moving platform %s" % [area, key])
 				"travel":
 					if not key.begins_with("TRAVEL_"):
 						e.append("%s: travel point id must start with TRAVEL_" % area)

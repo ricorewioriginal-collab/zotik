@@ -26,6 +26,12 @@ func _floor_rects(l: Dictionary) -> Array:
 		var c := WorldArea._v(f.pos)
 		var s := WorldArea._v(f.size)
 		out.append(Rect2(c.x - s.x / 2.0, c.z - s.z / 2.0, s.x, s.z))
+	for en in l.get("entities", []):
+		if en.type == "platform":
+			var a := WorldArea._v(en.pos)
+			var b := WorldArea._v(en.to)
+			var s := WorldArea._v(en.get("size", [4, 1, 4]))
+			out.append(Rect2(minf(a.x, b.x) - s.x / 2.0, minf(a.z, b.z) - s.z / 2.0, absf(a.x - b.x) + s.x, absf(a.z - b.z) + s.z))
 	for p in l.get("props", []):
 		if p.has("requires_flag") and p.get("collision", true):
 			var c := WorldArea._v(p.pos)
@@ -72,7 +78,7 @@ func test_everything_reachable_from_spawn() -> void:
 		for key in l.spawns:
 			targets["spawn " + key] = WorldArea._v(l.spawns[key])
 		for en in l.get("entities", []):
-			if en.type != "trigger":
+			if not en.type in ["trigger", "platform"]:
 				targets[en.get("spawn", en.get("id", ""))] = WorldArea._v(en.pos)
 		for name in targets:
 			var t: Vector3 = targets[name]

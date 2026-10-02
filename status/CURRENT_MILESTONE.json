@@ -1,7 +1,7 @@
 {
   "phase": 2,
-  "milestone": "E03_BREAK",
+  "milestone": "E04_ELARIS_CONTENT",
   "status": "PASSED",
-  "next_allowed": "E04_ELARIS_CONTENT",
+  "next_allowed": "E05_PUZZLES",
   "phase_2_allowed": true
 }

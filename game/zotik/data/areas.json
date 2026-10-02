@@ -57,6 +57,48 @@
   "AREA_ELA_TOWN": {
     "name": "Elaris – Stadt",
     "world": "WORLD_ELARIS",
-    "exits": []
+    "exits": [
+      "AREA_ELA_FOREST"
+    ],
+    "gate": {
+      "AREA_ELA_FOREST": "FLAG_ELA_FOREST_OPEN"
+    }
+  },
+  "AREA_ELA_FOREST": {
+    "name": "Der lebende Wald",
+    "world": "WORLD_ELARIS",
+    "exits": [
+      "AREA_ELA_TOWN",
+      "AREA_ELA_TOWER"
+    ]
+  },
+  "AREA_ELA_TOWER": {
+    "name": "Turm der Erinnerung",
+    "world": "WORLD_ELARIS",
+    "exits": [
+      "AREA_ELA_FOREST",
+      "AREA_ELA_DUNGEON"
+    ],
+    "gate": {
+      "AREA_ELA_DUNGEON": "FLAG_ELA_TOWER_SOLVED"
+    }
+  },
+  "AREA_ELA_DUNGEON": {
+    "name": "Das Herz des Waldes",
+    "world": "WORLD_ELARIS",
+    "exits": [
+      "AREA_ELA_TOWER",
+      "AREA_ELA_ROOT_ARENA"
+    ],
+    "gate": {
+      "AREA_ELA_ROOT_ARENA": "FLAG_ELA_ROOTS_PARTED"
+    }
+  },
+  "AREA_ELA_ROOT_ARENA": {
+    "name": "Thron der Wurzelkönigin",
+    "world": "WORLD_ELARIS",
+    "exits": [
+      "AREA_ELA_DUNGEON"
+    ]
   }
 }

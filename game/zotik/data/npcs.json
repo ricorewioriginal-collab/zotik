@@ -227,5 +227,57 @@
       }
     ],
     "hidden_when": "FLAG_ELA_LYRA_JOINED"
+  },
+  "NPC_MARA_001": {
+    "name": "Mara",
+    "area": "AREA_ELA_TOWN",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_MARA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_ELIO_001": {
+    "name": "Elio",
+    "area": "AREA_ELA_TOWN",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ELIO_SHOP_001"
+      }
+    ]
+  },
+  "NPC_SELA_001": {
+    "name": "Sela",
+    "area": "AREA_ELA_TOWN",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_SELA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_NIA_001": {
+    "name": "Nia",
+    "area": "AREA_ELA_TOWN",
+    "hidden_when": "FLAG_ELA_NIA_JOINED",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_NIA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_ROVAN_001": {
+    "name": "Rovan",
+    "area": "AREA_ELA_FOREST",
+    "hidden_when": "FLAG_ELA_ROVAN_JOINED",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ROVAN_IDLE_001"
+      }
+    ]
   }
 }
