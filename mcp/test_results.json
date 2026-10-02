@@ -1,9 +1,31 @@
-{"last_run":"2026-10-02","engine":"4.7.stable.official.5b4e0cb0f","runner":"tools/audit/m00_checks.sh","result":"EXECUTED","tests":[
-{"id":"M00_A1_LEGACY_PROJECT_LOADS","result":"FAIL","detail":"project.godot line 26: Expected '}' or ','"},
-{"id":"M00_A2_LEGACY_PROJECT_LOADS_WITH_BRACE_FIX","result":"PASS"},
-{"id":"M00_A3_LEGACY_SCRIPTS_CHECK_ONLY","result":"PASS","detail":"6/6 scripts"},
-{"id":"M00_A4_LEGACY_BREAK_SINGLE_EMIT","result":"FAIL","detail":"break_completed emitted 3x, break_started 0x"},
-{"id":"M00_A4_LEGACY_TIMELINE_SPEED","result":"FAIL","detail":"fires on advance(0); speed ignored"},
-{"id":"M00_A4_LEGACY_SAVE_TYPES","result":"FAIL","detail":"int restored as float"},
-{"id":"M00_A4_LEGACY_SAVE_CORRUPT_BACKUP","result":"FAIL","detail":"corrupt slot returns {} without backup"}
-],"note":"M00 records the legacy state; FAIL entries are findings, not M00 failures."}
+{
+  "engine": "4.7-stable (official)",
+  "failed": 0,
+  "last_run": "2026-10-02T07:59:56",
+  "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
+  "passed": 5,
+  "result": "PASS",
+  "runner": "tools/run_tests.sh",
+  "tests": [
+    {
+      "id": "test_m01_boot::test_autoloads_present",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_input_actions_defined",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_core_scenes_load",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_boot_reaches_title_then_game_root",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m01_boot::test_missing_scene_is_rejected",
+      "result": "PASS"
+    }
+  ]
+}
