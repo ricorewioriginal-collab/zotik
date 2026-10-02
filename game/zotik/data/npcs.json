@@ -233,6 +233,35 @@
     "area": "AREA_ELA_TOWN",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_ELA_001",
+            "step": 0
+          }
+        ],
+        "dialogue": "DLG_MARA_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_ELA_001",
+            "step": 10
+          }
+        ],
+        "dialogue": "DLG_MARA_RETURN_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ELA_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_MARA_AFTER_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_MARA_IDLE_001"
       }
@@ -253,6 +282,36 @@
     "area": "AREA_ELA_TOWN",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_ELA_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_SELA_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_ELA_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_SELA_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_ELA_001",
+            "state": "COMPLETED"
+          }
+        ],
+        "dialogue": "DLG_SELA_AFTER_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_SELA_IDLE_001"
       }
@@ -264,6 +323,16 @@
     "hidden_when": "FLAG_ELA_NIA_JOINED",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_ELA_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_NIA_JOIN_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_NIA_IDLE_001"
       }
@@ -274,6 +343,16 @@
     "area": "AREA_ELA_FOREST",
     "hidden_when": "FLAG_ELA_ROVAN_JOINED",
     "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_ELA_001",
+            "step": 4
+          }
+        ],
+        "dialogue": "DLG_ROVAN_JOIN_001"
+      },
       {
         "when": [],
         "dialogue": "DLG_ROVAN_IDLE_001"

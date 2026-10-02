@@ -99,6 +99,10 @@
       {
         "type": "set_flag",
         "id": "FLAG_ELA_LYRA_JOINED"
+      },
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_ELA_001"
       }
     ]
   },

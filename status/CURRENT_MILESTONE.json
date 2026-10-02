@@ -1,7 +1,7 @@
 {
   "phase": 2,
-  "milestone": "E05_PUZZLES",
+  "milestone": "E06_CHAPTER2_QUESTS",
   "status": "PASSED",
-  "next_allowed": "E06_CHAPTER2_QUESTS",
+  "next_allowed": "E07_BOSS_WURZELKOENIGIN",
   "phase_2_allowed": true
 }

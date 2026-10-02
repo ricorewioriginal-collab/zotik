@@ -323,5 +323,99 @@
         "Bleib zurück. Dieser Wald ist nicht mehr, was er war."
       ]
     ]
+  },
+  "DLG_MARA_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MARA_001",
+        "Ein Weltenhörer in Elaris … Lyra hat mir geschrieben."
+      ],
+      [
+        "NPC_MARA_001",
+        "Die Wege des Waldes wandern, seit der Riss in Lunaris aufging. Ich öffne euch das Waldtor. Nehmt Nia mit, sie kennt die Pfade."
+      ]
+    ]
+  },
+  "DLG_MARA_RETURN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MARA_001",
+        "Der Wald ist ruhig. Die Wurzelkönigin hat sich an etwas erinnert, das sie nicht hätte vergessen dürfen."
+      ],
+      [
+        "NPC_MARA_001",
+        "Eure Reise ist noch lange nicht zu Ende."
+      ]
+    ]
+  },
+  "DLG_MARA_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MARA_001",
+        "Die Erinnerungskristalle werden wir genau untersuchen."
+      ]
+    ]
+  },
+  "DLG_NIA_JOIN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NIA_001",
+        "Ihr wollt in den lebenden Wald? Ohne mich verlauft ihr euch nach drei Schritten."
+      ],
+      [
+        "NPC_NIA_001",
+        "Ich komme mit. Ich muss sowieso beweisen, dass ich das kann."
+      ]
+    ]
+  },
+  "DLG_ROVAN_JOIN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ROVAN_001",
+        "Ein Resonanzträger. Ich habe gehofft, diesen Klang nie wieder zu hören."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Gut. Dann gehe ich vor. Der Turm ist nicht weit."
+      ]
+    ]
+  },
+  "DLG_SELA_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Die Pilzlinge tragen Leuchtsporen. Bringst du mir fünf? Ich brauche sie für meine Lampen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_ELA_001"
+      }
+    ]
+  },
+  "DLG_SELA_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Fünf Sporen! Jetzt leuchtet die Gasse wieder. Hier, für dich."
+      ]
+    ]
+  },
+  "DLG_SELA_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Siehst du das Licht? Das bist du gewesen."
+      ]
+    ]
   }
 }

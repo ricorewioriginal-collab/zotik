@@ -170,8 +170,9 @@ func toggle_inventory() -> void:
 
 
 func _on_quest_completed(id: String) -> void:
-	if id == Quests.MAIN:
-		EventBus.notify.emit("Kapitel 1 „Lunaris – Der erste Riss“ abgeschlossen. Fortsetzung folgt.")
+	var notice: String = Content.get_entry("quests", id).get("completion_notice", "")
+	if notice != "":
+		EventBus.notify.emit(notice)
 		chapter_complete.emit()
 
 
@@ -196,7 +197,7 @@ func toggle_quest_log() -> void:
 func _update_objective() -> void:
 	var lines := []
 	for id in Quests.active_quests():
-		lines.append(("» " if id == Quests.MAIN else "• ") + Quests.objective(id))
+		lines.append(("» " if Content.get_entry("quests", id).get("type") == "main" else "• ") + Quests.objective(id))
 	hud.set_objective("\n".join(lines))
 	update_beacon.call_deferred()
 

@@ -61,5 +61,11 @@
   },
   "FLAG_ELA_ROVAN_JOINED": {
     "desc": "Rovan ist der Party beigetreten"
+  },
+  "FLAG_ELA_CHAPTER_COMPLETE": {
+    "desc": "Kapitel Elaris abgeschlossen"
+  },
+  "FLAG_BOSS_ELA_QUEEN_DEFEATED": {
+    "desc": "Wurzelkönigin besiegt"
   }
 }

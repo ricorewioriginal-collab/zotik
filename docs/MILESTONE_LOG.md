@@ -283,3 +283,25 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
 - The "moving paths" from `04_WORLDS` were implemented as a traversal mechanic in E04 (moving platforms), not as a separate switch puzzle. The plan was adjusted accordingly.
 - The glyph guard caught an "→" in a hint that would have rendered as a box on web; it was rephrased.
 - Tests: `tests/unit/test_e05_tower.gd` (4 tests).
+
+## E06 Chapter-2 quests – PASSED
+- `QUEST_MAIN_ELA_001` "Der Wald, der sich erinnert" has 11 steps. It starts with the arrival scene:
+  1. Mara opens the forest.
+  2. Nia joins.
+  3. Enter the forest.
+  4. Defeat 3 Pilzlinge.
+  5. Rovan joins.
+  6. Reach the tower.
+  7. Solve the tower puzzle.
+  8. Touch the Weltenanker.
+  9. Defeat the Wurzelkriecher.
+  10. Defeat the Wurzelkönigin.
+  11. Return to Mara: +200 Lun, `FLAG_ELA_CHAPTER_COMPLETE`.
+- Party joins happen through quest step effects. Talking to Rovan early does nothing, and Nia's and Rovan's town/forest NPCs hide while they are in the party.
+- `QUEST_SIDE_ELA_001` "Leuchtsporen für Sela": collect 5 spores (from Pilzlinge and the dungeon chest) for 90 Lun and 2 Große Heiltränke.
+- Generalised:
+  - chapter-end notices come from `completion_notice` in the quest data
+  - main quests are sorted before side quests, Lunaris before later chapters
+  - the HUD marks every main quest with »
+- Boss data for `BOSS_WURZELKOENIGIN_001` was added (3 phases) so the quest can reference it. The arena fight follows in E07.
+- Tests: `tests/unit/test_e06_quests.gd` (5 tests).

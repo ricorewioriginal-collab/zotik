@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T09:59:06",
+  "last_run": "2026-10-02T10:02:41",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 125,
+  "passed": 130,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -105,6 +105,26 @@
     },
     {
       "id": "test_e05_tower::test_pillars_show_symbols",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_arrival_starts_chapter_two",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_full_chapter_two_main_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_rovan_cannot_join_early",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_sela_side_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_main_quest_listed_before_side_quest",
       "result": "PASS"
     },
     {

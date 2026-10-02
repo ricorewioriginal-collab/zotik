@@ -141,7 +141,8 @@
         "type": "set_flag",
         "id": "FLAG_LUN_CHAPTER_COMPLETE"
       }
-    ]
+    ],
+    "completion_notice": "Kapitel 1 „Lunaris – Der erste Riss“ abgeschlossen."
   },
   "QUEST_SIDE_LUN_001": {
     "name": "Saris verlorene Lieferung",
@@ -183,6 +184,168 @@
         "type": "give_item",
         "id": "ITEM_MOON_PENDANT_001",
         "count": 1
+      }
+    ]
+  },
+  "QUEST_MAIN_ELA_001": {
+    "name": "Der Wald, der sich erinnert",
+    "type": "main",
+    "completion_notice": "Kapitel 2 „Elaris – Der Wald, der sich erinnert“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Sprich mit Mara im Forschungsviertel.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_MARA_001"
+        },
+        "on_complete": [
+          {
+            "type": "set_flag",
+            "id": "FLAG_ELA_FOREST_OPEN"
+          }
+        ]
+      },
+      {
+        "objective": "Sprich mit Nia in der Stadt.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_NIA_001"
+        },
+        "on_complete": [
+          {
+            "type": "join_party",
+            "id": "PARTY_NIA_001"
+          },
+          {
+            "type": "set_flag",
+            "id": "FLAG_ELA_NIA_JOINED"
+          }
+        ]
+      },
+      {
+        "objective": "Betritt den lebenden Wald.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_ELA_FOREST"
+        }
+      },
+      {
+        "objective": "Vertreibe die Pilzlinge (3).",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 3
+        }
+      },
+      {
+        "objective": "Sprich mit dem Fremden jenseits der wandernden Wege.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_ROVAN_001"
+        },
+        "on_complete": [
+          {
+            "type": "join_party",
+            "id": "PARTY_ROVAN_001"
+          },
+          {
+            "type": "set_flag",
+            "id": "FLAG_ELA_ROVAN_JOINED"
+          }
+        ]
+      },
+      {
+        "objective": "Erreiche den Turm der Erinnerung.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_ELA_TOWER"
+        }
+      },
+      {
+        "objective": "Löse das Rätsel des Turms.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_ELA_TURM_001"
+        }
+      },
+      {
+        "objective": "Berühre den Weltenanker im Herz des Waldes.",
+        "condition": {
+          "type": "savepoint",
+          "savepoint": "SAVEPOINT_ELA_001"
+        }
+      },
+      {
+        "objective": "Besiege den Wurzelkriecher.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_WURZELKRIECHER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich der Wurzelkönigin.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_WURZELKOENIGIN_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Kehre zu Mara zurück.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_MARA_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 200
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELA_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_ELA_001": {
+    "name": "Leuchtsporen für Sela",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 5 Leuchtsporen.",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_SPORE_001",
+          "count": 5
+        }
+      },
+      {
+        "objective": "Bring die Sporen zu Sela.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_SELA_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_SPORE_001",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 90
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
       }
     ]
   }
