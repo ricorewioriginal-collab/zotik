@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:32:32",
+  "last_run": "2026-10-02T08:34:36",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 74,
+  "passed": 78,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -301,6 +301,22 @@
     },
     {
       "id": "test_m10_puzzles::test_in_world_moongate_opens_ruins_exit",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_chasm_blocks_until_bridge_active",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_weltenanker_heals_saves_and_progresses_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_cave_chest_and_wolf_present",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m11_dungeon::test_pause_menu_and_back_to_title",
       "result": "PASS"
     }
   ]

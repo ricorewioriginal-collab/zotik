@@ -134,3 +134,10 @@ See `docs/PHASE_1_AUDIT.md`.
 - Partial puzzle state (dials, sequence progress, hints) survives save and load.
 - `PuzzleNode` in the world (PLACEHOLDER): Mondtor with 3 moon-phase dials and an activation plate, Resonanzbrücke with 4 crystals. The `puzzle_reset` (T) and `puzzle_hint` (H) keys work within 9 m. Solving opens the gate or bridge through flags.
 - Tests: `tests/unit/test_m10_puzzles.gd` (7 tests, including Moon Gate wrong/reset/correct in the world).
+
+## M11 Dungeon & Resonance Bridge – PASSED
+- The Risshöhle is fully built: entrance, chest, Resonanzbrücke puzzle over a real chasm, Mondwolf, Weltenanker and the gated exit to the arena.
+- The bridge is physical: before the puzzle is solved, walking north drops Zotik into the chasm (respawn with fall damage). Afterwards he can walk across.
+- `Savepoint` (Weltenanker) fully heals, emits `savepoint_used` (quest step 8 → opens the arena) and opens the save menu with 3 slots.
+- Pause menu (Esc): resume, camera inversion (persisted in settings), back to title, quit.
+- Tests: `tests/unit/test_m11_dungeon.gd` (4 tests).

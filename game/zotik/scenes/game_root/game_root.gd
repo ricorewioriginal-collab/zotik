@@ -18,13 +18,15 @@ var dialogue_box: DialogueBox
 var inventory_menu: InventoryMenu
 var shop_menu: ShopMenu
 var quest_log: QuestLog
+var save_menu: SaveMenu
+var pause_menu: PauseMenu
 var factories := {}
 var _entry_spawn := Vector3.ZERO
 
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
@@ -38,6 +40,12 @@ func _ready() -> void:
 	quest_log = QuestLog.new()
 	ui.add_child(quest_log)
 	quest_log.closed.connect(_update_control)
+	save_menu = SaveMenu.new()
+	ui.add_child(save_menu)
+	save_menu.closed.connect(_update_control)
+	pause_menu = PauseMenu.new()
+	ui.add_child(pause_menu)
+	pause_menu.closed.connect(_update_control)
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
 	shop_menu.closed.connect(_update_control)
@@ -73,7 +81,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible
 
 
 func _update_control() -> void:
@@ -91,6 +99,11 @@ func toggle_inventory() -> void:
 		inventory_menu.close_menu()
 	elif not Dialogue.is_active() and not shop_menu.visible:
 		inventory_menu.open()
+	_update_control()
+
+
+func open_save_menu() -> void:
+	save_menu.open()
 	_update_control()
 
 
@@ -114,6 +127,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_inventory()
 	elif event.is_action_pressed("quest_log"):
 		toggle_quest_log()
+	elif event.is_action_pressed("menu") and not is_menu_open() and not Dialogue.is_active():
+		get_viewport().set_input_as_handled()
+		pause_menu.open()
+		_update_control()
 
 
 func _process(delta: float) -> void:
