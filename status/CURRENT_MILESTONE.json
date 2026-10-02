@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M11_DUNGEON_RESONANCE_BRIDGE",
+  "milestone": "M12_BOSS_ORUN",
   "status": "PASSED",
-  "next_allowed": "M12_BOSS_ORUN",
+  "next_allowed": "M13_RIFT_WELTENKLINGE_STORY_END",
   "phase_2_allowed": false
 }

@@ -9,6 +9,8 @@ var area_label: Label
 var objective_label: Label
 var prompt_label: Label
 var notify_label: Label
+var boss_label: Label
+var boss_bar: ProgressBar
 var _notify_time := 0.0
 
 
@@ -27,6 +29,12 @@ func _ready() -> void:
 	objective_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	prompt_label = _label(Vector2(520, 600), 20)
 	notify_label = _label(Vector2(420, 120), 24)
+	boss_label = _label(Vector2(440, 650), 18)
+	boss_bar = ProgressBar.new()
+	boss_bar.position = Vector2(440, 676)
+	boss_bar.size = Vector2(400, 18)
+	boss_bar.show_percentage = false
+	add_child(boss_bar)
 	EventBus.notify.connect(show_notification)
 
 
@@ -37,6 +45,16 @@ func _process(delta: float) -> void:
 	hp_bar.value = hp
 	hp_label.text = "%d / %d" % [hp, mx]
 	area_label.text = str(Content.get_entry("areas", GameState.player.get("area", "")).get("name", ""))
+	var boss: Boss = null
+	for n in get_tree().get_nodes_in_group("enemy"):
+		if n is Boss and n.engaged():
+			boss = n
+	boss_bar.visible = boss != null
+	boss_label.visible = boss != null
+	if boss:
+		boss_label.text = "%s – %s" % [boss.data.name, boss.data.phases[boss.phase].name]
+		boss_bar.max_value = boss.max_hp
+		boss_bar.value = boss.hp
 	if _notify_time > 0.0:
 		_notify_time -= delta
 		if _notify_time <= 0.0:

@@ -115,6 +115,7 @@ func validate() -> Array[String]:
 		var en: Dictionary = table("enemies")[id]
 		for d in en.get("drops", []):
 			_ref(e, "items", d.id, id)
+		_effects(e, en.get("on_defeat", []), id)
 		for ph in en.get("phases", []):
 			if ph.has("summon"):
 				_ref(e, "enemies", ph.summon, id)

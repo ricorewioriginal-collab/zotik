@@ -141,3 +141,18 @@ See `docs/PHASE_1_AUDIT.md`.
 - `Savepoint` (Weltenanker) fully heals, emits `savepoint_used` (quest step 8 → opens the arena) and opens the save menu with 3 slots.
 - Pause menu (Esc): resume, camera inversion (persisted in settings), back to title, quit.
 - Tests: `tests/unit/test_m11_dungeon.gd` (4 tests).
+
+## M12 Boss Orun – PASSED
+- `BOSS_ORUN_001` has 3 data-defined phases:
+  - Wächter: from 100 %.
+  - Splitterruf: below 66 %, attack ×1.1, summons 2 Risslinge once.
+  - Resonanzsturm: below 33 %, attack ×1.3, cooldown ×0.75.
+  - Each phase has its own colour (state-driven material, docs/13). A single big hit runs through skipped phases exactly once.
+- Defeat:
+  - `on_defeat` data effects set `FLAG_BOSS_LUN_ORUN_DEFEATED`. This is idempotent and independent of the quest.
+  - The boss stays defeated across save and load.
+  - Summons are removed.
+- Death during the fight resets boss HP, phase and summons. Progress stays unchanged.
+- All enemies are passive during dialogues and cutscenes; an attack wind-up is cancelled. The arena intro (`CUT_LUN_ORUN_001`) plays once.
+- Boss HP bar with name and phase in the HUD while engaged.
+- Tests: `tests/unit/test_m12_boss.gd` (6 tests).

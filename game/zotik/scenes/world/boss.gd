@@ -1,7 +1,7 @@
 class_name Boss
 extends Enemy
 ## Multi-phase boss (phases from data). Phase changes adjust attack and
-## cooldown multipliers and may summon helpers. Implemented fully in M12.
+## cooldown multipliers, switch the state-driven colour and may summon helpers.
 
 signal phase_changed(index: int)
 
@@ -45,6 +45,7 @@ func _enter_phase(i: int) -> void:
 			e.global_position = global_position + Vector3(-3.0 + 6.0 * n, 0, 3.0)
 			e.home = e.position
 			summons.append(e)
+	_set_tint(Color.WHITE)
 	EventBus.notify.emit("%s: %s" % [data.name, ph.get("name", "")])
 	phase_changed.emit(i)
 
@@ -58,3 +59,11 @@ func reset_encounter() -> void:
 	attack_mult = 1.0
 	cooldown_mult = 1.0
 	super()
+
+
+func base_color() -> Color:
+	return Color.html(data.phases[phase].get("color", "#4a2a7a"))
+
+
+func engaged() -> bool:
+	return not is_dead() and (state != State.IDLE or hp < max_hp)

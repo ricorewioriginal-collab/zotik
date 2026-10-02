@@ -88,6 +88,13 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= GRAVITY * delta
 	if state == State.DEAD:
 		return
+	if Dialogue.is_active():
+		_move_to(Vector3.ZERO, delta)
+		if state == State.WINDUP:
+			state = State.CHASE
+			_set_tint(Color.WHITE)
+		move_and_slide()
+		return
 	cooldown = maxf(0.0, cooldown - delta)
 	if target == null or not is_instance_valid(target):
 		target = get_tree().get_first_node_in_group("player") as Player
@@ -162,6 +169,7 @@ func _die() -> void:
 		Inventory.add_currency(int(data.currency))
 	if persistent:
 		GameState.defeated[spawn_id] = true
+	Effects.run(data.get("on_defeat", []))
 	defeated.emit(self)
 	EventBus.enemy_defeated.emit(enemy_id)
 	hide()
@@ -181,8 +189,12 @@ func reset_encounter() -> void:
 	_update_label()
 
 
+func base_color() -> Color:
+	return Color.html(COLORS.get(enemy_id, "#aa3333"))
+
+
 func _set_tint(c: Color) -> void:
-	(body_mesh.material_override as StandardMaterial3D).albedo_color = Color.html(COLORS.get(enemy_id, "#aa3333")) * c
+	(body_mesh.material_override as StandardMaterial3D).albedo_color = base_color() * c
 
 
 func _update_label() -> void:

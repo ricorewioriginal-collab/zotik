@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:34:36",
+  "last_run": "2026-10-02T08:37:12",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 78,
+  "passed": 84,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -317,6 +317,30 @@
     },
     {
       "id": "test_m11_dungeon::test_pause_menu_and_back_to_title",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_three_phases_with_summons",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_big_hit_skips_through_phases_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_defeat_sets_flag_persists_and_clears_summons",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_death_during_boss_resets_fight",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_boss_passive_during_cutscene_and_hud_bar",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m12_boss::test_arena_intro_trigger_plays_once",
       "result": "PASS"
     }
   ]
