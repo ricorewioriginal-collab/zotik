@@ -1,0 +1,23 @@
+{
+  "WORLD_LUNARIS": {
+    "name": "Lunaris",
+    "chapter": 1,
+    "subtitle": "Der erste Riss",
+    "hub_area": "AREA_LUN_VILLAGE",
+    "hub_spawn": "travel"
+  },
+  "WORLD_ELARIS": {
+    "name": "Elaris",
+    "chapter": 2,
+    "subtitle": "Der Wald, der sich erinnert",
+    "hub_area": "AREA_ELA_TOWN",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_LUN_CHAPTER_COMPLETE"
+  },
+  "WORLD_VALDORIA": {
+    "name": "Valdoria",
+    "chapter": 3,
+    "subtitle": "Die Stadt, die niemals schläft",
+    "sealed": true
+  }
+}

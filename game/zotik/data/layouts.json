@@ -87,6 +87,11 @@
         0,
         0,
         -24
+      ],
+      "travel": [
+        -20,
+        0,
+        22
       ]
     },
     "exits": [
@@ -322,6 +327,15 @@
           16,
           0,
           -17
+        ]
+      },
+      {
+        "type": "travel",
+        "id": "TRAVEL_LUN_001",
+        "pos": [
+          -22,
+          0,
+          24
         ]
       }
     ]
@@ -875,6 +889,39 @@
           0,
           0,
           -12
+        ]
+      }
+    ]
+  },
+  "AREA_ELA_TOWN": {
+    "size": [
+      60,
+      60
+    ],
+    "ground": "#4f7a3a",
+    "ambient": "#d8f0c0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        22
+      ],
+      "travel": [
+        0,
+        0,
+        22
+      ]
+    },
+    "exits": [],
+    "props": [],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_ELA_001",
+        "pos": [
+          3,
+          0,
+          25
         ]
       }
     ]

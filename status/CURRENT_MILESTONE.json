@@ -1,7 +1,7 @@
 {
-  "phase": 1,
-  "milestone": "M15_COMPLETE_REGRESSION",
+  "phase": 2,
+  "milestone": "E01_WORLD_TRAVEL",
   "status": "PASSED",
-  "next_allowed": "PHASE_2_REQUIRES_OWNER_APPROVAL",
-  "phase_2_allowed": false
+  "next_allowed": "E02_PARTY",
+  "phase_2_allowed": true
 }

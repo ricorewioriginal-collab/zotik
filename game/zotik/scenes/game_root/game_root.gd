@@ -21,6 +21,7 @@ var shop_menu: ShopMenu
 var quest_log: QuestLog
 var save_menu: SaveMenu
 var pause_menu: PauseMenu
+var world_map: WorldMap
 var beacon: ObjectiveBeacon
 var beacon_target := ""  # entity key or "exit:<area>"
 var factories := {}
@@ -29,7 +30,7 @@ var _entry_spawn := Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
@@ -49,6 +50,9 @@ func _ready() -> void:
 	pause_menu = PauseMenu.new()
 	ui.add_child(pause_menu)
 	pause_menu.closed.connect(_update_control)
+	world_map = WorldMap.new()
+	ui.add_child(world_map)
+	world_map.closed.connect(_update_control)
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
 	EventBus.quest_completed.connect(_on_quest_completed)
@@ -91,7 +95,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or world_map.visible
 
 
 func _update_control() -> void:
@@ -136,10 +140,15 @@ func update_beacon() -> void:
 				pos = area.entities[key].global_position
 			beacon_target = key
 		else:
-			var hop := Navigator.next_hop(area.area_id, target.area)
-			if area.exits.has(hop):
-				pos = area.exits[hop].trigger.global_position - Vector3(0, 1.5, 0)
-				beacon_target = "exit:" + hop
+			var r := Navigator.route(area.area_id, target.area)
+			if r.has("exit") and area.exits.has(r.exit):
+				pos = area.exits[r.exit].trigger.global_position - Vector3(0, 1.5, 0)
+				beacon_target = "exit:" + r.exit
+			elif r.has("travel"):
+				for key in area.entities:
+					if str(key).begins_with("TRAVEL_"):
+						pos = area.entities[key].global_position
+						beacon_target = key
 	beacon.visible = pos != null
 	if pos != null:
 		beacon.global_position = pos
@@ -162,6 +171,11 @@ func _on_quest_completed(id: String) -> void:
 	if id == Quests.MAIN:
 		EventBus.notify.emit("Kapitel 1 „Lunaris – Der erste Riss“ abgeschlossen. Fortsetzung folgt.")
 		chapter_complete.emit()
+
+
+func open_world_map() -> void:
+	world_map.open()
+	_update_control()
 
 
 func open_save_menu() -> void:

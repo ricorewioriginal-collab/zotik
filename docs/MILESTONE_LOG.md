@@ -216,3 +216,16 @@ The project owner authorised autonomous work and merging on 2026-10-02. Phase 2 
   - The controls overlay overlapped the dialogue box. It now sits under the HP bar and hides during dialogues.
   - The title menu was off-centre.
 - New test `tests/unit/test_p03_glyphs.gd`: every string literal in game scripts and every data string must render with the built-in font. A mutation check confirmed it fails on "★".
+
+# Phase 2 – Elaris
+
+## E00 Phase-2 plan – PASSED
+The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions are logged as C-15 to C-18.
+
+## E01 World travel + save schema v2 – PASSED
+- `data/worlds.json` (namespace `WORLD_`): Lunaris (chapter 1), Elaris (chapter 2, unlocked by `FLAG_LUN_CHAPTER_COMPLETE`), Valdoria (sealed placeholder). Every area now has a `world`.
+- Weltenstein travel points (`TRAVEL_LUN_001` in the village, `TRAVEL_ELA_001` in the Elaris town skeleton) open the **Weltkarte**. It lists the chapters, travels only to unlocked worlds and shows sealed ones as "???".
+- Save schema **v2** adds `GameState.party`. The built-in migration v1 → v2 lets Phase-1 saves continue unchanged (tested with a real v1 envelope).
+- The beacon routes across worlds: first to the current world's hub, then to its Weltenstein.
+- Validation: area worlds, world hub area and spawn, unlock flags, `TRAVEL_` ids.
+- Tests: `tests/unit/test_e01_travel.gd` (5 tests).

@@ -58,6 +58,24 @@ static func next_hop(from: String, to: String) -> String:
 	return ""
 
 
+## Where to walk from `from` towards `to`: {"exit": area} for an exit in the
+## current area, {"travel": true} to use this area's Weltenstein, or {}.
+static func route(from: String, to: String) -> Dictionary:
+	if from == to:
+		return {}
+	var hop := next_hop(from, to)
+	if hop != "":
+		return {"exit": hop}
+	var here_world := Content.world_of(from)
+	if Content.world_of(to) == here_world:
+		return {}
+	var hub: String = Content.get_entry("worlds", here_world).get("hub_area", "")
+	if from == hub:
+		return {"travel": true}
+	hop = next_hop(from, hub)
+	return {"exit": hop} if hop != "" else {}
+
+
 ## The quest whose objective is guided: main quest first, then others.
 static func guided_quest() -> String:
 	var active := Quests.active_quests()
