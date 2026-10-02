@@ -1,7 +1,7 @@
 {
   "phase": 3,
-  "milestone": "V01_VALDORIA_HUB",
+  "milestone": "V02_GUILD_BESTIARY",
   "status": "PASSED",
-  "next_allowed": "V02_GUILD_BESTIARY",
+  "next_allowed": "V03_ARENA_CASINO",
   "standing_owner_approval": true
 }

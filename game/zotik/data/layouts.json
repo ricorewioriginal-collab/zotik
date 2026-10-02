@@ -1871,6 +1871,15 @@
           0,
           9
         ]
+      },
+      {
+        "type": "bounty_board",
+        "id": "BOARD_VAL_GUILD_001",
+        "pos": [
+          -6,
+          0,
+          -10
+        ]
       }
     ]
   },

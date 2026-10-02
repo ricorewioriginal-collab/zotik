@@ -22,6 +22,8 @@ var quest_log: QuestLog
 var save_menu: SaveMenu
 var pause_menu: PauseMenu
 var world_map: WorldMap
+var bounty_menu: BountyMenu
+var bestiary_menu: BestiaryMenu
 var companions := {}  # PARTY_* -> Companion
 var beacon: ObjectiveBeacon
 var beacon_target := ""  # entity key or "exit:<area>"
@@ -31,7 +33,7 @@ var _entry_spawn := Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create, "lore": LoreBook.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create, "lore": LoreBook.create, "bounty_board": BountyBoard.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
@@ -54,6 +56,12 @@ func _ready() -> void:
 	world_map = WorldMap.new()
 	ui.add_child(world_map)
 	world_map.closed.connect(_update_control)
+	bounty_menu = BountyMenu.new()
+	ui.add_child(bounty_menu)
+	bounty_menu.closed.connect(_update_control)
+	bestiary_menu = BestiaryMenu.new()
+	ui.add_child(bestiary_menu)
+	bestiary_menu.closed.connect(_update_control)
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
 	EventBus.quest_completed.connect(_on_quest_completed)
@@ -97,7 +105,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or world_map.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible
 
 
 func _update_control() -> void:
@@ -176,6 +184,13 @@ func _on_quest_completed(id: String) -> void:
 		chapter_complete.emit()
 
 
+## Opens a menu panel if nothing else is open.
+func open_menu(m: MenuPanel) -> void:
+	if not Dialogue.is_active() and not is_menu_open():
+		m.open()
+	_update_control()
+
+
 func open_world_map() -> void:
 	world_map.open()
 	_update_control()
@@ -207,6 +222,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_inventory()
 	elif event.is_action_pressed("quest_log"):
 		toggle_quest_log()
+	elif event.is_action_pressed("bestiary"):
+		if bestiary_menu.visible:
+			bestiary_menu.close_menu()
+		else:
+			open_menu(bestiary_menu)
 	elif event.is_action_pressed("help"):
 		hud.toggle_help()
 	elif event is InputEventMouseButton and event.pressed and player.control_enabled and DisplayServer.get_name() != "headless":

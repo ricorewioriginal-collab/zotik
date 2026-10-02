@@ -8,11 +8,11 @@ const TABLES := {
 	"flags": ["FLAG_"], "areas": ["AREA_"], "items": ["ITEM_", "WEAPON_", "ARMOR_"],
 	"cosmetics": ["COS_"], "enemies": ["ENEMY_", "BOSS_"], "chests": ["CHEST_"],
 	"shops": ["SHOP_"], "puzzles": ["PUZ_"], "quests": ["QUEST_"], "npcs": ["NPC_"],
-	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"], "lore": ["LORE_"],
+	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"], "lore": ["LORE_"], "bounties": ["BOUNTY_"],
 }
 const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOONGATE_001", "PUZ_LUN_RESONANCE_BRIDGE_001", "ENEMY_RIFTLING_001", "ENEMY_MOONWOLF_001", "BOSS_ORUN_001", "WEAPON_WORLD_BLADE_001", "CHEST_LUN_001", "CHEST_LUN_002", "SAVEPOINT_LUN_RIFT_001", "FLAG_LUN_FOREST_UNLOCKED", "FLAG_BOSS_LUN_ORUN_DEFEATED", "CHAR_ZOTIK_MASTER_001", "CHAR_MIRA_MASTER_001", "CHAR_LYRA_MASTER_001", "CHAR_PROFESSORIUM_MASTER_001"]
 const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party"]
-const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform", "lore"]
+const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform", "lore", "bounty_board"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
 const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
 
@@ -117,6 +117,20 @@ func validate() -> Array[String]:
 			e.append("%s: hub spawn missing" % id)
 		if wd.has("requires_flag"):
 			_ref(e, "flags", wd.requires_flag, id)
+	for id in table("enemies"):
+		var en2: Dictionary = table("enemies")[id]
+		_ref(e, "worlds", en2.get("region", ""), id)
+		if str(en2.get("description", "")).length() < 10:
+			e.append("%s: bestiary description missing" % id)
+	for id in table("bounties"):
+		var bt: Dictionary = table("bounties")[id]
+		_ref(e, "enemies", bt.enemy, id)
+		if int(bt.get("count", 0)) <= 0:
+			e.append("%s: count must be positive" % id)
+		if bt.has("requires_flag"):
+			_ref(e, "flags", bt.requires_flag, id)
+		for r in bt.get("rewards", []):
+			_ref(e, "items", r.id, id)
 	for id in table("party"):
 		_ref(e, "npcs", table("party")[id].get("npc", ""), id)
 	for id in table("items"):
@@ -332,6 +346,9 @@ func _validate_layouts(e: Array[String]) -> void:
 						e.append("%s placed outside its area" % en.id)
 				"lore":
 					_ref(e, "lore", en.id, area)
+				"bounty_board":
+					if not key.begins_with("BOARD_"):
+						e.append("%s: bounty board id must start with BOARD_" % area)
 				"platform":
 					if not key.begins_with("PLATFORM_") or not en.has("to") or float(en.get("period", 0)) <= 0.0:
 						e.append("%s: invalid moving platform %s" % [area, key])

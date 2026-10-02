@@ -139,5 +139,21 @@
     },
     "price": 90,
     "stack": 99
+  },
+  "ITEM_SCRAP_001": {
+    "name": "Altmetall",
+    "type": "material",
+    "price": 12,
+    "stack": 99
+  },
+  "ITEM_HUNTER_BADGE_001": {
+    "name": "Jägerabzeichen",
+    "type": "accessory",
+    "slot": "accessory",
+    "stats": {
+      "attack": 3
+    },
+    "price": 0,
+    "stack": 1
   }
 }

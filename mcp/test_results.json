@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T10:48:20",
+  "last_run": "2026-10-02T10:52:47",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 145,
+  "passed": 149,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -585,6 +585,22 @@
     },
     {
       "id": "test_v01_valdoria::test_smithy_armor_slot",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v02_guild::test_bestiary_records_every_defeat",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v02_guild::test_bounty_lifecycle",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v02_guild::test_bounty_limits_and_flags",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v02_guild::test_board_in_guild_and_persistence",
       "result": "PASS"
     }
   ]

@@ -20,6 +20,8 @@ var npc_states := {}       # NPC_* -> String
 var customization := {}    # option -> String
 var player := {}           # area, position, hp, max_hp
 var party: Array[String] = []  # PARTY_* member ids in join order
+var bestiary := {}         # ENEMY_*/BOSS_* -> times defeated
+var bounties := {}         # BOUNTY_* -> {state, progress}
 var play_time := 0.0
 
 
@@ -41,6 +43,8 @@ func reset_new_game() -> void:
 	customization = {}
 	player = {"area": START_AREA, "position": [0.0, 0.0, 0.0], "hp": START_HP, "max_hp": START_HP}
 	party = []
+	bestiary = {}
+	bounties = {}
 	play_time = 0.0
 
 
@@ -70,6 +74,8 @@ func to_dict() -> Dictionary:
 		"customization": customization.duplicate(true),
 		"player": player.duplicate(true),
 		"party": party.duplicate(),
+		"bestiary": bestiary.duplicate(),
+		"bounties": bounties.duplicate(true),
 		"play_time": play_time,
 	}
 
@@ -122,6 +128,12 @@ func from_dict(d: Dictionary) -> bool:
 	for m in _arr(d, "party"):
 		if not str(m) in party:
 			party.append(str(m))
+	for k in _dict(d, "bestiary"):
+		bestiary[str(k)] = int(d.bestiary[k])
+	for k in _dict(d, "bounties"):
+		var b = d.bounties[k]
+		if b is Dictionary:
+			bounties[str(k)] = {"state": str(b.get("state", "ACTIVE")), "progress": int(b.get("progress", 0))}
 	play_time = float(d.get("play_time", 0.0))
 	return true
 

@@ -9,7 +9,9 @@
     "attack_range": 0.0,
     "attack_cooldown": 99.0,
     "currency": 0,
-    "drops": []
+    "drops": [],
+    "region": "WORLD_LUNARIS",
+    "description": "Eine Strohpuppe aus Torens Trainingsplatz. Schlägt nie zurück."
   },
   "ENEMY_RIFTLING_001": {
     "name": "Rissling",
@@ -28,7 +30,9 @@
       }
     ],
     "break": 30,
-    "break_duration": 2.5
+    "break_duration": 2.5,
+    "region": "WORLD_LUNARIS",
+    "description": "Kleine Risswesen. Zerstören, was sie berühren, und fliehen zurück ins Licht des Risses."
   },
   "ENEMY_MOONWOLF_001": {
     "name": "Mondwolf",
@@ -47,7 +51,9 @@
       }
     ],
     "break": 60,
-    "break_duration": 3.0
+    "break_duration": 3.0,
+    "region": "WORLD_LUNARIS",
+    "description": "Wächter des Mondwaldes. Majestätisch, schnell und dem Wald treu ergeben."
   },
   "BOSS_ORUN_001": {
     "name": "Orun",
@@ -97,7 +103,9 @@
       }
     ],
     "break": 120,
-    "break_duration": 4.0
+    "break_duration": 4.0,
+    "region": "WORLD_LUNARIS",
+    "description": "Der erste Risswächter. Uralte Kraft in gebrochener Realität."
   },
   "ENEMY_PILZLING_001": {
     "name": "Pilzling",
@@ -116,7 +124,9 @@
       }
     ],
     "break": 25,
-    "break_duration": 2.5
+    "break_duration": 2.5,
+    "region": "WORLD_ELARIS",
+    "description": "Wandelnde Pilze, die Leuchtsporen verstreuen, wenn man sie trifft."
   },
   "ENEMY_DORNENWOLF_001": {
     "name": "Dornenwolf",
@@ -135,7 +145,9 @@
       }
     ],
     "break": 40,
-    "break_duration": 2.5
+    "break_duration": 2.5,
+    "region": "WORLD_ELARIS",
+    "description": "Ein Wolf, dessen Fell zu Dornen erstarrt ist, seit der Wald sich erinnert."
   },
   "ENEMY_WURZELKRIECHER_001": {
     "name": "Wurzelkriecher",
@@ -160,7 +172,9 @@
         "type": "set_flag",
         "id": "FLAG_ELA_ROOTS_PARTED"
       }
-    ]
+    ],
+    "region": "WORLD_ELARIS",
+    "description": "Eine kriechende Wurzelmasse, die den Weg zum Herz des Waldes versperrt."
   },
   "BOSS_WURZELKOENIGIN_001": {
     "name": "Wurzelkönigin",
@@ -228,6 +242,50 @@
           "damage": 18
         }
       }
-    ]
+    ],
+    "region": "WORLD_ELARIS",
+    "description": "Die Königin des lebenden Waldes. Sie trägt die Erinnerung an den Großen Bruch."
+  },
+  "ENEMY_KANALSCHLEIM_001": {
+    "name": "Kanalschleim",
+    "region": "WORLD_VALDORIA",
+    "description": "Ein zäher Schleim aus den vergessenen Kanälen. Teilt sich nicht – zum Glück.",
+    "hp": 45,
+    "attack": 11,
+    "defense": 2,
+    "move_speed": 2.2,
+    "aggro_range": 9.0,
+    "attack_range": 1.6,
+    "attack_cooldown": 1.4,
+    "currency": 9,
+    "drops": [
+      {
+        "id": "ITEM_HEALING_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 30,
+    "break_duration": 2.5
+  },
+  "ENEMY_SCHLEUSENKRABBE_001": {
+    "name": "Schleusenkrabbe",
+    "region": "WORLD_VALDORIA",
+    "description": "Gepanzerte Krabbe. Ihr Panzer bricht nur unter starken Schlägen.",
+    "hp": 70,
+    "attack": 13,
+    "defense": 9,
+    "move_speed": 3.4,
+    "aggro_range": 10.0,
+    "attack_range": 1.8,
+    "attack_cooldown": 1.3,
+    "currency": 15,
+    "drops": [
+      {
+        "id": "ITEM_SCRAP_001",
+        "count": 1
+      }
+    ],
+    "break": 35,
+    "break_duration": 3.0
   }
 }

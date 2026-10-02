@@ -349,3 +349,12 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - The placeholder scale follows the size comparison on the boards: Zotik ≈ 1.2 m; Rissling, Mondwolf and Orun are resized to match. Collision and camera were adjusted (C-23).
 - Logged instead of decided: C-24 to C-28 (human protagonist in demo images rejected, round-based combat concept, alternative world names, the "Felli"/Moosling companion, Lyra's hair colour and Nia's role).
 - C-20 resolved: the casino is wanted with virtual Lun and a family toggle. It is implemented in V03.
+
+## V02 Guild bounties + bestiary – PASSED
+- `Guild` autoload:
+  - **Bestiary:** every `enemy_defeated` is counted in `GameState.bestiary`. Every enemy now has a `region` (world) and a `description`, both validated.
+  - **Bounties** (`data/bounties.json`, namespace `BOUNTY_`): accept, count kills of the target enemy, then claim Lun and items exactly once. Up to 3 bounties can be active, and some are only offered behind a flag.
+- Guild bounty board in the Gildenviertel. Bestiary menu on **B**, showing the `05_GAMEPLAY` fields: name, region, drops, description, times defeated. Unknown enemies show as "???", and a progress counter is shown.
+- New canal enemies (data): Kanalschleim and the armoured Schleusenkrabbe (DEF 9, best handled with Break). New items: Altmetall and Jägerabzeichen (+3 ATK).
+- Bestiary and bounty state persist. They are additive fields with defaults, so schema v2 still loads.
+- Tests: `tests/unit/test_v02_guild.gd` (4 tests).
