@@ -43,10 +43,10 @@ func _ready() -> void:
 	stats = Content.player_stats()
 	var col := CollisionShape3D.new()
 	var shape := CapsuleShape3D.new()
-	shape.radius = 0.35
-	shape.height = 1.7
+	shape.radius = 0.3
+	shape.height = 1.2
 	col.shape = shape
-	col.position.y = 0.85
+	col.position.y = 0.6
 	add_child(col)
 	visual = ZotikVisual.new()
 	visual.name = "Visual"
@@ -56,14 +56,14 @@ func _ready() -> void:
 	camera_pivot.top_level = true
 	add_child(camera_pivot)
 	spring_arm = SpringArm3D.new()
-	spring_arm.spring_length = 5.0
+	spring_arm.spring_length = 4.2
 	spring_arm.rotation_degrees.x = -20.0
 	spring_arm.add_excluded_object(get_rid())
 	camera_pivot.add_child(spring_arm)
 	camera = Camera3D.new()
 	camera.current = true
 	spring_arm.add_child(camera)
-	camera_pivot.global_position = global_position + Vector3(0, 1.4, 0)
+	camera_pivot.global_position = global_position + Vector3(0, 1.0, 0)
 	GameState.player["max_hp"] = Stats.max_hp()
 	GameState.player["hp"] = clampi(int(GameState.player.get("hp", Stats.max_hp())), 1, Stats.max_hp())
 
@@ -110,7 +110,7 @@ func _physics_process(delta: float) -> void:
 		elif dir.length() > 0.01:
 			face(dir)
 	move_and_slide()
-	camera_pivot.global_position = global_position + Vector3(0, 1.4, 0)
+	camera_pivot.global_position = global_position + Vector3(0, 1.0, 0)
 	_update_interactable()
 	if control_enabled and not dead and current_interactable and Input.is_action_just_pressed("interact"):
 		current_interactable.interact(self)

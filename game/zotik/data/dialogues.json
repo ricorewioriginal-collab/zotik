@@ -417,5 +417,188 @@
         "Siehst du das Licht? Das bist du gewesen."
       ]
     ]
+  },
+  "DLG_HALDOR_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_HALDOR_001",
+        "Valdorianischer Stahl! Schwerter, Wämser, Mäntel – nichts rostet hier, außer den Kanälen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_VAL_SMITH_001"
+      }
+    ]
+  },
+  "DLG_YSME_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_YSME_001",
+        "Tränke und Elixiere. Frisch gebraut, garantiert ohne Kanalwasser."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_VAL_ALCHEMIST_001"
+      }
+    ]
+  },
+  "DLG_LOTTE_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_LOTTE_001",
+        "Der Hafen schläft nie. Nur die Schiffe aus dem Süden kommen seit Wochen nicht mehr."
+      ]
+    ]
+  },
+  "DLG_VEYR_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYR_001",
+        "Die Monsterjäger-Gilde nimmt jeden, der eine Klinge halten kann."
+      ]
+    ]
+  },
+  "DLG_TIBOR_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TIBOR_001",
+        "Das Tor ist offen. Ventile drehen, Wasser ablassen – und Augen auf in der Zisterne."
+      ]
+    ]
+  },
+  "DLG_KASIMIR_ARENA_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KASIMIR_001",
+        "Willkommen in der Arena von Valdoria! Wellen von Gegnern, Ruhm und Lun – wer wagt es?"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_menu",
+        "id": "arena"
+      }
+    ]
+  },
+  "DLG_TIBOR_OPEN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TIBOR_001",
+        "Veyr schickt euch? Na gut. Die Kristallströmung unten wird jeden Tag lauter."
+      ],
+      [
+        "NPC_TIBOR_001",
+        "Die Schleusen sind geflutet. Wenn du die Ventile richtig stellst, läuft das Wasser ab. Und pass auf den alten Golem auf."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_VAL_CANALS_OPEN"
+      }
+    ]
+  },
+  "DLG_TIBOR_GOLEM_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TIBOR_001",
+        "Den Rostgolem hast du geschafft? Dann ist das Rauschen dahinter … etwas anderes. Etwas Größeres."
+      ]
+    ]
+  },
+  "DLG_VEYR_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYR_001",
+        "Ihr seid die aus Elaris? Gut. Unter der Stadt rauscht es seit Wochen, und die Kanäle laufen über."
+      ],
+      [
+        "NPC_VEYR_001",
+        "Geht zu Tibor am Kanaltor. Er öffnet euch das Tor, wenn ich es sage – und ich sage es."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_VAL_001"
+      }
+    ]
+  },
+  "DLG_VEYR_RETURN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYR_001",
+        "Ein Splitter des Weltenkerns, in einem Schleusenwächter? Das war kein Zufall."
+      ],
+      [
+        "NPC_VEYR_001",
+        "Die Gilde steht in eurer Schuld. Valdoria schläft heute ruhiger."
+      ]
+    ]
+  },
+  "DLG_VEYR_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYR_001",
+        "Das Brett hängt voller Aufträge. Und die Arena wartet auf neue Champions."
+      ]
+    ]
+  },
+  "DLG_TIBOR_CLOSED_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TIBOR_001",
+        "Das Kanaltor bleibt zu. Ohne Veyrs Wort lasse ich niemanden da runter."
+      ]
+    ]
+  },
+  "DLG_LOTTE_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_LOTTE_001",
+        "Mein Boot leckt, und Altmetall gibt es nur noch unten in den Kanälen. Bringst du mir vier Stück?"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_VAL_001"
+      }
+    ]
+  },
+  "DLG_LOTTE_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_LOTTE_001",
+        "Vier Stück, wie versprochen! Damit hält das Boot wieder dicht. Nimm das hier."
+      ]
+    ]
+  },
+  "DLG_LOTTE_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_LOTTE_001",
+        "Sobald die Schiffe aus dem Süden zurück sind, fahre ich wieder hinaus."
+      ]
+    ]
   }
 }

@@ -22,6 +22,11 @@ var quest_log: QuestLog
 var save_menu: SaveMenu
 var pause_menu: PauseMenu
 var world_map: WorldMap
+var bounty_menu: BountyMenu
+var bestiary_menu: BestiaryMenu
+var arena_menu: ArenaMenu
+var casino_menu: CasinoMenu
+var arena_run: ArenaRun
 var companions := {}  # PARTY_* -> Companion
 var beacon: ObjectiveBeacon
 var beacon_target := ""  # entity key or "exit:<area>"
@@ -31,7 +36,7 @@ var _entry_spawn := Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create, "lore": LoreBook.create, "bounty_board": BountyBoard.create, "casino": CasinoEntrance.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
@@ -54,6 +59,22 @@ func _ready() -> void:
 	world_map = WorldMap.new()
 	ui.add_child(world_map)
 	world_map.closed.connect(_update_control)
+	bounty_menu = BountyMenu.new()
+	ui.add_child(bounty_menu)
+	bounty_menu.closed.connect(_update_control)
+	bestiary_menu = BestiaryMenu.new()
+	ui.add_child(bestiary_menu)
+	bestiary_menu.closed.connect(_update_control)
+	arena_menu = ArenaMenu.new()
+	arena_menu.game = self
+	ui.add_child(arena_menu)
+	arena_menu.closed.connect(_update_control)
+	casino_menu = CasinoMenu.new()
+	ui.add_child(casino_menu)
+	casino_menu.closed.connect(_update_control)
+	arena_run = ArenaRun.new()
+	add_child(arena_run)
+	EventBus.menu_requested.connect(func(m): open_menu(arena_menu if m == "arena" else casino_menu))
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
 	EventBus.quest_completed.connect(_on_quest_completed)
@@ -97,7 +118,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or world_map.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible
 
 
 func _update_control() -> void:
@@ -176,6 +197,13 @@ func _on_quest_completed(id: String) -> void:
 		chapter_complete.emit()
 
 
+## Opens a menu panel if nothing else is open.
+func open_menu(m: MenuPanel) -> void:
+	if not Dialogue.is_active() and not is_menu_open():
+		m.open()
+	_update_control()
+
+
 func open_world_map() -> void:
 	world_map.open()
 	_update_control()
@@ -207,6 +235,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_inventory()
 	elif event.is_action_pressed("quest_log"):
 		toggle_quest_log()
+	elif event.is_action_pressed("bestiary"):
+		if bestiary_menu.visible:
+			bestiary_menu.close_menu()
+		else:
+			open_menu(bestiary_menu)
 	elif event.is_action_pressed("help"):
 		hud.toggle_help()
 	elif event is InputEventMouseButton and event.pressed and player.control_enabled and DisplayServer.get_name() != "headless":
@@ -233,6 +266,8 @@ func _physics_process(_delta: float) -> void:
 
 ## Loads an area. spawn: spawn key; pos_override: exact position (save load).
 func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
+	if arena_run.active():
+		arena_run.abort()
 	if area:
 		world.remove_child(area)
 		area.queue_free()
@@ -253,9 +288,18 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	EventBus.area_entered.emit(area_id)
 
 
+func start_arena(id: String) -> bool:
+	return arena_run.start(id, self)
+
+
 ## Death: the encounter in the current area resets, the player respawns at
 ## the area entry with full health. Quest/world progress is kept.
 func _on_player_died() -> void:
+	if arena_run.active():
+		await get_tree().create_timer(1.0).timeout
+		if is_instance_valid(player):
+			arena_run.lose()
+		return
 	EventBus.notify.emit("Zotik ist gefallen …")
 	await get_tree().create_timer(1.5).timeout
 	if not is_instance_valid(player):

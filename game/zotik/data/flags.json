@@ -70,5 +70,29 @@
   },
   "FLAG_ELA_QUEEN_MET": {
     "desc": "Begegnung mit der Wurzelkönigin gesehen"
+  },
+  "FLAG_VAL_ARRIVED": {
+    "desc": "Erste Ankunft in Valdoria gesehen"
+  },
+  "FLAG_VAL_CANALS_OPEN": {
+    "desc": "Tibor öffnet das Kanaltor"
+  },
+  "FLAG_VAL_ARENA_BRONZE": {
+    "desc": "Bronzepokal der Arena gewonnen"
+  },
+  "FLAG_VAL_CANALS_DRAINED": {
+    "desc": "Ventilrätsel gelöst, Kanäle abgelassen"
+  },
+  "FLAG_VAL_ROSTGOLEM_DEFEATED": {
+    "desc": "Rostgolem in der Zisterne besiegt"
+  },
+  "FLAG_VAL_WAECHTER_MET": {
+    "desc": "Kanalwächter zum ersten Mal gesehen"
+  },
+  "FLAG_BOSS_VAL_WAECHTER_DEFEATED": {
+    "desc": "Boss Kanalwächter besiegt"
+  },
+  "FLAG_VAL_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 3 Valdoria abgeschlossen"
   }
 }

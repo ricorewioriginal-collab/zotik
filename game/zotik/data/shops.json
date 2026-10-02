@@ -16,5 +16,23 @@
       "ITEM_LEAF_CHARM_001"
     ],
     "sell_ratio": 0.5
+  },
+  "SHOP_VAL_SMITH_001": {
+    "npc": "NPC_HALDOR_001",
+    "stock": [
+      "WEAPON_STEEL_SWORD_001",
+      "ARMOR_LEATHER_001",
+      "ARMOR_CANAL_COAT_001"
+    ],
+    "sell_ratio": 0.5
+  },
+  "SHOP_VAL_ALCHEMIST_001": {
+    "npc": "NPC_YSME_001",
+    "stock": [
+      "ITEM_HEALING_POTION_001",
+      "ITEM_HI_POTION_001",
+      "ITEM_ELIXIR_001"
+    ],
+    "sell_ratio": 0.5
   }
 }

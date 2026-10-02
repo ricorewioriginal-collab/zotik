@@ -1,0 +1,32 @@
+{
+  "LORE_VAL_LIB_001": {
+    "title": "Chronik von Valdoria",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Valdoria wurde an den Kanälen gebaut, die einst Wasser aus allen Regionen Elyndras zusammenführten."
+      ]
+    ]
+  },
+  "LORE_VAL_LIB_002": {
+    "title": "Der Große Bruch",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Nach dem Großen Bruch versiegten einige Kanäle über Nacht. Andere füllten sich mit Wasser, das aus keiner bekannten Quelle stammte."
+      ]
+    ]
+  },
+  "LORE_VAL_LIB_003": {
+    "title": "Bestiarium der Gilde (Vorwort)",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Jedes Wesen, das ein Jäger besiegt, gehört in dieses Buch: Name, Region, Beute und was wir über es wissen."
+      ]
+    ]
+  }
+}

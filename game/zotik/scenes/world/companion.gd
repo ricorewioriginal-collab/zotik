@@ -9,8 +9,9 @@ signal healed_player(amount: int)
 
 const FOLLOW_MIN := 2.5
 const FOLLOW_MAX := 4.0
-## Formation slots behind Zotik (x = right, z = back), by party index.
-const SLOTS := [Vector3(-1.8, 0, 2.0), Vector3(1.8, 0, 2.0), Vector3(0, 0, 3.4)]
+## Formation slots behind Zotik (x = right, z = back), by party index. None
+## sits on the line between camera and Zotik, so he is never hidden.
+const SLOTS := [Vector3(-2.0, 0, 0.7), Vector3(2.0, 0, 0.7), Vector3(3.4, 0, 2.2)]
 const TELEPORT_DIST := 25.0
 const ENGAGE_RADIUS := 10.0
 const GRAVITY := 18.0

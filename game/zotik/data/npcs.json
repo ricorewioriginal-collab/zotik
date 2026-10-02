@@ -358,5 +358,166 @@
         "dialogue": "DLG_ROVAN_IDLE_001"
       }
     ]
+  },
+  "NPC_HALDOR_001": {
+    "name": "Haldor",
+    "area": "AREA_VAL_MARKET",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_HALDOR_SHOP_001"
+      }
+    ]
+  },
+  "NPC_YSME_001": {
+    "name": "Ysmé",
+    "area": "AREA_VAL_MARKET",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_YSME_SHOP_001"
+      }
+    ]
+  },
+  "NPC_LOTTE_001": {
+    "name": "Lotte",
+    "area": "AREA_VAL_MARKET",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_VAL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_LOTTE_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_VAL_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_LOTTE_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_VAL_001",
+            "state": "COMPLETED"
+          }
+        ],
+        "dialogue": "DLG_LOTTE_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_LOTTE_IDLE_001"
+      }
+    ]
+  },
+  "NPC_VEYR_001": {
+    "name": "Veyr",
+    "area": "AREA_VAL_GUILD",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_VAL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_VEYR_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_VAL_001",
+            "step": 0
+          }
+        ],
+        "dialogue": "DLG_VEYR_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_VAL_001",
+            "step": 6
+          }
+        ],
+        "dialogue": "DLG_VEYR_RETURN_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_VAL_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_VEYR_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_VEYR_IDLE_001"
+      }
+    ]
+  },
+  "NPC_TIBOR_001": {
+    "name": "Tibor",
+    "area": "AREA_VAL_CANAL_GATE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_VAL_CANALS_OPEN"
+          },
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_VAL_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_TIBOR_OPEN_001"
+      },
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_VAL_CANALS_OPEN"
+          }
+        ],
+        "dialogue": "DLG_TIBOR_CLOSED_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_VAL_ROSTGOLEM_DEFEATED"
+          }
+        ],
+        "dialogue": "DLG_TIBOR_GOLEM_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_TIBOR_IDLE_001"
+      }
+    ]
+  },
+  "NPC_KASIMIR_001": {
+    "name": "Kasimir",
+    "area": "AREA_VAL_ARENA",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_KASIMIR_ARENA_001"
+      }
+    ]
   }
 }

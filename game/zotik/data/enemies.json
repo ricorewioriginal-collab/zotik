@@ -9,7 +9,9 @@
     "attack_range": 0.0,
     "attack_cooldown": 99.0,
     "currency": 0,
-    "drops": []
+    "drops": [],
+    "region": "WORLD_LUNARIS",
+    "description": "Eine Strohpuppe aus Torens Trainingsplatz. Schlägt nie zurück."
   },
   "ENEMY_RIFTLING_001": {
     "name": "Rissling",
@@ -28,7 +30,9 @@
       }
     ],
     "break": 30,
-    "break_duration": 2.5
+    "break_duration": 2.5,
+    "region": "WORLD_LUNARIS",
+    "description": "Kleine Risswesen. Zerstören, was sie berühren, und fliehen zurück ins Licht des Risses."
   },
   "ENEMY_MOONWOLF_001": {
     "name": "Mondwolf",
@@ -47,7 +51,9 @@
       }
     ],
     "break": 60,
-    "break_duration": 3.0
+    "break_duration": 3.0,
+    "region": "WORLD_LUNARIS",
+    "description": "Wächter des Mondwaldes. Majestätisch, schnell und dem Wald treu ergeben."
   },
   "BOSS_ORUN_001": {
     "name": "Orun",
@@ -97,7 +103,9 @@
       }
     ],
     "break": 120,
-    "break_duration": 4.0
+    "break_duration": 4.0,
+    "region": "WORLD_LUNARIS",
+    "description": "Der erste Risswächter. Uralte Kraft in gebrochener Realität."
   },
   "ENEMY_PILZLING_001": {
     "name": "Pilzling",
@@ -116,7 +124,9 @@
       }
     ],
     "break": 25,
-    "break_duration": 2.5
+    "break_duration": 2.5,
+    "region": "WORLD_ELARIS",
+    "description": "Wandelnde Pilze, die Leuchtsporen verstreuen, wenn man sie trifft."
   },
   "ENEMY_DORNENWOLF_001": {
     "name": "Dornenwolf",
@@ -135,7 +145,9 @@
       }
     ],
     "break": 40,
-    "break_duration": 2.5
+    "break_duration": 2.5,
+    "region": "WORLD_ELARIS",
+    "description": "Ein Wolf, dessen Fell zu Dornen erstarrt ist, seit der Wald sich erinnert."
   },
   "ENEMY_WURZELKRIECHER_001": {
     "name": "Wurzelkriecher",
@@ -160,7 +172,9 @@
         "type": "set_flag",
         "id": "FLAG_ELA_ROOTS_PARTED"
       }
-    ]
+    ],
+    "region": "WORLD_ELARIS",
+    "description": "Eine kriechende Wurzelmasse, die den Weg zum Herz des Waldes versperrt."
   },
   "BOSS_WURZELKOENIGIN_001": {
     "name": "Wurzelkönigin",
@@ -226,6 +240,163 @@
           "radius": 2.6,
           "delay": 1.0,
           "damage": 18
+        }
+      }
+    ],
+    "region": "WORLD_ELARIS",
+    "description": "Die Königin des lebenden Waldes. Sie trägt die Erinnerung an den Großen Bruch."
+  },
+  "ENEMY_KANALSCHLEIM_001": {
+    "name": "Kanalschleim",
+    "region": "WORLD_VALDORIA",
+    "description": "Ein zäher Schleim aus den vergessenen Kanälen. Teilt sich nicht – zum Glück.",
+    "hp": 45,
+    "attack": 11,
+    "defense": 2,
+    "move_speed": 2.2,
+    "aggro_range": 9.0,
+    "attack_range": 1.6,
+    "attack_cooldown": 1.4,
+    "currency": 9,
+    "drops": [
+      {
+        "id": "ITEM_HEALING_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 30,
+    "break_duration": 2.5
+  },
+  "ENEMY_SCHLEUSENKRABBE_001": {
+    "name": "Schleusenkrabbe",
+    "region": "WORLD_VALDORIA",
+    "description": "Gepanzerte Krabbe. Ihr Panzer bricht nur unter starken Schlägen.",
+    "hp": 70,
+    "attack": 13,
+    "defense": 9,
+    "move_speed": 3.4,
+    "aggro_range": 10.0,
+    "attack_range": 1.8,
+    "attack_cooldown": 1.3,
+    "currency": 15,
+    "drops": [
+      {
+        "id": "ITEM_SCRAP_001",
+        "count": 1
+      }
+    ],
+    "break": 35,
+    "break_duration": 3.0
+  },
+  "ENEMY_ROSTGOLEM_001": {
+    "name": "Rostgolem",
+    "region": "WORLD_VALDORIA",
+    "description": "Ein alter Schleusenwächter aus Eisen und Moos. Langsam, aber jeder Schlag sitzt – Break öffnet seine Panzerung.",
+    "hp": 220,
+    "attack": 16,
+    "defense": 7,
+    "move_speed": 1.9,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 2.0,
+    "currency": 90,
+    "drops": [
+      {
+        "id": "ITEM_SCRAP_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 90,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_VAL_ROSTGOLEM_DEFEATED"
+      }
+    ]
+  },
+  "BOSS_KANALWAECHTER_001": {
+    "name": "Kanalwächter",
+    "region": "WORLD_VALDORIA",
+    "description": "Ein uralter Wächter der Schleusen, den ein Splitter des Weltenkerns geweckt hat. Er ruft das Wasser der ganzen Stadt.",
+    "hp": 640,
+    "attack": 17,
+    "defense": 6,
+    "move_speed": 2.0,
+    "aggro_range": 30.0,
+    "attack_range": 3.4,
+    "attack_cooldown": 1.8,
+    "currency": 220,
+    "drops": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "break": 160,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_BOSS_VAL_WAECHTER_DEFEATED"
+      },
+      {
+        "type": "play_cutscene",
+        "id": "CUT_VAL_WAECHTER_DEFEAT_001"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Strömung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#2a5a7a",
+        "hazard": {
+          "interval": 5.0,
+          "radius": 2.0,
+          "delay": 1.2,
+          "damage": 14
+        }
+      },
+      {
+        "from_hp_ratio": 0.6,
+        "name": "Flutwelle",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.9,
+        "summon": "ENEMY_KANALSCHLEIM_001",
+        "summon_count": 2,
+        "color": "#1a4a8a",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.5,
+          "width": 3.0,
+          "delay": 1.3,
+          "damage": 18
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Tiefenzorn",
+        "attack_mult": 1.3,
+        "cooldown_mult": 0.75,
+        "summon": "ENEMY_SCHLEUSENKRABBE_001",
+        "summon_count": 1,
+        "color": "#3a2a8a",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.2,
+          "width": 3.6,
+          "delay": 1.1,
+          "damage": 22
         }
       }
     ]

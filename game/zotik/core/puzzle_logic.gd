@@ -3,7 +3,8 @@ extends RefCounted
 ## Data-driven puzzle rules (data/puzzles.json). State in GameState.puzzles:
 ## {state: INITIAL|IN_PROGRESS|SOLVED, current: Array[int], hints: int}.
 ## Kinds: "dials" (rotate dials, then submit) and "sequence" (strike nodes in
-## order; a wrong node clears the attempt).
+## order; a wrong node clears the attempt) and "valves" (each valve flips the
+## water level of its channels; solved when every channel is drained).
 
 enum Result { OK, WRONG, SOLVED, ALREADY_SOLVED, INVALID }
 
@@ -69,6 +70,37 @@ static func strike(id: String, node: int) -> Result:
 	if cur.size() == d.solution.size():
 		return _solve(id)
 	return Result.OK
+
+
+static func turn_valve(id: String, valve: int) -> Result:
+	var d := data(id)
+	if is_solved(id):
+		return Result.ALREADY_SOLVED
+	if d.kind != "valves" or valve < 0 or valve >= d.valve_map.size():
+		return Result.INVALID
+	var s := state(id)
+	for ch in d.valve_map[valve]:
+		s.current[int(ch)] = 1 - int(s.current[int(ch)])
+	s.state = "IN_PROGRESS"
+	Sfx.play("blip")
+	if _matches(s.current, d.solution):
+		return _solve(id)
+	return Result.OK
+
+
+## True if the target levels can be reached from the initial ones (each valve
+## used at most once suffices because a second turn undoes the first).
+static func valves_solvable(d: Dictionary) -> bool:
+	var n: int = d.valve_map.size()
+	for mask in 1 << n:
+		var cur: Array = (d.initial as Array).map(func(v): return int(v))
+		for v in n:
+			if mask & (1 << v):
+				for ch in d.valve_map[v]:
+					cur[int(ch)] = 1 - cur[int(ch)]
+		if _matches(cur, d.solution):
+			return true
+	return false
 
 
 ## Manual reset to the initial configuration (not possible once solved).

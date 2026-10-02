@@ -2,9 +2,9 @@
 
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
-CURRENT PHASE: Phase 2 – Elaris (authorised by the owner on 2026-10-02, see docs/PHASE_2_PLAN.md)
-CURRENT MILESTONE: E08_CHAPTER2_REGRESSION
-STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 requires explicit owner approval
+CURRENT PHASE: Phase 3 – Valdoria (standing owner approval, see docs/PHASE_3_PLAN.md)
+CURRENT MILESTONE: V06_CHAPTER3_REGRESSION
+STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06)
 
 ## Mandatory workflow
 1. Audit before implementation. Do not rebuild from scratch.
@@ -15,6 +15,7 @@ STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 requires
 6. Never report placeholder/concept art as final production art.
 7. Log specification conflicts in `docs/CONFLICTS.md` instead of silently inventing a resolution.
 8. Phase 2 is not authorized by completion of Phase 1; explicit project-owner approval is required.
+   Update 2026-10-02: the project owner granted standing approval to continue with further phases without asking ("Mache weiter, auch ohne meine Freigabe in Zukunft"). Each phase still gets a written plan, logged assumptions and full regression.
 
 ## Canonical player character
 Zotik is NOT human. Zotik is an anthropomorphic orange fantasy creature with fox/feline-like visual traits, upright humanoid posture, large pointed ears, green eyes, light muzzle/chest fur, a large expressive bushy tail and modular adventurer clothing. The approved Zotik master sheet in `reference/approved/` is the primary visual reference.

@@ -1586,5 +1586,878 @@
         "persistent": true
       }
     ]
+  },
+  "AREA_VAL_MARKET": {
+    "size": [
+      70,
+      60
+    ],
+    "ground": "#7a6a5a",
+    "ambient": "#ffe0b0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        20
+      ],
+      "travel": [
+        0,
+        0,
+        20
+      ],
+      "AREA_VAL_GUILD": [
+        -29,
+        0,
+        0
+      ],
+      "AREA_VAL_CANAL_GATE": [
+        29,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_GUILD",
+        "pos": [
+          -33,
+          0,
+          0
+        ]
+      },
+      {
+        "to": "AREA_VAL_CANAL_GATE",
+        "pos": [
+          33,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "market_stall",
+        "pos": [
+          -12,
+          1,
+          -6
+        ],
+        "size": [
+          6,
+          2,
+          3
+        ],
+        "color": "#b06030"
+      },
+      {
+        "name": "market_stall",
+        "pos": [
+          0,
+          1,
+          -10
+        ],
+        "size": [
+          6,
+          2,
+          3
+        ],
+        "color": "#3060b0"
+      },
+      {
+        "name": "smithy",
+        "pos": [
+          16,
+          2.5,
+          -18
+        ],
+        "size": [
+          10,
+          5,
+          8
+        ],
+        "color": "#5a5a5a"
+      },
+      {
+        "name": "harbour_pier",
+        "pos": [
+          0,
+          0.2,
+          27
+        ],
+        "size": [
+          20,
+          0.4,
+          4
+        ],
+        "color": "#6a4a2a",
+        "collision": false
+      },
+      {
+        "name": "casino_golden_star",
+        "pos": [
+          -20,
+          3,
+          18
+        ],
+        "size": [
+          10,
+          6,
+          8
+        ],
+        "color": "#b08a2a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_VAL_001",
+        "pos": [
+          4,
+          0,
+          23
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_VAL_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          19
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_VAL_ARRIVAL_001",
+        "once_flag": "FLAG_VAL_ARRIVED"
+      },
+      {
+        "type": "npc",
+        "id": "NPC_HALDOR_001",
+        "pos": [
+          14,
+          0,
+          -12
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_YSME_001",
+        "pos": [
+          -12,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_LOTTE_001",
+        "pos": [
+          6,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "casino",
+        "id": "CASINO_VAL_001",
+        "pos": [
+          -14,
+          0,
+          12
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_GUILD": {
+    "size": [
+      60,
+      60
+    ],
+    "ground": "#6a6a7a",
+    "ambient": "#e0e0ff",
+    "spawns": {
+      "default": [
+        26,
+        0,
+        0
+      ],
+      "AREA_VAL_MARKET": [
+        26,
+        0,
+        0
+      ],
+      "AREA_VAL_ARENA": [
+        -24,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_MARKET",
+        "pos": [
+          29,
+          0,
+          0
+        ]
+      },
+      {
+        "to": "AREA_VAL_ARENA",
+        "pos": [
+          -29,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "guild_hall",
+        "pos": [
+          -14,
+          3,
+          -16
+        ],
+        "size": [
+          16,
+          6,
+          10
+        ],
+        "color": "#5a4a3a"
+      },
+      {
+        "name": "library",
+        "pos": [
+          -14,
+          3,
+          16
+        ],
+        "size": [
+          14,
+          6,
+          10
+        ],
+        "color": "#4a5a7a"
+      },
+      {
+        "name": "arena_wall",
+        "pos": [
+          -26,
+          3,
+          -10
+        ],
+        "size": [
+          2,
+          6,
+          10
+        ],
+        "color": "#8a7a5a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_VEYR_001",
+        "pos": [
+          -10,
+          0,
+          -9
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_VAL_LIB_001",
+        "pos": [
+          -18,
+          0,
+          9
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_VAL_LIB_002",
+        "pos": [
+          -14,
+          0,
+          9
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_VAL_LIB_003",
+        "pos": [
+          -10,
+          0,
+          9
+        ]
+      },
+      {
+        "type": "bounty_board",
+        "id": "BOARD_VAL_GUILD_001",
+        "pos": [
+          -6,
+          0,
+          -10
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_CANAL_GATE": {
+    "size": [
+      50,
+      50
+    ],
+    "ground": "#4a5a5a",
+    "ambient": "#b0d0e0",
+    "spawns": {
+      "default": [
+        -21,
+        0,
+        0
+      ],
+      "AREA_VAL_MARKET": [
+        -21,
+        0,
+        0
+      ],
+      "AREA_VAL_CANALS": [
+        0,
+        0,
+        -16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_MARKET",
+        "pos": [
+          -24,
+          0,
+          0
+        ]
+      },
+      {
+        "to": "AREA_VAL_CANALS",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "canal_gate",
+        "pos": [
+          0,
+          3,
+          -20
+        ],
+        "size": [
+          12,
+          6,
+          1
+        ],
+        "color": "#3a4a4a",
+        "hidden_by_flag": "FLAG_VAL_CANALS_OPEN"
+      },
+      {
+        "name": "canal_water",
+        "pos": [
+          10,
+          0.05,
+          0
+        ],
+        "size": [
+          6,
+          0.1,
+          30
+        ],
+        "color": "#2a5a8a",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_TIBOR_001",
+        "pos": [
+          -6,
+          0,
+          -12
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_ARENA": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#8a7a5a",
+    "ambient": "#fff0d0",
+    "spawns": {
+      "default": [
+        18,
+        0,
+        0
+      ],
+      "AREA_VAL_GUILD": [
+        18,
+        0,
+        0
+      ],
+      "arena_center": [
+        0,
+        0,
+        6
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_GUILD",
+        "pos": [
+          21,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "arena_stands",
+        "pos": [
+          0,
+          2,
+          -21
+        ],
+        "size": [
+          40,
+          4,
+          1
+        ],
+        "color": "#6a5a4a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_KASIMIR_001",
+        "pos": [
+          14,
+          0,
+          -6
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_CANALS": {
+    "size": [
+      40,
+      64
+    ],
+    "ground": "#3a4848",
+    "ambient": "#90b8c8",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        28
+      ],
+      "AREA_VAL_CANAL_GATE": [
+        0,
+        0,
+        28
+      ],
+      "AREA_VAL_CISTERN": [
+        0,
+        0,
+        -26
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_CANAL_GATE",
+        "pos": [
+          0,
+          0,
+          31
+        ]
+      },
+      {
+        "to": "AREA_VAL_CISTERN",
+        "pos": [
+          0,
+          0,
+          -31
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "canal_wall_w",
+        "pos": [
+          -12,
+          2,
+          8
+        ],
+        "size": [
+          1,
+          4,
+          30
+        ],
+        "color": "#2f3b3b"
+      },
+      {
+        "name": "canal_wall_e",
+        "pos": [
+          12,
+          2,
+          8
+        ],
+        "size": [
+          1,
+          4,
+          30
+        ],
+        "color": "#2f3b3b"
+      },
+      {
+        "name": "valve_house",
+        "pos": [
+          0,
+          1.5,
+          -8
+        ],
+        "size": [
+          14,
+          3,
+          1
+        ],
+        "color": "#4a5050"
+      },
+      {
+        "name": "flooded_channel",
+        "pos": [
+          0,
+          0.6,
+          -18
+        ],
+        "size": [
+          39,
+          1.2,
+          4
+        ],
+        "color": "#2a5a8a",
+        "hidden_by_flag": "FLAG_VAL_CANALS_DRAINED"
+      },
+      {
+        "name": "drained_channel",
+        "pos": [
+          0,
+          0.02,
+          -18
+        ],
+        "size": [
+          39,
+          0.04,
+          4
+        ],
+        "color": "#33403f",
+        "collision": false,
+        "requires_flag": "FLAG_VAL_CANALS_DRAINED"
+      }
+    ],
+    "entities": [
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_VAL_CANALS_001",
+        "pos": [
+          8,
+          0,
+          26
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_SCHLEIM_1",
+        "enemy": "ENEMY_KANALSCHLEIM_001",
+        "pos": [
+          -6,
+          0,
+          16
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_SCHLEIM_2",
+        "enemy": "ENEMY_KANALSCHLEIM_001",
+        "pos": [
+          6,
+          0,
+          12
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_SCHLEIM_3",
+        "enemy": "ENEMY_KANALSCHLEIM_001",
+        "pos": [
+          -16,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_KRABBE_1",
+        "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+        "pos": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_VAL_001",
+        "pos": [
+          -17,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_VAL_VALVES_001",
+        "pos": [
+          0,
+          0,
+          -4
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_CISTERN": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#38423f",
+    "ambient": "#a0b8b8",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        18
+      ],
+      "AREA_VAL_CANALS": [
+        0,
+        0,
+        18
+      ],
+      "AREA_VAL_FLOODGATE": [
+        0,
+        0,
+        -16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_CANALS",
+        "pos": [
+          0,
+          0,
+          21
+        ]
+      },
+      {
+        "to": "AREA_VAL_FLOODGATE",
+        "pos": [
+          0,
+          0,
+          -21
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "cistern_pillar_nw",
+        "pos": [
+          -12,
+          3,
+          -8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "cistern_pillar_ne",
+        "pos": [
+          12,
+          3,
+          -8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "cistern_pillar_sw",
+        "pos": [
+          -12,
+          3,
+          6
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "cistern_pillar_se",
+        "pos": [
+          12,
+          3,
+          6
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "sealed_floodgate",
+        "pos": [
+          0,
+          3,
+          -19
+        ],
+        "size": [
+          10,
+          6,
+          1
+        ],
+        "color": "#5a3a2a",
+        "hidden_by_flag": "FLAG_VAL_ROSTGOLEM_DEFEATED"
+      }
+    ],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CISTERN_GOLEM",
+        "enemy": "ENEMY_ROSTGOLEM_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
+      }
+    ]
+  },
+  "AREA_VAL_FLOODGATE": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#26343a",
+    "ambient": "#90b0d0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        15
+      ],
+      "AREA_VAL_CISTERN": [
+        0,
+        0,
+        15
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_CISTERN",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "floodgate_wall",
+        "pos": [
+          0,
+          3,
+          -18
+        ],
+        "size": [
+          14,
+          6,
+          1
+        ],
+        "color": "#3a4a5a",
+        "collision": false
+      },
+      {
+        "name": "water_basin",
+        "pos": [
+          0,
+          0.03,
+          -4
+        ],
+        "size": [
+          30,
+          0.06,
+          18
+        ],
+        "color": "#24507a",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_VAL_WAECHTER_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_VAL_WAECHTER_001",
+        "once_flag": "FLAG_VAL_WAECHTER_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_FLOODGATE_WAECHTER",
+        "enemy": "BOSS_KANALWAECHTER_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
+      }
+    ]
   }
 }

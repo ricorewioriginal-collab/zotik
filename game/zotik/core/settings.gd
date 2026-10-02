@@ -1,7 +1,7 @@
 extends Node
 ## User settings, stored separately from save slots.
 
-const DEFAULTS := {"master_volume": 1.0, "music_volume": 0.8, "sfx_volume": 0.9, "camera_invert": false, "camera_sensitivity": 1.0, "text_speed": 1.0, "fullscreen": false, "show_controls": true}
+const DEFAULTS := {"master_volume": 1.0, "music_volume": 0.8, "sfx_volume": 0.9, "camera_invert": false, "camera_sensitivity": 1.0, "text_speed": 1.0, "fullscreen": false, "show_controls": true, "casino_enabled": true}
 
 var path := "user://settings.cfg"
 var values := DEFAULTS.duplicate()

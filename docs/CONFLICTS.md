@@ -21,3 +21,15 @@ Format: ID – description – status / interim handling. Interim handling is th
 - C-17 – Combat doc lists MP, magic, elements and timeline. – Interim for Phase 2: Break and party AI only; elements, MP and timeline stay deferred.
 - C-18 – The legacy village attack (BUILD_01) remains deferred; not part of chapter 2.
 - C-19 – Elaris NPC roles are not specified. – Interim: Mara (research quarter), Elio (craftsman/shop) and Sela (townsperson) reuse names from the legacy NPC list. All dialogue is placeholder.
+- C-20 – `04_WORLDS` lists a casino in Valdoria. The addendum forbids real-money casinos, and the Phase-1 master design deferred the casino. – Interim: the casino is deferred, and Valdoria shows a closed casino building.
+- C-21 – Valdoria NPC roles are not specified. – Interim: names come from the legacy NPC list where possible (Veyr, Elio is already used) plus clearly marked placeholder roles. All dialogue is placeholder.
+- C-22 – `06_SYSTEMS` lists armour and headgear slots, but `docs/03` has no armour namespace. – Interim: added `ARMOR_` (slot `armor`) for Valdoria's smithy. Headgear is still deferred.
+
+## From owner concept uploads 2026-10-02 (`reference/concept_2026-10-02/`)
+- C-20 – **RESOLVED by owner material:** the casino is wanted, but only with virtual Lun ("Nur virtuelles Geld"), and families must be able to switch it off ("Familienoption: Casino deaktivieren"). It is implemented in Valdoria with a settings toggle.
+- C-23 – Scale: several boards consistently show Zotik ≈ 110–120 cm, humans 162–180 cm, Rissling 70 cm, Mondwolf 140 cm, Orun 300 cm. – Interim: placeholders use these ratios (Zotik ≈ 1.2 m). They are still not final (C-01).
+- C-24 – Two demo images (Turm der Erinnerung, Lunaris key scene) show a **human** protagonist. This contradicts the canon (Zotik is not human) and is rejected.
+- C-25 – `14_kampf_elemente_konzept` shows round-based command combat with MP, elements and status effects. The implemented and specified combat is real-time (`05_GAMEPLAY`). – Interim: real-time stays; elements and MP remain deferred (C-17).
+- C-26 – `15_asset_bible` uses different world names (Eldoria, Vulcanis, Aquael, Umbra, Sylvaris, Crythos, Zerath). – Interim: the world names from `01_MASTER` / `04_WORLDS` are used.
+- C-27 – Several images show a green creature companion ("Felli" / "Moosling – der Waldgeist"), but the legacy docs list the Moosling as an enemy. – Owner decision needed; not implemented.
+- C-28 – Lyra is pink-haired on two boards and blue-haired and "aus Lunaris" on others. Nia appears both as an archer and as a "Heilerin/naturverbunden". – Interim: keep the written specs (Lyra = researcher/mage/healer, Nia = archer). Placeholder colours are unchanged.

@@ -99,5 +99,61 @@
     "type": "material",
     "price": 30,
     "stack": 99
+  },
+  "ARMOR_LEATHER_001": {
+    "name": "Lederwams",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 3
+    },
+    "price": 180,
+    "stack": 1
+  },
+  "ARMOR_CANAL_COAT_001": {
+    "name": "Kanalmantel",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 5,
+      "max_hp": 15
+    },
+    "price": 380,
+    "stack": 1
+  },
+  "WEAPON_STEEL_SWORD_001": {
+    "name": "Stahlschwert",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 14
+    },
+    "price": 260,
+    "stack": 1
+  },
+  "ITEM_ELIXIR_001": {
+    "name": "Elixier",
+    "type": "consumable",
+    "effect": {
+      "heal": 200
+    },
+    "price": 90,
+    "stack": 99
+  },
+  "ITEM_SCRAP_001": {
+    "name": "Altmetall",
+    "type": "material",
+    "price": 12,
+    "stack": 99
+  },
+  "ITEM_HUNTER_BADGE_001": {
+    "name": "Jägerabzeichen",
+    "type": "accessory",
+    "slot": "accessory",
+    "stats": {
+      "attack": 3
+    },
+    "price": 0,
+    "stack": 1
   }
 }

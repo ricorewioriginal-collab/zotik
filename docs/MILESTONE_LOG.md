@@ -325,3 +325,106 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
 - `docs/ACCEPTANCE_MATRIX.md` gained the Phase-2 section. Screenshots 07–10 show Elaris.
 
 **Phase 2 (Elaris) milestones E00–E08: PASSED.** Further chapters (Valdoria, …) need owner approval and story input.
+
+# Phase 3 – Valdoria
+
+## V00 Phase-3 plan – PASSED
+Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is in `docs/PHASE_3_PLAN.md`; assumptions are logged as C-20 and C-21.
+
+## V01 Valdoria hub – PASSED
+- World Valdoria (chapter 3), unlocked by `FLAG_ELA_CHAPTER_COMPLETE`, with a one-time arrival scene. Solmera is added as a sealed placeholder for chapter 4.
+- Three districts:
+  - **Markt & Hafen:** Weltenstein; Haldor's smithy; Ysmé the alchemist; Lotte at the harbour; a closed casino (C-20)
+  - **Gildenviertel:** Veyr's guild hall, library and arena wall
+  - **Kanaltor:** Tibor at the canal gate
+- New **armour slot** (`ARMOR_`, C-22): Lederwams and Kanalmantel. Also new: Stahlschwert and Elixier.
+- `data/lore.json` + `LoreBook` entity: readable library books shown in the dialogue box and validated like dialogue.
+- Tests: `tests/unit/test_v01_valdoria.gd` (4 tests).
+
+## Owner concept uploads (2026-10-02) – integrated
+- 20 concept boards were stored as JPEG in `reference/concept_2026-10-02/` (57 MB → 9.5 MB), with an index and status "concept, not approved".
+- Applied, consistent with written canon:
+  - Zotik's default scarf is now **green**. `03_CHARACTERS` says so; the earlier red default was wrong.
+  - He now has a brown shoulder bag.
+  - The placeholder scale follows the size comparison on the boards: Zotik ≈ 1.2 m; Rissling, Mondwolf and Orun are resized to match. Collision and camera were adjusted (C-23).
+- Logged instead of decided: C-24 to C-28 (human protagonist in demo images rejected, round-based combat concept, alternative world names, the "Felli"/Moosling companion, Lyra's hair colour and Nia's role).
+- C-20 resolved: the casino is wanted with virtual Lun and a family toggle. It is implemented in V03.
+
+## V02 Guild bounties + bestiary – PASSED
+- `Guild` autoload:
+  - **Bestiary:** every `enemy_defeated` is counted in `GameState.bestiary`. Every enemy now has a `region` (world) and a `description`, both validated.
+  - **Bounties** (`data/bounties.json`, namespace `BOUNTY_`): accept, count kills of the target enemy, then claim Lun and items exactly once. Up to 3 bounties can be active, and some are only offered behind a flag.
+- Guild bounty board in the Gildenviertel. Bestiary menu on **B**, showing the `05_GAMEPLAY` fields: name, region, drops, description, times defeated. Unknown enemies show as "???", and a progress counter is shown.
+- New canal enemies (data): Kanalschleim and the armoured Schleusenkrabbe (DEF 9, best handled with Break). New items: Altmetall and Jägerabzeichen (+3 ATK).
+- Bestiary and bounty state persist. They are additive fields with defaults, so schema v2 still loads.
+- Tests: `tests/unit/test_v02_guild.gd` (4 tests).
+
+## V03 Arena + casino – PASSED
+- **Arena** (`AREA_VAL_ARENA`, west of the Gildenviertel). Arena master Kasimir opens the challenge menu.
+  - Challenges are defined in `data/arena.json` (namespace `ARENA_`). Each one is a sequence of enemy waves around the arena centre.
+  - Bronze: 2 waves, 120 Lun, Hi-Potions ×2 on the first clear. Clearing it unlocks Silver (`FLAG_VAL_ARENA_BRONZE`).
+  - Silver: 3 waves including the canal enemies, 260 Lun, Kanalmantel on the first clear.
+  - Lun is paid on every win. Items and flags are granted only on the first clear.
+  - Defeat is safe: no loss, full heal, and Zotik returns to the arena entrance. Leaving the area mid-run cancels the challenge.
+- **Golden Star Casino** on the market (C-20 resolution):
+  - Slot machine with virtual Lun only and bets of 10/50/100.
+  - The odds are fixed in code; the expected return is ≈ 93 %, so the house edge is visible and tested.
+  - The pause menu has a "Casino (Familienoption)" toggle. When it is off, the entrance is closed and spinning is blocked.
+  - Spin statistics are saved (`GameState.casino`).
+- New effect `open_menu` (arena/casino) and entity type `casino`, both validated by `Content`.
+- Arena wins and casino statistics are additive save fields with defaults, so schema v2 still loads.
+- Tests: `tests/unit/test_v03_arena_casino.gd` (7 tests).
+- Regression: 156/156 tests plus restart checks for chapters 1 and 2: PASS.
+
+## V04 Forgotten canals – PASSED
+- **Kanaltor:** on first talk, Tibor opens the canal gate (`FLAG_VAL_CANALS_OPEN`); the gate prop disappears. He has follow-up lines afterwards and after the golem.
+- **Vergessene Kanäle** (`AREA_VAL_CANALS`): Kanalschleim ×3 and Schleusenkrabbe, a chest (Elixier, 70 Lun) and a savepoint.
+  - A flooded channel blocks the way north until the puzzle is solved.
+- **New puzzle kind `valves`** (`PUZ_VAL_VALVES_001`):
+  - Each valve flips the water level of its channels; the puzzle is solved when every channel is empty.
+  - Channel gauges (West/Mitte/Ost) show the current state, and a notification follows each turn.
+  - Reset, hints (3 tiers) and the "stays solved" rule work as for the other puzzles.
+  - `Content` rejects valve setups that are malformed, already solved at the start, or unsolvable.
+  - Solving sets `FLAG_VAL_CANALS_DRAINED`: the water disappears and the cistern opens.
+- **Alte Zisterne** (`AREA_VAL_CISTERN`): miniboss **Rostgolem** (220 HP, DEF 7, Break 90).
+  - He is persistent, sets `FLAG_VAL_ROSTGOLEM_DEFEATED` and drops Altmetall ×3 and a Hi-Potion.
+  - The sealed floodgate at the back leads to the boss in V05.
+- Canal enemies have their own placeholder colours and sizes.
+- Test adjustment: `test_p02_reachability` now treats props removed by a flag (`hidden_by_flag`) as open. This matches its documented intent ("with every gate open").
+- Tests: `tests/unit/test_v04_canals.gd` (5 tests).
+- Regression: 161/161 tests plus restart checks: PASS.
+
+## V05 Chapter-3 quests + boss Kanalwächter – PASSED
+- **Main quest `QUEST_MAIN_VAL_001` "Die Stadt, die niemals schläft"** (7 steps):
+  1. Veyr
+  2. Tibor
+  3. the canals
+  4. the valve puzzle
+  5. the Rostgolem
+  6. the Kanalwächter
+  7. report back to Veyr
+
+  Reward: 300 Lun and `FLAG_VAL_CHAPTER_COMPLETE`.
+  - The quest is started by the arrival scene. Saves that already arrived before V05 can still start it by talking to Veyr.
+  - Tibor opens the gate only on the quest step "Sprich mit Tibor". This avoids sequence breaks: the order is linear (gate → puzzle → golem → floodgate), so no step can be skipped.
+- **Side quest `QUEST_SIDE_VAL_001` "Ein Boot für Lotte":** bring 4 Altmetall to Lotte at the harbour. Reward: 150 Lun and 2 Hi-Potions.
+- **Boss Kanalwächter** (`AREA_VAL_FLOODGATE`, behind the cistern's floodgate, which opens after the Rostgolem):
+  - 640 HP and Break 160.
+  - Phases: Strömung (circle eruptions), Flutwelle (summons 2 Kanalschleime), Tiefenzorn (summons a Schleusenkrabbe).
+  - Intro scene plays once. The defeat scene returns the party to the canal gate.
+- **New hazard kind `surge`** (water surge): a telegraphed band across the whole arena at Zotik's depth. Moving sideways does not help; stepping forwards or backwards (or dodging) does.
+  - `Content` now validates hazards: kind circle/surge plus the required fields.
+- V04 test updated: Tibor first needs Veyr's word (intended behaviour change from V05).
+- Tests: `tests/unit/test_v05_chapter3.gd` (9 tests).
+- Regression: 170/170 tests plus restart checks: PASS.
+
+## V06 Chapter-3 regression – PASSED (Phase 3 complete)
+- `tests/unit/test_v06_golden_valdoria.gd`: the chapter-3 golden path from a chapter-2 save, through real interactions (details in `docs/ACCEPTANCE_MATRIX.md`).
+- `tests/restart_check.gd` now checks all three chapters in a fresh process.
+- **Bug found and fixed via the screenshots:** the third companion's formation slot sat exactly on the line between the camera and Zotik, so Rovan hid Zotik. The slots are now to the sides, still behind Zotik and without overlap.
+- New reference screenshots:
+  - 11 Valdoria market with the casino
+  - 12 canals with valves and gauges
+  - 13 Kanalwächter
+- Version 0.4.0.
+- Regression: 171/171 tests plus restart checks for chapters 1–3: PASS.

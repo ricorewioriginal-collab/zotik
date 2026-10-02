@@ -1,0 +1,51 @@
+{
+  "BOUNTY_RIFTLING_001": {
+    "name": "Risslinge im Mondwald",
+    "enemy": "ENEMY_RIFTLING_001",
+    "count": 5,
+    "reward_currency": 80,
+    "rewards": [
+      {
+        "id": "ITEM_HEALING_POTION_001",
+        "count": 2
+      }
+    ]
+  },
+  "BOUNTY_PILZLING_001": {
+    "name": "Sporenplage in Elaris",
+    "enemy": "ENEMY_PILZLING_001",
+    "count": 5,
+    "reward_currency": 100,
+    "rewards": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ]
+  },
+  "BOUNTY_DORNENWOLF_001": {
+    "name": "Dornenwölfe jagen",
+    "enemy": "ENEMY_DORNENWOLF_001",
+    "count": 3,
+    "reward_currency": 140,
+    "rewards": [
+      {
+        "id": "ITEM_HUNTER_BADGE_001",
+        "count": 1
+      }
+    ]
+  },
+  "BOUNTY_SCHLEIM_001": {
+    "name": "Kanalschleim beseitigen",
+    "enemy": "ENEMY_KANALSCHLEIM_001",
+    "count": 6,
+    "reward_currency": 160,
+    "rewards": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "requires_flag": "FLAG_VAL_CANALS_OPEN"
+  }
+}

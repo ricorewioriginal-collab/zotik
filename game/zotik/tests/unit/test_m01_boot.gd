@@ -1,6 +1,6 @@
 extends TestCase
 
-const REQUIRED_ACTIONS := ["move_forward", "move_back", "move_left", "move_right", "attack", "dodge", "block", "lock_on", "jump", "interact", "camera_left", "camera_right", "use_item", "menu", "inventory", "quest_log", "puzzle_reset", "puzzle_hint", "help", "strong_attack"]
+const REQUIRED_ACTIONS := ["move_forward", "move_back", "move_left", "move_right", "attack", "dodge", "block", "lock_on", "jump", "interact", "camera_left", "camera_right", "use_item", "menu", "inventory", "quest_log", "puzzle_reset", "puzzle_hint", "help", "strong_attack", "bestiary"]
 
 
 func test_autoloads_present() -> void:

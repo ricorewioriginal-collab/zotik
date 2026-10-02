@@ -348,5 +348,112 @@
         "count": 2
       }
     ]
+  },
+  "QUEST_MAIN_VAL_001": {
+    "name": "Die Stadt, die niemals schläft",
+    "type": "main",
+    "completion_notice": "Kapitel 3 „Valdoria – Die Stadt, die niemals schläft“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Melde dich bei Veyr in der Gildenhalle.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_VEYR_001"
+        }
+      },
+      {
+        "objective": "Sprich mit Tibor am Kanaltor.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_TIBOR_001"
+        }
+      },
+      {
+        "objective": "Betritt die vergessenen Kanäle.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_VAL_CANALS"
+        }
+      },
+      {
+        "objective": "Lass das Wasser ab (Schleusenventile).",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_VAL_VALVES_001"
+        }
+      },
+      {
+        "objective": "Besiege den Rostgolem in der Zisterne.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_ROSTGOLEM_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich dem Kanalwächter.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_KANALWAECHTER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Veyr in der Gildenhalle.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_VEYR_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 300
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_VAL_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_VAL_001": {
+    "name": "Ein Boot für Lotte",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 4 Altmetall (Kanäle).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_SCRAP_001",
+          "count": 4
+        }
+      },
+      {
+        "objective": "Bring das Altmetall zu Lotte am Hafen.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_LOTTE_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_SCRAP_001",
+            "count": 4
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 150
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ]
   }
 }

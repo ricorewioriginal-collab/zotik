@@ -100,5 +100,68 @@
     "exits": [
       "AREA_ELA_DUNGEON"
     ]
+  },
+  "AREA_VAL_MARKET": {
+    "name": "Valdoria – Markt & Hafen",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_GUILD",
+      "AREA_VAL_CANAL_GATE"
+    ]
+  },
+  "AREA_VAL_GUILD": {
+    "name": "Valdoria – Gildenviertel",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_MARKET",
+      "AREA_VAL_ARENA"
+    ]
+  },
+  "AREA_VAL_CANAL_GATE": {
+    "name": "Valdoria – Kanaltor",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_MARKET",
+      "AREA_VAL_CANALS"
+    ],
+    "gate": {
+      "AREA_VAL_CANALS": "FLAG_VAL_CANALS_OPEN"
+    }
+  },
+  "AREA_VAL_ARENA": {
+    "name": "Valdoria – Arena",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_GUILD"
+    ]
+  },
+  "AREA_VAL_CANALS": {
+    "name": "Vergessene Kanäle",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_CANAL_GATE",
+      "AREA_VAL_CISTERN"
+    ],
+    "gate": {
+      "AREA_VAL_CISTERN": "FLAG_VAL_CANALS_DRAINED"
+    }
+  },
+  "AREA_VAL_CISTERN": {
+    "name": "Alte Zisterne",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_CANALS",
+      "AREA_VAL_FLOODGATE"
+    ],
+    "gate": {
+      "AREA_VAL_FLOODGATE": "FLAG_VAL_ROSTGOLEM_DEFEATED"
+    }
+  },
+  "AREA_VAL_FLOODGATE": {
+    "name": "Schleusenkammer",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_CISTERN"
+    ]
   }
 }

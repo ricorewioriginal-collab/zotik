@@ -2,7 +2,7 @@
 
 All tests are executed headless with Godot 4.7-stable: `GODOT=<godot 4.7> tools/run_regression.sh`.
 CI runs the same command on every PR update.
-Last local run on 2026-10-02: **92/92 tests passed + restart check PASS**.
+Last local run on 2026-10-02 (v0.4.0): **171/171 tests passed + restart check PASS for chapters 1, 2 and 3**.
 
 ## Critical golden path
 `tests/unit/test_m15_golden_path.gd` plays the whole path through real interactions: dialogues, melee hits, puzzle parts, exits, savepoint and pedestal.
@@ -81,3 +81,35 @@ Last local run on 2026-10-02: **140/140 tests + restart checks PASS for both cha
 ## Open (Phase 2)
 - All art and audio are placeholders. Dialogue is placeholder except the spec epilogue of the tower.
 - Story assumptions C-15 to C-19 need owner review: Phase-2 scope, when Nia and Rovan join, NPC roles.
+
+## Chapter-3 golden path
+`tests/unit/test_v06_golden_valdoria.gd` starts from a schema-v2 save at the end of chapter 2 (party: Lyra, Nia, Rovan) and plays through real interactions. Its final save is verified in a **separate process** by `tests/restart_check.gd`, alongside chapters 1 and 2 (`golden_expected_val.json`).
+
+| Step | Covered |
+|---|---|
+| Load the chapter-2 save via the title | party restored |
+| Weltenstein → Weltkarte → Valdoria | arrival scene, chapter-3 quest starts |
+| Market: Lotte's side quest, one casino spin | NPC quest start, casino entrance + virtual Lun |
+| Guild: Veyr, accept a bounty | quest step, bounty board |
+| Arena: Kasimir → Bronze (2 waves) | arena menu, waves, first-clear reward |
+| Canal gate: Tibor opens the gate | quest-gated dialogue |
+| Canals: Krabbe + Schleim, chest, Weltenanker save, valves (a turn undone, then solved) | savepoint save menu, valve puzzle |
+| Cistern: Rostgolem | miniboss gate, scrap for Lotte |
+| Schleusenkammer: intro, Kanalwächter, defeat scene → canal gate | boss, travel effect |
+| Lotte, Veyr | side quest and chapter complete, bestiary entry |
+| Save → new process → load → identical state | restart check |
+
+## Phase-3 systems
+| System | Tests |
+|---|---|
+| Valdoria districts, library, armour slot | `test_v01_valdoria` |
+| Guild bounties + bestiary | `test_v02_guild` |
+| Arena waves, safe defeat, abort on leaving; casino (virtual Lun, odds, family toggle) | `test_v03_arena_casino` |
+| Forgotten canals, valve puzzle + validator, Rostgolem | `test_v04_canals`, `test_p02_reachability` |
+| Chapter-3 quests, Kanalwächter phases, water surge + hazard validator | `test_v05_chapter3` |
+| Companion formation keeps the camera line free | `test_e02_party::test_companions_spread_into_formation` (behind Zotik, no overlap) |
+
+## Open (Phase 3)
+- All art and audio are placeholders; all chapter-3 dialogue is placeholder.
+- Assumptions C-20 to C-28 need owner review.
+- No human playtest of chapter 3 yet; boss and arena tuning is a first pass.

@@ -7,6 +7,9 @@ extends Node3D
 
 var parts := {}
 
+## Interim scale (C-23): Zotik ≈ 1.2 m next to ≈ 1.65–1.8 m humans.
+const SCALE := 0.68
+
 
 func _ready() -> void:
 	_part("PLACEHOLDER_body", _capsule(0.32, 1.1), Vector3(0, 0.75, 0))
@@ -21,6 +24,8 @@ func _ready() -> void:
 	_part("PLACEHOLDER_tail", _capsule(0.16, 0.9), Vector3(0, 0.75, 0.42), Vector3(55, 0, 0))
 	_part("PLACEHOLDER_scarf", _torus(0.2, 0.3), Vector3(0, 1.2, 0))
 	_part("PLACEHOLDER_weapon", _box(Vector3(0.08, 1.0, 0.03)), Vector3(0.42, 0.9, -0.1), Vector3(-20, 0, 0))
+	_part("PLACEHOLDER_shoulder_bag", _box(Vector3(0.22, 0.26, 0.12)), Vector3(-0.36, 0.72, 0.05))
+	scale = Vector3.ONE * SCALE
 	apply_customization()
 	if is_inside_tree() and get_tree().root.has_node("EventBus"):
 		EventBus.equipment_changed.connect(update_weapon)
@@ -39,6 +44,7 @@ func apply_customization() -> void:
 	_color("PLACEHOLDER_eye_r", Color(0.2, 0.75, 0.3))
 	_color("PLACEHOLDER_scarf", Customization.color("scarf"))
 	_color("PLACEHOLDER_outfit", Customization.color("outfit"))
+	_color("PLACEHOLDER_shoulder_bag", Color(0.45, 0.28, 0.15))
 	update_weapon()
 
 

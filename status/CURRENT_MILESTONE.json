@@ -1,8 +1,7 @@
 {
-  "phase": 2,
-  "milestone": "E08_CHAPTER2_REGRESSION",
+  "phase": 3,
+  "milestone": "V06_CHAPTER3_REGRESSION",
   "status": "PASSED",
-  "next_allowed": "PHASE_3_REQUIRES_OWNER_APPROVAL",
-  "phase_2_allowed": true,
-  "phase_3_allowed": false
+  "next_allowed": "PHASE_4_PLAN (standing owner approval)",
+  "standing_owner_approval": true
 }

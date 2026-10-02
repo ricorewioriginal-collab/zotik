@@ -5,14 +5,14 @@ extends Node
 
 const DATA_DIR := "res://data/"
 const TABLES := {
-	"flags": ["FLAG_"], "areas": ["AREA_"], "items": ["ITEM_", "WEAPON_"],
+	"flags": ["FLAG_"], "areas": ["AREA_"], "items": ["ITEM_", "WEAPON_", "ARMOR_"],
 	"cosmetics": ["COS_"], "enemies": ["ENEMY_", "BOSS_"], "chests": ["CHEST_"],
 	"shops": ["SHOP_"], "puzzles": ["PUZ_"], "quests": ["QUEST_"], "npcs": ["NPC_"],
-	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"],
+	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"], "lore": ["LORE_"], "bounties": ["BOUNTY_"], "arena": ["ARENA_"],
 }
 const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOONGATE_001", "PUZ_LUN_RESONANCE_BRIDGE_001", "ENEMY_RIFTLING_001", "ENEMY_MOONWOLF_001", "BOSS_ORUN_001", "WEAPON_WORLD_BLADE_001", "CHEST_LUN_001", "CHEST_LUN_002", "SAVEPOINT_LUN_RIFT_001", "FLAG_LUN_FOREST_UNLOCKED", "FLAG_BOSS_LUN_ORUN_DEFEATED", "CHAR_ZOTIK_MASTER_001", "CHAR_MIRA_MASTER_001", "CHAR_LYRA_MASTER_001", "CHAR_PROFESSORIUM_MASTER_001"]
-const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party"]
-const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform"]
+const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party", "open_menu"]
+const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform", "lore", "bounty_board", "casino"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
 const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
 
@@ -117,11 +117,37 @@ func validate() -> Array[String]:
 			e.append("%s: hub spawn missing" % id)
 		if wd.has("requires_flag"):
 			_ref(e, "flags", wd.requires_flag, id)
+	for id in table("enemies"):
+		var en2: Dictionary = table("enemies")[id]
+		_ref(e, "worlds", en2.get("region", ""), id)
+		if str(en2.get("description", "")).length() < 10:
+			e.append("%s: bestiary description missing" % id)
+	for id in table("arena"):
+		var ac: Dictionary = table("arena")[id]
+		if ac.get("waves", []).is_empty():
+			e.append("%s: no waves" % id)
+		for wave in ac.get("waves", []):
+			for grp in wave:
+				_ref(e, "enemies", grp.enemy, id)
+		for r in ac.get("first_clear", []):
+			_ref(e, "items", r.id, id)
+		_effects(e, ac.get("on_first_clear", []), id)
+		if ac.has("requires_flag"):
+			_ref(e, "flags", ac.requires_flag, id)
+	for id in table("bounties"):
+		var bt: Dictionary = table("bounties")[id]
+		_ref(e, "enemies", bt.enemy, id)
+		if int(bt.get("count", 0)) <= 0:
+			e.append("%s: count must be positive" % id)
+		if bt.has("requires_flag"):
+			_ref(e, "flags", bt.requires_flag, id)
+		for r in bt.get("rewards", []):
+			_ref(e, "items", r.id, id)
 	for id in table("party"):
 		_ref(e, "npcs", table("party")[id].get("npc", ""), id)
 	for id in table("items"):
 		var it: Dictionary = table("items")[id]
-		if it.get("type") in ["weapon", "accessory"] and not it.has("slot"):
+		if it.get("type") in ["weapon", "accessory", "armor"] and not it.has("slot"):
 			e.append("%s: equipment without slot" % id)
 	var defaults := {}
 	for id in table("cosmetics"):
@@ -138,6 +164,11 @@ func validate() -> Array[String]:
 		for ph in en.get("phases", []):
 			if ph.has("summon"):
 				_ref(e, "enemies", ph.summon, id)
+			if ph.has("hazard"):
+				var hz: Dictionary = ph.hazard
+				var kind: String = hz.get("kind", "circle")
+				if not kind in ["circle", "surge"] or not hz.has("interval") or not hz.has("delay") or not hz.has("damage") or not hz.has("width" if kind == "surge" else "radius"):
+					e.append("%s: invalid hazard in phase %s" % [id, ph.get("name", "?")])
 	for id in table("chests"):
 		_ref(e, "areas", table("chests")[id].area, id)
 		for c in table("chests")[id].contents:
@@ -160,6 +191,12 @@ func validate() -> Array[String]:
 		elif p.kind == "sequence":
 			if p.solution.any(func(v): return v < 0 or v >= p.nodes):
 				e.append("%s: invalid sequence" % id)
+		elif p.kind == "valves":
+			var n := int(p.channels)
+			if p.initial.size() != n or p.solution.size() != n or p.valve_map.is_empty() or p.valve_map.any(func(m): return m.is_empty() or m.any(func(c): return c < 0 or c >= n)):
+				e.append("%s: invalid valve setup" % id)
+			elif p.solution == p.initial or not PuzzleLogic.valves_solvable(p):
+				e.append("%s: valves trivial or unsolvable" % id)
 		else:
 			e.append("%s: unknown puzzle kind" % id)
 		if p.get("hints", []).is_empty():
@@ -183,7 +220,7 @@ func validate() -> Array[String]:
 			_ref(e, "dialogues", d.dialogue, id)
 			for g in d.when:
 				_gate(e, g, id)
-	for t in ["dialogues", "cutscenes"]:
+	for t in ["dialogues", "cutscenes", "lore"]:
 		for id in table(t):
 			var dl: Dictionary = table(t)[id]
 			if dl.get("lines", []).is_empty():
@@ -241,6 +278,9 @@ func _effects(e: Array[String], list: Array, owner: String) -> void:
 			"open_shop": _ref(e, "shops", fx.id, owner)
 			"play_cutscene": _ref(e, "cutscenes", fx.id, owner)
 			"join_party": _ref(e, "party", fx.id, owner)
+			"open_menu":
+				if not fx.id in ["arena", "casino"]:
+					e.append("%s: unknown menu %s" % [owner, fx.id])
 			"travel":
 				_ref(e, "areas", fx.area, owner)
 				if not layouts.get(fx.area, {}).get("spawns", {}).has(fx.get("spawn", "")):
@@ -330,6 +370,14 @@ func _validate_layouts(e: Array[String]) -> void:
 				"unique":
 					if world.get("uniques", {}).get(en.id, {}).get("area") != area:
 						e.append("%s placed outside its area" % en.id)
+				"lore":
+					_ref(e, "lore", en.id, area)
+				"casino":
+					if not key.begins_with("CASINO_"):
+						e.append("%s: casino id must start with CASINO_" % area)
+				"bounty_board":
+					if not key.begins_with("BOARD_"):
+						e.append("%s: bounty board id must start with BOARD_" % area)
 				"platform":
 					if not key.begins_with("PLATFORM_") or not en.has("to") or float(en.get("period", 0)) <= 0.0:
 						e.append("%s: invalid moving platform %s" % [area, key])

@@ -24,6 +24,7 @@ static func apply(fx: Dictionary) -> void:
 		"open_shop": EventBus.shop_requested.emit(fx.id)
 		"play_cutscene": EventBus.cutscene_requested.emit(fx.id)
 		"travel": EventBus.travel_requested.emit(fx.area, fx.spawn)
+		"open_menu": EventBus.menu_requested.emit(fx.id)
 		"join_party":
 			if not fx.id in GameState.party:
 				GameState.party.append(fx.id)
