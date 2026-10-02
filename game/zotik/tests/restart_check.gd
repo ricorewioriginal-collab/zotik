@@ -12,7 +12,7 @@ func _run() -> void:
 	await process_frame
 	var all_ok := true
 	var ran := 0
-	var cases := {"user://golden_expected.json": "user://golden_saves/", "user://golden_expected_ela.json": "user://golden_saves_ela/"}
+	var cases := {"user://golden_expected.json": "user://golden_saves/", "user://golden_expected_ela.json": "user://golden_saves_ela/", "user://golden_expected_val.json": "user://golden_saves_val/"}
 	for exp_path in cases:
 		if FileAccess.file_exists(exp_path):
 			ran += 1

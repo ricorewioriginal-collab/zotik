@@ -64,4 +64,21 @@ func _run() -> void:
 	game.enter_area("AREA_ELA_ROOT_ARENA", "default")
 	game.player.global_position = Vector3(0, 0, 7)
 	await _shot("10_wurzelkoenigin")
+	for f in ["FLAG_ELA_CHAPTER_COMPLETE", "FLAG_VAL_ARRIVED", "FLAG_VAL_CANALS_OPEN", "FLAG_VAL_WAECHTER_MET"]:
+		gs.set_flag(f)
+	game.enter_area("AREA_VAL_MARKET", "default")
+	game.player.global_position = Vector3(-10, 0, 18)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("11_valdoria_market_casino")
+	game.enter_area("AREA_VAL_CANALS", "default")
+	game.player.global_position = Vector3(0, 0, 4)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("12_canals_valves")
+	game.enter_area("AREA_VAL_FLOODGATE", "default")
+	game.player.global_position = Vector3(0, 0, 7)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("13_kanalwaechter")
 	quit()

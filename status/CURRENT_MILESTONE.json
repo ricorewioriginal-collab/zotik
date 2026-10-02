@@ -1,7 +1,7 @@
 {
   "phase": 3,
-  "milestone": "V05_CHAPTER3_QUESTS_BOSS",
+  "milestone": "V06_CHAPTER3_REGRESSION",
   "status": "PASSED",
-  "next_allowed": "V06_CHAPTER3_REGRESSION",
+  "next_allowed": "PHASE_4_PLAN (standing owner approval)",
   "standing_owner_approval": true
 }

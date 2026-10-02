@@ -417,3 +417,14 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - V04 test updated: Tibor first needs Veyr's word (intended behaviour change from V05).
 - Tests: `tests/unit/test_v05_chapter3.gd` (9 tests).
 - Regression: 170/170 tests plus restart checks: PASS.
+
+## V06 Chapter-3 regression – PASSED (Phase 3 complete)
+- `tests/unit/test_v06_golden_valdoria.gd`: the chapter-3 golden path from a chapter-2 save, through real interactions (details in `docs/ACCEPTANCE_MATRIX.md`).
+- `tests/restart_check.gd` now checks all three chapters in a fresh process.
+- **Bug found and fixed via the screenshots:** the third companion's formation slot sat exactly on the line between the camera and Zotik, so Rovan hid Zotik. The slots are now to the sides, still behind Zotik and without overlap.
+- New reference screenshots:
+  - 11 Valdoria market with the casino
+  - 12 canals with valves and gauges
+  - 13 Kanalwächter
+- Version 0.4.0.
+- Regression: 171/171 tests plus restart checks for chapters 1–3: PASS.
