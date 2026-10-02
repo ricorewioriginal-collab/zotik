@@ -17,6 +17,7 @@ var hud: Hud
 var dialogue_box: DialogueBox
 var inventory_menu: InventoryMenu
 var shop_menu: ShopMenu
+var quest_log: QuestLog
 var factories := {}
 var _entry_spawn := Vector3.ZERO
 
@@ -34,7 +35,11 @@ func _ready() -> void:
 	ui.add_child(inventory_menu)
 	shop_menu = ShopMenu.new()
 	ui.add_child(shop_menu)
+	quest_log = QuestLog.new()
+	ui.add_child(quest_log)
+	quest_log.closed.connect(_update_control)
 	inventory_menu.closed.connect(_update_control)
+	EventBus.quest_updated.connect(func(_q): _update_objective())
 	shop_menu.closed.connect(_update_control)
 	EventBus.shop_requested.connect(open_shop)
 	Dialogue.finished.connect(_on_dialogue_finished)
@@ -68,7 +73,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible
 
 
 func _update_control() -> void:
@@ -89,9 +94,26 @@ func toggle_inventory() -> void:
 	_update_control()
 
 
+func toggle_quest_log() -> void:
+	if quest_log.visible:
+		quest_log.close_menu()
+	elif not Dialogue.is_active() and not is_menu_open():
+		quest_log.open()
+	_update_control()
+
+
+func _update_objective() -> void:
+	var lines := []
+	for id in Quests.active_quests():
+		lines.append(("★ " if id == Quests.MAIN else "• ") + Quests.objective(id))
+	hud.set_objective("\n".join(lines))
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"):
 		toggle_inventory()
+	elif event.is_action_pressed("quest_log"):
+		toggle_quest_log()
 
 
 func _process(delta: float) -> void:
@@ -120,6 +142,7 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	area.exit_requested.connect(_on_exit_requested, CONNECT_DEFERRED)
 	GameState.player.area = area_id
 	_sync_state()
+	_update_objective()
 	area_loaded.emit(area_id)
 	EventBus.area_entered.emit(area_id)
 

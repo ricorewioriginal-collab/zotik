@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M08_COMBAT_FOUNDATION",
+  "milestone": "M09_MAIN_QUEST",
   "status": "PASSED",
-  "next_allowed": "M09_MAIN_QUEST",
+  "next_allowed": "M10_PUZZLE_FRAMEWORK",
   "phase_2_allowed": false
 }

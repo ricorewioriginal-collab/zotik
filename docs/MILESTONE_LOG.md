@@ -111,3 +111,16 @@ See `docs/PHASE_1_AUDIT.md`.
   1. **Chained area transitions.** A stale position from the previous area could trigger an exit of the new area immediately (Mondwald → Höhle → Ruinen). The player is now placed before the area is built, and exits have a 250 ms grace period. A regression test covers it.
   2. **Silent test passes.** A GDScript runtime error used to abort a test without failing it. The runner now records script errors through `Logger` and fails the test.
 - Tests: `tests/unit/test_m08_combat.gd` (7 tests) and 1 new regression test in M05.
+
+## M09 Main Quest – PASSED
+- `Quests` autoload:
+  - Event-driven progression from talk, defeat, area, puzzle, savepoint and item events.
+  - Item and area conditions are also state-checked when a step is entered (e.g. Sari's delivery already in the bag).
+  - Kill counts are stored in `progress` and survive save and load.
+  - Events raised by effects are queued instead of recursing.
+  - Out-of-order events are ignored: an early Orun kill or talking to Toren first does not advance the quest.
+  - There is no public force or complete API; the UI can only read (docs/03).
+- Step and completion effects and rewards run through `Effects`. New objectives and completions are announced.
+- HUD shows the main (★) and side (•) objectives. Read-only quest log (key L).
+- `QUEST_MAIN_LUN_001` (13 steps) and `QUEST_SIDE_LUN_001` (2 steps) are completable end to end by events.
+- Tests: `tests/unit/test_m09_quests.gd` (7 tests).

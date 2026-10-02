@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:28:30",
+  "last_run": "2026-10-02T08:30:24",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 60,
+  "passed": 67,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -245,6 +245,34 @@
     },
     {
       "id": "test_m08_combat::test_death_resets_encounter_and_keeps_progress",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_full_main_quest_by_events",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_out_of_order_events_are_ignored",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_kill_progress_objective_and_persistence",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_state_condition_checked_on_step_entry",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_side_quest_with_item_already_owned",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_quests_start_once_and_have_no_force_api",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m09_quests::test_hud_objective_and_quest_log",
       "result": "PASS"
     }
   ]
