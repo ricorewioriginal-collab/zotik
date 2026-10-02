@@ -317,7 +317,10 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 	for spec in specs:
 		var hx := size.x / 2.0 + float(spec[1])
 		var hz := size.y / 2.0 + float(spec[1])
-		for side in [[Vector2(-hx, -hz), Vector2(hx, -hz)], [Vector2(-hx, hz), Vector2(hx, hz)], [Vector2(-hx, -hz), Vector2(-hx, hz)], [Vector2(hx, -hz), Vector2(hx, hz)]]:
+		var skip: Array = layout.get("backdrop_skip", [])  # e.g. "south" for a harbour
+		for side in [[Vector2(-hx, -hz), Vector2(hx, -hz), "north"], [Vector2(-hx, hz), Vector2(hx, hz), "south"], [Vector2(-hx, -hz), Vector2(-hx, hz), "west"], [Vector2(hx, -hz), Vector2(hx, hz), "east"]]:
+			if side[2] in skip:
+				continue
 			var a: Vector2 = side[0]
 			var b: Vector2 = side[1]
 			var steps := maxi(1, int(a.distance_to(b) / float(spec[2])))
@@ -329,6 +332,121 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 				var nm: String = models[rng.randi() % models.size()]
 				var yaw := atan2(-p.x, -p.y) if town else rng.randf() * TAU
 				_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw)
+
+
+## Small hand-placed dressing from layout "decor" (G05): KayKit models or
+## procedural lanterns, with an optional thin collider ("r", metres) so the
+## player does not walk through barrels. Scale 1 = hex-pack units × DECOR_SCALE.
+const DECOR_SCALE := 5.0
+
+
+static func build_decor(parent: Node3D, layout: Dictionary) -> void:
+	var list: Array = layout.get("decor", [])
+	if list.is_empty():
+		return
+	var root := Node3D.new()
+	root.name = "Decor"
+	parent.add_child(root)
+	for d in list:
+		var pos := Vector3(float(d.pos[0]), float(d.pos[1]), float(d.pos[2]))
+		var yaw := deg_to_rad(float(d.get("rot", 0.0)))
+		var n: Node3D
+		if d.model == "lantern":
+			n = _lantern(root, pos, yaw)
+		elif d.model == "water":
+			var plane := PlaneMesh.new()
+			plane.size = Vector2(float(d.size[0]), float(d.size[1]))
+			n = _mesh(root, plane, pos, water(Color(0.25, 0.5, 0.75)), "Water")
+		elif d.model == "path":
+			n = _path(root, pos, yaw, Vector2(float(d.size[0]), float(d.size[1])), str(d.get("tex", "cobble")))
+		else:
+			n = _place(root, d.model, pos, DECOR_SCALE * float(d.get("scale", 1.0)), yaw)
+		if n and d.has("r"):
+			var body := StaticBody3D.new()
+			body.name = "DecorCollider"
+			var cs := CollisionShape3D.new()
+			var cyl := CylinderShape3D.new()
+			cyl.radius = float(d.r)
+			cyl.height = 2.0
+			cs.shape = cyl
+			cs.position.y = 1.0
+			body.add_child(cs)
+			body.position = pos
+			root.add_child(body)
+
+
+## Flat road or plaza (visual only) laid just above the floor.
+static func _path(parent: Node3D, pos: Vector3, yaw: float, size: Vector2, tex: String) -> Node3D:
+	var plane := PlaneMesh.new()
+	plane.size = size
+	var mi := _mesh(parent, plane, pos + Vector3(0, 0.02, 0), surface(tex, Color(0.92, 0.88, 0.8), FLOOR_SCALE.get(tex, 0.5)), "Path")
+	mi.rotation.y = yaw
+	return mi
+
+
+static func _lantern(parent: Node3D, pos: Vector3, yaw: float) -> Node3D:
+	var n := Node3D.new()
+	n.name = "Lantern"
+	n.position = pos
+	n.rotation.y = yaw
+	parent.add_child(n)
+	var wood := surface("wood", Color(0.35, 0.25, 0.18), 1.0)
+	var pole := CylinderMesh.new()
+	pole.top_radius = 0.06
+	pole.bottom_radius = 0.09
+	pole.height = 2.6
+	_mesh(n, pole, Vector3(0, 1.3, 0), wood, "Pole")
+	var arm := BoxMesh.new()
+	arm.size = Vector3(0.6, 0.07, 0.07)
+	_mesh(n, arm, Vector3(0.25, 2.5, 0), wood, "Arm")
+	var lamp := BoxMesh.new()
+	lamp.size = Vector3(0.16, 0.22, 0.16)
+	var amber := glow(Color(1.0, 0.65, 0.3))
+	amber.emission_energy_multiplier = 0.9
+	_mesh(n, lamp, Vector3(0.5, 2.3, 0), amber, "Lamp")
+	var cap := PrismMesh.new()
+	cap.size = Vector3(0.26, 0.12, 0.26)
+	_mesh(n, cap, Vector3(0.5, 2.47, 0), wood, "Cap")
+	return n
+
+
+## Landmarks far outside the walkable area (outdoor Lunaris/Valdoria): a
+## castle on the horizon and floating islands with trees, like the key art.
+const SKY_FEATURES := {"WORLD_LUNARIS": "building_castle_blue", "WORLD_VALDORIA": "building_castle_blue"}
+
+
+static func build_sky_features(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
+	if is_indoor(area_id, layout) or not SKY_FEATURES.has(world_of(area_id)):
+		return
+	var root := Node3D.new()
+	root.name = "SkyFeatures"
+	parent.add_child(root)
+	var far := size.y / 2.0 + 70.0
+	_place(root, SKY_FEATURES[world_of(area_id)], Vector3(-far * 0.9, -6, -far * 1.7), 26.0, 0.6)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(area_id + "sky")
+	var rock := surface("rock", Color(0.55, 0.5, 0.6), 0.15)
+	var grass := surface("grass", Color(0.6, 0.85, 0.6), 0.2)
+	for i in (3 if low_end() else 6):
+		var ang := lerpf(-1.1, 1.1, float(i) / 5.0) + rng.randf_range(-0.12, 0.12)
+		var dist := rng.randf_range(far * 0.8, far * 1.3)
+		var island := Node3D.new()
+		island.name = "Island"
+		island.position = Vector3(sin(ang) * dist, rng.randf_range(24, 46), -cos(ang) * dist)
+		root.add_child(island)
+		var r := rng.randf_range(5.0, 11.0)
+		var under := CylinderMesh.new()
+		under.top_radius = r
+		under.bottom_radius = 0.0
+		under.height = r * 1.6
+		_mesh(island, under, Vector3(0, -r * 0.8, 0), rock, "Rock")
+		var top := CylinderMesh.new()
+		top.top_radius = r * 0.98
+		top.bottom_radius = r
+		top.height = 0.8
+		_mesh(island, top, Vector3.ZERO, grass, "Top")
+		for t in 2:
+			_place(island, "trees_A_medium", Vector3(rng.randf_range(-r, r) * 0.4, 0.3, rng.randf_range(-r, r) * 0.4), r * 0.55, rng.randf() * TAU)
 
 
 static func _tree(root: Node3D, size: Vector3, color: Color) -> void:

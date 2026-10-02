@@ -325,6 +325,9 @@ func _validate_layouts(e: Array[String]) -> void:
 			e.append("area %s has no layout" % area)
 	for area in layouts:
 		_ref(e, "areas", area, "layouts")
+		for d in layouts[area].get("decor", []):
+			if not d.has("model") or not d.has("pos") or (not d.model in ["lantern", "path", "water"] and not ResourceLoader.exists(Look.MODEL_DIR % d.model)):
+				e.append("%s: decor model %s missing" % [area, d.get("model", "?")])
 		var l: Dictionary = layouts[area]
 		if not l.get("spawns", {}).has("default"):
 			e.append("%s: layout without default spawn" % area)

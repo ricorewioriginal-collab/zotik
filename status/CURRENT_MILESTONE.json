@@ -1,7 +1,7 @@
 {
   "phase": "graphics",
-  "milestone": "C01_REALISTIC_CHARACTERS",
+  "milestone": "G05_WORLD_DETAIL",
   "status": "PASSED",
-  "next_allowed": "G05_WORLD_DETAIL",
+  "next_allowed": "owner assets (image-to-3D models) / further world detail",
   "standing_owner_approval": true
 }

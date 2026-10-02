@@ -566,3 +566,19 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - **Zotik:** the same human rig in the ranger outfit with fur-coloured arms. The fox head (muzzle, nose, green eyes, cheek fluff, large ears), green scarf, neck fur, bushy tail, bag and the Weltenklinge sit on the bones. Positions are defined in model space and converted per bone, so they follow every animation.
 - Logged as C-32. G02 tests updated to the new rig: no human head, skin uses the fur shade, Sword_Attack animation.
 - Regression: 194/194 tests plus restart checks for chapters 1–3: PASS.
+
+## G05 World detail – PASSED (owner: "die Spielwelt soll aussehen wie sie soll")
+- New layout key `decor`: hand-placed CC0 models (wells, tents, barrels, crates, sacks, weapon racks, targets, flags, fences, trees, rocks, wheelbarrows, lumber). An optional thin collider (`r`) stops the player walking through them.
+- Procedural decor types:
+  - `lantern`: wooden pole with a warm glowing lamp
+  - `path`: cobbled roads and plazas
+  - `water`: the Valdoria harbour
+- Decor models are validated by `Content`; the reachability test includes decor colliders.
+- Areas dressed:
+  - Lunaris village: main road with branches, 6 lanterns, well, tent, training corner, garden fences, trees inside the village
+  - Elaris town: roads, lanterns, trees, tent, workshop props
+  - Valdoria market: east–west street, market plaza, harbour water, tents and stalls
+  - Guild district: street, training racks, targets
+- **Horizon** (Lunaris, Valdoria): a castle far away and floating islands with trees, like the key art (3 on Android/Web, 6 on PC).
+- `backdrop_skip` keeps the town ring out of the harbour.
+- Regression: 194/194 tests plus restart checks: PASS.
