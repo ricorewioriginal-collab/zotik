@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:02:04",
+  "last_run": "2026-10-02T08:05:49",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 14,
+  "passed": 21,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -61,6 +61,34 @@
     },
     {
       "id": "test_m02_save::test_settings_persist",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_all_tables_load",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_content_validates_clean",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_validator_detects_broken_reference",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_validator_detects_bad_namespace_and_duplicates",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_canonical_phase1_ids_present",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_legacy_items_migrated",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m03_content::test_dialogues_marked_placeholder",
       "result": "PASS"
     }
   ]

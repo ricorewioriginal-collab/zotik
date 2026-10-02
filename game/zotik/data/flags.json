@@ -1,0 +1,14 @@
+{
+  "FLAG_LUN_INTRO_SEEN": {"desc": "Traum/Flüstern-Intro gesehen"},
+  "FLAG_LUN_TRAINING_DONE": {"desc": "Torens Training abgeschlossen"},
+  "FLAG_LUN_FOREST_UNLOCKED": {"desc": "Waldtor durch Toren freigegeben"},
+  "FLAG_LUN_MOONGATE_OPEN": {"desc": "Mondtor geöffnet"},
+  "FLAG_LUN_BRIDGE_ACTIVE": {"desc": "Resonanzbrücke aktiviert"},
+  "FLAG_BOSS_LUN_ORUN_DEFEATED": {"desc": "Orun besiegt"},
+  "FLAG_LUN_WORLD_BLADE_TAKEN": {"desc": "Weltenklinge aufgenommen"},
+  "FLAG_LUN_RETURNED": {"desc": "Nach dem Riss nach Lunaris zurückgekehrt"},
+  "FLAG_LUN_PROFESSORIUM_ARRIVED": {"desc": "Professorium ist in Lunaris eingetroffen"},
+  "FLAG_LUN_LYRA_MET": {"desc": "Lyra-Brückenszene gesehen"},
+  "FLAG_LUN_CHAPTER_COMPLETE": {"desc": "Kapitel Lunaris abgeschlossen"},
+  "FLAG_LUN_SARI_DELIVERY_RETURNED": {"desc": "Saris Lieferung zurückgebracht"}
+}

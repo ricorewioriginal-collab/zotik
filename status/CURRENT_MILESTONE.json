@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M02_SAVE_FOUNDATION",
+  "milestone": "M03_CONTENT_REGISTRY",
   "status": "PASSED",
-  "next_allowed": "M03_CONTENT_REGISTRY",
+  "next_allowed": "M04_PLAYER",
   "phase_2_allowed": false
 }

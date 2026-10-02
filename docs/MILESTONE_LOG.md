@@ -24,3 +24,19 @@ See `docs/PHASE_1_AUDIT.md`.
   - A failed load leaves the current state untouched.
 - `Settings` autoload: separate `user://settings.cfg` with type-checked values.
 - Tests: `tests/unit/test_m02_save.gd` (9 tests). A save → separate-process load check follows in M15.
+
+## M03 Content Registry – PASSED
+- `data/*.json` contains all Phase-1 content:
+  - 12 flags and 6 areas with flag-gated exits
+  - 8 items (legacy items migrated, C-08) and 8 cosmetics
+  - 4 enemies including Orun's 3 phases, 3 chests and Boro's shop
+  - 2 puzzles with 3-tier hints, the main quest (13 steps) and the side quest (2 steps)
+  - 8 NPCs with conditional dialogue selection, 24 dialogues and 4 in-engine cutscenes
+  - savepoint and unique-reward rules
+- All dialogue and cutscene text is marked `placeholder: true` and only paraphrases `docs/04` (C-10).
+- `Content` autoload checks:
+  - namespaces and global ID uniqueness
+  - every cross-reference: areas, gates, drops, summons, chest contents, shop stock and prices, puzzle setup, quest conditions, effects, dialogue speakers and gates, uniques
+  - cosmetic defaults
+  - presence of all canonical IDs from `docs/07`
+- Tests: `tests/unit/test_m03_content.gd` (7 tests, including negative tests that prove broken references, namespaces and duplicates are detected).

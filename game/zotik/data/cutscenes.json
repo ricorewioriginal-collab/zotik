@@ -1,0 +1,18 @@
+{
+  "CUT_LUN_DREAM_001": {"placeholder": true, "lines": [
+    ["NARRATOR", "Ein Flüstern zieht durch den Schlaf. Irgendwo bricht etwas."],
+    ["UNKNOWN", "… Weltenhörer …"],
+    ["CHAR_ZOTIK", "Wer ist da?!"]],
+    "effects": [{"type": "set_flag", "id": "FLAG_LUN_INTRO_SEEN"}, {"type": "start_quest", "id": "QUEST_MAIN_LUN_001"}]},
+  "CUT_LUN_ORUN_001": {"placeholder": true, "lines": [
+    ["BOSS_ORUN_001", "Ein Weltenhörer. Ein Resonanzträger. Nach so langer Zeit."],
+    ["CHAR_ZOTIK", "Ich weiß nicht, wovon du redest – aber du lässt Lunaris in Ruhe!"]]},
+  "CUT_LUN_RIFT_VISION_001": {"placeholder": true, "lines": [
+    ["NARRATOR", "Der große Riss flackert. Bilder fremder Welten ziehen vorbei."],
+    ["NARRATOR", "Im Licht liegt eine Klinge, die auf Zotik zu antworten scheint."]]},
+  "CUT_LUN_LYRA_BRIDGE_001": {"placeholder": true, "lines": [
+    ["NPC_LYRA_001", "Professorium! Ich bin gekommen, so schnell ich konnte."],
+    ["NPC_LYRA_001", "Das ist also der Resonanzträger. Dann hat es begonnen."],
+    ["NARRATOR", "Fortsetzung folgt."]],
+    "effects": [{"type": "set_flag", "id": "FLAG_LUN_LYRA_MET"}]}
+}

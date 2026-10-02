@@ -1,0 +1,3 @@
+{
+  "SHOP_LUN_BORO_001": {"npc": "NPC_BORO_001", "stock": ["ITEM_HEALING_POTION_001", "ITEM_MOON_PENDANT_001", "WEAPON_MOONBLADE_001"], "sell_ratio": 0.5}
+}

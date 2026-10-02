@@ -1,0 +1,6 @@
+{
+  "PUZ_LUN_MOONGATE_001": {"name": "Mondtor", "area": "AREA_LUN_RUINS", "kind": "dials", "dial_count": 3, "dial_states": 4, "initial": [0, 0, 0], "solution": [2, 0, 3], "on_solved": [{"type": "set_flag", "id": "FLAG_LUN_MOONGATE_OPEN"}],
+    "hints": ["Die drei Scheiben zeigen Mondphasen. Elwens alte Geschichten sprechen von 'voll, neu, abnehmend'.", "Linke Scheibe: Vollmond. Mitte: Neumond.", "Rechte Scheibe: abnehmender Mond – dreimal drehen."]},
+  "PUZ_LUN_RESONANCE_BRIDGE_001": {"name": "Resonanzbrücke", "area": "AREA_LUN_RIFT_CAVE", "kind": "sequence", "nodes": 4, "initial": [], "solution": [2, 0, 3, 1], "on_solved": [{"type": "set_flag", "id": "FLAG_LUN_BRIDGE_ACTIVE"}],
+    "hints": ["Die Kristalle summen unterschiedlich hoch. Beginne beim tiefsten Ton.", "Reihenfolge der Töne: tief, mittel-tief, mittel-hoch, hoch.", "Kristalle 3, 1, 4, 2 (von links gezählt)."]}
+}
