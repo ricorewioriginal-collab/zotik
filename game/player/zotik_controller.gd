@@ -21,6 +21,7 @@ func _physics_process(_delta: float) -> void:
 		facing_direction = direction.normalized()
 	velocity = direction * MOVE_SPEED
 	move_and_slide()
+	position = position.clamp(Vector2(24, 24), Vector2(936, 596))
 	if Input.is_action_just_pressed("interact"):
 		_interact_with_nearest()
 	if Input.is_action_just_pressed("attack"):

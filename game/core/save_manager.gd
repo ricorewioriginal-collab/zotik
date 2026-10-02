@@ -22,7 +22,7 @@ func save_slot(slot: int, payload: Dictionary) -> bool:
 		"version": SAVE_VERSION,
 		"payload": payload.duplicate(true),
 	}
-	data["checksum"] = hash(JSON.stringify(data["payload"]))
+	data["checksum"] = _checksum(data["payload"])
 	var path := _slot_path(slot)
 	var temporary_path := path + ".tmp"
 	var file := FileAccess.open(temporary_path, FileAccess.WRITE)
@@ -34,6 +34,8 @@ func save_slot(slot: int, payload: Dictionary) -> bool:
 	file.close()
 
 	if FileAccess.file_exists(path):
+		if FileAccess.file_exists(path + ".bak"):
+			DirAccess.remove_absolute(path + ".bak")
 		var backup_error := DirAccess.copy_absolute(path, path + ".bak")
 		if backup_error != OK:
 			DirAccess.remove_absolute(temporary_path)
@@ -42,6 +44,9 @@ func save_slot(slot: int, payload: Dictionary) -> bool:
 		DirAccess.remove_absolute(path)
 	var rename_error := DirAccess.rename_absolute(temporary_path, path)
 	if rename_error != OK:
+		DirAccess.remove_absolute(temporary_path)
+		if not FileAccess.file_exists(path) and FileAccess.file_exists(path + ".bak"):
+			DirAccess.copy_absolute(path + ".bak", path)
 		save_failed.emit(slot, "Could not replace save file.")
 		return false
 	save_completed.emit(slot)
@@ -58,8 +63,13 @@ func load_slot(slot: int) -> Dictionary:
 	if file == null:
 		push_warning("SaveManager: Could not read slot %d." % slot)
 		return {}
-	var parsed: Variant = JSON.parse_string(file.get_as_text())
+	var json := JSON.new()
+	var parse_error := json.parse(file.get_as_text())
 	file.close()
+	if parse_error != OK:
+		push_warning("SaveManager: Slot %d contains invalid JSON." % slot)
+		return {}
+	var parsed: Variant = json.data
 	if not parsed is Dictionary or not parsed.get("payload") is Dictionary:
 		push_warning("SaveManager: Slot %d is malformed." % slot)
 		return {}
@@ -68,7 +78,7 @@ func load_slot(slot: int) -> Dictionary:
 		push_warning("SaveManager: Slot %d uses unsupported version %d." % [slot, version])
 		return {}
 	var payload: Dictionary = parsed["payload"]
-	if parsed.get("checksum", -1) != hash(JSON.stringify(payload)):
+	if parsed.get("checksum", -1) != _checksum(payload):
 		push_warning("SaveManager: Slot %d failed checksum validation." % slot)
 		return {}
 	return payload.duplicate(true)
@@ -84,3 +94,23 @@ func _is_valid_slot(slot: int) -> bool:
 
 func _slot_path(slot: int) -> String:
 	return "%s/slot_%d.json" % [SAVE_DIRECTORY, slot]
+
+
+func _checksum(payload: Dictionary) -> int:
+	return hash(JSON.stringify(_normalize_for_checksum(payload)))
+
+
+func _normalize_for_checksum(value: Variant) -> Variant:
+	if value is Dictionary:
+		var normalized: Dictionary = {}
+		for key in value:
+			normalized[key] = _normalize_for_checksum(value[key])
+		return normalized
+	if value is Array:
+		var normalized: Array = []
+		for entry in value:
+			normalized.append(_normalize_for_checksum(entry))
+		return normalized
+	if typeof(value) == TYPE_INT or typeof(value) == TYPE_FLOAT:
+		return float(value)
+	return value

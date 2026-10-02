@@ -50,9 +50,10 @@ tests/                Repository-Strukturprüfungen (Python-Standardbibliothek)
 
    ```sh
    godot --headless --path game --editor --quit
+   godot --headless --path game --script res://tests/runtime_smoke_test.gd
    ```
 
-   Unter Umständen heißt das Programm `godot4`. Exportvorlagen sind für den Editor-Import nicht erforderlich.
+   Unter Umständen heißt das Programm `godot4`. Exportvorlagen sind für den Editor-Import nicht erforderlich. Der Laufzeittest verwendet vorübergehend Save-Slots 1 und 3 und stellt vorhandene Slot-/Backupdateien wieder her.
 
 ## Beitrag und Dokumentation
 

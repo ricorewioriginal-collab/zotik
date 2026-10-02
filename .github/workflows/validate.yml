@@ -1,0 +1,37 @@
+name: Validate Godot project
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Run repository tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Import Godot project headlessly
+        run: |
+          set -o pipefail
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE/game:/project" \
+            barichello/godot-ci:4.4.1 \
+            godot --headless --path /project --editor --quit 2>&1 | tee /tmp/godot-validation.log
+          if grep -Eq "SCRIPT ERROR:|ERROR: Failed to load script|^ERROR:" /tmp/godot-validation.log; then
+            exit 1
+          fi
+      - name: Run Godot runtime smoke tests
+        run: |
+          set -o pipefail
+          docker run --rm \
+            -v "$GITHUB_WORKSPACE/game:/project" \
+            barichello/godot-ci:4.4.1 \
+            godot --headless --path /project --script res://tests/runtime_smoke_test.gd 2>&1 | tee /tmp/godot-tests.log
+          if grep -Eq "SCRIPT ERROR:|ERROR: Failed to load script|^ERROR:" /tmp/godot-tests.log; then
+            exit 1
+          fi

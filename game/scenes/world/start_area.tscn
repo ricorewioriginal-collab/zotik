@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scenes/world/start_area.gd" id="1"]
+[ext_resource type="PackedScene" path="res://player/zotik.tscn" id="2"]
+[ext_resource type="Script" path="res://scenes/world/npc.gd" id="3"]
+[ext_resource type="Script" path="res://scenes/world/enemy.gd" id="4"]
+[ext_resource type="Script" path="res://scenes/world/pickup.gd" id="5"]
+[ext_resource type="Script" path="res://scenes/world/puzzle_switch.gd" id="6"]
+[ext_resource type="Script" path="res://scenes/world/puzzle_gate.gd" id="7"]
+[ext_resource type="Script" path="res://scenes/world/area_portal.gd" id="8"]
+
+[node name="StartArea" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Zotik" parent="." instance=ExtResource("2")]
+position = Vector2(170, 330)
+
+[node name="Keeper" type="Node2D" parent="."]
+position = Vector2(254, 326)
+script = ExtResource("3")
+
+[node name="ForestWisp" type="Node2D" parent="."]
+position = Vector2(464, 334)
+script = ExtResource("4")
+
+[node name="HealingFruit" type="Node2D" parent="."]
+position = Vector2(336, 370)
+script = ExtResource("5")
+
+[node name="ResonanceSwitch" type="Node2D" parent="."]
+position = Vector2(594, 358)
+script = ExtResource("6")
+
+[node name="SealedGate" type="Node2D" parent="."]
+position = Vector2(666, 358)
+script = ExtResource("7")
+
+[node name="ForestPortal" type="Node2D" parent="."]
+position = Vector2(834, 358)
+script = ExtResource("8")
