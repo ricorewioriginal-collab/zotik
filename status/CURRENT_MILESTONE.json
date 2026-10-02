@@ -1,7 +1,7 @@
 {
-  "phase": 3,
-  "milestone": "V06_CHAPTER3_REGRESSION",
+  "phase": "graphics",
+  "milestone": "G01_LOOK_RENDERER",
   "status": "PASSED",
-  "next_allowed": "PHASE_4_PLAN (standing owner approval)",
+  "next_allowed": "G02_ANIMATED_CHARACTERS",
   "standing_owner_approval": true
 }

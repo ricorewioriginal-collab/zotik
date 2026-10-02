@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T11:16:21",
+  "last_run": "2026-10-02T11:34:00",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 171,
+  "passed": 175,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -157,6 +157,22 @@
     },
     {
       "id": "test_e08_golden_elaris::test_golden_path_chapter_two",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g01_look::test_prop_kinds_and_indoor",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g01_look::test_wall_segments_leave_exit_gaps",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g01_look::test_outdoor_sky_and_indoor_dark",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g01_look::test_props_keep_names_collision_and_textures",
       "result": "PASS"
     },
     {

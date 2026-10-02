@@ -428,3 +428,20 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - 13 Kanalwächter
 - Version 0.4.0.
 - Regression: 171/171 tests plus restart checks for chapters 1–3: PASS.
+
+## G01 Look & renderer – PASSED
+- Plan: `docs/GRAPHICS_PLAN.md`.
+- Renderer: Forward+ on PC. Android (`.mobile`) and Web (`.web`) keep the compatibility renderer, with a cheaper shadow profile (`Look.low_end()`).
+- `core/look.gd`, per world:
+  - procedural sky (Lunaris dusk, Elaris daylight, Valdoria golden evening)
+  - sun with soft shadows, fog
+  - filmic tonemapping, glow, saturation/contrast, SSAO on PC
+  - dark, foggy interiors for caves and canals
+- Nine CC0 Poly Haven textures at 512 px (1.3 MB total, mipmaps on), applied as world-space triplanar materials. They are tinted with the layout colours so the art direction is kept.
+- Props get proper shapes; collision and node names are unchanged, so no gameplay or test change:
+  - houses with a tiled roof and timber posts
+  - trees with a trunk and canopy
+  - water as a glossy transparent surface
+  - rifts and crystals glow
+- Visible area borders (hedge, town wall or cave rock) with openings at exits. Outdoor ground continues into the fog.
+- Tests: `tests/unit/test_g01_look.gd` (4 tests).

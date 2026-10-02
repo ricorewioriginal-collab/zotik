@@ -27,14 +27,19 @@ func build(id: String, factories: Dictionary) -> void:
 	_environment()
 	var size: Array = layout.get("size", [20, 20])
 	var floors: Array = layout.get("floors", [{"pos": [0, -0.5, 0], "size": [size[0], 1, size[1]]}])
+	var floor_tex := Look.floor_texture(area_id, layout)
+	var floor_mat := Look.surface(floor_tex, Color.html(layout.get("ground", "#555555")), Look.FLOOR_SCALE.get(floor_tex, 0.25))
 	for f in floors:
-		_box("PLACEHOLDER_floor", _v(f.pos), _v(f.size), Color.html(layout.get("ground", "#555555")), true).add_to_group("ground")
+		var fl := _box("PLACEHOLDER_floor", _v(f.pos), _v(f.size), Color.html(layout.get("ground", "#555555")), true)
+		fl.add_to_group("ground")
+		(fl.get_child(1) as MeshInstance3D).material_override = floor_mat
 	var hx: float = size[0] / 2.0
 	var hz: float = size[1] / 2.0
 	for w in [[Vector3(0, WALL_HEIGHT / 2, -hz), Vector3(size[0], WALL_HEIGHT, 1)], [Vector3(0, WALL_HEIGHT / 2, hz), Vector3(size[0], WALL_HEIGHT, 1)], [Vector3(-hx, WALL_HEIGHT / 2, 0), Vector3(1, WALL_HEIGHT, size[1])], [Vector3(hx, WALL_HEIGHT / 2, 0), Vector3(1, WALL_HEIGHT, size[1])]]:
 		_collider(w[0], w[1])
+	Look.build_boundary(self, area_id, layout, Vector2(size[0], size[1]), WALL_HEIGHT)
 	for p in layout.get("props", []):
-		var node := _box("PLACEHOLDER_" + str(p.name), _v(p.pos), _v(p.size), Color.html(p.color), p.get("collision", true))
+		var node := _prop("PLACEHOLDER_" + str(p.name), str(p.name), _v(p.pos), _v(p.size), Color.html(p.color), p.get("collision", true))
 		if p.has("requires_flag"):
 			flag_props.append({"node": node, "flag": p.requires_flag, "invert": false})
 		elif p.has("hidden_by_flag"):
@@ -112,19 +117,7 @@ func _on_exit_body(body: Node, target: String) -> void:
 
 
 func _environment() -> void:
-	var env := Environment.new()
-	env.background_mode = Environment.BG_COLOR
-	env.background_color = Color(0.03, 0.04, 0.08)
-	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
-	env.ambient_light_color = Color.html(layout.get("ambient", "#ffffff"))
-	env.ambient_light_energy = 0.6
-	var we := WorldEnvironment.new()
-	we.environment = env
-	add_child(we)
-	var sun := DirectionalLight3D.new()
-	sun.rotation_degrees = Vector3(-55, -25, 0)
-	sun.light_energy = 0.9
-	add_child(sun)
+	Look.build_environment(self, area_id, layout)
 
 
 func _box(nm: String, pos: Vector3, size: Vector3, color: Color, collide: bool) -> Node3D:
@@ -147,6 +140,22 @@ func _box(nm: String, pos: Vector3, size: Vector3, color: Color, collide: bool) 
 		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	mi.material_override = mat
 	root.add_child(mi)
+	add_child(root)
+	return root
+
+
+## Layout prop: collision box as defined, visible shape from Look.
+func _prop(nm: String, prop_name: String, pos: Vector3, size: Vector3, color: Color, collide: bool) -> Node3D:
+	var root: Node3D = StaticBody3D.new() if collide else Node3D.new()
+	root.name = nm
+	root.position = pos
+	if collide:
+		var cs := CollisionShape3D.new()
+		var shape := BoxShape3D.new()
+		shape.size = size
+		cs.shape = shape
+		root.add_child(cs)
+	Look.build_prop(root, prop_name, size, color, Look.style(area_id))
 	add_child(root)
 	return root
 
