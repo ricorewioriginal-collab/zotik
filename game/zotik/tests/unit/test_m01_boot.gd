@@ -28,7 +28,10 @@ func test_boot_reaches_title_then_game_root() -> void:
 	eq(tree.current_scene.name, &"Title", "boot must open title")
 	tree.current_scene.buttons["new_game"].pressed.emit()
 	await frames(3)
-	eq(tree.current_scene.name, &"GameRoot", "new game must open game root")
+	eq(tree.current_scene.name, &"CharacterCreator", "new game must open character creator")
+	tree.current_scene.confirm()
+	await frames(3)
+	eq(tree.current_scene.name, &"GameRoot", "creator must open game root")
 	check(tree.current_scene.has_node("World") and tree.current_scene.has_node("UI"), "game root structure")
 
 

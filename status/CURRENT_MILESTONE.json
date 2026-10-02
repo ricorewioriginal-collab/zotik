@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M03_CONTENT_REGISTRY",
+  "milestone": "M04_PLAYER_MEIN_ZOTIK",
   "status": "PASSED",
-  "next_allowed": "M04_PLAYER",
+  "next_allowed": "M05_LUNARIS_GREYBOX",
   "phase_2_allowed": false
 }

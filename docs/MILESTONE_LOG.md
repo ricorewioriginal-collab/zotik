@@ -40,3 +40,15 @@ See `docs/PHASE_1_AUDIT.md`.
   - cosmetic defaults
   - presence of all canonical IDs from `docs/07`
 - Tests: `tests/unit/test_m03_content.gd` (7 tests, including negative tests that prove broken references, namespaces and duplicates are detected).
+
+## M04 Player + Mein Zotik – PASSED
+- `Player` (CharacterBody3D) features:
+  - camera-relative movement with a third-person SpringArm camera (mouse and gamepad)
+  - jump, plus dodge with invulnerability frames, which replaces the defective legacy dodge
+  - block with damage reduction
+  - health stored in `GameState`, death signal, heal and revive
+- `Stats`: base stats from `data/world.json` plus equipment bonuses, and a shared damage formula.
+- `ZotikVisual`: a clearly labelled PLACEHOLDER built from primitives. It shows the canonical non-human traits: orange fur, pointed ears, green eyes, light muzzle and chest, bushy tail, scarf and outfit. Gameplay never references it.
+- "Mein Zotik" character creator: fur shade (orange shades only), scarf and outfit, with a live 3D preview. Choices are cosmetic only, validated and persisted in `GameState.customization`.
+- Flow: Title → Neues Spiel → character creator → game root.
+- Tests: `tests/unit/test_m04_player.gd` (8 tests: movement, camera yaw, jump, i-frames, block, death, customization, equipment). The boot test now also covers the creator step.

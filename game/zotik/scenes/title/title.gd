@@ -37,4 +37,4 @@ func _add_button(box: Control, id: String, text: String, cb: Callable) -> void:
 
 func _on_new_game() -> void:
 	new_game_requested.emit()
-	App.goto_scene(App.SCENE_GAME_ROOT)
+	App.start_new_game()
