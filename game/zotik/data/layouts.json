@@ -923,6 +923,22 @@
           0,
           25
         ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_ELA_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          21
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_ELA_ARRIVAL_001",
+        "once_flag": "FLAG_ELA_ARRIVED"
       }
     ]
   }

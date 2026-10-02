@@ -229,3 +229,15 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
 - The beacon routes across worlds: first to the current world's hub, then to its Weltenstein.
 - Validation: area worlds, world hub area and spawn, unlock flags, `TRAVEL_` ids.
 - Tests: `tests/unit/test_e01_travel.gd` (5 tests).
+
+## E02 Party foundation (Lyra) – PASSED
+- `data/party.json` (namespace `PARTY_`): `PARTY_LYRA_001`, a ranged healer, with all values in data.
+- `join_party` effect (idempotent). On the first arrival in Elaris, `CUT_ELA_ARRIVAL_001` (placeholder text) adds Lyra to the party. Her Lunaris NPC is then hidden through `hidden_when`.
+- `Companion` AI:
+  - follows Zotik and teleports along when far away or on area changes
+  - attacks enemies within 10 m of Zotik from range, but not the training dummy
+  - heals Zotik below 45 % HP with a cooldown
+  - passive during dialogues
+  - enemies target only Zotik, so a companion can never block progress
+- The party persists across save, load and area changes.
+- Tests: `tests/unit/test_e02_party.gd` (5 tests).

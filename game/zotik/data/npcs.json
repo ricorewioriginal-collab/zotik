@@ -1,33 +1,231 @@
 {
-  "NPC_MIRA_001": {"name": "Mira", "character": "CHAR_MIRA_MASTER_001", "area": "AREA_LUN_VILLAGE", "dialogues": [
-    {"when": [{"type": "quest_step", "id": "QUEST_MAIN_LUN_001", "step": 0}], "dialogue": "DLG_MIRA_INTRO_001"},
-    {"when": [{"type": "quest_step", "id": "QUEST_MAIN_LUN_001", "step": 11}], "dialogue": "DLG_MIRA_RETURN_001"},
-    {"when": [{"type": "flag", "id": "FLAG_LUN_CHAPTER_COMPLETE"}], "dialogue": "DLG_MIRA_AFTER_001"},
-    {"when": [{"type": "flag", "id": "FLAG_LUN_FOREST_UNLOCKED"}], "dialogue": "DLG_MIRA_FOREST_001"},
-    {"when": [], "dialogue": "DLG_MIRA_IDLE_001"}]},
-  "NPC_TOREN_001": {"name": "Toren", "area": "AREA_LUN_VILLAGE", "dialogues": [
-    {"when": [{"type": "quest_step", "id": "QUEST_MAIN_LUN_001", "step": 1}], "dialogue": "DLG_TOREN_TRAINING_001"},
-    {"when": [{"type": "quest_step", "id": "QUEST_MAIN_LUN_001", "step": 2}], "dialogue": "DLG_TOREN_TRAINING_HINT_001"},
-    {"when": [{"type": "flag", "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"}], "dialogue": "DLG_TOREN_REACTION_001"},
-    {"when": [{"type": "flag", "id": "FLAG_LUN_FOREST_UNLOCKED"}], "dialogue": "DLG_TOREN_FOREST_001"},
-    {"when": [], "dialogue": "DLG_TOREN_IDLE_001"}]},
-  "NPC_BORO_001": {"name": "Boro", "area": "AREA_LUN_VILLAGE", "dialogues": [
-    {"when": [{"type": "flag", "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"}], "dialogue": "DLG_BORO_REACTION_001"},
-    {"when": [], "dialogue": "DLG_BORO_SHOP_001"}]},
-  "NPC_ELWEN_001": {"name": "Elwen", "area": "AREA_LUN_VILLAGE", "dialogues": [
-    {"when": [{"type": "flag", "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"}], "dialogue": "DLG_ELWEN_REACTION_001"},
-    {"when": [], "dialogue": "DLG_ELWEN_LORE_001"}]},
-  "NPC_FINN_001": {"name": "Finn", "area": "AREA_LUN_VILLAGE", "dialogues": [
-    {"when": [{"type": "flag", "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"}], "dialogue": "DLG_FINN_REACTION_001"},
-    {"when": [], "dialogue": "DLG_FINN_EXPLORE_001"}]},
-  "NPC_SARI_001": {"name": "Sari", "area": "AREA_LUN_VILLAGE", "dialogues": [
-    {"when": [{"type": "quest_state", "id": "QUEST_SIDE_LUN_001", "state": "INACTIVE"}], "dialogue": "DLG_SARI_QUEST_001"},
-    {"when": [{"type": "quest_step", "id": "QUEST_SIDE_LUN_001", "step": 1}], "dialogue": "DLG_SARI_THANKS_001"},
-    {"when": [{"type": "quest_state", "id": "QUEST_SIDE_LUN_001", "state": "COMPLETED"}], "dialogue": "DLG_SARI_AFTER_001"},
-    {"when": [], "dialogue": "DLG_SARI_WAITING_001"}]},
-  "NPC_PROFESSORIUM_001": {"name": "Professorium", "character": "CHAR_PROFESSORIUM_MASTER_001", "area": "AREA_LUN_VILLAGE", "appears_when": "FLAG_LUN_PROFESSORIUM_ARRIVED", "dialogues": [
-    {"when": [{"type": "quest_step", "id": "QUEST_MAIN_LUN_001", "step": 12}], "dialogue": "DLG_PROFESSORIUM_ARRIVAL_001"},
-    {"when": [], "dialogue": "DLG_PROFESSORIUM_IDLE_001"}]},
-  "NPC_LYRA_001": {"name": "Lyra", "character": "CHAR_LYRA_MASTER_001", "area": "AREA_LUN_VILLAGE", "appears_when": "FLAG_LUN_LYRA_MET", "dialogues": [
-    {"when": [], "dialogue": "DLG_LYRA_IDLE_001"}]}
+  "NPC_MIRA_001": {
+    "name": "Mira",
+    "character": "CHAR_MIRA_MASTER_001",
+    "area": "AREA_LUN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_LUN_001",
+            "step": 0
+          }
+        ],
+        "dialogue": "DLG_MIRA_INTRO_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_LUN_001",
+            "step": 11
+          }
+        ],
+        "dialogue": "DLG_MIRA_RETURN_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_LUN_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_MIRA_AFTER_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_LUN_FOREST_UNLOCKED"
+          }
+        ],
+        "dialogue": "DLG_MIRA_FOREST_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_MIRA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_TOREN_001": {
+    "name": "Toren",
+    "area": "AREA_LUN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_LUN_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_TOREN_TRAINING_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_LUN_001",
+            "step": 2
+          }
+        ],
+        "dialogue": "DLG_TOREN_TRAINING_HINT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+          }
+        ],
+        "dialogue": "DLG_TOREN_REACTION_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_LUN_FOREST_UNLOCKED"
+          }
+        ],
+        "dialogue": "DLG_TOREN_FOREST_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_TOREN_IDLE_001"
+      }
+    ]
+  },
+  "NPC_BORO_001": {
+    "name": "Boro",
+    "area": "AREA_LUN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+          }
+        ],
+        "dialogue": "DLG_BORO_REACTION_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_BORO_SHOP_001"
+      }
+    ]
+  },
+  "NPC_ELWEN_001": {
+    "name": "Elwen",
+    "area": "AREA_LUN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+          }
+        ],
+        "dialogue": "DLG_ELWEN_REACTION_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_ELWEN_LORE_001"
+      }
+    ]
+  },
+  "NPC_FINN_001": {
+    "name": "Finn",
+    "area": "AREA_LUN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+          }
+        ],
+        "dialogue": "DLG_FINN_REACTION_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_FINN_EXPLORE_001"
+      }
+    ]
+  },
+  "NPC_SARI_001": {
+    "name": "Sari",
+    "area": "AREA_LUN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_LUN_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_SARI_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_LUN_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_SARI_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_LUN_001",
+            "state": "COMPLETED"
+          }
+        ],
+        "dialogue": "DLG_SARI_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_SARI_WAITING_001"
+      }
+    ]
+  },
+  "NPC_PROFESSORIUM_001": {
+    "name": "Professorium",
+    "character": "CHAR_PROFESSORIUM_MASTER_001",
+    "area": "AREA_LUN_VILLAGE",
+    "appears_when": "FLAG_LUN_PROFESSORIUM_ARRIVED",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_LUN_001",
+            "step": 12
+          }
+        ],
+        "dialogue": "DLG_PROFESSORIUM_ARRIVAL_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_PROFESSORIUM_IDLE_001"
+      }
+    ]
+  },
+  "NPC_LYRA_001": {
+    "name": "Lyra",
+    "character": "CHAR_LYRA_MASTER_001",
+    "area": "AREA_LUN_VILLAGE",
+    "appears_when": "FLAG_LUN_LYRA_MET",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_LYRA_IDLE_001"
+      }
+    ],
+    "hidden_when": "FLAG_ELA_LYRA_JOINED"
+  }
 }

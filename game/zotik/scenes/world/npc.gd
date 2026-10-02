@@ -47,8 +47,10 @@ func _ready() -> void:
 
 
 func _refresh() -> void:
-	var flag: String = Content.get_entry("npcs", npc_id).get("appears_when", "")
-	var present := flag == "" or GameState.has_flag(flag)
+	var npc := Content.get_entry("npcs", npc_id)
+	var flag: String = npc.get("appears_when", "")
+	var gone: String = npc.get("hidden_when", "")
+	var present := (flag == "" or GameState.has_flag(flag)) and (gone == "" or not GameState.has_flag(gone))
 	visible = present
 	for c in find_children("*", "CollisionShape3D", true, false):
 		c.disabled = not present

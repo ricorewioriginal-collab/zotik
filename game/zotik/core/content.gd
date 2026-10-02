@@ -8,10 +8,10 @@ const TABLES := {
 	"flags": ["FLAG_"], "areas": ["AREA_"], "items": ["ITEM_", "WEAPON_"],
 	"cosmetics": ["COS_"], "enemies": ["ENEMY_", "BOSS_"], "chests": ["CHEST_"],
 	"shops": ["SHOP_"], "puzzles": ["PUZ_"], "quests": ["QUEST_"], "npcs": ["NPC_"],
-	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"],
+	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"],
 }
 const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOONGATE_001", "PUZ_LUN_RESONANCE_BRIDGE_001", "ENEMY_RIFTLING_001", "ENEMY_MOONWOLF_001", "BOSS_ORUN_001", "WEAPON_WORLD_BLADE_001", "CHEST_LUN_001", "CHEST_LUN_002", "SAVEPOINT_LUN_RIFT_001", "FLAG_LUN_FOREST_UNLOCKED", "FLAG_BOSS_LUN_ORUN_DEFEATED", "CHAR_ZOTIK_MASTER_001", "CHAR_MIRA_MASTER_001", "CHAR_LYRA_MASTER_001", "CHAR_PROFESSORIUM_MASTER_001"]
-const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel"]
+const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party"]
 const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
 const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
@@ -113,6 +113,8 @@ func validate() -> Array[String]:
 			e.append("%s: hub spawn missing" % id)
 		if wd.has("requires_flag"):
 			_ref(e, "flags", wd.requires_flag, id)
+	for id in table("party"):
+		_ref(e, "npcs", table("party")[id].get("npc", ""), id)
 	for id in table("items"):
 		var it: Dictionary = table("items")[id]
 		if it.get("type") in ["weapon", "accessory"] and not it.has("slot"):
@@ -169,6 +171,8 @@ func validate() -> Array[String]:
 		_ref(e, "areas", n.area, id)
 		if n.has("appears_when"):
 			_ref(e, "flags", n.appears_when, id)
+		if n.has("hidden_when"):
+			_ref(e, "flags", n.hidden_when, id)
 		if n.get("dialogues", []).is_empty() or not n.dialogues[-1].when.is_empty():
 			e.append("%s: last dialogue entry must be an unconditional fallback" % id)
 		for d in n.get("dialogues", []):
@@ -232,6 +236,7 @@ func _effects(e: Array[String], list: Array, owner: String) -> void:
 			"start_quest": _ref(e, "quests", fx.id, owner)
 			"open_shop": _ref(e, "shops", fx.id, owner)
 			"play_cutscene": _ref(e, "cutscenes", fx.id, owner)
+			"join_party": _ref(e, "party", fx.id, owner)
 			"travel":
 				_ref(e, "areas", fx.area, owner)
 				if not layouts.get(fx.area, {}).get("spawns", {}).has(fx.get("spawn", "")):

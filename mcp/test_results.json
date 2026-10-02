@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T09:41:34",
+  "last_run": "2026-10-02T09:45:21",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 105,
+  "passed": 110,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -25,6 +25,26 @@
     },
     {
       "id": "test_e01_travel::test_beacon_routes_across_worlds",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_arrival_in_elaris_joins_lyra_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_follows_player_and_survives_area_change",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_attacks_enemies_near_player",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_heals_player_when_low_with_cooldown",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_passive_during_dialogue_and_persists",
       "result": "PASS"
     },
     {

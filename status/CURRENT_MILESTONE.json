@@ -1,7 +1,7 @@
 {
   "phase": 2,
-  "milestone": "E01_WORLD_TRAVEL",
+  "milestone": "E02_PARTY",
   "status": "PASSED",
-  "next_allowed": "E02_PARTY",
+  "next_allowed": "E03_BREAK",
   "phase_2_allowed": true
 }

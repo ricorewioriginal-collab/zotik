@@ -1,0 +1,15 @@
+{
+  "PARTY_LYRA_001": {
+    "name": "Lyra",
+    "npc": "NPC_LYRA_001",
+    "role": "ranged_healer",
+    "color": "#6a8ad9",
+    "attack": 7,
+    "attack_range": 9.0,
+    "attack_cooldown": 1.6,
+    "heal_amount": 25,
+    "heal_cooldown": 10.0,
+    "heal_threshold": 0.45,
+    "move_speed": 5.8
+  }
+}

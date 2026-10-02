@@ -40,5 +40,11 @@
   },
   "FLAG_LUN_ORUN_MET": {
     "desc": "Orun-Begegnungsszene gesehen"
+  },
+  "FLAG_ELA_ARRIVED": {
+    "desc": "Erste Ankunft in Elaris gesehen"
+  },
+  "FLAG_ELA_LYRA_JOINED": {
+    "desc": "Lyra ist der Party beigetreten"
   }
 }

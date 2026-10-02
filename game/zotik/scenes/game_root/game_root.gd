@@ -22,6 +22,7 @@ var quest_log: QuestLog
 var save_menu: SaveMenu
 var pause_menu: PauseMenu
 var world_map: WorldMap
+var companions := {}  # PARTY_* -> Companion
 var beacon: ObjectiveBeacon
 var beacon_target := ""  # entity key or "exit:<area>"
 var factories := {}
@@ -71,6 +72,7 @@ func _ready() -> void:
 	player.died.connect(_on_player_died)
 	player.damaged.connect(func(_d): hud.flash_hurt())
 	EventBus.sync_state.connect(_sync_state)
+	EventBus.party_changed.connect(_sync_party)
 	EventBus.travel_requested.connect(func(a, s): enter_area.call_deferred(a, s))
 	if App.pending_load:
 		App.pending_load = false
@@ -242,6 +244,9 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	area.exit_requested.connect(_on_exit_requested, CONNECT_DEFERRED)
 	GameState.player.area = area_id
 	_sync_state()
+	_sync_party()
+	for c in companions.values():
+		c.snap_to_player()
 	_update_objective()
 	area_loaded.emit(area_id)
 	EventBus.area_entered.emit(area_id)
@@ -260,6 +265,20 @@ func _on_player_died() -> void:
 	player.global_position = _entry_spawn
 	player.velocity = Vector3.ZERO
 	EventBus.notify.emit("Zotik steht wieder auf.")
+
+
+## Spawns/removes companions so they match GameState.party.
+func _sync_party() -> void:
+	for id in companions.keys():
+		if not id in GameState.party:
+			companions[id].queue_free()
+			companions.erase(id)
+	for id in GameState.party:
+		if not companions.has(id) and Content.has_id("party", id):
+			var c := Companion.create(id, player)
+			world.add_child(c)
+			companions[id] = c
+			c.snap_to_player()
 
 
 func _on_exit_requested(target: String) -> void:
