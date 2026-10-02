@@ -164,6 +164,11 @@ func validate() -> Array[String]:
 		for ph in en.get("phases", []):
 			if ph.has("summon"):
 				_ref(e, "enemies", ph.summon, id)
+			if ph.has("hazard"):
+				var hz: Dictionary = ph.hazard
+				var kind: String = hz.get("kind", "circle")
+				if not kind in ["circle", "surge"] or not hz.has("interval") or not hz.has("delay") or not hz.has("damage") or not hz.has("width" if kind == "surge" else "radius"):
+					e.append("%s: invalid hazard in phase %s" % [id, ph.get("name", "?")])
 	for id in table("chests"):
 		_ref(e, "areas", table("chests")[id].area, id)
 		for c in table("chests")[id].contents:

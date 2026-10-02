@@ -2257,6 +2257,11 @@
         0,
         0,
         18
+      ],
+      "AREA_VAL_FLOODGATE": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -2266,6 +2271,14 @@
           0,
           0,
           21
+        ]
+      },
+      {
+        "to": "AREA_VAL_FLOODGATE",
+        "pos": [
+          0,
+          0,
+          -21
         ]
       }
     ],
@@ -2331,14 +2344,15 @@
         "pos": [
           0,
           3,
-          -21
+          -19
         ],
         "size": [
           10,
           6,
           1
         ],
-        "color": "#5a3a2a"
+        "color": "#5a3a2a",
+        "hidden_by_flag": "FLAG_VAL_ROSTGOLEM_DEFEATED"
       }
     ],
     "entities": [
@@ -2346,6 +2360,97 @@
         "type": "enemy",
         "spawn": "SPAWN_VAL_CISTERN_GOLEM",
         "enemy": "ENEMY_ROSTGOLEM_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
+      }
+    ]
+  },
+  "AREA_VAL_FLOODGATE": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#26343a",
+    "ambient": "#90b0d0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        15
+      ],
+      "AREA_VAL_CISTERN": [
+        0,
+        0,
+        15
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_CISTERN",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "floodgate_wall",
+        "pos": [
+          0,
+          3,
+          -18
+        ],
+        "size": [
+          14,
+          6,
+          1
+        ],
+        "color": "#3a4a5a",
+        "collision": false
+      },
+      {
+        "name": "water_basin",
+        "pos": [
+          0,
+          0.03,
+          -4
+        ],
+        "size": [
+          30,
+          0.06,
+          18
+        ],
+        "color": "#24507a",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_VAL_WAECHTER_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_VAL_WAECHTER_001",
+        "once_flag": "FLAG_VAL_WAECHTER_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_FLOODGATE_WAECHTER",
+        "enemy": "BOSS_KANALWAECHTER_001",
         "pos": [
           0,
           0,

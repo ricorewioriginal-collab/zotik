@@ -150,7 +150,18 @@
     "name": "Alte Zisterne",
     "world": "WORLD_VALDORIA",
     "exits": [
-      "AREA_VAL_CANALS"
+      "AREA_VAL_CANALS",
+      "AREA_VAL_FLOODGATE"
+    ],
+    "gate": {
+      "AREA_VAL_FLOODGATE": "FLAG_VAL_ROSTGOLEM_DEFEATED"
+    }
+  },
+  "AREA_VAL_FLOODGATE": {
+    "name": "Schleusenkammer",
+    "world": "WORLD_VALDORIA",
+    "exits": [
+      "AREA_VAL_CISTERN"
     ]
   }
 }

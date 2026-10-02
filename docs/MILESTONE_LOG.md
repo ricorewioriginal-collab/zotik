@@ -393,3 +393,27 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Test adjustment: `test_p02_reachability` now treats props removed by a flag (`hidden_by_flag`) as open. This matches its documented intent ("with every gate open").
 - Tests: `tests/unit/test_v04_canals.gd` (5 tests).
 - Regression: 161/161 tests plus restart checks: PASS.
+
+## V05 Chapter-3 quests + boss Kanalwächter – PASSED
+- **Main quest `QUEST_MAIN_VAL_001` "Die Stadt, die niemals schläft"** (7 steps):
+  1. Veyr
+  2. Tibor
+  3. the canals
+  4. the valve puzzle
+  5. the Rostgolem
+  6. the Kanalwächter
+  7. report back to Veyr
+
+  Reward: 300 Lun and `FLAG_VAL_CHAPTER_COMPLETE`.
+  - The quest is started by the arrival scene. Saves that already arrived before V05 can still start it by talking to Veyr.
+  - Tibor opens the gate only on the quest step "Sprich mit Tibor". This avoids sequence breaks: the order is linear (gate → puzzle → golem → floodgate), so no step can be skipped.
+- **Side quest `QUEST_SIDE_VAL_001` "Ein Boot für Lotte":** bring 4 Altmetall to Lotte at the harbour. Reward: 150 Lun and 2 Hi-Potions.
+- **Boss Kanalwächter** (`AREA_VAL_FLOODGATE`, behind the cistern's floodgate, which opens after the Rostgolem):
+  - 640 HP and Break 160.
+  - Phases: Strömung (circle eruptions), Flutwelle (summons 2 Kanalschleime), Tiefenzorn (summons a Schleusenkrabbe).
+  - Intro scene plays once. The defeat scene returns the party to the canal gate.
+- **New hazard kind `surge`** (water surge): a telegraphed band across the whole arena at Zotik's depth. Moving sideways does not help; stepping forwards or backwards (or dodging) does.
+  - `Content` now validates hazards: kind circle/surge plus the required fields.
+- V04 test updated: Tibor first needs Veyr's word (intended behaviour change from V05).
+- Tests: `tests/unit/test_v05_chapter3.gd` (9 tests).
+- Regression: 170/170 tests plus restart checks: PASS.

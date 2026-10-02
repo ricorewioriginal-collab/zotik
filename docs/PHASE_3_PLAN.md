@@ -26,4 +26,4 @@ Playable chapter 3 reachable from a chapter-2 save:
 | V05 | Chapter-3 quests + boss Kanalwächter | main quest, side quest, multi-phase boss with water surge hazard |
 | V06 | Chapter-3 regression | golden path from a chapter-2 save + restart check for all chapters |
 
-Deferred: casino (C-20), apartments/housing, harbour travel (Nautilux arrives in Solmera), crafting (Ignara).
+Casino delivered in V03 (C-20 resolved). Deferred: apartments/housing, harbour travel (Nautilux arrives in Solmera), crafting (Ignara).

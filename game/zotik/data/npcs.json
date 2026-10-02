@@ -384,6 +384,36 @@
     "area": "AREA_VAL_MARKET",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_VAL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_LOTTE_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_VAL_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_LOTTE_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_VAL_001",
+            "state": "COMPLETED"
+          }
+        ],
+        "dialogue": "DLG_LOTTE_AFTER_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_LOTTE_IDLE_001"
       }
@@ -393,6 +423,45 @@
     "name": "Veyr",
     "area": "AREA_VAL_GUILD",
     "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_VAL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_VEYR_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_VAL_001",
+            "step": 0
+          }
+        ],
+        "dialogue": "DLG_VEYR_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_VAL_001",
+            "step": 6
+          }
+        ],
+        "dialogue": "DLG_VEYR_RETURN_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_VAL_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_VEYR_AFTER_001"
+      },
       {
         "when": [],
         "dialogue": "DLG_VEYR_IDLE_001"
@@ -408,9 +477,23 @@
           {
             "type": "not_flag",
             "id": "FLAG_VAL_CANALS_OPEN"
+          },
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_VAL_001",
+            "step": 1
           }
         ],
         "dialogue": "DLG_TIBOR_OPEN_001"
+      },
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_VAL_CANALS_OPEN"
+          }
+        ],
+        "dialogue": "DLG_TIBOR_CLOSED_001"
       },
       {
         "when": [

@@ -1,7 +1,7 @@
 {
   "phase": 3,
-  "milestone": "V04_FORGOTTEN_CANALS",
+  "milestone": "V05_CHAPTER3_QUESTS_BOSS",
   "status": "PASSED",
-  "next_allowed": "V05_CHAPTER3_QUESTS_BOSS",
+  "next_allowed": "V06_CHAPTER3_REGRESSION",
   "standing_owner_approval": true
 }

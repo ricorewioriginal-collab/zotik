@@ -5,6 +5,8 @@ extends Enemy
 
 signal phase_changed(index: int)
 
+const SURGE_LENGTH := 60.0
+
 var phase := 0
 var summons: Array[Enemy] = []
 var hazards: Array[Node3D] = []
@@ -12,7 +14,9 @@ var hazard_timer := 0.0
 
 
 ## Phase hazard (data "hazard"): a telegraphed eruption under Zotik that
-## hits after `delay` if he is still inside `radius`. Dodge i-frames apply.
+## hits after `delay` if he is still inside `radius`, or (kind "surge") a
+## water band across the whole arena at his depth that hits everyone within
+## `width`/2 – sidestep forwards or backwards. Dodge i-frames apply.
 func _physics_process(delta: float) -> void:
 	super(delta)
 	var hz: Dictionary = data.phases[phase].get("hazard", {})
@@ -26,18 +30,25 @@ func _physics_process(delta: float) -> void:
 
 func spawn_hazard(at: Vector3, hz: Dictionary) -> Node3D:
 	var h := MeshInstance3D.new()
-	h.name = "PLACEHOLDER_root_eruption"
-	var m := CylinderMesh.new()
-	m.top_radius = float(hz.radius)
-	m.bottom_radius = float(hz.radius)
-	m.height = 0.05
-	h.mesh = m
 	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.9, 0.4, 0.1, 0.5)
+	if hz.get("kind", "") == "surge":
+		h.name = "PLACEHOLDER_water_surge"
+		var b := BoxMesh.new()
+		b.size = Vector3(SURGE_LENGTH, 0.05, float(hz.width))
+		h.mesh = b
+		mat.albedo_color = Color(0.2, 0.5, 1.0, 0.5)
+	else:
+		h.name = "PLACEHOLDER_root_eruption"
+		var m := CylinderMesh.new()
+		m.top_radius = float(hz.radius)
+		m.bottom_radius = float(hz.radius)
+		m.height = 0.05
+		h.mesh = m
+		mat.albedo_color = Color(0.9, 0.4, 0.1, 0.5)
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	h.material_override = mat
 	get_parent().add_child(h)
-	h.global_position = Vector3(at.x, 0.03, at.z)
+	h.global_position = Vector3(0.0 if hz.get("kind", "") == "surge" else at.x, 0.03, at.z)
 	hazards.append(h)
 	get_tree().create_timer(float(hz.delay), false, true).timeout.connect(_erupt.bind(h, hz))
 	return h
@@ -49,7 +60,8 @@ func _erupt(h: Node3D, hz: Dictionary) -> void:
 	hazards.erase(h)
 	if is_instance_valid(target) and not is_dead():
 		var flat := Vector2(target.global_position.x - h.global_position.x, target.global_position.z - h.global_position.z)
-		if flat.length() <= float(hz.radius):
+		var hit := absf(flat.y) <= float(hz.width) / 2.0 if hz.get("kind", "") == "surge" else flat.length() <= float(hz.radius)
+		if hit:
 			target.take_damage(int(hz.damage) + Stats.defense())  # hazard ignores armour
 	h.queue_free()
 

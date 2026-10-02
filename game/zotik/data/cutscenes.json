@@ -192,6 +192,53 @@
         "NPC_LYRA_001",
         "Die Risse wurden auch hier gemeldet. Unter der Stadt, in den alten Kanälen."
       ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_VAL_001"
+      }
+    ]
+  },
+  "CUT_VAL_WAECHTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_KANALWAECHTER_001",
+        "Die Stadt über mir lärmt seit tausend Jahren. Der Splitter in meiner Brust lässt mich endlich antworten."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Ein Splitter des Weltenkerns – genau wie bei der Wurzelkönigin!"
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann holen wir ihn raus, bevor er die Stadt flutet."
+      ]
+    ]
+  },
+  "CUT_VAL_WAECHTER_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Das Wasser sinkt. Im Schlamm glimmt ein Splitter, kalt wie Mondlicht."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Jemand hat diese Splitter verteilt. Mit Absicht."
+      ],
+      [
+        "NPC_NIA_001",
+        "Zurück zu Veyr. Die Gilde muss das erfahren."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_VAL_CANAL_GATE",
+        "spawn": "AREA_VAL_CANALS"
+      }
     ]
   }
 }

@@ -85,5 +85,14 @@
   },
   "FLAG_VAL_ROSTGOLEM_DEFEATED": {
     "desc": "Rostgolem in der Zisterne besiegt"
+  },
+  "FLAG_VAL_WAECHTER_MET": {
+    "desc": "Kanalwächter zum ersten Mal gesehen"
+  },
+  "FLAG_BOSS_VAL_WAECHTER_DEFEATED": {
+    "desc": "Boss Kanalwächter besiegt"
+  },
+  "FLAG_VAL_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 3 Valdoria abgeschlossen"
   }
 }

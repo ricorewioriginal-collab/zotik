@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T11:05:41",
+  "last_run": "2026-10-02T11:10:24",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 161,
+  "passed": 170,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -649,6 +649,42 @@
     },
     {
       "id": "test_v04_canals::test_rostgolem_miniboss_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_arrival_starts_main_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_veyr_starts_quest_for_old_saves",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_main_quest_flow_through_dungeon",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_intro_plays_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_boss_phases_and_summons",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_water_surge_spans_arena_and_can_be_sidestepped",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_validator_rejects_bad_hazard",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_defeat_completes_chapter",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v05_chapter3::test_side_quest_lotte",
       "result": "PASS"
     }
   ]
