@@ -184,6 +184,10 @@
       {
         "type": "set_flag",
         "id": "FLAG_BOSS_ELA_QUEEN_DEFEATED"
+      },
+      {
+        "type": "play_cutscene",
+        "id": "CUT_ELA_QUEEN_DEFEAT_001"
       }
     ],
     "phases": [
@@ -201,7 +205,13 @@
         "cooldown_mult": 0.9,
         "summon": "ENEMY_PILZLING_001",
         "summon_count": 2,
-        "color": "#6a5a1a"
+        "color": "#6a5a1a",
+        "hazard": {
+          "interval": 4.5,
+          "radius": 2.2,
+          "delay": 1.2,
+          "damage": 14
+        }
       },
       {
         "from_hp_ratio": 0.3,
@@ -210,7 +220,13 @@
         "cooldown_mult": 0.75,
         "summon": "ENEMY_DORNENWOLF_001",
         "summon_count": 1,
-        "color": "#8a2a1a"
+        "color": "#8a2a1a",
+        "hazard": {
+          "interval": 3.0,
+          "radius": 2.6,
+          "delay": 1.0,
+          "damage": 18
+        }
       }
     ]
   }

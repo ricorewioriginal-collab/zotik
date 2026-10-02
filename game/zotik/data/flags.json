@@ -67,5 +67,8 @@
   },
   "FLAG_BOSS_ELA_QUEEN_DEFEATED": {
     "desc": "Wurzelkönigin besiegt"
+  },
+  "FLAG_ELA_QUEEN_MET": {
+    "desc": "Begegnung mit der Wurzelkönigin gesehen"
   }
 }

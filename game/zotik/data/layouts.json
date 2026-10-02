@@ -915,6 +915,11 @@
         0,
         0,
         -24
+      ],
+      "return": [
+        -6,
+        0,
+        -2
       ]
     },
     "exits": [
@@ -1552,6 +1557,34 @@
         "collision": false
       }
     ],
-    "entities": []
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_ELA_QUEEN_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_ELA_QUEEN_001",
+        "once_flag": "FLAG_ELA_QUEEN_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_ARENA_QUEEN",
+        "enemy": "BOSS_WURZELKOENIGIN_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
+      }
+    ]
   }
 }

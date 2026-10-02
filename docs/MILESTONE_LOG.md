@@ -305,3 +305,12 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
   - the HUD marks every main quest with »
 - Boss data for `BOSS_WURZELKOENIGIN_001` was added (3 phases) so the quest can reference it. The arena fight follows in E07.
 - Tests: `tests/unit/test_e06_quests.gd` (5 tests).
+
+## E07 Boss Wurzelkönigin – PASSED
+- `BOSS_WURZELKOENIGIN_001` (520 HP, Break 140) has 3 data phases with their own colours:
+  - Erwachen: from 100 %.
+  - Dornenkrone: below 60 %, 2 Pilzlinge summoned, root eruptions start.
+  - Wurzelzorn: below 30 %, 1 Dornenwolf summoned, faster and larger eruptions.
+- **Root eruptions:** a data-defined phase hazard. A telegraphed disc appears under Zotik and hits after a delay unless he leaves it (or dodges with i-frames). Eruptions pause during cutscenes, while the boss is broken or idle, and are cleared on defeat and on death or reset.
+- One-time intro `CUT_ELA_QUEEN_001`. Defeat sets `FLAG_BOSS_ELA_QUEEN_DEFEATED` (persistent), plays the memory vision `CUT_ELA_QUEEN_DEFEAT_001` and brings the party back to Elaris town to report to Mara.
+- Tests: `tests/unit/test_e07_queen.gd` (6 tests).

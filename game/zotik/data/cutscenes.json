@@ -135,5 +135,46 @@
         "Elaris-Lore: Der Turm speicherte einst die Erinnerungen des Waldes, bevor der Große Bruch sie zerstreute."
       ]
     ]
+  },
+  "CUT_ELA_QUEEN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_WURZELKOENIGIN_001",
+        "Ihr tragt den Klang des Kerns in diesen Wald. Er hat mich einst zerrissen."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Sie erinnert sich an den Großen Bruch!"
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann helfen wir ihr, ihn zu vergessen."
+      ]
+    ]
+  },
+  "CUT_ELA_QUEEN_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die Wurzeln sinken zurück in die Erde. Ein letztes Bild flackert: Forscher, ein geteilter Kern, ein Name, der nicht gesagt wird."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Ich war dort. Damals."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Zurück zu Mara. Sie muss das hören."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_ELA_TOWN",
+        "spawn": "return"
+      }
+    ]
   }
 }
