@@ -1,7 +1,7 @@
 {
   "phase": "graphics",
-  "milestone": "G02_ANIMATED_CHARACTERS",
+  "milestone": "G03_ENEMIES_BOSSES",
   "status": "PASSED",
-  "next_allowed": "G03_ENEMIES_BOSSES",
+  "next_allowed": "A01_ANDROID",
   "standing_owner_approval": true
 }

@@ -167,8 +167,8 @@ static func glow(tint: Color) -> StandardMaterial3D:
 	if tint.a < 1.0:
 		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	m.emission_enabled = true
-	m.emission = tint.lightened(0.2)
-	m.emission_energy_multiplier = 2.2
+	m.emission = tint
+	m.emission_energy_multiplier = 1.2
 	return m
 
 

@@ -466,3 +466,18 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Conflict C-29 logged: chibi interim proportions versus the owner's target look.
 - Tests: `tests/unit/test_g02_characters.gd` (3 tests).
 - Regression: 178/178 tests plus restart checks: PASS.
+
+## G03 Enemies & bosses – PASSED
+- `scenes/world/creature_visual.gd`: procedural interim creatures following the enemy master sheet (dark bodies, emissive rift crystals and eyes). Archetypes:
+  - **imp:** Rissling, with large glowing eyes and a crystal crest
+  - **wolf:** Mondwolf with a blue crystal ridge, Dornenwolf with a green thorn ridge
+  - **golem:** Orun, Rostgolem, Kanalwächter, with rounded rock bodies, a glowing core, horn crystals and crystal clusters on the shoulders
+  - **queen:** a golem with a crystal crown and root tendrils
+  - **mushroom:** Pilzling, with a glowing-spotted cap
+  - **slime:** Kanalschleim, translucent with a glowing core and squash
+  - **crab:** Schleusenkrabbe
+  - **roots:** Wurzelkriecher
+  - **dummy:** training dummy
+- Animation from the enemy state: idle bob, walk cycle, wind-up rear-back, strike lunge, dazed wobble while broken. Hit and wind-up tints still work. Defeat shows a short burst of rift light.
+- Rift and crystal glow is toned down so it keeps its colour instead of blowing out to white.
+- Tests: `tests/unit/test_g03_creatures.gd` (3 tests). Regression: 181/181 tests plus restart checks: PASS.

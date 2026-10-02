@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T11:51:08",
+  "last_run": "2026-10-02T11:57:24",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 178,
+  "passed": 181,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -185,6 +185,18 @@
     },
     {
       "id": "test_g02_characters::test_companions_and_npcs_use_rigs",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g03_creatures::test_every_enemy_has_an_archetype",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g03_creatures::test_creature_reacts_to_state",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g03_creatures::test_enemy_uses_creature_visual",
       "result": "PASS"
     },
     {
