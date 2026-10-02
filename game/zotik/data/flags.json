@@ -79,5 +79,11 @@
   },
   "FLAG_VAL_ARENA_BRONZE": {
     "desc": "Bronzepokal der Arena gewonnen"
+  },
+  "FLAG_VAL_CANALS_DRAINED": {
+    "desc": "Ventilrätsel gelöst, Kanäle abgelassen"
+  },
+  "FLAG_VAL_ROSTGOLEM_DEFEATED": {
+    "desc": "Rostgolem in der Zisterne besiegt"
   }
 }

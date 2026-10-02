@@ -1922,6 +1922,11 @@
         -21,
         0,
         0
+      ],
+      "AREA_VAL_CANALS": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -1931,6 +1936,14 @@
           -24,
           0,
           0
+        ]
+      },
+      {
+        "to": "AREA_VAL_CANALS",
+        "pos": [
+          0,
+          0,
+          -22
         ]
       }
     ],
@@ -1945,14 +1958,15 @@
         "size": [
           12,
           6,
-          2
+          1
         ],
-        "color": "#3a4a4a"
+        "color": "#3a4a4a",
+        "hidden_by_flag": "FLAG_VAL_CANALS_OPEN"
       },
       {
         "name": "canal_water",
         "pos": [
-          0,
+          10,
           0.05,
           0
         ],
@@ -2036,6 +2050,308 @@
           0,
           -6
         ]
+      }
+    ]
+  },
+  "AREA_VAL_CANALS": {
+    "size": [
+      40,
+      64
+    ],
+    "ground": "#3a4848",
+    "ambient": "#90b8c8",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        28
+      ],
+      "AREA_VAL_CANAL_GATE": [
+        0,
+        0,
+        28
+      ],
+      "AREA_VAL_CISTERN": [
+        0,
+        0,
+        -26
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_CANAL_GATE",
+        "pos": [
+          0,
+          0,
+          31
+        ]
+      },
+      {
+        "to": "AREA_VAL_CISTERN",
+        "pos": [
+          0,
+          0,
+          -31
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "canal_wall_w",
+        "pos": [
+          -12,
+          2,
+          8
+        ],
+        "size": [
+          1,
+          4,
+          30
+        ],
+        "color": "#2f3b3b"
+      },
+      {
+        "name": "canal_wall_e",
+        "pos": [
+          12,
+          2,
+          8
+        ],
+        "size": [
+          1,
+          4,
+          30
+        ],
+        "color": "#2f3b3b"
+      },
+      {
+        "name": "valve_house",
+        "pos": [
+          0,
+          1.5,
+          -8
+        ],
+        "size": [
+          14,
+          3,
+          1
+        ],
+        "color": "#4a5050"
+      },
+      {
+        "name": "flooded_channel",
+        "pos": [
+          0,
+          0.6,
+          -18
+        ],
+        "size": [
+          39,
+          1.2,
+          4
+        ],
+        "color": "#2a5a8a",
+        "hidden_by_flag": "FLAG_VAL_CANALS_DRAINED"
+      },
+      {
+        "name": "drained_channel",
+        "pos": [
+          0,
+          0.02,
+          -18
+        ],
+        "size": [
+          39,
+          0.04,
+          4
+        ],
+        "color": "#33403f",
+        "collision": false,
+        "requires_flag": "FLAG_VAL_CANALS_DRAINED"
+      }
+    ],
+    "entities": [
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_VAL_CANALS_001",
+        "pos": [
+          8,
+          0,
+          26
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_SCHLEIM_1",
+        "enemy": "ENEMY_KANALSCHLEIM_001",
+        "pos": [
+          -6,
+          0,
+          16
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_SCHLEIM_2",
+        "enemy": "ENEMY_KANALSCHLEIM_001",
+        "pos": [
+          6,
+          0,
+          12
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_SCHLEIM_3",
+        "enemy": "ENEMY_KANALSCHLEIM_001",
+        "pos": [
+          -16,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CANALS_KRABBE_1",
+        "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+        "pos": [
+          0,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_VAL_001",
+        "pos": [
+          -17,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_VAL_VALVES_001",
+        "pos": [
+          0,
+          0,
+          -4
+        ]
+      }
+    ]
+  },
+  "AREA_VAL_CISTERN": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#38423f",
+    "ambient": "#a0b8b8",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        18
+      ],
+      "AREA_VAL_CANALS": [
+        0,
+        0,
+        18
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_VAL_CANALS",
+        "pos": [
+          0,
+          0,
+          21
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "cistern_pillar_nw",
+        "pos": [
+          -12,
+          3,
+          -8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "cistern_pillar_ne",
+        "pos": [
+          12,
+          3,
+          -8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "cistern_pillar_sw",
+        "pos": [
+          -12,
+          3,
+          6
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "cistern_pillar_se",
+        "pos": [
+          12,
+          3,
+          6
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#4a5454"
+      },
+      {
+        "name": "sealed_floodgate",
+        "pos": [
+          0,
+          3,
+          -21
+        ],
+        "size": [
+          10,
+          6,
+          1
+        ],
+        "color": "#5a3a2a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_VAL_CISTERN_GOLEM",
+        "enemy": "ENEMY_ROSTGOLEM_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
       }
     ]
   }

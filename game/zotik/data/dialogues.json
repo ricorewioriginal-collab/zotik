@@ -471,7 +471,7 @@
     "lines": [
       [
         "NPC_TIBOR_001",
-        "Das Kanaltor bleibt zu. Da unten wohnt etwas, das niemand mehr gesehen haben will."
+        "Das Tor ist offen. Ventile drehen, Wasser ablassen – und Augen auf in der Zisterne."
       ]
     ]
   },
@@ -488,6 +488,34 @@
         "type": "open_menu",
         "id": "arena"
       }
+    ]
+  },
+  "DLG_TIBOR_OPEN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TIBOR_001",
+        "Du willst da runter? In die vergessenen Kanäle? … Na gut. Die Kristallströmung unten wird jeden Tag lauter."
+      ],
+      [
+        "NPC_TIBOR_001",
+        "Die Schleusen sind geflutet. Wenn du die Ventile richtig stellst, läuft das Wasser ab. Und pass auf den alten Golem auf."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_VAL_CANALS_OPEN"
+      }
+    ]
+  },
+  "DLG_TIBOR_GOLEM_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TIBOR_001",
+        "Den Rostgolem hast du geschafft? Dann ist das Rauschen dahinter … etwas anderes. Etwas Größeres."
+      ]
     ]
   }
 }

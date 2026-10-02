@@ -1,7 +1,7 @@
 {
   "phase": 3,
-  "milestone": "V03_ARENA_CASINO",
+  "milestone": "V04_FORGOTTEN_CANALS",
   "status": "PASSED",
-  "next_allowed": "V04_FORGOTTEN_CANALS",
+  "next_allowed": "V05_CHAPTER3_QUESTS_BOSS",
   "standing_owner_approval": true
 }

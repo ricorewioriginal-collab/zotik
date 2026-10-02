@@ -186,6 +186,12 @@ func validate() -> Array[String]:
 		elif p.kind == "sequence":
 			if p.solution.any(func(v): return v < 0 or v >= p.nodes):
 				e.append("%s: invalid sequence" % id)
+		elif p.kind == "valves":
+			var n := int(p.channels)
+			if p.initial.size() != n or p.solution.size() != n or p.valve_map.is_empty() or p.valve_map.any(func(m): return m.is_empty() or m.any(func(c): return c < 0 or c >= n)):
+				e.append("%s: invalid valve setup" % id)
+			elif p.solution == p.initial or not PuzzleLogic.valves_solvable(p):
+				e.append("%s: valves trivial or unsolvable" % id)
 		else:
 			e.append("%s: unknown puzzle kind" % id)
 		if p.get("hints", []).is_empty():

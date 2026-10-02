@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T11:00:01",
+  "last_run": "2026-10-02T11:05:41",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 156,
+  "passed": 161,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -629,6 +629,26 @@
     },
     {
       "id": "test_v03_arena_casino::test_casino_entrance_and_persistence",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v04_canals::test_tibor_opens_canal_gate",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v04_canals::test_valves_logic",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v04_canals::test_validator_rejects_bad_valves",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v04_canals::test_canal_dungeon_in_world",
+      "result": "PASS"
+    },
+    {
+      "id": "test_v04_canals::test_rostgolem_miniboss_persists",
       "result": "PASS"
     }
   ]

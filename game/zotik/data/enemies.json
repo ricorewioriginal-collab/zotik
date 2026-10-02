@@ -287,5 +287,36 @@
     ],
     "break": 35,
     "break_duration": 3.0
+  },
+  "ENEMY_ROSTGOLEM_001": {
+    "name": "Rostgolem",
+    "region": "WORLD_VALDORIA",
+    "description": "Ein alter Schleusenwächter aus Eisen und Moos. Langsam, aber jeder Schlag sitzt – Break öffnet seine Panzerung.",
+    "hp": 220,
+    "attack": 16,
+    "defense": 7,
+    "move_speed": 1.9,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 2.0,
+    "currency": 90,
+    "drops": [
+      {
+        "id": "ITEM_SCRAP_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 90,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_VAL_ROSTGOLEM_DEFEATED"
+      }
+    ]
   }
 }

@@ -56,5 +56,15 @@
       }
     ],
     "currency": 70
+  },
+  "CHEST_VAL_001": {
+    "area": "AREA_VAL_CANALS",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 70
   }
 }

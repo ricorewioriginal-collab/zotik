@@ -404,6 +404,24 @@
     "area": "AREA_VAL_CANAL_GATE",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_VAL_CANALS_OPEN"
+          }
+        ],
+        "dialogue": "DLG_TIBOR_OPEN_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_VAL_ROSTGOLEM_DEFEATED"
+          }
+        ],
+        "dialogue": "DLG_TIBOR_GOLEM_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_TIBOR_IDLE_001"
       }

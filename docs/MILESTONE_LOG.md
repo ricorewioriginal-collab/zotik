@@ -375,3 +375,21 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Arena wins and casino statistics are additive save fields with defaults, so schema v2 still loads.
 - Tests: `tests/unit/test_v03_arena_casino.gd` (7 tests).
 - Regression: 156/156 tests plus restart checks for chapters 1 and 2: PASS.
+
+## V04 Forgotten canals – PASSED
+- **Kanaltor:** on first talk, Tibor opens the canal gate (`FLAG_VAL_CANALS_OPEN`); the gate prop disappears. He has follow-up lines afterwards and after the golem.
+- **Vergessene Kanäle** (`AREA_VAL_CANALS`): Kanalschleim ×3 and Schleusenkrabbe, a chest (Elixier, 70 Lun) and a savepoint.
+  - A flooded channel blocks the way north until the puzzle is solved.
+- **New puzzle kind `valves`** (`PUZ_VAL_VALVES_001`):
+  - Each valve flips the water level of its channels; the puzzle is solved when every channel is empty.
+  - Channel gauges (West/Mitte/Ost) show the current state, and a notification follows each turn.
+  - Reset, hints (3 tiers) and the "stays solved" rule work as for the other puzzles.
+  - `Content` rejects valve setups that are malformed, already solved at the start, or unsolvable.
+  - Solving sets `FLAG_VAL_CANALS_DRAINED`: the water disappears and the cistern opens.
+- **Alte Zisterne** (`AREA_VAL_CISTERN`): miniboss **Rostgolem** (220 HP, DEF 7, Break 90).
+  - He is persistent, sets `FLAG_VAL_ROSTGOLEM_DEFEATED` and drops Altmetall ×3 and a Hi-Potion.
+  - The sealed floodgate at the back leads to the boss in V05.
+- Canal enemies have their own placeholder colours and sizes.
+- Test adjustment: `test_p02_reachability` now treats props removed by a flag (`hidden_by_flag`) as open. This matches its documented intent ("with every gate open").
+- Tests: `tests/unit/test_v04_canals.gd` (5 tests).
+- Regression: 161/161 tests plus restart checks: PASS.

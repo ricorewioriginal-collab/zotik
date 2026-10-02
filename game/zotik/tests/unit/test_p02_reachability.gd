@@ -1,7 +1,8 @@
 extends TestCase
 ## Level sanity: with every gate open, every entity and exit of each area is
 ## reachable on foot from the default spawn (grid flood fill over floors,
-## minus collidable props inflated by the player radius).
+## minus collidable props inflated by the player radius; props removed by a
+## flag count as open).
 
 const CELL := 0.5
 const RADIUS := 0.4
@@ -10,7 +11,7 @@ const RADIUS := 0.4
 func _blocked_boxes(l: Dictionary) -> Array:
 	var out := []
 	for p in l.get("props", []):
-		if p.get("collision", true) and not p.has("requires_flag"):
+		if p.get("collision", true) and not p.has("requires_flag") and not p.has("hidden_by_flag"):
 			var c := WorldArea._v(p.pos)
 			var s := WorldArea._v(p.size)
 			if c.y - s.y / 2.0 < 1.0:  # only obstacles at walking height

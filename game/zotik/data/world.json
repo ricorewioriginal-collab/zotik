@@ -21,6 +21,11 @@
       "area": "AREA_ELA_DUNGEON",
       "name": "Weltenanker im Herz des Waldes",
       "heals": true
+    },
+    "SAVEPOINT_VAL_CANALS_001": {
+      "area": "AREA_VAL_CANALS",
+      "name": "Weltenanker in den Kanälen",
+      "heals": true
     }
   },
   "uniques": {

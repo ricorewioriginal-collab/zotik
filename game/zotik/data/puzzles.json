@@ -94,5 +94,54 @@
       "Erst der Mond, dann das, was unter ihm wächst. Das Feuer kommt zuletzt.",
       "Mond, dann Blatt, dann Kristall, dann Flamme."
     ]
+  },
+  "PUZ_VAL_VALVES_001": {
+    "name": "Schleusenventile",
+    "area": "AREA_VAL_CANALS",
+    "kind": "valves",
+    "channels": 3,
+    "channel_labels": [
+      "West",
+      "Mitte",
+      "Ost"
+    ],
+    "valve_map": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        0
+      ]
+    ],
+    "initial": [
+      1,
+      1,
+      1
+    ],
+    "solution": [
+      0,
+      0,
+      0
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_VAL_CANALS_DRAINED"
+      },
+      {
+        "type": "give_currency",
+        "amount": 60
+      }
+    ],
+    "hints": [
+      "Jedes Ventil kippt mehrere Kanäle zugleich: volle laufen leer, leere laufen voll.",
+      "Das linke Ventil ist eine Falle – es flutet den Mittelkanal wieder, wenn er schon leer ist.",
+      "Mittleres Ventil einmal, dann rechtes Ventil einmal."
+    ]
   }
 }
