@@ -500,3 +500,52 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - publishing the APK with the rolling release
 - The APK cannot be built in this container: there is no Android SDK or template here. The build is therefore verified only by CI. It has not been tested on a real device.
 - Tests: `tests/unit/test_a01_touch.gd` (3 tests). Regression: 184/184 tests plus restart checks: PASS.
+
+## A01 follow-up – owner device test (2026-10-02)
+- The owner tested the APK and found the controls "buggy". Two root causes were found and fixed:
+  1. Android turns every touch into an emulated left click, and `attack` is bound to the left mouse button, so every stick, camera or button touch also attacked. Mouse-button bindings are now removed while touch mode is on and restored when it is off.
+  2. The stick sent its "release" only if `Input.is_action_pressed` already reported the action. Input is buffered until the next frame, so a quick flick left Zotik walking. The stick now tracks its own pressed actions.
+- The CI APK build is green, so A01 counts as PASSED. It still needs another device test by the owner.
+- Tests: `test_a01_touch` gained 2 regression tests; 5 in total.
+
+## G04 World dressing – PASSED
+- 40 curated CC0 models from the KayKit Medieval Hexagon pack (2.5 MB).
+  - Buildings replace the procedural houses, fitted inside the prop's collision footprint:
+    - homes A/B in the world colour (Lunaris blue, Elaris green, Valdoria red)
+    - blacksmith, market, church (library, research hall), tavern (guild hall)
+  - Trees use real tree models.
+- Backdrop beyond the walkable border (outdoors only, purely visual, exit openings left free):
+  - an inner row of trees, or town houses facing inwards in Valdoria
+  - an outer row of forest clusters
+  - halved density on Android and Web
+- The pack's hexagon hills and mountains were tried and rejected: they look blocky, which is exactly what the owner criticised.
+- **Bug fixed:** the invisible border colliders were drawn as 5 m fog-coloured walls, which showed as a grey band at the horizon. They are now collision-only.
+- Outdoor borders are a low stone edge, so the forest behind them stays visible.
+- Regression: 186/186 tests plus restart checks: PASS.
+
+## U01 UI overhaul – PASSED (owner request: Final Fantasy / Kingdom Hearts direction)
+- **Design system** `core/ui_style.gd`:
+  - dark navy glass panels with gold trim and crystal-blue highlights
+  - Cinzel for titles, Exo 2 for text (both OFL)
+  - saved as `assets/ui/zotik_theme.tres` and set as the project theme. A theme set only on the root window does not reach controls under a CanvasLayer. A test keeps the file in sync with the builder.
+- **HUD** (same API as before; all tests unchanged):
+  - top left: Zotik frame with a painted portrait, HP and Lun, plus party frames (portrait, name, role, HP, readiness bar)
+  - top right: a round minimap drawn from the layout data (no second 3D render, so it stays cheap on Android). It shows props, exits, NPCs, enemies, the objective and Zotik's facing.
+  - area title and an "Aktuelles Ziel" quest box
+  - boss bar in an ornate frame
+  - interaction prompt chip
+  - icon bar with drawn icons (Inventar, Quests, Bestiarium, Menü). On touch screens it moves under the party frames, and taps on it are not treated as stick or camera input.
+- **Dialogue box:** wide panel with a name plate (hidden for the narrator) and a bobbing continue arrow.
+- **Menus:** centred, themed, with Cinzel titles.
+- **Title screen:** the owner's party poster as key art, with a fade, themed buttons and the version number.
+- The glyph test now checks the UI fonts.
+- Tests: `tests/unit/test_u01_ui.gd` (3 tests).
+
+## U02 Companion HP – PASSED (owner request)
+- Lyra 110, Nia 120, Rovan 190 HP, each with their own defence. Saved in `GameState.party_hp`, an additive save field.
+- Enemies pick the nearest member who is still standing. Boss hazards hit companions too; Zotik's armour bonus is only removed for Zotik.
+- K.O. at 0 HP: a death pose, no actions, ignored by enemies. The companion gets up with 30 % HP once nearby fighting stops. Every full heal (savepoint, respawn, arena) restores the party.
+- Lyra heals the weakest member (Zotik or a companion).
+- HUD party frames show HP and "k.o.".
+- Logged as C-31. Tests: `tests/unit/test_u02_party_hp.gd` (5 tests).
+- Regression: 194/194 tests plus restart checks for chapters 1–3: PASS. The golden paths still pass with vulnerable companions.

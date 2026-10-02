@@ -145,6 +145,8 @@ func validate() -> Array[String]:
 			_ref(e, "items", r.id, id)
 	for id in table("party"):
 		_ref(e, "npcs", table("party")[id].get("npc", ""), id)
+		if int(table("party")[id].get("hp", 0)) <= 0:
+			e.append("%s: party member needs hp > 0" % id)
 	for id in table("items"):
 		var it: Dictionary = table("items")[id]
 		if it.get("type") in ["weapon", "accessory", "armor"] and not it.has("slot"):

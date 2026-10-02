@@ -62,7 +62,7 @@ func _erupt(h: Node3D, hz: Dictionary) -> void:
 		var flat := Vector2(target.global_position.x - h.global_position.x, target.global_position.z - h.global_position.z)
 		var hit := absf(flat.y) <= float(hz.width) / 2.0 if hz.get("kind", "") == "surge" else flat.length() <= float(hz.radius)
 		if hit:
-			target.take_damage(int(hz.damage) + Stats.defense())  # hazard ignores armour
+			target.take_damage(int(hz.damage) + (Stats.defense() if target is Player else 0))  # hazard ignores Zotik's armour
 	h.queue_free()
 
 

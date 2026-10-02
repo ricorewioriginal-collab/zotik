@@ -51,8 +51,28 @@ func test_buttons_emit_actions() -> void:
 	touch._on_release(0)
 	await frames(1)
 	check(not Input.is_action_pressed("attack"), "attack released")
-	eq(touch.action_at(Vector2(20 + 70, 96 + 28)), "menu", "menu button where the keyboard help was")
+	var menu_btn: Control = game.hud.icon_bar.get_node("Icon_menu")
+	check(game.hud.is_ui_at(menu_btn.get_global_rect().get_center()), "menu lives in the HUD icon bar")
+	touch._on_press(5, menu_btn.get_global_rect().get_center())
+	check(touch._camera_index == -1 and touch._stick_index == -1, "tap on the icon bar is not a stick or camera touch")
 	check(not game.hud.help_label.visible, "keyboard help hidden in touch mode")
+
+
+func test_taps_do_not_attack_in_touch_mode() -> void:
+	check(not InputMap.action_get_events("attack").any(func(e): return e is InputEventMouseButton), "no LMB attack while touch controls are on")
+	touch.force = false
+	touch._set_touch_bindings(false)
+	check(InputMap.action_get_events("attack").any(func(e): return e is InputEventMouseButton), "LMB attack restored for mouse players")
+
+
+func test_quick_stick_flick_releases() -> void:
+	var size_v := touch.get_viewport_rect().size
+	var origin := Vector2(200, size_v.y - 200)
+	touch._on_press(1, origin)
+	_drag(1, origin + Vector2(0, -110), Vector2(0, -110))
+	touch._on_release(1)  # released in the same frame, before the input flush
+	await frames(2)
+	eq(Input.get_action_strength("move_forward"), 0.0, "no stuck movement after a quick flick")
 
 
 func test_stick_moves_and_swipe_turns_camera() -> void:

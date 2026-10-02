@@ -38,6 +38,7 @@ func build(id: String, factories: Dictionary) -> void:
 	for w in [[Vector3(0, WALL_HEIGHT / 2, -hz), Vector3(size[0], WALL_HEIGHT, 1)], [Vector3(0, WALL_HEIGHT / 2, hz), Vector3(size[0], WALL_HEIGHT, 1)], [Vector3(-hx, WALL_HEIGHT / 2, 0), Vector3(1, WALL_HEIGHT, size[1])], [Vector3(hx, WALL_HEIGHT / 2, 0), Vector3(1, WALL_HEIGHT, size[1])]]:
 		_collider(w[0], w[1])
 	Look.build_boundary(self, area_id, layout, Vector2(size[0], size[1]), WALL_HEIGHT)
+	Look.build_backdrop(self, area_id, layout, Vector2(size[0], size[1]))
 	for p in layout.get("props", []):
 		var node := _prop("PLACEHOLDER_" + str(p.name), str(p.name), _v(p.pos), _v(p.size), Color.html(p.color), p.get("collision", true))
 		if p.has("requires_flag"):
@@ -162,7 +163,8 @@ func _prop(nm: String, prop_name: String, pos: Vector3, size: Vector3, color: Co
 
 func _collider(pos: Vector3, size: Vector3) -> void:
 	var body := _box("PLACEHOLDER_boundary", pos, size, Color.html(layout.get("ground", "#555555")).darkened(0.45), true)
-	body.name = "Boundary"
+	body.name = "BoundaryCollider"
+	body.get_child(1).visible = false  # the visible border comes from Look.build_boundary
 
 
 static func _v(a: Array) -> Vector3:

@@ -8,21 +8,47 @@ var buttons := {}
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var bg := ColorRect.new()
-	bg.color = Color(0.035, 0.055, 0.09)
-	bg.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(bg)
-	var center := CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(center)
+	var bg_color := ColorRect.new()
+	bg_color.color = Color(0.02, 0.03, 0.07)
+	bg_color.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	add_child(bg_color)
+	# owner's party poster (concept art, interim key art) with a dark fade
+	var art := TextureRect.new()
+	art.texture = load("res://assets/ui/title_bg.jpg")
+	art.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	add_child(art)
+	var fade := TextureRect.new()
+	var grad := Gradient.new()
+	grad.set_color(0, Color(0.02, 0.03, 0.07, 0.0))
+	grad.set_color(1, Color(0.02, 0.03, 0.07, 0.92))
+	var gt := GradientTexture2D.new()
+	gt.gradient = grad
+	gt.fill_from = Vector2(0, 0.35)
+	gt.fill_to = Vector2(0, 1)
+	fade.texture = gt
+	fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	fade.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	add_child(fade)
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 12)
-	center.add_child(box)
-	var title := Label.new()
-	title.text = "ZOTIK\nDie Splitter der Welten"
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 40)
-	box.add_child(title)
+	box.add_theme_constant_override("separation", 10)
+	box.set_anchors_and_offsets_preset(Control.PRESET_CENTER_BOTTOM)
+	box.offset_left = -200
+	box.offset_right = 200
+	box.offset_top = -250
+	box.offset_bottom = -40
+	box.alignment = BoxContainer.ALIGNMENT_END
+	box.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	add_child(box)
+	var version := Label.new()
+	version.text = "v" + App.VERSION
+	version.add_theme_color_override("font_color", UiStyle.TEXT_DIM)
+	version.add_theme_font_size_override("font_size", 14)
+	version.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	version.offset_left = -90
+	version.offset_top = -34
+	add_child(version)
 	_add_button(box, "new_game", "Neues Spiel", _on_new_game)
 	for slot in range(1, SaveSystem.SLOT_COUNT + 1):
 		var info := SaveSystem.slot_info(slot)
@@ -38,7 +64,9 @@ func _ready() -> void:
 func _add_button(box: Control, id: String, text: String, cb: Callable) -> void:
 	var b := Button.new()
 	b.text = text
-	b.custom_minimum_size = Vector2(260, 44)
+	b.custom_minimum_size = Vector2(400, 48)
+	b.add_theme_font_override("font", UiStyle.title_font())
+	b.add_theme_font_size_override("font_size", 20)
 	b.pressed.connect(cb)
 	box.add_child(b)
 	buttons[id] = b
