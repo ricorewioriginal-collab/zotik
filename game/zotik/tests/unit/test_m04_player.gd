@@ -126,3 +126,11 @@ func test_equipment_bonus() -> void:
 	eq(Stats.attack(), base + 18, "world blade attack bonus")
 	GameState.equipment["accessory"] = "ITEM_MOON_PENDANT_001"
 	eq(Stats.max_hp(), 105, "pendant max hp")
+
+
+func test_relative_scale_c23() -> void:
+	var zotik_h := 1.75 * ZotikVisual.SCALE
+	check(zotik_h > 1.1 and zotik_h < 1.3, "Zotik about 1.2 m (%.2f)" % zotik_h)
+	check(zotik_h < 1.8 * 0.8, "clearly smaller than human NPCs")
+	eq(player.visual.part_color("PLACEHOLDER_scarf"), Color.html("#3f8a4a"), "canonical green scarf by default")
+	check(player.visual.parts.has("PLACEHOLDER_shoulder_bag"), "brown shoulder bag (03_CHARACTERS)")

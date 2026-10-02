@@ -340,3 +340,12 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - New **armour slot** (`ARMOR_`, C-22): Lederwams and Kanalmantel. Also new: Stahlschwert and Elixier.
 - `data/lore.json` + `LoreBook` entity: readable library books shown in the dialogue box and validated like dialogue.
 - Tests: `tests/unit/test_v01_valdoria.gd` (4 tests).
+
+## Owner concept uploads (2026-10-02) – integrated
+- 20 concept boards were stored as JPEG in `reference/concept_2026-10-02/` (57 MB → 9.5 MB), with an index and status "concept, not approved".
+- Applied, consistent with written canon:
+  - Zotik's default scarf is now **green**. `03_CHARACTERS` says so; the earlier red default was wrong.
+  - He now has a brown shoulder bag.
+  - The placeholder scale follows the size comparison on the boards: Zotik ≈ 1.2 m; Rissling, Mondwolf and Orun are resized to match. Collision and camera were adjusted (C-23).
+- Logged instead of decided: C-24 to C-28 (human protagonist in demo images rejected, round-based combat concept, alternative world names, the "Felli"/Moosling companion, Lyra's hair colour and Nia's role).
+- C-20 resolved: the casino is wanted with virtual Lun and a family toggle. It is implemented in V03.

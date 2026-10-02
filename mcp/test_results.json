@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T10:43:46",
+  "last_run": "2026-10-02T10:48:20",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 144,
+  "passed": 145,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -277,6 +277,10 @@
     },
     {
       "id": "test_m04_player::test_equipment_bonus",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m04_player::test_relative_scale_c23",
       "result": "PASS"
     },
     {

@@ -1,10 +1,45 @@
 {
-  "COS_FUR_ORANGE_001": {"option": "fur_shade", "name": "Fell: Sonnenorange", "color": "#e8792b", "default": true},
-  "COS_FUR_ORANGE_002": {"option": "fur_shade", "name": "Fell: Kupferorange", "color": "#c85f1e"},
-  "COS_FUR_ORANGE_003": {"option": "fur_shade", "name": "Fell: Aprikose", "color": "#f2a05a"},
-  "COS_SCARF_RED_001": {"option": "scarf", "name": "Schal: Rot", "color": "#b8322c", "default": true},
-  "COS_SCARF_BLUE_001": {"option": "scarf", "name": "Schal: Mondblau", "color": "#3a5fb0"},
-  "COS_SCARF_GREEN_001": {"option": "scarf", "name": "Schal: Waldgrün", "color": "#3f8a4a"},
-  "COS_OUTFIT_ADVENTURER_001": {"option": "outfit", "name": "Abenteurerkluft", "color": "#7a5634", "default": true},
-  "COS_OUTFIT_TRAVELER_001": {"option": "outfit", "name": "Reisemantel", "color": "#4d5a6e"}
+  "COS_FUR_ORANGE_001": {
+    "option": "fur_shade",
+    "name": "Fell: Sonnenorange",
+    "color": "#e8792b",
+    "default": true
+  },
+  "COS_FUR_ORANGE_002": {
+    "option": "fur_shade",
+    "name": "Fell: Kupferorange",
+    "color": "#c85f1e"
+  },
+  "COS_FUR_ORANGE_003": {
+    "option": "fur_shade",
+    "name": "Fell: Aprikose",
+    "color": "#f2a05a"
+  },
+  "COS_SCARF_RED_001": {
+    "option": "scarf",
+    "name": "Schal: Rot",
+    "color": "#b8322c"
+  },
+  "COS_SCARF_BLUE_001": {
+    "option": "scarf",
+    "name": "Schal: Mondblau",
+    "color": "#3a5fb0"
+  },
+  "COS_SCARF_GREEN_001": {
+    "option": "scarf",
+    "name": "Schal: Waldgrün",
+    "color": "#3f8a4a",
+    "default": true
+  },
+  "COS_OUTFIT_ADVENTURER_001": {
+    "option": "outfit",
+    "name": "Abenteurerkluft",
+    "color": "#7a5634",
+    "default": true
+  },
+  "COS_OUTFIT_TRAVELER_001": {
+    "option": "outfit",
+    "name": "Reisemantel",
+    "color": "#4d5a6e"
+  }
 }
