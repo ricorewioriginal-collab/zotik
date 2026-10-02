@@ -1,1 +1,9 @@
-{"tests":[],"last_run":null,"result":"NOT_RUN"}
+{"last_run":"2026-10-02","engine":"4.7.stable.official.5b4e0cb0f","runner":"tools/audit/m00_checks.sh","result":"EXECUTED","tests":[
+{"id":"M00_A1_LEGACY_PROJECT_LOADS","result":"FAIL","detail":"project.godot line 26: Expected '}' or ','"},
+{"id":"M00_A2_LEGACY_PROJECT_LOADS_WITH_BRACE_FIX","result":"PASS"},
+{"id":"M00_A3_LEGACY_SCRIPTS_CHECK_ONLY","result":"PASS","detail":"6/6 scripts"},
+{"id":"M00_A4_LEGACY_BREAK_SINGLE_EMIT","result":"FAIL","detail":"break_completed emitted 3x, break_started 0x"},
+{"id":"M00_A4_LEGACY_TIMELINE_SPEED","result":"FAIL","detail":"fires on advance(0); speed ignored"},
+{"id":"M00_A4_LEGACY_SAVE_TYPES","result":"FAIL","detail":"int restored as float"},
+{"id":"M00_A4_LEGACY_SAVE_CORRUPT_BACKUP","result":"FAIL","detail":"corrupt slot returns {} without backup"}
+],"note":"M00 records the legacy state; FAIL entries are findings, not M00 failures."}
