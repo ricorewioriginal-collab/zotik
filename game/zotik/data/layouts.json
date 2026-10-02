@@ -1360,7 +1360,17 @@
         "color": "#6a6a5a"
       }
     ],
-    "entities": []
+    "entities": [
+      {
+        "type": "puzzle",
+        "id": "PUZ_ELA_TURM_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ]
   },
   "AREA_ELA_DUNGEON": {
     "size": [

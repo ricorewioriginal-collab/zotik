@@ -93,5 +93,11 @@
     },
     "price": 150,
     "stack": 1
+  },
+  "ITEM_MEMORY_CRYSTAL_001": {
+    "name": "Erinnerungskristall",
+    "type": "material",
+    "price": 30,
+    "stack": 99
   }
 }

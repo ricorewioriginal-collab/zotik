@@ -47,6 +47,9 @@ func test_legacy_items_migrated() -> void:
 
 
 func test_dialogues_marked_placeholder() -> void:
+	# Invented text must be marked placeholder (C-10); only text copied from
+	# a project document may be final, and it must cite its source.
 	for t in ["dialogues", "cutscenes"]:
 		for id in Content.table(t):
-			check(Content.get_entry(t, id).get("placeholder", false), "%s must be marked placeholder (C-10)" % id)
+			var d := Content.get_entry(t, id)
+			check(d.get("placeholder", false) or str(d.get("source", "")).length() > 5, "%s must be placeholder or cite a source (C-10)" % id)

@@ -272,3 +272,14 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
 - Party data for Nia (archer) and Rovan (melee guardian with a higher Break value). The companion AI now handles melee and non-healers.
 - Validation: platform entities (`PLATFORM_`, target, period). The reachability test counts platform sweeps as floor. It found a real gap at the ravine edges, fixed by extending the platform travel.
 - Tests: `tests/unit/test_e04_elaris.gd` (6 tests, including a physical platform ride and a ravine fall).
+
+## E05 Puzzles: Turm der Erinnerung – PASSED
+- `PUZ_ELA_TURM_001` implements spec `ELARIS_TURM_01` (`20_RIDDLES`):
+  - four symbol pillars (Flamme, Mond, Kristall, Blatt in physical order), each showing its symbol
+  - the order must be Mond → Blatt → Kristall → Flamme
+  - a wrong symbol resets the attempt (RESET_FAILURE); manual reset (T) and hints at levels 1–3 (H, level 3 = solution) are available
+- Reward as specified: the key to the inner area (`FLAG_ELA_TOWER_SOLVED`), 80 Lun, Elaris lore and rare materials (2× Erinnerungskristall).
+- The completion epilogue `CUT_ELA_TURM_EPILOG_001` uses the **verbatim demo dialogue from the spec** (Zotik/Nia/Rovan). It is the first non-placeholder text, and it cites its source. The content test now requires that every dialogue is either a placeholder or cites a project document.
+- The "moving paths" from `04_WORLDS` were implemented as a traversal mechanic in E04 (moving platforms), not as a separate switch puzzle. The plan was adjusted accordingly.
+- The glyph guard caught an "→" in a hint that would have rendered as a box on web; it was rephrased.
+- Tests: `tests/unit/test_e05_tower.gd` (4 tests).

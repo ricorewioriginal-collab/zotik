@@ -28,7 +28,7 @@ All of this must be reachable from a Phase-1 save, including saves created befor
 | E02 | Party foundation (Lyra) | Lyra follows, fights at range, heals when Zotik is low, cannot block progress, persists |
 | E03 | Break system | Break gauge per enemy; strong attack and party hits reduce it; full break → stun window with bonus damage; telegraphs interruptible |
 | E04 | Elaris greybox & content | city, research quarter, craftsmen, living forest with moving paths, tower, dungeon, arena; NPCs, enemies, shop — validated data |
-| E05 | Puzzles | ELARIS_TURM_01 (Mond → Blatt → Kristall → Flamme, RESET_FAILURE) + moving-path switch puzzle |
+| E05 | Puzzles | ELARIS_TURM_01 (Mond → Blatt → Kristall → Flamme, RESET_FAILURE); moving paths are a traversal mechanic (E04) |
 | E06 | Chapter-2 quests | main quest QUEST_MAIN_ELA_001, one side quest, party joins (Nia, Rovan per C-16) |
 | E07 | Boss Wurzelkönigin | multi-phase boss using Break, root summons, arena hazards |
 | E08 | Chapter-2 regression | golden path Elaris + restart check + Phase-1 regression unchanged |

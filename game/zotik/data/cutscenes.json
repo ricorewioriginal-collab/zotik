@@ -101,5 +101,35 @@
         "id": "FLAG_ELA_LYRA_JOINED"
       }
     ]
+  },
+  "CUT_ELA_TURM_EPILOG_001": {
+    "placeholder": false,
+    "source": "20_RIDDLES/RIDDLE_SYSTEM.md (Demo-Dialog / Epilog)",
+    "lines": [
+      [
+        "CHAR_ZOTIK",
+        "Geschafft."
+      ],
+      [
+        "NPC_NIA_001",
+        "Du hast gerade eine uralte Weltenmaschine geknackt und sagst einfach ‚geschafft‘?"
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Was soll ich sonst sagen?"
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Vielleicht nichts. Die Tür ist offen."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Das ist ein gutes Argument."
+      ],
+      [
+        "NARRATOR",
+        "Elaris-Lore: Der Turm speicherte einst die Erinnerungen des Waldes, bevor der Große Bruch sie zerstreute."
+      ]
+    ]
   }
 }

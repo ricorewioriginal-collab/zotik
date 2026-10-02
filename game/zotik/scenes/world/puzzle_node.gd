@@ -26,7 +26,20 @@ func _ready() -> void:
 		var it := Interactable.new()
 		it.name = "Part_%d" % i
 		it.position = Vector3(-2.0 * (n - 1) / 2.0 + 2.0 * i, 0, 0)
-		it.prompt = "Mondscheibe drehen" if d.kind == "dials" else "Kristall %d anschlagen" % (i + 1)
+		var labels: Array = d.get("node_labels", [])
+		if d.kind == "dials":
+			it.prompt = "Mondscheibe drehen"
+		elif i < labels.size():
+			it.prompt = "Symbolsäule „%s“ aktivieren" % labels[i]
+			var sym := Label3D.new()
+			sym.text = labels[i]
+			sym.font_size = 72
+			sym.outline_size = 14
+			sym.position.y = 2.2
+			sym.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			it.add_child(sym)
+		else:
+			it.prompt = "Kristall %d anschlagen" % (i + 1)
 		it.interacted.connect(_on_part.bind(i))
 		add_child(it)
 		parts.append(it)
