@@ -11,6 +11,6 @@ func refresh() -> void:
 		var q := Content.get_entry("quests", id)
 		match Conditions.quest_state(id):
 			"ACTIVE":
-				add_row("%s %s\n    → %s" % ["★" if q.type == "main" else "•", q.name, Quests.objective(id)], [])
+				add_row("%s %s\n      Ziel: %s" % ["»" if q.type == "main" else "•", q.name, Quests.objective(id)], [])
 			"COMPLETED":
-				add_row("✓ %s (abgeschlossen)" % q.name, [])
+				add_row("[erledigt] %s" % q.name, [])

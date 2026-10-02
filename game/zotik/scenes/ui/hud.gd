@@ -44,7 +44,7 @@ func _ready() -> void:
 	hurt_flash.color = Color(0.9, 0.1, 0.1, 0.0)
 	hurt_flash.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(hurt_flash)
-	help_label = _label(Vector2(20, 520), 15)
+	help_label = _label(Vector2(20, 90), 15)
 	help_label.text = HELP_TEXT
 	help_label.visible = Settings.get_value("show_controls")
 	EventBus.notify.connect(show_notification)
@@ -69,19 +69,20 @@ func _process(delta: float) -> void:
 		boss_bar.max_value = boss.max_hp
 		boss_bar.value = boss.hp
 	hurt_flash.color.a = maxf(0.0, hurt_flash.color.a - delta * 1.2)
+	help_label.visible = bool(Settings.get_value("show_controls")) and not Dialogue.is_active()
 	if _notify_time > 0.0:
 		_notify_time -= delta
 		if _notify_time <= 0.0:
 			notify_label.text = ""
 
 
-const HELP_TEXT := "WASD bewegen · Maus/←→ Kamera · Leertaste springen\nLinksklick/J angreifen · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
+const HELP_TEXT := "WASD bewegen · Maus/Pfeiltasten Kamera · Leertaste springen\nLinksklick/J angreifen · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
 
 
 func toggle_help() -> void:
-	help_label.visible = not help_label.visible
-	Settings.set_value("show_controls", help_label.visible)
+	Settings.set_value("show_controls", not Settings.get_value("show_controls"))
 	Settings.save_settings()
+	help_label.visible = Settings.get_value("show_controls")
 
 
 func flash_hurt() -> void:

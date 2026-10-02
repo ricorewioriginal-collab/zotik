@@ -180,7 +180,7 @@ func toggle_quest_log() -> void:
 func _update_objective() -> void:
 	var lines := []
 	for id in Quests.active_quests():
-		lines.append(("★ " if id == Quests.MAIN else "• ") + Quests.objective(id))
+		lines.append(("» " if id == Quests.MAIN else "• ") + Quests.objective(id))
 	hud.set_objective("\n".join(lines))
 	update_beacon.call_deferred()
 
