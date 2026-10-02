@@ -11,6 +11,7 @@ var prompt_label: Label
 var notify_label: Label
 var boss_label: Label
 var help_label: Label
+var touch_mode := false  # keyboard help is hidden while touch controls are shown
 var hurt_flash: ColorRect
 var boss_bar: ProgressBar
 var _notify_time := 0.0
@@ -73,7 +74,7 @@ func _process(delta: float) -> void:
 		boss_bar.max_value = boss.max_hp
 		boss_bar.value = boss.hp
 	hurt_flash.color.a = maxf(0.0, hurt_flash.color.a - delta * 1.2)
-	help_label.visible = bool(Settings.get_value("show_controls")) and not Dialogue.is_active()
+	help_label.visible = bool(Settings.get_value("show_controls")) and not Dialogue.is_active() and not touch_mode
 	if _notify_time > 0.0:
 		_notify_time -= delta
 		if _notify_time <= 0.0:

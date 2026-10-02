@@ -27,6 +27,7 @@ var bestiary_menu: BestiaryMenu
 var arena_menu: ArenaMenu
 var casino_menu: CasinoMenu
 var arena_run: ArenaRun
+var touch: TouchControls
 var companions := {}  # PARTY_* -> Companion
 var beacon: ObjectiveBeacon
 var beacon_target := ""  # entity key or "exit:<area>"
@@ -74,6 +75,9 @@ func _ready() -> void:
 	casino_menu.closed.connect(_update_control)
 	arena_run = ArenaRun.new()
 	add_child(arena_run)
+	touch = TouchControls.new()
+	touch.game = self
+	ui.add_child(touch)
 	EventBus.menu_requested.connect(func(m): open_menu(arena_menu if m == "arena" else casino_menu))
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
@@ -131,7 +135,8 @@ func _update_control() -> void:
 func _update_mouse() -> void:
 	if DisplayServer.get_name() == "headless":
 		return
-	var want := Input.MOUSE_MODE_CAPTURED if player.control_enabled and not player.dead else Input.MOUSE_MODE_VISIBLE
+	var capture := player.control_enabled and not player.dead and not (touch and (touch.force or TouchControls.wanted()))
+	var want := Input.MOUSE_MODE_CAPTURED if capture else Input.MOUSE_MODE_VISIBLE
 	if Input.mouse_mode != want:
 		Input.mouse_mode = want
 

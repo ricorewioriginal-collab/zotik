@@ -82,4 +82,10 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("13_kanalwaechter")
+	game.enter_area("AREA_VAL_MARKET", "default")
+	game.player.global_position = Vector3(0, 0, 12)
+	game.touch.force = true
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("14_android_touch_controls")
 	quit()

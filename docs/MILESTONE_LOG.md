@@ -481,3 +481,22 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Animation from the enemy state: idle bob, walk cycle, wind-up rear-back, strike lunge, dazed wobble while broken. Hit and wind-up tints still work. Defeat shows a short burst of rift light.
 - Rift and crystal glow is toned down so it keeps its colour instead of blowing out to white.
 - Tests: `tests/unit/test_g03_creatures.gd` (3 tests). Regression: 181/181 tests plus restart checks: PASS.
+
+## A01 Android – implemented; APK build verified by CI only
+- **Touch controls** (`scenes/ui/touch_controls.gd`). They are active on Android or any touch screen, and can be forced via "Touch-Steuerung" in the pause menu.
+  - virtual stick on the left
+  - swipe on the right half to turn the camera
+  - action buttons: Angriff, Stark, Ausweichen, Springen, Benutzen, Block, Trank
+  - menu buttons: Menü, Inventar, Quests, Bestiarium
+
+  They send the same input actions as keyboard and gamepad, so gameplay is unchanged. Behaviour:
+  - Hidden during dialogue (a tap advances it) and while menus are open (menus are touchable).
+  - The keyboard help is hidden and the mouse is not captured in touch mode.
+- Landscape (sensor) orientation and `expand` aspect for phone screens. ETC2/ASTC texture import is on; Android uses the compatibility renderer (`rendering_method.mobile`).
+- **Export preset "Android":** arm64-v8a, package `de.zotik.splitterderwelten`, immersive mode.
+- **CI** (`build.yml`) adds:
+  - Java 17, the runner's Android SDK, a generated debug keystore and Godot's Android template
+  - export of `ZOTIK-android-arm64.apk` (debug-signed), checking the arm64 library is inside
+  - publishing the APK with the rolling release
+- The APK cannot be built in this container: there is no Android SDK or template here. The build is therefore verified only by CI. It has not been tested on a real device.
+- Tests: `tests/unit/test_a01_touch.gd` (3 tests). Regression: 184/184 tests plus restart checks: PASS.

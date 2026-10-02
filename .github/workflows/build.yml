@@ -1,6 +1,6 @@
 name: build
 
-# Exports playable builds (Windows, Linux, Web). On main they are published
+# Exports playable builds (Windows, Linux, Web, Android APK). On main they are published
 # as the rolling GitHub release "phase1-latest"; the web build is also
 # deployed to GitHub Pages when Pages is enabled for the repository.
 on:
@@ -33,7 +33,7 @@ jobs:
           path: |
             ~/godot
             ~/.local/share/godot/export_templates
-          key: godot-export-${{ env.GODOT_VERSION }}
+          key: godot-export-${{ env.GODOT_VERSION }}-android
       - name: Download Godot and templates
         if: steps.cache.outputs.cache-hit != 'true'
         run: |
@@ -44,20 +44,35 @@ jobs:
           mv ~/godot/Godot_v${GODOT_VERSION}_linux.x86_64 ~/godot/godot
           curl -sSL -o /tmp/templates.tpz "$base/Godot_v${GODOT_VERSION}_export_templates.tpz"
           unzip -q /tmp/templates.tpz -d /tmp/tpl
-          for f in windows_release_x86_64.exe linux_release.x86_64 web_nothreads_release.zip version.txt; do
+          for f in windows_release_x86_64.exe linux_release.x86_64 web_nothreads_release.zip android_debug.apk android_release.apk version.txt; do
             mv /tmp/tpl/templates/$f ~/.local/share/godot/export_templates/4.7.stable/
           done
           rm -rf /tmp/tpl /tmp/templates.tpz
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Configure Android export (SDK, debug keystore)
+        run: |
+          mkdir -p ~/.config/godot
+          printf '[gd_resource type="EditorSettings" format=3]\n\n[resource]\nexport/android/android_sdk_path = "%s"\nexport/android/java_sdk_path = "%s"\n' "$ANDROID_SDK_ROOT" "$JAVA_HOME" > ~/.config/godot/editor_settings-4.7.tres
+          keytool -genkeypair -v -keystore ~/debug.keystore -storepass android -alias androiddebugkey -keypass android \
+            -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+          echo "GODOT_ANDROID_KEYSTORE_DEBUG_PATH=$HOME/debug.keystore" >> "$GITHUB_ENV"
+          echo "GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey" >> "$GITHUB_ENV"
+          echo "GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android" >> "$GITHUB_ENV"
       - name: Import project
         run: ~/godot/godot --headless --path game/zotik --import || true
       - name: Export
         run: |
-          mkdir -p build/windows build/linux build/web
+          mkdir -p build/windows build/linux build/web build/android
           ~/godot/godot --headless --path game/zotik --export-release "Windows Desktop" ../../build/windows/ZOTIK.exe
           ~/godot/godot --headless --path game/zotik --export-release "Linux" ../../build/linux/ZOTIK.x86_64
           ~/godot/godot --headless --path game/zotik --export-release "Web" ../../build/web/index.html
+          ~/godot/godot --headless --path game/zotik --export-debug "Android" ../../build/android/ZOTIK.apk
           ls -la build/*
-          test -s build/windows/ZOTIK.exe && test -s build/linux/ZOTIK.x86_64 && test -s build/web/index.html
+          test -s build/windows/ZOTIK.exe && test -s build/linux/ZOTIK.x86_64 && test -s build/web/index.html && test -s build/android/ZOTIK.apk
+          unzip -l build/android/ZOTIK.apk | grep -q "lib/arm64-v8a/libgodot_android.so"
       - name: Smoke test Linux build (boots and reaches the title)
         run: |
           out=$(timeout 60 build/linux/ZOTIK.x86_64 --headless --quit-after 120 2>&1 || true)
@@ -71,11 +86,14 @@ jobs:
           (cd windows && zip -qr ../ZOTIK-windows-x86_64.zip .)
           (cd linux && zip -qr ../ZOTIK-linux-x86_64.zip .)
           (cd web && zip -qr ../ZOTIK-web.zip .)
-          ls -la *.zip
+          cp android/ZOTIK.apk ZOTIK-android-arm64.apk
+          ls -la *.zip *.apk
       - uses: actions/upload-artifact@v4
         with:
           name: zotik-builds
-          path: build/*.zip
+          path: |
+            build/*.zip
+            build/*.apk
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main'
         with:
@@ -86,9 +104,9 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release delete phase1-latest --yes --cleanup-tag || true
-          gh release create phase1-latest build/*.zip \
+          gh release create phase1-latest build/*.zip build/*.apk \
             --title "ZOTIK Phase 1 – aktueller Build" \
-            --notes "Automatischer Build von ${GITHUB_SHA::7}. Windows: ZIP entpacken, ZOTIK.exe starten. Linux: ZOTIK.x86_64 starten. Web: im Browser über GitHub Pages (falls aktiviert) oder lokal mit einem Webserver. Alle Grafiken, Sounds und Dialogtexte sind Platzhalter." \
+            --notes "Automatischer Build von ${GITHUB_SHA::7}. Windows: ZIP entpacken, ZOTIK.exe starten. Linux: ZOTIK.x86_64 starten. Android: ZOTIK-android-arm64.apk aufs Handy laden und installieren (Installation aus unbekannten Quellen erlauben). Web: im Browser über GitHub Pages (falls aktiviert) oder lokal mit einem Webserver. Alle Grafiken, Sounds und Dialogtexte sind Platzhalter." \
             --prerelease
 
   pages:

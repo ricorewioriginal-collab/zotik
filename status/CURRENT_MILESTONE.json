@@ -1,7 +1,7 @@
 {
   "phase": "graphics",
-  "milestone": "G03_ENEMIES_BOSSES",
-  "status": "PASSED",
-  "next_allowed": "A01_ANDROID",
+  "milestone": "A01_ANDROID",
+  "status": "IMPLEMENTED_CI_PENDING",
+  "next_allowed": "G04_WORLD_DRESSING",
   "standing_owner_approval": true
 }

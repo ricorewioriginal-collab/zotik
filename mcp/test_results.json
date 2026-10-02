@@ -1,12 +1,24 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T11:57:24",
+  "last_run": "2026-10-02T12:09:46",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 181,
+  "passed": 184,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
+    {
+      "id": "test_a01_touch::test_visible_only_when_wanted_and_free",
+      "result": "PASS"
+    },
+    {
+      "id": "test_a01_touch::test_buttons_emit_actions",
+      "result": "PASS"
+    },
+    {
+      "id": "test_a01_touch::test_stick_moves_and_swipe_turns_camera",
+      "result": "PASS"
+    },
     {
       "id": "test_e01_travel::test_worlds_data_and_unlock",
       "result": "PASS"
