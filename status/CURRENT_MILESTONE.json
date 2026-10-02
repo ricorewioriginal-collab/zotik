@@ -1,7 +1,7 @@
 {
   "phase": "graphics",
-  "milestone": "G01_LOOK_RENDERER",
+  "milestone": "G02_ANIMATED_CHARACTERS",
   "status": "PASSED",
-  "next_allowed": "G02_ANIMATED_CHARACTERS",
+  "next_allowed": "G03_ENEMIES_BOSSES",
   "standing_owner_approval": true
 }

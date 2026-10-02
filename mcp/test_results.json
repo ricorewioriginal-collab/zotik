@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T11:34:00",
+  "last_run": "2026-10-02T11:51:08",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 175,
+  "passed": 178,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -173,6 +173,18 @@
     },
     {
       "id": "test_g01_look::test_props_keep_names_collision_and_textures",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g02_characters::test_zotik_rig_is_a_fox_not_a_human",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g02_characters::test_zotik_animation_follows_state",
+      "result": "PASS"
+    },
+    {
+      "id": "test_g02_characters::test_companions_and_npcs_use_rigs",
       "result": "PASS"
     },
     {

@@ -3,7 +3,7 @@
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
 CURRENT PHASE: Graphics pass + Android (owner request 2026-10-02, see docs/GRAPHICS_PLAN.md)
-CURRENT MILESTONE: G01_LOOK_RENDERER
+CURRENT MILESTONE: G02_ANIMATED_CHARACTERS
 STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06)
 
 ## Mandatory workflow

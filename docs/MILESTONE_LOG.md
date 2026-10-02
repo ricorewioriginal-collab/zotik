@@ -445,3 +445,24 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - rifts and crystals glow
 - Visible area borders (hedge, town wall or cave rock) with openings at exits. Outdoor ground continues into the fog.
 - Tests: `tests/unit/test_g01_look.gd` (4 tests).
+
+## G02 Animated characters – PASSED
+- `scenes/world/character_rig.gd`: a shared rig on CC0 KayKit models (5 models, 75 animations each). It scales to a target height and faces the game's forward direction (-Z), and supports:
+  - idle/walk/run locomotion and one-shot actions (attack, strong attack, cast, hit, dodge, block, death)
+  - choosing visible weapons, hiding body parts, attaching meshes to bones
+  - palette recolouring and tinting
+- **Zotik:**
+  - Rig body recoloured to his fur shade and outfit colour (follows the character creator).
+  - The human head is hidden. A fox head (muzzle, nose, green eyes with pupils, cheek fluff, large ears with light inner fur, hair tuft), the green scarf, light chest fur, a bushy tail with a light tip, the shoulder bag and the blade are attached to the bones, so they animate with him.
+  - Animations follow the gameplay state: run/walk/idle, light or strong attack, dodge, block, hit, death.
+  - `ZotikVisual`'s API is unchanged; the customization and scale tests still pass.
+- **Companions:**
+  - Lyra: mage with staff.
+  - Nia: hooded archer with crossbow.
+  - Rovan: barbarian guardian with axe and shield.
+  - Walk/run animations follow movement; casts or swings play on attacks.
+- **NPCs:** a model and height each, tinted with their colour.
+- Formation slots moved further to the sides and the camera pulled back slightly (4.2 → 5.0 m), so the wider models do not fill the screen.
+- Conflict C-29 logged: chibi interim proportions versus the owner's target look.
+- Tests: `tests/unit/test_g02_characters.gd` (3 tests).
+- Regression: 178/178 tests plus restart checks: PASS.
