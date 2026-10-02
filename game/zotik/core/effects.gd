@@ -24,4 +24,9 @@ static func apply(fx: Dictionary) -> void:
 		"open_shop": EventBus.shop_requested.emit(fx.id)
 		"play_cutscene": EventBus.cutscene_requested.emit(fx.id)
 		"travel": EventBus.travel_requested.emit(fx.area, fx.spawn)
+		"join_party":
+			if not fx.id in GameState.party:
+				GameState.party.append(fx.id)
+				EventBus.party_changed.emit()
+				EventBus.notify.emit("%s schließt sich dir an!" % Content.get_entry("party", fx.id).name)
 		_: push_error("Effects: unknown effect %s" % fx)

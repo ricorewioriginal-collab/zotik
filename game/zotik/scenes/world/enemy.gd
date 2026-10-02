@@ -6,13 +6,15 @@ extends CharacterBody3D
 
 signal hp_changed(hp: int, max_hp: int)
 signal defeated(enemy: Enemy)
+signal break_started(enemy: Enemy)
+signal break_ended(enemy: Enemy)
 
-enum State { IDLE, CHASE, WINDUP, RECOVER, DEAD }
+enum State { IDLE, CHASE, WINDUP, RECOVER, BROKEN, DEAD }
 
 const WINDUP_TIME := 0.5
 const GRAVITY := 18.0
-const COLORS := {"ENEMY_TRAINING_DUMMY_001": "#b08a5a", "ENEMY_RIFTLING_001": "#7a4ad8", "ENEMY_MOONWOLF_001": "#9ab0d8", "BOSS_ORUN_001": "#4a2a7a"}
-const SIZES := {"ENEMY_TRAINING_DUMMY_001": 0.9, "ENEMY_RIFTLING_001": 0.7, "ENEMY_MOONWOLF_001": 1.2, "BOSS_ORUN_001": 2.2}
+const COLORS := {"ENEMY_TRAINING_DUMMY_001": "#b08a5a", "ENEMY_RIFTLING_001": "#7a4ad8", "ENEMY_MOONWOLF_001": "#9ab0d8", "BOSS_ORUN_001": "#4a2a7a", "ENEMY_PILZLING_001": "#c87a9a", "ENEMY_DORNENWOLF_001": "#5a7a3a", "ENEMY_WURZELKRIECHER_001": "#5a4a2a", "BOSS_WURZELKOENIGIN_001": "#4a6a2a"}
+const SIZES := {"ENEMY_TRAINING_DUMMY_001": 0.9, "ENEMY_RIFTLING_001": 0.7, "ENEMY_MOONWOLF_001": 1.2, "BOSS_ORUN_001": 2.2, "ENEMY_PILZLING_001": 0.7, "ENEMY_DORNENWOLF_001": 1.1, "ENEMY_WURZELKRIECHER_001": 1.6, "BOSS_WURZELKOENIGIN_001": 2.4}
 
 var enemy_id := ""
 var spawn_id := ""
@@ -27,6 +29,8 @@ var attack_mult := 1.0
 var cooldown_mult := 1.0
 var target: Player
 var home := Vector3.ZERO
+var break_max := 0.0   # 0 = cannot be broken
+var break_value := 0.0
 var body_mesh: MeshInstance3D
 var label: Label3D
 
@@ -48,6 +52,8 @@ func setup(entry: Dictionary) -> void:
 	data = Content.enemy(enemy_id)
 	max_hp = int(data.hp)
 	hp = max_hp
+	break_max = float(data.get("break", 0))
+	break_value = break_max
 	add_to_group("enemy")
 	var s: float = SIZES.get(enemy_id, 1.0)
 	var cs := CollisionShape3D.new()
@@ -70,8 +76,10 @@ func setup(entry: Dictionary) -> void:
 	add_child(body_mesh)
 	label = Label3D.new()
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 72
-	label.outline_size = 16
+	label.font_size = 48
+	label.outline_size = 12
+	label.fixed_size = true
+	label.pixel_size = 0.0009
 	label.position.y = 1.9 * s
 	add_child(label)
 	_update_label()
@@ -128,6 +136,11 @@ func _physics_process(delta: float) -> void:
 			timer -= delta
 			if timer <= 0.0:
 				state = State.CHASE
+		State.BROKEN:
+			_move_to(Vector3.ZERO, delta)
+			timer -= delta
+			if timer <= 0.0:
+				_end_break()
 	move_and_slide()
 
 
@@ -147,20 +160,59 @@ func _strike(dist: float) -> void:
 	timer = 0.3
 
 
-## Returns damage dealt.
-func take_hit(attack_value: int) -> int:
+func is_broken() -> bool:
+	return state == State.BROKEN
+
+
+func break_ratio() -> float:
+	return break_value / break_max if break_max > 0.0 else 1.0
+
+
+## Returns damage dealt. break_amount drains the Break gauge; interrupt
+## cancels a telegraphed attack (strong attacks).
+func take_hit(attack_value: int, break_amount: float = 0.0, interrupt: bool = false) -> int:
 	if state == State.DEAD:
 		return 0
 	var dmg := Stats.damage(attack_value, int(data.defense))
+	if state == State.BROKEN:
+		dmg = int(round(dmg * float(Content.combat().get("broken_damage_mult", 1.5))))
+	elif break_max > 0.0:
+		if interrupt and state == State.WINDUP:
+			break_amount += float(Content.combat().get("break_interrupt_bonus", 0))
+			state = State.RECOVER
+			timer = 0.6
+			_set_tint(Color.WHITE)
+			EventBus.notify.emit("Unterbrochen!")
+		break_value = maxf(0.0, break_value - break_amount)
+		if break_value <= 0.0:
+			_start_break()
 	hp = maxi(0, hp - dmg)
 	hp_changed.emit(hp, max_hp)
 	_update_label()
 	_hit_feedback(dmg)
 	if hp == 0:
 		_die()
-	elif state == State.IDLE and float(data.move_speed) > 0.0:
+	elif state == State.IDLE and float(data.move_speed) > 0.0 and not is_broken():
 		state = State.CHASE
 	return dmg
+
+
+func _start_break() -> void:
+	state = State.BROKEN
+	timer = float(data.get("break_duration", 2.0))
+	velocity = Vector3.ZERO
+	_set_tint(Color(1.6, 1.4, 0.4))
+	EventBus.notify.emit("BREAK! %s ist verwundbar." % data.get("name", ""))
+	break_started.emit(self)
+	_update_label()
+
+
+func _end_break() -> void:
+	break_value = break_max
+	state = State.CHASE
+	_set_tint(Color.WHITE)
+	break_ended.emit(self)
+	_update_label()
 
 
 ## Hit flash, knockback and a floating damage number.
@@ -168,7 +220,7 @@ func _hit_feedback(dmg: int) -> void:
 	if not is_inside_tree():
 		return
 	_set_tint(Color(3, 3, 3))
-	get_tree().create_timer(0.08).timeout.connect(func(): if is_instance_valid(self) and state != State.WINDUP: _set_tint(Color.WHITE))
+	get_tree().create_timer(0.08).timeout.connect(func(): if is_instance_valid(self) and state != State.WINDUP and state != State.BROKEN: _set_tint(Color.WHITE))
 	var p := get_tree().get_first_node_in_group("player") as Node3D
 	if p and float(data.move_speed) > 0.0 and not self is Boss:
 		var away := global_position - p.global_position
@@ -191,7 +243,10 @@ func _hit_feedback(dmg: int) -> void:
 
 
 func _die() -> void:
+	var was_broken := is_broken()
 	state = State.DEAD
+	if was_broken:
+		break_ended.emit(self)
 	velocity = Vector3.ZERO
 	for d in data.get("drops", []):
 		Inventory.add(d.id, int(d.count))
@@ -212,6 +267,7 @@ func reset_encounter() -> void:
 	if state == State.DEAD:
 		return
 	hp = max_hp
+	break_value = break_max
 	state = State.IDLE
 	position = home
 	velocity = Vector3.ZERO
@@ -228,4 +284,9 @@ func _set_tint(c: Color) -> void:
 
 
 func _update_label() -> void:
-	label.text = "%s  %d/%d" % [data.get("name", enemy_id), hp, max_hp]
+	var txt := "%s  %d/%d" % [data.get("name", enemy_id), hp, max_hp]
+	if is_broken():
+		txt += "  [BREAK]"
+	elif break_max > 0.0:
+		txt += "  [Bruch %d%%]" % int(round((1.0 - break_ratio()) * 100.0))
+	label.text = txt

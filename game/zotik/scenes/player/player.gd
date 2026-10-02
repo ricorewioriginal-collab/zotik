@@ -116,6 +116,8 @@ func _physics_process(delta: float) -> void:
 		current_interactable.interact(self)
 	if control_enabled and not dead and Input.is_action_just_pressed("attack"):
 		attack()
+	if control_enabled and not dead and Input.is_action_just_pressed("strong_attack"):
+		attack(true)
 	if control_enabled and not dead and Input.is_action_just_pressed("lock_on"):
 		set_lock(null if lock_target else nearest_enemy(LOCK_RANGE))
 	if control_enabled and not dead and Input.is_action_just_pressed("use_item"):
@@ -148,10 +150,14 @@ func move_direction(input: Vector2) -> Vector3:
 
 
 ## Melee attack against all enemies in a frontal cone. Returns hits.
-func attack() -> int:
+## A strong attack hits harder, drains more Break and interrupts telegraphs.
+func attack(strong: bool = false) -> int:
 	if attack_cooldown > 0.0 or is_dodging or dead:
 		return 0
-	attack_cooldown = float(stats.attack_cooldown)
+	var cb := Content.combat()
+	attack_cooldown = float(cb.get("strong_cooldown", 1.1)) if strong else float(stats.attack_cooldown)
+	var power := int(round(Stats.attack() * (float(cb.get("strong_damage_mult", 1.6)) if strong else 1.0)))
+	var brk := float(cb.get("break_strong", 25)) if strong else float(cb.get("break_light", 8))
 	if lock_target:
 		face(lock_target.global_position - global_position)
 	var hits := 0
@@ -165,7 +171,7 @@ func attack() -> int:
 			continue
 		if to.length() > 0.3 and forward().dot(to.normalized()) < ATTACK_CONE_DOT:
 			continue
-		e.take_hit(Stats.attack())
+		e.take_hit(power, brk, strong)
 		hits += 1
 	visual.swing()
 	Sfx.play("hit" if hits > 0 else "swing")

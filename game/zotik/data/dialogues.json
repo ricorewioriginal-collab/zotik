@@ -1,42 +1,421 @@
 {
-  "DLG_MIRA_INTRO_001": {"placeholder": true, "lines": [
-    ["NPC_MIRA_001", "Zotik! Du siehst aus, als hättest du wieder schlecht geträumt."],
-    ["CHAR_ZOTIK", "Dieses Flüstern … es kam aus Richtung Mondwald."],
-    ["NPC_MIRA_001", "Die Alten erzählen von solchen Nächten. Sprich mit Toren – ohne sein Training lässt er niemanden in den Wald."]]},
-  "DLG_MIRA_FOREST_001": {"placeholder": true, "lines": [
-    ["NPC_MIRA_001", "Im Mondwald soll es alte Ruinen mit einem Tor geben, das auf den Mond hört."],
-    ["NPC_MIRA_001", "Mehr … weiß ich nicht. Pass einfach auf dich auf."]]},
-  "DLG_MIRA_IDLE_001": {"placeholder": true, "lines": [["NPC_MIRA_001", "Toren wartet am Trainingsplatz auf dich."]]},
-  "DLG_MIRA_RETURN_001": {"placeholder": true, "lines": [
-    ["NPC_MIRA_001", "Du bist zurück! Und diese Klinge … sie leuchtet, wenn du in ihrer Nähe bist."],
-    ["NPC_MIRA_001", "Ich habe dir nicht alles erzählt, was ich über die Risse weiß. Aber da kommt jemand – ein seltsamer alter Herr mit einer Maschine."]]},
-  "DLG_MIRA_AFTER_001": {"placeholder": true, "lines": [["NPC_MIRA_001", "Was auch immer da draußen wartet – Lunaris bleibt dein Zuhause."]]},
-  "DLG_TOREN_TRAINING_001": {"placeholder": true, "lines": [
-    ["NPC_TOREN_001", "Du willst in den Mondwald? Erst zeigst du mir, dass du ein Schwert halten kannst."],
-    ["NPC_TOREN_001", "Hier, ein Übungsschwert. Schlag die Puppe dort um."]],
-    "effects": [{"type": "give_item", "id": "WEAPON_TRAINING_SWORD_001", "count": 1}, {"type": "equip", "id": "WEAPON_TRAINING_SWORD_001"}]},
-  "DLG_TOREN_TRAINING_HINT_001": {"placeholder": true, "lines": [["NPC_TOREN_001", "Angreifen, ausweichen, blocken. Die Puppe wartet."]]},
-  "DLG_TOREN_FOREST_001": {"placeholder": true, "lines": [["NPC_TOREN_001", "Das Waldtor ist offen. Bleib wachsam."]]},
-  "DLG_TOREN_IDLE_001": {"placeholder": true, "lines": [["NPC_TOREN_001", "Der Wald bleibt zu, bis du trainiert hast."]]},
-  "DLG_TOREN_REACTION_001": {"placeholder": true, "lines": [["NPC_TOREN_001", "Du hast etwas besiegt, das älter ist als dieses Dorf. Ich ziehe meinen Hut."]]},
-  "DLG_BORO_SHOP_001": {"placeholder": true, "lines": [["NPC_BORO_001", "Boros Laden! Heiltränke, Anhänger, Klingen – und heute ganz ohne Mondaufschlag!"]], "effects": [{"type": "open_shop", "id": "SHOP_LUN_BORO_001"}]},
-  "DLG_BORO_REACTION_001": {"placeholder": true, "lines": [["NPC_BORO_001", "Der Held von Lunaris kauft bei mir! Das schreibe ich aufs Schild."]], "effects": [{"type": "open_shop", "id": "SHOP_LUN_BORO_001"}]},
-  "DLG_ELWEN_LORE_001": {"placeholder": true, "lines": [
-    ["NPC_ELWEN_001", "Vor langer Zeit hat sich schon einmal ein Riss über dem Mondwald geöffnet."],
-    ["NPC_ELWEN_001", "Die Alten sagten: Erst voll, dann neu, dann abnehmend – so schläft das Tor."]]},
-  "DLG_ELWEN_REACTION_001": {"placeholder": true, "lines": [["NPC_ELWEN_001", "Der alte Riss hat dich erkannt. Das ist kein Zufall, Kind."]]},
-  "DLG_FINN_EXPLORE_001": {"placeholder": true, "lines": [["NPC_FINN_001", "Im Mondwald stehen Truhen, die keiner aufmacht. Ich trau mich nicht – du schon?"]]},
-  "DLG_FINN_REACTION_001": {"placeholder": true, "lines": [["NPC_FINN_001", "Erzähl mir alles! Wie groß war der Riss?"]]},
-  "DLG_SARI_QUEST_001": {"placeholder": true, "lines": [
-    ["NPC_SARI_001", "Meine Lieferung ist im Mondwald verloren gegangen, als die seltsamen Lichter auftauchten."],
-    ["NPC_SARI_001", "Wenn du sie findest, bekommst du eine Belohnung."]], "effects": [{"type": "start_quest", "id": "QUEST_SIDE_LUN_001"}]},
-  "DLG_SARI_WAITING_001": {"placeholder": true, "lines": [["NPC_SARI_001", "Die Lieferung muss irgendwo im Mondwald liegen."]]},
-  "DLG_SARI_THANKS_001": {"placeholder": true, "lines": [["NPC_SARI_001", "Meine Lieferung! Danke, Zotik. Nimm das hier."]]},
-  "DLG_SARI_AFTER_001": {"placeholder": true, "lines": [["NPC_SARI_001", "Seit du geholfen hast, läuft das Geschäft wieder."]]},
-  "DLG_PROFESSORIUM_ARRIVAL_001": {"placeholder": true, "lines": [
-    ["NPC_PROFESSORIUM_001", "Halt! Diese Klinge – das ist eine Weltenklinge! Weißt du überhaupt, was du da trägst?"],
-    ["NPC_PROFESSORIUM_001", "Der Weltenkern … die Risse … Ich muss sofort jemanden benachrichtigen."]],
-    "effects": [{"type": "play_cutscene", "id": "CUT_LUN_LYRA_BRIDGE_001"}]},
-  "DLG_PROFESSORIUM_IDLE_001": {"placeholder": true, "lines": [["NPC_PROFESSORIUM_001", "Faszinierend, faszinierend …"]]},
-  "DLG_LYRA_IDLE_001": {"placeholder": true, "lines": [["NPC_LYRA_001", "Die Risse sind kein Zufall. Meine Familie erforscht den Weltenkern seit Jahren."]]}
+  "DLG_MIRA_INTRO_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRA_001",
+        "Zotik! Du siehst aus, als hättest du wieder schlecht geträumt."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dieses Flüstern … es kam aus Richtung Mondwald."
+      ],
+      [
+        "NPC_MIRA_001",
+        "Die Alten erzählen von solchen Nächten. Sprich mit Toren – ohne sein Training lässt er niemanden in den Wald."
+      ]
+    ]
+  },
+  "DLG_MIRA_FOREST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRA_001",
+        "Im Mondwald soll es alte Ruinen mit einem Tor geben, das auf den Mond hört."
+      ],
+      [
+        "NPC_MIRA_001",
+        "Mehr … weiß ich nicht. Pass einfach auf dich auf."
+      ]
+    ]
+  },
+  "DLG_MIRA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRA_001",
+        "Toren wartet am Trainingsplatz auf dich."
+      ]
+    ]
+  },
+  "DLG_MIRA_RETURN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRA_001",
+        "Du bist zurück! Und diese Klinge … sie leuchtet, wenn du in ihrer Nähe bist."
+      ],
+      [
+        "NPC_MIRA_001",
+        "Ich habe dir nicht alles erzählt, was ich über die Risse weiß. Aber da kommt jemand – ein seltsamer alter Herr mit einer Maschine."
+      ]
+    ]
+  },
+  "DLG_MIRA_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRA_001",
+        "Was auch immer da draußen wartet – Lunaris bleibt dein Zuhause."
+      ]
+    ]
+  },
+  "DLG_TOREN_TRAINING_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TOREN_001",
+        "Du willst in den Mondwald? Erst zeigst du mir, dass du ein Schwert halten kannst."
+      ],
+      [
+        "NPC_TOREN_001",
+        "Hier, ein Übungsschwert. Schlag die Puppe dort um."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "give_item",
+        "id": "WEAPON_TRAINING_SWORD_001",
+        "count": 1
+      },
+      {
+        "type": "equip",
+        "id": "WEAPON_TRAINING_SWORD_001"
+      }
+    ]
+  },
+  "DLG_TOREN_TRAINING_HINT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TOREN_001",
+        "Angreifen, ausweichen, blocken. Die Puppe wartet."
+      ]
+    ]
+  },
+  "DLG_TOREN_FOREST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TOREN_001",
+        "Das Waldtor ist offen. Bleib wachsam."
+      ]
+    ]
+  },
+  "DLG_TOREN_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TOREN_001",
+        "Der Wald bleibt zu, bis du trainiert hast."
+      ]
+    ]
+  },
+  "DLG_TOREN_REACTION_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TOREN_001",
+        "Du hast etwas besiegt, das älter ist als dieses Dorf. Ich ziehe meinen Hut."
+      ]
+    ]
+  },
+  "DLG_BORO_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_BORO_001",
+        "Boros Laden! Heiltränke, Anhänger, Klingen – und heute ganz ohne Mondaufschlag!"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_LUN_BORO_001"
+      }
+    ]
+  },
+  "DLG_BORO_REACTION_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_BORO_001",
+        "Der Held von Lunaris kauft bei mir! Das schreibe ich aufs Schild."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_LUN_BORO_001"
+      }
+    ]
+  },
+  "DLG_ELWEN_LORE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ELWEN_001",
+        "Vor langer Zeit hat sich schon einmal ein Riss über dem Mondwald geöffnet."
+      ],
+      [
+        "NPC_ELWEN_001",
+        "Die Alten sagten: Erst voll, dann neu, dann abnehmend – so schläft das Tor."
+      ]
+    ]
+  },
+  "DLG_ELWEN_REACTION_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ELWEN_001",
+        "Der alte Riss hat dich erkannt. Das ist kein Zufall, Kind."
+      ]
+    ]
+  },
+  "DLG_FINN_EXPLORE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_FINN_001",
+        "Im Mondwald stehen Truhen, die keiner aufmacht. Ich trau mich nicht – du schon?"
+      ]
+    ]
+  },
+  "DLG_FINN_REACTION_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_FINN_001",
+        "Erzähl mir alles! Wie groß war der Riss?"
+      ]
+    ]
+  },
+  "DLG_SARI_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SARI_001",
+        "Meine Lieferung ist im Mondwald verloren gegangen, als die seltsamen Lichter auftauchten."
+      ],
+      [
+        "NPC_SARI_001",
+        "Wenn du sie findest, bekommst du eine Belohnung."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_LUN_001"
+      }
+    ]
+  },
+  "DLG_SARI_WAITING_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SARI_001",
+        "Die Lieferung muss irgendwo im Mondwald liegen."
+      ]
+    ]
+  },
+  "DLG_SARI_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SARI_001",
+        "Meine Lieferung! Danke, Zotik. Nimm das hier."
+      ]
+    ]
+  },
+  "DLG_SARI_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SARI_001",
+        "Seit du geholfen hast, läuft das Geschäft wieder."
+      ]
+    ]
+  },
+  "DLG_PROFESSORIUM_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PROFESSORIUM_001",
+        "Halt! Diese Klinge – das ist eine Weltenklinge! Weißt du überhaupt, was du da trägst?"
+      ],
+      [
+        "NPC_PROFESSORIUM_001",
+        "Der Weltenkern … die Risse … Ich muss sofort jemanden benachrichtigen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "play_cutscene",
+        "id": "CUT_LUN_LYRA_BRIDGE_001"
+      }
+    ]
+  },
+  "DLG_PROFESSORIUM_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PROFESSORIUM_001",
+        "Faszinierend, faszinierend …"
+      ]
+    ]
+  },
+  "DLG_LYRA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_LYRA_001",
+        "Die Risse sind kein Zufall. Meine Familie erforscht den Weltenkern seit Jahren."
+      ]
+    ]
+  },
+  "DLG_MARA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MARA_001",
+        "Willkommen im Forschungsviertel. Der Wald draußen erinnert sich an alles, was in ihm geschieht."
+      ]
+    ]
+  },
+  "DLG_ELIO_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ELIO_001",
+        "Handwerk aus Elaris! Tränke, Amulette – alles aus dem lebenden Wald."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_ELA_ELIO_001"
+      }
+    ]
+  },
+  "DLG_SELA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Die Wege im Wald verschieben sich. Wer zu lange wartet, steht plötzlich woanders."
+      ]
+    ]
+  },
+  "DLG_NIA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NIA_001",
+        "Ich treffe alles, was sich bewegt. Na ja … fast alles."
+      ]
+    ]
+  },
+  "DLG_ROVAN_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ROVAN_001",
+        "Bleib zurück. Dieser Wald ist nicht mehr, was er war."
+      ]
+    ]
+  },
+  "DLG_MARA_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MARA_001",
+        "Ein Weltenhörer in Elaris … Lyra hat mir geschrieben."
+      ],
+      [
+        "NPC_MARA_001",
+        "Die Wege des Waldes wandern, seit der Riss in Lunaris aufging. Ich öffne euch das Waldtor. Nehmt Nia mit, sie kennt die Pfade."
+      ]
+    ]
+  },
+  "DLG_MARA_RETURN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MARA_001",
+        "Der Wald ist ruhig. Die Wurzelkönigin hat sich an etwas erinnert, das sie nicht hätte vergessen dürfen."
+      ],
+      [
+        "NPC_MARA_001",
+        "Eure Reise ist noch lange nicht zu Ende."
+      ]
+    ]
+  },
+  "DLG_MARA_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MARA_001",
+        "Die Erinnerungskristalle werden wir genau untersuchen."
+      ]
+    ]
+  },
+  "DLG_NIA_JOIN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NIA_001",
+        "Ihr wollt in den lebenden Wald? Ohne mich verlauft ihr euch nach drei Schritten."
+      ],
+      [
+        "NPC_NIA_001",
+        "Ich komme mit. Ich muss sowieso beweisen, dass ich das kann."
+      ]
+    ]
+  },
+  "DLG_ROVAN_JOIN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ROVAN_001",
+        "Ein Resonanzträger. Ich habe gehofft, diesen Klang nie wieder zu hören."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Gut. Dann gehe ich vor. Der Turm ist nicht weit."
+      ]
+    ]
+  },
+  "DLG_SELA_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Die Pilzlinge tragen Leuchtsporen. Bringst du mir fünf? Ich brauche sie für meine Lampen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_ELA_001"
+      }
+    ]
+  },
+  "DLG_SELA_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Fünf Sporen! Jetzt leuchtet die Gasse wieder. Hier, für dich."
+      ]
+    ]
+  },
+  "DLG_SELA_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Siehst du das Licht? Das bist du gewesen."
+      ]
+    ]
+  }
 }

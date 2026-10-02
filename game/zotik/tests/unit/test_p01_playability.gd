@@ -89,3 +89,15 @@ func test_feedback_sfx_and_hit() -> void:
 	game.player.take_damage(10)
 	check(game.hud.hurt_flash.color.a > 0.0, "hurt flash")
 	check(int(GameState.player.hp) < hp, "damage applied")
+
+
+func test_hud_fills_screen_and_centres_notifications() -> void:
+	var vp := game.get_viewport().get_visible_rect().size
+	eq(game.hud.size, vp, "HUD covers the viewport")
+	check(game.hud.notify_label.size.x >= vp.x - 1.0, "notification row spans the width")
+	eq(game.hud.notify_label.horizontal_alignment, HORIZONTAL_ALIGNMENT_CENTER, "centred")
+
+
+func test_hurt_flash_covers_screen() -> void:
+	var vp := game.get_viewport().get_visible_rect().size
+	eq(game.hud.hurt_flash.size, vp, "hurt flash is full screen")

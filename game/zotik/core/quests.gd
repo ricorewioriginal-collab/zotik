@@ -50,7 +50,15 @@ func active_quests() -> Array:
 	for id in Content.table("quests"):
 		if Conditions.quest_state(id) == "ACTIVE":
 			out.append(id)
-	out.sort_custom(func(a, b): return a == MAIN or (b != MAIN and a < b))
+	# Main quests first (Lunaris before later chapters), then side quests.
+	out.sort_custom(func(a, b):
+		var ma: bool = Content.get_entry("quests", a).get("type") == "main"
+		var mb: bool = Content.get_entry("quests", b).get("type") == "main"
+		if ma != mb:
+			return ma
+		if a == MAIN or b == MAIN:
+			return a == MAIN
+		return a < b)
 	return out
 
 

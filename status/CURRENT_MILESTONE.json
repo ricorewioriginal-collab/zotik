@@ -1,7 +1,8 @@
 {
-  "phase": 1,
-  "milestone": "M15_COMPLETE_REGRESSION",
+  "phase": 2,
+  "milestone": "E08_CHAPTER2_REGRESSION",
   "status": "PASSED",
-  "next_allowed": "PHASE_2_REQUIRES_OWNER_APPROVAL",
-  "phase_2_allowed": false
+  "next_allowed": "PHASE_3_REQUIRES_OWNER_APPROVAL",
+  "phase_2_allowed": true,
+  "phase_3_allowed": false
 }

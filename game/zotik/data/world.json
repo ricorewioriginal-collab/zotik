@@ -16,6 +16,11 @@
       "area": "AREA_LUN_RIFT_CAVE",
       "name": "Weltenanker",
       "heals": true
+    },
+    "SAVEPOINT_ELA_001": {
+      "area": "AREA_ELA_DUNGEON",
+      "name": "Weltenanker im Herz des Waldes",
+      "heals": true
     }
   },
   "uniques": {
@@ -44,5 +49,14 @@
     "UNKNOWN": {
       "name": "???"
     }
+  },
+  "combat": {
+    "break_light": 8,
+    "break_strong": 25,
+    "break_party": 6,
+    "break_interrupt_bonus": 15,
+    "strong_damage_mult": 1.6,
+    "strong_cooldown": 1.1,
+    "broken_damage_mult": 1.5
   }
 }

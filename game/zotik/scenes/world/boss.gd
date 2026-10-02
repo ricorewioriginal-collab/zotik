@@ -7,16 +7,69 @@ signal phase_changed(index: int)
 
 var phase := 0
 var summons: Array[Enemy] = []
+var hazards: Array[Node3D] = []
+var hazard_timer := 0.0
 
 
-func take_hit(attack_value: int) -> int:
-	var dmg := super(attack_value)
+## Phase hazard (data "hazard"): a telegraphed eruption under Zotik that
+## hits after `delay` if he is still inside `radius`. Dodge i-frames apply.
+func _physics_process(delta: float) -> void:
+	super(delta)
+	var hz: Dictionary = data.phases[phase].get("hazard", {})
+	if hz.is_empty() or is_dead() or is_broken() or Dialogue.is_active() or state == State.IDLE:
+		return
+	hazard_timer -= delta
+	if hazard_timer <= 0.0 and target and not target.dead:
+		hazard_timer = float(hz.interval)
+		spawn_hazard(target.global_position, hz)
+
+
+func spawn_hazard(at: Vector3, hz: Dictionary) -> Node3D:
+	var h := MeshInstance3D.new()
+	h.name = "PLACEHOLDER_root_eruption"
+	var m := CylinderMesh.new()
+	m.top_radius = float(hz.radius)
+	m.bottom_radius = float(hz.radius)
+	m.height = 0.05
+	h.mesh = m
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.9, 0.4, 0.1, 0.5)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	h.material_override = mat
+	get_parent().add_child(h)
+	h.global_position = Vector3(at.x, 0.03, at.z)
+	hazards.append(h)
+	get_tree().create_timer(float(hz.delay), false, true).timeout.connect(_erupt.bind(h, hz))
+	return h
+
+
+func _erupt(h: Node3D, hz: Dictionary) -> void:
+	if not is_instance_valid(h):
+		return
+	hazards.erase(h)
+	if is_instance_valid(target) and not is_dead():
+		var flat := Vector2(target.global_position.x - h.global_position.x, target.global_position.z - h.global_position.z)
+		if flat.length() <= float(hz.radius):
+			target.take_damage(int(hz.damage) + Stats.defense())  # hazard ignores armour
+	h.queue_free()
+
+
+func _clear_hazards() -> void:
+	for h in hazards:
+		if is_instance_valid(h):
+			h.queue_free()
+	hazards.clear()
+
+
+func take_hit(attack_value: int, break_amount: float = 0.0, interrupt: bool = false) -> int:
+	var dmg := super(attack_value, break_amount, interrupt)
 	_update_phase()
 	return dmg
 
 
 func _update_phase() -> void:
 	if is_dead():
+		_clear_hazards()
 		for s in summons:
 			if is_instance_valid(s) and not s.is_dead():
 				s.queue_free()
@@ -51,6 +104,8 @@ func _enter_phase(i: int) -> void:
 
 
 func reset_encounter() -> void:
+	_clear_hazards()
+	hazard_timer = 0.0
 	for s in summons:
 		if is_instance_valid(s):
 			s.queue_free()

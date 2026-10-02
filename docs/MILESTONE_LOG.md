@@ -216,3 +216,112 @@ The project owner authorised autonomous work and merging on 2026-10-02. Phase 2 
   - The controls overlay overlapped the dialogue box. It now sits under the HP bar and hides during dialogues.
   - The title menu was off-centre.
 - New test `tests/unit/test_p03_glyphs.gd`: every string literal in game scripts and every data string must render with the built-in font. A mutation check confirmed it fails on "★".
+
+# Phase 2 – Elaris
+
+## E00 Phase-2 plan – PASSED
+The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions are logged as C-15 to C-18.
+
+## E01 World travel + save schema v2 – PASSED
+- `data/worlds.json` (namespace `WORLD_`): Lunaris (chapter 1), Elaris (chapter 2, unlocked by `FLAG_LUN_CHAPTER_COMPLETE`), Valdoria (sealed placeholder). Every area now has a `world`.
+- Weltenstein travel points (`TRAVEL_LUN_001` in the village, `TRAVEL_ELA_001` in the Elaris town skeleton) open the **Weltkarte**. It lists the chapters, travels only to unlocked worlds and shows sealed ones as "???".
+- Save schema **v2** adds `GameState.party`. The built-in migration v1 → v2 lets Phase-1 saves continue unchanged (tested with a real v1 envelope).
+- The beacon routes across worlds: first to the current world's hub, then to its Weltenstein.
+- Validation: area worlds, world hub area and spawn, unlock flags, `TRAVEL_` ids.
+- Tests: `tests/unit/test_e01_travel.gd` (5 tests).
+
+## E02 Party foundation (Lyra) – PASSED
+- `data/party.json` (namespace `PARTY_`): `PARTY_LYRA_001`, a ranged healer, with all values in data.
+- `join_party` effect (idempotent). On the first arrival in Elaris, `CUT_ELA_ARRIVAL_001` (placeholder text) adds Lyra to the party. Her Lunaris NPC is then hidden through `hidden_when`.
+- `Companion` AI:
+  - follows Zotik and teleports along when far away or on area changes
+  - attacks enemies within 10 m of Zotik from range, but not the training dummy
+  - heals Zotik below 45 % HP with a cooldown
+  - passive during dialogues
+  - enemies target only Zotik, so a companion can never block progress
+- The party persists across save, load and area changes.
+- Tests: `tests/unit/test_e02_party.gd` (5 tests).
+
+## E03 Break system – PASSED
+- Enemy data has `break` (gauge) and `break_duration`. Combat values live in `data/world.json → combat`. Enemies without a gauge, such as the training dummy, cannot be broken.
+- Break amounts and effects:
+
+  | Source | Break | Damage | Other |
+  |---|---|---|---|
+  | Light attack | 8 | normal | |
+  | **Strong attack** (K / LB) | 25 | ×1.6 | 1.1 s cooldown |
+  | Party member hit | 6 | normal | |
+  | Strong attack during a telegraphed wind-up | +15 bonus | | interrupts the wind-up (the legacy "interruptible telegraphs") |
+
+- At 0, the enemy is BROKEN: stunned, never attacks, takes ×1.5 damage. Afterwards it recovers with a full gauge.
+- `break_started` and `break_ended` are each emitted exactly once, including when the enemy dies while broken. The legacy BreakSystem emitted repeatedly and never signalled the start; that defect was not reproduced.
+- The enemy label shows Break progress and "[BREAK]". The HUD help lists the strong attack.
+- Tests: `tests/unit/test_e03_break.gd` (5 tests). One found a real bug, fixed: `break_ended` was lost when an enemy died while broken.
+
+## E04 Elaris greybox & content – PASSED
+- Five streamed areas in the world Elaris:
+  - Stadt (Forschungsviertel, Werkstatt, Weltenstein, arrival scene)
+  - Der lebende Wald, where "sich bewegende Wege" are two `MovingPlatform`s (AnimatableBody3D, ping-pong) that carry Zotik across a ravine
+  - Turm der Erinnerung
+  - Das Herz des Waldes (dungeon with a Weltenanker)
+  - Thron der Wurzelkönigin
+- Gates: the forest needs `FLAG_ELA_FOREST_OPEN` (E06 quest), the dungeon needs `FLAG_ELA_TOWER_SOLVED` (E05 puzzle), the arena needs `FLAG_ELA_ROOTS_PARTED` (set by the Wurzelkriecher's `on_defeat`).
+- Enemies: Pilzling, Dornenwolf and the persistent Wurzelkriecher miniboss. All have Break gauges.
+- NPCs with placeholder lines: Mara (research), Elio (craftsman shop), Sela, Nia, Rovan. Names come from the legacy NPC/character lists (C-19).
+- New items: Großer Heiltrank, Leuchtspore, Blattamulett (+2 DEF, +10 HP).
+- Party data for Nia (archer) and Rovan (melee guardian with a higher Break value). The companion AI now handles melee and non-healers.
+- Validation: platform entities (`PLATFORM_`, target, period). The reachability test counts platform sweeps as floor. It found a real gap at the ravine edges, fixed by extending the platform travel.
+- Tests: `tests/unit/test_e04_elaris.gd` (6 tests, including a physical platform ride and a ravine fall).
+
+## E05 Puzzles: Turm der Erinnerung – PASSED
+- `PUZ_ELA_TURM_001` implements spec `ELARIS_TURM_01` (`20_RIDDLES`):
+  - four symbol pillars (Flamme, Mond, Kristall, Blatt in physical order), each showing its symbol
+  - the order must be Mond → Blatt → Kristall → Flamme
+  - a wrong symbol resets the attempt (RESET_FAILURE); manual reset (T) and hints at levels 1–3 (H, level 3 = solution) are available
+- Reward as specified: the key to the inner area (`FLAG_ELA_TOWER_SOLVED`), 80 Lun, Elaris lore and rare materials (2× Erinnerungskristall).
+- The completion epilogue `CUT_ELA_TURM_EPILOG_001` uses the **verbatim demo dialogue from the spec** (Zotik/Nia/Rovan). It is the first non-placeholder text, and it cites its source. The content test now requires that every dialogue is either a placeholder or cites a project document.
+- The "moving paths" from `04_WORLDS` were implemented as a traversal mechanic in E04 (moving platforms), not as a separate switch puzzle. The plan was adjusted accordingly.
+- The glyph guard caught an "→" in a hint that would have rendered as a box on web; it was rephrased.
+- Tests: `tests/unit/test_e05_tower.gd` (4 tests).
+
+## E06 Chapter-2 quests – PASSED
+- `QUEST_MAIN_ELA_001` "Der Wald, der sich erinnert" has 11 steps. It starts with the arrival scene:
+  1. Mara opens the forest.
+  2. Nia joins.
+  3. Enter the forest.
+  4. Defeat 3 Pilzlinge.
+  5. Rovan joins.
+  6. Reach the tower.
+  7. Solve the tower puzzle.
+  8. Touch the Weltenanker.
+  9. Defeat the Wurzelkriecher.
+  10. Defeat the Wurzelkönigin.
+  11. Return to Mara: +200 Lun, `FLAG_ELA_CHAPTER_COMPLETE`.
+- Party joins happen through quest step effects. Talking to Rovan early does nothing, and Nia's and Rovan's town/forest NPCs hide while they are in the party.
+- `QUEST_SIDE_ELA_001` "Leuchtsporen für Sela": collect 5 spores (from Pilzlinge and the dungeon chest) for 90 Lun and 2 Große Heiltränke.
+- Generalised:
+  - chapter-end notices come from `completion_notice` in the quest data
+  - main quests are sorted before side quests, Lunaris before later chapters
+  - the HUD marks every main quest with »
+- Boss data for `BOSS_WURZELKOENIGIN_001` was added (3 phases) so the quest can reference it. The arena fight follows in E07.
+- Tests: `tests/unit/test_e06_quests.gd` (5 tests).
+
+## E07 Boss Wurzelkönigin – PASSED
+- `BOSS_WURZELKOENIGIN_001` (520 HP, Break 140) has 3 data phases with their own colours:
+  - Erwachen: from 100 %.
+  - Dornenkrone: below 60 %, 2 Pilzlinge summoned, root eruptions start.
+  - Wurzelzorn: below 30 %, 1 Dornenwolf summoned, faster and larger eruptions.
+- **Root eruptions:** a data-defined phase hazard. A telegraphed disc appears under Zotik and hits after a delay unless he leaves it (or dodges with i-frames). Eruptions pause during cutscenes, while the boss is broken or idle, and are cleared on defeat and on death or reset.
+- One-time intro `CUT_ELA_QUEEN_001`. Defeat sets `FLAG_BOSS_ELA_QUEEN_DEFEATED` (persistent), plays the memory vision `CUT_ELA_QUEEN_DEFEAT_001` and brings the party back to Elaris town to report to Mara.
+- Tests: `tests/unit/test_e07_queen.gd` (6 tests).
+
+## E08 Chapter-2 regression – PASSED
+- Chapter-2 golden path from a real v1 Phase-1 save through the whole chapter, using real interactions. The restart check now verifies **both** chapters in a fresh process, each with its own save directory.
+- The rendered check of Elaris found and fixed four UI issues:
+  - Companions stood on one spot and in front of the camera. They now use formation slots behind Zotik, with a test for it.
+  - 3D name labels became huge up close. They now have a fixed screen size.
+  - **The HUD root and other full-screen controls had size 0**, because `set_anchors_preset` does not move offsets. As a result, notifications were never centred and the red hurt flash never covered the screen. Fixed everywhere; tests now check the HUD and flash sizes.
+  - Notifications overlapped the controls overlay; they were moved below it and centred.
+- `docs/ACCEPTANCE_MATRIX.md` gained the Phase-2 section. Screenshots 07–10 show Elaris.
+
+**Phase 2 (Elaris) milestones E00–E08: PASSED.** Further chapters (Valdoria, …) need owner approval and story input.

@@ -19,6 +19,7 @@ var defeated := {}         # spawn/boss ids -> true
 var npc_states := {}       # NPC_* -> String
 var customization := {}    # option -> String
 var player := {}           # area, position, hp, max_hp
+var party: Array[String] = []  # PARTY_* member ids in join order
 var play_time := 0.0
 
 
@@ -39,6 +40,7 @@ func reset_new_game() -> void:
 	npc_states = {}
 	customization = {}
 	player = {"area": START_AREA, "position": [0.0, 0.0, 0.0], "hp": START_HP, "max_hp": START_HP}
+	party = []
 	play_time = 0.0
 
 
@@ -67,6 +69,7 @@ func to_dict() -> Dictionary:
 		"npc_states": npc_states.duplicate(true),
 		"customization": customization.duplicate(true),
 		"player": player.duplicate(true),
+		"party": party.duplicate(),
 		"play_time": play_time,
 	}
 
@@ -116,6 +119,9 @@ func from_dict(d: Dictionary) -> bool:
 			"hp": int(pl.get("hp", START_HP)),
 			"max_hp": int(pl.get("max_hp", START_HP)),
 		}
+	for m in _arr(d, "party"):
+		if not str(m) in party:
+			party.append(str(m))
 	play_time = float(d.get("play_time", 0.0))
 	return true
 

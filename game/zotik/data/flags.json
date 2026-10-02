@@ -40,5 +40,35 @@
   },
   "FLAG_LUN_ORUN_MET": {
     "desc": "Orun-Begegnungsszene gesehen"
+  },
+  "FLAG_ELA_ARRIVED": {
+    "desc": "Erste Ankunft in Elaris gesehen"
+  },
+  "FLAG_ELA_LYRA_JOINED": {
+    "desc": "Lyra ist der Party beigetreten"
+  },
+  "FLAG_ELA_FOREST_OPEN": {
+    "desc": "Mara öffnet den Weg in den lebenden Wald"
+  },
+  "FLAG_ELA_TOWER_SOLVED": {
+    "desc": "Turm der Erinnerung gelöst – innerer Wald offen"
+  },
+  "FLAG_ELA_ROOTS_PARTED": {
+    "desc": "Wurzelkriecher besiegt – Weg zur Wurzelkönigin frei"
+  },
+  "FLAG_ELA_NIA_JOINED": {
+    "desc": "Nia ist der Party beigetreten"
+  },
+  "FLAG_ELA_ROVAN_JOINED": {
+    "desc": "Rovan ist der Party beigetreten"
+  },
+  "FLAG_ELA_CHAPTER_COMPLETE": {
+    "desc": "Kapitel Elaris abgeschlossen"
+  },
+  "FLAG_BOSS_ELA_QUEEN_DEFEATED": {
+    "desc": "Wurzelkönigin besiegt"
+  },
+  "FLAG_ELA_QUEEN_MET": {
+    "desc": "Begegnung mit der Wurzelkönigin gesehen"
   }
 }

@@ -2,7 +2,7 @@ class_name Npc
 extends Interactable
 ## Talkable NPC (PLACEHOLDER capsule + name). Visibility follows appears_when.
 
-const COLORS := {"NPC_MIRA_001": "#d9a066", "NPC_TOREN_001": "#8a6f5a", "NPC_BORO_001": "#c9a227", "NPC_ELWEN_001": "#9a9ab0", "NPC_FINN_001": "#6fa86f", "NPC_SARI_001": "#c46a8a", "NPC_PROFESSORIUM_001": "#b0b0b0", "NPC_LYRA_001": "#6a8ad9"}
+const COLORS := {"NPC_MIRA_001": "#d9a066", "NPC_TOREN_001": "#8a6f5a", "NPC_BORO_001": "#c9a227", "NPC_ELWEN_001": "#9a9ab0", "NPC_FINN_001": "#6fa86f", "NPC_SARI_001": "#c46a8a", "NPC_PROFESSORIUM_001": "#b0b0b0", "NPC_LYRA_001": "#6a8ad9", "NPC_MARA_001": "#8aa0b8", "NPC_ELIO_001": "#b8803a", "NPC_SELA_001": "#a0c070", "NPC_NIA_001": "#d9a03a", "NPC_ROVAN_001": "#7a6a5a"}
 
 var npc_id := ""
 
@@ -27,8 +27,10 @@ static func create(entry: Dictionary) -> Npc:
 	label.text = str(Content.get_entry("npcs", entry.id).name)
 	label.position.y = 2.2
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 72
-	label.outline_size = 16
+	label.font_size = 48
+	label.outline_size = 12
+	label.fixed_size = true
+	label.pixel_size = 0.0009
 	n.add_child(label)
 	var sb := StaticBody3D.new()
 	var cs := CollisionShape3D.new()
@@ -47,8 +49,10 @@ func _ready() -> void:
 
 
 func _refresh() -> void:
-	var flag: String = Content.get_entry("npcs", npc_id).get("appears_when", "")
-	var present := flag == "" or GameState.has_flag(flag)
+	var npc := Content.get_entry("npcs", npc_id)
+	var flag: String = npc.get("appears_when", "")
+	var gone: String = npc.get("hidden_when", "")
+	var present := (flag == "" or GameState.has_flag(flag)) and (gone == "" or not GameState.has_flag(gone))
 	visible = present
 	for c in find_children("*", "CollisionShape3D", true, false):
 		c.disabled = not present

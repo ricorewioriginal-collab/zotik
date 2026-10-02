@@ -17,7 +17,7 @@ var _notify_time := 0.0
 
 
 func _ready() -> void:
-	set_anchors_preset(Control.PRESET_FULL_RECT)
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	area_label = _label(Vector2(20, 14), 22)
 	hp_bar = ProgressBar.new()
@@ -31,7 +31,11 @@ func _ready() -> void:
 	objective_label.size = Vector2(440, 80)
 	objective_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 	prompt_label = _label(Vector2(520, 600), 20)
-	notify_label = _label(Vector2(420, 120), 24)
+	notify_label = _label(Vector2(0, 230), 24)
+	notify_label.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	notify_label.offset_top = 230
+	notify_label.offset_bottom = 270
+	notify_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	boss_label = _label(Vector2(440, 650), 18)
 	boss_bar = ProgressBar.new()
 	boss_bar.position = Vector2(440, 676)
@@ -40,7 +44,7 @@ func _ready() -> void:
 	_style_bar(boss_bar, Color(0.75, 0.3, 0.9))
 	add_child(boss_bar)
 	hurt_flash = ColorRect.new()
-	hurt_flash.set_anchors_preset(Control.PRESET_FULL_RECT)
+	hurt_flash.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hurt_flash.color = Color(0.9, 0.1, 0.1, 0.0)
 	hurt_flash.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(hurt_flash)
@@ -76,7 +80,7 @@ func _process(delta: float) -> void:
 			notify_label.text = ""
 
 
-const HELP_TEXT := "WASD bewegen · Maus/Pfeiltasten Kamera · Leertaste springen\nLinksklick/J angreifen · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
+const HELP_TEXT := "WASD bewegen · Maus/Pfeiltasten Kamera · Leertaste springen\nLinksklick/J angreifen · K stark (Break) · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
 
 
 func toggle_help() -> void:

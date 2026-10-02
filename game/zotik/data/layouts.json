@@ -87,6 +87,11 @@
         0,
         0,
         -24
+      ],
+      "travel": [
+        -20,
+        0,
+        22
       ]
     },
     "exits": [
@@ -322,6 +327,15 @@
           16,
           0,
           -17
+        ]
+      },
+      {
+        "type": "travel",
+        "id": "TRAVEL_LUN_001",
+        "pos": [
+          -22,
+          0,
+          24
         ]
       }
     ]
@@ -876,6 +890,700 @@
           0,
           -12
         ]
+      }
+    ]
+  },
+  "AREA_ELA_TOWN": {
+    "size": [
+      60,
+      60
+    ],
+    "ground": "#4f7a3a",
+    "ambient": "#d8f0c0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        22
+      ],
+      "travel": [
+        0,
+        0,
+        22
+      ],
+      "AREA_ELA_FOREST": [
+        0,
+        0,
+        -24
+      ],
+      "return": [
+        -6,
+        0,
+        -2
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_ELA_FOREST",
+        "pos": [
+          0,
+          0,
+          -28
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "research_hall",
+        "pos": [
+          -20,
+          2.5,
+          -12
+        ],
+        "size": [
+          10,
+          5,
+          10
+        ],
+        "color": "#7a8a9a"
+      },
+      {
+        "name": "workshop",
+        "pos": [
+          20,
+          2,
+          -8
+        ],
+        "size": [
+          8,
+          4,
+          8
+        ],
+        "color": "#9a7040"
+      },
+      {
+        "name": "living_tree",
+        "pos": [
+          -18,
+          4,
+          14
+        ],
+        "size": [
+          3,
+          8,
+          3
+        ],
+        "color": "#4a3a22"
+      },
+      {
+        "name": "house",
+        "pos": [
+          18,
+          2,
+          14
+        ],
+        "size": [
+          8,
+          4,
+          8
+        ],
+        "color": "#8a7a5a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_ELA_001",
+        "pos": [
+          3,
+          0,
+          25
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_ELA_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          21
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_ELA_ARRIVAL_001",
+        "once_flag": "FLAG_ELA_ARRIVED"
+      },
+      {
+        "type": "npc",
+        "id": "NPC_MARA_001",
+        "pos": [
+          -13,
+          0,
+          -6
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_ELIO_001",
+        "pos": [
+          14,
+          0,
+          -4
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_SELA_001",
+        "pos": [
+          -8,
+          0,
+          8
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_NIA_001",
+        "pos": [
+          7,
+          0,
+          6
+        ]
+      }
+    ]
+  },
+  "AREA_ELA_FOREST": {
+    "size": [
+      60,
+      80
+    ],
+    "ground": "#2f5a2a",
+    "ambient": "#b8e0a0",
+    "floors": [
+      {
+        "pos": [
+          0,
+          -0.5,
+          24
+        ],
+        "size": [
+          60,
+          1,
+          32
+        ]
+      },
+      {
+        "pos": [
+          0,
+          -0.5,
+          -24
+        ],
+        "size": [
+          60,
+          1,
+          32
+        ]
+      }
+    ],
+    "spawns": {
+      "default": [
+        0,
+        0,
+        36
+      ],
+      "AREA_ELA_TOWN": [
+        0,
+        0,
+        36
+      ],
+      "AREA_ELA_TOWER": [
+        0,
+        0,
+        -35
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_ELA_TOWN",
+        "pos": [
+          0,
+          0,
+          39
+        ]
+      },
+      {
+        "to": "AREA_ELA_TOWER",
+        "pos": [
+          0,
+          0,
+          -39
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "tree",
+        "pos": [
+          -15,
+          3,
+          28
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          16,
+          3,
+          18
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          -18,
+          3,
+          -20
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      },
+      {
+        "name": "tree",
+        "pos": [
+          18,
+          3,
+          -28
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#3d2b1f"
+      }
+    ],
+    "entities": [
+      {
+        "type": "platform",
+        "id": "PLATFORM_ELA_PATH_1",
+        "pos": [
+          -3,
+          -0.5,
+          6.6
+        ],
+        "to": [
+          -3,
+          -0.5,
+          -6.6
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "period": 6.0,
+        "phase": 0.0
+      },
+      {
+        "type": "platform",
+        "id": "PLATFORM_ELA_PATH_2",
+        "pos": [
+          3,
+          -0.5,
+          -6.6
+        ],
+        "to": [
+          3,
+          -0.5,
+          6.6
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "period": 6.0,
+        "phase": 0.0
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_FOREST_PILZ_1",
+        "enemy": "ENEMY_PILZLING_001",
+        "pos": [
+          -8,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_FOREST_PILZ_2",
+        "enemy": "ENEMY_PILZLING_001",
+        "pos": [
+          9,
+          0,
+          16
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_FOREST_PILZ_3",
+        "enemy": "ENEMY_PILZLING_001",
+        "pos": [
+          0,
+          0,
+          12
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_FOREST_WOLF_1",
+        "enemy": "ENEMY_DORNENWOLF_001",
+        "pos": [
+          10,
+          0,
+          -18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_FOREST_WOLF_2",
+        "enemy": "ENEMY_DORNENWOLF_001",
+        "pos": [
+          -6,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_ROVAN_001",
+        "pos": [
+          -12,
+          0,
+          -16
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_ELA_001",
+        "pos": [
+          22,
+          0,
+          30
+        ]
+      }
+    ]
+  },
+  "AREA_ELA_TOWER": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#5a5a4a",
+    "ambient": "#e0d8b0",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_ELA_FOREST": [
+        0,
+        0,
+        16
+      ],
+      "AREA_ELA_DUNGEON": [
+        0,
+        0,
+        -14
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_ELA_FOREST",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      },
+      {
+        "to": "AREA_ELA_DUNGEON",
+        "pos": [
+          0,
+          0,
+          -19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "tower_wall_l",
+        "pos": [
+          -11,
+          3,
+          -17
+        ],
+        "size": [
+          17,
+          6,
+          1
+        ],
+        "color": "#6a6a5a"
+      },
+      {
+        "name": "tower_wall_r",
+        "pos": [
+          11,
+          3,
+          -17
+        ],
+        "size": [
+          17,
+          6,
+          1
+        ],
+        "color": "#6a6a5a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "puzzle",
+        "id": "PUZ_ELA_TURM_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ]
+  },
+  "AREA_ELA_DUNGEON": {
+    "size": [
+      50,
+      60
+    ],
+    "ground": "#2a3a22",
+    "ambient": "#90c080",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        26
+      ],
+      "AREA_ELA_TOWER": [
+        0,
+        0,
+        26
+      ],
+      "AREA_ELA_ROOT_ARENA": [
+        0,
+        0,
+        -25
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_ELA_TOWER",
+        "pos": [
+          0,
+          0,
+          29
+        ]
+      },
+      {
+        "to": "AREA_ELA_ROOT_ARENA",
+        "pos": [
+          0,
+          0,
+          -29
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "root_wall",
+        "pos": [
+          -14,
+          2,
+          0
+        ],
+        "size": [
+          16,
+          4,
+          2
+        ],
+        "color": "#4a3a22"
+      },
+      {
+        "name": "root_wall",
+        "pos": [
+          14,
+          2,
+          -8
+        ],
+        "size": [
+          16,
+          4,
+          2
+        ],
+        "color": "#4a3a22"
+      }
+    ],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_DUNGEON_WOLF_1",
+        "enemy": "ENEMY_DORNENWOLF_001",
+        "pos": [
+          8,
+          0,
+          14
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_DUNGEON_PILZ_1",
+        "enemy": "ENEMY_PILZLING_001",
+        "pos": [
+          -8,
+          0,
+          8
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_DUNGEON_PILZ_2",
+        "enemy": "ENEMY_PILZLING_001",
+        "pos": [
+          6,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_DUNGEON_KRIECHER",
+        "enemy": "ENEMY_WURZELKRIECHER_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_ELA_002",
+        "pos": [
+          -18,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_ELA_001",
+        "pos": [
+          12,
+          0,
+          20
+        ]
+      }
+    ]
+  },
+  "AREA_ELA_ROOT_ARENA": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#1e2a18",
+    "ambient": "#a0d080",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        15
+      ],
+      "AREA_ELA_DUNGEON": [
+        0,
+        0,
+        15
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_ELA_DUNGEON",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "root_throne",
+        "pos": [
+          0,
+          3,
+          -18
+        ],
+        "size": [
+          10,
+          6,
+          1
+        ],
+        "color": "#5a7a3a",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_ELA_QUEEN_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_ELA_QUEEN_001",
+        "once_flag": "FLAG_ELA_QUEEN_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_ELA_ARENA_QUEEN",
+        "enemy": "BOSS_WURZELKOENIGIN_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
       }
     ]
   }

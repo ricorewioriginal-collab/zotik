@@ -1,12 +1,164 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T09:23:49",
+  "last_run": "2026-10-02T10:16:56",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 100,
+  "passed": 140,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
+    {
+      "id": "test_e01_travel::test_worlds_data_and_unlock",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e01_travel::test_world_map_travel_to_elaris_and_back",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e01_travel::test_v1_save_migrates_to_v2",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e01_travel::test_party_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e01_travel::test_beacon_routes_across_worlds",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_arrival_in_elaris_joins_lyra_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_follows_player_and_survives_area_change",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_attacks_enemies_near_player",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_heals_player_when_low_with_cooldown",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_passive_during_dialogue_and_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e02_party::test_companions_spread_into_formation",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_light_and_strong_drain_break",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_full_break_stuns_and_amplifies_damage_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_strong_attack_interrupts_telegraph",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_unbreakable_and_party_break",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_strong_attack_key_and_death_while_broken",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_all_elaris_areas_build_completely",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_ride_moving_path_across_ravine",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_falling_into_ravine_respawns",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_forest_gate_and_shop",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_elaris_enemies_and_miniboss_flag",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e04_elaris::test_rovan_fights_in_melee",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e05_tower::test_spec_order_mond_blatt_kristall_flamme",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e05_tower::test_wrong_symbol_resets_then_solve_rewards_and_epilog",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e05_tower::test_hints_and_manual_reset",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e05_tower::test_pillars_show_symbols",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_arrival_starts_chapter_two",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_full_chapter_two_main_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_rovan_cannot_join_early",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_sela_side_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e06_quests::test_main_quest_listed_before_side_quest",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e07_queen::test_intro_plays_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e07_queen::test_phases_summons_and_break",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e07_queen::test_root_eruption_hits_unless_avoided",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e07_queen::test_hazards_start_in_phase_two_only",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e07_queen::test_defeat_vision_and_return_to_town",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e07_queen::test_death_resets_fight_and_hazards",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e08_golden_elaris::test_golden_path_chapter_two",
+      "result": "PASS"
+    },
     {
       "id": "test_m01_boot::test_autoloads_present",
       "result": "PASS"
@@ -397,6 +549,14 @@
     },
     {
       "id": "test_p01_playability::test_feedback_sfx_and_hit",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_hud_fills_screen_and_centres_notifications",
+      "result": "PASS"
+    },
+    {
+      "id": "test_p01_playability::test_hurt_flash_covers_screen",
       "result": "PASS"
     },
     {

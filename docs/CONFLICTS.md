@@ -16,3 +16,8 @@ Format: ID – description – status / interim handling. Interim handling is th
 - C-12 – `docs/03` lists the namespaces QUEST_ … FLAG_. Phase-1 content also needs areas, shops, savepoints and characters. `docs/07` already uses SAVEPOINT_ and CHAR_. – Interim: additional namespaces `AREA_`, `SHOP_`, `SAVEPOINT_`, `CHAR_`; the registry validates them like the others.
 - C-13 – Toren, Boro, Elwen, Finn and Sari have no `NPC_` IDs in `docs/07`. – Interim: `NPC_<NAME>_001`.
 - C-14 – Puzzle solutions (Moon Gate phases full/new/waning, Resonance Bridge order) are not specified. – Interim: defined in `data/puzzles.json` and hinted by Elwen's lore line; owner may change the data without code changes.
+- C-15 – No Phase-2 specification exists. – Interim: Phase 2 = chapter 2 Elaris plus the party and Break systems (`docs/PHASE_2_PLAN.md`). Owner review requested.
+- C-16 – `20_RIDDLES` demo dialogue in the Elaris tower features Nia and Rovan, but no document says when they join. – Interim: Nia (young archer) joins in Elaris town and Rovan (former guardian) joins in the living forest. Both are placeholders until the story owner confirms.
+- C-17 – Combat doc lists MP, magic, elements and timeline. – Interim for Phase 2: Break and party AI only; elements, MP and timeline stay deferred.
+- C-18 – The legacy village attack (BUILD_01) remains deferred; not part of chapter 2.
+- C-19 – Elaris NPC roles are not specified. – Interim: Mara (research quarter), Elio (craftsman/shop) and Sela (townsperson) reuse names from the legacy NPC list. All dialogue is placeholder.

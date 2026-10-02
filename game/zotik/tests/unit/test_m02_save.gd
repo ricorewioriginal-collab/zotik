@@ -6,7 +6,7 @@ const S := preload("res://core/save_system.gd")
 
 func before_each() -> void:
 	SaveSystem.save_dir = DIR
-	SaveSystem.migrations = {}
+	SaveSystem.reset_migrations()
 	for slot in range(1, S.SLOT_COUNT + 1):
 		SaveSystem.delete_slot(slot)
 	GameState.reset_new_game()
@@ -105,7 +105,7 @@ func test_older_schema_is_migrated() -> void:
 	var f := FileAccess.open(SaveSystem.slot_path(1), FileAccess.WRITE)
 	f.store_string(JSON.stringify(env))
 	f.close()
-	eq(SaveSystem.load_slot(1), S.Status.UNSUPPORTED_VERSION, "no migration registered")
+	eq(SaveSystem.load_slot(1), S.Status.UNSUPPORTED_VERSION, "no migration registered for v0")
 	SaveSystem.migrations[0] = func(d: Dictionary) -> Dictionary:
 		d.currency = int(d.currency) + 1
 		return d

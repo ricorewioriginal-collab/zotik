@@ -8,11 +8,11 @@ const TABLES := {
 	"flags": ["FLAG_"], "areas": ["AREA_"], "items": ["ITEM_", "WEAPON_"],
 	"cosmetics": ["COS_"], "enemies": ["ENEMY_", "BOSS_"], "chests": ["CHEST_"],
 	"shops": ["SHOP_"], "puzzles": ["PUZ_"], "quests": ["QUEST_"], "npcs": ["NPC_"],
-	"dialogues": ["DLG_"], "cutscenes": ["CUT_"],
+	"dialogues": ["DLG_"], "cutscenes": ["CUT_"], "worlds": ["WORLD_"], "party": ["PARTY_"],
 }
 const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOONGATE_001", "PUZ_LUN_RESONANCE_BRIDGE_001", "ENEMY_RIFTLING_001", "ENEMY_MOONWOLF_001", "BOSS_ORUN_001", "WEAPON_WORLD_BLADE_001", "CHEST_LUN_001", "CHEST_LUN_002", "SAVEPOINT_LUN_RIFT_001", "FLAG_LUN_FOREST_UNLOCKED", "FLAG_BOSS_LUN_ORUN_DEFEATED", "CHAR_ZOTIK_MASTER_001", "CHAR_MIRA_MASTER_001", "CHAR_LYRA_MASTER_001", "CHAR_PROFESSORIUM_MASTER_001"]
-const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel"]
-const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger"]
+const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party"]
+const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
 const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
 
@@ -67,6 +67,10 @@ func savepoint(id: String) -> Dictionary:
 	return world.get("savepoints", {}).get(id, {})
 
 
+func combat() -> Dictionary:
+	return world.get("combat", {})
+
+
 func player_stats() -> Dictionary:
 	return world.get("player", {})
 
@@ -100,6 +104,21 @@ func validate() -> Array[String]:
 		for x in a.get("gate", {}):
 			_ref(e, "areas", x, id)
 			_ref(e, "flags", a.gate[x], id)
+	for id in table("areas"):
+		_ref(e, "worlds", table("areas")[id].get("world", ""), id)
+	for id in table("worlds"):
+		var wd: Dictionary = table("worlds")[id]
+		if wd.get("sealed", false):
+			continue
+		_ref(e, "areas", wd.get("hub_area", ""), id)
+		if get_entry("areas", wd.get("hub_area", "")).get("world") != id:
+			e.append("%s: hub area belongs to another world" % id)
+		if not layouts.get(wd.get("hub_area", ""), {}).get("spawns", {}).has(wd.get("hub_spawn", "")):
+			e.append("%s: hub spawn missing" % id)
+		if wd.has("requires_flag"):
+			_ref(e, "flags", wd.requires_flag, id)
+	for id in table("party"):
+		_ref(e, "npcs", table("party")[id].get("npc", ""), id)
 	for id in table("items"):
 		var it: Dictionary = table("items")[id]
 		if it.get("type") in ["weapon", "accessory"] and not it.has("slot"):
@@ -156,6 +175,8 @@ func validate() -> Array[String]:
 		_ref(e, "areas", n.area, id)
 		if n.has("appears_when"):
 			_ref(e, "flags", n.appears_when, id)
+		if n.has("hidden_when"):
+			_ref(e, "flags", n.hidden_when, id)
 		if n.get("dialogues", []).is_empty() or not n.dialogues[-1].when.is_empty():
 			e.append("%s: last dialogue entry must be an unconditional fallback" % id)
 		for d in n.get("dialogues", []):
@@ -219,6 +240,7 @@ func _effects(e: Array[String], list: Array, owner: String) -> void:
 			"start_quest": _ref(e, "quests", fx.id, owner)
 			"open_shop": _ref(e, "shops", fx.id, owner)
 			"play_cutscene": _ref(e, "cutscenes", fx.id, owner)
+			"join_party": _ref(e, "party", fx.id, owner)
 			"travel":
 				_ref(e, "areas", fx.area, owner)
 				if not layouts.get(fx.area, {}).get("spawns", {}).has(fx.get("spawn", "")):
@@ -308,6 +330,12 @@ func _validate_layouts(e: Array[String]) -> void:
 				"unique":
 					if world.get("uniques", {}).get(en.id, {}).get("area") != area:
 						e.append("%s placed outside its area" % en.id)
+				"platform":
+					if not key.begins_with("PLATFORM_") or not en.has("to") or float(en.get("period", 0)) <= 0.0:
+						e.append("%s: invalid moving platform %s" % [area, key])
+				"travel":
+					if not key.begins_with("TRAVEL_"):
+						e.append("%s: travel point id must start with TRAVEL_" % area)
 				"trigger":
 					_ref(e, "cutscenes", en.cutscene, area)
 					_ref(e, "flags", en.once_flag, area)
@@ -318,3 +346,15 @@ func _validate_layouts(e: Array[String]) -> void:
 	for id in world.get("savepoints", {}).keys() + world.get("uniques", {}).keys():
 		if not placed.has(id):
 			e.append("%s is never placed in a layout" % id)
+
+
+func world_of(area: String) -> String:
+	return str(get_entry("areas", area).get("world", ""))
+
+
+func world_unlocked(world_id: String) -> bool:
+	var wd := get_entry("worlds", world_id)
+	if wd.is_empty() or wd.get("sealed", false):
+		return false
+	var flag: String = wd.get("requires_flag", "")
+	return flag == "" or GameState.has_flag(flag)

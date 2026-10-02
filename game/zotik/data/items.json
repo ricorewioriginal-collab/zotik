@@ -1,10 +1,103 @@
 {
-  "ITEM_HEALING_POTION_001": {"name": "Heiltrank", "type": "consumable", "effect": {"heal": 50}, "price": 20, "stack": 99, "legacy_id": "healing_potion"},
-  "ITEM_MOON_HERB_001": {"name": "Mondkraut", "type": "material", "price": 5, "stack": 99},
-  "ITEM_RIFT_SHARD_001": {"name": "Weltenkernsplitter", "type": "key", "stack": 99, "legacy_id": "rift_shard"},
-  "ITEM_LOST_DELIVERY_001": {"name": "Saris Lieferung", "type": "key", "stack": 1},
-  "ITEM_MOON_PENDANT_001": {"name": "Mondanhänger", "type": "accessory", "slot": "accessory", "stats": {"max_hp": 5}, "price": 80, "stack": 1, "legacy_id": "moon_pendant"},
-  "WEAPON_TRAINING_SWORD_001": {"name": "Übungsschwert", "type": "weapon", "slot": "weapon", "stats": {"attack": 6}, "price": 0, "stack": 1},
-  "WEAPON_MOONBLADE_001": {"name": "Mondklinge", "type": "weapon", "slot": "weapon", "stats": {"attack": 10}, "price": 120, "stack": 1, "legacy_id": "moonblade"},
-  "WEAPON_WORLD_BLADE_001": {"name": "Weltenklinge", "type": "weapon", "slot": "weapon", "stats": {"attack": 18}, "unique": true, "stack": 1}
+  "ITEM_HEALING_POTION_001": {
+    "name": "Heiltrank",
+    "type": "consumable",
+    "effect": {
+      "heal": 50
+    },
+    "price": 20,
+    "stack": 99,
+    "legacy_id": "healing_potion"
+  },
+  "ITEM_MOON_HERB_001": {
+    "name": "Mondkraut",
+    "type": "material",
+    "price": 5,
+    "stack": 99
+  },
+  "ITEM_RIFT_SHARD_001": {
+    "name": "Weltenkernsplitter",
+    "type": "key",
+    "stack": 99,
+    "legacy_id": "rift_shard"
+  },
+  "ITEM_LOST_DELIVERY_001": {
+    "name": "Saris Lieferung",
+    "type": "key",
+    "stack": 1
+  },
+  "ITEM_MOON_PENDANT_001": {
+    "name": "Mondanhänger",
+    "type": "accessory",
+    "slot": "accessory",
+    "stats": {
+      "max_hp": 5
+    },
+    "price": 80,
+    "stack": 1,
+    "legacy_id": "moon_pendant"
+  },
+  "WEAPON_TRAINING_SWORD_001": {
+    "name": "Übungsschwert",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 6
+    },
+    "price": 0,
+    "stack": 1
+  },
+  "WEAPON_MOONBLADE_001": {
+    "name": "Mondklinge",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 10
+    },
+    "price": 120,
+    "stack": 1,
+    "legacy_id": "moonblade"
+  },
+  "WEAPON_WORLD_BLADE_001": {
+    "name": "Weltenklinge",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 18
+    },
+    "unique": true,
+    "stack": 1
+  },
+  "ITEM_HI_POTION_001": {
+    "name": "Großer Heiltrank",
+    "type": "consumable",
+    "effect": {
+      "heal": 100
+    },
+    "price": 45,
+    "stack": 99
+  },
+  "ITEM_SPORE_001": {
+    "name": "Leuchtspore",
+    "type": "material",
+    "price": 6,
+    "stack": 99
+  },
+  "ITEM_LEAF_CHARM_001": {
+    "name": "Blattamulett",
+    "type": "accessory",
+    "slot": "accessory",
+    "stats": {
+      "defense": 2,
+      "max_hp": 10
+    },
+    "price": 150,
+    "stack": 1
+  },
+  "ITEM_MEMORY_CRYSTAL_001": {
+    "name": "Erinnerungskristall",
+    "type": "material",
+    "price": 30,
+    "stack": 99
+  }
 }

@@ -21,6 +21,8 @@ var shop_menu: ShopMenu
 var quest_log: QuestLog
 var save_menu: SaveMenu
 var pause_menu: PauseMenu
+var world_map: WorldMap
+var companions := {}  # PARTY_* -> Companion
 var beacon: ObjectiveBeacon
 var beacon_target := ""  # entity key or "exit:<area>"
 var factories := {}
@@ -29,7 +31,7 @@ var _entry_spawn := Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
@@ -49,6 +51,9 @@ func _ready() -> void:
 	pause_menu = PauseMenu.new()
 	ui.add_child(pause_menu)
 	pause_menu.closed.connect(_update_control)
+	world_map = WorldMap.new()
+	ui.add_child(world_map)
+	world_map.closed.connect(_update_control)
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
 	EventBus.quest_completed.connect(_on_quest_completed)
@@ -67,6 +72,7 @@ func _ready() -> void:
 	player.died.connect(_on_player_died)
 	player.damaged.connect(func(_d): hud.flash_hurt())
 	EventBus.sync_state.connect(_sync_state)
+	EventBus.party_changed.connect(_sync_party)
 	EventBus.travel_requested.connect(func(a, s): enter_area.call_deferred(a, s))
 	if App.pending_load:
 		App.pending_load = false
@@ -91,7 +97,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or world_map.visible
 
 
 func _update_control() -> void:
@@ -136,10 +142,15 @@ func update_beacon() -> void:
 				pos = area.entities[key].global_position
 			beacon_target = key
 		else:
-			var hop := Navigator.next_hop(area.area_id, target.area)
-			if area.exits.has(hop):
-				pos = area.exits[hop].trigger.global_position - Vector3(0, 1.5, 0)
-				beacon_target = "exit:" + hop
+			var r := Navigator.route(area.area_id, target.area)
+			if r.has("exit") and area.exits.has(r.exit):
+				pos = area.exits[r.exit].trigger.global_position - Vector3(0, 1.5, 0)
+				beacon_target = "exit:" + r.exit
+			elif r.has("travel"):
+				for key in area.entities:
+					if str(key).begins_with("TRAVEL_"):
+						pos = area.entities[key].global_position
+						beacon_target = key
 	beacon.visible = pos != null
 	if pos != null:
 		beacon.global_position = pos
@@ -159,9 +170,15 @@ func toggle_inventory() -> void:
 
 
 func _on_quest_completed(id: String) -> void:
-	if id == Quests.MAIN:
-		EventBus.notify.emit("Kapitel 1 „Lunaris – Der erste Riss“ abgeschlossen. Fortsetzung folgt.")
+	var notice: String = Content.get_entry("quests", id).get("completion_notice", "")
+	if notice != "":
+		EventBus.notify.emit(notice)
 		chapter_complete.emit()
+
+
+func open_world_map() -> void:
+	world_map.open()
+	_update_control()
 
 
 func open_save_menu() -> void:
@@ -180,7 +197,7 @@ func toggle_quest_log() -> void:
 func _update_objective() -> void:
 	var lines := []
 	for id in Quests.active_quests():
-		lines.append(("» " if id == Quests.MAIN else "• ") + Quests.objective(id))
+		lines.append(("» " if Content.get_entry("quests", id).get("type") == "main" else "• ") + Quests.objective(id))
 	hud.set_objective("\n".join(lines))
 	update_beacon.call_deferred()
 
@@ -228,6 +245,9 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	area.exit_requested.connect(_on_exit_requested, CONNECT_DEFERRED)
 	GameState.player.area = area_id
 	_sync_state()
+	_sync_party()
+	for c in companions.values():
+		c.snap_to_player()
 	_update_objective()
 	area_loaded.emit(area_id)
 	EventBus.area_entered.emit(area_id)
@@ -246,6 +266,20 @@ func _on_player_died() -> void:
 	player.global_position = _entry_spawn
 	player.velocity = Vector3.ZERO
 	EventBus.notify.emit("Zotik steht wieder auf.")
+
+
+## Spawns/removes companions so they match GameState.party.
+func _sync_party() -> void:
+	for id in companions.keys():
+		if not id in GameState.party:
+			companions[id].queue_free()
+			companions.erase(id)
+	for id in GameState.party:
+		if not companions.has(id) and Content.has_id("party", id):
+			var c := Companion.create(id, player)
+			world.add_child(c)
+			companions[id] = c
+			c.snap_to_player()
 
 
 func _on_exit_requested(target: String) -> void:

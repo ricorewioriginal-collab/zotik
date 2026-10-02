@@ -1,6 +1,98 @@
 {
-  "PUZ_LUN_MOONGATE_001": {"name": "Mondtor", "area": "AREA_LUN_RUINS", "kind": "dials", "dial_count": 3, "dial_states": 4, "initial": [0, 0, 0], "solution": [2, 0, 3], "on_solved": [{"type": "set_flag", "id": "FLAG_LUN_MOONGATE_OPEN"}],
-    "hints": ["Die drei Scheiben zeigen Mondphasen. Elwens alte Geschichten sprechen von 'voll, neu, abnehmend'.", "Linke Scheibe: Vollmond. Mitte: Neumond.", "Rechte Scheibe: abnehmender Mond – dreimal drehen."]},
-  "PUZ_LUN_RESONANCE_BRIDGE_001": {"name": "Resonanzbrücke", "area": "AREA_LUN_RIFT_CAVE", "kind": "sequence", "nodes": 4, "initial": [], "solution": [2, 0, 3, 1], "on_solved": [{"type": "set_flag", "id": "FLAG_LUN_BRIDGE_ACTIVE"}],
-    "hints": ["Die Kristalle summen unterschiedlich hoch. Beginne beim tiefsten Ton.", "Reihenfolge der Töne: tief, mittel-tief, mittel-hoch, hoch.", "Kristalle 3, 1, 4, 2 (von links gezählt)."]}
+  "PUZ_LUN_MOONGATE_001": {
+    "name": "Mondtor",
+    "area": "AREA_LUN_RUINS",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      2,
+      0,
+      3
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_LUN_MOONGATE_OPEN"
+      }
+    ],
+    "hints": [
+      "Die drei Scheiben zeigen Mondphasen. Elwens alte Geschichten sprechen von 'voll, neu, abnehmend'.",
+      "Linke Scheibe: Vollmond. Mitte: Neumond.",
+      "Rechte Scheibe: abnehmender Mond – dreimal drehen."
+    ]
+  },
+  "PUZ_LUN_RESONANCE_BRIDGE_001": {
+    "name": "Resonanzbrücke",
+    "area": "AREA_LUN_RIFT_CAVE",
+    "kind": "sequence",
+    "nodes": 4,
+    "initial": [],
+    "solution": [
+      2,
+      0,
+      3,
+      1
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_LUN_BRIDGE_ACTIVE"
+      }
+    ],
+    "hints": [
+      "Die Kristalle summen unterschiedlich hoch. Beginne beim tiefsten Ton.",
+      "Reihenfolge der Töne: tief, mittel-tief, mittel-hoch, hoch.",
+      "Kristalle 3, 1, 4, 2 (von links gezählt)."
+    ]
+  },
+  "PUZ_ELA_TURM_001": {
+    "name": "Turm der Erinnerung",
+    "spec_id": "ELARIS_TURM_01",
+    "area": "AREA_ELA_TOWER",
+    "kind": "sequence",
+    "nodes": 4,
+    "node_labels": [
+      "Flamme",
+      "Mond",
+      "Kristall",
+      "Blatt"
+    ],
+    "initial": [],
+    "solution": [
+      1,
+      3,
+      2,
+      0
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELA_TOWER_SOLVED"
+      },
+      {
+        "type": "give_currency",
+        "amount": 80
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_MEMORY_CRYSTAL_001",
+        "count": 2
+      },
+      {
+        "type": "play_cutscene",
+        "id": "CUT_ELA_TURM_EPILOG_001"
+      }
+    ],
+    "hints": [
+      "Die Wandbilder erzählen von einer Nacht, in der der Wald erwachte und zu leuchten begann.",
+      "Erst der Mond, dann das, was unter ihm wächst. Das Feuer kommt zuletzt.",
+      "Mond, dann Blatt, dann Kristall, dann Flamme."
+    ]
+  }
 }

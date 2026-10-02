@@ -1,18 +1,180 @@
 {
-  "CUT_LUN_DREAM_001": {"placeholder": true, "lines": [
-    ["NARRATOR", "Ein Flüstern zieht durch den Schlaf. Irgendwo bricht etwas."],
-    ["UNKNOWN", "… Weltenhörer …"],
-    ["CHAR_ZOTIK", "Wer ist da?!"]],
-    "effects": [{"type": "set_flag", "id": "FLAG_LUN_INTRO_SEEN"}, {"type": "start_quest", "id": "QUEST_MAIN_LUN_001"}]},
-  "CUT_LUN_ORUN_001": {"placeholder": true, "lines": [
-    ["BOSS_ORUN_001", "Ein Weltenhörer. Ein Resonanzträger. Nach so langer Zeit."],
-    ["CHAR_ZOTIK", "Ich weiß nicht, wovon du redest – aber du lässt Lunaris in Ruhe!"]]},
-  "CUT_LUN_RIFT_VISION_001": {"placeholder": true, "lines": [
-    ["NARRATOR", "Der große Riss flackert. Bilder fremder Welten ziehen vorbei."],
-    ["NARRATOR", "Im Licht liegt eine Klinge, die auf Zotik zu antworten scheint."]]},
-  "CUT_LUN_LYRA_BRIDGE_001": {"placeholder": true, "lines": [
-    ["NPC_LYRA_001", "Professorium! Ich bin gekommen, so schnell ich konnte."],
-    ["NPC_LYRA_001", "Das ist also der Resonanzträger. Dann hat es begonnen."],
-    ["NARRATOR", "Fortsetzung folgt."]],
-    "effects": [{"type": "set_flag", "id": "FLAG_LUN_LYRA_MET"}]}
+  "CUT_LUN_DREAM_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Ein Flüstern zieht durch den Schlaf. Irgendwo bricht etwas."
+      ],
+      [
+        "UNKNOWN",
+        "… Weltenhörer …"
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Wer ist da?!"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_LUN_INTRO_SEEN"
+      },
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_LUN_001"
+      }
+    ]
+  },
+  "CUT_LUN_ORUN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_ORUN_001",
+        "Ein Weltenhörer. Ein Resonanzträger. Nach so langer Zeit."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ich weiß nicht, wovon du redest – aber du lässt Lunaris in Ruhe!"
+      ]
+    ]
+  },
+  "CUT_LUN_RIFT_VISION_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der große Riss flackert. Bilder fremder Welten ziehen vorbei."
+      ],
+      [
+        "NARRATOR",
+        "Im Licht liegt eine Klinge, die auf Zotik zu antworten scheint."
+      ]
+    ]
+  },
+  "CUT_LUN_LYRA_BRIDGE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_LYRA_001",
+        "Professorium! Ich bin gekommen, so schnell ich konnte."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Das ist also der Resonanzträger. Dann hat es begonnen."
+      ],
+      [
+        "NARRATOR",
+        "Fortsetzung folgt."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_LUN_LYRA_MET"
+      }
+    ]
+  },
+  "CUT_ELA_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Hinter dem Weltenstein öffnet sich ein Wald, dessen Wege sich leise verschieben."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Elaris. Hier hat meine Familie früher geforscht. Ich komme mit dir, Zotik."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann los."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "join_party",
+        "id": "PARTY_LYRA_001"
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELA_LYRA_JOINED"
+      },
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_ELA_001"
+      }
+    ]
+  },
+  "CUT_ELA_TURM_EPILOG_001": {
+    "placeholder": false,
+    "source": "20_RIDDLES/RIDDLE_SYSTEM.md (Demo-Dialog / Epilog)",
+    "lines": [
+      [
+        "CHAR_ZOTIK",
+        "Geschafft."
+      ],
+      [
+        "NPC_NIA_001",
+        "Du hast gerade eine uralte Weltenmaschine geknackt und sagst einfach ‚geschafft‘?"
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Was soll ich sonst sagen?"
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Vielleicht nichts. Die Tür ist offen."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Das ist ein gutes Argument."
+      ],
+      [
+        "NARRATOR",
+        "Elaris-Lore: Der Turm speicherte einst die Erinnerungen des Waldes, bevor der Große Bruch sie zerstreute."
+      ]
+    ]
+  },
+  "CUT_ELA_QUEEN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_WURZELKOENIGIN_001",
+        "Ihr tragt den Klang des Kerns in diesen Wald. Er hat mich einst zerrissen."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Sie erinnert sich an den Großen Bruch!"
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann helfen wir ihr, ihn zu vergessen."
+      ]
+    ]
+  },
+  "CUT_ELA_QUEEN_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die Wurzeln sinken zurück in die Erde. Ein letztes Bild flackert: Forscher, ein geteilter Kern, ein Name, der nicht gesagt wird."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Ich war dort. Damals."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Zurück zu Mara. Sie muss das hören."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_ELA_TOWN",
+        "spawn": "return"
+      }
+    ]
+  }
 }

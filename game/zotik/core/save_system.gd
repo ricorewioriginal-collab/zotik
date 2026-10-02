@@ -5,7 +5,7 @@ extends Node
 ## - Corrupt or tampered slot: the file is kept as .corrupt and the .bak is loaded.
 ## - Newer schema versions are rejected (no unsafe downgrade).
 
-const SCHEMA_VERSION := 1
+const SCHEMA_VERSION := 2
 const SLOT_COUNT := 3
 
 enum Status { OK, EMPTY, RECOVERED_FROM_BACKUP, CORRUPT, UNSUPPORTED_VERSION, IO_ERROR }
@@ -16,6 +16,26 @@ signal loaded(slot: int, status: Status)
 var save_dir := "user://saves/"
 ## Migration callables: from version N to N+1, keyed by N.
 var migrations := {}
+
+## Built-in migrations shipped with the game (tests may replace `migrations`).
+const BUILTIN_MIGRATIONS := {1: "_migrate_1_to_2"}
+
+
+func _ready() -> void:
+	reset_migrations()
+
+
+func reset_migrations() -> void:
+	migrations = {}
+	for v in BUILTIN_MIGRATIONS:
+		migrations[v] = Callable(self, BUILTIN_MIGRATIONS[v])
+
+
+## v1 (Phase 1) -> v2 (Phase 2): adds the party list.
+func _migrate_1_to_2(d: Dictionary) -> Dictionary:
+	if not d.get("party") is Array:
+		d["party"] = []
+	return d
 
 
 func slot_path(slot: int) -> String:
