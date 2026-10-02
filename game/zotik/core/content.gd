@@ -11,12 +11,14 @@ const TABLES := {
 	"dialogues": ["DLG_"], "cutscenes": ["CUT_"],
 }
 const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOONGATE_001", "PUZ_LUN_RESONANCE_BRIDGE_001", "ENEMY_RIFTLING_001", "ENEMY_MOONWOLF_001", "BOSS_ORUN_001", "WEAPON_WORLD_BLADE_001", "CHEST_LUN_001", "CHEST_LUN_002", "SAVEPOINT_LUN_RIFT_001", "FLAG_LUN_FOREST_UNLOCKED", "FLAG_BOSS_LUN_ORUN_DEFEATED", "CHAR_ZOTIK_MASTER_001", "CHAR_MIRA_MASTER_001", "CHAR_LYRA_MASTER_001", "CHAR_PROFESSORIUM_MASTER_001"]
-const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene"]
+const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel"]
+const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
 const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
 
 var tables := {}
 var world := {}
+var layouts := {}
 var load_errors: Array[String] = []
 
 
@@ -30,6 +32,7 @@ func load_all() -> void:
 	for t in TABLES:
 		tables[t] = _read(DATA_DIR + t + ".json")
 	world = _read(DATA_DIR + "world.json")
+	layouts = _read(DATA_DIR + "layouts.json")
 
 
 func _read(path: String) -> Dictionary:
@@ -178,6 +181,8 @@ func validate() -> Array[String]:
 		_ref(e, "flags", u.requires_flag, id)
 		_ref(e, "flags", u.sets_flag, id)
 		_ref(e, "cutscenes", u.cutscene, id)
+		_effects(e, u.get("after", []), id)
+	_validate_layouts(e)
 	var chars := {}
 	for id in table("npcs"):
 		chars[table("npcs")[id].get("character", "")] = true
@@ -206,6 +211,10 @@ func _effects(e: Array[String], list: Array, owner: String) -> void:
 			"start_quest": _ref(e, "quests", fx.id, owner)
 			"open_shop": _ref(e, "shops", fx.id, owner)
 			"play_cutscene": _ref(e, "cutscenes", fx.id, owner)
+			"travel":
+				_ref(e, "areas", fx.area, owner)
+				if not layouts.get(fx.area, {}).get("spawns", {}).has(fx.get("spawn", "")):
+					e.append("%s: travel to unknown spawn %s" % [owner, fx.get("spawn", "")])
 			"give_currency":
 				if int(fx.get("amount", 0)) <= 0:
 					e.append("%s: give_currency without positive amount" % owner)
@@ -230,3 +239,73 @@ func _gate(e: Array[String], g: Dictionary, owner: String) -> void:
 		"flag", "not_flag": _ref(e, "flags", g.id, owner)
 		"has_item": _ref(e, "items", g.id, owner)
 		_: e.append("%s: unknown gate %s" % [owner, g.get("type", "")])
+
+
+func layout(area: String) -> Dictionary:
+	return layouts.get(area, {})
+
+
+func _validate_layouts(e: Array[String]) -> void:
+	var placed := {}
+	var spawns_seen := {}
+	for area in table("areas"):
+		if not layouts.has(area):
+			e.append("area %s has no layout" % area)
+	for area in layouts:
+		_ref(e, "areas", area, "layouts")
+		var l: Dictionary = layouts[area]
+		if not l.get("spawns", {}).has("default"):
+			e.append("%s: layout without default spawn" % area)
+		var declared: Array = get_entry("areas", area).get("exits", [])
+		var exits := []
+		for x in l.get("exits", []):
+			exits.append(x.to)
+			if not x.to in declared:
+				e.append("%s: exit to %s not declared in areas.json" % [area, x.to])
+			if not layouts.get(x.to, {}).get("spawns", {}).has(area):
+				e.append("%s: target %s has no spawn for arrivals from %s" % [area, x.to, area])
+		for x in declared:
+			if not x in exits:
+				e.append("%s: declared exit %s has no layout exit" % [area, x])
+		for p in l.get("props", []):
+			if p.has("requires_flag"):
+				_ref(e, "flags", p.requires_flag, area)
+		for en in l.get("entities", []):
+			var ty: String = en.get("type", "")
+			if not ty in ENTITY_TYPES:
+				e.append("%s: unknown entity type %s" % [area, ty])
+				continue
+			var key: String = en.get("spawn", en.get("id", ""))
+			if placed.has(key):
+				e.append("%s placed twice" % key)
+			placed[key] = area
+			match ty:
+				"npc":
+					_ref(e, "npcs", en.id, area)
+					if get_entry("npcs", en.id).get("area") != area:
+						e.append("%s placed outside its area" % en.id)
+				"enemy":
+					_ref(e, "enemies", en.enemy, area)
+					if not key.begins_with("SPAWN_"):
+						e.append("%s: enemy spawn id must start with SPAWN_" % area)
+				"chest", "puzzle":
+					var t := "chests" if ty == "chest" else "puzzles"
+					_ref(e, t, en.id, area)
+					if get_entry(t, en.id).get("area") != area:
+						e.append("%s placed outside its area" % en.id)
+				"savepoint":
+					if savepoint(en.id).get("area") != area:
+						e.append("%s placed outside its area" % en.id)
+				"unique":
+					if world.get("uniques", {}).get(en.id, {}).get("area") != area:
+						e.append("%s placed outside its area" % en.id)
+				"trigger":
+					_ref(e, "cutscenes", en.cutscene, area)
+					_ref(e, "flags", en.once_flag, area)
+	for t in ["npcs", "chests", "puzzles"]:
+		for id in table(t):
+			if not placed.has(id):
+				e.append("%s is never placed in a layout" % id)
+	for id in world.get("savepoints", {}).keys() + world.get("uniques", {}).keys():
+		if not placed.has(id):
+			e.append("%s is never placed in a layout" % id)

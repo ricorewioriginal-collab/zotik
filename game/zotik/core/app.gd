@@ -8,8 +8,11 @@ const SCENE_GAME_ROOT := "res://scenes/game_root/game_root.tscn"
 const SCENE_CHARACTER_CREATOR := "res://scenes/character_creator/character_creator.tscn"
 
 signal scene_changed(path: String)
+signal new_game_started
 
 var current_scene_path := ""
+## Set by continue_game(): the game root restores the saved position.
+var pending_load := false
 
 
 func goto_scene(path: String) -> Error:
@@ -27,6 +30,14 @@ func start_new_game() -> void:
 	GameState.reset_new_game()
 	Customization.ensure_valid()
 	goto_scene(SCENE_CHARACTER_CREATOR)
+
+
+func continue_game(slot: int) -> int:
+	var status: int = SaveSystem.load_slot(slot)
+	if status == SaveSystem.Status.OK or status == SaveSystem.Status.RECOVERED_FROM_BACKUP:
+		pending_load = true
+		goto_scene(SCENE_GAME_ROOT)
+	return status
 
 
 func quit_game() -> void:

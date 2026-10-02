@@ -1,6 +1,48 @@
 {
-  "player": {"max_hp": 100, "attack": 4, "defense": 2, "move_speed": 5.5, "dodge_speed": 11.0, "dodge_time": 0.25, "iframe_time": 0.2, "attack_cooldown": 0.45, "attack_range": 2.0, "block_reduction": 0.75},
-  "savepoints": {"SAVEPOINT_LUN_RIFT_001": {"area": "AREA_LUN_RIFT_CAVE", "name": "Weltenanker", "heals": true}},
-  "uniques": {"WEAPON_WORLD_BLADE_001": {"area": "AREA_LUN_ORUN_ARENA", "requires_flag": "FLAG_BOSS_LUN_ORUN_DEFEATED", "sets_flag": "FLAG_LUN_WORLD_BLADE_TAKEN", "cutscene": "CUT_LUN_RIFT_VISION_001"}},
-  "characters": {"CHAR_ZOTIK": {"name": "Zotik", "master": "CHAR_ZOTIK_MASTER_001"}, "NARRATOR": {"name": ""}, "UNKNOWN": {"name": "???"}}
+  "player": {
+    "max_hp": 100,
+    "attack": 4,
+    "defense": 2,
+    "move_speed": 5.5,
+    "dodge_speed": 11.0,
+    "dodge_time": 0.25,
+    "iframe_time": 0.2,
+    "attack_cooldown": 0.45,
+    "attack_range": 2.0,
+    "block_reduction": 0.75
+  },
+  "savepoints": {
+    "SAVEPOINT_LUN_RIFT_001": {
+      "area": "AREA_LUN_RIFT_CAVE",
+      "name": "Weltenanker",
+      "heals": true
+    }
+  },
+  "uniques": {
+    "WEAPON_WORLD_BLADE_001": {
+      "area": "AREA_LUN_ORUN_ARENA",
+      "requires_flag": "FLAG_BOSS_LUN_ORUN_DEFEATED",
+      "sets_flag": "FLAG_LUN_WORLD_BLADE_TAKEN",
+      "cutscene": "CUT_LUN_RIFT_VISION_001",
+      "after": [
+        {
+          "type": "travel",
+          "area": "AREA_LUN_VILLAGE",
+          "spawn": "return"
+        }
+      ]
+    }
+  },
+  "characters": {
+    "CHAR_ZOTIK": {
+      "name": "Zotik",
+      "master": "CHAR_ZOTIK_MASTER_001"
+    },
+    "NARRATOR": {
+      "name": ""
+    },
+    "UNKNOWN": {
+      "name": "???"
+    }
+  }
 }

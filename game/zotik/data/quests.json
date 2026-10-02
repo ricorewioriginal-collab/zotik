@@ -1,25 +1,189 @@
 {
-  "QUEST_MAIN_LUN_001": {"name": "Der erste Riss", "type": "main",
+  "QUEST_MAIN_LUN_001": {
+    "name": "Der erste Riss",
+    "type": "main",
     "steps": [
-      {"objective": "Sprich mit Mira im Dorf.", "condition": {"type": "talk", "npc": "NPC_MIRA_001"}},
-      {"objective": "Melde dich bei Toren am Trainingsplatz.", "condition": {"type": "talk", "npc": "NPC_TOREN_001"}},
-      {"objective": "Besiege die Trainingspuppe.", "condition": {"type": "defeat", "enemy": "ENEMY_TRAINING_DUMMY_001", "count": 1}, "on_complete": [{"type": "set_flag", "id": "FLAG_LUN_TRAINING_DONE"}, {"type": "set_flag", "id": "FLAG_LUN_FOREST_UNLOCKED"}]},
-      {"objective": "Betritt den Mondwald.", "condition": {"type": "area", "area": "AREA_LUN_FOREST"}},
-      {"objective": "Vertreibe die Risslinge im Mondwald (3).", "condition": {"type": "defeat", "enemy": "ENEMY_RIFTLING_001", "count": 3}},
-      {"objective": "Öffne das Mondtor in den Ruinen.", "condition": {"type": "puzzle", "puzzle": "PUZ_LUN_MOONGATE_001"}},
-      {"objective": "Aktiviere die Resonanzbrücke in der Risshöhle.", "condition": {"type": "puzzle", "puzzle": "PUZ_LUN_RESONANCE_BRIDGE_001"}},
-      {"objective": "Besiege den Mondwolf.", "condition": {"type": "defeat", "enemy": "ENEMY_MOONWOLF_001", "count": 1}},
-      {"objective": "Berühre den Weltenanker.", "condition": {"type": "savepoint", "savepoint": "SAVEPOINT_LUN_RIFT_001"}},
-      {"objective": "Stelle dich Orun.", "condition": {"type": "defeat", "enemy": "BOSS_ORUN_001", "count": 1}, "on_complete": [{"type": "set_flag", "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"}]},
-      {"objective": "Nimm die Weltenklinge an dich.", "condition": {"type": "item", "item": "WEAPON_WORLD_BLADE_001", "count": 1}},
-      {"objective": "Kehre nach Lunaris zurück und sprich mit Mira.", "condition": {"type": "talk", "npc": "NPC_MIRA_001"}, "on_complete": [{"type": "set_flag", "id": "FLAG_LUN_RETURNED"}, {"type": "set_flag", "id": "FLAG_LUN_PROFESSORIUM_ARRIVED"}]},
-      {"objective": "Sprich mit dem Professorium.", "condition": {"type": "talk", "npc": "NPC_PROFESSORIUM_001"}}
+      {
+        "objective": "Sprich mit Mira im Dorf.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_MIRA_001"
+        }
+      },
+      {
+        "objective": "Melde dich bei Toren am Trainingsplatz.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_TOREN_001"
+        }
+      },
+      {
+        "objective": "Besiege die Trainingspuppe.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_TRAINING_DUMMY_001",
+          "count": 1
+        },
+        "on_complete": [
+          {
+            "type": "set_flag",
+            "id": "FLAG_LUN_TRAINING_DONE"
+          },
+          {
+            "type": "set_flag",
+            "id": "FLAG_LUN_FOREST_UNLOCKED"
+          }
+        ]
+      },
+      {
+        "objective": "Betritt den Mondwald.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_LUN_FOREST"
+        }
+      },
+      {
+        "objective": "Vertreibe die Risslinge im Mondwald (3).",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_RIFTLING_001",
+          "count": 3
+        }
+      },
+      {
+        "objective": "Öffne das Mondtor in den Ruinen.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_LUN_MOONGATE_001"
+        }
+      },
+      {
+        "objective": "Aktiviere die Resonanzbrücke in der Risshöhle.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_LUN_RESONANCE_BRIDGE_001"
+        }
+      },
+      {
+        "objective": "Besiege den Mondwolf.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berühre den Weltenanker.",
+        "condition": {
+          "type": "savepoint",
+          "savepoint": "SAVEPOINT_LUN_RIFT_001"
+        },
+        "on_complete": [
+          {
+            "type": "set_flag",
+            "id": "FLAG_LUN_WELTENANKER_AWAKENED"
+          }
+        ]
+      },
+      {
+        "objective": "Stelle dich Orun.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_ORUN_001",
+          "count": 1
+        },
+        "on_complete": [
+          {
+            "type": "set_flag",
+            "id": "FLAG_BOSS_LUN_ORUN_DEFEATED"
+          }
+        ]
+      },
+      {
+        "objective": "Nimm die Weltenklinge an dich.",
+        "condition": {
+          "type": "item",
+          "item": "WEAPON_WORLD_BLADE_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Kehre nach Lunaris zurück und sprich mit Mira.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_MIRA_001"
+        },
+        "on_complete": [
+          {
+            "type": "set_flag",
+            "id": "FLAG_LUN_RETURNED"
+          },
+          {
+            "type": "set_flag",
+            "id": "FLAG_LUN_PROFESSORIUM_ARRIVED"
+          }
+        ]
+      },
+      {
+        "objective": "Sprich mit dem Professorium.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_PROFESSORIUM_001"
+        }
+      }
     ],
-    "rewards": [{"type": "give_currency", "amount": 100}, {"type": "set_flag", "id": "FLAG_LUN_CHAPTER_COMPLETE"}]},
-  "QUEST_SIDE_LUN_001": {"name": "Saris verlorene Lieferung", "type": "side",
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 100
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_LUN_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_LUN_001": {
+    "name": "Saris verlorene Lieferung",
+    "type": "side",
     "steps": [
-      {"objective": "Finde Saris Lieferung im Mondwald.", "condition": {"type": "item", "item": "ITEM_LOST_DELIVERY_001", "count": 1}},
-      {"objective": "Bring die Lieferung zu Sari.", "condition": {"type": "talk", "npc": "NPC_SARI_001"}, "on_complete": [{"type": "take_item", "id": "ITEM_LOST_DELIVERY_001", "count": 1}, {"type": "set_flag", "id": "FLAG_LUN_SARI_DELIVERY_RETURNED"}]}
+      {
+        "objective": "Finde Saris Lieferung im Mondwald.",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_LOST_DELIVERY_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Bring die Lieferung zu Sari.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_SARI_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_LOST_DELIVERY_001",
+            "count": 1
+          },
+          {
+            "type": "set_flag",
+            "id": "FLAG_LUN_SARI_DELIVERY_RETURNED"
+          }
+        ]
+      }
     ],
-    "rewards": [{"type": "give_currency", "amount": 60}, {"type": "give_item", "id": "ITEM_MOON_PENDANT_001", "count": 1}]}
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 60
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_MOON_PENDANT_001",
+        "count": 1
+      }
+    ]
+  }
 }

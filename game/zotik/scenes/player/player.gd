@@ -7,6 +7,7 @@ extends CharacterBody3D
 signal damaged(amount: int)
 signal healed(amount: int)
 signal died
+signal interactable_changed(target: Interactable)
 
 const JUMP_VELOCITY := 6.5
 const GRAVITY := 18.0
@@ -21,6 +22,7 @@ var invulnerable_time := 0.0
 var dodge_time_left := 0.0
 var dodge_dir := Vector3.ZERO
 var dead := false
+var current_interactable: Interactable
 
 var stats := {}
 var visual: ZotikVisual
@@ -97,6 +99,25 @@ func _physics_process(delta: float) -> void:
 			face(dir)
 	move_and_slide()
 	camera_pivot.global_position = global_position + Vector3(0, 1.4, 0)
+	_update_interactable()
+	if control_enabled and not dead and current_interactable and Input.is_action_just_pressed("interact"):
+		current_interactable.interact(self)
+
+
+func _update_interactable() -> void:
+	var best: Interactable = null
+	var best_d := Interactable.INTERACT_RANGE
+	for n in get_tree().get_nodes_in_group("interactable"):
+		var it := n as Interactable
+		if it == null or not it.can_interact():
+			continue
+		var d := it.global_position.distance_to(global_position)
+		if d < best_d:
+			best_d = d
+			best = it
+	if best != current_interactable:
+		current_interactable = best
+		interactable_changed.emit(best)
 
 
 ## Converts stick/WASD input into a world direction relative to the camera yaw.

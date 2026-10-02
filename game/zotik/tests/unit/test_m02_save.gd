@@ -68,6 +68,7 @@ func test_corrupt_save_recovers_from_backup() -> void:
 	f.store_string("{broken")
 	f.close()
 	GameState.reset_new_game()
+	eq(SaveSystem.slot_info(1).status, S.Status.RECOVERED_FROM_BACKUP, "slot info reports recoverable slot")
 	eq(SaveSystem.load_slot(1), S.Status.RECOVERED_FROM_BACKUP, "status")
 	eq(GameState.currency, 10, "state from backup")
 	check(FileAccess.file_exists(SaveSystem.slot_path(1) + ".corrupt"), "corrupt file kept")

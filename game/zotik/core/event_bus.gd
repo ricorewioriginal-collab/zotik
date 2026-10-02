@@ -16,3 +16,6 @@ signal quest_completed(quest_id: String)
 signal savepoint_used(savepoint_id: String)
 signal player_died
 signal notify(text: String)
+signal cutscene_requested(cutscene_id: String)
+signal travel_requested(area_id: String, spawn: String)
+signal sync_state

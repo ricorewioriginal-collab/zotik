@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:07:59",
+  "last_run": "2026-10-02T08:13:40",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 30,
+  "passed": 38,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -125,6 +125,38 @@
     },
     {
       "id": "test_m04_player::test_equipment_bonus",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_new_game_starts_at_home",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_exit_transitions_and_arrival_spawn",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_forest_gate_locked_until_flag",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_bridge_appears_with_flag",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_every_spawn_has_ground",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_fall_into_void_respawns",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_save_and_continue_restores_area_and_position",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m05_greybox::test_interaction_picks_nearest",
       "result": "PASS"
     }
   ]

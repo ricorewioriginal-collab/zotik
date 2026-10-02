@@ -18,6 +18,8 @@ if run --path "$WORK/orig" --quit-after 5 | grep -q "Error parsing"; then echo "
 
 cp -a "$WORK/orig" "$WORK/fixed"
 sed -i 's/\("axis_value":1\.0)\]\)$/\1}/' "$WORK/fixed/project.godot"
+# Separate user:// directory so the probes never touch saves of game/zotik (same project name).
+sed -i 's/^config\/name=.*/config\/name="ZOTIK_M00_AUDIT_SANDBOX"/' "$WORK/fixed/project.godot"
 echo "## A2 copy with closing brace on move_right loads"
 if run --path "$WORK/fixed" --quit-after 5 | grep -q "Error parsing"; then echo "FAIL"; else echo "PASS"; fi
 

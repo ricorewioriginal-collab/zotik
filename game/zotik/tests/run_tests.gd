@@ -35,6 +35,9 @@ func _run() -> void:
 			await t.before_each()
 			await t.call(m)
 			await t.after_each()
+			if current_scene:
+				unload_current_scene()
+			await process_frame
 			if t.failures.is_empty():
 				passed += 1
 				results.append({"id": "%s::%s" % [f.get_basename(), m], "result": "PASS"})

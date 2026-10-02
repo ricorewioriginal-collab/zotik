@@ -26,6 +26,7 @@ func save_slot(slot: int) -> Status:
 	if slot < 1 or slot > SLOT_COUNT:
 		return Status.IO_ERROR
 	DirAccess.make_dir_recursive_absolute(save_dir)
+	EventBus.sync_state.emit()
 	var data := GameState.to_dict()
 	var env := {
 		"schema_version": SCHEMA_VERSION,
@@ -79,9 +80,14 @@ func load_slot(slot: int) -> Status:
 
 func slot_info(slot: int) -> Dictionary:
 	var res := _read_envelope(slot_path(slot))
+	var status: Status = res.status
+	if status == Status.CORRUPT:
+		res = _read_envelope(slot_path(slot) + ".bak")
+		if res.status == Status.OK:
+			status = Status.RECOVERED_FROM_BACKUP
 	if res.status != Status.OK:
-		return {"slot": slot, "status": res.status}
-	return {"slot": slot, "status": Status.OK, "saved_at": res.env.get("saved_at", ""), "area": res.env.get("area", ""), "play_time": res.env.get("play_time", 0.0)}
+		return {"slot": slot, "status": status}
+	return {"slot": slot, "status": status, "saved_at": res.env.get("saved_at", ""), "area": res.env.get("area", ""), "play_time": res.env.get("play_time", 0.0)}
 
 
 func delete_slot(slot: int) -> void:

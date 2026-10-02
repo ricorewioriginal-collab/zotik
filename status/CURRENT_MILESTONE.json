@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M04_PLAYER_MEIN_ZOTIK",
+  "milestone": "M05_LUNARIS_GREYBOX",
   "status": "PASSED",
-  "next_allowed": "M05_LUNARIS_GREYBOX",
+  "next_allowed": "M06_NPC_DIALOGUE",
   "phase_2_allowed": false
 }

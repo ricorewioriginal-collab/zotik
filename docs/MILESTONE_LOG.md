@@ -52,3 +52,24 @@ See `docs/PHASE_1_AUDIT.md`.
 - "Mein Zotik" character creator: fur shade (orange shades only), scarf and outfit, with a live 3D preview. Choices are cosmetic only, validated and persisted in `GameState.customization`.
 - Flow: Title → Neues Spiel → character creator → game root.
 - Tests: `tests/unit/test_m04_player.gd` (8 tests: movement, camera yaw, jump, i-frames, block, death, customization, equipment). The boot test now also covers the creator step.
+
+## M05 Lunaris Greybox – PASSED
+- `data/layouts.json` defines six streamed greybox areas: Zuhause, Dorf, Mondwald, Alte Ruinen, Risshöhle (with chasm) and Weltenanker/Orun-Arena. Each has spawns per arrival direction, exits, props and entity placements.
+- `WorldArea` builds an area from its data, using PLACEHOLDER primitives only.
+  - Exits are triggers. A flag-gated exit has a physical barrier that disappears when the flag is set, and a locked exit shows a notification.
+  - The Resonanzbrücke is a flag-dependent prop: invisible and not walkable until the puzzle is solved.
+- `GameRoot` loads one area at a time and places the player at the arrival spawn.
+  - Falling into the void respawns the player with fall damage. Play time is counted.
+  - `sync_state` writes the position before every save. "Laden" on the title restores area and exact position.
+- Interaction foundation (`Interactable`, nearest-in-range selection), `CutsceneTrigger`, and a HUD with HP, area, objective, prompt and notifications.
+- Flow gating added: `FLAG_LUN_WELTENANKER_AWAKENED` (set by quest step 8) opens the arena, so Orun cannot be fought before the main quest reaches him. `FLAG_LUN_ORUN_MET` covers the one-time intro trigger.
+- Content validation extended:
+  - every area has a layout, and exits match `areas.json`
+  - every exit target has an arrival spawn
+  - every NPC, chest, puzzle, savepoint and unique is placed exactly once and in its own area
+  - flag and cutscene references in layouts resolve
+- Fixes found while testing:
+  - The test runner now unloads the scene after each test.
+  - `tools/audit/m00_checks.sh` uses a separate user directory, because the legacy probes wrote into the save directory of the new game (same project name).
+  - The title offers slots that can be recovered from backup.
+- Tests: `tests/unit/test_m05_greybox.gd` (8 tests). One of them raycasts ground under every spawn in every area.
