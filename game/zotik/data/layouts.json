@@ -338,6 +338,321 @@
           24
         ]
       }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          5,
+          60
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          -8,
+          0,
+          -18
+        ],
+        "size": [
+          9,
+          9
+        ],
+        "rot": 45
+      },
+      {
+        "model": "path",
+        "pos": [
+          10,
+          0,
+          -2
+        ],
+        "size": [
+          16,
+          4
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          18
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          10
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          0
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          -10
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          -20
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          -22
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "building_well_red",
+        "pos": [
+          -8,
+          0,
+          -18
+        ],
+        "rot": 30,
+        "scale": 0.9,
+        "r": 1.5
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          17.5,
+          0,
+          3.6
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          18.9,
+          0,
+          3.9
+        ],
+        "rot": 40,
+        "r": 0.5
+      },
+      {
+        "model": "sack",
+        "pos": [
+          20.4,
+          0,
+          3.5
+        ],
+        "rot": 70
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          -12.4,
+          0,
+          8.2
+        ],
+        "rot": 15,
+        "r": 0.6
+      },
+      {
+        "model": "crate_B_small",
+        "pos": [
+          -12.6,
+          0,
+          9.5
+        ],
+        "rot": 40
+      },
+      {
+        "model": "tent",
+        "pos": [
+          25,
+          0,
+          -14
+        ],
+        "rot": -90,
+        "scale": 1.2,
+        "r": 1.6
+      },
+      {
+        "model": "weaponrack",
+        "pos": [
+          22.5,
+          0,
+          -21
+        ],
+        "rot": 180,
+        "r": 0.5
+      },
+      {
+        "model": "target",
+        "pos": [
+          20,
+          0,
+          -24.5
+        ],
+        "rot": 180
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          -26,
+          0,
+          4
+        ],
+        "scale": 1.3,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          26,
+          0,
+          10
+        ],
+        "rot": 60,
+        "scale": 1.3,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          -26,
+          0,
+          -22
+        ],
+        "rot": 120,
+        "scale": 1.2,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          26,
+          0,
+          -26
+        ],
+        "rot": 10,
+        "scale": 1.4,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          9,
+          0,
+          26
+        ],
+        "rot": 200,
+        "scale": 1.1,
+        "r": 0.5
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          -8,
+          0,
+          26
+        ],
+        "rot": 90,
+        "scale": 1.1,
+        "r": 0.5
+      },
+      {
+        "model": "fence_wood_straight",
+        "pos": [
+          -15,
+          0,
+          9.8
+        ],
+        "scale": 1.4
+      },
+      {
+        "model": "fence_wood_straight",
+        "pos": [
+          15,
+          0,
+          9.8
+        ],
+        "scale": 1.4
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          -11.3,
+          0,
+          10.8
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          11.3,
+          0,
+          10.8
+        ],
+        "rot": 180,
+        "scale": 1.6
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          24,
+          0,
+          22
+        ],
+        "scale": 2.0
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -25,
+          0,
+          -14
+        ],
+        "rot": 50,
+        "scale": 2.0
+      },
+      {
+        "model": "wheelbarrow",
+        "pos": [
+          -17,
+          0,
+          -14.5
+        ],
+        "rot": 30,
+        "r": 0.6
+      }
     ]
   },
   "AREA_LUN_FOREST": {
@@ -1051,6 +1366,233 @@
           0,
           6
         ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          5,
+          60
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          -9,
+          0,
+          -8
+        ],
+        "size": [
+          14,
+          4
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          10,
+          0,
+          -6
+        ],
+        "size": [
+          16,
+          4
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          16
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          6
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          -6
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          -18
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          -26,
+          0,
+          0
+        ],
+        "rot": 30,
+        "scale": 1.4,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          26,
+          0,
+          2
+        ],
+        "rot": 80,
+        "scale": 1.4,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          -25,
+          0,
+          24
+        ],
+        "rot": 10,
+        "scale": 1.3,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          26,
+          0,
+          25
+        ],
+        "rot": 140,
+        "scale": 1.3,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          -26,
+          0,
+          -26
+        ],
+        "scale": 1.4,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          26,
+          0,
+          -24
+        ],
+        "scale": 1.3,
+        "r": 0.6
+      },
+      {
+        "model": "tent",
+        "pos": [
+          11,
+          0,
+          20
+        ],
+        "rot": -150,
+        "r": 1.3
+      },
+      {
+        "model": "resource_lumber",
+        "pos": [
+          25,
+          0,
+          -15
+        ],
+        "rot": 90,
+        "scale": 1.2,
+        "r": 0.8
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          15,
+          0,
+          -2.5
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          16.3,
+          0,
+          -2.8
+        ],
+        "rot": 20,
+        "r": 0.6
+      },
+      {
+        "model": "flag_green",
+        "pos": [
+          -14.6,
+          0,
+          -6.6
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "flag_green",
+        "pos": [
+          15.7,
+          0,
+          9.6
+        ],
+        "rot": 180,
+        "scale": 1.6
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -10,
+          0,
+          24
+        ],
+        "scale": 2.0
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          22,
+          0,
+          22
+        ],
+        "scale": 1.8
+      },
+      {
+        "model": "wheelbarrow",
+        "pos": [
+          -24,
+          0,
+          -2
+        ],
+        "rot": 60,
+        "r": 0.6
       }
     ]
   },
@@ -1769,6 +2311,268 @@
           12
         ]
       }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          70,
+          6
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          12
+        ],
+        "size": [
+          5,
+          18
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          -8
+        ],
+        "size": [
+          22,
+          10
+        ]
+      },
+      {
+        "model": "water",
+        "pos": [
+          0,
+          0.0,
+          52
+        ],
+        "size": [
+          140,
+          40
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -24,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -8,
+          0,
+          -3.5
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          8,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          24,
+          0,
+          -3.5
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          14
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          8
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "tent",
+        "pos": [
+          -24,
+          0,
+          -14
+        ],
+        "rot": 30,
+        "scale": 1.3,
+        "r": 1.8
+      },
+      {
+        "model": "tent",
+        "pos": [
+          26,
+          0,
+          10
+        ],
+        "rot": -60,
+        "scale": 1.2,
+        "r": 1.6
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -8,
+          0,
+          -5
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -8.2,
+          0,
+          -6.3
+        ],
+        "rot": 40,
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          4.2,
+          0,
+          -11
+        ],
+        "rot": 15,
+        "r": 0.6
+      },
+      {
+        "model": "crate_B_small",
+        "pos": [
+          4.5,
+          0,
+          -9.6
+        ]
+      },
+      {
+        "model": "sack",
+        "pos": [
+          -15.6,
+          0,
+          -5
+        ],
+        "rot": 30
+      },
+      {
+        "model": "sack",
+        "pos": [
+          -15.4,
+          0,
+          -6.2
+        ],
+        "rot": 80
+      },
+      {
+        "model": "bucket_water",
+        "pos": [
+          -3.6,
+          0,
+          -11.2
+        ]
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          -15,
+          0,
+          -7.7
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          3.2,
+          0,
+          -11.7
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          20.5,
+          0,
+          -13.5
+        ],
+        "scale": 1.8
+      },
+      {
+        "model": "wheelbarrow",
+        "pos": [
+          22,
+          0,
+          -6
+        ],
+        "rot": 70,
+        "r": 0.6
+      },
+      {
+        "model": "resource_lumber",
+        "pos": [
+          27,
+          0,
+          -22
+        ],
+        "scale": 1.2,
+        "r": 0.9
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          -31,
+          0,
+          -25
+        ],
+        "scale": 1.3,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          31,
+          0,
+          22
+        ],
+        "scale": 1.3,
+        "r": 0.6
+      }
+    ],
+    "backdrop_skip": [
+      "south"
     ]
   },
   "AREA_VAL_GUILD": {
@@ -1902,6 +2706,199 @@
           0,
           -10
         ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          60,
+          6
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          -14,
+          0,
+          -6
+        ],
+        "size": [
+          5,
+          12
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          -14,
+          0,
+          8
+        ],
+        "size": [
+          5,
+          10
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          20,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          8,
+          0,
+          -3.5
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -4,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -20,
+          0,
+          -3.5
+        ],
+        "rot": 180,
+        "r": 0.25
+      },
+      {
+        "model": "weaponrack",
+        "pos": [
+          -3,
+          0,
+          -12
+        ],
+        "rot": 180,
+        "r": 0.5
+      },
+      {
+        "model": "weaponrack",
+        "pos": [
+          -1,
+          0,
+          -12
+        ],
+        "rot": 180,
+        "r": 0.5
+      },
+      {
+        "model": "target",
+        "pos": [
+          6,
+          0,
+          -16
+        ],
+        "rot": 180
+      },
+      {
+        "model": "target",
+        "pos": [
+          9,
+          0,
+          -16
+        ],
+        "rot": 180
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -21,
+          0,
+          -6.5
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          -22.3,
+          0,
+          -6.3
+        ],
+        "rot": 20,
+        "r": 0.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          -6,
+          0,
+          -10.8
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          -22,
+          0,
+          -10.8
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          22,
+          0,
+          -22
+        ],
+        "scale": 1.4,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          22,
+          0,
+          22
+        ],
+        "scale": 1.4,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_A",
+        "pos": [
+          4,
+          0,
+          24
+        ],
+        "rot": 30,
+        "scale": 1.2,
+        "r": 0.6
+      },
+      {
+        "model": "tree_single_B",
+        "pos": [
+          6,
+          0,
+          -25
+        ],
+        "rot": 60,
+        "scale": 1.2,
+        "r": 0.6
       }
     ]
   },

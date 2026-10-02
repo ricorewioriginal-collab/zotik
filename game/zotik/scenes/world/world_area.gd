@@ -39,6 +39,8 @@ func build(id: String, factories: Dictionary) -> void:
 		_collider(w[0], w[1])
 	Look.build_boundary(self, area_id, layout, Vector2(size[0], size[1]), WALL_HEIGHT)
 	Look.build_backdrop(self, area_id, layout, Vector2(size[0], size[1]))
+	Look.build_sky_features(self, area_id, layout, Vector2(size[0], size[1]))
+	Look.build_decor(self, layout)
 	for p in layout.get("props", []):
 		var node := _prop("PLACEHOLDER_" + str(p.name), str(p.name), _v(p.pos), _v(p.size), Color.html(p.color), p.get("collision", true))
 		if p.has("requires_flag"):

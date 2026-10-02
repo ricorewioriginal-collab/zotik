@@ -549,3 +549,48 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - HUD party frames show HP and "k.o.".
 - Logged as C-31. Tests: `tests/unit/test_u02_party_hp.gd` (5 tests).
 - Regression: 194/194 tests plus restart checks for chapters 1–3: PASS. The golden paths still pass with vulnerable companions.
+
+## C01 Realistic-proportion characters – PASSED (owner: "Charaktere sollen so aussehen wie sie sollen")
+- **Problem:** The chibi KayKit figures read as "Animal Crossing". Replaced by the CC0 Quaternius human kit (11 MB in total):
+  - base body (head only, cut above the neck)
+  - modular fantasy outfits (peasant/ranger, male/female)
+  - rigged hairstyles
+  - Universal Animation Library: 17 animations, stored as one compressed AnimationLibrary
+  - textures reduced from 4K to 1K for Android
+- `CharacterRig.create_human(spec, height)` builds a figure from outfit, body, hair or beard, hair colour, outfit tint, hidden parts and weapons. Weapon meshes are borrowed from the KayKit packs. It keeps the same API as before (play/action/locomotion/attach), so gameplay code is unchanged.
+- **Companions:**
+  - Lyra: long blue hair, blue-tinted dress, staff
+  - Nia: hair in buns, ranger outfit, crossbow
+  - Rovan: beard, ranger outfit, axe and shield
+- **NPCs:** all 19 styled individually (outfit, hair, colour, weapon); Finn is child-sized.
+- **Zotik:** the same human rig in the ranger outfit with fur-coloured arms. The fox head (muzzle, nose, green eyes, cheek fluff, large ears), green scarf, neck fur, bushy tail, bag and the Weltenklinge sit on the bones. Positions are defined in model space and converted per bone, so they follow every animation.
+- Logged as C-32. G02 tests updated to the new rig: no human head, skin uses the fur shade, Sword_Attack animation.
+- Regression: 194/194 tests plus restart checks for chapters 1–3: PASS.
+
+## G05 World detail – PASSED (owner: "die Spielwelt soll aussehen wie sie soll")
+- New layout key `decor`: hand-placed CC0 models (wells, tents, barrels, crates, sacks, weapon racks, targets, flags, fences, trees, rocks, wheelbarrows, lumber). An optional thin collider (`r`) stops the player walking through them.
+- Procedural decor types:
+  - `lantern`: wooden pole with a warm glowing lamp
+  - `path`: cobbled roads and plazas
+  - `water`: the Valdoria harbour
+- Decor models are validated by `Content`; the reachability test includes decor colliders.
+- Areas dressed:
+  - Lunaris village: main road with branches, 6 lanterns, well, tent, training corner, garden fences, trees inside the village
+  - Elaris town: roads, lanterns, trees, tent, workshop props
+  - Valdoria market: east–west street, market plaza, harbour water, tents and stalls
+  - Guild district: street, training racks, targets
+- **Horizon** (Lunaris, Valdoria): a castle far away and floating islands with trees, like the key art (3 on Android/Web, 6 on PC).
+- `backdrop_skip` keeps the town ring out of the harbour.
+- Regression: 194/194 tests plus restart checks: PASS.
+
+## X01 Full playthrough – PASSED (owner: "das Spiel soll spielbar sein in deinen bisherigen Welten in voller Logik")
+- New test `test_x01_full_playthrough`: the whole game in one session, with no prepared saves.
+  - Title → new game → chapter 1 (Lunaris) → Weltenstein to Elaris → chapter 2 → Weltenstein to Valdoria → chapter 3 (guild, bounty, bronze arena, canals, cistern golem, Kanalwächter) → save → reset → load through the title.
+  - Every chapter starts from the state the previous chapter really produced: party, items, flags and quest steps. The golden paths m15/e08/v06 start from hand-written saves; this one does not.
+  - Uses each chapter's savepoint, because doing so is a quest step.
+- Checks:
+  - All 6 main and side quests COMPLETED.
+  - Companions follow across worlds (2 in Elaris, then 3).
+  - The loaded state is identical to the saved one (play_time excluded, because it keeps counting).
+- No game bugs found. The two failures during writing were test-script mistakes: the savepoint step was missing, and the valve order was wrong (the solution is valves 1 and 2).
+- Regression: 195/195 tests plus restart checks for chapters 1–3: PASS.

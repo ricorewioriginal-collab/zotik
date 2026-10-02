@@ -2,50 +2,65 @@ class_name ZotikVisual
 extends Node3D
 ## Interim visual for CHAR_ZOTIK_MASTER_001 (orange anthropomorphic creature:
 ## upright body, large pointed ears, green eyes, light muzzle/chest, large
-## bushy tail, green scarf, adventurer outfit). G02: an animated CC0 rig body
-## recoloured to his fur/outfit palette, with a fox head, ears, tail, scarf,
-## bag and blade attached to its bones. Not final art (CLAUDE.md rule 6);
-## replace with the production model without touching gameplay code.
+## bushy tail, green scarf, adventurer outfit). C01: the animated CC0 human
+## rig (Quaternius) in the ranger outfit with fur-coloured arms; fox head,
+## ears, scarf, tail, bag and blade are attached to its bones. Part
+## positions are given in model space (metres, +Y up, +Z = his front) and
+## converted per bone, so they follow the animation. Not final art (CLAUDE.md
+## rule 6); replace with the production model without touching gameplay code.
 
 var parts := {}
 var rig: CharacterRig
 var _was_dodging := false
+var _model_from_skeleton := Transform3D.IDENTITY
 
 ## Interim scale (C-23): Zotik ≈ 1.2 m next to ≈ 1.65–1.8 m humans.
 const SCALE := 0.68
+const BODY_SPEC := {"outfit": "Male_Ranger", "body": "Male", "human_head": false, "hide": ["Male_Ranger_Head_Hood", "Male_Ranger_Acc_Pauldron"]}
 
 
 func _ready() -> void:
-	rig = CharacterRig.create("rogue", 1.75)
+	rig = CharacterRig.create_human(BODY_SPEC, 1.75)
 	add_child(rig)
-	rig.hide_parts(["Rogue_Head", "Rogue_Cape"])
-	# head-bone space, model units (front = +Z inside the model)
-	_bone_part("head", "PLACEHOLDER_head", _sphere(0.48), Vector3(0, 0.48, 0.02), Vector3.ZERO, Vector3(1.05, 0.95, 1.0))
-	_bone_part("head", "PLACEHOLDER_cheek_l", _sphere(0.2), Vector3(0.3, 0.3, 0.18), Vector3(0, 0, 30), Vector3(1.3, 0.8, 0.9))
-	_bone_part("head", "PLACEHOLDER_cheek_r", _sphere(0.2), Vector3(-0.3, 0.3, 0.18), Vector3(0, 0, -30), Vector3(1.3, 0.8, 0.9))
-	_bone_part("head", "PLACEHOLDER_muzzle", _sphere(0.16), Vector3(0, 0.32, 0.42), Vector3.ZERO, Vector3(1.0, 0.75, 1.35))
-	_bone_part("head", "PLACEHOLDER_nose", _sphere(0.065), Vector3(0, 0.37, 0.63))
-	_bone_part("head", "PLACEHOLDER_ear_l", _cone(0.19, 0.58), Vector3(0.27, 1.06, -0.02), Vector3(0, 0, -16))
-	_bone_part("head", "PLACEHOLDER_ear_r", _cone(0.19, 0.58), Vector3(-0.27, 1.06, -0.02), Vector3(0, 0, 16))
-	_bone_part("head", "PLACEHOLDER_ear_inner_l", _cone(0.1, 0.36), Vector3(0.27, 1.0, 0.07), Vector3(0, 0, -16))
-	_bone_part("head", "PLACEHOLDER_ear_inner_r", _cone(0.1, 0.36), Vector3(-0.27, 1.0, 0.07), Vector3(0, 0, 16))
-	_bone_part("head", "PLACEHOLDER_eye_l", _sphere(0.095), Vector3(0.19, 0.56, 0.4), Vector3.ZERO, Vector3(0.8, 1.0, 0.6))
-	_bone_part("head", "PLACEHOLDER_eye_r", _sphere(0.095), Vector3(-0.19, 0.56, 0.4), Vector3.ZERO, Vector3(0.8, 1.0, 0.6))
-	_bone_part("head", "PLACEHOLDER_pupil_l", _sphere(0.045), Vector3(0.19, 0.56, 0.455))
-	_bone_part("head", "PLACEHOLDER_pupil_r", _sphere(0.045), Vector3(-0.19, 0.56, 0.455))
-	_bone_part("head", "PLACEHOLDER_hair", _cone(0.32, 0.36), Vector3(0, 0.9, 0.16), Vector3(35, 0, 0))
-	_bone_part("chest", "PLACEHOLDER_scarf", _torus(0.3, 0.41), Vector3(0, 0.18, 0.02))
-	_bone_part("chest", "PLACEHOLDER_scarf_end", _box(Vector3(0.18, 0.5, 0.06)), Vector3(0.2, -0.05, -0.36), Vector3(15, 0, -10))
-	_bone_part("chest", "PLACEHOLDER_chest", _sphere(0.16), Vector3(0, -0.02, 0.32), Vector3.ZERO, Vector3(1.0, 1.25, 0.5))
-	_bone_part("hips", "PLACEHOLDER_outfit", _torus(0.36, 0.46), Vector3(0, 0.12, 0))
-	_bone_part("hips", "PLACEHOLDER_tail", _capsule(0.3, 1.35), Vector3(0, 0.3, -0.62), Vector3(-58, 0, 0))
-	_bone_part("hips", "PLACEHOLDER_tail_tip", _sphere(0.27), Vector3(0, 0.62, -1.13))
-	_bone_part("hips", "PLACEHOLDER_shoulder_bag", _box(Vector3(0.28, 0.32, 0.16)), Vector3(0.48, 0.05, 0.05))
-	_bone_part("handslot.r", "PLACEHOLDER_weapon", _box(Vector3(0.09, 0.05, 1.2)), Vector3(0, 0, 0.38))
-	# colour holder for the fur shade (the rig body itself is recoloured)
+	scale = Vector3.ONE * SCALE
+	_model_from_skeleton = rig.model.global_transform.affine_inverse() * rig.skeleton.global_transform
+	_bone_part("Head", "PLACEHOLDER_head", _sphere(0.22), Vector3(0, 1.69, 0.02), Vector3.ZERO, Vector3(1.05, 0.95, 1.0))
+	_bone_part("Head", "PLACEHOLDER_cheek_l", _sphere(0.085), Vector3(0.13, 1.61, 0.11), Vector3(0, 0, 30), Vector3(1.3, 0.8, 0.9))
+	_bone_part("Head", "PLACEHOLDER_cheek_r", _sphere(0.085), Vector3(-0.13, 1.61, 0.11), Vector3(0, 0, -30), Vector3(1.3, 0.8, 0.9))
+	_bone_part("Head", "PLACEHOLDER_muzzle", _sphere(0.075), Vector3(0, 1.62, 0.2), Vector3.ZERO, Vector3(1.0, 0.75, 1.35))
+	_bone_part("Head", "PLACEHOLDER_nose", _sphere(0.03), Vector3(0, 1.645, 0.3))
+	_bone_part("Head", "PLACEHOLDER_ear_l", _cone(0.09, 0.29), Vector3(0.13, 1.93, -0.01), Vector3(0, 0, -16))
+	_bone_part("Head", "PLACEHOLDER_ear_r", _cone(0.09, 0.29), Vector3(-0.13, 1.93, -0.01), Vector3(0, 0, 16))
+	_bone_part("Head", "PLACEHOLDER_ear_inner_l", _cone(0.048, 0.18), Vector3(0.13, 1.91, 0.028), Vector3(0, 0, -16))
+	_bone_part("Head", "PLACEHOLDER_ear_inner_r", _cone(0.048, 0.18), Vector3(-0.13, 1.91, 0.028), Vector3(0, 0, 16))
+	_bone_part("Head", "PLACEHOLDER_eye_l", _sphere(0.042), Vector3(0.085, 1.72, 0.198), Vector3.ZERO, Vector3(0.8, 1.0, 0.6))
+	_bone_part("Head", "PLACEHOLDER_eye_r", _sphere(0.042), Vector3(-0.085, 1.72, 0.198), Vector3.ZERO, Vector3(0.8, 1.0, 0.6))
+	_bone_part("Head", "PLACEHOLDER_pupil_l", _sphere(0.021), Vector3(0.085, 1.72, 0.222))
+	_bone_part("Head", "PLACEHOLDER_pupil_r", _sphere(0.021), Vector3(-0.085, 1.72, 0.222))
+	_bone_part("Head", "PLACEHOLDER_hair", _cone(0.13, 0.16), Vector3(0, 1.85, 0.07), Vector3(35, 0, 0))
+	_bone_part("neck_01", "PLACEHOLDER_scarf", _torus(0.1, 0.18), Vector3(0, 1.44, 0.02), Vector3(8, 0, 0), Vector3(1.0, 1.15, 1.0))
+	_bone_part("spine_03", "PLACEHOLDER_scarf_end", _box(Vector3(0.08, 0.26, 0.03)), Vector3(0.09, 1.33, 0.15), Vector3(-12, 0, -12))
+	_bone_part("neck_01", "PLACEHOLDER_chest", _sphere(0.07), Vector3(0, 1.54, 0.15), Vector3.ZERO, Vector3(1.2, 0.9, 0.6))
+	_bone_part("pelvis", "PLACEHOLDER_outfit", _torus(0.15, 0.175), Vector3(0, 1.0, 0))
+	_bone_part("pelvis", "PLACEHOLDER_tail", _capsule(0.12, 0.62), Vector3(0, 1.0, -0.26), Vector3(-58, 0, 0))
+	_bone_part("pelvis", "PLACEHOLDER_tail_tip", _sphere(0.11), Vector3(0, 1.2, -0.48))
+	_bone_part("pelvis", "PLACEHOLDER_shoulder_bag", _box(Vector3(0.11, 0.13, 0.06)), Vector3(0.19, 0.95, 0.02))
+	# blade in the right hand (bone space, same grip as CharacterRig weapons)
+	var sword: Array = CharacterRig.HUMAN_WEAPONS.sword
+	var src: Node = (load(CharacterRig.MODELS[sword[0]]) as PackedScene).instantiate()
+	var w := MeshInstance3D.new()
+	w.name = "PLACEHOLDER_weapon"
+	w.mesh = (src.find_children(sword[1], "MeshInstance3D", true, false)[0] as MeshInstance3D).mesh
+	src.free()
+	w.position = sword[2]
+	w.rotation_degrees = sword[3]
+	w.scale = Vector3.ONE * float(sword[4])
+	w.material_override = StandardMaterial3D.new()
+	rig.attach("hand_r", w)
+	parts["PLACEHOLDER_weapon"] = w
+	# colour holder for the fur shade (applied to the arms' skin surfaces)
 	_part("PLACEHOLDER_body", _capsule(0.01, 0.02), Vector3.ZERO)
 	parts["PLACEHOLDER_body"].visible = false
-	scale = Vector3.ONE * SCALE
 	apply_customization()
 	if is_inside_tree() and get_tree().root.has_node("EventBus"):
 		EventBus.equipment_changed.connect(update_weapon)
@@ -68,10 +83,21 @@ func apply_customization() -> void:
 	_color("PLACEHOLDER_outfit", outfit)
 	_color("PLACEHOLDER_shoulder_bag", Color(0.45, 0.28, 0.15))
 	if rig:
-		rig.recolor("zotik_%s_%s" % [fur.to_html(), outfit.to_html()], [
-			[func(c: Color): return c.v > 0.8 and c.s > 0.12 and c.s < 0.6 and c.h > 0.02 and c.h < 0.12, fur],
-			[func(c: Color): return c.s > 0.4 and c.h > 0.35 and c.h < 0.55, outfit],
-		])
+		# clothes take a light outfit tint, exposed skin becomes fur
+		for mi in rig.meshes():
+			if not mi.name.begins_with("Male_Ranger"):
+				continue
+			for i in mi.mesh.get_surface_count():
+				var base := mi.mesh.surface_get_material(i) as StandardMaterial3D
+				if base == null:
+					continue
+				var m := base.duplicate() as StandardMaterial3D
+				if base.resource_name.contains("Regular"):
+					m.albedo_texture = null
+					m.albedo_color = fur
+				else:
+					m.albedo_color = outfit.lerp(Color.WHITE, 0.55)
+				mi.set_surface_override_material(i, m)
 	update_weapon()
 
 
@@ -133,14 +159,17 @@ func _part(name: String, mesh: Mesh, pos: Vector3, rot := Vector3.ZERO) -> void:
 	parts[name] = mi
 
 
+## Mesh attached to `bone`; pos/rot are in model space (rest pose), so the
+## part keeps its place regardless of how the bone's axes are oriented.
 func _bone_part(bone: String, name: String, mesh: Mesh, pos: Vector3, rot := Vector3.ZERO, scl := Vector3.ONE) -> void:
 	var mi := MeshInstance3D.new()
 	mi.name = name
 	mi.mesh = mesh
-	mi.position = pos
-	mi.rotation_degrees = rot
-	mi.scale = scl
 	mi.material_override = StandardMaterial3D.new()
+	var idx := rig.skeleton.find_bone(bone)
+	var rest := rig.skeleton.get_bone_global_rest(idx)
+	var want := Transform3D(Basis.from_euler(rot * PI / 180.0).scaled(scl), pos)
+	mi.transform = rest.affine_inverse() * _model_from_skeleton.affine_inverse() * want
 	rig.attach(bone, mi)
 	parts[name] = mi
 

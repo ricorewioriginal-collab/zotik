@@ -16,6 +16,10 @@ func _blocked_boxes(l: Dictionary) -> Array:
 			var s := WorldArea._v(p.size)
 			if c.y - s.y / 2.0 < 1.0:  # only obstacles at walking height
 				out.append(Rect2(c.x - s.x / 2.0 - RADIUS, c.z - s.z / 2.0 - RADIUS, s.x + 2 * RADIUS, s.z + 2 * RADIUS))
+	for d in l.get("decor", []):
+		if d.has("r"):
+			var r := float(d.r) + RADIUS
+			out.append(Rect2(float(d.pos[0]) - r, float(d.pos[2]) - r, 2.0 * r, 2.0 * r))
 	return out
 
 
