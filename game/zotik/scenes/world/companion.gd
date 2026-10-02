@@ -85,7 +85,7 @@ func _physics_process(delta: float) -> void:
 			goal = to_t.normalized() * float(data.move_speed)
 		elif attack_cd <= 0.0:
 			attack_cd = float(data.attack_cooldown)
-			target.take_hit(int(data.attack))
+			target.take_hit(int(data.attack), float(Content.combat().get("break_party", 6)))
 			_bolt(target.global_position)
 			attacked.emit(target)
 		_face(to_t)

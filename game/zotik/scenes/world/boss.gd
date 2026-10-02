@@ -9,8 +9,8 @@ var phase := 0
 var summons: Array[Enemy] = []
 
 
-func take_hit(attack_value: int) -> int:
-	var dmg := super(attack_value)
+func take_hit(attack_value: int, break_amount: float = 0.0, interrupt: bool = false) -> int:
+	var dmg := super(attack_value, break_amount, interrupt)
 	_update_phase()
 	return dmg
 

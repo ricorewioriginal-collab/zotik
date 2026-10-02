@@ -67,6 +67,10 @@ func savepoint(id: String) -> Dictionary:
 	return world.get("savepoints", {}).get(id, {})
 
 
+func combat() -> Dictionary:
+	return world.get("combat", {})
+
+
 func player_stats() -> Dictionary:
 	return world.get("player", {})
 

@@ -1,7 +1,7 @@
 {
   "phase": 2,
-  "milestone": "E02_PARTY",
+  "milestone": "E03_BREAK",
   "status": "PASSED",
-  "next_allowed": "E03_BREAK",
+  "next_allowed": "E04_ELARIS_CONTENT",
   "phase_2_allowed": true
 }

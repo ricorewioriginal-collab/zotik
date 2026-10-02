@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T09:45:21",
+  "last_run": "2026-10-02T09:49:28",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 110,
+  "passed": 115,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -45,6 +45,26 @@
     },
     {
       "id": "test_e02_party::test_passive_during_dialogue_and_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_light_and_strong_drain_break",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_full_break_stuns_and_amplifies_damage_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_strong_attack_interrupts_telegraph",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_unbreakable_and_party_break",
+      "result": "PASS"
+    },
+    {
+      "id": "test_e03_break::test_strong_attack_key_and_death_while_broken",
       "result": "PASS"
     },
     {

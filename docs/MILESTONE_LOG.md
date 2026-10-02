@@ -241,3 +241,19 @@ The owner authorised Phase 2. The plan is in `docs/PHASE_2_PLAN.md`; assumptions
   - enemies target only Zotik, so a companion can never block progress
 - The party persists across save, load and area changes.
 - Tests: `tests/unit/test_e02_party.gd` (5 tests).
+
+## E03 Break system – PASSED
+- Enemy data has `break` (gauge) and `break_duration`. Combat values live in `data/world.json → combat`. Enemies without a gauge, such as the training dummy, cannot be broken.
+- Break amounts and effects:
+
+  | Source | Break | Damage | Other |
+  |---|---|---|---|
+  | Light attack | 8 | normal | |
+  | **Strong attack** (K / LB) | 25 | ×1.6 | 1.1 s cooldown |
+  | Party member hit | 6 | normal | |
+  | Strong attack during a telegraphed wind-up | +15 bonus | | interrupts the wind-up (the legacy "interruptible telegraphs") |
+
+- At 0, the enemy is BROKEN: stunned, never attacks, takes ×1.5 damage. Afterwards it recovers with a full gauge.
+- `break_started` and `break_ended` are each emitted exactly once, including when the enemy dies while broken. The legacy BreakSystem emitted repeatedly and never signalled the start; that defect was not reproduced.
+- The enemy label shows Break progress and "[BREAK]". The HUD help lists the strong attack.
+- Tests: `tests/unit/test_e03_break.gd` (5 tests). One found a real bug, fixed: `break_ended` was lost when an enemy died while broken.

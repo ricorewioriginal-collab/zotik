@@ -76,7 +76,7 @@ func _process(delta: float) -> void:
 			notify_label.text = ""
 
 
-const HELP_TEXT := "WASD bewegen · Maus/Pfeiltasten Kamera · Leertaste springen\nLinksklick/J angreifen · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
+const HELP_TEXT := "WASD bewegen · Maus/Pfeiltasten Kamera · Leertaste springen\nLinksklick/J angreifen · K stark (Break) · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
 
 
 func toggle_help() -> void:
