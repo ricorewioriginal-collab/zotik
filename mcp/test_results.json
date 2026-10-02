@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T07:59:56",
+  "last_run": "2026-10-02T08:02:04",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 5,
+  "passed": 14,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -25,6 +25,42 @@
     },
     {
       "id": "test_m01_boot::test_missing_scene_is_rejected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_round_trip_preserves_values_and_types",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_envelope_has_schema_and_checksum",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_second_save_creates_backup_of_previous",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_corrupt_save_recovers_from_backup",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_tampered_save_is_detected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_newer_schema_rejected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_older_schema_is_migrated",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_slots_are_independent",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m02_save::test_settings_persist",
       "result": "PASS"
     }
   ]

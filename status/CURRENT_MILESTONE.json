@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M01_BOOT",
+  "milestone": "M02_SAVE_FOUNDATION",
   "status": "PASSED",
-  "next_allowed": "M02_SAVE_FOUNDATION",
+  "next_allowed": "M03_CONTENT_REGISTRY",
   "phase_2_allowed": false
 }

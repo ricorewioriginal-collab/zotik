@@ -13,6 +13,9 @@ config/features=PackedStringArray("4.7", "GL Compatibility")
 
 EventBus="*res://core/event_bus.gd"
 App="*res://core/app.gd"
+GameState="*res://core/game_state.gd"
+SaveSystem="*res://core/save_system.gd"
+Settings="*res://core/settings.gd"
 
 [display]
 
