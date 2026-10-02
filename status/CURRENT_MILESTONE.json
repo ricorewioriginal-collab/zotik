@@ -1,7 +1,7 @@
 {
   "phase": "graphics",
-  "milestone": "U02_COMPANION_HP",
+  "milestone": "C01_REALISTIC_CHARACTERS",
   "status": "PASSED",
-  "next_allowed": "owner feedback (art direction)",
+  "next_allowed": "G05_WORLD_DETAIL",
   "standing_owner_approval": true
 }

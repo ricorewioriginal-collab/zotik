@@ -549,3 +549,20 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - HUD party frames show HP and "k.o.".
 - Logged as C-31. Tests: `tests/unit/test_u02_party_hp.gd` (5 tests).
 - Regression: 194/194 tests plus restart checks for chapters 1–3: PASS. The golden paths still pass with vulnerable companions.
+
+## C01 Realistic-proportion characters – PASSED (owner: "Charaktere sollen so aussehen wie sie sollen")
+- **Problem:** The chibi KayKit figures read as "Animal Crossing". Replaced by the CC0 Quaternius human kit (11 MB in total):
+  - base body (head only, cut above the neck)
+  - modular fantasy outfits (peasant/ranger, male/female)
+  - rigged hairstyles
+  - Universal Animation Library: 17 animations, stored as one compressed AnimationLibrary
+  - textures reduced from 4K to 1K for Android
+- `CharacterRig.create_human(spec, height)` builds a figure from outfit, body, hair or beard, hair colour, outfit tint, hidden parts and weapons. Weapon meshes are borrowed from the KayKit packs. It keeps the same API as before (play/action/locomotion/attach), so gameplay code is unchanged.
+- **Companions:**
+  - Lyra: long blue hair, blue-tinted dress, staff
+  - Nia: hair in buns, ranger outfit, crossbow
+  - Rovan: beard, ranger outfit, axe and shield
+- **NPCs:** all 19 styled individually (outfit, hair, colour, weapon); Finn is child-sized.
+- **Zotik:** the same human rig in the ranger outfit with fur-coloured arms. The fox head (muzzle, nose, green eyes, cheek fluff, large ears), green scarf, neck fur, bushy tail, bag and the Weltenklinge sit on the bones. Positions are defined in model space and converted per bone, so they follow every animation.
+- Logged as C-32. G02 tests updated to the new rig: no human head, skin uses the fur shade, Sword_Attack animation.
+- Regression: 194/194 tests plus restart checks for chapters 1–3: PASS.

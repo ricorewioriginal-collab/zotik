@@ -40,3 +40,4 @@ Format: ID – description – status / interim handling. Interim handling is th
   - Every full heal (savepoint, respawn, arena) restores the whole party.
   - The healer heals the weakest member.
   - Enemies attack the nearest member who is still standing.
+- C-32 – C01 character models. The free Quaternius packs contain only peasant and ranger outfits, with no mage robe. – Interim: Lyra wears a blue-tinted peasant outfit with long blue hair and a staff (see C-28). Zotik is the ranger outfit with fur-coloured arms and a fox head, ears, scarf and tail on the shared skeleton. Both are placeholders until production models exist; the paid pack versions or custom models can replace them through `CharacterRig.create_human`.

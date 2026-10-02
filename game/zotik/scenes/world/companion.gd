@@ -15,11 +15,11 @@ const FOLLOW_MAX := 4.0
 ## Formation slots behind Zotik (x = right, z = back), by party index. None
 ## sits on the line between camera and Zotik, so he is never hidden.
 const SLOTS := [Vector3(-2.4, 0, 0.3), Vector3(2.4, 0, 0.3), Vector3(3.6, 0, 1.6)]
-## interim model per member (G02, CC0 KayKit): [rig, visible weapons]
-const MODELS := {
-	"PARTY_LYRA_001": ["mage", ["2H_Staff"]],
-	"PARTY_NIA_001": ["rogue_hooded", ["2H_Crossbow"]],
-	"PARTY_ROVAN_001": ["barbarian", ["1H_Axe", "Barbarian_Round_Shield"]],
+## interim model per member (C01, CC0 Quaternius humans; see CharacterRig.create_human)
+const LOOKS := {
+	"PARTY_LYRA_001": [{"outfit": "Female_Peasant", "body": "Female", "hair": "Hair_Long", "hair_color": Color(0.35, 0.6, 1.0), "tint": Color(0.78, 0.82, 1.0), "right": "staff"}, 1.72],
+	"PARTY_NIA_001": [{"outfit": "Female_Ranger", "body": "Female", "hair": "Hair_Buns", "hair_color": Color(0.5, 0.34, 0.22), "hide": ["Female_Ranger_Head_Hood"], "right": "crossbow"}, 1.68],
+	"PARTY_ROVAN_001": [{"outfit": "Male_Ranger", "body": "Male", "hair": "Hair_SimpleParted", "beard": true, "hair_color": Color(0.22, 0.16, 0.11), "hide": ["Male_Ranger_Head_Hood"], "right": "axe", "left": "shield"}, 1.86],
 }
 const TELEPORT_DIST := 25.0
 const KO_RECOVER_SEC := 5.0       # quiet seconds after a fight before a K.O. ends
@@ -53,9 +53,8 @@ static func create(id: String, p: Player) -> Companion:
 	cs.shape = shape
 	cs.position.y = 0.85
 	c.add_child(cs)
-	var look: Array = MODELS.get(id, ["rogue", []])
-	c.rig = CharacterRig.create(look[0], 1.75)
-	c.rig.show_weapons(look[1])
+	var look: Array = LOOKS.get(id, [{"outfit": "Male_Peasant"}, 1.75])
+	c.rig = CharacterRig.create_human(look[0], float(look[1]))
 	c.body = c.rig
 	c.add_child(c.rig)
 	if int(GameState.party_hp.get(id, 1)) <= 0:
