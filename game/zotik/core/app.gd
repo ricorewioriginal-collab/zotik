@@ -1,7 +1,7 @@
 extends Node
 ## Application core: version info and scene switching.
 
-const VERSION := "0.1.0"
+const VERSION := "0.2.0"
 const SCENE_BOOT := "res://scenes/boot/boot.tscn"
 const SCENE_TITLE := "res://scenes/title/title.tscn"
 const SCENE_GAME_ROOT := "res://scenes/game_root/game_root.tscn"
