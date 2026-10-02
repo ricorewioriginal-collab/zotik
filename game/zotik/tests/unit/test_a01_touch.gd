@@ -55,6 +55,23 @@ func test_buttons_emit_actions() -> void:
 	check(not game.hud.help_label.visible, "keyboard help hidden in touch mode")
 
 
+func test_taps_do_not_attack_in_touch_mode() -> void:
+	check(not InputMap.action_get_events("attack").any(func(e): return e is InputEventMouseButton), "no LMB attack while touch controls are on")
+	touch.force = false
+	touch._set_touch_bindings(false)
+	check(InputMap.action_get_events("attack").any(func(e): return e is InputEventMouseButton), "LMB attack restored for mouse players")
+
+
+func test_quick_stick_flick_releases() -> void:
+	var size_v := touch.get_viewport_rect().size
+	var origin := Vector2(200, size_v.y - 200)
+	touch._on_press(1, origin)
+	_drag(1, origin + Vector2(0, -110), Vector2(0, -110))
+	touch._on_release(1)  # released in the same frame, before the input flush
+	await frames(2)
+	eq(Input.get_action_strength("move_forward"), 0.0, "no stuck movement after a quick flick")
+
+
 func test_stick_moves_and_swipe_turns_camera() -> void:
 	var size_v := touch.get_viewport_rect().size
 	var origin := Vector2(200, size_v.y - 200)

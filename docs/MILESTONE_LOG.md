@@ -500,3 +500,25 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - publishing the APK with the rolling release
 - The APK cannot be built in this container: there is no Android SDK or template here. The build is therefore verified only by CI. It has not been tested on a real device.
 - Tests: `tests/unit/test_a01_touch.gd` (3 tests). Regression: 184/184 tests plus restart checks: PASS.
+
+## A01 follow-up – owner device test (2026-10-02)
+- The owner tested the APK and found the controls "buggy". Two root causes were found and fixed:
+  1. Android turns every touch into an emulated left click, and `attack` is bound to the left mouse button, so every stick, camera or button touch also attacked. Mouse-button bindings are now removed while touch mode is on and restored when it is off.
+  2. The stick sent its "release" only if `Input.is_action_pressed` already reported the action. Input is buffered until the next frame, so a quick flick left Zotik walking. The stick now tracks its own pressed actions.
+- The CI APK build is green, so A01 counts as PASSED. It still needs another device test by the owner.
+- Tests: `test_a01_touch` gained 2 regression tests; 5 in total.
+
+## G04 World dressing – PASSED
+- 40 curated CC0 models from the KayKit Medieval Hexagon pack (2.5 MB).
+  - Buildings replace the procedural houses, fitted inside the prop's collision footprint:
+    - homes A/B in the world colour (Lunaris blue, Elaris green, Valdoria red)
+    - blacksmith, market, church (library, research hall), tavern (guild hall)
+  - Trees use real tree models.
+- Backdrop beyond the walkable border (outdoors only, purely visual, exit openings left free):
+  - an inner row of trees, or town houses facing inwards in Valdoria
+  - an outer row of forest clusters
+  - halved density on Android and Web
+- The pack's hexagon hills and mountains were tried and rejected: they look blocky, which is exactly what the owner criticised.
+- **Bug fixed:** the invisible border colliders were drawn as 5 m fog-coloured walls, which showed as a grey band at the horizon. They are now collision-only.
+- Outdoor borders are a low stone edge, so the forest behind them stays visible.
+- Regression: 186/186 tests plus restart checks: PASS.

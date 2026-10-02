@@ -6,3 +6,4 @@
 
 All other visuals are generated in code (placeholders or procedural shapes).
 | `assets/characters/kaykit/*` | KayKit Adventurers Character Pack 1.0 by Kay Lousberg (kaylousberg.com), rigged and animated | CC0 (see `LICENSE.txt` there) |
+| `assets/world/kaykit/*` | KayKit Medieval Hexagon Pack 1.0 by Kay Lousberg (kaylousberg.com): buildings, trees, props (curated subset) | CC0 (see `LICENSE.txt` there) |

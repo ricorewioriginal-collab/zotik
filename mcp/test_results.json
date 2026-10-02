@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T12:09:46",
+  "last_run": "2026-10-02T12:42:31",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 184,
+  "passed": 186,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -13,6 +13,14 @@
     },
     {
       "id": "test_a01_touch::test_buttons_emit_actions",
+      "result": "PASS"
+    },
+    {
+      "id": "test_a01_touch::test_taps_do_not_attack_in_touch_mode",
+      "result": "PASS"
+    },
+    {
+      "id": "test_a01_touch::test_quick_stick_flick_releases",
       "result": "PASS"
     },
     {

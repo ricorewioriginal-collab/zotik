@@ -48,7 +48,7 @@ func test_props_keep_names_collision_and_textures() -> void:
 	game.enter_area("AREA_LUN_VILLAGE", "default")
 	await physics_frames(1)
 	var house: Node3D = game.area.find_children("PLACEHOLDER_house_mira", "", true, false)[0]
-	check(house is StaticBody3D and house.has_node("Roof"), "house keeps collision and gets a roof")
+	check(house is StaticBody3D and (house.has_node("Building") or house.has_node("Roof")), "house keeps collision and gets a building")
 	var floor_mesh := game.area.get_tree().get_nodes_in_group("ground")[0].get_child(1) as MeshInstance3D
 	check((floor_mesh.material_override as StandardMaterial3D).albedo_texture != null, "textured floor")
 	check(game.area.has_node("Boundary"), "visible boundary")

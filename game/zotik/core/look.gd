@@ -30,7 +30,20 @@ const EXIT_GAP := 6.0
 ## texture repeats per metre on floors (keeps cobbles/planks at a believable size)
 const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25}
 
+## CC0 KayKit Medieval Hexagon models (assets/world/kaykit), G04
+const MODEL_DIR := "res://assets/world/kaykit/%s.gltf"
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red"}
+## prop name keyword -> building model ("%s" = world colour variant)
+const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
+## backdrop beyond the area border: [inner row models, outer row models]
+const BACKDROP := {
+	"WORLD_LUNARIS": [["trees_A_medium", "tree_single_A", "trees_A_large", "tree_single_B"], ["trees_A_large", "trees_A_medium"]],
+	"WORLD_ELARIS": [["trees_B_large", "trees_B_medium", "tree_single_B", "trees_A_large"], ["trees_B_large", "trees_A_large"]],
+	"WORLD_VALDORIA": [["building_home_A_red", "building_home_B_red", "building_tavern_red", "building_tower_A_red", "building_home_A_red"], ["trees_A_large", "trees_B_large"]],
+}
+
 static var _cache := {}
+static var _models := {}   # name -> [PackedScene, AABB]
 
 
 ## Android and the browser use the compatibility renderer: cheaper shadows.
@@ -194,13 +207,15 @@ static func build_prop(root: Node3D, prop_name: String, size: Vector3, color: Co
 			b.size = size
 			_mesh(root, b, Vector3.ZERO, glow(color))
 		"tree":
-			_tree(root, size, color)
+			if not _model_tree(root, prop_name, size):
+				_tree(root, size, color)
 		"roots":
 			var b := BoxMesh.new()
 			b.size = size
 			_mesh(root, b, Vector3.ZERO, surface("bark", color, 0.4))
 		"house":
-			_house(root, size, color)
+			if not _model_building(root, prop_name, size, world_style):
+				_house(root, size, color)
 		"wood":
 			var b := BoxMesh.new()
 			b.size = size
@@ -209,6 +224,111 @@ static func build_prop(root: Node3D, prop_name: String, size: Vector3, color: Co
 			var b := BoxMesh.new()
 			b.size = size
 			_mesh(root, b, Vector3.ZERO, surface("brick" if world_style.get("boundary", "") == "wall" else "rock", color, 0.3))
+
+
+## Instance of a KayKit model plus its unscaled bounds (cached per name).
+static func model(name: String) -> Array:
+	if not _models.has(name):
+		var path := MODEL_DIR % name
+		if not ResourceLoader.exists(path):
+			_models[name] = [null, AABB()]
+		else:
+			var scene: PackedScene = load(path)
+			var probe: Node3D = scene.instantiate()
+			var box := AABB()
+			var first := true
+			for mi in probe.find_children("*", "MeshInstance3D", true, false):
+				var a: AABB = (mi as MeshInstance3D).transform * (mi as MeshInstance3D).get_aabb()
+				box = a if first else box.merge(a)
+				first = false
+			probe.free()
+			_models[name] = [scene, box]
+	var entry: Array = _models[name]
+	return [(entry[0] as PackedScene).instantiate() if entry[0] else null, entry[1]]
+
+
+static func _place(parent: Node3D, name: String, pos: Vector3, scl: float, yaw: float = 0.0) -> Node3D:
+	var m: Array = model(name)
+	if m[0] == null:
+		return null
+	var n: Node3D = m[0]
+	n.scale = Vector3.ONE * scl
+	n.rotation.y = yaw
+	n.position = pos - Vector3(0, (m[1] as AABB).position.y * scl, 0)
+	parent.add_child(n)
+	return n
+
+
+static func building_for(prop_name: String, world_style: Dictionary) -> String:
+	var colour: String = WORLD_COLOR.get(_world_key(world_style), "red")
+	for b in BUILDINGS:
+		if prop_name.contains(b[0]):
+			var nm: String = b[1]
+			if nm == "building_home_%s":
+				return "building_home_%s_%s" % ["A" if prop_name.hash() % 2 == 0 else "B", colour]
+			return nm % colour if nm.contains("%s") else nm
+	return ""
+
+
+static func _world_key(world_style: Dictionary) -> String:
+	for k in WORLDS:
+		if WORLDS[k] == world_style:
+			return k
+	return "WORLD_LUNARIS"
+
+
+## Building model fitted to the prop's footprint (never beyond its collision).
+static func _model_building(root: Node3D, prop_name: String, size: Vector3, world_style: Dictionary) -> bool:
+	var nm := building_for(prop_name, world_style)
+	if nm == "":
+		return false
+	var box: AABB = model(nm)[1]
+	var scl := minf(size.x / box.size.x, size.z / box.size.z)
+	var n := _place(root, nm, Vector3(0, -size.y / 2.0, 0), scl)
+	if n:
+		n.name = "Building"
+	return n != null
+
+
+static func _model_tree(root: Node3D, prop_name: String, size: Vector3) -> bool:
+	var nm := "tree_single_B" if prop_name.contains("living") or prop_name.hash() % 2 == 0 else "tree_single_A"
+	var n := _place(root, nm, Vector3(0, -size.y / 2.0, 0), size.y / 1.1)
+	if n:
+		n.name = "Tree"
+	return n != null
+
+
+## Scenery beyond the walkable border (outdoors only): a row of trees or
+## town houses close to the wall and hills/mountains further out, chosen
+## deterministically per area. Purely visual; leaves exit openings free.
+static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
+	if is_indoor(area_id, layout):
+		return
+	var rows: Array = BACKDROP.get(world_of(area_id), BACKDROP.WORLD_LUNARIS)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(area_id)
+	var root := Node3D.new()
+	root.name = "Backdrop"
+	parent.add_child(root)
+	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var town := world_of(area_id) == "WORLD_VALDORIA"
+	# [models, distance beyond the edge, spacing, min scale, max scale]
+	var specs := [[rows[0], 5.0, 7.5, 4.5 if not town else 6.0, 6.5 if not town else 8.0], [rows[1], 18.0, 16.0 if low_end() else 10.0, 7.0, 10.0]]
+	for spec in specs:
+		var hx := size.x / 2.0 + float(spec[1])
+		var hz := size.y / 2.0 + float(spec[1])
+		for side in [[Vector2(-hx, -hz), Vector2(hx, -hz)], [Vector2(-hx, hz), Vector2(hx, hz)], [Vector2(-hx, -hz), Vector2(-hx, hz)], [Vector2(hx, -hz), Vector2(hx, hz)]]:
+			var a: Vector2 = side[0]
+			var b: Vector2 = side[1]
+			var steps := maxi(1, int(a.distance_to(b) / float(spec[2])))
+			for i in steps + 1:
+				var p := a.lerp(b, float(i) / steps) + Vector2(rng.randf_range(-1.5, 1.5), rng.randf_range(-1.5, 1.5))
+				if exits.any(func(e: Vector2): return Vector2(clampf(p.x, -size.x / 2.0, size.x / 2.0), clampf(p.y, -size.y / 2.0, size.y / 2.0)).distance_to(e) < 7.0):
+					continue
+				var models: Array = spec[0]
+				var nm: String = models[rng.randi() % models.size()]
+				var yaw := atan2(-p.x, -p.y) if town else rng.randf() * TAU
+				_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw)
 
 
 static func _tree(root: Node3D, size: Vector3, color: Color) -> void:
@@ -257,8 +377,8 @@ static func build_boundary(parent: Node3D, area_id: String, layout: Dictionary, 
 		mat = surface("brick", Color(0.85, 0.78, 0.68), 0.3)
 		h = 2.4
 	else:
-		mat = surface("grass", ground.darkened(0.1), 0.5)
-		h = 3.2
+		mat = surface("rock", ground.lightened(0.15), 0.5)
+		h = 0.9
 	var hx := size.x / 2.0
 	var hz := size.y / 2.0
 	var root := Node3D.new()

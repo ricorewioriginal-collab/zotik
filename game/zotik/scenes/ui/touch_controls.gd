@@ -28,6 +28,8 @@ var _stick_vec := Vector2.ZERO
 var _camera_index := -1
 var _buttons := {}      # touch index -> action
 var _rects := []        # [action, center, radius]
+var _stick_down := {}     # move action -> true while the stick holds it
+var _removed_mouse := {}  # action -> mouse-button events removed in touch mode
 var _stick_base: Panel
 var _stick_knob: Panel
 
@@ -65,8 +67,33 @@ func _process(_delta: float) -> void:
 	if visible and not show:
 		_release_all()
 	visible = show
+	_set_touch_bindings(force or wanted())
 	if game:
 		game.hud.touch_mode = force or wanted()
+
+
+## Touch screens turn every tap into an emulated left click. Mouse-button
+## bindings (attack = LMB, block = RMB) are therefore removed in touch mode,
+## otherwise every stick or camera touch would also attack. Restored when
+## touch mode is switched off.
+func _set_touch_bindings(on: bool) -> void:
+	if on and _removed_mouse.is_empty():
+		for action in InputMap.get_actions():
+			for ev in InputMap.action_get_events(action):
+				if ev is InputEventMouseButton:
+					_removed_mouse.get_or_add(action, []).append(ev)
+					InputMap.action_erase_event(action, ev)
+		if _removed_mouse.is_empty():
+			_removed_mouse["_none"] = []
+	elif not on and not _removed_mouse.is_empty():
+		for action in _removed_mouse:
+			for ev in _removed_mouse[action]:
+				InputMap.action_add_event(action, ev)
+		_removed_mouse.clear()
+
+
+func _exit_tree() -> void:
+	_set_touch_bindings(false)
 
 
 func _layout() -> void:
@@ -161,8 +188,10 @@ func _send_stick() -> void:
 		var s: float = pair[1]
 		if s > 0.05:
 			_send(pair[0], true, s)
-		elif Input.is_action_pressed(pair[0]):
+			_stick_down[pair[0]] = true
+		elif _stick_down.has(pair[0]):
 			_send(pair[0], false)
+			_stick_down.erase(pair[0])
 
 
 func _release_all() -> void:
