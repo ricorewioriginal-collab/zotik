@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:37:12",
+  "last_run": "2026-10-02T08:39:31",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 84,
+  "passed": 88,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -341,6 +341,22 @@
     },
     {
       "id": "test_m12_boss::test_arena_intro_trigger_plays_once",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_pedestal_hidden_until_orun_defeated",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_take_blade_vision_and_return_home",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_blade_cannot_be_duplicated_after_reload",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m13_story_end::test_ending_mira_professorium_lyra",
       "result": "PASS"
     }
   ]

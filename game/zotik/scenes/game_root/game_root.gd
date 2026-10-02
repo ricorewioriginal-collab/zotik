@@ -7,6 +7,7 @@ const VOID_Y := -15.0
 const PLAYER_SCENE := preload("res://scenes/player/player.tscn")
 
 signal area_loaded(area_id: String)
+signal chapter_complete
 
 @onready var world: Node3D = $World
 @onready var ui: CanvasLayer = $UI
@@ -26,7 +27,7 @@ var _entry_spawn := Vector3.ZERO
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
@@ -48,6 +49,7 @@ func _ready() -> void:
 	pause_menu.closed.connect(_update_control)
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
+	EventBus.quest_completed.connect(_on_quest_completed)
 	shop_menu.closed.connect(_update_control)
 	EventBus.shop_requested.connect(open_shop)
 	Dialogue.finished.connect(_on_dialogue_finished)
@@ -100,6 +102,12 @@ func toggle_inventory() -> void:
 	elif not Dialogue.is_active() and not shop_menu.visible:
 		inventory_menu.open()
 	_update_control()
+
+
+func _on_quest_completed(id: String) -> void:
+	if id == Quests.MAIN:
+		EventBus.notify.emit("Kapitel 1 „Lunaris – Der erste Riss“ abgeschlossen. Fortsetzung folgt.")
+		chapter_complete.emit()
 
 
 func open_save_menu() -> void:

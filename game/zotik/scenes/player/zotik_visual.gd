@@ -20,7 +20,10 @@ func _ready() -> void:
 	_part("PLACEHOLDER_eye_r", _sphere(0.05), Vector3(0.11, 1.5, -0.26))
 	_part("PLACEHOLDER_tail", _capsule(0.16, 0.9), Vector3(0, 0.75, 0.42), Vector3(55, 0, 0))
 	_part("PLACEHOLDER_scarf", _torus(0.2, 0.3), Vector3(0, 1.2, 0))
+	_part("PLACEHOLDER_weapon", _box(Vector3(0.08, 1.0, 0.03)), Vector3(0.42, 0.9, -0.1), Vector3(-20, 0, 0))
 	apply_customization()
+	if is_inside_tree() and get_tree().root.has_node("EventBus"):
+		EventBus.equipment_changed.connect(update_weapon)
 
 
 func apply_customization() -> void:
@@ -36,6 +39,22 @@ func apply_customization() -> void:
 	_color("PLACEHOLDER_eye_r", Color(0.2, 0.75, 0.3))
 	_color("PLACEHOLDER_scarf", Customization.color("scarf"))
 	_color("PLACEHOLDER_outfit", Customization.color("outfit"))
+	update_weapon()
+
+
+## Shows the equipped weapon; the Weltenklinge glows (reacts to Zotik).
+func update_weapon() -> void:
+	var id: String = GameState.equipment.get("weapon", "")
+	var w: MeshInstance3D = parts["PLACEHOLDER_weapon"]
+	w.visible = id != ""
+	var mat := w.material_override as StandardMaterial3D
+	mat.albedo_color = Color(0.75, 0.85, 1.0) if id == "WEAPON_WORLD_BLADE_001" else Color(0.7, 0.7, 0.72)
+	mat.emission_enabled = id == "WEAPON_WORLD_BLADE_001"
+	mat.emission = Color(0.5, 0.4, 1.0)
+
+
+func is_weapon_glowing() -> bool:
+	return (parts["PLACEHOLDER_weapon"].material_override as StandardMaterial3D).emission_enabled
 
 
 func part_color(name: String) -> Color:
@@ -55,6 +74,10 @@ func _part(name: String, mesh: Mesh, pos: Vector3, rot := Vector3.ZERO) -> void:
 
 func _color(name: String, c: Color) -> void:
 	(parts[name].material_override as StandardMaterial3D).albedo_color = c
+
+
+static func _box(size: Vector3) -> Mesh:
+	var m := BoxMesh.new(); m.size = size; return m
 
 
 static func _capsule(r: float, h: float) -> Mesh:

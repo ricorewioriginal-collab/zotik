@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M12_BOSS_ORUN",
+  "milestone": "M13_RIFT_WELTENKLINGE_STORY_END",
   "status": "PASSED",
-  "next_allowed": "M13_RIFT_WELTENKLINGE_STORY_END",
+  "next_allowed": "M14_SIDEQUEST_WORLD_REACTIONS",
   "phase_2_allowed": false
 }

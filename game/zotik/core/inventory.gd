@@ -41,6 +41,7 @@ static func equip(id: String) -> bool:
 	GameState.equipment[slot] = id
 	GameState.player.max_hp = Stats.max_hp()
 	GameState.player.hp = mini(int(GameState.player.hp), Stats.max_hp())
+	EventBus.equipment_changed.emit()
 	return true
 
 
@@ -50,6 +51,7 @@ static func unequip(slot: String) -> void:
 	GameState.equipment.erase(slot)
 	GameState.player.max_hp = Stats.max_hp()
 	GameState.player.hp = mini(int(GameState.player.hp), Stats.max_hp())
+	EventBus.equipment_changed.emit()
 
 
 static func add_currency(amount: int) -> void:

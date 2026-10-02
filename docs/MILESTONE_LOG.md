@@ -156,3 +156,15 @@ See `docs/PHASE_1_AUDIT.md`.
 - All enemies are passive during dialogues and cutscenes; an attack wind-up is cancelled. The arena intro (`CUT_LUN_ORUN_001`) plays once.
 - Boss HP bar with name and phase in the HUD while engaged.
 - Tests: `tests/unit/test_m12_boss.gd` (6 tests).
+
+## M13 Rift, Weltenklinge & Story End – PASSED
+- `UniquePedestal` appears only after Orun's defeat.
+  - `WEAPON_WORLD_BLADE_001` is granted exactly once and equipped. Duplicates are impossible, including after save/load and repeated effects.
+  - The blade glows on Zotik, a placeholder for "the Weltenklinge reacts to Zotik".
+  - Then `CUT_LUN_RIFT_VISION_001` plays and the `travel` effect brings Zotik back to Lunaris (`return` spawn).
+- Ending:
+  1. Mira return dialogue: the Professorium arrives.
+  2. Professorium dialogue: he recognises the Weltenklinge and the main quest completes (+100 Lun, `FLAG_LUN_CHAPTER_COMPLETE`).
+  3. `CUT_LUN_LYRA_BRIDGE_001` plays and Lyra is present afterwards.
+- Mira and Lyra stay separate characters with their own dialogues (MIGRATION_DECISIONS). An end-of-chapter notice is shown.
+- Tests: `tests/unit/test_m13_story_end.gd` (4 tests, the ending runs through the real dialogues).
