@@ -1,0 +1,32 @@
+# Godot-generated files
+.godot/
+game/.godot/
+*.godot.uid.tmp
+
+# Export/build output
+/build/
+/dist/
+*.pck
+*.zip
+
+# Local secrets and signing material
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p12
+*.pem
+*.key
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
