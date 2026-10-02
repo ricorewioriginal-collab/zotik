@@ -102,6 +102,10 @@ func _physics_process(delta: float) -> void:
 	_update_interactable()
 	if control_enabled and not dead and current_interactable and Input.is_action_just_pressed("interact"):
 		current_interactable.interact(self)
+	if control_enabled and not dead and Input.is_action_just_pressed("use_item"):
+		var id := Inventory.first_consumable()
+		if id == "" or not Inventory.use(id, self):
+			EventBus.notify.emit("Kein passender Gegenstand.")
 
 
 func _update_interactable() -> void:

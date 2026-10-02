@@ -15,23 +15,33 @@ var player: Player
 var area: WorldArea
 var hud: Hud
 var dialogue_box: DialogueBox
+var inventory_menu: InventoryMenu
+var shop_menu: ShopMenu
 var factories := {}
 var _entry_spawn := Vector3.ZERO
 
 
 func _ready() -> void:
 	add_to_group("game_root")
-	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create}
+	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create}
 	Dialogue.reset()
 	hud = Hud.new()
 	ui.add_child(hud)
 	dialogue_box = DialogueBox.new()
 	ui.add_child(dialogue_box)
 	Dialogue.started.connect(_on_dialogue_started)
+	inventory_menu = InventoryMenu.new()
+	ui.add_child(inventory_menu)
+	shop_menu = ShopMenu.new()
+	ui.add_child(shop_menu)
+	inventory_menu.closed.connect(_update_control)
+	shop_menu.closed.connect(_update_control)
+	EventBus.shop_requested.connect(open_shop)
 	Dialogue.finished.connect(_on_dialogue_finished)
 	player = PLAYER_SCENE.instantiate()
 	world.add_child(player)
 	player.interactable_changed.connect(hud.set_prompt)
+	inventory_menu.player = player
 	EventBus.sync_state.connect(_sync_state)
 	EventBus.travel_requested.connect(func(a, s): enter_area.call_deferred(a, s))
 	if App.pending_load:
@@ -53,8 +63,34 @@ func _on_dialogue_finished(_id: String) -> void:
 	# immediately re-trigger an interaction.
 	await get_tree().physics_frame
 	await get_tree().physics_frame
+	_update_control()
+
+
+func is_menu_open() -> bool:
+	return inventory_menu.visible or shop_menu.visible
+
+
+func _update_control() -> void:
 	if is_instance_valid(player):
-		player.control_enabled = not Dialogue.is_active()
+		player.control_enabled = not Dialogue.is_active() and not is_menu_open()
+
+
+func open_shop(shop_id: String) -> void:
+	shop_menu.open_shop(shop_id)
+	_update_control()
+
+
+func toggle_inventory() -> void:
+	if inventory_menu.visible:
+		inventory_menu.close_menu()
+	elif not Dialogue.is_active() and not shop_menu.visible:
+		inventory_menu.open()
+	_update_control()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory"):
+		toggle_inventory()
 
 
 func _process(delta: float) -> void:

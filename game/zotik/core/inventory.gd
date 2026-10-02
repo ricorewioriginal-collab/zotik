@@ -64,3 +64,26 @@ static func grant_unique(id: String) -> bool:
 	GameState.unique_rewards[id] = true
 	add(id, 1)
 	return true
+
+
+## Uses a consumable on the player. Returns true if it had an effect.
+static func use(id: String, player: Node) -> bool:
+	var it := Content.item(id)
+	if it.get("type") != "consumable" or count(id) < 1:
+		return false
+	var heal := int(it.get("effect", {}).get("heal", 0))
+	if heal > 0 and int(GameState.player.hp) >= Stats.max_hp():
+		return false
+	remove(id, 1)
+	if heal > 0 and player and player.has_method("heal"):
+		player.heal(heal)
+	return true
+
+
+static func first_consumable() -> String:
+	var ids := GameState.inventory.keys()
+	ids.sort()
+	for id in ids:
+		if Content.item(id).get("type") == "consumable":
+			return id
+	return ""

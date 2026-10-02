@@ -86,3 +86,15 @@ See `docs/PHASE_1_AUDIT.md`.
   - CI runs once per PR update instead of twice.
 - Content validation: every dialogue must be used by an NPC.
 - Tests: `tests/unit/test_m06_dialogue.gd` (7 tests).
+
+## M07 Inventory, Equipment & Shop – PASSED
+- `Shop`:
+  - Buying checks stock, price, currency (Lun) and stack limit.
+  - Selling pays the shop's sell ratio. Key items, uniques and worthless items cannot be sold, and neither can the only equipped copy of an item.
+- `Inventory.use`: consumables (Heiltrank heals 50 and is not used up at full health). The `use_item` key uses the first consumable.
+- `Chest` entity: opens once per save, gives contents and Lun, and stays open after save and load.
+- UI:
+  - The inventory menu (key I) shows items, equipment and stats, and lets you equip or take off accessories and use items.
+  - The shop menu opens after Boro's dialogue (`open_shop` effect).
+  - Player control is locked while a menu is open.
+- Tests: `tests/unit/test_m07_inventory_shop.gd` (7 tests).

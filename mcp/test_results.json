@@ -1,9 +1,9 @@
 {
   "engine": "4.7-stable (official)",
   "failed": 0,
-  "last_run": "2026-10-02T08:22:07",
+  "last_run": "2026-10-02T08:24:04",
   "legacy_audit": "M00 legacy findings: docs/PHASE_1_AUDIT.md, tools/audit/m00_checks.sh",
-  "passed": 45,
+  "passed": 52,
   "result": "PASS",
   "runner": "tools/run_tests.sh",
   "tests": [
@@ -185,6 +185,34 @@
     },
     {
       "id": "test_m06_dialogue::test_unique_effect_is_idempotent",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_buy_rules",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_sell_rules",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_equipped_item_protected",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_use_potion",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_chest_opens_once_and_persists",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_boro_dialogue_opens_shop_and_locks_control",
+      "result": "PASS"
+    },
+    {
+      "id": "test_m07_inventory_shop::test_inventory_menu_equip_changes_stats",
       "result": "PASS"
     }
   ]

@@ -1,7 +1,7 @@
 {
   "phase": 1,
-  "milestone": "M06_NPC_DIALOGUE",
+  "milestone": "M07_INVENTORY_EQUIPMENT_SHOP",
   "status": "PASSED",
-  "next_allowed": "M07_INVENTORY_EQUIPMENT_SHOP",
+  "next_allowed": "M08_COMBAT_FOUNDATION",
   "phase_2_allowed": false
 }
