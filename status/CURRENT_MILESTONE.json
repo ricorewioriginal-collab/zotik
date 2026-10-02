@@ -1,7 +1,7 @@
 {
-  "phase": 3,
-  "milestone": "V06_CHAPTER3_REGRESSION",
-  "status": "PASSED",
-  "next_allowed": "PHASE_4_PLAN (standing owner approval)",
+  "phase": "graphics",
+  "milestone": "A01_ANDROID",
+  "status": "IMPLEMENTED_CI_PENDING",
+  "next_allowed": "G04_WORLD_DRESSING",
   "standing_owner_approval": true
 }

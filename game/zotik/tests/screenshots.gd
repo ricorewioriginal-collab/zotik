@@ -41,6 +41,7 @@ func _run() -> void:
 	await _shot("04b_village_beacon_on_mira")
 	gs.set_flag("FLAG_LUN_BRIDGE_ACTIVE")
 	game.enter_area("AREA_LUN_RIFT_CAVE", "default")
+	game.player.camera_pivot.rotation.y = 0.0
 	game.player.global_position = Vector3(0, 0, 14)
 	await _shot("05_rift_cave_bridge")
 	game.enter_area("AREA_LUN_ORUN_ARENA", "default")
@@ -81,4 +82,10 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("13_kanalwaechter")
+	game.enter_area("AREA_VAL_MARKET", "default")
+	game.player.global_position = Vector3(0, 0, 12)
+	game.touch.force = true
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("14_android_touch_controls")
 	quit()

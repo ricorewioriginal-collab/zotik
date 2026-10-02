@@ -31,7 +31,7 @@ var target: Player
 var home := Vector3.ZERO
 var break_max := 0.0   # 0 = cannot be broken
 var break_value := 0.0
-var body_mesh: MeshInstance3D
+var body_mesh: CreatureVisual
 var label: Label3D
 
 
@@ -63,16 +63,8 @@ func setup(entry: Dictionary) -> void:
 	cs.shape = shape
 	cs.position.y = 0.8 * s
 	add_child(cs)
-	body_mesh = MeshInstance3D.new()
-	body_mesh.name = "PLACEHOLDER_enemy"
-	var m := CapsuleMesh.new()
-	m.radius = 0.4 * s
-	m.height = 1.6 * s
-	body_mesh.mesh = m
-	body_mesh.position.y = 0.8 * s
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color.html(COLORS.get(enemy_id, "#aa3333"))
-	body_mesh.material_override = mat
+	body_mesh = CreatureVisual.create(enemy_id, Color.html(COLORS.get(enemy_id, "#aa3333")))
+	body_mesh.scale = Vector3.ONE * s
 	add_child(body_mesh)
 	label = Label3D.new()
 	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -142,6 +134,7 @@ func _physics_process(delta: float) -> void:
 			if timer <= 0.0:
 				_end_break()
 	move_and_slide()
+	body_mesh.animate(state, Vector2(velocity.x, velocity.z).length(), delta)
 
 
 func _move_to(v: Vector3, delta: float) -> void:
@@ -153,6 +146,7 @@ func _move_to(v: Vector3, delta: float) -> void:
 
 func _strike(dist: float) -> void:
 	_set_tint(Color.WHITE)
+	body_mesh.lunge()
 	if target and dist <= float(data.attack_range) * 1.25:
 		target.take_damage(int(round(int(data.attack) * attack_mult)))
 	cooldown = float(data.attack_cooldown) * cooldown_mult
@@ -257,10 +251,29 @@ func _die() -> void:
 	Effects.run(data.get("on_defeat", []))
 	defeated.emit(self)
 	EventBus.enemy_defeated.emit(enemy_id)
+	_death_burst()
 	hide()
 	for c in find_children("*", "CollisionShape3D", true, false):
 		c.set_deferred("disabled", true)
 	remove_from_group("enemy")
+
+
+## Short rift-light burst where the enemy vanished (cosmetic).
+func _death_burst() -> void:
+	if not is_inside_tree() or get_parent() == null:
+		return
+	var b := MeshInstance3D.new()
+	var m := SphereMesh.new()
+	m.radius = 0.6 * SIZES.get(enemy_id, 1.0)
+	m.height = m.radius * 2.0
+	b.mesh = m
+	b.material_override = body_mesh.glow_mat
+	get_parent().add_child(b)
+	b.global_position = global_position + Vector3(0, 0.7 * SIZES.get(enemy_id, 1.0), 0)
+	var tw := b.create_tween()
+	tw.tween_property(b, "scale", Vector3.ONE * 1.8, 0.3)
+	tw.parallel().tween_property(b, "transparency", 1.0, 0.3)
+	tw.tween_callback(b.queue_free)
 
 
 func reset_encounter() -> void:
@@ -280,7 +293,7 @@ func base_color() -> Color:
 
 
 func _set_tint(c: Color) -> void:
-	(body_mesh.material_override as StandardMaterial3D).albedo_color = base_color() * c
+	body_mesh.set_tint(base_color() * c)
 
 
 func _update_label() -> void:

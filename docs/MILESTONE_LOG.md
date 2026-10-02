@@ -428,3 +428,75 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - 13 Kanalwächter
 - Version 0.4.0.
 - Regression: 171/171 tests plus restart checks for chapters 1–3: PASS.
+
+## G01 Look & renderer – PASSED
+- Plan: `docs/GRAPHICS_PLAN.md`.
+- Renderer: Forward+ on PC. Android (`.mobile`) and Web (`.web`) keep the compatibility renderer, with a cheaper shadow profile (`Look.low_end()`).
+- `core/look.gd`, per world:
+  - procedural sky (Lunaris dusk, Elaris daylight, Valdoria golden evening)
+  - sun with soft shadows, fog
+  - filmic tonemapping, glow, saturation/contrast, SSAO on PC
+  - dark, foggy interiors for caves and canals
+- Nine CC0 Poly Haven textures at 512 px (1.3 MB total, mipmaps on), applied as world-space triplanar materials. They are tinted with the layout colours so the art direction is kept.
+- Props get proper shapes; collision and node names are unchanged, so no gameplay or test change:
+  - houses with a tiled roof and timber posts
+  - trees with a trunk and canopy
+  - water as a glossy transparent surface
+  - rifts and crystals glow
+- Visible area borders (hedge, town wall or cave rock) with openings at exits. Outdoor ground continues into the fog.
+- Tests: `tests/unit/test_g01_look.gd` (4 tests).
+
+## G02 Animated characters – PASSED
+- `scenes/world/character_rig.gd`: a shared rig on CC0 KayKit models (5 models, 75 animations each). It scales to a target height and faces the game's forward direction (-Z), and supports:
+  - idle/walk/run locomotion and one-shot actions (attack, strong attack, cast, hit, dodge, block, death)
+  - choosing visible weapons, hiding body parts, attaching meshes to bones
+  - palette recolouring and tinting
+- **Zotik:**
+  - Rig body recoloured to his fur shade and outfit colour (follows the character creator).
+  - The human head is hidden. A fox head (muzzle, nose, green eyes with pupils, cheek fluff, large ears with light inner fur, hair tuft), the green scarf, light chest fur, a bushy tail with a light tip, the shoulder bag and the blade are attached to the bones, so they animate with him.
+  - Animations follow the gameplay state: run/walk/idle, light or strong attack, dodge, block, hit, death.
+  - `ZotikVisual`'s API is unchanged; the customization and scale tests still pass.
+- **Companions:**
+  - Lyra: mage with staff.
+  - Nia: hooded archer with crossbow.
+  - Rovan: barbarian guardian with axe and shield.
+  - Walk/run animations follow movement; casts or swings play on attacks.
+- **NPCs:** a model and height each, tinted with their colour.
+- Formation slots moved further to the sides and the camera pulled back slightly (4.2 → 5.0 m), so the wider models do not fill the screen.
+- Conflict C-29 logged: chibi interim proportions versus the owner's target look.
+- Tests: `tests/unit/test_g02_characters.gd` (3 tests).
+- Regression: 178/178 tests plus restart checks: PASS.
+
+## G03 Enemies & bosses – PASSED
+- `scenes/world/creature_visual.gd`: procedural interim creatures following the enemy master sheet (dark bodies, emissive rift crystals and eyes). Archetypes:
+  - **imp:** Rissling, with large glowing eyes and a crystal crest
+  - **wolf:** Mondwolf with a blue crystal ridge, Dornenwolf with a green thorn ridge
+  - **golem:** Orun, Rostgolem, Kanalwächter, with rounded rock bodies, a glowing core, horn crystals and crystal clusters on the shoulders
+  - **queen:** a golem with a crystal crown and root tendrils
+  - **mushroom:** Pilzling, with a glowing-spotted cap
+  - **slime:** Kanalschleim, translucent with a glowing core and squash
+  - **crab:** Schleusenkrabbe
+  - **roots:** Wurzelkriecher
+  - **dummy:** training dummy
+- Animation from the enemy state: idle bob, walk cycle, wind-up rear-back, strike lunge, dazed wobble while broken. Hit and wind-up tints still work. Defeat shows a short burst of rift light.
+- Rift and crystal glow is toned down so it keeps its colour instead of blowing out to white.
+- Tests: `tests/unit/test_g03_creatures.gd` (3 tests). Regression: 181/181 tests plus restart checks: PASS.
+
+## A01 Android – implemented; APK build verified by CI only
+- **Touch controls** (`scenes/ui/touch_controls.gd`). They are active on Android or any touch screen, and can be forced via "Touch-Steuerung" in the pause menu.
+  - virtual stick on the left
+  - swipe on the right half to turn the camera
+  - action buttons: Angriff, Stark, Ausweichen, Springen, Benutzen, Block, Trank
+  - menu buttons: Menü, Inventar, Quests, Bestiarium
+
+  They send the same input actions as keyboard and gamepad, so gameplay is unchanged. Behaviour:
+  - Hidden during dialogue (a tap advances it) and while menus are open (menus are touchable).
+  - The keyboard help is hidden and the mouse is not captured in touch mode.
+- Landscape (sensor) orientation and `expand` aspect for phone screens. ETC2/ASTC texture import is on; Android uses the compatibility renderer (`rendering_method.mobile`).
+- **Export preset "Android":** arm64-v8a, package `de.zotik.splitterderwelten`, immersive mode.
+- **CI** (`build.yml`) adds:
+  - Java 17, the runner's Android SDK, a generated debug keystore and Godot's Android template
+  - export of `ZOTIK-android-arm64.apk` (debug-signed), checking the arm64 library is inside
+  - publishing the APK with the rolling release
+- The APK cannot be built in this container: there is no Android SDK or template here. The build is therefore verified only by CI. It has not been tested on a real device.
+- Tests: `tests/unit/test_a01_touch.gd` (3 tests). Regression: 184/184 tests plus restart checks: PASS.

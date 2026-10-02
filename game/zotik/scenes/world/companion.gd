@@ -11,7 +11,13 @@ const FOLLOW_MIN := 2.5
 const FOLLOW_MAX := 4.0
 ## Formation slots behind Zotik (x = right, z = back), by party index. None
 ## sits on the line between camera and Zotik, so he is never hidden.
-const SLOTS := [Vector3(-2.0, 0, 0.7), Vector3(2.0, 0, 0.7), Vector3(3.4, 0, 2.2)]
+const SLOTS := [Vector3(-2.4, 0, 0.3), Vector3(2.4, 0, 0.3), Vector3(3.6, 0, 1.6)]
+## interim model per member (G02, CC0 KayKit): [rig, visible weapons]
+const MODELS := {
+	"PARTY_LYRA_001": ["mage", ["2H_Staff"]],
+	"PARTY_NIA_001": ["rogue_hooded", ["2H_Crossbow"]],
+	"PARTY_ROVAN_001": ["barbarian", ["1H_Axe", "Barbarian_Round_Shield"]],
+}
 const TELEPORT_DIST := 25.0
 const ENGAGE_RADIUS := 10.0
 const GRAVITY := 18.0
@@ -21,7 +27,8 @@ var data := {}
 var player: Player
 var attack_cd := 0.0
 var heal_cd := 0.0
-var body: MeshInstance3D
+var body: Node3D
+var rig: CharacterRig
 
 
 static func create(id: String, p: Player) -> Companion:
@@ -39,17 +46,11 @@ static func create(id: String, p: Player) -> Companion:
 	cs.shape = shape
 	cs.position.y = 0.85
 	c.add_child(cs)
-	c.body = MeshInstance3D.new()
-	c.body.name = "PLACEHOLDER_companion"
-	var m := CapsuleMesh.new()
-	m.radius = 0.3
-	m.height = 1.7
-	c.body.mesh = m
-	c.body.position.y = 0.85
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color.html(c.data.get("color", "#cccccc"))
-	c.body.material_override = mat
-	c.add_child(c.body)
+	var look: Array = MODELS.get(id, ["rogue", []])
+	c.rig = CharacterRig.create(look[0], 1.75)
+	c.rig.show_weapons(look[1])
+	c.body = c.rig
+	c.add_child(c.rig)
 	var label := Label3D.new()
 	label.text = str(c.data.get("name", id))
 	label.font_size = 48
@@ -93,6 +94,7 @@ func _physics_process(delta: float) -> void:
 			target.take_hit(int(data.attack), float(data.get("break", Content.combat().get("break_party", 6))))
 			_bolt(target.global_position)
 			attacked.emit(target)
+			rig.action("cast" if float(data.attack_range) > 4.0 else "attack", 1.5)
 		_face(to_t)
 	else:
 		var to_slot := slot_position() - global_position
@@ -138,6 +140,7 @@ func _move(v: Vector3, delta: float) -> void:
 	velocity.x = move_toward(velocity.x, v.x, 25.0 * delta)
 	velocity.z = move_toward(velocity.z, v.z, 25.0 * delta)
 	move_and_slide()
+	rig.locomotion(Vector2(velocity.x, velocity.z).length(), float(data.move_speed))
 
 
 func _face(dir: Vector3) -> void:
