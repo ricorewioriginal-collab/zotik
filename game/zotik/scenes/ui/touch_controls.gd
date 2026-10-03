@@ -1,22 +1,34 @@
 class_name TouchControls
 extends Control
-## On-screen controls for Android / touch screens (A01): a virtual stick on
-## the left, camera swipe on the right half, action buttons bottom-right and
-## the HUD icon bar handles the menus. Emits the same input actions as keyboard/gamepad
-## (Input.parse_input_event), so gameplay code is unchanged. Hidden during
-## dialogue (a tap advances it) and while a menu is open (menus are touchable).
+## On-screen controls for Android / touch screens (A01, reworked in A02): a
+## floating stick on the left, camera swipe on the right half and a few
+## translucent action buttons bottom-right. Emits the same input actions as
+## keyboard/gamepad (Input.parse_input_event), so gameplay code is unchanged.
+##
+## A02 (owner: "irritierende Flächen", "muss per Touch steuerbar sein"):
+## - three big buttons (attack, dodge, jump), three small ones (strong, block,
+##   potion); "Benutzen" only appears while something can be used
+## - translucent at rest, brighter while pressed; size and opacity are
+##   settings (pause menu)
+## - tap the world: tap a person, chest or stone to use it, tap an enemy to
+##   lock on
+## Hidden during dialogue (a tap advances it) and while a menu is open.
 
-const STICK_RADIUS := 110.0
+const STICK_RADIUS := 100.0
 const CAMERA_SENS := 0.006
+const TAP_MAX_SEC := 0.25
+const TAP_MAX_MOVE := 20.0
+const TAP_PICK_RADIUS := 110.0   # screen px around a tapped object
+const TAP_REACH := 1.7           # tapped objects must be within INTERACT_RANGE * this
 const ACTIONS := [
-	# [action, label, anchor offset from bottom-right (x, y), radius]
-	["attack", "Angriff", Vector2(150, 150), 72.0],
-	["strong_attack", "Stark", Vector2(300, 110), 54.0],
-	["dodge", "Ausweichen", Vector2(110, 300), 54.0],
-	["jump", "Springen", Vector2(260, 260), 50.0],
-	["interact", "Benutzen", Vector2(400, 200), 50.0],
-	["block", "Block", Vector2(390, 340), 46.0],
-	["use_item", "Trank", Vector2(420, 70), 42.0],
+	# [action, label, anchor offset from bottom-right (x, y), radius, kind]
+	["attack", "Angriff", Vector2(150, 150), 62.0, "main"],
+	["dodge", "Ausweichen", Vector2(300, 90), 44.0, "main"],
+	["jump", "Springen", Vector2(100, 285), 44.0, "main"],
+	["strong_attack", "Stark", Vector2(285, 215), 36.0, "minor"],
+	["block", "Block", Vector2(405, 80), 32.0, "minor"],
+	["use_item", "Trank", Vector2(215, 340), 32.0, "minor"],
+	["interact", "Benutzen", Vector2(345, 320), 50.0, "context"],
 ]
 
 var game: Node
@@ -26,11 +38,14 @@ var _stick_origin := Vector2.ZERO
 var _stick_vec := Vector2.ZERO
 var _camera_index := -1
 var _buttons := {}      # touch index -> action
-var _rects := []        # [action, center, radius]
+var _rects := []        # [action, center, radius, Rect2]
+var _panels := {}       # action -> Panel
 var _stick_down := {}     # move action -> true while the stick holds it
 var _removed_mouse := {}  # action -> mouse-button events removed in touch mode
+var _starts := {}         # touch index -> [time msec, position] (tap detection)
 var _stick_base: Panel
 var _stick_knob: Panel
+var _applied := [-1.0, -1.0]  # scale / opacity the layout was built for
 
 
 static func wanted() -> bool:
@@ -42,16 +57,23 @@ func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_stick_base = _circle(STICK_RADIUS, Color(1, 1, 1, 0.12))
-	_stick_knob = _circle(46.0, Color(1, 1, 1, 0.35))
+	_stick_knob = _circle(44.0, Color(1, 1, 1, 0.35))
 	for a in ACTIONS:
-		var p := _circle(a[3], Color(0.05, 0.09, 0.2, 0.55), a[1])
-		p.set_meta("action", a[0])
+		_panels[a[0]] = _circle(a[3], Color(0.05, 0.09, 0.2, 0.6), a[1])
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 
 
 func active() -> bool:
 	return (force or wanted()) and visible
+
+
+func ui_scale() -> float:
+	return clampf(float(Settings.get_value("touch_scale")), 0.6, 1.6)
+
+
+func ui_opacity() -> float:
+	return clampf(float(Settings.get_value("touch_opacity")), 0.15, 1.0)
 
 
 func _process(_delta: float) -> void:
@@ -63,6 +85,29 @@ func _process(_delta: float) -> void:
 	_set_touch_bindings(force or wanted())
 	if game:
 		game.hud.touch_mode = force or wanted()
+	if _applied != [ui_scale(), ui_opacity()]:
+		_layout()
+	_update_context()
+
+
+## "Benutzen" is only offered while the player stands next to something usable.
+func _update_context() -> void:
+	var p: Panel = _panels.get("interact")
+	if p == null:
+		return
+	var can: bool = game != null and game.player.current_interactable != null
+	if p.visible != can:
+		p.visible = can
+		_rebuild_rects()
+		if not can:
+			for i in _buttons.keys():
+				if _buttons[i] == "interact":
+					_send("interact", false)
+					_buttons.erase(i)
+	if can:
+		var pulse := 0.85 + 0.15 * sin(Time.get_ticks_msec() / 220.0)
+		if not _buttons.values().has("interact"):
+			p.modulate = Color(1, 1, 1, minf(1.0, ui_opacity() + 0.25) * pulse)
 
 
 ## Touch screens turn every tap into an emulated left click. Mouse-button
@@ -91,17 +136,38 @@ func _exit_tree() -> void:
 
 func _layout() -> void:
 	var size_v := get_viewport_rect().size
-	_rects.clear()
-	_stick_base.position = Vector2(60, size_v.y - 60 - STICK_RADIUS * 2.0)
+	var s := ui_scale()
+	var op := ui_opacity()
+	_applied = [s, op]
+	_stick_base.scale = Vector2.ONE * s
+	_stick_knob.scale = Vector2.ONE * s
+	_stick_base.pivot_offset = _stick_base.size / 2.0
+	_stick_knob.pivot_offset = _stick_knob.size / 2.0
+	# the scaled circle keeps a 60 px margin to the screen corner
+	_stick_base.position = Vector2(60 + STICK_RADIUS * (s - 1.0), size_v.y - 60 - STICK_RADIUS * (s + 1.0))
+	_stick_base.modulate.a = op * 0.55
+	_stick_knob.modulate.a = op
 	_center_knob()
-	for c in get_children():
-		if not c.has_meta("action"):
-			continue
-		for a in ACTIONS:
-			if a[0] == c.get_meta("action"):
-				var center: Vector2 = size_v - a[2]
-				c.position = center - Vector2(a[3], a[3])
-				_rects.append([a[0], center, a[3], Rect2()])
+	for a in ACTIONS:
+		var p: Panel = _panels[a[0]]
+		var center: Vector2 = size_v - Vector2(a[2]) * s
+		p.pivot_offset = p.size / 2.0
+		p.scale = Vector2.ONE * s
+		p.position = center - p.size / 2.0
+		p.modulate = Color(1, 1, 1, op if a[4] != "minor" else op * 0.8)
+		if a[4] == "context":
+			p.visible = false
+	_rebuild_rects()
+
+
+func _rebuild_rects() -> void:
+	_rects.clear()
+	var size_v := get_viewport_rect().size
+	var s := ui_scale()
+	for a in ACTIONS:
+		var p: Panel = _panels[a[0]]
+		if p.visible:
+			_rects.append([a[0], size_v - Vector2(a[2]) * s, a[3] * s, Rect2()])
 
 
 func _input(event: InputEvent) -> void:
@@ -112,12 +178,13 @@ func _input(event: InputEvent) -> void:
 		if st.pressed:
 			_on_press(st.index, st.position)
 		else:
-			_on_release(st.index)
+			_on_release(st.index, st.position)
 	elif event is InputEventScreenDrag:
 		var sd := event as InputEventScreenDrag
 		if sd.index == _stick_index:
-			_stick_vec = (sd.position - _stick_origin).limit_length(STICK_RADIUS) / STICK_RADIUS
-			_stick_knob.position = _stick_origin + _stick_vec * STICK_RADIUS - _stick_knob.size / 2.0
+			_stick_vec = (sd.position - _stick_origin).limit_length(STICK_RADIUS * ui_scale()) / (STICK_RADIUS * ui_scale())
+			_stick_knob.position = _stick_origin + _stick_vec * STICK_RADIUS * ui_scale() - _stick_knob.size / 2.0
+			_stick_knob.modulate.a = minf(1.0, ui_opacity() + 0.3)
 			_send_stick()
 		elif sd.index == _camera_index and game:
 			game.player.camera_pivot.rotation.y -= sd.relative.x * CAMERA_SENS
@@ -130,21 +197,26 @@ func _on_press(index: int, pos: Vector2) -> void:
 	if hit != "":
 		_buttons[index] = hit
 		_send(hit, true)
+		var p: Panel = _panels[hit]
+		p.modulate = Color(1.35, 1.35, 1.35, minf(1.0, ui_opacity() + 0.4))
 		return
+	_starts[index] = [Time.get_ticks_msec(), pos]
 	var size_v := get_viewport_rect().size
 	if pos.x < size_v.x * 0.45 and _stick_index == -1:
 		_stick_index = index
 		_stick_origin = pos
 		_stick_base.position = pos - _stick_base.size / 2.0
 		_stick_vec = Vector2.ZERO
+		_stick_base.modulate.a = minf(1.0, ui_opacity() * 0.9)
 		_center_knob()
 	elif pos.x >= size_v.x * 0.45 and _camera_index == -1:
 		_camera_index = index
 
 
-func _on_release(index: int) -> void:
+func _on_release(index: int, pos: Vector2 = Vector2(-1, -1)) -> void:
 	if _buttons.has(index):
 		_send(_buttons[index], false)
+		_restore_button(_buttons[index])
 		_buttons.erase(index)
 	elif index == _stick_index:
 		_stick_index = -1
@@ -153,6 +225,67 @@ func _on_release(index: int) -> void:
 		_layout()
 	elif index == _camera_index:
 		_camera_index = -1
+	if _starts.has(index):
+		var st: Array = _starts[index]
+		_starts.erase(index)
+		var moved: float = (st[1] as Vector2).distance_to(pos) if pos.x >= 0.0 else 0.0
+		if Time.get_ticks_msec() - int(st[0]) <= TAP_MAX_SEC * 1000.0 and moved <= TAP_MAX_MOVE and pos.x >= 0.0:
+			tap_world(pos)
+
+
+func _restore_button(action: String) -> void:
+	var p: Panel = _panels.get(action)
+	if p == null:
+		return
+	for a in ACTIONS:
+		if a[0] == action:
+			p.modulate = Color(1, 1, 1, ui_opacity() if a[4] != "minor" else ui_opacity() * 0.8)
+
+
+## A short tap in the world: use the tapped person / chest / stone when close
+## enough, or lock on to a tapped enemy. Returns what happened:
+## "interact", "far" (too far away), "lock" or "".
+func tap_world(pos: Vector2) -> String:
+	if game == null or game.player == null or game.player.camera == null:
+		return ""
+	var cam: Camera3D = game.player.camera
+	var player: Node3D = game.player
+	var best: Interactable = null
+	var best_d := TAP_PICK_RADIUS
+	for n in get_tree().get_nodes_in_group("interactable"):
+		var it := n as Interactable
+		if it == null or not it.can_interact():
+			continue
+		var d := _screen_distance(cam, it.global_position + Vector3(0, 1.0, 0), pos)
+		if d < best_d:
+			best_d = d
+			best = it
+	if best != null:
+		if player.global_position.distance_to(best.global_position) <= Interactable.INTERACT_RANGE * TAP_REACH:
+			best.interact(player)
+			return "interact"
+		game.hud.show_notification("Geh näher heran.")
+		return "far"
+	var foe: Enemy = null
+	best_d = TAP_PICK_RADIUS
+	for n in get_tree().get_nodes_in_group("enemy"):
+		var e := n as Enemy
+		if e == null or e.is_dead() or not e.is_visible_in_tree():
+			continue
+		var d := _screen_distance(cam, e.global_position + Vector3(0, 1.0, 0), pos)
+		if d < best_d:
+			best_d = d
+			foe = e
+	if foe != null:
+		player.set_lock(foe)
+		return "lock"
+	return ""
+
+
+func _screen_distance(cam: Camera3D, world: Vector3, pos: Vector2) -> float:
+	if cam.is_position_behind(world):
+		return INF
+	return cam.unproject_position(world).distance_to(pos)
 
 
 ## Action under a screen position ("" if none).
@@ -188,7 +321,9 @@ func _send_stick() -> void:
 func _release_all() -> void:
 	for i in _buttons:
 		_send(_buttons[i], false)
+		_restore_button(_buttons[i])
 	_buttons.clear()
+	_starts.clear()
 	_stick_index = -1
 	_camera_index = -1
 	_stick_vec = Vector2.ZERO
@@ -216,7 +351,10 @@ func _circle(r: float, c: Color, text: String = "") -> Panel:
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		l.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		l.add_theme_font_size_override("font_size", 22 if r > 50 and text.length() <= 7 else 16)
+		var size_px := 22 if r > 55 else (16 if r > 40 else 13)
+		if text.length() > 8:
+			size_px -= 3
+		l.add_theme_font_size_override("font_size", size_px)
 		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		p.add_child(l)
 	add_child(p)

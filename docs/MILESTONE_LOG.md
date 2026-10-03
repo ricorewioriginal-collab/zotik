@@ -618,3 +618,17 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Sandstorm: layout key `sandstorm` makes the fog dense and warm. It is cheap, so it also runs on Android and Web.
 - 4 new tests (`test_s02_dunes`), screenshot 17.
 - Regression: 205/205 tests plus restart checks for chapters 1–3: PASS.
+## A02 Touch usability – PASSED (owner: "auf Android noch blöd bedienbar", "irritierende Flächen", "muss per Touch steuerbar sein")
+- Fewer and calmer on-screen controls:
+  - Big: Angriff, Ausweichen, Springen. Small: Stark, Block, Trank.
+  - Translucent at rest (60 %), brighter while pressed.
+  - "Benutzen" appears only while something can be used, and pulses.
+- Tap the world:
+  - tap a person, chest, stone or sign to use it (a "Geh näher heran." hint if too far)
+  - tap an enemy to lock on
+  - swipes and stick drags are not taps (max 0.25 s, 20 px)
+- Settings in the pause menu (touch mode only): size 80/100/120/140 %, opacity 35/60/85 %. Stored with the other settings.
+- Stick and buttons scale from their screen corners and stay inside the screen.
+- 5 new tests in `test_a01_touch` (context button, calm layout + settings, tap person, tap far, tap enemy, tap vs swipe).
+- Not done: menus are still the same size. Compact HUD frames on small phones and gyro/pinch camera are open ideas.
+- Regression: 211/211 tests plus restart checks for chapters 1–3: PASS.
