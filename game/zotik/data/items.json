@@ -155,5 +155,41 @@
     },
     "price": 0,
     "stack": 1
+  },
+  "ITEM_SUN_DUST_001": {
+    "name": "Sonnenstaub",
+    "type": "material",
+    "price": 25,
+    "stack": 99
+  },
+  "ITEM_DATE_CAKE_001": {
+    "name": "Dattelkuchen",
+    "type": "consumable",
+    "effect": {
+      "heal": 60
+    },
+    "price": 22,
+    "stack": 99
+  },
+  "WEAPON_SUN_SABER_001": {
+    "name": "Sonnensäbel",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 18
+    },
+    "price": 480,
+    "stack": 1
+  },
+  "ARMOR_SAND_VEIL_001": {
+    "name": "Sandschleier",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 7,
+      "max_hp": 20
+    },
+    "price": 520,
+    "stack": 1
   }
 }

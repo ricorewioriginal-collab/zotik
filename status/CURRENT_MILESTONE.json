@@ -1,7 +1,7 @@
 {
-  "phase": "graphics",
-  "milestone": "G05_WORLD_DETAIL",
+  "phase": "phase4",
+  "milestone": "S01_SOLMERA_HUB",
   "status": "PASSED",
-  "next_allowed": "owner assets (image-to-3D models) / further world detail",
+  "next_allowed": "S02 dunes",
   "standing_owner_approval": true
 }

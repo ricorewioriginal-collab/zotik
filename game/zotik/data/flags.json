@@ -94,5 +94,11 @@
   },
   "FLAG_VAL_CHAPTER_COMPLETE": {
     "desc": "Kapitel 3 Valdoria abgeschlossen"
+  },
+  "FLAG_SOL_ARRIVED": {
+    "desc": "Erste Ankunft in Solmera gesehen"
+  },
+  "FLAG_SOL_DUNES_OPEN": {
+    "desc": "Nuri führt die Gruppe durch das Dünentor (Kapitel 4, S02)"
   }
 }

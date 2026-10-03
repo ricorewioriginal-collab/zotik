@@ -34,5 +34,24 @@
       "ITEM_ELIXIR_001"
     ],
     "sell_ratio": 0.5
+  },
+  "SHOP_SOL_SMITH_001": {
+    "npc": "NPC_AMANI_001",
+    "stock": [
+      "WEAPON_STEEL_SWORD_001",
+      "WEAPON_SUN_SABER_001",
+      "ARMOR_SAND_VEIL_001"
+    ],
+    "sell_ratio": 0.5
+  },
+  "SHOP_SOL_ALCHEMIST_001": {
+    "npc": "NPC_JABIR_001",
+    "stock": [
+      "ITEM_HEALING_POTION_001",
+      "ITEM_HI_POTION_001",
+      "ITEM_ELIXIR_001",
+      "ITEM_DATE_CAKE_001"
+    ],
+    "sell_ratio": 0.5
   }
 }

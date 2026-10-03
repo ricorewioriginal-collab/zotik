@@ -600,5 +600,61 @@
         "Sobald die Schiffe aus dem Süden zurück sind, fahre ich wieder hinaus."
       ]
     ]
+  },
+  "DLG_NURI_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NURI_001",
+        "Ich bin Nuri, Karawanenführerin. Seit der Sandsturm kam, wagt sich niemand mehr durch das Dünentor."
+      ],
+      [
+        "NPC_NURI_001",
+        "Sobald sich der Sand legt, führe ich euch hinaus – zur versunkenen Stadt. Bis dahin: Trinkt, rastet, kauft Vorräte."
+      ]
+    ]
+  },
+  "DLG_ZEYD_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ZEYD_001",
+        "Der Sand vergisst nichts, Reisende. Er trägt jede Spur, jedes Wort – und manchmal gibt er sie wieder her."
+      ],
+      [
+        "NPC_ZEYD_001",
+        "Die Alten sagen, ein Koloss schläft unter den Dünen und bewacht, was die Stadt verschlang."
+      ]
+    ]
+  },
+  "DLG_AMANI_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_AMANI_001",
+        "Sonnenstahl, in der Glut der Dünen geschmiedet! Säbel und Schleier – leicht genug für den Sand, hart genug für alles andere."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_SOL_SMITH_001"
+      }
+    ]
+  },
+  "DLG_JABIR_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_JABIR_001",
+        "Wasser ist Gold, Freunde, aber meine Tränke sind mehr wert. Dattelkuchen gibt es gratis dazu – nein, Scherz. Zwanzig Lun."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_SOL_ALCHEMIST_001"
+      }
+    ]
   }
 }

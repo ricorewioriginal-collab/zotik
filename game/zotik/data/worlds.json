@@ -26,6 +26,8 @@
     "name": "Solmera",
     "chapter": 4,
     "subtitle": "Wo der Sand sich erinnert",
-    "sealed": true
+    "hub_area": "AREA_SOL_OASIS",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_VAL_CHAPTER_COMPLETE"
   }
 }

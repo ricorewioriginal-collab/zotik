@@ -3456,5 +3456,673 @@
         "persistent": true
       }
     ]
+  },
+  "AREA_SOL_OASIS": {
+    "size": [
+      70,
+      60
+    ],
+    "ground": "#d9b97a",
+    "ambient": "#fff0cc",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        20
+      ],
+      "travel": [
+        0,
+        0,
+        20
+      ],
+      "AREA_SOL_BAZAAR": [
+        29,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_SOL_BAZAAR",
+        "pos": [
+          33,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "house_a",
+        "pos": [
+          -22,
+          3,
+          -14
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#c9a070"
+      },
+      {
+        "name": "house_b",
+        "pos": [
+          -22,
+          3,
+          12
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#c9a070"
+      },
+      {
+        "name": "house_c",
+        "pos": [
+          20,
+          3,
+          -18
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#c9a070"
+      },
+      {
+        "name": "dune_gate",
+        "pos": [
+          0,
+          3,
+          -28.5
+        ],
+        "size": [
+          14,
+          6,
+          2
+        ],
+        "color": "#b89060",
+        "hidden_by_flag": "FLAG_SOL_DUNES_OPEN"
+      },
+      {
+        "name": "water_basin",
+        "pos": [
+          10,
+          0.05,
+          -4
+        ],
+        "size": [
+          14,
+          0.1,
+          10
+        ],
+        "color": "#2a7ab0",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_SOL_001",
+        "pos": [
+          4,
+          0,
+          23
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_SOL_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          19
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_SOL_ARRIVAL_001",
+        "once_flag": "FLAG_SOL_ARRIVED"
+      },
+      {
+        "type": "npc",
+        "id": "NPC_NURI_001",
+        "pos": [
+          -4,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_ZEYD_001",
+        "pos": [
+          16,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_SOL_001",
+        "pos": [
+          -14,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_SOL_002",
+        "pos": [
+          -11,
+          0,
+          2
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          10
+        ],
+        "size": [
+          24,
+          14
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          -8
+        ],
+        "size": [
+          5,
+          28
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          20,
+          0,
+          0
+        ],
+        "size": [
+          30,
+          5
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -10,
+          0,
+          16
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          10,
+          0,
+          16
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          -6
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          -14
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          24,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "tent",
+        "pos": [
+          -27,
+          0,
+          -2
+        ],
+        "rot": 70,
+        "scale": 1.3,
+        "r": 1.8
+      },
+      {
+        "model": "tent",
+        "pos": [
+          26,
+          0,
+          14
+        ],
+        "rot": -40,
+        "scale": 1.2,
+        "r": 1.6
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -17,
+          0,
+          -8
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          -17.2,
+          0,
+          -9.3
+        ],
+        "rot": 20,
+        "r": 0.6
+      },
+      {
+        "model": "sack",
+        "pos": [
+          -15,
+          0,
+          -8.4
+        ],
+        "rot": 40
+      },
+      {
+        "model": "bucket_water",
+        "pos": [
+          4.5,
+          0,
+          -3
+        ]
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          -6,
+          0,
+          22
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          7,
+          0,
+          22
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -31,
+          0,
+          -22
+        ],
+        "scale": 1.6,
+        "r": 1.2
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          31,
+          0,
+          -24
+        ],
+        "scale": 1.6,
+        "r": 1.2
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          3.5,
+          0,
+          -9
+        ],
+        "scale": 0.9,
+        "r": 0.8
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          17,
+          0,
+          -8.5
+        ],
+        "rot": 50,
+        "scale": 0.8,
+        "r": 0.8
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          17.5,
+          0,
+          1.5
+        ],
+        "rot": 20,
+        "scale": 0.7,
+        "r": 0.7
+      },
+      {
+        "model": "waterlily_A",
+        "pos": [
+          8,
+          0.1,
+          -4
+        ],
+        "scale": 1.2
+      },
+      {
+        "model": "waterlily_A",
+        "pos": [
+          12,
+          0.1,
+          -6
+        ],
+        "rot": 60,
+        "scale": 1.0
+      },
+      {
+        "model": "waterlily_A",
+        "pos": [
+          11,
+          0.1,
+          -2
+        ],
+        "rot": 120,
+        "scale": 1.1
+      }
+    ]
+  },
+  "AREA_SOL_BAZAAR": {
+    "size": [
+      60,
+      50
+    ],
+    "ground": "#d4b070",
+    "ambient": "#ffe9c0",
+    "spawns": {
+      "default": [
+        -26,
+        0,
+        0
+      ],
+      "AREA_SOL_OASIS": [
+        -26,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_SOL_OASIS",
+        "pos": [
+          -29,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "smithy_amani",
+        "pos": [
+          10,
+          3,
+          -14
+        ],
+        "size": [
+          12,
+          6,
+          8
+        ],
+        "color": "#7a5a40"
+      },
+      {
+        "name": "shop_jabir",
+        "pos": [
+          10,
+          3,
+          14
+        ],
+        "size": [
+          10,
+          6,
+          8
+        ],
+        "color": "#b08050"
+      },
+      {
+        "name": "shop_market",
+        "pos": [
+          -8,
+          3,
+          -16
+        ],
+        "size": [
+          10,
+          6,
+          6
+        ],
+        "color": "#a07048"
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_AMANI_001",
+        "pos": [
+          10,
+          0,
+          -8
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_JABIR_001",
+        "pos": [
+          10,
+          0,
+          8
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          60,
+          5
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          10,
+          0,
+          0
+        ],
+        "size": [
+          5,
+          24
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -18,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -4,
+          0,
+          -3.5
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          18,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "tent",
+        "pos": [
+          -20,
+          0,
+          12
+        ],
+        "rot": 20,
+        "scale": 1.3,
+        "r": 1.8
+      },
+      {
+        "model": "tent",
+        "pos": [
+          -14,
+          0,
+          -10
+        ],
+        "rot": -70,
+        "scale": 1.2,
+        "r": 1.6
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          0,
+          0,
+          -7
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -0.2,
+          0,
+          -8.3
+        ],
+        "rot": 40,
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          -4,
+          0,
+          8
+        ],
+        "rot": 15,
+        "r": 0.6
+      },
+      {
+        "model": "crate_B_small",
+        "pos": [
+          -4.3,
+          0,
+          9.5
+        ]
+      },
+      {
+        "model": "sack",
+        "pos": [
+          2,
+          0,
+          7
+        ],
+        "rot": 30
+      },
+      {
+        "model": "wheelbarrow",
+        "pos": [
+          20,
+          0,
+          5
+        ],
+        "rot": 70,
+        "r": 0.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          5,
+          0,
+          -4
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          15,
+          0,
+          4
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          24,
+          0,
+          -20
+        ],
+        "scale": 1.6,
+        "r": 1.2
+      }
+    ]
   }
 }

@@ -163,5 +163,19 @@
     "exits": [
       "AREA_VAL_CISTERN"
     ]
+  },
+  "AREA_SOL_OASIS": {
+    "name": "Solmera – Oase Qamra",
+    "world": "WORLD_SOLMERA",
+    "exits": [
+      "AREA_SOL_BAZAAR"
+    ]
+  },
+  "AREA_SOL_BAZAAR": {
+    "name": "Solmera – Basar",
+    "world": "WORLD_SOLMERA",
+    "exits": [
+      "AREA_SOL_OASIS"
+    ]
   }
 }

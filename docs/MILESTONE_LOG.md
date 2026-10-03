@@ -594,3 +594,17 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - The loaded state is identical to the saved one (play_time excluded, because it keeps counting).
 - No game bugs found. The two failures during writing were test-script mistakes: the savepoint step was missing, and the valve order was wrong (the solution is valves 1 and 2).
 - Regression: 195/195 tests plus restart checks for chapters 1–3: PASS.
+
+## S00/S01 Solmera hub (chapter 4) – PASSED
+- Phase-4 plan `docs/PHASE_4_PLAN.md` (S00–S05), assumptions logged as C-34.
+- World Solmera is unlocked by `FLAG_VAL_CHAPTER_COMPLETE`. The existing Weltenstein in Valdoria lists it; the oasis has its own stone for the way back.
+- Areas:
+  - Oase Qamra (hub): pond, plazas, tents, rocks, lanterns, steles, closed Dünentor
+  - Basar: smithy and alchemist
+- NPCs: Nuri (caravan guide), Zeyd (elder), Amani (smith), Jabir (alchemist).
+- New items: Sonnenstaub, Dattelkuchen, Sonnensäbel (attack 18), Sandschleier (defense 7, +20 HP).
+- Two lore steles (Karawanenwege, Kharos); one-time arrival scene.
+- Desert look: CC0 Poly Haven sand floor (512 px), warm sky and fog, rock and tent backdrop.
+- The Dünentor is still closed; the dunes follow in S02 (`FLAG_SOL_DUNES_OPEN` is reserved). No main quest yet.
+- 6 new tests (`test_s01_solmera`), 2 new screenshots (15 oasis, 16 bazaar).
+- Regression: 201/201 tests plus restart checks for chapters 1–3: PASS.

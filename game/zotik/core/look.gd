@@ -13,6 +13,7 @@ const WORLDS := {
 	"WORLD_LUNARIS": {"sky_top": "#1d2b66", "sky_horizon": "#b49ad8", "sun": "#dfe6ff", "sun_energy": 1.0, "pitch": -48.0, "fog": "#7a72b8", "floor": "grass", "boundary": "hedge"},
 	"WORLD_ELARIS": {"sky_top": "#2f74d6", "sky_horizon": "#cdeeff", "sun": "#fff0c8", "sun_energy": 1.25, "pitch": -58.0, "fog": "#a8d8b0", "floor": "forest", "boundary": "hedge"},
 	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall"},
+	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall"},
 }
 
 ## prop name keyword -> shape/material kind (first match wins)
@@ -28,11 +29,11 @@ const PROP_KINDS := [
 
 const EXIT_GAP := 6.0
 ## texture repeats per metre on floors (keeps cobbles/planks at a believable size)
-const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25}
+const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25, "sand": 0.2}
 
 ## CC0 KayKit Medieval Hexagon models (assets/world/kaykit), G04
 const MODEL_DIR := "res://assets/world/kaykit/%s.gltf"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red"}
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
@@ -40,6 +41,7 @@ const BACKDROP := {
 	"WORLD_LUNARIS": [["trees_A_medium", "tree_single_A", "trees_A_large", "tree_single_B"], ["trees_A_large", "trees_A_medium"]],
 	"WORLD_ELARIS": [["trees_B_large", "trees_B_medium", "tree_single_B", "trees_A_large"], ["trees_B_large", "trees_A_large"]],
 	"WORLD_VALDORIA": [["building_home_A_red", "building_home_B_red", "building_tavern_red", "building_tower_A_red", "building_home_A_red"], ["trees_A_large", "trees_B_large"]],
+	"WORLD_SOLMERA": [["rock_single_A", "rock_single_B", "tent", "rock_single_C", "building_tower_A_red"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 }
 
 static var _cache := {}

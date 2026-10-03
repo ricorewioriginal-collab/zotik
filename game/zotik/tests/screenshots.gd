@@ -82,6 +82,17 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("13_kanalwaechter")
+	gs.set_flag("FLAG_SOL_ARRIVED")
+	game.enter_area("AREA_SOL_OASIS", "default")
+	game.player.global_position = Vector3(-2, 0, 12)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("15_solmera_oasis")
+	game.enter_area("AREA_SOL_BAZAAR", "default")
+	game.player.global_position = Vector3(2, 0, 4)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("16_solmera_bazaar")
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	game.touch.force = true
