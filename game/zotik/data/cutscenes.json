@@ -257,5 +257,24 @@
         "Der Weltenstein hat uns an die Oase gebracht. Die Risse liegen weiter draußen, in der Wüste."
       ]
     ]
+  },
+  "CUT_SOL_RUINS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Wind dreht, und der Sand rinnt von den Stufen. Unter den Dünen öffnet sich eine Treppe in die Tiefe."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Eine ganze Stadt, unter dem Sand begraben. Seht ihr die Spiegel an den Mauern? Das ist ein Rätsel aus Licht."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_SOL_RUINS_OPEN"
+      }
+    ]
   }
 }

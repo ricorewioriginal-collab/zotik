@@ -103,5 +103,14 @@
   },
   "FLAG_SOL_RUINS_OPEN": {
     "desc": "Eingang zur versunkenen Stadt offen (Kapitel 4, S03)"
+  },
+  "FLAG_SOL_RUINS_SEEN": {
+    "desc": "Treppe zur versunkenen Stadt gesehen"
+  },
+  "FLAG_SOL_MIRRORS_DONE": {
+    "desc": "Sonnenspiegel in der versunkenen Stadt ausgerichtet"
+  },
+  "FLAG_SOL_WAECHTER_DEFEATED": {
+    "desc": "Sandwächter der Sonnenhalle besiegt"
   }
 }

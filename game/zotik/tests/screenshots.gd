@@ -99,6 +99,12 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("17_solmera_dunes")
+	gs.set_flag("FLAG_SOL_RUINS_OPEN")
+	game.enter_area("AREA_SOL_SUNKEN", "default")
+	game.player.global_position = Vector3(0, 0, -2)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("18_solmera_sunken_city")
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	game.touch.force = true

@@ -48,5 +48,15 @@
         "Die Legende spricht von einem Wächter aus Sand und Stein, der die versunkene Stadt hütet. Wer ihn weckt, hört den Sand flüstern."
       ]
     ]
+  },
+  "LORE_SOL_003": {
+    "title": "Die Sonnenspiegel",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Vier Spiegel aus poliertem Stein fingen einst das Licht der Sonne und trugen es in die Halle. Wer sie richtig stellt, weckt die Stadt."
+      ]
+    ]
   }
 }
