@@ -143,5 +143,46 @@
       "Das linke Ventil ist eine Falle – es flutet den Mittelkanal wieder, wenn er schon leer ist.",
       "Mittleres Ventil einmal, dann rechtes Ventil einmal."
     ]
+  },
+  "PUZ_SOL_MIRRORS_001": {
+    "name": "Sonnenspiegel",
+    "area": "AREA_SOL_SUNKEN",
+    "kind": "dials",
+    "dial_count": 4,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      1,
+      3,
+      0,
+      2
+    ],
+    "part_prompt": "Sonnenspiegel drehen",
+    "plate_prompt": "Sonnenlicht bündeln",
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_SOL_MIRRORS_DONE"
+      },
+      {
+        "type": "give_currency",
+        "amount": 80
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_SUN_DUST_001",
+        "count": 3
+      }
+    ],
+    "hints": [
+      "Vier Spiegel fangen das Licht. Jeder zeigt anfangs nach Norden und lässt sich im Uhrzeigersinn weiterdrehen: Nord, Ost, Süd, West.",
+      "Das Relief an der Wand zeigt die Sonne im Osten, dann im Westen, dann wieder im Norden und zuletzt im Süden – der Reihe nach.",
+      "Erster Spiegel einmal drehen (Ost), zweiter dreimal (West), dritter gar nicht (Nord), vierter zweimal (Süd). Dann das Licht bündeln."
+    ]
   }
 }

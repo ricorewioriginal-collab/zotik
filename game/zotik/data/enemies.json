@@ -442,5 +442,36 @@
     ],
     "break": 30,
     "break_duration": 2.5
+  },
+  "ENEMY_SANDWAECHTER_001": {
+    "name": "Sandwächter",
+    "region": "WORLD_SOLMERA",
+    "description": "Ein uralter Hüter der Sonnenhalle aus Sandstein. Träge, aber mit schwerem Arm – Break lässt seinen Panzer bröckeln.",
+    "hp": 260,
+    "attack": 19,
+    "defense": 8,
+    "move_speed": 2.0,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 1.9,
+    "currency": 110,
+    "drops": [
+      {
+        "id": "ITEM_SUN_DUST_001",
+        "count": 5
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 100,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_SOL_WAECHTER_DEFEATED"
+      }
+    ]
   }
 }

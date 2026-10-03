@@ -186,7 +186,29 @@
     "name": "Solmera – Die Dünen",
     "world": "WORLD_SOLMERA",
     "exits": [
-      "AREA_SOL_OASIS"
+      "AREA_SOL_OASIS",
+      "AREA_SOL_SUNKEN"
+    ],
+    "gate": {
+      "AREA_SOL_SUNKEN": "FLAG_SOL_RUINS_OPEN"
+    }
+  },
+  "AREA_SOL_SUNKEN": {
+    "name": "Solmera – Die versunkene Stadt",
+    "world": "WORLD_SOLMERA",
+    "exits": [
+      "AREA_SOL_DUNES",
+      "AREA_SOL_SUN_HALL"
+    ],
+    "gate": {
+      "AREA_SOL_SUN_HALL": "FLAG_SOL_MIRRORS_DONE"
+    }
+  },
+  "AREA_SOL_SUN_HALL": {
+    "name": "Solmera – Sonnenhalle",
+    "world": "WORLD_SOLMERA",
+    "exits": [
+      "AREA_SOL_SUNKEN"
     ]
   }
 }

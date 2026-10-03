@@ -1,7 +1,7 @@
 {
   "phase": "phase4",
-  "milestone": "A02_TOUCH_UX",
+  "milestone": "S03_SUNKEN_CITY",
   "status": "PASSED",
-  "next_allowed": "S03 sunken city",
+  "next_allowed": "S04 chapter-4 quests + Kharos",
   "standing_owner_approval": true
 }

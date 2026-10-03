@@ -632,3 +632,13 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - 5 new tests in `test_a01_touch` (context button, calm layout + settings, tap person, tap far, tap enemy, tap vs swipe).
 - Not done: menus are still the same size. Compact HUD frames on small phones and gyro/pinch camera are open ideas.
 - Regression: 211/211 tests plus restart checks for chapters 1–3: PASS.
+
+## S03 Sunken city – PASSED
+- At the end of the dunes a trigger plays a short scene and opens the stairs (`FLAG_SOL_RUINS_OPEN`); the `ruin_gate` prop disappears.
+- Area `AREA_SOL_SUNKEN` (ruins, rocks, Weltenanker, chest, lore stele, 2 Sandskorpion + 2 Sandgeist) and the closed `AREA_SOL_SUN_HALL`.
+- Sun-mirror puzzle `PUZ_SOL_MIRRORS_001`: four mirrors, four quarter-turn states (Nord, Ost, Süd, West), solution 1-3-0-2, three hints, then "Sonnenlicht bündeln". Reward: 80 Lun, 3 Sonnenstaub; it opens the hall (`FLAG_SOL_MIRRORS_DONE`).
+  - Built on the existing "dials" puzzle kind. New optional data keys `part_prompt` and `plate_prompt` replace the hard-coded moon-gate texts.
+- Miniboss Sandwächter in the Sonnenhalle (golem model, break gauge, persistent). It sets `FLAG_SOL_WAECHTER_DEFEATED`.
+- 5 new tests (`test_s03_sunken_city`), screenshot 18.
+- Not yet: no quest text for chapter 4; S04 adds the quests, Kharos and the Nuri arc.
+- Regression: 216/216 tests plus restart checks for chapters 1–3: PASS.
