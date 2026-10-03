@@ -2,9 +2,9 @@
 
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
-CURRENT PHASE: Graphics pass + Android (owner request 2026-10-02, see docs/GRAPHICS_PLAN.md)
-CURRENT MILESTONE: G05_WORLD_DETAIL
-STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06)
+CURRENT PHASE: Phase 4 – Solmera (owner request 2026-10-03, see docs/PHASE_4_PLAN.md)
+CURRENT MILESTONE: S01_SOLMERA_HUB
+STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06); Graphics pass PASSED (G01–G05, A01, U01, U02, C01); Phase 4 in progress (S00–S01 PASSED)
 
 ## Mandatory workflow
 1. Audit before implementation. Do not rebuild from scratch.

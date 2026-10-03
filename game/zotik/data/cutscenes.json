@@ -240,5 +240,22 @@
         "spawn": "AREA_VAL_CANALS"
       }
     ]
+  },
+  "CUT_SOL_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Solmera. Wo der Sand sich erinnert. Die Oase Qamra liegt wie ein grünes Versprechen zwischen den Dünen."
+      ],
+      [
+        "NPC_NIA_001",
+        "Ist das heiß! Und ich dachte, Valdoria im Hochsommer wäre schlimm."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der Weltenstein hat uns an die Oase gebracht. Die Risse liegen weiter draußen, in der Wüste."
+      ]
+    ]
   }
 }

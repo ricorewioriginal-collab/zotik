@@ -519,5 +519,45 @@
         "dialogue": "DLG_KASIMIR_ARENA_001"
       }
     ]
+  },
+  "NPC_NURI_001": {
+    "name": "Nuri",
+    "area": "AREA_SOL_OASIS",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_NURI_IDLE_001"
+      }
+    ]
+  },
+  "NPC_ZEYD_001": {
+    "name": "Zeyd",
+    "area": "AREA_SOL_OASIS",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ZEYD_IDLE_001"
+      }
+    ]
+  },
+  "NPC_AMANI_001": {
+    "name": "Amani",
+    "area": "AREA_SOL_BAZAAR",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_AMANI_SHOP_001"
+      }
+    ]
+  },
+  "NPC_JABIR_001": {
+    "name": "Jabir",
+    "area": "AREA_SOL_BAZAAR",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_JABIR_SHOP_001"
+      }
+    ]
   }
 }

@@ -28,5 +28,25 @@
         "Jedes Wesen, das ein Jäger besiegt, gehört in dieses Buch: Name, Region, Beute und was wir über es wissen."
       ]
     ]
+  },
+  "LORE_SOL_001": {
+    "title": "Die Karawanenwege",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Seit Generationen ziehen Karawanen von Oase zu Oase. Die Wege sind nirgends aufgeschrieben – man erzählt sie, Stern für Stern."
+      ]
+    ]
+  },
+  "LORE_SOL_002": {
+    "title": "Kharos, der Sandkoloss",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die Legende spricht von einem Wächter aus Sand und Stein, der die versunkene Stadt hütet. Wer ihn weckt, hört den Sand flüstern."
+      ]
+    ]
   }
 }
