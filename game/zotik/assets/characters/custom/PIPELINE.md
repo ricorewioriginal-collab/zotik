@@ -39,3 +39,11 @@ Next: re-cut the three views with floor/neighbours removed (transparent backgrou
 
 ## 5. Licensing gate
 The TRELLIS GLB output is non-commercial/unverified (see `assets/LICENSES.md`). Before any release integration, re-generate with a commercially cleared texture-baking path or get written clearance.
+
+## 6. Result with the re-cut views (2026-10-03, run 2)
+`zotik_trellis_mv2.glb` (front + side + back, transparent backgrounds, seed 42; preview `zotik_trellis_mv2_preview.png`).
+Better: no floor slab, clean legs/boots, believable proportions, readable face, scarf, belt, sword.
+Still not integrable (non-commercial/unverified output, see section 5):
+- the tail is missing (a canonical Zotik trait), the side view is flat,
+- back side is almost black, no skeleton/animations.
+Next: a tail-friendly input (3/4 views or a generated back/tail view), or model the tail as a separate mesh on tail bones.
