@@ -28,3 +28,11 @@ asset there publishes it, so it needs owner approval first.
 Integrate only if: has skeleton + all `STATES` clips play, height matches `MODEL_HEIGHT` scaling,
 no base disc, back side textured, file size sane for Android (< ~5 MB, 1024 texture), and it looks
 better than the current rig in a side-by-side render. Keep labelled placeholder until then.
+
+## 4. Result of the multi-view run (2026-10-03)
+`zotik_trellis_mv.glb` (front + side + back, seed 42, simplify 0.95, 1024 texture; preview `zotik_trellis_mv_preview.png`).
+Better than the bust: full body with legs and boots. Still not integrable:
+- square slab under the feet (floor of the source crops), no skeleton/animations,
+- tail small and torn, sword on the back is a thin spike, back side nearly black,
+- low source resolution (~170 px per view).
+Next: re-cut the three views with floor/neighbours removed (transparent background), re-run, then rig.
