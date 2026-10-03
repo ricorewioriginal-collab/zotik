@@ -1,9 +1,9 @@
 # custom/ – Zotik TRELLIS test model (PLACEHOLDER, not integrated)
 
 - `zotik_trellis.glb` – textured mesh generated with TRELLIS (MIT license, Space `trellis-community/TRELLIS`)
-  from `reference/derived/ZOTIK_FRONT_CROP.png` (seed 42-class defaults, simplify 0.95, 1024 texture).
+  from `reference/derived/ZOTIK_FRONT_CROP.png` (cut from `reference/approved/ZOTIK_MASTER_CHARACTER_SHEET_1.0.png`; defaults, simplify 0.95, 1024 texture).
 - `zotik_trellis_preview.png` – front / side / back render (three.js, neutral light).
-- Status: concept/test placeholder, NOT final production art.
+- Status: concept/test placeholder, NOT final production art. This folder is excluded from all export presets (`export_presets.cfg`).
 
 ## Evaluation vs. current in-game Zotik (KayKit rig + customization)
 Not integrated. Reasons:
