@@ -3,11 +3,11 @@
 ## 1. Multi-view input (done)
 `multiview/zotik_{front,front34,side,back34,back}.png` – full-body crops (3x Lanczos upscale) from
 `reference/approved/ZOTIK_MASTER_CHARACTER_SHEET_1.0.png`. Known flaws: the sheet's source resolution is low
-(~170 px per figure), and `front34`, `side`, `back34`, `back` still show slivers of neighbouring figures
-at the edges, so remove them (or keep only the largest foreground blob) before/while background removal.
+(~170 px per figure), and all five crops (including `front`, which has a turquoise fragment of the neighbouring figure on its right edge)
+still show slivers of neighbouring figures or the floor, so remove them (or keep only the largest foreground blob) before/while background removal.
 
 Run (TRELLIS Space `trellis-community/TRELLIS`, MIT):
-- Use the **Multiple Images** tab with `front`, `side`, `back` (clean, orthogonal), algo `stochastic`,
+- Use the **Multiple Images** tab with `front`, `side`, `back` (orthogonal, after the cleanup above), algo `stochastic`,
   simplify 0.95, texture 1024. The model has full legs/feet now, so no base disc is expected.
 - Not run by Claude: the account has no ZeroGPU quota and the MCP `invoke` is disabled. Run it in the browser,
   drop the resulting GLB here as `zotik_trellis_mv.glb`.
@@ -36,3 +36,6 @@ Better than the bust: full body with legs and boots. Still not integrable:
 - tail small and torn, sword on the back is a thin spike, back side nearly black,
 - low source resolution (~170 px per view).
 Next: re-cut the three views with floor/neighbours removed (transparent background), re-run, then rig.
+
+## 5. Licensing gate
+The TRELLIS GLB output is non-commercial/unverified (see `assets/LICENSES.md`). Before any release integration, re-generate with a commercially cleared texture-baking path or get written clearance.
