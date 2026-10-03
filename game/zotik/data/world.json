@@ -26,6 +26,11 @@
       "area": "AREA_VAL_CANALS",
       "name": "Weltenanker in den Kanälen",
       "heals": true
+    },
+    "SAVEPOINT_SOL_DUNES_001": {
+      "area": "AREA_SOL_DUNES",
+      "name": "Weltenanker in den Dünen",
+      "heals": true
     }
   },
   "uniques": {

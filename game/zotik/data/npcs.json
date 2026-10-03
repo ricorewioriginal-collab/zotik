@@ -525,6 +525,15 @@
     "area": "AREA_SOL_OASIS",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_SOL_DUNES_OPEN"
+          }
+        ],
+        "dialogue": "DLG_NURI_LEAD_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_NURI_IDLE_001"
       }

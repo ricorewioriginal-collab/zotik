@@ -606,11 +606,7 @@
     "lines": [
       [
         "NPC_NURI_001",
-        "Ich bin Nuri, Karawanenführerin. Seit der Sandsturm kam, wagt sich niemand mehr durch das Dünentor."
-      ],
-      [
-        "NPC_NURI_001",
-        "Sobald sich der Sand legt, führe ich euch hinaus – zur versunkenen Stadt. Bis dahin: Trinkt, rastet, kauft Vorräte."
+        "Das Dünentor steht offen. Hinter dem Sand liegt die versunkene Stadt – aber den Weg dorthin kenne selbst ich noch nicht ganz."
       ]
     ]
   },
@@ -654,6 +650,25 @@
       {
         "type": "open_shop",
         "id": "SHOP_SOL_ALCHEMIST_001"
+      }
+    ]
+  },
+  "DLG_NURI_LEAD_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NURI_001",
+        "Der Sturm lässt nach. Bleibt dicht hinter mir, die Dünen verschlucken jede Spur."
+      ],
+      [
+        "NPC_NURI_001",
+        "Skorpione unter dem Sand, Geister im Wind. Am Weltenanker weiter draußen könnt ihr rasten und speichern."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_SOL_DUNES_OPEN"
       }
     ]
   }

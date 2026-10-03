@@ -120,6 +120,11 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 		env.fog_light_color = Color.html(st.fog)
 		env.fog_density = 0.006
 		env.fog_sky_affect = 0.2
+		if layout.get("sandstorm", false):
+			# drifting sand: dense, warm fog that swallows the horizon
+			env.fog_light_color = Color.html(st.fog).darkened(0.12)
+			env.fog_density = 0.02
+			env.fog_sky_affect = 0.7
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.tonemap_white = 6.0
 	env.glow_enabled = true
