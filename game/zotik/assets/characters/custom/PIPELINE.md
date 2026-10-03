@@ -1,16 +1,16 @@
 # Zotik custom model – multi-view + rigging preparation (PLACEHOLDER pipeline, nothing integrated)
 
-## 1. Multi-view input (done)
-`multiview/zotik_{front,front34,side,back34,back}.png` – full-body crops (3x Lanczos upscale) from
-`reference/approved/ZOTIK_MASTER_CHARACTER_SHEET_1.0.png`. Known flaws: the sheet's source resolution is low
-(~170 px per figure), and all five crops (including `front`, which has a turquoise fragment of the neighbouring figure on its right edge)
-still show slivers of neighbouring figures or the floor, so remove them (or keep only the largest foreground blob) before/while background removal.
+## 1. Multi-view input (re-cut 2026-10-03)
+`multiview/zotik_{front,side,back}.png` – 768x768 RGBA, transparent background, figure centred, cut from
+`reference/approved/ZOTIK_MASTER_CHARACTER_SHEET_1.0.png` (crop boxes in the sheet's 1536x1024 pixels:
+front 5,125,175,472 · side 345,125,525,472 · back 650,125,845,472; 3x Lanczos upscale, background removed with
+rembg `isnet-general-use` for front/side and `isnet-anime` for back, largest blob kept; floor and neighbouring
+figures removed). The 3/4 views were dropped (neighbour overlap).
+Known flaws: source resolution is low (~170 px per figure); on `back`, the neighbour's tail was erased by a colour
+rule, so one boot is missing and the right arm/ear edge is semi-transparent.
 
-Run (TRELLIS Space `trellis-community/TRELLIS`, MIT):
-- Use the **Multiple Images** tab with `front`, `side`, `back` (orthogonal, after the cleanup above), algo `stochastic`,
-  simplify 0.95, texture 1024. The model has full legs/feet now, so no base disc is expected.
-- Not run by Claude: the account has no ZeroGPU quota and the MCP `invoke` is disabled. Run it in the browser,
-  drop the resulting GLB here as `zotik_trellis_mv.glb`.
+Run (TRELLIS Space `trellis-community/TRELLIS`): Multiple Images with `front`, `side`, `back`, algo `stochastic`,
+simplify 0.95, texture 1024. Needs an HF token with ZeroGPU quota (not stored in the repo).
 
 ## 2. Rigging (not started)
 Target: a skeleton the game can animate. Two options:
