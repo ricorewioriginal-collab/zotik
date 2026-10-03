@@ -168,11 +168,22 @@
     "name": "Solmera – Oase Qamra",
     "world": "WORLD_SOLMERA",
     "exits": [
-      "AREA_SOL_BAZAAR"
-    ]
+      "AREA_SOL_BAZAAR",
+      "AREA_SOL_DUNES"
+    ],
+    "gate": {
+      "AREA_SOL_DUNES": "FLAG_SOL_DUNES_OPEN"
+    }
   },
   "AREA_SOL_BAZAAR": {
     "name": "Solmera – Basar",
+    "world": "WORLD_SOLMERA",
+    "exits": [
+      "AREA_SOL_OASIS"
+    ]
+  },
+  "AREA_SOL_DUNES": {
+    "name": "Solmera – Die Dünen",
     "world": "WORLD_SOLMERA",
     "exits": [
       "AREA_SOL_OASIS"

@@ -100,5 +100,8 @@
   },
   "FLAG_SOL_DUNES_OPEN": {
     "desc": "Nuri führt die Gruppe durch das Dünentor (Kapitel 4, S02)"
+  },
+  "FLAG_SOL_RUINS_OPEN": {
+    "desc": "Eingang zur versunkenen Stadt offen (Kapitel 4, S03)"
   }
 }

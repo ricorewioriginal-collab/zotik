@@ -1,7 +1,7 @@
 {
   "phase": "phase4",
-  "milestone": "S01_SOLMERA_HUB",
+  "milestone": "S02_DUNES",
   "status": "PASSED",
-  "next_allowed": "S02 dunes",
+  "next_allowed": "S03 sunken city",
   "standing_owner_approval": true
 }

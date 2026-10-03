@@ -66,5 +66,19 @@
       }
     ],
     "currency": 70
+  },
+  "CHEST_SOL_001": {
+    "area": "AREA_SOL_DUNES",
+    "contents": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_SUN_DUST_001",
+        "count": 3
+      }
+    ],
+    "currency": 90
   }
 }

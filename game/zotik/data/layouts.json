@@ -3479,6 +3479,11 @@
         29,
         0,
         0
+      ],
+      "AREA_SOL_DUNES": [
+        0,
+        0,
+        -22
       ]
     },
     "exits": [
@@ -3488,6 +3493,14 @@
           33,
           0,
           0
+        ]
+      },
+      {
+        "to": "AREA_SOL_DUNES",
+        "pos": [
+          0,
+          0,
+          -26
         ]
       }
     ],
@@ -4122,6 +4135,273 @@
         ],
         "scale": 1.6,
         "r": 1.2
+      }
+    ]
+  },
+  "AREA_SOL_DUNES": {
+    "size": [
+      60,
+      80
+    ],
+    "ground": "#d8b070",
+    "ambient": "#ffd9a0",
+    "sandstorm": true,
+    "spawns": {
+      "default": [
+        0,
+        0,
+        34
+      ],
+      "AREA_SOL_OASIS": [
+        0,
+        0,
+        34
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_SOL_OASIS",
+        "pos": [
+          0,
+          0,
+          37
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "ruin_gate",
+        "pos": [
+          0,
+          3,
+          -38
+        ],
+        "size": [
+          14,
+          6,
+          2
+        ],
+        "color": "#9a7a50",
+        "hidden_by_flag": "FLAG_SOL_RUINS_OPEN"
+      }
+    ],
+    "entities": [
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_SOL_DUNES_001",
+        "pos": [
+          10,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_DUNES_SKORPION_1",
+        "enemy": "ENEMY_SANDSKORPION_001",
+        "pos": [
+          -12,
+          0,
+          8
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_DUNES_SKORPION_2",
+        "enemy": "ENEMY_SANDSKORPION_001",
+        "pos": [
+          14,
+          0,
+          -4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_DUNES_GEIST_1",
+        "enemy": "ENEMY_SANDGEIST_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_DUNES_GEIST_2",
+        "enemy": "ENEMY_SANDGEIST_001",
+        "pos": [
+          -14,
+          0,
+          -26
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_SOL_001",
+        "pos": [
+          -22,
+          0,
+          -32
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -26,
+          0,
+          -30
+        ],
+        "rot": 178,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          26,
+          0,
+          -28
+        ],
+        "rot": 182,
+        "scale": 1.7000000000000002,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -27,
+          0,
+          12
+        ],
+        "rot": 171,
+        "scale": 1.7000000000000002,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          27,
+          0,
+          8
+        ],
+        "rot": 189,
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          -8,
+          0,
+          -8
+        ],
+        "rot": 304,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          12,
+          0,
+          -18
+        ],
+        "rot": 84,
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -18,
+          0,
+          -12
+        ],
+        "rot": 234,
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          20,
+          0,
+          16
+        ],
+        "rot": 140,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          6,
+          0,
+          30
+        ],
+        "rot": 42,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          -22,
+          0,
+          30
+        ],
+        "rot": 206,
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          -4,
+          0,
+          28
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          4,
+          0,
+          -6
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "tent",
+        "pos": [
+          -12,
+          0,
+          24
+        ],
+        "rot": 40,
+        "scale": 1.2,
+        "r": 1.6
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -9.5,
+          0,
+          25
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "sack",
+        "pos": [
+          -9.2,
+          0,
+          26.3
+        ],
+        "rot": 30
       }
     ]
   }

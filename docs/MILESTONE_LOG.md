@@ -608,3 +608,13 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - The Dünentor is still closed; the dunes follow in S02 (`FLAG_SOL_DUNES_OPEN` is reserved). No main quest yet.
 - 6 new tests (`test_s01_solmera`), 2 new screenshots (15 oasis, 16 bazaar).
 - Regression: 201/201 tests plus restart checks for chapters 1–3: PASS.
+
+## S02 Dunes – PASSED
+- Nuri opens the Dünentor (`FLAG_SOL_DUNES_OPEN`); after that the oasis exit leads to the dunes.
+- Area `AREA_SOL_DUNES` (60×80): rocks, tents, Weltenanker (heals and saves), chest (2 Großer Heiltrank, 3 Sonnenstaub, 90 Lun) and a still-sealed `ruin_gate` (opens in S03 via `FLAG_SOL_RUINS_OPEN`).
+- Enemies, both with break gauge, bestiary entry and Sonnenstaub drops:
+  - Sandskorpion (armoured, crab model in sand colour)
+  - Sandgeist (fast, imp model in sand colour)
+- Sandstorm: layout key `sandstorm` makes the fog dense and warm. It is cheap, so it also runs on Android and Web.
+- 4 new tests (`test_s02_dunes`), screenshot 17.
+- Regression: 205/205 tests plus restart checks for chapters 1–3: PASS.
