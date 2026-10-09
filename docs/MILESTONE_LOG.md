@@ -642,3 +642,15 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - 5 new tests (`test_s03_sunken_city`), screenshot 18.
 - Not yet: no quest text for chapter 4; S04 adds the quests, Kharos and the Nuri arc.
 - Regression: 216/216 tests plus restart checks for chapters 1–3: PASS.
+
+## S04 Chapter-4 quests + Kharos – PASSED
+- Main quest "Wo der Sand sich erinnert" (Nuri arc): arrival or talking to Nuri starts it (also for older saves), it runs through dunes, ruins and mirror puzzle to the boss and ends with `FLAG_SOL_CHAPTER_COMPLETE`.
+- Side quest "Sonnenstaub für Jabir" (reward: Elixier and more).
+- Boss Kharos (the sand colossus, 780 HP, break gauge) in the Sonnenhalle arena, intro scene plays once, three phases:
+  - Sandfaust: circular sand slam hazard
+  - Sandsturm (60 %): sand wave across the arena (sidestep it), summons 2 Sandgeister
+  - Sturz des Kolosses (30 %): faster waves, summons a Sandskorpion
+- Defeat sets `FLAG_BOSS_SOL_KHAROS_DEFEATED`, plays the ending scene and stays defeated after a reload.
+- Desert enemies and Kharos have colours and size entries (`enemy.gd`) and creature models (`creature_visual.gd`).
+- 8 new tests (`test_s04_kharos`).
+- Regression: 224/224 tests plus restart checks (golden paths of chapters 1–3): PASS, run with Godot 4.7.2.
