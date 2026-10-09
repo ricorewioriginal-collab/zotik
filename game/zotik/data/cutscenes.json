@@ -323,5 +323,22 @@
         "spawn": "AREA_SOL_DUNES"
       }
     ]
+  },
+  "CUT_AQU_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Aqualis. Die Stadt unter dem Meer. Über den gläsernen Kuppeln ziehen Fischschwärme wie Wolken."
+      ],
+      [
+        "NPC_NIA_001",
+        "Wir atmen hier unten? Ich schwöre, ich halte trotzdem kurz die Luft an."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der Splitter, den wir suchen, muss in der Tiefe liegen. Fragen wir nach den Ingenieuren der Kuppeln."
+      ]
+    ]
   }
 }

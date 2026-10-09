@@ -221,5 +221,19 @@
     "exits": [
       "AREA_SOL_SUN_HALL"
     ]
+  },
+  "AREA_AQU_DOME": {
+    "name": "Aqualis – Kuppelstadt",
+    "world": "WORLD_AQUALIS",
+    "exits": [
+      "AREA_AQU_HARBOUR"
+    ]
+  },
+  "AREA_AQU_HARBOUR": {
+    "name": "Aqualis – Hafendock",
+    "world": "WORLD_AQUALIS",
+    "exits": [
+      "AREA_AQU_DOME"
+    ]
   }
 }

@@ -112,6 +112,19 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("19_kharos_arena")
+	while dlg.is_active():
+		dlg.advance()
+	gs.set_flag("FLAG_AQU_ARRIVED")
+	game.enter_area("AREA_AQU_DOME", "default")
+	game.player.global_position = Vector3(-2, 0, 12)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("20_aqualis_dome")
+	game.enter_area("AREA_AQU_HARBOUR", "default")
+	game.player.global_position = Vector3(2, 0, 4)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("21_aqualis_harbour")
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	game.touch.force = true

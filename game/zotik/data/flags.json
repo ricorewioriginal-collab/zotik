@@ -121,5 +121,11 @@
   },
   "FLAG_SOL_CHAPTER_COMPLETE": {
     "desc": "Kapitel 4 (Solmera) abgeschlossen"
+  },
+  "FLAG_AQU_ARRIVED": {
+    "desc": "Erste Ankunft in Aqualis gesehen"
+  },
+  "FLAG_AQU_CAVES_OPEN": {
+    "desc": "Mirael öffnet das Korallentor (Kapitel 5, Q02)"
   }
 }

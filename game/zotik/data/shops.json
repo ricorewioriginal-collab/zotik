@@ -53,5 +53,24 @@
       "ITEM_DATE_CAKE_001"
     ],
     "sell_ratio": 0.5
+  },
+  "SHOP_AQU_SMITH_001": {
+    "npc": "NPC_DORAN_001",
+    "stock": [
+      "WEAPON_SUN_SABER_001",
+      "WEAPON_TRIDENT_001",
+      "ARMOR_CORAL_PLATE_001"
+    ],
+    "sell_ratio": 0.5
+  },
+  "SHOP_AQU_ALCHEMIST_001": {
+    "npc": "NPC_PERLA_001",
+    "stock": [
+      "ITEM_HEALING_POTION_001",
+      "ITEM_HI_POTION_001",
+      "ITEM_ELIXIR_001",
+      "ITEM_KELP_WRAP_001"
+    ],
+    "sell_ratio": 0.5
   }
 }

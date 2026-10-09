@@ -191,5 +191,41 @@
     },
     "price": 520,
     "stack": 1
+  },
+  "ITEM_PEARL_001": {
+    "name": "Perle",
+    "type": "material",
+    "price": 30,
+    "stack": 99
+  },
+  "ITEM_KELP_WRAP_001": {
+    "name": "Algenwickel",
+    "type": "consumable",
+    "effect": {
+      "heal": 70
+    },
+    "price": 26,
+    "stack": 99
+  },
+  "WEAPON_TRIDENT_001": {
+    "name": "Dreizack",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 22
+    },
+    "price": 620,
+    "stack": 1
+  },
+  "ARMOR_CORAL_PLATE_001": {
+    "name": "Korallenpanzer",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 9,
+      "max_hp": 25
+    },
+    "price": 680,
+    "stack": 1
   }
 }

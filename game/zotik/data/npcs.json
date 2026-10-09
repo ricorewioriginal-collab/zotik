@@ -617,5 +617,45 @@
         "dialogue": "DLG_JABIR_SHOP_001"
       }
     ]
+  },
+  "NPC_MIRAEL_001": {
+    "name": "Mirael",
+    "area": "AREA_AQU_DOME",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_MIRAEL_IDLE_001"
+      }
+    ]
+  },
+  "NPC_ORIEL_001": {
+    "name": "Oriel",
+    "area": "AREA_AQU_DOME",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ORIEL_IDLE_001"
+      }
+    ]
+  },
+  "NPC_DORAN_001": {
+    "name": "Doran",
+    "area": "AREA_AQU_HARBOUR",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_DORAN_SHOP_001"
+      }
+    ]
+  },
+  "NPC_PERLA_001": {
+    "name": "Perla",
+    "area": "AREA_AQU_HARBOUR",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_PERLA_SHOP_001"
+      }
+    ]
   }
 }

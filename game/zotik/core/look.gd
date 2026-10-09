@@ -14,6 +14,7 @@ const WORLDS := {
 	"WORLD_ELARIS": {"sky_top": "#2f74d6", "sky_horizon": "#cdeeff", "sun": "#fff0c8", "sun_energy": 1.25, "pitch": -58.0, "fog": "#a8d8b0", "floor": "forest", "boundary": "hedge"},
 	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall"},
 	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall"},
+	"WORLD_AQUALIS": {"sky_top": "#0a3a6a", "sky_horizon": "#4ad0c8", "sun": "#a8f0ff", "sun_energy": 1.1, "pitch": -70.0, "fog": "#1a8aa8", "floor": "sand", "boundary": "wall", "fog_density": 0.016},
 }
 
 ## prop name keyword -> shape/material kind (first match wins)
@@ -33,7 +34,7 @@ const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "
 
 ## CC0 KayKit Medieval Hexagon models (assets/world/kaykit), G04
 const MODEL_DIR := "res://assets/world/kaykit/%s.gltf"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red"}
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
@@ -42,6 +43,7 @@ const BACKDROP := {
 	"WORLD_ELARIS": [["trees_B_large", "trees_B_medium", "tree_single_B", "trees_A_large"], ["trees_B_large", "trees_A_large"]],
 	"WORLD_VALDORIA": [["building_home_A_red", "building_home_B_red", "building_tavern_red", "building_tower_A_red", "building_home_A_red"], ["trees_A_large", "trees_B_large"]],
 	"WORLD_SOLMERA": [["rock_single_A", "rock_single_B", "tent", "rock_single_C", "building_tower_A_red"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
+	"WORLD_AQUALIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "rock_single_B", "building_home_B_blue"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 }
 
 static var _cache := {}
@@ -118,7 +120,7 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 		env.ambient_light_energy = 0.9
 		env.fog_enabled = true
 		env.fog_light_color = Color.html(st.fog)
-		env.fog_density = 0.006
+		env.fog_density = float(st.get("fog_density", 0.006))
 		env.fog_sky_affect = 0.2
 		if layout.get("sandstorm", false):
 			# drifting sand: dense, warm fog that swallows the horizon

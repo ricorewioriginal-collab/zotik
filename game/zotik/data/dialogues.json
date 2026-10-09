@@ -725,5 +725,61 @@
         "Sechs Beutel, glänzend wie Gold! Mein Elixier wird das beste der Wüste. Hier, deine Belohnung."
       ]
     ]
+  },
+  "DLG_MIRAEL_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Mirael, Chefingenieurin der Kuppeln. Hier unten hält alles zusammen, was jemand rechtzeitig festgeschraubt hat."
+      ],
+      [
+        "NPC_MIRAEL_001",
+        "Seit ein Splitter in den Korallenhöhlen leuchtet, spielen die Strömungen verrückt. Gebt mir einen Moment, ich schaue mir die Schleusen an."
+      ]
+    ]
+  },
+  "DLG_ORIEL_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ORIEL_001",
+        "Das Weltenarchiv liegt tiefer als jede Kuppel. Es erinnert sich an Wasser, das längst verdunstet ist."
+      ],
+      [
+        "NPC_ORIEL_001",
+        "Man sagt, ein Wächter schläft dort unten und hütet jedes Wort, das je gesprochen wurde."
+      ]
+    ]
+  },
+  "DLG_DORAN_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_DORAN_001",
+        "Dreizack und Korallenpanzer, druckfest bis in die Tiefsee! Kein Rost, keine Ausreden."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_AQU_SMITH_001"
+      }
+    ]
+  },
+  "DLG_PERLA_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PERLA_001",
+        "Frische Algenwickel und feinste Tränke! Perlen nehme ich auch in Zahlung – wenn sie echt sind."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_AQU_ALCHEMIST_001"
+      }
+    ]
   }
 }
