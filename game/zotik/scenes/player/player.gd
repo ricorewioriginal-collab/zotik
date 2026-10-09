@@ -28,6 +28,15 @@ var current_interactable: Interactable
 var attack_cooldown := 0.0
 var lock_target: Enemy
 
+## Touch autopilot (A03): tap-to-walk, tap a person/chest to walk there and use
+## it, tap an enemy to approach and fight it. Any manual input cancels it.
+enum Goal { NONE, POINT, USE, FIGHT }
+var goal := Goal.NONE
+var goal_point := Vector3.ZERO
+var goal_node: Node3D
+var _stuck_time := 0.0
+var _stuck_ref := Vector3.ZERO
+
 const ATTACK_CONE_DOT := 0.3
 const LOCK_RANGE := 15.0
 
@@ -93,6 +102,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		is_blocking = false
 	var dir := move_direction(input)
+	if goal != Goal.NONE:
+		if not control_enabled or dead or input.length() > 0.2:
+			clear_goal()
+		else:
+			dir = _goal_direction(delta)
 	if is_dodging:
 		dodge_time_left -= delta
 		velocity.x = dodge_dir.x * float(stats.dodge_speed)
@@ -125,6 +139,59 @@ func _physics_process(delta: float) -> void:
 		var id := Inventory.first_consumable()
 		if id == "" or not Inventory.use(id, self):
 			EventBus.notify.emit("Kein passender Gegenstand.")
+
+
+func set_goal(kind: Goal, point: Vector3 = Vector3.ZERO, node: Node3D = null) -> void:
+	goal = kind
+	goal_point = point
+	goal_node = node
+	_stuck_time = 0.0
+	_stuck_ref = global_position
+	if kind == Goal.FIGHT and node is Enemy:
+		set_lock(node)
+
+
+func clear_goal() -> void:
+	goal = Goal.NONE
+	goal_node = null
+
+
+## Steering for the current goal: a world direction, or zero when there is
+## none, when it was reached (and acted on) or when the way is blocked.
+func _goal_direction(delta: float) -> Vector3:
+	var target := goal_point
+	if goal != Goal.POINT:
+		if not is_instance_valid(goal_node) or (goal_node is Enemy and (goal_node as Enemy).is_dead()):
+			clear_goal()
+			return Vector3.ZERO
+		target = goal_node.global_position
+	var to := target - global_position
+	to.y = 0.0
+	var reach := 0.35
+	if goal == Goal.USE:
+		reach = Interactable.INTERACT_RANGE * 0.7
+	elif goal == Goal.FIGHT:
+		reach = maxf(0.8, float(stats.attack_range) - 0.4)
+	if to.length() <= reach:
+		if goal == Goal.FIGHT:
+			face(to)
+			attack()  # gated by the attack cooldown; the goal stays until the foe falls
+			return Vector3.ZERO
+		var it := goal_node as Interactable
+		clear_goal()
+		if it != null and it.can_interact():
+			it.interact(self)
+		return Vector3.ZERO
+	_stuck_time += delta
+	if _stuck_time >= 1.2:
+		if global_position.distance_to(_stuck_ref) < 0.3:
+			clear_goal()
+			return Vector3.ZERO
+		_stuck_time = 0.0
+		_stuck_ref = global_position
+	if goal == Goal.FIGHT and lock_target != goal_node and global_position.distance_to(target) <= LOCK_RANGE:
+		set_lock(goal_node as Enemy)
+	return to.normalized()
 
 
 func _update_interactable() -> void:

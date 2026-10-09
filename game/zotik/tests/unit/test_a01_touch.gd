@@ -43,7 +43,7 @@ func test_visible_only_when_wanted_and_free() -> void:
 
 func test_buttons_emit_actions() -> void:
 	var size_v := touch.get_viewport_rect().size
-	var attack_pos := size_v - Vector2(150, 150)
+	var attack_pos := size_v - Vector2(90, 100)
 	eq(touch.action_at(attack_pos), "attack", "attack button under the thumb")
 	touch._on_press(0, attack_pos)
 	await frames(1)
@@ -105,7 +105,7 @@ func test_interact_button_only_when_something_is_usable() -> void:
 	await physics_frames(3)
 	await frames(2)
 	var size_v := touch.get_viewport_rect().size
-	var spot := size_v - Vector2(345, 320)
+	var spot := size_v - Vector2(250, 150)
 	check(game.player.current_interactable == null, "nothing in reach")
 	eq(touch.action_at(spot), "", "no Benutzen button in the open")
 	var mira: Npc = game.area.entities["NPC_MIRA_001"]
@@ -124,7 +124,9 @@ func test_buttons_are_calm_and_scale_with_settings() -> void:
 			main_r = a[3]
 		if a[0] == "block":
 			minor_r = a[3]
-	check(minor_r < main_r * 0.6, "secondary buttons are much smaller than attack")
+	check(minor_r < main_r * 0.7, "secondary buttons are smaller than attack")
+	for a in TouchControls.ACTIONS:
+		check(a[3] <= 40.0, "%s is a small button" % a[0])
 	check(touch.ui_opacity() <= 0.65, "translucent at rest")
 	var before: float = touch._panels["attack"].scale.x
 	Settings.set_value("touch_scale", 1.4)
@@ -148,7 +150,7 @@ func test_tap_a_person_uses_them() -> void:
 	eq(touch.tap_world(_screen_of(mira)), "interact", "tap on Mira")
 	check(Dialogue.is_active(), "dialogue started")
 	await finish_dialogues()
-	eq(touch.tap_world(Vector2(5, 5)), "", "tap on nothing")
+	check(["", "ground"].has(touch.tap_world(Vector2(5, 5))), "tap in the corner")
 
 
 func test_tap_far_person_asks_to_come_closer() -> void:
@@ -159,7 +161,7 @@ func test_tap_far_person_asks_to_come_closer() -> void:
 	await frames(2)
 	var pos := _screen_of(mira)
 	var res := touch.tap_world(pos)
-	check(res == "far" or res == "", "too far to talk (%s)" % res)
+	eq(res, "walk_use", "too far to talk: walk over first (%s)" % res)
 	check(not Dialogue.is_active(), "no dialogue from far away")
 
 
@@ -171,7 +173,7 @@ func test_tap_enemy_locks_on() -> void:
 	game.player.rotation = Vector3.ZERO
 	await physics_frames(3)
 	await frames(2)
-	eq(touch.tap_world(_screen_of(e)), "lock", "tap on an enemy")
+	eq(touch.tap_world(_screen_of(e)), "attack", "tap on an enemy")
 	check(game.player.lock_target == e, "locked on")
 
 
@@ -189,3 +191,118 @@ func test_short_tap_in_world_is_detected_but_drag_is_not() -> void:
 	touch._on_release(8, pos)
 	check(Dialogue.is_active(), "a quick tap uses the person")
 	await finish_dialogues()
+
+
+# --- A03: the world is the control -------------------------------------------
+
+func _frames_until(cond: Callable, max_frames: int) -> int:
+	var n := 0
+	while not cond.call() and n < max_frames:
+		await physics_frames(1)
+		n += 1
+	return n
+
+
+func test_tap_ground_walks_there() -> void:
+	game.enter_area("AREA_LUN_VILLAGE", "default")
+	await physics_frames(3)
+	await frames(2)
+	var size_v := touch.get_viewport_rect().size
+	var res := touch.tap_world(Vector2(size_v.x * 0.5, size_v.y * 0.8))
+	eq(res, "ground", "tap on the ground in front of Zotik")
+	eq(game.player.goal, Player.Goal.POINT, "goal set")
+	var target: Vector3 = game.player.goal_point
+	var start: Vector3 = game.player.global_position
+	await _frames_until(func(): return game.player.goal == Player.Goal.NONE, 240)
+	eq(game.player.goal, Player.Goal.NONE, "goal reached or given up")
+	var closer: bool = game.player.global_position.distance_to(target) < start.distance_to(target) - 0.5
+	check(closer or start.distance_to(target) < 1.0, "Zotik walked toward the tapped point")
+	check(game.area.find_child("TapMarker", false, false) != null, "marker shown")
+
+
+func test_tap_far_person_walks_over_and_talks() -> void:
+	game.enter_area("AREA_LUN_VILLAGE", "default")
+	var mira: Npc = game.area.entities["NPC_MIRA_001"]
+	game.player.global_position = mira.global_position + Vector3(0, 0, 8.0)
+	await physics_frames(3)
+	await frames(2)
+	eq(touch.tap_world(_screen_of(mira)), "walk_use", "tap on Mira from far away")
+	check(not Dialogue.is_active(), "not yet")
+	await _frames_until(func(): return Dialogue.is_active(), 360)
+	check(Dialogue.is_active(), "arrived and talked")
+	eq(game.player.goal, Player.Goal.NONE, "goal consumed")
+	await finish_dialogues()
+
+
+func test_tap_enemy_runs_up_and_fights() -> void:
+	game.enter_area("AREA_LUN_VILLAGE", "default")
+	await physics_frames(2)
+	var dummy: Enemy = game.area.entities["SPAWN_LUN_DUMMY_001"]
+	game.player.global_position = dummy.global_position + Vector3(0, 0, 7.0)
+	game.player.invulnerable_time = 999.0
+	await physics_frames(3)
+	await frames(2)
+	eq(touch.tap_world(_screen_of(dummy)), "attack", "tap on the dummy")
+	check(game.player.lock_target == dummy, "locked on")
+	var hp0 := dummy.hp
+	await _frames_until(func(): return dummy.hp < hp0, 420)
+	check(dummy.hp < hp0, "walked up and hit it without any button")
+	game.player.clear_goal()
+
+
+func test_manual_input_cancels_the_autopilot() -> void:
+	game.enter_area("AREA_LUN_VILLAGE", "default")
+	await physics_frames(3)
+	game.player.set_goal(Player.Goal.POINT, game.player.global_position + Vector3(10, 0, 0))
+	Input.action_press("move_left")
+	await physics_frames(3)
+	Input.action_release("move_left")
+	eq(game.player.goal, Player.Goal.NONE, "stick or keys take over")
+	game.player.set_goal(Player.Goal.POINT, game.player.global_position + Vector3(10, 0, 0))
+	game.player.control_enabled = false
+	await physics_frames(2)
+	eq(game.player.goal, Player.Goal.NONE, "dialogue or menu stops it")
+	game.player.control_enabled = true
+
+
+func test_blocked_way_gives_up() -> void:
+	game.enter_area("AREA_LUN_VILLAGE", "default")
+	await physics_frames(3)
+	game.player.set_goal(Player.Goal.POINT, game.player.global_position + Vector3(500, 0, 0))
+	game.player.global_position = game.player.global_position  # stays put: nothing moves it
+	game.player.velocity = Vector3.ZERO
+	game.player._stuck_ref = game.player.global_position
+	# pretend the body cannot move: pin it every frame for the stuck window
+	var pin: Vector3 = game.player.global_position
+	for i in 100:
+		game.player.global_position = pin
+		await physics_frames(1)
+		if game.player.goal == Player.Goal.NONE:
+			break
+	eq(game.player.goal, Player.Goal.NONE, "gives up when it makes no progress")
+
+
+func test_double_tap_dodges() -> void:
+	game.enter_area("AREA_LUN_VILLAGE", "default")
+	await physics_frames(3)
+	await frames(2)
+	var size_v := touch.get_viewport_rect().size
+	var pos := Vector2(size_v.x * 0.5, size_v.y * 0.8)
+	touch._on_press(3, pos)
+	touch._on_release(3, pos)
+	touch._on_press(4, pos + Vector2(10, 0))
+	touch._on_release(4, pos + Vector2(10, 0))
+	await physics_frames(3)
+	check(game.player.is_dodging, "second tap dodged")
+
+
+func test_buttons_can_be_switched_off() -> void:
+	var attack_pos := touch.get_viewport_rect().size - Vector2(90, 100)
+	eq(touch.action_at(attack_pos), "attack", "buttons on by default")
+	Settings.set_value("touch_buttons", false)
+	await frames(2)
+	eq(touch.action_at(attack_pos), "", "no button in the way when switched off")
+	check(not touch._panels["attack"].visible, "button hidden")
+	Settings.set_value("touch_buttons", true)
+	await frames(2)
+	eq(touch.action_at(attack_pos), "attack", "and back")

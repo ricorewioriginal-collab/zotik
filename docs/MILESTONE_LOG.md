@@ -661,3 +661,20 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - `test_x01_full_playthrough` now continues into chapter 4 from the state chapter 3 really produced (new game to Kharos, all 8 quests completed, save/load through the title at the oasis bazaar).
 - Regression: 225/225 tests plus restart checks for chapters 1–4: PASS (Godot 4.7.2).
 - Phase 4 (Solmera) is complete.
+
+## A03 Controls – PASSED (owner: "die Steuerung gefällt mir noch nicht … Android voll Touch ohne große Buttons … Windows auch Pfeiltasten")
+- Windows / keyboard:
+  - Arrow keys move, in addition to WASD.
+  - The camera turns with Z / C (the arrow keys no longer double as camera keys); the mouse still works.
+  - The F1 help text lists both.
+- Android / touch is gesture-first (autopilot in `Player`: goals POINT, USE, FIGHT):
+  - tap the ground → Zotik walks there (a marker shows the target)
+  - tap a person, chest or stone → walk there and use it
+  - tap an enemy → approach, lock on and attack automatically
+  - double-tap → dodge
+  - floating stick on the left, swipe on the right turns the camera
+  - any manual input (stick) cancels the autopilot; it also gives up when the way is blocked
+- The action buttons are small and translucent at the screen edge. The pause menu has "Aktionstasten" to hide them entirely (setting `touch_buttons`).
+- Tests: `test_a01_touch` (18) and `test_p01_playability` (arrow and Z/C bindings, help text).
+- Not tested on a real phone yet, only in headless tests and a rendered screenshot (14).
+- Regression: 232/232 tests plus restart checks for chapters 1–4: PASS (run locally on Windows with Godot 4.7).
