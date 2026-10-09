@@ -1,7 +1,7 @@
 extends TestCase
 ## X01: the whole game in one session, without prepared saves. New game from
 ## the title, chapter 1 in Lunaris, Weltenstein to Elaris, chapter 2,
-## Weltenstein to Valdoria, chapter 3, then save -> reset -> load through the
+## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, then save -> reset -> load through the
 ## title. Unlike the per-chapter golden paths (m15/e08/v06) every chapter
 ## starts from the state the previous one really produced, so a broken
 ## hand-over between chapters fails here.
@@ -224,6 +224,55 @@ func _chapter_three() -> void:
 	eq(Conditions.quest_state(M), "COMPLETED", "chapter 3 completed")
 
 
+func _chapter_four() -> void:
+	const M := "QUEST_MAIN_SOL_001"
+	const S := "QUEST_SIDE_SOL_001"
+	await _exit_to("AREA_VAL_MARKET")
+	await _travel("TRAVEL_VAL_001", "WORLD_SOLMERA", "CUT_SOL_ARRIVAL_001")
+	eq(game.area.area_id, "AREA_SOL_OASIS", "in the oasis")
+	eq(game.companions.size(), 3, "party travels along")
+	await _exit_to("AREA_SOL_BAZAAR")
+	await _talk("NPC_JABIR_001")
+	eq(Conditions.quest_step(S), 0, "Solmera side quest started")
+	game.shop_menu.close_menu()
+	await _exit_to("AREA_SOL_OASIS")
+	await _talk("NPC_NURI_001")
+	eq(Conditions.quest_step(M), 1, "find the sunken city")
+	await _exit_to("AREA_SOL_DUNES")
+	for id in ["SPAWN_SOL_DUNES_SKORPION_1", "SPAWN_SOL_DUNES_SKORPION_2", "SPAWN_SOL_DUNES_GEIST_1", "SPAWN_SOL_DUNES_GEIST_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_SOL_001"].interact(game.player)
+	await _use_savepoint("SAVEPOINT_SOL_DUNES_001", 2)
+	await _boss_intro("TRIGGER_SOL_RUINS", "CUT_SOL_RUINS_001")
+	await _exit_to("AREA_SOL_SUNKEN")
+	eq(Conditions.quest_step(M), 2, "mirrors next")
+	for id in ["SPAWN_SOL_CITY_SKORPION_1", "SPAWN_SOL_CITY_SKORPION_2", "SPAWN_SOL_CITY_GEIST_1", "SPAWN_SOL_CITY_GEIST_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_SOL_002"].interact(game.player)
+	var node: PuzzleNode = game.area.entities["PUZ_SOL_MIRRORS_001"]
+	for i in 4:
+		for t in [1, 3, 0, 2][i]:
+			node.parts[i].interact(game.player)
+	node.parts[4].interact(game.player)
+	eq(Conditions.quest_step(M), 3, "Sandwächter next")
+	await _exit_to("AREA_SOL_SUN_HALL")
+	await _defeat_spawn("SPAWN_SOL_HALL_WAECHTER")
+	eq(Conditions.quest_step(M), 4, "Kharos next")
+	await _exit_to("AREA_SOL_ARENA")
+	await _boss_intro("TRIGGER_SOL_KHAROS_INTRO", "CUT_SOL_KHAROS_001")
+	await _defeat_spawn("SPAWN_SOL_ARENA_KHAROS")
+	eq(Dialogue.active_id, "CUT_SOL_KHAROS_DEFEAT_001", "defeat scene")
+	await finish_dialogues()
+	await frames(2)
+	await physics_frames(3)
+	eq(game.area.area_id, "AREA_SOL_OASIS", "back in the oasis")
+	await _talk("NPC_NURI_001")
+	eq(Conditions.quest_state(M), "COMPLETED", "chapter 4 completed")
+	await _exit_to("AREA_SOL_BAZAAR")
+	await _talk("NPC_JABIR_001")
+	eq(Conditions.quest_state(S), "COMPLETED", "Solmera side quest completed")
+
+
 ## Saved state minus play_time, which keeps counting once the game runs.
 func _state_without_clock() -> String:
 	var d := GameState.to_dict()
@@ -240,7 +289,8 @@ func test_full_playthrough() -> void:
 	await _chapter_one()
 	await _chapter_two()
 	await _chapter_three()
-	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001"]:
+	await _chapter_four()
+	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001"]:
 		eq(Conditions.quest_state(q), "COMPLETED", q)
 	eq(GameState.party.size(), 3, "full party at the end")
 	# Save -> fresh state -> load through the title
@@ -253,7 +303,7 @@ func test_full_playthrough() -> void:
 	await frames(3)
 	game = tree.current_scene
 	await physics_frames(2)
-	eq(game.area.area_id, "AREA_VAL_GUILD", "loaded where the game was saved")
+	eq(game.area.area_id, "AREA_SOL_BAZAAR", "loaded where the game was saved")
 	eq(game.companions.size(), 3, "party restored")
 	eq(_state_without_clock(), expected, "state survives save/load")
 	SaveSystem.save_dir = "user://saves/"

@@ -654,3 +654,10 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Desert enemies and Kharos have colours and size entries (`enemy.gd`) and creature models (`creature_visual.gd`).
 - 8 new tests (`test_s04_kharos`).
 - Regression: 224/224 tests plus restart checks (golden paths of chapters 1–3): PASS, run with Godot 4.7.2.
+
+## S05 Chapter-4 regression – PASSED
+- `test_s06_golden_solmera`: starts from a schema-v2 save at the end of chapter 3, loads it through the title, travels from the Valdoria Weltenstein to Solmera and plays chapter 4 with real interactions (Nuri, Jabir, dunes, ruins scene, mirror puzzle, Sandwächter, Kharos, both quests). It writes a final save.
+- `restart_check.gd` also verifies that save in a new process (`golden_expected_sol.json`), next to the chapter 1–3 saves.
+- `test_x01_full_playthrough` now continues into chapter 4 from the state chapter 3 really produced (new game to Kharos, all 8 quests completed, save/load through the title at the oasis bazaar).
+- Regression: 225/225 tests plus restart checks for chapters 1–4: PASS (Godot 4.7.2).
+- Phase 4 (Solmera) is complete.
