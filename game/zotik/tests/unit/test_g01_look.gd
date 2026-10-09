@@ -25,6 +25,31 @@ func test_prop_kinds_and_indoor() -> void:
 	check(Look.is_indoor("AREA_VAL_MARKET", {"indoor": true}), "layout override")
 
 
+## W01: the browser and Android builds must stay light (owner: the web version
+## hangs). The cheaper settings live in project.godot as feature overrides.
+func test_web_and_mobile_stay_light() -> void:
+	var text := FileAccess.get_file_as_string("res://project.godot")
+	for key in ["msaa_3d.web=0", "msaa_3d.mobile=0", "directional_shadow/size.web=2048", "directional_shadow/size.mobile=2048"]:
+		check(text.contains(key), "project.godot keeps " + key)
+	var exports := FileAccess.get_file_as_string("res://export_presets.cfg")
+	check(exports.contains("assets/characters/kaykit/*.glb"), "the big KayKit models stay out of the exports")
+	# own icon and loading image instead of the default Godot ones
+	var icon := str(ProjectSettings.get_setting("application/config/icon", ""))
+	check(icon.contains("assets/icons/icon.png") and ResourceLoader.exists(icon), "project icon is Zotik")
+	var splash := str(ProjectSettings.get_setting("application/boot_splash/image", ""))
+	check(splash.contains("title_bg") and ResourceLoader.exists(splash), "loading image is the title art")
+	# own loading page for the web build (instead of Godot's grey one)
+	check(exports.contains('html/custom_html_shell="res://web/zotik_shell.html"'), "web export uses the Zotik loading page")
+	var shell := FileAccess.get_file_as_string("res://web/zotik_shell.html")
+	for ph in ["$GODOT_URL", "$GODOT_CONFIG", "$GODOT_SPLASH", "$GODOT_PROJECT_NAME", "$GODOT_THREADS_ENABLED", "$GODOT_HEAD_INCLUDE"]:
+		check(shell.contains(ph), "loading page keeps the Godot placeholder " + ph)
+	check(shell.contains("Die Welten werden geladen"), "German loading text")
+	for f in ["icon.ico", "android_main_192.png", "android_foreground_432.png", "android_background_432.png"]:
+		check(FileAccess.file_exists("res://assets/icons/" + f), "icon file " + f)
+	for key in CharacterRig.HUMAN_WEAPONS:
+		check(ResourceLoader.exists(CharacterRig.WEAPON_DIR % CharacterRig.HUMAN_WEAPONS[key][0]), "baked weapon mesh for " + key)
+
+
 func test_wall_segments_leave_exit_gaps() -> void:
 	eq(Look.wall_segments(-10.0, 10.0, [], 6.0), [[-10.0, 10.0]], "no exits: one wall")
 	eq(Look.wall_segments(-10.0, 10.0, [0.0], 6.0), [[-10.0, -3.0], [3.0, 10.0]], "gap in the middle")

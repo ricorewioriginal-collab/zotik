@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<meta name="theme-color" content="#05080f">
+		<title>$GODOT_PROJECT_NAME</title>
+		<style>
+html, body, #canvas {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	color: #f0f3ff;
+	background-color: #05080f;
+	overflow: hidden;
+	touch-action: none;
+}
+
+#canvas {
+	display: block;
+}
+
+#canvas:focus {
+	outline: none;
+}
+
+/* Loading screen: the title art, a dark fade and a gold progress bar. */
+#status {
+	position: absolute;
+	inset: 0;
+	background-color: #05080f;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+	font-family: 'Cinzel', 'Trajan Pro', Georgia, 'Times New Roman', serif;
+	transition: opacity 0.6s ease;
+}
+
+#status.fade-out {
+	opacity: 0;
+	pointer-events: none;
+}
+
+#status-splash {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: 50% 30%;
+}
+
+#status-fade {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to bottom, rgba(5, 8, 15, 0) 45%, rgba(5, 8, 15, 0.92) 100%);
+}
+
+#status-panel {
+	position: relative;
+	box-sizing: border-box;
+	width: min(560px, 86%);
+	margin-bottom: max(6vh, 28px);
+	text-align: center;
+}
+
+#status-title {
+	margin: 0 0 12px;
+	font-size: clamp(14px, 2.4vw, 20px);
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: #dcb561;
+	text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+}
+
+#status-bar {
+	height: 14px;
+	border: 2px solid #8c6b33;
+	border-radius: 9px;
+	background: rgba(5, 8, 15, 0.82);
+	overflow: hidden;
+	box-shadow: 0 0 18px rgba(0, 0, 0, 0.7);
+}
+
+#status-bar-fill {
+	height: 100%;
+	width: 0%;
+	border-radius: 7px;
+	background: linear-gradient(to bottom, #f1d58a, #c29a45);
+	transition: width 0.25s ease;
+}
+
+#status-bar.waiting #status-bar-fill {
+	width: 35%;
+	animation: slide 1.4s ease-in-out infinite;
+}
+
+@keyframes slide {
+	0% { margin-left: 0; }
+	50% { margin-left: 65%; }
+	100% { margin-left: 0; }
+}
+
+#status-text {
+	margin-top: 10px;
+	font-size: clamp(12px, 2vw, 15px);
+	letter-spacing: 0.06em;
+	color: #b9c3dd;
+	text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+}
+
+#status-hint {
+	margin-top: 4px;
+	font-size: 12px;
+	color: #7f8aa8;
+}
+
+#status-notice {
+	display: none;
+	margin-top: 14px;
+	padding: 14px 16px;
+	border: 1px solid #9b3943;
+	border-radius: 10px;
+	background: rgba(60, 20, 28, 0.92);
+	color: #f0e4e6;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.4;
+}
+		</style>
+		$GODOT_HEAD_INCLUDE
+	</head>
+	<body>
+		<canvas id="canvas">
+			Dein Browser unterstützt das Canvas-Element nicht.
+		</canvas>
+
+		<noscript>
+			Bitte aktiviere JavaScript, um ZOTIK zu spielen.
+		</noscript>
+
+		<div id="status">
+			<img id="status-splash" class="$GODOT_SPLASH_CLASSES" src="$GODOT_SPLASH" alt="">
+			<div id="status-fade"></div>
+			<div id="status-panel">
+				<div id="status-title">Die Splitter der Welten</div>
+				<div id="status-bar" class="waiting"><div id="status-bar-fill"></div></div>
+				<div id="status-text">Die Welten werden geladen …</div>
+				<div id="status-hint">Beim Start werden die Spieldaten geladen. Das kann beim ersten Mal etwas dauern.</div>
+				<div id="status-notice"></div>
+			</div>
+		</div>
+
+		<script src="$GODOT_URL"></script>
+		<script>
+const GODOT_CONFIG = $GODOT_CONFIG;
+const GODOT_THREADS_ENABLED = $GODOT_THREADS_ENABLED;
+const engine = new Engine(GODOT_CONFIG);
+
+(function () {
+	const statusOverlay = document.getElementById('status');
+	const statusBar = document.getElementById('status-bar');
+	const statusFill = document.getElementById('status-bar-fill');
+	const statusText = document.getElementById('status-text');
+	const statusHint = document.getElementById('status-hint');
+	const statusNotice = document.getElementById('status-notice');
+
+	let initializing = true;
+
+	function showNotice(lines) {
+		statusBar.style.display = 'none';
+		statusText.textContent = 'ZOTIK konnte nicht gestartet werden.';
+		statusHint.style.display = 'none';
+		while (statusNotice.lastChild) {
+			statusNotice.removeChild(statusNotice.lastChild);
+		}
+		lines.forEach((line) => {
+			statusNotice.appendChild(document.createTextNode(line));
+			statusNotice.appendChild(document.createElement('br'));
+		});
+		statusNotice.style.display = 'block';
+		initializing = false;
+	}
+
+	function displayFailureNotice(err) {
+		console.error(err);
+		if (err instanceof Error) {
+			showNotice([err.message]);
+		} else if (typeof err === 'string') {
+			showNotice(err.split('\n'));
+		} else {
+			showNotice(['Es ist ein unbekannter Fehler aufgetreten.']);
+		}
+	}
+
+	function onProgress(current, total) {
+		if (!initializing) {
+			return;
+		}
+		if (current > 0 && total > 0) {
+			const share = Math.min(1, current / total);
+			statusBar.classList.remove('waiting');
+			statusFill.style.width = (share * 100).toFixed(1) + '%';
+			if (share < 1) {
+				statusText.textContent = 'Die Welten werden geladen … ' + Math.floor(share * 100) + ' % (' + (current / 1e6).toFixed(0) + ' von ' + (total / 1e6).toFixed(0) + ' MB)';
+			} else {
+				statusText.textContent = 'Zotik macht sich bereit …';
+			}
+		} else {
+			statusBar.classList.add('waiting');
+		}
+	}
+
+	function hideOverlay() {
+		initializing = false;
+		statusOverlay.classList.add('fade-out');
+		setTimeout(() => statusOverlay.remove(), 700);
+	}
+
+	const missing = Engine.getMissingFeatures({
+		threads: GODOT_THREADS_ENABLED,
+	});
+
+	if (missing.length !== 0) {
+		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
+			let serviceWorkerRegistrationPromise;
+			try {
+				serviceWorkerRegistrationPromise = navigator.serviceWorker.getRegistration();
+			} catch (err) {
+				serviceWorkerRegistrationPromise = Promise.reject(new Error('Service worker registration failed.'));
+			}
+			Promise.race([
+				serviceWorkerRegistrationPromise.then((registration) => {
+					if (registration != null) {
+						return Promise.reject(new Error('Service worker already exists.'));
+					}
+					return registration;
+				}).then(() => engine.installServiceWorker()),
+				new Promise((resolve) => {
+					setTimeout(() => resolve(), 2000);
+				}),
+			]).then(() => {
+				window.location.reload();
+			}).catch((err) => {
+				console.error('Error while registering service worker:', err);
+			});
+		} else {
+			showNotice(['Dein Browser unterstützt Funktionen nicht, die ZOTIK braucht (zum Beispiel WebGL 2):'].concat(missing));
+		}
+	} else {
+		engine.startGame({
+			'onProgress': onProgress,
+		}).then(hideOverlay, displayFailureNotice);
+	}
+}());
+		</script>
+	</body>
+</html>

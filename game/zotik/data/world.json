@@ -41,6 +41,11 @@
       "area": "AREA_AQU_CAVES",
       "name": "Weltenanker in den Korallenhöhlen",
       "heals": true
+    },
+    "SAVEPOINT_AQU_ARCHIVE_001": {
+      "area": "AREA_AQU_ARCHIVE",
+      "name": "Weltenanker im Weltenarchiv",
+      "heals": true
     }
   },
   "uniques": {

@@ -340,5 +340,24 @@
         "Der Splitter, den wir suchen, muss in der Tiefe liegen. Fragen wir nach den Ingenieuren der Kuppeln."
       ]
     ]
+  },
+  "CUT_AQU_ARCHIVE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die Strömung zieht sich zurück, und im Boden der Höhle öffnet sich eine Treppe aus Perlmutt."
+      ],
+      [
+        "NPC_MIRAEL_001",
+        "Das Weltenarchiv. Ich habe nur die Pläne gesehen, nie die Kammern selbst. Dort unten fließt alles gegeneinander."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_AQU_ARCHIVE_OPEN"
+      }
+    ]
   }
 }

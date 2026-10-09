@@ -134,12 +134,13 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 			env.fog_sky_affect = 0.8
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.tonemap_white = 6.0
-	env.glow_enabled = true
+	# Android and the browser skip the full-screen glow and colour passes
+	env.glow_enabled = not low_end()
 	env.glow_intensity = 0.6
 	env.glow_bloom = 0.08
 	env.glow_hdr_threshold = 0.9
 	env.ssao_enabled = true  # Forward+ only; ignored by the web renderer
-	env.adjustment_enabled = true
+	env.adjustment_enabled = not low_end()
 	env.adjustment_saturation = 1.15
 	env.adjustment_contrast = 1.05
 	var we := WorldEnvironment.new()
@@ -154,6 +155,9 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 	sun.shadow_enabled = true
 	sun.shadow_blur = 1.5
 	sun.directional_shadow_max_distance = 35.0 if low_end() else 60.0
+	if low_end():
+		# one shadow split instead of four: the scene is drawn once into the shadow map
+		sun.directional_shadow_mode = DirectionalLight3D.SHADOW_ORTHOGONAL
 	parent.add_child(sun)
 
 

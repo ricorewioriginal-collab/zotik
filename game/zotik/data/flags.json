@@ -130,5 +130,14 @@
   },
   "FLAG_AQU_ARCHIVE_OPEN": {
     "desc": "Eingang zum Weltenarchiv offen (Kapitel 5, Q03)"
+  },
+  "FLAG_AQU_ARCHIVE_SEEN": {
+    "desc": "Abstieg zum Weltenarchiv gesehen"
+  },
+  "FLAG_AQU_CURRENT_DONE": {
+    "desc": "Strömungen im Weltenarchiv beruhigt"
+  },
+  "FLAG_AQU_WAECHTER_DEFEATED": {
+    "desc": "Archivwächter des Gewölbes besiegt"
   }
 }

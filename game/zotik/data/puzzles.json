@@ -184,5 +184,67 @@
       "Das Relief an der Wand zeigt die Sonne im Osten, dann im Westen, dann wieder im Norden und zuletzt im Süden – der Reihe nach.",
       "Erster Spiegel einmal drehen (Ost), zweiter dreimal (West), dritter gar nicht (Nord), vierter zweimal (Süd). Dann das Licht bündeln."
     ]
+  },
+  "PUZ_AQU_CURRENTS_001": {
+    "name": "Strömungsventile",
+    "area": "AREA_AQU_ARCHIVE",
+    "kind": "valves",
+    "channels": 4,
+    "channel_labels": [
+      "Nord",
+      "Ost",
+      "Süd",
+      "West"
+    ],
+    "valve_map": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        3
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "initial": [
+      1,
+      1,
+      1,
+      1
+    ],
+    "solution": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_AQU_CURRENT_DONE"
+      },
+      {
+        "type": "give_currency",
+        "amount": 90
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_PEARL_001",
+        "count": 3
+      }
+    ],
+    "hints": [
+      "Vier Strömungen wirbeln durch das Archiv. Jedes Ventil kippt zwei benachbarte Strömungen zugleich: ruhige werden wild, wilde werden ruhig.",
+      "Jede Strömung muss am Ende ruhig sein, also genau einmal gekippt werden. Ventil 1 und Ventil 3 berühren zusammen alle vier Kanäle, ohne einen doppelt zu treffen.",
+      "Dreh das erste und das dritte Ventil (von links gezählt) je einmal. Die anderen beiden rührst du nicht an."
+    ]
   }
 }

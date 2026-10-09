@@ -47,13 +47,15 @@ const HUMAN_STATES := {
 	"talk": "Idle_Talking_Loop",
 }
 const HUMAN_LOOPING := ["Idle_Loop", "Walk_Loop", "Jog_Fwd_Loop", "Sprint_Loop", "Sword_Idle", "Idle_Talking_Loop", "Dance_Loop"]
-## weapon meshes borrowed from the KayKit packs: [source model, mesh, offset, rotation°, scale]
+## weapon meshes from the KayKit packs, baked into small files by
+## tools/bake_weapon_meshes.gd: [mesh resource, offset, rotation°, scale]
+const WEAPON_DIR := "res://assets/characters/weapons/%s.res"
 const HUMAN_WEAPONS := {
-	"staff": ["mage", "2H_Staff", Vector3(0.0, 0.02, 0.0), Vector3(180, 0, 0), 0.62],
-	"crossbow": ["rogue", "2H_Crossbow", Vector3(0.0, 0.03, 0.02), Vector3(180, 0, 0), 0.55],
-	"axe": ["barbarian", "1H_Axe", Vector3(0.0, 0.03, 0.0), Vector3(180, 0, 0), 0.6],
-	"shield": ["barbarian", "Barbarian_Round_Shield", Vector3(0.0, 0.0, 0.08), Vector3(0, 90, 0), 0.55],
-	"sword": ["knight", "1H_Sword", Vector3(0.0, 0.03, 0.0), Vector3(180, 0, 0), 0.6],
+	"staff": ["staff", Vector3(0.0, 0.02, 0.0), Vector3(180, 0, 0), 0.62],
+	"crossbow": ["crossbow", Vector3(0.0, 0.03, 0.02), Vector3(180, 0, 0), 0.55],
+	"axe": ["axe", Vector3(0.0, 0.03, 0.0), Vector3(180, 0, 0), 0.6],
+	"shield": ["shield", Vector3(0.0, 0.0, 0.08), Vector3(0, 90, 0), 0.55],
+	"sword": ["sword", Vector3(0.0, 0.03, 0.0), Vector3(180, 0, 0), 0.6],
 }
 static var _human_anims: AnimationLibrary
 
@@ -167,17 +169,13 @@ func _human_weapon(key: String, bone: String) -> void:
 	var w: Array = HUMAN_WEAPONS.get(key, [])
 	if w.is_empty():
 		return
-	var src: Node = (load(MODELS[w[0]]) as PackedScene).instantiate()
-	var found: Array = src.find_children(w[1], "MeshInstance3D", true, false)
-	if not found.is_empty():
-		var mi := MeshInstance3D.new()
-		mi.name = "Weapon_" + key
-		mi.mesh = (found[0] as MeshInstance3D).mesh
-		mi.position = w[2]
-		mi.rotation_degrees = w[3]
-		mi.scale = Vector3.ONE * float(w[4])
-		attach(bone, mi)
-	src.free()
+	var mi := MeshInstance3D.new()
+	mi.name = "Weapon_" + key
+	mi.mesh = load(WEAPON_DIR % w[0]) as Mesh
+	mi.position = w[1]
+	mi.rotation_degrees = w[2]
+	mi.scale = Vector3.ONE * float(w[3])
+	attach(bone, mi)
 
 
 static func create(model_kind: String, height: float) -> CharacterRig:
