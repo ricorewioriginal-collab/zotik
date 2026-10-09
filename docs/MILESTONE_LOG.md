@@ -722,7 +722,8 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - shadow map 2048, light soft-shadow filter, one shadow split instead of four
   - no full-screen glow and no colour-adjustment pass
 - Icon and loading screen:
-  - project icon, Windows `.ico` and Android launcher icons (main and adaptive) are Zotik's face, cut from the approved master sheet
+  - project icon, Windows `.ico` and Android launcher icons (main and adaptive) use the owner's cover image (Zotik logo with the party; source `reference/derived/ZOTIK_COVER_640.jpg`, from the owner's site)
+  - the Android adaptive icon is the cover on a blurred copy of itself, so the logo stays inside the round mask
   - the loading screen uses the title art
   - concept art, not final (CLAUDE.md rule 6)
 - New test `test_web_and_mobile_stay_light` keeps these settings.
