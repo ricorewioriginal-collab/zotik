@@ -678,3 +678,16 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Tests: `test_a01_touch` (18) and `test_p01_playability` (arrow and Z/C bindings, help text).
 - Not tested on a real phone yet, only in headless tests and a rendered screenshot (14).
 - Regression: 232/232 tests plus restart checks for chapters 1–4: PASS (run locally on Windows with Godot 4.7).
+
+## Q00/Q01 Aqualis hub (chapter 5) – PASSED
+- Phase-5 plan `docs/PHASE_5_PLAN.md` (Q00–Q05), assumptions logged as C-35.
+- World Aqualis ("Die Stadt unter dem Meer") unlocks with `FLAG_SOL_CHAPTER_COMPLETE`. The Weltenstein in the Solmera oasis lists it; the dome city has its own stone for the way back.
+- Areas:
+  - Kuppelstadt (hub): pond, plazas, lanterns, coral-rock stand-ins, two lore steles, a closed Korallentor (`FLAG_AQU_CAVES_OPEN`, opens in Q02)
+  - Hafendock: smithy and alchemist
+- NPCs: Mirael (engineer and guide), Oriel (archivist), Doran (smith), Perla (alchemist).
+- New items: Perle, Algenwickel, Dreizack (attack 22), Korallenpanzer (defense 9, +25 HP).
+- Underwater look: teal sky, dense fog (world style key `fog_density`, new and optional), blue buildings.
+- No chapter-5 quest yet; Q04 adds it.
+- 6 new tests (`test_q01_aqualis`), screenshots 20 (dome) and 21 (harbour).
+- Regression: 238/238 tests plus restart checks for chapters 1–4: PASS.

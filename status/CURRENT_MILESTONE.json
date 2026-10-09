@@ -1,7 +1,7 @@
 {
-  "phase": "phase4",
-  "milestone": "S03_SUNKEN_CITY",
+  "phase": "phase5",
+  "milestone": "Q01_AQUALIS_HUB",
   "status": "PASSED",
-  "next_allowed": "S04 chapter-4 quests + Kharos",
+  "next_allowed": "Q02 coral caves",
   "standing_owner_approval": true
 }
