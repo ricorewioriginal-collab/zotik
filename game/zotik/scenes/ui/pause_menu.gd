@@ -17,6 +17,8 @@ func refresh() -> void:
 	add_heading("Einstellungen")
 	add_row("Kamera invertieren: %s" % _on(Settings.get_value("camera_invert")), [["Umschalten", _toggle_invert]])
 	add_row("Casino (Familienoption): %s" % ("erlaubt" if Settings.get_value("casino_enabled") else "deaktiviert"), [["Umschalten", _toggle_casino]])
+	if ColorGrade.available():
+		add_row("Farbstimmung (nur PC, braucht eine Grafikkarte): %s" % _on(Settings.get_value("color_grading")), [["Umschalten", _toggle_grading]])
 	add_row("Touch-Steuerung: %s" % _on(TouchControls.wanted()), [["Umschalten", _toggle_touch]])
 	if TouchControls.wanted():
 		add_row("Touch-Größe: %d %%" % roundi(float(Settings.get_value("touch_scale")) * 100.0), [["Ändern", _cycle_touch_scale]])
@@ -43,6 +45,15 @@ static func _on(v: Variant) -> String:
 func _toggle_invert() -> void:
 	Settings.set_value("camera_invert", not Settings.get_value("camera_invert"))
 	Settings.save_settings()
+	refresh()
+
+
+func _toggle_grading() -> void:
+	Settings.set_value("color_grading", not Settings.get_value("color_grading"))
+	Settings.save_settings()
+	var p := get_tree().get_first_node_in_group("player") as Player
+	if p:
+		ColorGrade.apply(p.camera)
 	refresh()
 
 

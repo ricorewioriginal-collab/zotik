@@ -139,5 +139,14 @@
   },
   "FLAG_AQU_WAECHTER_DEFEATED": {
     "desc": "Archivwächter des Gewölbes besiegt"
+  },
+  "FLAG_AQU_NERYX_MET": {
+    "desc": "Begegnung mit Neryx gesehen"
+  },
+  "FLAG_BOSS_AQU_NERYX_DEFEATED": {
+    "desc": "Neryx, die Strömungsbestie, besiegt"
+  },
+  "FLAG_AQU_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 5 (Aqualis) abgeschlossen"
   }
 }

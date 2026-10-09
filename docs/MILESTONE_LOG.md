@@ -742,3 +742,16 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Name tags (`NameTag`): smaller, UI font, soft dark outline, colour by role (gold people, blue companions, red enemies), only visible within ~13–16 m. Enemy tag is two lines (name / HP).
 - Enter (and keypad Enter) now also use/talk next to E; the prompt reads "[Enter]". Touch: tapping a person already walks up and talks.
 - "Spielanleitung" (`GuideMenu`): opened from the help panel (gear); story, movement, talking, combat, quests, puzzles, saving, inventory, party, tips when stuck.
+
+## C02 – Colour grading (PC, optional) and boot splash fix
+- Live check of the Pages site after #16/#17: new loading page shows (progress text, hand-over to the title screen), pck 32.9 MB (was 36.6 MB).
+- Boot splash bug: Godot only accepts PNG for `boot_splash/image`; the JPG was ignored and the default Godot splash showed on desktop/Android. Now `assets/ui/boot_splash.png` (the web page is unaffected).
+- Rytelier "Color Grading" (MIT): runtime part in `compositor/` (no editor plugin), `core/color_grade.gd`. Works only with RenderingDevice (Forward+/Mobile), so PC only; setting `color_grading`, default OFF, switch in the help panel (shown only where available). Could not be run here (no GPU, headless/Compatibility) – the owner's local session must try it on a PC: switch on, check the look, switch off.
+- Vertex Studio: not integrated (editor tool, licence; owner may install locally).
+
+## Q04 + Q05 – Chapter-5 quests, Neryx, regression – PASSED
+- Main quest `QUEST_MAIN_AQU_001` "Die Stadt unter dem Meer": Mirael → Weltenarchiv → current puzzle → Archivwächter → Neryx → report to Mirael (reward 450 Lun, `FLAG_AQU_CHAPTER_COMPLETE`). Started by the arrival scene; Mirael also starts it for older saves.
+- Side quest `QUEST_SIDE_AQU_001` "Perlen für Perla": 5 pearls to Perla (220 Lun + Elixier).
+- New area `AREA_AQU_ABYSS` behind the vault (gated by `FLAG_AQU_WAECHTER_DEFEATED`), boss `BOSS_NERYX_001`: 860 HP, three phases (Strömung → Strudel with 2 Leuchtquallen → Tiefendruck with a Riffkrabbe); the whirlpool/pressure hazards reuse the existing circle and surge kinds (ground circle, travelling surge), intro and defeat scenes, persistent defeat, bestiary entry. Placeholder look (golem model, concept art not final).
+- Tests: `test_q04_neryx` (8), `test_q05_golden_aqualis` (golden path from a chapter-4 save plus restart check `golden_expected_aqu.json`), `test_x01_full_playthrough` now plays chapters 1–5 and saves/loads at the end.
+- Screenshot 24 (Neryx arena).

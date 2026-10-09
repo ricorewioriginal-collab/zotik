@@ -37,7 +37,7 @@ func test_web_and_mobile_stay_light() -> void:
 	var icon := str(ProjectSettings.get_setting("application/config/icon", ""))
 	check(icon.contains("assets/icons/icon.png") and ResourceLoader.exists(icon), "project icon is Zotik")
 	var splash := str(ProjectSettings.get_setting("application/boot_splash/image", ""))
-	check(splash.contains("title_bg") and ResourceLoader.exists(splash), "loading image is the title art")
+	check(splash.contains("boot_splash") and ResourceLoader.exists(splash), "loading image is the title art")
 	# own loading page for the web build (instead of Godot's grey one)
 	check(exports.contains('html/custom_html_shell="res://web/zotik_shell.html"'), "web export uses the Zotik loading page")
 	var shell := FileAccess.get_file_as_string("res://web/zotik_shell.html")
@@ -48,6 +48,16 @@ func test_web_and_mobile_stay_light() -> void:
 		check(FileAccess.file_exists("res://assets/icons/" + f), "icon file " + f)
 	for key in CharacterRig.HUMAN_WEAPONS:
 		check(ResourceLoader.exists(CharacterRig.WEAPON_DIR % CharacterRig.HUMAN_WEAPONS[key][0]), "baked weapon mesh for " + key)
+
+
+## Colour grading is PC-only, off by default and never active where it cannot run.
+func test_color_grading_is_optional_and_pc_only() -> void:
+	check(not bool(Settings.DEFAULTS["color_grading"]), "off by default")
+	check(not ColorGrade.wanted(), "not active by default")
+	check(game.player.camera.compositor == null, "camera has no effect by default")
+	check(FileAccess.file_exists("res://compositor/LICENSE.txt"), "licence shipped")
+	if not ColorGrade.available():
+		check(not ColorGrade.wanted(), "unavailable without a RenderingDevice (web, Android, headless)")
 
 
 func test_wall_segments_leave_exit_gaps() -> void:

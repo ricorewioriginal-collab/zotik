@@ -625,11 +625,40 @@
       {
         "when": [
           {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_AQU_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_MIRAEL_LEAD_001"
+      },
+      {
+        "when": [
+          {
             "type": "not_flag",
             "id": "FLAG_AQU_CAVES_OPEN"
           }
         ],
         "dialogue": "DLG_MIRAEL_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_AQU_001",
+            "step": 5
+          }
+        ],
+        "dialogue": "DLG_MIRAEL_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_AQU_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_MIRAEL_AFTER_001"
       },
       {
         "when": [],
@@ -661,6 +690,26 @@
     "name": "Perla",
     "area": "AREA_AQU_HARBOUR",
     "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_AQU_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_PERLA_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_AQU_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_PERLA_THANKS_001"
+      },
       {
         "when": [],
         "dialogue": "DLG_PERLA_SHOP_001"

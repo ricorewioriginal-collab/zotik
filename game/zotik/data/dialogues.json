@@ -794,7 +794,61 @@
       {
         "type": "set_flag",
         "id": "FLAG_AQU_CAVES_OPEN"
+      },
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_AQU_001"
       }
+    ]
+  },
+  "DLG_MIRAEL_REPORT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Die Strömung ruht, und die Schleusen halten ohne mein Zutun. Aqualis atmet wieder – dank euch."
+      ],
+      [
+        "NPC_MIRAEL_001",
+        "Der Splitter, den ihr tragt … Er ruft nach der nächsten Welt. Reist weiter, Zotik."
+      ]
+    ]
+  },
+  "DLG_MIRAEL_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Die Kuppeln leuchten, die Wege sind frei. Wenn ihr zurückkehrt, wartet hier immer ein Platz am Korallentor."
+      ]
+    ]
+  },
+  "DLG_PERLA_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PERLA_001",
+        "Fünf Perlen, glatt und echt – dann braue ich den besten Trank der Tiefsee. Suchst du sie für mich in den Höhlen und im Archiv? Ich zahle gut!"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_AQU_001"
+      },
+      {
+        "type": "open_shop",
+        "id": "SHOP_AQU_ALCHEMIST_001"
+      }
+    ]
+  },
+  "DLG_PERLA_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PERLA_001",
+        "Fünf Perlen, ohne Kratzer! Mein Elixier wird das Beste unter der Kuppel. Hier, deine Belohnung."
+      ]
     ]
   }
 }

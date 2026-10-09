@@ -555,5 +555,105 @@
         "count": 1
       }
     ]
+  },
+  "QUEST_MAIN_AQU_001": {
+    "name": "Die Stadt unter dem Meer",
+    "type": "main",
+    "completion_notice": "Kapitel 5 „Aqualis – Die Stadt unter dem Meer“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Sprich mit Mirael am Korallentor.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_MIRAEL_001"
+        }
+      },
+      {
+        "objective": "Finde das Weltenarchiv hinter den Korallenhöhlen.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_AQU_ARCHIVE"
+        }
+      },
+      {
+        "objective": "Bring die Strömungen im Archiv in Ordnung.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_AQU_CURRENTS_001"
+        }
+      },
+      {
+        "objective": "Besiege den Archivwächter im Gewölbe.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_ARCHIVWAECHTER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich Neryx im Abgrund.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_NERYX_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Mirael an der Kuppel.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_MIRAEL_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 450
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_AQU_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_AQU_001": {
+    "name": "Perlen für Perla",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 5 Perlen (Höhlen, Archiv).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_PEARL_001",
+          "count": 5
+        }
+      },
+      {
+        "objective": "Bring die Perlen zu Perla im Hafen.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_PERLA_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_PEARL_001",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 220
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ]
   }
 }

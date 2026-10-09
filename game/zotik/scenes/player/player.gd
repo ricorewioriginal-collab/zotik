@@ -72,6 +72,7 @@ func _ready() -> void:
 	camera = Camera3D.new()
 	camera.current = true
 	spring_arm.add_child(camera)
+	ColorGrade.apply(camera)
 	camera_pivot.global_position = global_position + Vector3(0, 1.0, 0)
 	GameState.player["max_hp"] = Stats.max_hp()
 	GameState.player["hp"] = clampi(int(GameState.player.get("hp", Stats.max_hp())), 1, Stats.max_hp())

@@ -6147,6 +6147,11 @@
         0,
         0,
         16
+      ],
+      "AREA_AQU_ABYSS": [
+        0,
+        0,
+        -14
       ]
     },
     "exits": [
@@ -6156,6 +6161,14 @@
           0,
           0,
           18
+        ]
+      },
+      {
+        "to": "AREA_AQU_ABYSS",
+        "pos": [
+          0,
+          0,
+          -18
         ]
       }
     ],
@@ -6248,6 +6261,138 @@
           12
         ],
         "scale": 1.6
+      }
+    ]
+  },
+  "AREA_AQU_ABYSS": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#2a6a80",
+    "ambient": "#9ad8ec",
+    "floor_tex": "rock",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_AQU_VAULT": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_AQU_VAULT",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "abyss_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#3a8aa0"
+      },
+      {
+        "name": "abyss_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#3a8aa0"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_AQU_NERYX_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_AQU_NERYX_001",
+        "once_flag": "FLAG_AQU_NERYX_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_AQU_ABYSS_NERYX",
+        "enemy": "BOSS_NERYX_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
+      }
+    ],
+    "decor": [
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.0
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.0
       }
     ]
   }

@@ -27,6 +27,7 @@ const ARCHETYPES := {
 	"ENEMY_RIFFKRABBE_001": ["crab", "#ff8a7a"],
 	"ENEMY_LEUCHTQUALLE_001": ["slime", "#9af0ff"],
 	"ENEMY_ARCHIVWAECHTER_001": ["golem", "#5ac8c0"],
+	"BOSS_NERYX_001": ["queen", "#58e0f0"],
 }
 
 var archetype := "imp"
