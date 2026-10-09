@@ -77,11 +77,21 @@ func test_controls_bound_and_help_toggles() -> void:
 	for pair in [["move_forward", "W"], ["move_back", "S"], ["move_left", "A"], ["move_right", "D"]]:
 		check(InputMap.action_get_events(pair[0]).any(func(e): return e is InputEventKey and e.physical_keycode == OS.find_keycode_from_string(pair[1])), pair[0] + " still on " + pair[1])
 	check(InputMap.action_get_events("help")[0].as_text().contains("F1"), "help on F1")
-	check(game.hud.HELP_TEXT.contains("Pfeiltasten"), "help text mentions the arrow keys")
-	var shown: bool = game.hud.help_label.visible
-	game.hud.toggle_help()
-	eq(game.hud.help_label.visible, not shown, "help toggled")
-	game.hud.toggle_help()
+	check(PauseMenu.KEYBOARD_HELP.contains("Pfeiltasten"), "help text mentions the arrow keys")
+	check(not game.pause_menu.visible, "help closed at start")
+	game.pause_menu.open()
+	check(game.pause_menu.title_label.text.contains("Hilfe"), "help and settings panel")
+	game.pause_menu._open_guide()
+	var guide: GuideMenu = game.ui.get_node("GuideMenu")
+	check(guide.visible and not game.pause_menu.visible and game.is_menu_open(), "guide opens from the help panel")
+	check(guide.list.get_child_count() > 20, "guide has content")
+	guide.close_menu()
+	check(game.pause_menu.visible, "help panel is back after the guide")
+	game.pause_menu.close_menu()
+	var enter := InputMap.action_get_events("interact").any(func(e): return e is InputEventKey and e.physical_keycode == KEY_ENTER)
+	check(enter, "Enter talks/uses")
+	for n in tree.get_nodes_in_group("enemy"):
+		check(not (n as Enemy).label.text.contains("  "), "tidy enemy tag")
 
 
 func test_feedback_sfx_and_hit() -> void:

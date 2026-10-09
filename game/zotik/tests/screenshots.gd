@@ -39,6 +39,12 @@ func _run() -> void:
 	game.player.camera_pivot.rotation.y = PI
 	game.update_beacon()
 	await _shot("04b_village_beacon_on_mira")
+	game.pause_menu.open()
+	await _shot("04c_help_and_settings")
+	game.pause_menu._open_guide()
+	await _shot("04d_guide")
+	game.ui.get_node("GuideMenu").close_menu()
+	game.pause_menu.close_menu()
 	gs.set_flag("FLAG_LUN_BRIDGE_ACTIVE")
 	game.enter_area("AREA_LUN_RIFT_CAVE", "default")
 	game.player.camera_pivot.rotation.y = 0.0

@@ -51,11 +51,11 @@ func test_buttons_emit_actions() -> void:
 	touch._on_release(0)
 	await frames(1)
 	check(not Input.is_action_pressed("attack"), "attack released")
-	var menu_btn: Control = game.hud.icon_bar.get_node("Icon_menu")
-	check(game.hud.is_ui_at(menu_btn.get_global_rect().get_center()), "menu lives in the HUD icon bar")
+	var menu_btn: Control = game.hud.gear
+	check(game.hud.is_ui_at(menu_btn.get_global_rect().get_center()), "the gear tile counts as HUD")
 	touch._on_press(5, menu_btn.get_global_rect().get_center())
 	check(touch._camera_index == -1 and touch._stick_index == -1, "tap on the icon bar is not a stick or camera touch")
-	check(not game.hud.help_label.visible, "keyboard help hidden in touch mode")
+	check(game.hud.gear.visible and not game.hud.has_node("HelpLabel"), "gear tile instead of keyboard hints")
 
 
 func test_taps_do_not_attack_in_touch_mode() -> void:

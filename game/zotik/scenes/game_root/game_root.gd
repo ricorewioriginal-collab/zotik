@@ -58,6 +58,10 @@ func _ready() -> void:
 	pause_menu = PauseMenu.new()
 	ui.add_child(pause_menu)
 	pause_menu.closed.connect(_update_control)
+	var guide := GuideMenu.new()
+	guide.name = "GuideMenu"
+	ui.add_child(guide)
+	guide.closed.connect(_update_control)
 	world_map = WorldMap.new()
 	ui.add_child(world_map)
 	world_map.closed.connect(_update_control)
@@ -123,7 +127,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or ui.get_node("GuideMenu").visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible
 
 
 func _update_control() -> void:
@@ -246,8 +250,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			bestiary_menu.close_menu()
 		else:
 			open_menu(bestiary_menu)
-	elif event.is_action_pressed("help"):
-		hud.toggle_help()
+	elif event.is_action_pressed("help") and not is_menu_open() and not Dialogue.is_active():
+		get_viewport().set_input_as_handled()
+		pause_menu.open()
+		_update_control()
 	elif event is InputEventMouseButton and event.pressed and player.control_enabled and DisplayServer.get_name() != "headless":
 		_update_mouse()
 	elif event.is_action_pressed("menu") and not is_menu_open() and not Dialogue.is_active():

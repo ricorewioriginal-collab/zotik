@@ -730,3 +730,15 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - New test `test_web_and_mobile_stay_light` keeps these settings.
 - To verify: after the merge, open https://ricorewioriginal-collab.github.io/zotik/ again (the Pages job runs on `main` only).
 - Regression: 248/248 tests plus restart checks for chapters 1–4: PASS.
+
+## U03 – Help tile and menu rows (owner request)
+- Owner: the keyboard hints at the top left are annoying; a simple gear tile with settings would be easier, and the menu entries looked bad.
+- The permanent hint text is gone. A small gear tile sits top left under the party frames (also in touch mode, where the icon bar moves right of it). It opens the former pause menu, now "Hilfe & Einstellungen": controls overview (keyboard or touch, depending on the mode), settings, title/quit. Esc and F1 open the same panel; the bottom bar keeps Inventar / Quests / Bestiarium.
+- Menu rows (all `MenuPanel` menus): dark rounded plates with the text left and gold-rimmed rounded buttons right; headings and notes for grouping; a gold "Schließen" button.
+- Tests adapted (p01, a01, u01); the `show_controls` setting is no longer used by the HUD.
+- Screenshot `04c_help_and_settings` added to `tests/screenshots.gd`.
+
+## U03 (cont.) – names, Enter, in-game guide
+- Name tags (`NameTag`): smaller, UI font, soft dark outline, colour by role (gold people, blue companions, red enemies), only visible within ~13–16 m. Enemy tag is two lines (name / HP).
+- Enter (and keypad Enter) now also use/talk next to E; the prompt reads "[Enter]". Touch: tapping a person already walks up and talks.
+- "Spielanleitung" (`GuideMenu`): opened from the help panel (gear); story, movement, talking, combat, quests, puzzles, saving, inventory, party, tips when stuck.

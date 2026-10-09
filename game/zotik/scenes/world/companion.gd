@@ -62,12 +62,8 @@ static func create(id: String, p: Player) -> Companion:
 		c.rig.play("death")
 	var label := Label3D.new()
 	label.text = str(c.data.get("name", id))
-	label.font_size = 48
-	label.outline_size = 12
-	label.fixed_size = true
-	label.pixel_size = 0.0009
+	NameTag.style(label, NameTag.ALLY)
 	label.position.y = 2.1
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	c.add_child(label)
 	return c
 

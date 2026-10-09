@@ -5,12 +5,11 @@ extends Control
 ## centre), interaction prompt and menu icon bar (bottom centre), short
 ## notifications and the optional keyboard help.
 
-const HELP_TEXT := "WASD oder Pfeiltasten bewegen · Maus oder Z/C Kamera · Leertaste springen\nLinksklick/J angreifen · K stark (Break) · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog · B Bestiarium\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
 ## [action, label, icon kind, key hint]
 ## painted portraits cut from the owner's party poster (concept art, interim)
 const PORTRAITS := {"zotik": "res://assets/ui/portraits/zotik.png", "PARTY_LYRA_001": "res://assets/ui/portraits/lyra.png", "PARTY_NIA_001": "res://assets/ui/portraits/nia.png", "PARTY_ROVAN_001": "res://assets/ui/portraits/rovan.png"}
 const ROLES := {"PARTY_LYRA_001": "Lichtmagierin", "PARTY_NIA_001": "Bogenjägerin", "PARTY_ROVAN_001": "Wächter"}
-const MENU_ICONS := [["inventory", "Inventar", "bag", "I"], ["quest_log", "Quests", "scroll", "L"], ["bestiary", "Bestiarium", "book", "B"], ["menu", "Menü", "gear", "Esc"]]
+const MENU_ICONS := [["inventory", "Inventar", "bag", "I"], ["quest_log", "Quests", "scroll", "L"], ["bestiary", "Bestiarium", "book", "B"]]
 
 var game: Node
 var hp_bar: ProgressBar
@@ -25,8 +24,8 @@ var notify_label: Label
 var boss_label: Label
 var boss_bar: ProgressBar
 var boss_box: Control
-var help_label: Label
-var touch_mode := false  # keyboard help is hidden while touch controls are shown
+var gear: IconButton  # top-left tile: help and settings
+var touch_mode := false  # icon bar moves to the top while touch controls are shown
 var hurt_flash: ColorRect
 var minimap: Minimap
 var icon_bar: HBoxContainer
@@ -49,11 +48,9 @@ func _ready() -> void:
 	notify_label.offset_bottom = 270
 	notify_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	notify_label.add_theme_color_override("font_color", Color(1.0, 0.93, 0.7))
-	help_label = _label(15)
-	help_label.position = Vector2(20, 132)
-	help_label.text = HELP_TEXT
-	help_label.add_theme_color_override("font_color", UiStyle.TEXT_DIM)
-	help_label.visible = Settings.get_value("show_controls")
+	gear = IconButton.create_tile("menu", "gear", "Hilfe & Einstellungen (Esc / F1)")
+	gear.position = Vector2(16, 132)
+	add_child(gear)
 	hurt_flash = ColorRect.new()
 	hurt_flash.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	hurt_flash.color = Color(0.9, 0.1, 0.1, 0.0)
@@ -229,8 +226,8 @@ func _process(delta: float) -> void:
 	_place_icon_bar()
 	prompt_box.visible = prompt_label.text != "" and not busy
 	hurt_flash.color.a = maxf(0.0, hurt_flash.color.a - delta * 1.2)
-	help_label.visible = bool(Settings.get_value("show_controls")) and not busy and not touch_mode
-	help_label.position.y = _below_party()
+	gear.visible = not busy
+	gear.position = Vector2(16, _below_party())
 	if _notify_time > 0.0:
 		_notify_time -= delta
 		if _notify_time <= 0.0:
@@ -242,8 +239,8 @@ func _process(delta: float) -> void:
 func _place_icon_bar() -> void:
 	if touch_mode:
 		icon_bar.set_anchors_preset(Control.PRESET_TOP_LEFT)
-		icon_bar.offset_left = 16
-		icon_bar.offset_right = 416
+		icon_bar.offset_left = 90
+		icon_bar.offset_right = 490
 		icon_bar.offset_top = _below_party()
 		icon_bar.offset_bottom = icon_bar.offset_top + 86
 		icon_bar.alignment = BoxContainer.ALIGNMENT_BEGIN
@@ -262,13 +259,7 @@ func _below_party() -> float:
 
 ## True if a screen position lies on a HUD button (touch controls ignore it).
 func is_ui_at(pos: Vector2) -> bool:
-	return icon_bar.visible and icon_bar.get_global_rect().has_point(pos)
-
-
-func toggle_help() -> void:
-	Settings.set_value("show_controls", not Settings.get_value("show_controls"))
-	Settings.save_settings()
-	help_label.visible = Settings.get_value("show_controls")
+	return (icon_bar.visible and icon_bar.get_global_rect().has_point(pos)) or (gear.visible and gear.get_global_rect().has_point(pos))
 
 
 func flash_hurt() -> void:
@@ -276,7 +267,7 @@ func flash_hurt() -> void:
 
 
 func set_prompt(target: Interactable) -> void:
-	prompt_label.text = ("[E]  " if not touch_mode else "") + target.prompt if target else ""
+	prompt_label.text = ("[Enter]  " if not touch_mode else "") + target.prompt if target else ""
 
 
 func set_objective(text: String) -> void:

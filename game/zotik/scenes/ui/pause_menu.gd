@@ -3,20 +3,41 @@ extends MenuPanel
 ## Pause menu: resume, settings shortcut values, back to title, quit.
 
 
+const KEYBOARD_HELP := "WASD / Pfeiltasten bewegen · Maus oder Z/C Kamera · Leertaste springen\nLinksklick/J angreifen · K stark (Break) · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog · B Bestiarium\nT Rätsel zurücksetzen · H Hinweis · Esc oder F1 Hilfe & Einstellungen"
+const TOUCH_HELP := "Stick unten links: laufen · rechte Bildschirmhälfte wischen: Kamera\nAntippen: dorthin laufen, sprechen oder benutzen, Gegner angreifen\nDoppeltippen: ausweichen · Aktionstasten unten rechts (abschaltbar)\nSymbole oben links: Einstellungen, Inventar, Quests, Bestiarium"
+
+
 func refresh() -> void:
 	super()
-	title_label.text = "Pause"
+	title_label.text = "Hilfe & Einstellungen"
 	info_label.text = "Spielzeit %d:%02d · Speichern ist am Weltenanker möglich." % [int(GameState.play_time) / 3600, (int(GameState.play_time) / 60) % 60]
-	add_row("Weiterspielen", [["OK", close_menu]])
-	add_row("Kamera invertieren: %s" % ("an" if Settings.get_value("camera_invert") else "aus"), [["Umschalten", _toggle_invert]])
+	add_heading("Steuerung")
+	add_note(TOUCH_HELP if TouchControls.wanted() else KEYBOARD_HELP)
+	add_row("Spielanleitung: Ziel, Steuerung, Kampf, Rätsel, Quests", [["Öffnen", _open_guide]])
+	add_heading("Einstellungen")
+	add_row("Kamera invertieren: %s" % _on(Settings.get_value("camera_invert")), [["Umschalten", _toggle_invert]])
 	add_row("Casino (Familienoption): %s" % ("erlaubt" if Settings.get_value("casino_enabled") else "deaktiviert"), [["Umschalten", _toggle_casino]])
-	add_row("Touch-Steuerung: %s" % ("an" if TouchControls.wanted() else "aus"), [["Umschalten", _toggle_touch]])
+	add_row("Touch-Steuerung: %s" % _on(TouchControls.wanted()), [["Umschalten", _toggle_touch]])
 	if TouchControls.wanted():
 		add_row("Touch-Größe: %d %%" % roundi(float(Settings.get_value("touch_scale")) * 100.0), [["Ändern", _cycle_touch_scale]])
 		add_row("Touch-Deckkraft: %d %%" % roundi(float(Settings.get_value("touch_opacity")) * 100.0), [["Ändern", _cycle_touch_opacity]])
-		add_row("Aktionstasten: %s (Tippen und Doppeltippen steuern auch ohne)" % ("an" if Settings.get_value("touch_buttons") else "aus"), [["Umschalten", _toggle_touch_buttons]])
+		add_row("Aktionstasten: %s" % _on(Settings.get_value("touch_buttons")), [["Umschalten", _toggle_touch_buttons]])
+	add_heading("Spiel")
 	add_row("Zum Titelbildschirm (ungespeicherter Fortschritt geht verloren)", [["Titel", _to_title]])
 	add_row("Spiel beenden", [["Beenden", App.quit_game]])
+
+
+func _open_guide() -> void:
+	hide()
+	var g: GuideMenu = get_parent().get_node("GuideMenu")
+	g.closed.connect(func():
+		open()
+		get_parent().get_parent()._update_control(), CONNECT_ONE_SHOT)
+	g.open()
+
+
+static func _on(v: Variant) -> String:
+	return "an" if v else "aus"
 
 
 func _toggle_invert() -> void:
