@@ -5,7 +5,7 @@ extends Control
 ## centre), interaction prompt and menu icon bar (bottom centre), short
 ## notifications and the optional keyboard help.
 
-const HELP_TEXT := "WASD bewegen · Maus/Pfeiltasten Kamera · Leertaste springen\nLinksklick/J angreifen · K stark (Break) · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog · B Bestiarium\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
+const HELP_TEXT := "WASD oder Pfeiltasten bewegen · Maus oder Z/C Kamera · Leertaste springen\nLinksklick/J angreifen · K stark (Break) · F ausweichen · Rechtsklick blocken · Q Zielen\nE sprechen/benutzen · R Heiltrank · I Inventar · L Questlog · B Bestiarium\nT Rätsel zurücksetzen · H Hinweis · Esc Pause · F1 Hilfe ein/aus"
 ## [action, label, icon kind, key hint]
 ## painted portraits cut from the owner's party poster (concept art, interim)
 const PORTRAITS := {"zotik": "res://assets/ui/portraits/zotik.png", "PARTY_LYRA_001": "res://assets/ui/portraits/lyra.png", "PARTY_NIA_001": "res://assets/ui/portraits/nia.png", "PARTY_ROVAN_001": "res://assets/ui/portraits/rovan.png"}

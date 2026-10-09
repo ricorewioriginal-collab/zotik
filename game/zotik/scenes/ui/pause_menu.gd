@@ -14,6 +14,7 @@ func refresh() -> void:
 	if TouchControls.wanted():
 		add_row("Touch-Größe: %d %%" % roundi(float(Settings.get_value("touch_scale")) * 100.0), [["Ändern", _cycle_touch_scale]])
 		add_row("Touch-Deckkraft: %d %%" % roundi(float(Settings.get_value("touch_opacity")) * 100.0), [["Ändern", _cycle_touch_opacity]])
+		add_row("Aktionstasten: %s (Tippen und Doppeltippen steuern auch ohne)" % ("an" if Settings.get_value("touch_buttons") else "aus"), [["Umschalten", _toggle_touch_buttons]])
 	add_row("Zum Titelbildschirm (ungespeicherter Fortschritt geht verloren)", [["Titel", _to_title]])
 	add_row("Spiel beenden", [["Beenden", App.quit_game]])
 
@@ -53,6 +54,12 @@ static func _next_of(options: Array, current: float) -> float:
 		if absf(options[i] - current) < absf(options[best] - current):
 			best = i
 	return options[(best + 1) % options.size()]
+
+
+func _toggle_touch_buttons() -> void:
+	Settings.set_value("touch_buttons", not Settings.get_value("touch_buttons"))
+	Settings.save_settings()
+	refresh()
 
 
 func _toggle_casino() -> void:

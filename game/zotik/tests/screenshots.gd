@@ -127,6 +127,10 @@ func _run() -> void:
 	await _shot("21_aqualis_harbour")
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
+	for _i in 20:
+		if dlg.is_active():
+			dlg.advance()
+	game.player.spring_arm.rotation.x = deg_to_rad(-20.0)
 	game.touch.force = true
 	for c in game.companions.values():
 		c.snap_to_player()
