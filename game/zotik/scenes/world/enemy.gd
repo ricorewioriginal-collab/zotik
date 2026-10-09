@@ -69,11 +69,7 @@ func setup(entry: Dictionary) -> void:
 	body_mesh.scale = Vector3.ONE * s
 	add_child(body_mesh)
 	label = Label3D.new()
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 48
-	label.outline_size = 12
-	label.fixed_size = true
-	label.pixel_size = 0.0009
+	NameTag.style(label, NameTag.FOE, 16.0)
 	label.position.y = 1.9 * s
 	add_child(label)
 	_update_label()
@@ -317,7 +313,7 @@ func _set_tint(c: Color) -> void:
 
 
 func _update_label() -> void:
-	var txt := "%s  %d/%d" % [data.get("name", enemy_id), hp, max_hp]
+	var txt := "%s\n%d/%d" % [data.get("name", enemy_id), hp, max_hp]
 	if is_broken():
 		txt += "  [BREAK]"
 	elif break_max > 0.0:

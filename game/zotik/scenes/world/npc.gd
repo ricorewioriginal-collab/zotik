@@ -50,11 +50,7 @@ static func create(entry: Dictionary) -> Npc:
 	var label := Label3D.new()
 	label.text = str(Content.get_entry("npcs", entry.id).name)
 	label.position.y = 2.2
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.font_size = 48
-	label.outline_size = 12
-	label.fixed_size = true
-	label.pixel_size = 0.0009
+	NameTag.style(label, NameTag.FRIEND)
 	n.add_child(label)
 	var sb := StaticBody3D.new()
 	var cs := CollisionShape3D.new()

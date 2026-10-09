@@ -28,7 +28,7 @@ func test_bestiary_records_every_defeat() -> void:
 	eq(Guild.kills("ENEMY_RIFTLING_001"), 3, "three recorded")
 	game.open_menu(game.bestiary_menu)
 	check(game.bestiary_menu.visible, "bestiary open")
-	var texts: Array = game.bestiary_menu.list.get_children().map(func(r): return r.get_child(0).text)
+	var texts: Array = game.bestiary_menu.list.get_children().map(func(r): return r.get_child(0).get_child(0).text)
 	check(texts.any(func(t): return t.begins_with("Rissling (Lunaris) – besiegt: 3")), "entry with name, region, kills")
 	check(texts.any(func(t): return t.begins_with("???")), "unknown enemies hidden")
 	check(game.bestiary_menu.info_label.text.begins_with("Erfasst: 1 /"), "progress counter")

@@ -6,6 +6,7 @@ extends Button
 var action := ""
 var icon_kind := ""
 var key_hint := ""
+var compact := false  # small square tile: icon only
 
 
 static func create(act: String, caption: String, kind: String, key: String) -> IconButton:
@@ -24,6 +25,16 @@ static func create(act: String, caption: String, kind: String, key: String) -> I
 	return b
 
 
+## Small square tile with just the drawn icon (the gear in the corner).
+static func create_tile(act: String, kind: String, tip: String) -> IconButton:
+	var b := create(act, "", kind, "")
+	b.compact = true
+	b.name = "Tile_" + act
+	b.tooltip_text = tip
+	b.custom_minimum_size = Vector2(64, 64)
+	return b
+
+
 func _fire() -> void:
 	for pressed in [true, false]:
 		var ev := InputEventAction.new()
@@ -33,7 +44,7 @@ func _fire() -> void:
 
 
 func _draw() -> void:
-	var c := Vector2(size.x / 2.0, 32)
+	var c := size / 2.0 if compact else Vector2(size.x / 2.0, 32)
 	var g := UiStyle.GOLD
 	match icon_kind:
 		"bag":
@@ -60,6 +71,8 @@ func _draw() -> void:
 
 
 func _ready() -> void:
+	if compact:
+		return
 	# caption below the drawn icon
 	add_theme_constant_override("h_separation", 0)
 	add_theme_stylebox_override("normal", _pad(get_theme_stylebox("normal")))
