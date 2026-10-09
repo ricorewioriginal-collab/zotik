@@ -1,7 +1,7 @@
 {
-  "phase": "phase4",
-  "milestone": "S03_SUNKEN_CITY",
+  "phase": "phase5",
+  "milestone": "Q02_CORAL_CAVES",
   "status": "PASSED",
-  "next_allowed": "S04 chapter-4 quests + Kharos",
+  "next_allowed": "Q03 Weltenarchiv",
   "standing_owner_approval": true
 }

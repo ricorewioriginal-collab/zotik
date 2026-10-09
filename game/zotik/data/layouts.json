@@ -4998,6 +4998,11 @@
         29,
         0,
         0
+      ],
+      "AREA_AQU_CAVES": [
+        0,
+        0,
+        -22
       ]
     },
     "exits": [
@@ -5007,6 +5012,14 @@
           33,
           0,
           0
+        ]
+      },
+      {
+        "to": "AREA_AQU_CAVES",
+        "pos": [
+          0,
+          0,
+          -26
         ]
       }
     ],
@@ -5571,6 +5584,263 @@
         ],
         "scale": 1.6,
         "r": 1.2
+      }
+    ]
+  },
+  "AREA_AQU_CAVES": {
+    "size": [
+      60,
+      80
+    ],
+    "ground": "#5a9aa0",
+    "ambient": "#bfe6f2",
+    "current": true,
+    "spawns": {
+      "default": [
+        0,
+        0,
+        34
+      ],
+      "AREA_AQU_DOME": [
+        0,
+        0,
+        34
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_AQU_DOME",
+        "pos": [
+          0,
+          0,
+          37
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "reef_gate",
+        "pos": [
+          0,
+          3,
+          -38
+        ],
+        "size": [
+          14,
+          6,
+          2
+        ],
+        "color": "#3a7a8a",
+        "hidden_by_flag": "FLAG_AQU_ARCHIVE_OPEN"
+      }
+    ],
+    "entities": [
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_AQU_CAVES_001",
+        "pos": [
+          10,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_AQU_CAVES_KRABBE_1",
+        "enemy": "ENEMY_RIFFKRABBE_001",
+        "pos": [
+          -12,
+          0,
+          8
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_AQU_CAVES_KRABBE_2",
+        "enemy": "ENEMY_RIFFKRABBE_001",
+        "pos": [
+          14,
+          0,
+          -4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_AQU_CAVES_QUALLE_1",
+        "enemy": "ENEMY_LEUCHTQUALLE_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_AQU_CAVES_QUALLE_2",
+        "enemy": "ENEMY_LEUCHTQUALLE_001",
+        "pos": [
+          -14,
+          0,
+          -26
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_AQU_001",
+        "pos": [
+          -22,
+          0,
+          -32
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -26,
+          0,
+          -30
+        ],
+        "rot": 178,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          26,
+          0,
+          -28
+        ],
+        "rot": 182,
+        "scale": 1.7000000000000002,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -27,
+          0,
+          12
+        ],
+        "rot": 171,
+        "scale": 1.7000000000000002,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          27,
+          0,
+          8
+        ],
+        "rot": 189,
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          -8,
+          0,
+          -8
+        ],
+        "rot": 304,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          12,
+          0,
+          -18
+        ],
+        "rot": 84,
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -18,
+          0,
+          -12
+        ],
+        "rot": 234,
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          20,
+          0,
+          16
+        ],
+        "rot": 140,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          6,
+          0,
+          30
+        ],
+        "rot": 42,
+        "scale": 1.4000000000000001,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          -22,
+          0,
+          30
+        ],
+        "rot": 206,
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          -4,
+          0,
+          28
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          4,
+          0,
+          -6
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "waterlily_A",
+        "pos": [
+          -12,
+          0.1,
+          24
+        ],
+        "scale": 1.3
+      },
+      {
+        "model": "waterlily_A",
+        "pos": [
+          -8,
+          0.1,
+          26
+        ],
+        "rot": 50,
+        "scale": 1.1
       }
     ]
   }

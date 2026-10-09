@@ -36,6 +36,11 @@
       "area": "AREA_SOL_SUNKEN",
       "name": "Weltenanker in der versunkenen Stadt",
       "heals": true
+    },
+    "SAVEPOINT_AQU_CAVES_001": {
+      "area": "AREA_AQU_CAVES",
+      "name": "Weltenanker in den Korallenhöhlen",
+      "heals": true
     }
   },
   "uniques": {

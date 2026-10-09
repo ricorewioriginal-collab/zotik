@@ -94,5 +94,19 @@
       }
     ],
     "currency": 120
+  },
+  "CHEST_AQU_001": {
+    "area": "AREA_AQU_CAVES",
+    "contents": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_PEARL_001",
+        "count": 3
+      }
+    ],
+    "currency": 100
   }
 }

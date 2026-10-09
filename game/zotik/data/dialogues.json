@@ -731,11 +731,7 @@
     "lines": [
       [
         "NPC_MIRAEL_001",
-        "Mirael, Chefingenieurin der Kuppeln. Hier unten hält alles zusammen, was jemand rechtzeitig festgeschraubt hat."
-      ],
-      [
-        "NPC_MIRAEL_001",
-        "Seit ein Splitter in den Korallenhöhlen leuchtet, spielen die Strömungen verrückt. Gebt mir einen Moment, ich schaue mir die Schleusen an."
+        "Das Korallentor steht offen. Hinter den Höhlen beginnt das Weltenarchiv – aber den Weg dorthin kenne selbst ich noch nicht ganz."
       ]
     ]
   },
@@ -779,6 +775,25 @@
       {
         "type": "open_shop",
         "id": "SHOP_AQU_ALCHEMIST_001"
+      }
+    ]
+  },
+  "DLG_MIRAEL_LEAD_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Die Schleusen halten, ich habe sie überbrückt. Das Korallentor ist offen – aber bleibt dicht bei mir, die Strömung dreht sich ohne Warnung."
+      ],
+      [
+        "NPC_MIRAEL_001",
+        "Riffkrabben und Leuchtquallen treiben dort unten. Am Weltenanker weiter vorn könnt ihr rasten und speichern."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_AQU_CAVES_OPEN"
       }
     ]
   }

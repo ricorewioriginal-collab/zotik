@@ -127,5 +127,8 @@
   },
   "FLAG_AQU_CAVES_OPEN": {
     "desc": "Mirael öffnet das Korallentor (Kapitel 5, Q02)"
+  },
+  "FLAG_AQU_ARCHIVE_OPEN": {
+    "desc": "Eingang zum Weltenarchiv offen (Kapitel 5, Q03)"
   }
 }
