@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://ba361s5swhgbr"
+path="res://.godot/imported/Local contrast.glsl-5860a8baf9d5db553758d72253103af6.res"
+
+[deps]
+
+source_file="res://compositor/Color grading/Local contrast.glsl"
+dest_files=["res://.godot/imported/Local contrast.glsl-5860a8baf9d5db553758d72253103af6.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://5cmeuha346mk"
+path="res://.godot/imported/Color grading.glsl-e6e15650b1773d57777044cd77ee044a.res"
+
+[deps]
+
+source_file="res://compositor/Color grading/Color grading.glsl"
+dest_files=["res://.godot/imported/Color grading.glsl-e6e15650b1773d57777044cd77ee044a.res"]
+
+[params]
+
