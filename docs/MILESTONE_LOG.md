@@ -699,3 +699,32 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Drifting current: layout key `current` makes the water thick and dark teal. It is only fog, so it is cheap on Android and Web.
 - 4 new tests (`test_q02_caves`), screenshot 22.
 - Regression: 242/242 tests plus restart checks for chapters 1–4: PASS.
+
+## Q03 Weltenarchiv – PASSED
+- At the end of the caves a trigger plays a short scene and opens the stairs (`FLAG_AQU_ARCHIVE_OPEN`); the `reef_gate` prop disappears.
+- Areas `AREA_AQU_ARCHIVE` (anchor, chest, lore stele, 2 Riffkrabben, 2 Leuchtquallen) and the closed `AREA_AQU_VAULT`.
+- Current puzzle `PUZ_AQU_CURRENTS_001`: reuses the "valves" kind, four valves that each flip two neighbouring currents (solution: valves 1 and 3), three hints. Reward 90 Lun and 3 Perlen; it opens the vault (`FLAG_AQU_CURRENT_DONE`). The content validator proves it solvable.
+- Miniboss Archivwächter in the vault (golem model, break gauge, persistent), sets `FLAG_AQU_WAECHTER_DEFEATED`.
+- 5 new tests (`test_q03_archive`), screenshot 23. No chapter-5 quest yet; Q04 adds it.
+
+## W01 Web and Android weight + app icon – PASSED (owner: "Zotik im Web total am Hängen", "App-Icon, beim Laden nur diese komische Godot-Seite")
+- Measured on the published build (downloaded and served locally, rendered with a software GL in a headless Chromium):
+  - The title screen is static; at a small window it runs at 60 fps, so the slowness there is the software renderer's fill rate, not game logic.
+  - Browsers receive about 47 MB on the first load (10 MB wasm + 37 MB game data, gzip by GitHub Pages).
+  - Real-device performance could not be measured here.
+- Download weight:
+  - The five KayKit adventurer models (about 18 MB) were only used to borrow weapon meshes, and every character with a weapon instantiated a whole 3.6 MB scene for it.
+  - New `tools/bake_weapon_meshes.gd` extracts the five weapons into 12–31 KB files under `assets/characters/weapons/`. `CharacterRig` and `ZotikVisual` load those.
+  - The `*.glb` models stay in the repo as sources but are excluded from all four exports.
+  - The whole regression passes with the models removed.
+- Rendering on browser and Android only (PC unchanged):
+  - no 4× MSAA
+  - shadow map 2048, light soft-shadow filter, one shadow split instead of four
+  - no full-screen glow and no colour-adjustment pass
+- Icon and loading screen:
+  - project icon, Windows `.ico` and Android launcher icons (main and adaptive) are Zotik's face, cut from the approved master sheet
+  - the loading screen uses the title art
+  - concept art, not final (CLAUDE.md rule 6)
+- New test `test_web_and_mobile_stay_light` keeps these settings.
+- To verify: after the merge, open https://ricorewioriginal-collab.github.io/zotik/ again (the Pages job runs on `main` only).
+- Regression: 248/248 tests plus restart checks for chapters 1–4: PASS.

@@ -108,5 +108,19 @@
       }
     ],
     "currency": 100
+  },
+  "CHEST_AQU_002": {
+    "area": "AREA_AQU_ARCHIVE",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_PEARL_001",
+        "count": 2
+      }
+    ],
+    "currency": 130
   }
 }

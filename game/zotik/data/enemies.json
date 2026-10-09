@@ -601,5 +601,36 @@
     ],
     "break": 32,
     "break_duration": 2.5
+  },
+  "ENEMY_ARCHIVWAECHTER_001": {
+    "name": "Archivwächter",
+    "region": "WORLD_AQUALIS",
+    "description": "Ein uralter Hüter des Gewölbes aus Muschelkalk und Korallen. Langsam, aber schwer – Break lässt seine Schale splittern.",
+    "hp": 300,
+    "attack": 21,
+    "defense": 9,
+    "move_speed": 2.0,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 1.9,
+    "currency": 125,
+    "drops": [
+      {
+        "id": "ITEM_PEARL_001",
+        "count": 5
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 110,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_AQU_WAECHTER_DEFEATED"
+      }
+    ]
   }
 }

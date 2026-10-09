@@ -78,5 +78,15 @@
         "Im Weltenarchiv wacht ein Wesen aus Strömung und Druck. Wer ihm zuhört, hört das Meer jede vergessene Geschichte erzählen."
       ]
     ]
+  },
+  "LORE_AQU_003": {
+    "title": "Die Strömungen des Archivs",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Das Archiv bewahrt seine Schriften im fließenden Wasser. Wer die Strömungen versteht, kann jede Kammer öffnen; wer sie zornig macht, ertrinkt in Erinnerungen."
+      ]
+    ]
   }
 }

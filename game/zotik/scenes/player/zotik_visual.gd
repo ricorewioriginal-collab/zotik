@@ -47,14 +47,12 @@ func _ready() -> void:
 	_bone_part("pelvis", "PLACEHOLDER_shoulder_bag", _box(Vector3(0.11, 0.13, 0.06)), Vector3(0.19, 0.95, 0.02))
 	# blade in the right hand (bone space, same grip as CharacterRig weapons)
 	var sword: Array = CharacterRig.HUMAN_WEAPONS.sword
-	var src: Node = (load(CharacterRig.MODELS[sword[0]]) as PackedScene).instantiate()
 	var w := MeshInstance3D.new()
 	w.name = "PLACEHOLDER_weapon"
-	w.mesh = (src.find_children(sword[1], "MeshInstance3D", true, false)[0] as MeshInstance3D).mesh
-	src.free()
-	w.position = sword[2]
-	w.rotation_degrees = sword[3]
-	w.scale = Vector3.ONE * float(sword[4])
+	w.mesh = load(CharacterRig.WEAPON_DIR % sword[0]) as Mesh
+	w.position = sword[1]
+	w.rotation_degrees = sword[2]
+	w.scale = Vector3.ONE * float(sword[3])
 	w.material_override = StandardMaterial3D.new()
 	rig.attach("hand_r", w)
 	parts["PLACEHOLDER_weapon"] = w

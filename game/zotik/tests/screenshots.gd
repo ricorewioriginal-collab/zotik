@@ -131,6 +131,12 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("22_aqualis_caves")
+	gs.set_flag("FLAG_AQU_ARCHIVE_OPEN")
+	game.enter_area("AREA_AQU_ARCHIVE", "default")
+	game.player.global_position = Vector3(0, 0, -2)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("23_aqualis_archive")
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	for _i in 20:
