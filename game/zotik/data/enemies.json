@@ -559,5 +559,47 @@
         }
       }
     ]
+  },
+  "ENEMY_RIFFKRABBE_001": {
+    "name": "Riffkrabbe",
+    "region": "WORLD_AQUALIS",
+    "description": "Hält Korallenstücke als Schild. Der Panzer bricht erst unter starken Schlägen.",
+    "hp": 95,
+    "attack": 17,
+    "defense": 10,
+    "move_speed": 3.6,
+    "aggro_range": 10.0,
+    "attack_range": 1.8,
+    "attack_cooldown": 1.2,
+    "currency": 20,
+    "drops": [
+      {
+        "id": "ITEM_PEARL_001",
+        "count": 1
+      }
+    ],
+    "break": 42,
+    "break_duration": 3.0
+  },
+  "ENEMY_LEUCHTQUALLE_001": {
+    "name": "Leuchtqualle",
+    "region": "WORLD_AQUALIS",
+    "description": "Schwebt lautlos durch die Strömung. Ihr Leuchten lockt Beute – und ihre Fäden brennen.",
+    "hp": 65,
+    "attack": 18,
+    "defense": 3,
+    "move_speed": 3.0,
+    "aggro_range": 11.0,
+    "attack_range": 1.7,
+    "attack_cooldown": 1.3,
+    "currency": 16,
+    "drops": [
+      {
+        "id": "ITEM_PEARL_001",
+        "count": 2
+      }
+    ],
+    "break": 32,
+    "break_duration": 2.5
   }
 }

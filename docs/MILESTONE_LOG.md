@@ -691,3 +691,11 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - No chapter-5 quest yet; Q04 adds it.
 - 6 new tests (`test_q01_aqualis`), screenshots 20 (dome) and 21 (harbour).
 - Regression: 238/238 tests plus restart checks for chapters 1–4: PASS.
+
+## Q02 Coral caves – PASSED
+- Mirael opens the Korallentor (`FLAG_AQU_CAVES_OPEN`); after that the dome city exit leads into the caves.
+- Area `AREA_AQU_CAVES` (60×80): coral-rock stand-ins, Weltenanker (heals and saves), chest (2 Großer Heiltrank, 3 Perlen, 100 Lun) and a still-sealed `reef_gate` (opens in Q03 via `FLAG_AQU_ARCHIVE_OPEN`).
+- Enemies, both with break gauge, bestiary entry and Perlen drops: Riffkrabbe (crab model, coral red) and Leuchtqualle (slime model, glowing blue).
+- Drifting current: layout key `current` makes the water thick and dark teal. It is only fog, so it is cheap on Android and Web.
+- 4 new tests (`test_q02_caves`), screenshot 22.
+- Regression: 242/242 tests plus restart checks for chapters 1–4: PASS.

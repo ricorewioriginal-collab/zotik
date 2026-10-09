@@ -1,7 +1,7 @@
 {
   "phase": "phase5",
-  "milestone": "Q01_AQUALIS_HUB",
+  "milestone": "Q02_CORAL_CAVES",
   "status": "PASSED",
-  "next_allowed": "Q02 coral caves",
+  "next_allowed": "Q03 Weltenarchiv",
   "standing_owner_approval": true
 }

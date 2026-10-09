@@ -127,6 +127,11 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 			env.fog_light_color = Color.html(st.fog).darkened(0.12)
 			env.fog_density = 0.02
 			env.fog_sky_affect = 0.7
+		if layout.get("current", false):
+			# drifting current: thick, dark teal water that hides the far reef
+			env.fog_light_color = Color.html(st.fog).darkened(0.3)
+			env.fog_density = 0.026
+			env.fog_sky_affect = 0.8
 	env.tonemap_mode = Environment.TONE_MAPPER_FILMIC
 	env.tonemap_white = 6.0
 	env.glow_enabled = true

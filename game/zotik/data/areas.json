@@ -226,11 +226,22 @@
     "name": "Aqualis – Kuppelstadt",
     "world": "WORLD_AQUALIS",
     "exits": [
-      "AREA_AQU_HARBOUR"
-    ]
+      "AREA_AQU_HARBOUR",
+      "AREA_AQU_CAVES"
+    ],
+    "gate": {
+      "AREA_AQU_CAVES": "FLAG_AQU_CAVES_OPEN"
+    }
   },
   "AREA_AQU_HARBOUR": {
     "name": "Aqualis – Hafendock",
+    "world": "WORLD_AQUALIS",
+    "exits": [
+      "AREA_AQU_DOME"
+    ]
+  },
+  "AREA_AQU_CAVES": {
+    "name": "Aqualis – Korallenhöhlen",
     "world": "WORLD_AQUALIS",
     "exits": [
       "AREA_AQU_DOME"

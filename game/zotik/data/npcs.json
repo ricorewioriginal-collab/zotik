@@ -623,6 +623,15 @@
     "area": "AREA_AQU_DOME",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_AQU_CAVES_OPEN"
+          }
+        ],
+        "dialogue": "DLG_MIRAEL_LEAD_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_MIRAEL_IDLE_001"
       }
