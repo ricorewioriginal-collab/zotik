@@ -99,8 +99,38 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("17_solmera_dunes")
+	gs.set_flag("FLAG_SOL_RUINS_OPEN")
+	game.enter_area("AREA_SOL_SUNKEN", "default")
+	game.player.global_position = Vector3(0, 0, -2)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("18_solmera_sunken_city")
+	for f in ["FLAG_SOL_MIRRORS_DONE", "FLAG_SOL_WAECHTER_DEFEATED"]:
+		gs.set_flag(f)
+	game.enter_area("AREA_SOL_ARENA", "default")
+	game.player.global_position = Vector3(0, 0, 8)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("19_kharos_arena")
+	while dlg.is_active():
+		dlg.advance()
+	gs.set_flag("FLAG_AQU_ARRIVED")
+	game.enter_area("AREA_AQU_DOME", "default")
+	game.player.global_position = Vector3(-2, 0, 12)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("20_aqualis_dome")
+	game.enter_area("AREA_AQU_HARBOUR", "default")
+	game.player.global_position = Vector3(2, 0, 4)
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("21_aqualis_harbour")
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
+	for _i in 20:
+		if dlg.is_active():
+			dlg.advance()
+	game.player.spring_arm.rotation.x = deg_to_rad(-20.0)
 	game.touch.force = true
 	for c in game.companions.values():
 		c.snap_to_player()

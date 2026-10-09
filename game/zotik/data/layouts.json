@@ -4156,6 +4156,11 @@
         0,
         0,
         34
+      ],
+      "AREA_SOL_SUNKEN": [
+        0,
+        0,
+        -32
       ]
     },
     "exits": [
@@ -4165,6 +4170,14 @@
           0,
           0,
           37
+        ]
+      },
+      {
+        "to": "AREA_SOL_SUNKEN",
+        "pos": [
+          0,
+          0,
+          -36
         ]
       }
     ],
@@ -4243,6 +4256,22 @@
           0,
           -32
         ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_SOL_RUINS",
+        "pos": [
+          0,
+          1,
+          -31
+        ],
+        "size": [
+          14,
+          3,
+          6
+        ],
+        "cutscene": "CUT_SOL_RUINS_001",
+        "once_flag": "FLAG_SOL_RUINS_SEEN"
       }
     ],
     "decor": [
@@ -4402,6 +4431,1146 @@
           26.3
         ],
         "rot": 30
+      }
+    ]
+  },
+  "AREA_SOL_SUNKEN": {
+    "size": [
+      50,
+      60
+    ],
+    "ground": "#cfae78",
+    "ambient": "#ffe3b0",
+    "floor_tex": "rock",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        26
+      ],
+      "AREA_SOL_DUNES": [
+        0,
+        0,
+        26
+      ],
+      "AREA_SOL_SUN_HALL": [
+        0,
+        0,
+        -24
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_SOL_DUNES",
+        "pos": [
+          0,
+          0,
+          28
+        ]
+      },
+      {
+        "to": "AREA_SOL_SUN_HALL",
+        "pos": [
+          0,
+          0,
+          -28
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "ruin_wall_w",
+        "pos": [
+          -16,
+          2,
+          -6
+        ],
+        "size": [
+          2,
+          4,
+          16
+        ],
+        "color": "#b49360"
+      },
+      {
+        "name": "ruin_wall_e",
+        "pos": [
+          16,
+          2,
+          -6
+        ],
+        "size": [
+          2,
+          4,
+          16
+        ],
+        "color": "#b49360"
+      },
+      {
+        "name": "ruin_wall_n1",
+        "pos": [
+          -9,
+          2,
+          -22
+        ],
+        "size": [
+          14,
+          4,
+          2
+        ],
+        "color": "#b49360"
+      },
+      {
+        "name": "ruin_wall_n2",
+        "pos": [
+          9,
+          2,
+          -22
+        ],
+        "size": [
+          14,
+          4,
+          2
+        ],
+        "color": "#b49360"
+      },
+      {
+        "name": "hall_door",
+        "pos": [
+          0,
+          3,
+          -28.5
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#8a6a40",
+        "hidden_by_flag": "FLAG_SOL_MIRRORS_DONE"
+      }
+    ],
+    "entities": [
+      {
+        "type": "puzzle",
+        "id": "PUZ_SOL_MIRRORS_001",
+        "pos": [
+          0,
+          0,
+          -12
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_SOL_CITY_001",
+        "pos": [
+          10,
+          0,
+          20
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_SOL_002",
+        "pos": [
+          -20,
+          0,
+          -24
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_SOL_003",
+        "pos": [
+          -6,
+          0,
+          -17
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_CITY_SKORPION_1",
+        "enemy": "ENEMY_SANDSKORPION_001",
+        "pos": [
+          -10,
+          0,
+          12
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_CITY_SKORPION_2",
+        "enemy": "ENEMY_SANDSKORPION_001",
+        "pos": [
+          12,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_CITY_GEIST_1",
+        "enemy": "ENEMY_SANDGEIST_001",
+        "pos": [
+          -12,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_CITY_GEIST_2",
+        "enemy": "ENEMY_SANDGEIST_001",
+        "pos": [
+          8,
+          0,
+          -12
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -21,
+          0,
+          16
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          21,
+          0,
+          12
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -20,
+          0,
+          -8
+        ],
+        "scale": 1.3,
+        "r": 1.0
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          20,
+          0,
+          -20
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          6,
+          0,
+          22
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          14,
+          0,
+          22
+        ],
+        "rot": 25,
+        "r": 0.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          -4,
+          0,
+          -8
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          4,
+          0,
+          -8
+        ],
+        "scale": 1.6
+      }
+    ]
+  },
+  "AREA_SOL_SUN_HALL": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#d8b878",
+    "ambient": "#fff0c8",
+    "floor_tex": "rock",
+    "indoor": false,
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_SOL_SUNKEN": [
+        0,
+        0,
+        16
+      ],
+      "AREA_SOL_ARENA": [
+        0,
+        0,
+        -14
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_SOL_SUNKEN",
+        "pos": [
+          0,
+          0,
+          18
+        ]
+      },
+      {
+        "to": "AREA_SOL_ARENA",
+        "pos": [
+          0,
+          0,
+          -18
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "hall_pillar_w",
+        "pos": [
+          -12,
+          3,
+          -4
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#c9a468"
+      },
+      {
+        "name": "hall_pillar_e",
+        "pos": [
+          12,
+          3,
+          -4
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#c9a468"
+      },
+      {
+        "name": "hall_pillar_w2",
+        "pos": [
+          -12,
+          3,
+          8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#c9a468"
+      },
+      {
+        "name": "hall_pillar_e2",
+        "pos": [
+          12,
+          3,
+          8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#c9a468"
+      }
+    ],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_HALL_WAECHTER",
+        "enemy": "ENEMY_SANDWAECHTER_001",
+        "pos": [
+          0,
+          0,
+          -8
+        ],
+        "persistent": true
+      }
+    ],
+    "decor": [
+      {
+        "model": "flag_red",
+        "pos": [
+          -6,
+          0,
+          12
+        ],
+        "scale": 1.6
+      },
+      {
+        "model": "flag_red",
+        "pos": [
+          6,
+          0,
+          12
+        ],
+        "scale": 1.6
+      }
+    ]
+  },
+  "AREA_SOL_ARENA": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#d9b070",
+    "ambient": "#ffe6b8",
+    "floor_tex": "sand",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_SOL_SUN_HALL": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_SOL_SUN_HALL",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "sand_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#c9a468"
+      },
+      {
+        "name": "sand_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#c9a468"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_SOL_KHAROS_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_SOL_KHAROS_001",
+        "once_flag": "FLAG_SOL_KHAROS_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_SOL_ARENA_KHAROS",
+        "enemy": "BOSS_KHAROS_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
+      }
+    ],
+    "decor": [
+      {
+        "model": "rock_single_A",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.0
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.0
+      }
+    ]
+  },
+  "AREA_AQU_DOME": {
+    "size": [
+      70,
+      60
+    ],
+    "ground": "#7ab8b0",
+    "ambient": "#cfeeff",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        20
+      ],
+      "travel": [
+        0,
+        0,
+        20
+      ],
+      "AREA_AQU_HARBOUR": [
+        29,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_AQU_HARBOUR",
+        "pos": [
+          33,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "house_a",
+        "pos": [
+          -22,
+          3,
+          -14
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#8ac0c8"
+      },
+      {
+        "name": "house_b",
+        "pos": [
+          -22,
+          3,
+          12
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#8ac0c8"
+      },
+      {
+        "name": "house_c",
+        "pos": [
+          20,
+          3,
+          -18
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#8ac0c8"
+      },
+      {
+        "name": "cave_gate",
+        "pos": [
+          0,
+          3,
+          -28.5
+        ],
+        "size": [
+          14,
+          6,
+          2
+        ],
+        "color": "#3a7a8a",
+        "hidden_by_flag": "FLAG_AQU_CAVES_OPEN"
+      },
+      {
+        "name": "water_basin",
+        "pos": [
+          10,
+          0.05,
+          -4
+        ],
+        "size": [
+          14,
+          0.1,
+          10
+        ],
+        "color": "#1a8ac0",
+        "collision": false
+      }
+    ],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_AQU_001",
+        "pos": [
+          4,
+          0,
+          23
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_AQU_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          19
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_AQU_ARRIVAL_001",
+        "once_flag": "FLAG_AQU_ARRIVED"
+      },
+      {
+        "type": "npc",
+        "id": "NPC_MIRAEL_001",
+        "pos": [
+          -4,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_ORIEL_001",
+        "pos": [
+          16,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_AQU_001",
+        "pos": [
+          -14,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_AQU_002",
+        "pos": [
+          -11,
+          0,
+          2
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          10
+        ],
+        "size": [
+          24,
+          14
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          -8
+        ],
+        "size": [
+          5,
+          28
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          20,
+          0,
+          0
+        ],
+        "size": [
+          30,
+          5
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -10,
+          0,
+          16
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          10,
+          0,
+          16
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          -6
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          -14
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          24,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -17,
+          0,
+          -8
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          -17.2,
+          0,
+          -9.3
+        ],
+        "rot": 20,
+        "r": 0.6
+      },
+      {
+        "model": "bucket_water",
+        "pos": [
+          4.5,
+          0,
+          -3
+        ]
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          -6,
+          0,
+          22
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          7,
+          0,
+          22
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "waterlily_A",
+        "pos": [
+          8,
+          0.1,
+          -4
+        ],
+        "scale": 1.2
+      },
+      {
+        "model": "waterlily_A",
+        "pos": [
+          12,
+          0.1,
+          -6
+        ],
+        "rot": 60,
+        "scale": 1.0
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          3.5,
+          0,
+          -9
+        ],
+        "scale": 0.9,
+        "r": 0.8
+      },
+      {
+        "model": "rock_single_B",
+        "pos": [
+          17,
+          0,
+          -8.5
+        ],
+        "rot": 50,
+        "scale": 0.8,
+        "r": 0.8
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          -31,
+          0,
+          -22
+        ],
+        "scale": 1.6,
+        "r": 1.2
+      },
+      {
+        "model": "rock_single_A",
+        "pos": [
+          31,
+          0,
+          -24
+        ],
+        "scale": 1.6,
+        "r": 1.2
+      }
+    ]
+  },
+  "AREA_AQU_HARBOUR": {
+    "size": [
+      60,
+      50
+    ],
+    "ground": "#6aa8a8",
+    "ambient": "#c8e8f8",
+    "spawns": {
+      "default": [
+        -26,
+        0,
+        0
+      ],
+      "AREA_AQU_DOME": [
+        -26,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_AQU_DOME",
+        "pos": [
+          -29,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "smithy_doran",
+        "pos": [
+          10,
+          3,
+          -14
+        ],
+        "size": [
+          12,
+          6,
+          8
+        ],
+        "color": "#4a6a7a"
+      },
+      {
+        "name": "shop_perla",
+        "pos": [
+          10,
+          3,
+          14
+        ],
+        "size": [
+          10,
+          6,
+          8
+        ],
+        "color": "#6a9ab0"
+      },
+      {
+        "name": "shop_market",
+        "pos": [
+          -8,
+          3,
+          -16
+        ],
+        "size": [
+          10,
+          6,
+          6
+        ],
+        "color": "#5a8aa0"
+      },
+      {
+        "name": "pier_a",
+        "pos": [
+          -14,
+          0.2,
+          18
+        ],
+        "size": [
+          16,
+          0.4,
+          4
+        ],
+        "color": "#7a6a50"
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_DORAN_001",
+        "pos": [
+          10,
+          0,
+          -8
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_PERLA_001",
+        "pos": [
+          10,
+          0,
+          8
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          0
+        ],
+        "size": [
+          60,
+          5
+        ]
+      },
+      {
+        "model": "path",
+        "pos": [
+          10,
+          0,
+          0
+        ],
+        "size": [
+          5,
+          24
+        ]
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -18,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -4,
+          0,
+          -3.5
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          18,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          0,
+          0,
+          -7
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -0.2,
+          0,
+          -8.3
+        ],
+        "rot": 40,
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          -4,
+          0,
+          8
+        ],
+        "rot": 15,
+        "r": 0.6
+      },
+      {
+        "model": "crate_B_small",
+        "pos": [
+          -4.3,
+          0,
+          9.5
+        ]
+      },
+      {
+        "model": "sack",
+        "pos": [
+          2,
+          0,
+          7
+        ],
+        "rot": 30
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          5,
+          0,
+          -4
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "flag_blue",
+        "pos": [
+          15,
+          0,
+          4
+        ],
+        "scale": 1.7
+      },
+      {
+        "model": "rock_single_C",
+        "pos": [
+          24,
+          0,
+          -20
+        ],
+        "scale": 1.6,
+        "r": 1.2
       }
     ]
   }

@@ -527,11 +527,40 @@
       {
         "when": [
           {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_SOL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_NURI_LEAD_001"
+      },
+      {
+        "when": [
+          {
             "type": "not_flag",
             "id": "FLAG_SOL_DUNES_OPEN"
           }
         ],
         "dialogue": "DLG_NURI_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_SOL_001",
+            "step": 5
+          }
+        ],
+        "dialogue": "DLG_NURI_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_SOL_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_NURI_AFTER_001"
       },
       {
         "when": [],
@@ -564,8 +593,68 @@
     "area": "AREA_SOL_BAZAAR",
     "dialogues": [
       {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_SOL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_JABIR_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_SOL_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_JABIR_THANKS_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_JABIR_SHOP_001"
+      }
+    ]
+  },
+  "NPC_MIRAEL_001": {
+    "name": "Mirael",
+    "area": "AREA_AQU_DOME",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_MIRAEL_IDLE_001"
+      }
+    ]
+  },
+  "NPC_ORIEL_001": {
+    "name": "Oriel",
+    "area": "AREA_AQU_DOME",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ORIEL_IDLE_001"
+      }
+    ]
+  },
+  "NPC_DORAN_001": {
+    "name": "Doran",
+    "area": "AREA_AQU_HARBOUR",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_DORAN_SHOP_001"
+      }
+    ]
+  },
+  "NPC_PERLA_001": {
+    "name": "Perla",
+    "area": "AREA_AQU_HARBOUR",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_PERLA_SHOP_001"
       }
     ]
   }

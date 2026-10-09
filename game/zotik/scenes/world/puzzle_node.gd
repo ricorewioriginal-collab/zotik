@@ -30,7 +30,7 @@ func _ready() -> void:
 		it.position = Vector3(-2.0 * (n - 1) / 2.0 + 2.0 * i, 0, 0)
 		var labels: Array = d.get("node_labels", [])
 		if d.kind == "dials":
-			it.prompt = "Mondscheibe drehen"
+			it.prompt = str(d.get("part_prompt", "Mondscheibe drehen"))
 		elif d.kind == "valves":
 			it.prompt = "Ventil %d drehen" % (i + 1)
 		elif i < labels.size():
@@ -59,7 +59,7 @@ func _ready() -> void:
 		var plate := Interactable.new()
 		plate.name = "Activate"
 		plate.position = Vector3(0, 0, 2.5)
-		plate.prompt = "Mondtor aktivieren"
+		plate.prompt = str(d.get("plate_prompt", "Mondtor aktivieren"))
 		plate.interacted.connect(func(): PuzzleLogic.submit(puzzle_id); refresh())
 		add_child(plate)
 		var pm := MeshInstance3D.new()

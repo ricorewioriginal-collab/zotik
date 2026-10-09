@@ -455,5 +455,105 @@
         "count": 2
       }
     ]
+  },
+  "QUEST_MAIN_SOL_001": {
+    "name": "Wo der Sand sich erinnert",
+    "type": "main",
+    "completion_notice": "Kapitel 4 „Solmera – Wo der Sand sich erinnert“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Sprich mit Nuri in der Oase.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_NURI_001"
+        }
+      },
+      {
+        "objective": "Finde die versunkene Stadt hinter den Dünen.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_SOL_SUNKEN"
+        }
+      },
+      {
+        "objective": "Richte die Sonnenspiegel aus.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_SOL_MIRRORS_001"
+        }
+      },
+      {
+        "objective": "Besiege den Sandwächter in der Sonnenhalle.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_SANDWAECHTER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich Kharos, dem Sandkoloss.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_KHAROS_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Nuri in der Oase.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_NURI_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 400
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_SOL_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_SOL_001": {
+    "name": "Sonnenstaub für Jabir",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 6 Sonnenstaub (Dünen, versunkene Stadt).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_SUN_DUST_001",
+          "count": 6
+        }
+      },
+      {
+        "objective": "Bring den Sonnenstaub zu Jabir im Basar.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_JABIR_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_SUN_DUST_001",
+            "count": 6
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 200
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ]
   }
 }

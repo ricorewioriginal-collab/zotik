@@ -68,8 +68,16 @@ func test_no_beacon_without_active_quest() -> void:
 
 func test_controls_bound_and_help_toggles() -> void:
 	var keys := InputMap.action_get_events("camera_left").map(func(e): return e.as_text())
-	check(keys.any(func(k): return k.contains("Left")), "camera left on arrow key: %s" % [keys])
+	check(keys.any(func(k): return k.contains("Z")), "camera left on Z: %s" % [keys])
+	check(InputMap.action_get_events("camera_right").any(func(e): return e.as_text().contains("C")), "camera right on C")
+	# arrow keys walk (A02b); WASD still works
+	for pair in [["move_forward", "Up"], ["move_back", "Down"], ["move_left", "Left"], ["move_right", "Right"]]:
+		var texts := InputMap.action_get_events(pair[0]).map(func(e): return e.as_text())
+		check(texts.has(pair[1]), "%s on the %s arrow: %s" % [pair[0], pair[1], texts])
+	for pair in [["move_forward", "W"], ["move_back", "S"], ["move_left", "A"], ["move_right", "D"]]:
+		check(InputMap.action_get_events(pair[0]).any(func(e): return e is InputEventKey and e.physical_keycode == OS.find_keycode_from_string(pair[1])), pair[0] + " still on " + pair[1])
 	check(InputMap.action_get_events("help")[0].as_text().contains("F1"), "help on F1")
+	check(game.hud.HELP_TEXT.contains("Pfeiltasten"), "help text mentions the arrow keys")
 	var shown: bool = game.hud.help_label.visible
 	game.hud.toggle_help()
 	eq(game.hud.help_label.visible, not shown, "help toggled")

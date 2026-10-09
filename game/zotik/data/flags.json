@@ -103,5 +103,29 @@
   },
   "FLAG_SOL_RUINS_OPEN": {
     "desc": "Eingang zur versunkenen Stadt offen (Kapitel 4, S03)"
+  },
+  "FLAG_SOL_RUINS_SEEN": {
+    "desc": "Treppe zur versunkenen Stadt gesehen"
+  },
+  "FLAG_SOL_MIRRORS_DONE": {
+    "desc": "Sonnenspiegel in der versunkenen Stadt ausgerichtet"
+  },
+  "FLAG_SOL_WAECHTER_DEFEATED": {
+    "desc": "Sandwächter der Sonnenhalle besiegt"
+  },
+  "FLAG_SOL_KHAROS_MET": {
+    "desc": "Begegnung mit Kharos gesehen"
+  },
+  "FLAG_BOSS_SOL_KHAROS_DEFEATED": {
+    "desc": "Kharos, der Sandkoloss, besiegt"
+  },
+  "FLAG_SOL_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 4 (Solmera) abgeschlossen"
+  },
+  "FLAG_AQU_ARRIVED": {
+    "desc": "Erste Ankunft in Aqualis gesehen"
+  },
+  "FLAG_AQU_CAVES_OPEN": {
+    "desc": "Mirael öffnet das Korallentor (Kapitel 5, Q02)"
   }
 }

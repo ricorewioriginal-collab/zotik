@@ -1,34 +1,34 @@
 class_name TouchControls
 extends Control
-## On-screen controls for Android / touch screens (A01, reworked in A02): a
-## floating stick on the left, camera swipe on the right half and a few
+## On-screen controls for Android / touch screens (A01, A02, A03): a floating
+## stick on the left, camera swipe on the right half and a few small
 ## translucent action buttons bottom-right. Emits the same input actions as
 ## keyboard/gamepad (Input.parse_input_event), so gameplay code is unchanged.
 ##
-## A02 (owner: "irritierende Flächen", "muss per Touch steuerbar sein"):
-## - three big buttons (attack, dodge, jump), three small ones (strong, block,
-##   potion); "Benutzen" only appears while something can be used
-## - translucent at rest, brighter while pressed; size and opacity are
-##   settings (pause menu)
-## - tap the world: tap a person, chest or stone to use it, tap an enemy to
-##   lock on
+## A03 (owner: "voll Touch, ohne große Buttons"): the world itself is the
+## control. Tap the ground to walk there, tap a person, chest or stone to walk
+## over and use it, tap an enemy to run up and fight it (Player.set_goal),
+## double-tap to dodge. The buttons are small and can be switched off in the
+## pause menu; "Nutzen" only appears while something can be used.
 ## Hidden during dialogue (a tap advances it) and while a menu is open.
 
 const STICK_RADIUS := 100.0
 const CAMERA_SENS := 0.006
 const TAP_MAX_SEC := 0.25
 const TAP_MAX_MOVE := 20.0
-const TAP_PICK_RADIUS := 110.0   # screen px around a tapped object
-const TAP_REACH := 1.7           # tapped objects must be within INTERACT_RANGE * this
+const DOUBLE_TAP_SEC := 0.32
+const DOUBLE_TAP_DIST := 80.0
+const TAP_PICK_RADIUS := 90.0    # screen px around a tapped object
+const TAP_REACH := 1.7           # tapped objects within INTERACT_RANGE * this are used at once
 const ACTIONS := [
 	# [action, label, anchor offset from bottom-right (x, y), radius, kind]
-	["attack", "Angriff", Vector2(150, 150), 62.0, "main"],
-	["dodge", "Ausweichen", Vector2(300, 90), 44.0, "main"],
-	["jump", "Springen", Vector2(100, 285), 44.0, "main"],
-	["strong_attack", "Stark", Vector2(285, 215), 36.0, "minor"],
-	["block", "Block", Vector2(405, 80), 32.0, "minor"],
-	["use_item", "Trank", Vector2(215, 340), 32.0, "minor"],
-	["interact", "Benutzen", Vector2(345, 320), 50.0, "context"],
+	["attack", "Angriff", Vector2(90, 100), 38.0, "main"],
+	["dodge", "Rolle", Vector2(180, 70), 30.0, "main"],
+	["jump", "Sprung", Vector2(60, 190), 30.0, "main"],
+	["strong_attack", "Stark", Vector2(160, 160), 26.0, "minor"],
+	["block", "Block", Vector2(250, 60), 24.0, "minor"],
+	["use_item", "Trank", Vector2(140, 245), 24.0, "minor"],
+	["interact", "Nutzen", Vector2(250, 150), 34.0, "context"],
 ]
 
 var game: Node
@@ -43,9 +43,10 @@ var _panels := {}       # action -> Panel
 var _stick_down := {}     # move action -> true while the stick holds it
 var _removed_mouse := {}  # action -> mouse-button events removed in touch mode
 var _starts := {}         # touch index -> [time msec, position] (tap detection)
+var _last_tap := [-100000, Vector2(-1000, -1000)]  # [time msec, position]
 var _stick_base: Panel
 var _stick_knob: Panel
-var _applied := [-1.0, -1.0]  # scale / opacity the layout was built for
+var _applied := [-1.0, -1.0, true]  # scale / opacity / buttons the layout was built for
 
 
 static func wanted() -> bool:
@@ -76,6 +77,10 @@ func ui_opacity() -> float:
 	return clampf(float(Settings.get_value("touch_opacity")), 0.15, 1.0)
 
 
+func buttons_on() -> bool:
+	return bool(Settings.get_value("touch_buttons"))
+
+
 func _process(_delta: float) -> void:
 	var busy: bool = Dialogue.is_active() or (game != null and game.is_menu_open())
 	var show: bool = (force or wanted()) and not busy and (game == null or game.player.control_enabled)
@@ -85,12 +90,12 @@ func _process(_delta: float) -> void:
 	_set_touch_bindings(force or wanted())
 	if game:
 		game.hud.touch_mode = force or wanted()
-	if _applied != [ui_scale(), ui_opacity()]:
+	if _applied != [ui_scale(), ui_opacity(), buttons_on()]:
 		_layout()
 	_update_context()
 
 
-## "Benutzen" is only offered while the player stands next to something usable.
+## "Nutzen" is only offered while the player stands next to something usable.
 func _update_context() -> void:
 	var p: Panel = _panels.get("interact")
 	if p == null:
@@ -138,7 +143,7 @@ func _layout() -> void:
 	var size_v := get_viewport_rect().size
 	var s := ui_scale()
 	var op := ui_opacity()
-	_applied = [s, op]
+	_applied = [s, op, buttons_on()]
 	_stick_base.scale = Vector2.ONE * s
 	_stick_knob.scale = Vector2.ONE * s
 	_stick_base.pivot_offset = _stick_base.size / 2.0
@@ -155,8 +160,7 @@ func _layout() -> void:
 		p.scale = Vector2.ONE * s
 		p.position = center - p.size / 2.0
 		p.modulate = Color(1, 1, 1, op if a[4] != "minor" else op * 0.8)
-		if a[4] == "context":
-			p.visible = false
+		p.visible = false if a[4] == "context" else buttons_on()
 	_rebuild_rects()
 
 
@@ -230,7 +234,7 @@ func _on_release(index: int, pos: Vector2 = Vector2(-1, -1)) -> void:
 		_starts.erase(index)
 		var moved: float = (st[1] as Vector2).distance_to(pos) if pos.x >= 0.0 else 0.0
 		if Time.get_ticks_msec() - int(st[0]) <= TAP_MAX_SEC * 1000.0 and moved <= TAP_MAX_MOVE and pos.x >= 0.0:
-			tap_world(pos)
+			_tap(pos)
 
 
 func _restore_button(action: String) -> void:
@@ -242,14 +246,31 @@ func _restore_button(action: String) -> void:
 			p.modulate = Color(1, 1, 1, ui_opacity() if a[4] != "minor" else ui_opacity() * 0.8)
 
 
-## A short tap in the world: use the tapped person / chest / stone when close
-## enough, or lock on to a tapped enemy. Returns what happened:
-## "interact", "far" (too far away), "lock" or "".
+## A short tap: a second one close by dodges, otherwise it acts on the world.
+func _tap(pos: Vector2) -> void:
+	var now := Time.get_ticks_msec()
+	if now - int(_last_tap[0]) <= DOUBLE_TAP_SEC * 1000.0 and pos.distance_to(_last_tap[1]) <= DOUBLE_TAP_DIST:
+		_last_tap = [-100000, Vector2(-1000, -1000)]
+		pulse("dodge")
+		return
+	_last_tap = [now, pos]
+	tap_world(pos)
+
+
+## Presses an action for a moment (gestures have no finger holding a button).
+func pulse(action: String) -> void:
+	_send(action, true)
+	get_tree().create_timer(0.08).timeout.connect(func(): _send(action, false))
+
+
+## A short tap in the world. Returns what happened:
+## "interact" (used at once), "walk_use" (walking over to use it), "attack"
+## (running up to fight), "ground" (walking there) or "".
 func tap_world(pos: Vector2) -> String:
 	if game == null or game.player == null or game.player.camera == null:
 		return ""
 	var cam: Camera3D = game.player.camera
-	var player: Node3D = game.player
+	var player: Player = game.player
 	var best: Interactable = null
 	var best_d := TAP_PICK_RADIUS
 	for n in get_tree().get_nodes_in_group("interactable"):
@@ -260,26 +281,66 @@ func tap_world(pos: Vector2) -> String:
 		if d < best_d:
 			best_d = d
 			best = it
-	if best != null:
-		if player.global_position.distance_to(best.global_position) <= Interactable.INTERACT_RANGE * TAP_REACH:
-			best.interact(player)
-			return "interact"
-		game.hud.show_notification("Geh näher heran.")
-		return "far"
 	var foe: Enemy = null
-	best_d = TAP_PICK_RADIUS
+	var foe_d := TAP_PICK_RADIUS
 	for n in get_tree().get_nodes_in_group("enemy"):
 		var e := n as Enemy
 		if e == null or e.is_dead() or not e.is_visible_in_tree():
 			continue
 		var d := _screen_distance(cam, e.global_position + Vector3(0, 1.0, 0), pos)
-		if d < best_d:
-			best_d = d
+		if d < foe_d:
+			foe_d = d
 			foe = e
-	if foe != null:
-		player.set_lock(foe)
-		return "lock"
+	if foe != null and foe_d < best_d:
+		player.set_goal(Player.Goal.FIGHT, Vector3.ZERO, foe)
+		return "attack"
+	if best != null:
+		if player.global_position.distance_to(best.global_position) <= Interactable.INTERACT_RANGE * TAP_REACH:
+			player.clear_goal()
+			best.interact(player)
+			return "interact"
+		player.set_goal(Player.Goal.USE, Vector3.ZERO, best)
+		return "walk_use"
+	var ground: Variant = _ground_point(cam, pos, player)
+	if ground != null:
+		player.set_goal(Player.Goal.POINT, ground)
+		_show_marker(ground)
+		return "ground"
 	return ""
+
+
+## Where a tap on the screen meets walkable ground (null: wall, sky, ...).
+func _ground_point(cam: Camera3D, pos: Vector2, player: Player) -> Variant:
+	var from := cam.project_ray_origin(pos)
+	var q := PhysicsRayQueryParameters3D.create(from, from + cam.project_ray_normal(pos) * 200.0)
+	q.exclude = [player.get_rid()]
+	var hit := cam.get_world_3d().direct_space_state.intersect_ray(q)
+	if hit.is_empty() or (hit.normal as Vector3).y < 0.6:
+		return null
+	return hit.position
+
+
+## A ring that fades out where the player was sent.
+func _show_marker(p: Vector3) -> void:
+	if game == null or game.area == null:
+		return
+	var m := MeshInstance3D.new()
+	m.name = "TapMarker"
+	var ring := TorusMesh.new()
+	ring.inner_radius = 0.3
+	ring.outer_radius = 0.45
+	m.mesh = ring
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.albedo_color = Color(1.0, 0.9, 0.5, 0.9)
+	m.material_override = mat
+	game.area.add_child(m)
+	m.global_position = p + Vector3(0, 0.06, 0)
+	var tw := m.create_tween().set_parallel(true)
+	tw.tween_property(m, "scale", Vector3.ONE * 1.8, 0.7)
+	tw.tween_property(mat, "albedo_color:a", 0.0, 0.7)
+	tw.chain().tween_callback(m.queue_free)
 
 
 func _screen_distance(cam: Camera3D, world: Vector3, pos: Vector2) -> float:
@@ -351,9 +412,9 @@ func _circle(r: float, c: Color, text: String = "") -> Panel:
 		l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		l.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		l.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-		var size_px := 22 if r > 55 else (16 if r > 40 else 13)
-		if text.length() > 8:
-			size_px -= 3
+		var size_px := 15 if r >= 30.0 else 12
+		if text.length() > 6:
+			size_px -= 2
 		l.add_theme_font_size_override("font_size", size_px)
 		l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		p.add_child(l)

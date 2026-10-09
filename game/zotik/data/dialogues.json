@@ -667,8 +667,118 @@
     ],
     "effects": [
       {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_SOL_001"
+      },
+      {
         "type": "set_flag",
         "id": "FLAG_SOL_DUNES_OPEN"
+      }
+    ]
+  },
+  "DLG_NURI_REPORT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NURI_001",
+        "Der Sandkoloss ruht, und der Wind trägt wieder Wasser durch die Dünen. Die Karawanen können weiterziehen – dank euch."
+      ],
+      [
+        "NPC_NURI_001",
+        "Der Splitter, den ihr tragt … Er ruft nach den nächsten Welten. Reist weiter, Zotik."
+      ]
+    ]
+  },
+  "DLG_NURI_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NURI_001",
+        "Die Oase blüht, die Wege sind frei. Wenn ihr zurückkehrt, wartet hier immer ein Platz am Feuer."
+      ]
+    ]
+  },
+  "DLG_JABIR_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_JABIR_001",
+        "Mein Tränkevorrat schmilzt dahin wie Eis in der Sonne. Bringst du mir sechs Sonnenstaub? Ich zahle gut!"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_SOL_001"
+      },
+      {
+        "type": "open_shop",
+        "id": "SHOP_SOL_ALCHEMIST_001"
+      }
+    ]
+  },
+  "DLG_JABIR_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_JABIR_001",
+        "Sechs Beutel, glänzend wie Gold! Mein Elixier wird das beste der Wüste. Hier, deine Belohnung."
+      ]
+    ]
+  },
+  "DLG_MIRAEL_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Mirael, Chefingenieurin der Kuppeln. Hier unten hält alles zusammen, was jemand rechtzeitig festgeschraubt hat."
+      ],
+      [
+        "NPC_MIRAEL_001",
+        "Seit ein Splitter in den Korallenhöhlen leuchtet, spielen die Strömungen verrückt. Gebt mir einen Moment, ich schaue mir die Schleusen an."
+      ]
+    ]
+  },
+  "DLG_ORIEL_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ORIEL_001",
+        "Das Weltenarchiv liegt tiefer als jede Kuppel. Es erinnert sich an Wasser, das längst verdunstet ist."
+      ],
+      [
+        "NPC_ORIEL_001",
+        "Man sagt, ein Wächter schläft dort unten und hütet jedes Wort, das je gesprochen wurde."
+      ]
+    ]
+  },
+  "DLG_DORAN_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_DORAN_001",
+        "Dreizack und Korallenpanzer, druckfest bis in die Tiefsee! Kein Rost, keine Ausreden."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_AQU_SMITH_001"
+      }
+    ]
+  },
+  "DLG_PERLA_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PERLA_001",
+        "Frische Algenwickel und feinste Tränke! Perlen nehme ich auch in Zahlung – wenn sie echt sind."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_AQU_ALCHEMIST_001"
       }
     ]
   }

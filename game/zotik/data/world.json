@@ -31,6 +31,11 @@
       "area": "AREA_SOL_DUNES",
       "name": "Weltenanker in den Dünen",
       "heals": true
+    },
+    "SAVEPOINT_SOL_CITY_001": {
+      "area": "AREA_SOL_SUNKEN",
+      "name": "Weltenanker in der versunkenen Stadt",
+      "heals": true
     }
   },
   "uniques": {

@@ -29,5 +29,13 @@
     "hub_area": "AREA_SOL_OASIS",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_VAL_CHAPTER_COMPLETE"
+  },
+  "WORLD_AQUALIS": {
+    "name": "Aqualis",
+    "chapter": 5,
+    "subtitle": "Die Stadt unter dem Meer",
+    "hub_area": "AREA_AQU_DOME",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_SOL_CHAPTER_COMPLETE"
   }
 }

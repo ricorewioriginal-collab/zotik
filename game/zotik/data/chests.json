@@ -80,5 +80,19 @@
       }
     ],
     "currency": 90
+  },
+  "CHEST_SOL_002": {
+    "area": "AREA_SOL_SUNKEN",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_SUN_DUST_001",
+        "count": 2
+      }
+    ],
+    "currency": 120
   }
 }

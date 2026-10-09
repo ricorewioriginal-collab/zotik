@@ -48,5 +48,35 @@
         "Die Legende spricht von einem Wächter aus Sand und Stein, der die versunkene Stadt hütet. Wer ihn weckt, hört den Sand flüstern."
       ]
     ]
+  },
+  "LORE_SOL_003": {
+    "title": "Die Sonnenspiegel",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Vier Spiegel aus poliertem Stein fingen einst das Licht der Sonne und trugen es in die Halle. Wer sie richtig stellt, weckt die Stadt."
+      ]
+    ]
+  },
+  "LORE_AQU_001": {
+    "title": "Die Kuppeln von Aqualis",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Vor langer Zeit senkten die Gründer die ersten Kuppeln auf den Meeresgrund. Heute tragen sie ein Dutzend Viertel und einen Hafen, in dem Schiffe aus allen Welten anlegen."
+      ]
+    ]
+  },
+  "LORE_AQU_002": {
+    "title": "Neryx, der Tiefenwächter",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Im Weltenarchiv wacht ein Wesen aus Strömung und Druck. Wer ihm zuhört, hört das Meer jede vergessene Geschichte erzählen."
+      ]
+    ]
   }
 }

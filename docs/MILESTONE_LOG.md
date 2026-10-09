@@ -632,3 +632,49 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - 5 new tests in `test_a01_touch` (context button, calm layout + settings, tap person, tap far, tap enemy, tap vs swipe).
 - Not done: menus are still the same size. Compact HUD frames on small phones and gyro/pinch camera are open ideas.
 - Regression: 211/211 tests plus restart checks for chapters 1–3: PASS.
+
+## S03 Sunken city – PASSED
+- At the end of the dunes a trigger plays a short scene and opens the stairs (`FLAG_SOL_RUINS_OPEN`); the `ruin_gate` prop disappears.
+- Area `AREA_SOL_SUNKEN` (ruins, rocks, Weltenanker, chest, lore stele, 2 Sandskorpion + 2 Sandgeist) and the closed `AREA_SOL_SUN_HALL`.
+- Sun-mirror puzzle `PUZ_SOL_MIRRORS_001`: four mirrors, four quarter-turn states (Nord, Ost, Süd, West), solution 1-3-0-2, three hints, then "Sonnenlicht bündeln". Reward: 80 Lun, 3 Sonnenstaub; it opens the hall (`FLAG_SOL_MIRRORS_DONE`).
+  - Built on the existing "dials" puzzle kind. New optional data keys `part_prompt` and `plate_prompt` replace the hard-coded moon-gate texts.
+- Miniboss Sandwächter in the Sonnenhalle (golem model, break gauge, persistent). It sets `FLAG_SOL_WAECHTER_DEFEATED`.
+- 5 new tests (`test_s03_sunken_city`), screenshot 18.
+- Not yet: no quest text for chapter 4; S04 adds the quests, Kharos and the Nuri arc.
+- Regression: 216/216 tests plus restart checks for chapters 1–3: PASS.
+
+## S04 Chapter-4 quests + Kharos – PASSED
+- Main quest "Wo der Sand sich erinnert" (Nuri arc): arrival or talking to Nuri starts it (also for older saves), it runs through dunes, ruins and mirror puzzle to the boss and ends with `FLAG_SOL_CHAPTER_COMPLETE`.
+- Side quest "Sonnenstaub für Jabir" (reward: Elixier and more).
+- Boss Kharos (the sand colossus, 780 HP, break gauge) in the Sonnenhalle arena, intro scene plays once, three phases:
+  - Sandfaust: circular sand slam hazard
+  - Sandsturm (60 %): sand wave across the arena (sidestep it), summons 2 Sandgeister
+  - Sturz des Kolosses (30 %): faster waves, summons a Sandskorpion
+- Defeat sets `FLAG_BOSS_SOL_KHAROS_DEFEATED`, plays the ending scene and stays defeated after a reload.
+- Desert enemies and Kharos have colours and size entries (`enemy.gd`) and creature models (`creature_visual.gd`).
+- 8 new tests (`test_s04_kharos`).
+- Regression: 224/224 tests plus restart checks (golden paths of chapters 1–3): PASS, run with Godot 4.7.2.
+
+## S05 Chapter-4 regression – PASSED
+- `test_s06_golden_solmera`: starts from a schema-v2 save at the end of chapter 3, loads it through the title, travels from the Valdoria Weltenstein to Solmera and plays chapter 4 with real interactions (Nuri, Jabir, dunes, ruins scene, mirror puzzle, Sandwächter, Kharos, both quests). It writes a final save.
+- `restart_check.gd` also verifies that save in a new process (`golden_expected_sol.json`), next to the chapter 1–3 saves.
+- `test_x01_full_playthrough` now continues into chapter 4 from the state chapter 3 really produced (new game to Kharos, all 8 quests completed, save/load through the title at the oasis bazaar).
+- Regression: 225/225 tests plus restart checks for chapters 1–4: PASS (Godot 4.7.2).
+- Phase 4 (Solmera) is complete.
+
+## A03 Controls – PASSED (owner: "die Steuerung gefällt mir noch nicht … Android voll Touch ohne große Buttons … Windows auch Pfeiltasten")
+- Windows / keyboard:
+  - Arrow keys move, in addition to WASD.
+  - The camera turns with Z / C (the arrow keys no longer double as camera keys); the mouse still works.
+  - The F1 help text lists both.
+- Android / touch is gesture-first (autopilot in `Player`: goals POINT, USE, FIGHT):
+  - tap the ground → Zotik walks there (a marker shows the target)
+  - tap a person, chest or stone → walk there and use it
+  - tap an enemy → approach, lock on and attack automatically
+  - double-tap → dodge
+  - floating stick on the left, swipe on the right turns the camera
+  - any manual input (stick) cancels the autopilot; it also gives up when the way is blocked
+- The action buttons are small and translucent at the screen edge. The pause menu has "Aktionstasten" to hide them entirely (setting `touch_buttons`).
+- Tests: `test_a01_touch` (18) and `test_p01_playability` (arrow and Z/C bindings, help text).
+- Not tested on a real phone yet, only in headless tests and a rendered screenshot (14).
+- Regression: 232/232 tests plus restart checks for chapters 1–4: PASS (run locally on Windows with Godot 4.7).
