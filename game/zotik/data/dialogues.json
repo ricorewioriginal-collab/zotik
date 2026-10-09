@@ -667,9 +667,63 @@
     ],
     "effects": [
       {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_SOL_001"
+      },
+      {
         "type": "set_flag",
         "id": "FLAG_SOL_DUNES_OPEN"
       }
+    ]
+  },
+  "DLG_NURI_REPORT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NURI_001",
+        "Der Sandkoloss ruht, und der Wind trägt wieder Wasser durch die Dünen. Die Karawanen können weiterziehen – dank euch."
+      ],
+      [
+        "NPC_NURI_001",
+        "Der Splitter, den ihr tragt … Er ruft nach den nächsten Welten. Reist weiter, Zotik."
+      ]
+    ]
+  },
+  "DLG_NURI_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NURI_001",
+        "Die Oase blüht, die Wege sind frei. Wenn ihr zurückkehrt, wartet hier immer ein Platz am Feuer."
+      ]
+    ]
+  },
+  "DLG_JABIR_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_JABIR_001",
+        "Mein Tränkevorrat schmilzt dahin wie Eis in der Sonne. Bringst du mir sechs Sonnenstaub? Ich zahle gut!"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_SOL_001"
+      },
+      {
+        "type": "open_shop",
+        "id": "SHOP_SOL_ALCHEMIST_001"
+      }
+    ]
+  },
+  "DLG_JABIR_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_JABIR_001",
+        "Sechs Beutel, glänzend wie Gold! Mein Elixier wird das beste der Wüste. Hier, deine Belohnung."
+      ]
     ]
   }
 }

@@ -256,6 +256,12 @@
         "NPC_LYRA_001",
         "Der Weltenstein hat uns an die Oase gebracht. Die Risse liegen weiter draußen, in der Wüste."
       ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_SOL_001"
+      }
     ]
   },
   "CUT_SOL_RUINS_001": {
@@ -274,6 +280,47 @@
       {
         "type": "set_flag",
         "id": "FLAG_SOL_RUINS_OPEN"
+      }
+    ]
+  },
+  "CUT_SOL_KHAROS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_KHAROS_001",
+        "Der Sand erinnert sich an jeden, der kam. An jeden, der ging. An jeden, der blieb."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Ein weiterer Splitter des Weltenkerns – er sitzt tief in seiner Brust."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann lassen wir den Sand diesmal vergessen."
+      ]
+    ]
+  },
+  "CUT_SOL_KHAROS_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Koloss zerfällt zu Sand, und der Wind trägt ihn fort. Im Staub glimmt ein Splitter, warm wie ein Sonnenaufgang."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Drei Splitter, drei Welten. Jemand verteilt sie – und wir folgen der Spur."
+      ],
+      [
+        "NPC_NIA_001",
+        "Erst zurück zu Nuri. Sie wartet an der Oase."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_SOL_OASIS",
+        "spawn": "AREA_SOL_DUNES"
       }
     ]
   }

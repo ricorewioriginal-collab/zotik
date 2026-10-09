@@ -112,5 +112,14 @@
   },
   "FLAG_SOL_WAECHTER_DEFEATED": {
     "desc": "Sandwächter der Sonnenhalle besiegt"
+  },
+  "FLAG_SOL_KHAROS_MET": {
+    "desc": "Begegnung mit Kharos gesehen"
+  },
+  "FLAG_BOSS_SOL_KHAROS_DEFEATED": {
+    "desc": "Kharos, der Sandkoloss, besiegt"
+  },
+  "FLAG_SOL_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 4 (Solmera) abgeschlossen"
   }
 }

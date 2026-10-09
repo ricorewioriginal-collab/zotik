@@ -208,7 +208,18 @@
     "name": "Solmera – Sonnenhalle",
     "world": "WORLD_SOLMERA",
     "exits": [
-      "AREA_SOL_SUNKEN"
+      "AREA_SOL_SUNKEN",
+      "AREA_SOL_ARENA"
+    ],
+    "gate": {
+      "AREA_SOL_ARENA": "FLAG_SOL_WAECHTER_DEFEATED"
+    }
+  },
+  "AREA_SOL_ARENA": {
+    "name": "Solmera – Sandkuppel",
+    "world": "WORLD_SOLMERA",
+    "exits": [
+      "AREA_SOL_SUN_HALL"
     ]
   }
 }
