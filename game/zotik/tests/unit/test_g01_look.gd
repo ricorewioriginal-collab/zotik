@@ -38,6 +38,12 @@ func test_web_and_mobile_stay_light() -> void:
 	check(icon.contains("assets/icons/icon.png") and ResourceLoader.exists(icon), "project icon is Zotik")
 	var splash := str(ProjectSettings.get_setting("application/boot_splash/image", ""))
 	check(splash.contains("title_bg") and ResourceLoader.exists(splash), "loading image is the title art")
+	# own loading page for the web build (instead of Godot's grey one)
+	check(exports.contains('html/custom_html_shell="res://web/zotik_shell.html"'), "web export uses the Zotik loading page")
+	var shell := FileAccess.get_file_as_string("res://web/zotik_shell.html")
+	for ph in ["$GODOT_URL", "$GODOT_CONFIG", "$GODOT_SPLASH", "$GODOT_PROJECT_NAME", "$GODOT_THREADS_ENABLED", "$GODOT_HEAD_INCLUDE"]:
+		check(shell.contains(ph), "loading page keeps the Godot placeholder " + ph)
+	check(shell.contains("Die Welten werden geladen"), "German loading text")
 	for f in ["icon.ico", "android_main_192.png", "android_foreground_432.png", "android_background_432.png"]:
 		check(FileAccess.file_exists("res://assets/icons/" + f), "icon file " + f)
 	for key in CharacterRig.HUMAN_WEAPONS:

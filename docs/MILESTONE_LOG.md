@@ -725,6 +725,7 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
   - project icon, Windows `.ico` and Android launcher icons (main and adaptive) use the owner's cover image (Zotik logo with the party; source `reference/derived/ZOTIK_COVER_640.jpg`, from the owner's site)
   - the Android adaptive icon is the cover on a blurred copy of itself, so the logo stays inside the round mask
   - the loading screen uses the title art
+  - the web build has its own loading page (`web/zotik_shell.html`, set as `html/custom_html_shell`): title art, gold progress bar with percent and MB, German texts and error messages, fade into the game. It keeps Godot's placeholders and was checked in a headless browser with the placeholders filled in as Godot does; the real export is checked after the merge on the Pages site.
   - concept art, not final (CLAUDE.md rule 6)
 - New test `test_web_and_mobile_stay_light` keeps these settings.
 - To verify: after the merge, open https://ricorewioriginal-collab.github.io/zotik/ again (the Pages job runs on `main` only).
