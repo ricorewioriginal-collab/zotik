@@ -143,6 +143,14 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("23_aqualis_archive")
+	gs.set_flag("FLAG_AQU_WAECHTER_DEFEATED")
+	gs.set_flag("FLAG_AQU_NERYX_MET")
+	game.enter_area("AREA_AQU_ABYSS", "default")
+	game.player.global_position = Vector3(0, 0, 6)
+	game.player.camera_pivot.rotation.y = 0.0
+	for c in game.companions.values():
+		c.snap_to_player()
+	await _shot("24_aqualis_neryx")
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	for _i in 20:

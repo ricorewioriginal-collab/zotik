@@ -17,7 +17,7 @@ Playable chapter 5 reachable from a chapter-4 save:
 | Q01 | Aqualis hub | world unlocked by chapter 4, dome city and harbour, shops, steles, arrival scene, blue-green underwater look |
 | Q02 | Coral caves | cave area, sea enemies, drifting-current look, anchor and chest |
 | Q03 | Weltenarchiv | dungeon, current puzzle (new puzzle kind or reuse of "valves"), miniboss |
-| Q04 | Chapter-5 quests + Neryx | main and side quest, multi-phase boss with a pressure/whirlpool hazard |
-| Q05 | Chapter-5 regression | golden path from a chapter-4 save, restart check for all chapters, extend the full playthrough test |
+| Q04 (PASSED) | Chapter-5 quests + Neryx | main and side quest, multi-phase boss with a pressure/whirlpool hazard |
+| Q05 (PASSED) | Chapter-5 regression | golden path from a chapter-4 save, restart check for all chapters, extend the full playthrough test |
 
 Deferred: swimming as a free-movement mode, the Nautilux as a drivable vehicle (needs its own plan), housing, crafting (Ignara).

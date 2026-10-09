@@ -339,6 +339,12 @@
         "NPC_LYRA_001",
         "Der Splitter, den wir suchen, muss in der Tiefe liegen. Fragen wir nach den Ingenieuren der Kuppeln."
       ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_AQU_001"
+      }
     ]
   },
   "CUT_AQU_ARCHIVE_001": {
@@ -357,6 +363,47 @@
       {
         "type": "set_flag",
         "id": "FLAG_AQU_ARCHIVE_OPEN"
+      }
+    ]
+  },
+  "CUT_AQU_NERYX_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_NERYX_001",
+        "Das Meer vergisst nichts. Es drückt, bis nichts mehr bleibt, als es erinnern kann."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der vierte Splitter – er sitzt in ihrem Kern und treibt die Strudel an."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann lassen wir die Strömung diesmal los."
+      ]
+    ]
+  },
+  "CUT_AQU_NERYX_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Neryx löst sich in einen Strudel aus Licht auf. Der Druck weicht, und im Wasser glimmt ein Splitter wie eine Perle."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Vier Splitter, vier Welten. Wer sie verteilt, kennt jede Strömung."
+      ],
+      [
+        "NPC_NIA_001",
+        "Erst zurück zu Mirael. Sie wartet an der Kuppel."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_AQU_DOME",
+        "spawn": "AREA_AQU_CAVES"
       }
     ]
   }

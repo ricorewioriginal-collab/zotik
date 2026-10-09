@@ -1,7 +1,7 @@
 extends TestCase
 ## X01: the whole game in one session, without prepared saves. New game from
 ## the title, chapter 1 in Lunaris, Weltenstein to Elaris, chapter 2,
-## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, then save -> reset -> load through the
+## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, Weltenstein to Aqualis, chapter 5, then save -> reset -> load through the
 ## title. Unlike the per-chapter golden paths (m15/e08/v06) every chapter
 ## starts from the state the previous one really produced, so a broken
 ## hand-over between chapters fails here.
@@ -273,6 +273,52 @@ func _chapter_four() -> void:
 	eq(Conditions.quest_state(S), "COMPLETED", "Solmera side quest completed")
 
 
+func _chapter_five() -> void:
+	const M := "QUEST_MAIN_AQU_001"
+	const S := "QUEST_SIDE_AQU_001"
+	await _exit_to("AREA_SOL_OASIS")
+	await _travel("TRAVEL_SOL_001", "WORLD_AQUALIS", "CUT_AQU_ARRIVAL_001")
+	eq(game.area.area_id, "AREA_AQU_DOME", "in the dome")
+	await _exit_to("AREA_AQU_HARBOUR")
+	await _talk("NPC_PERLA_001")
+	eq(Conditions.quest_step(S), 0, "Aqualis side quest started")
+	game.shop_menu.close_menu()
+	await _exit_to("AREA_AQU_DOME")
+	await _talk("NPC_MIRAEL_001")
+	eq(Conditions.quest_step(M), 1, "find the archive")
+	await _exit_to("AREA_AQU_CAVES")
+	for id in ["SPAWN_AQU_CAVES_KRABBE_1", "SPAWN_AQU_CAVES_KRABBE_2", "SPAWN_AQU_CAVES_QUALLE_1", "SPAWN_AQU_CAVES_QUALLE_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_AQU_001"].interact(game.player)
+	await _use_savepoint("SAVEPOINT_AQU_CAVES_001", 2)
+	await _boss_intro("TRIGGER_AQU_ARCHIVE", "CUT_AQU_ARCHIVE_001")
+	await _exit_to("AREA_AQU_ARCHIVE")
+	eq(Conditions.quest_step(M), 2, "currents next")
+	for id in ["SPAWN_AQU_ARCHIVE_KRABBE_1", "SPAWN_AQU_ARCHIVE_KRABBE_2", "SPAWN_AQU_ARCHIVE_QUALLE_1", "SPAWN_AQU_ARCHIVE_QUALLE_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_AQU_002"].interact(game.player)
+	var node: PuzzleNode = game.area.entities["PUZ_AQU_CURRENTS_001"]
+	node.parts[0].interact(game.player)
+	node.parts[2].interact(game.player)
+	eq(Conditions.quest_step(M), 3, "Archivwächter next")
+	await _exit_to("AREA_AQU_VAULT")
+	await _defeat_spawn("SPAWN_AQU_VAULT_WAECHTER")
+	eq(Conditions.quest_step(M), 4, "Neryx next")
+	await _exit_to("AREA_AQU_ABYSS")
+	await _boss_intro("TRIGGER_AQU_NERYX_INTRO", "CUT_AQU_NERYX_001")
+	await _defeat_spawn("SPAWN_AQU_ABYSS_NERYX")
+	eq(Dialogue.active_id, "CUT_AQU_NERYX_DEFEAT_001", "defeat scene")
+	await finish_dialogues()
+	await frames(2)
+	await physics_frames(3)
+	eq(game.area.area_id, "AREA_AQU_DOME", "back in the dome")
+	await _talk("NPC_MIRAEL_001")
+	eq(Conditions.quest_state(M), "COMPLETED", "chapter 5 completed")
+	await _exit_to("AREA_AQU_HARBOUR")
+	await _talk("NPC_PERLA_001")
+	eq(Conditions.quest_state(S), "COMPLETED", "Aqualis side quest completed")
+
+
 ## Saved state minus play_time, which keeps counting once the game runs.
 func _state_without_clock() -> String:
 	var d := GameState.to_dict()
@@ -290,7 +336,8 @@ func test_full_playthrough() -> void:
 	await _chapter_two()
 	await _chapter_three()
 	await _chapter_four()
-	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001"]:
+	await _chapter_five()
+	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001"]:
 		eq(Conditions.quest_state(q), "COMPLETED", q)
 	eq(GameState.party.size(), 3, "full party at the end")
 	# Save -> fresh state -> load through the title
@@ -303,7 +350,7 @@ func test_full_playthrough() -> void:
 	await frames(3)
 	game = tree.current_scene
 	await physics_frames(2)
-	eq(game.area.area_id, "AREA_SOL_BAZAAR", "loaded where the game was saved")
+	eq(game.area.area_id, "AREA_AQU_HARBOUR", "loaded where the game was saved")
 	eq(game.companions.size(), 3, "party restored")
 	eq(_state_without_clock(), expected, "state survives save/load")
 	SaveSystem.save_dir = "user://saves/"

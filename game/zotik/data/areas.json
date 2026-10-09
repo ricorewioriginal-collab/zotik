@@ -266,7 +266,18 @@
     "name": "Aqualis – Archivgewölbe",
     "world": "WORLD_AQUALIS",
     "exits": [
-      "AREA_AQU_ARCHIVE"
+      "AREA_AQU_ARCHIVE",
+      "AREA_AQU_ABYSS"
+    ],
+    "gate": {
+      "AREA_AQU_ABYSS": "FLAG_AQU_WAECHTER_DEFEATED"
+    }
+  },
+  "AREA_AQU_ABYSS": {
+    "name": "Aqualis – Der Abgrund",
+    "world": "WORLD_AQUALIS",
+    "exits": [
+      "AREA_AQU_VAULT"
     ]
   }
 }
