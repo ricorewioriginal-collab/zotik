@@ -13,6 +13,8 @@ const SCHEMA_VERSION := 2
 const SLOT_COUNT := 3
 const AUTO_SLOT := 0
 const MIRROR_PREFIX := "zotik_save_"
+const CODE_PREFIX := "ZOTIK1:"
+const CODE_MAX_BYTES := 8 * 1024 * 1024
 
 enum Status { OK, EMPTY, RECOVERED_FROM_BACKUP, CORRUPT, UNSUPPORTED_VERSION, IO_ERROR }
 
@@ -178,6 +180,49 @@ func _best(slot: int) -> Dictionary:
 	if from_file.status == Status.EMPTY and from_mirror.status != Status.EMPTY:
 		return from_mirror
 	return from_file
+
+
+## Transfer code of a slot ("ZOTIK1:<size>:<base64 of the deflated save envelope>") for moving
+## a save to another device by copy and paste or a text file. "" if the slot has no valid save.
+func export_code(slot: int) -> String:
+	var res := _best(slot)
+	if res.status != Status.OK and res.status != Status.RECOVERED_FROM_BACKUP:
+		return ""
+	var bytes := JSON.stringify(res.env).to_utf8_buffer()
+	return "%s%d:%s" % [CODE_PREFIX, bytes.size(), Marshalls.raw_to_base64(bytes.compress(FileAccess.COMPRESSION_DEFLATE))]
+
+
+## Imports a transfer code into a manual slot (1-3). The save must pass the normal checks
+## (structure, checksum, schema version). Returns OK or the reason it was refused.
+func import_code(code: String, slot: int) -> Status:
+	if slot < 1 or slot > SLOT_COUNT:
+		return Status.IO_ERROR
+	var clean := code.strip_edges().replace("\n", "").replace("\r", "").replace(" ", "")
+	if not clean.begins_with(CODE_PREFIX):
+		return Status.CORRUPT
+	var parts := clean.trim_prefix(CODE_PREFIX).split(":", false)
+	if parts.size() != 2 or not parts[0].is_valid_int():
+		return Status.CORRUPT
+	var size := int(parts[0])
+	if size <= 0 or size > CODE_MAX_BYTES:
+		return Status.CORRUPT
+	var packed := Marshalls.base64_to_raw(parts[1])
+	if packed.is_empty():
+		return Status.CORRUPT
+	var bytes := packed.decompress(size, FileAccess.COMPRESSION_DEFLATE)
+	if bytes.size() != size:
+		return Status.CORRUPT
+	var text := bytes.get_string_from_utf8()
+	var res := _parse_envelope(text)
+	if res.status != Status.OK:
+		return res.status
+	DirAccess.make_dir_recursive_absolute(save_dir)
+	var file_ok := _write_file(slot, text)
+	var mirror_ok := _use_mirror() and _mirror_write(slot, text)
+	if not file_ok and not mirror_ok:
+		return Status.IO_ERROR
+	saved.emit(slot)
+	return Status.OK
 
 
 func load_slot(slot: int) -> Status:

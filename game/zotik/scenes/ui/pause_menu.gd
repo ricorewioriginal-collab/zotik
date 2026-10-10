@@ -26,8 +26,19 @@ func refresh() -> void:
 		add_row("Aktionstasten: %s" % _on(Settings.get_value("touch_buttons")), [["Umschalten", _toggle_touch_buttons]])
 	add_heading("Spiel")
 	add_row("Spielstand speichern (3 Slots)", [["Speichern", _open_save]])
+	add_row("Spielstand auf ein anderes Gerät übertragen (Export / Import)", [["Öffnen", _open_transfer]])
 	add_row("Zum Titelbildschirm (speichert vorher automatisch)", [["Titel", _to_title]])
 	add_row("Spiel beenden", [["Beenden", App.quit_game]])
+
+
+func _open_transfer() -> void:
+	hide()
+	var game := get_parent().get_parent()
+	var tm: TransferMenu = game.transfer_menu
+	tm.closed.connect(func():
+		open()
+		game._update_control(), CONNECT_ONE_SHOT)
+	tm.open()
 
 
 func _open_save() -> void:

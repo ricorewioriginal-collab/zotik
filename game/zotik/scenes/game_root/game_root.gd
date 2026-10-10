@@ -20,6 +20,7 @@ var inventory_menu: InventoryMenu
 var shop_menu: ShopMenu
 var quest_log: QuestLog
 var save_menu: SaveMenu
+var transfer_menu: TransferMenu
 var pause_menu: PauseMenu
 var world_map: WorldMap
 var bounty_menu: BountyMenu
@@ -57,6 +58,9 @@ func _ready() -> void:
 	save_menu = SaveMenu.new()
 	ui.add_child(save_menu)
 	save_menu.closed.connect(_update_control)
+	transfer_menu = TransferMenu.new()
+	ui.add_child(transfer_menu)
+	transfer_menu.closed.connect(_update_control)
 	pause_menu = PauseMenu.new()
 	ui.add_child(pause_menu)
 	pause_menu.closed.connect(_update_control)
@@ -132,7 +136,7 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or pause_menu.visible or ui.get_node("GuideMenu").visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible or ngplus_menu.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or transfer_menu.visible or pause_menu.visible or ui.get_node("GuideMenu").visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible or ngplus_menu.visible
 
 
 func _update_control() -> void:

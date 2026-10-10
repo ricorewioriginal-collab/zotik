@@ -59,8 +59,18 @@ func _ready() -> void:
 			if info.status == SaveSystem.Status.RECOVERED_FROM_BACKUP:
 				text += " – Sicherung"
 			_add_button(box, "load_%d" % slot, text, _on_load.bind(slot))
+	_add_button(box, "transfer", "Spielstand übertragen (Export / Import)", _open_transfer)
 	_add_button(box, "quit", "Beenden", App.quit_game)
 	buttons["new_game"].grab_focus.call_deferred()
+
+
+func _open_transfer() -> void:
+	var tm := TransferMenu.new()
+	add_child(tm)
+	# a new save appears in the load list: rebuild the title
+	tm.imported.connect(func(): App.goto_scene.call_deferred(App.SCENE_TITLE))
+	tm.closed.connect(tm.queue_free)
+	tm.open()
 
 
 func _add_button(box: Control, id: String, text: String, cb: Callable) -> void:
