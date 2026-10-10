@@ -796,3 +796,15 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Look: dark red sky, rising embers (`Look.build_weather`, `embers` style), lava pools (`lava_pool` props glow, no collision), rocks and dead trees as backdrop.
 - Tests: `test_r07_ignara` (8), `test_r08_golden_ignara` (golden path from a chapter-6 save, restart check `golden_expected_ign.json`), `test_x01_full_playthrough` now plays chapters 1–7. Screenshots 29–32.
 - Owner's 3MF (Bambu Studio export, one untextured 1M-triangle mesh, looks like the extruded sheet) converted to GLB for inspection; not usable as a character. Placeholder art, not final.
+
+## W03 – Smoother running and world changes (owner: "es hängt beim Laufen und beim Betreten der Welten")
+Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the web/Android settings on a desktop):
+- Before: Lunaris village 748 draw calls / 734k primitives (low-end settings); the area build took 520–650 ms on a cold start, mostly in NPC creation (loading outfit and body models with 1024 px textures: 120 ms per new look).
+- Character textures (Quaternius) 1024 → 512 px, base colours lossy: first load of an NPC look 123 → 32 ms, texture memory 205 → 141 MB.
+- Flora in 14 m chunks (frustum and distance culling, 38 m on web/Android, 70 m on PC); on web/Android only the cheapest models; no lambdas in the placement loops.
+- Backdrop trees: wider spacing and no 4,700-triangle twisted trees on web/Android; backdrop casts no shadows; houses skip the timber frame on web/Android.
+- `Warmup` (core/warmup.gd): while the title screen is up the models, NPC/companion rigs and creature meshes are loaded a few milliseconds per frame (priority order; stops when the game starts), so the first visit of a world no longer loads everything at once.
+- Area changes (exits, portal, world map) go through a dark loading veil ("Die Welt wird geladen …"): the build happens behind it instead of a frozen picture (not in headless runs).
+- HUD: no per-frame tree search, re-layout only when its inputs change, style boxes touched only when the colour changes. NPC idle animations only within 32 m.
+- After (low-end settings, warmed): Lunaris 626 draws / 489k primitives, area builds 14–137 ms (other worlds 14–70 ms).
+- Real devices were not measured (no GPU here); the owner should try the live site.

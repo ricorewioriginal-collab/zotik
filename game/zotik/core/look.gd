@@ -65,8 +65,12 @@ static var _models := {}   # name -> [PackedScene, AABB]
 
 
 ## Android and the browser use the compatibility renderer: cheaper shadows.
+## Set ZOTIK_LOWEND=1 to test the web/Android settings on a desktop.
+static var _force_low := OS.get_environment("ZOTIK_LOWEND") == "1"
+
+
 static func low_end() -> bool:
-	return OS.has_feature("mobile") or OS.has_feature("web")
+	return _force_low or OS.has_feature("mobile") or OS.has_feature("web")
 
 
 static func world_of(area_id: String) -> String:
@@ -407,13 +411,13 @@ static func _village_house(prop_root: Node3D, prop_name: String, size: Vector3, 
 	var upper := BoxMesh.new()
 	upper.size = Vector3(w - 0.12, wall_h - base_h, d - 0.12)
 	_mesh(root, upper, Vector3(0, -h / 2.0 + base_h + (wall_h - base_h) / 2.0, 0), plaster, "Walls")
-	# timber frame: corner posts and a beam under the roof
-	for sx_ in [-1, 1]:
+	# timber frame: corner posts and a beam under the roof (skipped on web/Android: 12 draw calls per house)
+	for sx_ in ([] if low_end() else [-1, 1]):
 		for sz_ in [-1, 1]:
 			var post := BoxMesh.new()
 			post.size = Vector3(0.22, wall_h - base_h, 0.22)
 			_mesh(root, post, Vector3(sx_ * (w / 2.0 - 0.05), -h / 2.0 + base_h + (wall_h - base_h) / 2.0, sz_ * (d / 2.0 - 0.05)), wood, "Post")
-	for side in [-1, 1]:
+	for side in ([] if low_end() else [-1, 1]):
 		var beam_x := BoxMesh.new()
 		beam_x.size = Vector3(w + 0.1, 0.2, 0.2)
 		_mesh(root, beam_x, Vector3(0, top_y - 0.1, side * (d / 2.0 - 0.05)), wood, "BeamX")
@@ -520,10 +524,20 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 	var root := Node3D.new()
 	root.name = "Backdrop"
 	parent.add_child(root)
-	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var exit_pts := PackedVector2Array()
+	for x in layout.get("exits", []):
+		exit_pts.append(Vector2(float(x.pos[0]), float(x.pos[2])))
 	var town := world_of(area_id) == "WORLD_VALDORIA"
+	var low := low_end()
+	# web/Android: wider spacing and no 4,700-triangle twisted trees
+	var inner: Array = rows[0]
+	var outer: Array = rows[1]
+	if low:
+		outer = outer.filter(func(m): return not str(m).begins_with("TwistedTree"))
+		if outer.is_empty():
+			outer = ["Pine_1", "Pine_2"]
 	# [models, distance beyond the edge, spacing, min scale, max scale]
-	var specs := [[rows[0], 5.0, 7.5, 4.5 if not town else 6.0, 6.5 if not town else 8.0], [rows[1], 18.0, 16.0 if low_end() else 10.0, 7.0, 10.0]]
+	var specs := [[inner, 5.0, 12.0 if low else 7.5, 4.5 if not town else 6.0, 6.5 if not town else 8.0], [outer, 18.0, 24.0 if low else 10.0, 7.0, 10.0]]
 	for spec in specs:
 		var hx := size.x / 2.0 + float(spec[1])
 		var hz := size.y / 2.0 + float(spec[1])
@@ -536,7 +550,13 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 			var steps := maxi(1, int(a.distance_to(b) / float(spec[2])))
 			for i in steps + 1:
 				var p := a.lerp(b, float(i) / steps) + Vector2(rng.randf_range(-1.5, 1.5), rng.randf_range(-1.5, 1.5))
-				if exits.any(func(e: Vector2): return Vector2(clampf(p.x, -size.x / 2.0, size.x / 2.0), clampf(p.y, -size.y / 2.0, size.y / 2.0)).distance_to(e) < 7.0):
+				var edge := Vector2(clampf(p.x, -size.x / 2.0, size.x / 2.0), clampf(p.y, -size.y / 2.0, size.y / 2.0))
+				var near_exit := false
+				for e in exit_pts:
+					if e.distance_squared_to(edge) < 49.0:
+						near_exit = true
+						break
+				if near_exit:
 					continue
 				var models: Array = spec[0]
 				var nm: String = models[rng.randi() % models.size()]
@@ -544,9 +564,17 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 				if ResourceLoader.exists(NATURE_DIR % nm):
 					# metre-scaled nature model: inner row 7-12 m, outer row 14-24 m
 					var tall := rng.randf_range(7.0, 12.0) if spec[1] < 10.0 else rng.randf_range(14.0, 24.0)
-					_place_h(root, nm, Vector3(p.x, -0.05, p.y), tall, yaw)
+					_no_shadow(_place_h(root, nm, Vector3(p.x, -0.05, p.y), tall, yaw))
 				else:
-					_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw)
+					_no_shadow(_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw))
+
+
+## Far scenery does not need to cast shadows (they would fall outside the shadow range anyway).
+static func _no_shadow(n: Node3D) -> void:
+	if n == null:
+		return
+	for mi in n.find_children("*", "MeshInstance3D", true, false):
+		(mi as MeshInstance3D).cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 
 ## Small hand-placed dressing from layout "decor" (G05): KayKit models or
@@ -743,12 +771,19 @@ static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, siz
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(area_id + "flora")
 	var blocked := _blocked_rects(layout)
-	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var exit_pts := PackedVector2Array()
+	for x in layout.get("exits", []):
+		exit_pts.append(Vector2(float(x.pos[0]), float(x.pos[2])))
 	var root := Node3D.new()
 	root.name = "Flora"
 	parent.add_child(root)
-	var div := 3 if low_end() else 1
-	var groups := [["Grass", cfg.grass, Color.html(cfg.tint), int(cfg.count) / div, 0.2, 0.4], ["Flowers", cfg.flowers, Color.html(cfg.flower_tint), int(cfg.flower_count) / div, 0.25, 0.42], ["Mushrooms", cfg.mush, Color(1, 1, 1), int(cfg.mush_count) / div, 0.35, 0.7]]
+	var low := low_end()
+	var div := 2 if low else 1
+	# web/Android: only the cheapest models (about 50-90 triangles) and no mushrooms
+	var grass_models: Array = ["Grass_Common_Short"] if low else cfg.grass
+	var flower_models: Array = (["Flower_3_Single"] if not cfg.flowers.is_empty() else []) if low else cfg.flowers
+	var mush_models: Array = [] if low else cfg.mush
+	var groups := [["Grass", grass_models, Color.html(cfg.tint), int(cfg.count) / div, 0.2, 0.4], ["Flowers", flower_models, Color.html(cfg.flower_tint), int(cfg.flower_count) / div, 0.25, 0.42], ["Mushrooms", mush_models, Color(1, 1, 1), int(cfg.mush_count) / div, 0.35, 0.7]]
 	var glow_pts: Array[Vector3] = []
 	for g in groups:
 		var names: Array = g[1]
@@ -760,18 +795,23 @@ static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, siz
 			var mesh := nature_mesh(nm, g[2])
 			if mesh == null:
 				continue
-			var xforms: Array[Transform3D] = []
+			var chunks := {}  # cell -> Array[Transform3D]
+			var placed := 0
 			var tries := 0
-			while xforms.size() < per and tries < per * 3:
+			while placed < per and tries < per * 3:
 				tries += 1
 				var p := Vector2(rng.randf_range(-size.x / 2.0 + 1.0, size.x / 2.0 - 1.0), rng.randf_range(-size.y / 2.0 + 1.0, size.y / 2.0 - 1.0))
-				if blocked.any(func(r: Rect2): return r.has_point(p)) or exits.any(func(e: Vector2): return e.distance_to(p) < 5.0):
-					continue
-				var sc := rng.randf_range(g[4], g[5])
-				xforms.append(Transform3D(Basis(Vector3.UP, rng.randf() * TAU).scaled(Vector3.ONE * sc), Vector3(p.x, 0.0, p.y)))
-				if g[0] == "Grass" and glow_pts.size() < int(cfg.glow_count) / div and rng.randf() < 0.05:
-					glow_pts.append(Vector3(p.x, 0.0, p.y))
-			_multimesh(root, mesh, xforms, g[0] + "_" + nm)
+				if _free_spot(p, blocked, exit_pts):
+					var sc := rng.randf_range(g[4], g[5])
+					var cell := Vector2i(floori(p.x / FLORA_CELL), floori(p.y / FLORA_CELL))
+					if not chunks.has(cell):
+						chunks[cell] = [] as Array[Transform3D]
+					(chunks[cell] as Array[Transform3D]).append(Transform3D(Basis(Vector3.UP, rng.randf() * TAU).scaled(Vector3.ONE * sc), Vector3(p.x, 0.0, p.y)))
+					placed += 1
+					if g[0] == "Grass" and glow_pts.size() < int(cfg.glow_count) / div and rng.randf() < 0.05:
+						glow_pts.append(Vector3(p.x, 0.0, p.y))
+			for cell in chunks:
+				_multimesh(root, mesh, chunks[cell], "%s_%s_%d_%d" % [g[0], nm, cell.x, cell.y], Vector3((cell.x + 0.5) * FLORA_CELL, 0.0, (cell.y + 0.5) * FLORA_CELL), 38.0 if low else 70.0)
 	if cfg.glow != "" and not glow_pts.is_empty():
 		var bulb := SphereMesh.new()
 		bulb.radius = 0.09
@@ -787,17 +827,41 @@ static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, siz
 		_multimesh(root, bulb, bulbs, "Buds")
 
 
-static func _multimesh(parent: Node3D, mesh: Mesh, xforms: Array[Transform3D], nm: String) -> void:
+## Edge length (m) of one flora chunk: each chunk is culled by the camera frustum and by distance.
+const FLORA_CELL := 14.0
+
+
+## True if a flora/dressing spot is clear of houses, roads, water and the exits (plain loops: no lambdas, this runs thousands of times).
+static func _free_spot(p: Vector2, blocked: Array[Rect2], exit_pts: PackedVector2Array) -> bool:
+	for r in blocked:
+		if r.has_point(p):
+			return false
+	for e in exit_pts:
+		if e.distance_squared_to(p) < 25.0:
+			return false
+	return true
+
+
+## `origin` re-bases the transforms so the node sits in the middle of its chunk (needed for the
+## distance cut-off); `range_end` > 0 hides the chunk beyond that distance.
+static func _multimesh(parent: Node3D, mesh: Mesh, xforms: Array[Transform3D], nm: String, origin := Vector3.ZERO, range_end := 0.0) -> void:
 	var mm := MultiMesh.new()
 	mm.transform_format = MultiMesh.TRANSFORM_3D
 	mm.mesh = mesh
 	mm.instance_count = xforms.size()
 	for i in xforms.size():
-		mm.set_instance_transform(i, xforms[i])
+		var t := xforms[i]
+		t.origin -= origin
+		mm.set_instance_transform(i, t)
 	var mi := MultiMeshInstance3D.new()
 	mi.name = nm
 	mi.multimesh = mm
+	mi.position = origin
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	if range_end > 0.0:
+		mi.visibility_range_end = range_end
+		mi.visibility_range_end_margin = 4.0
+		mi.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_DISABLED
 	parent.add_child(mi)
 
 
@@ -812,7 +876,9 @@ static func build_dressing(parent: Node3D, area_id: String, layout: Dictionary) 
 		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(area_id + "dress")
-	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var exit_pts := PackedVector2Array()
+	for x in layout.get("exits", []):
+		exit_pts.append(Vector2(float(x.pos[0]), float(x.pos[2])))
 	var rects := _blocked_rects(layout)
 	var root := Node3D.new()
 	root.name = "Dressing"
@@ -836,10 +902,20 @@ static func build_dressing(parent: Node3D, area_id: String, layout: Dictionary) 
 				2: pos = Vector3(cx + hx + 0.9, 0, cz + along * hz); yaw = PI / 2.0
 				_: pos = Vector3(cx - hx - 0.9, 0, cz + along * hz); yaw = -PI / 2.0
 			var p2 := Vector2(pos.x, pos.z)
-			if exits.any(func(e: Vector2): return e.distance_to(p2) < 6.0):
+			var near_exit := false
+			for e in exit_pts:
+				if e.distance_squared_to(p2) < 36.0:
+					near_exit = true
+					break
+			if near_exit:
 				continue
 			# outside every other footprint (the own house is allowed: the item stands next to it)
-			if rects.any(func(r: Rect2): return r.has_point(p2) and not r.grow(0.0).has_point(Vector2(cx, cz))):
+			var in_other := false
+			for r in rects:
+				if r.has_point(p2) and not r.has_point(Vector2(cx, cz)):
+					in_other = true
+					break
+			if in_other:
 				continue
 			var n := _place(root, nm, pos, 1.0, yaw + rng.randf_range(-0.3, 0.3))
 			if n and not nm.begins_with("Banner"):
