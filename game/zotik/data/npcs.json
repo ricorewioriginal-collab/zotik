@@ -1329,5 +1329,15 @@
         "dialogue": "DLG_RASHA_HALL_001"
       }
     ]
+  },
+  "NPC_YSOLDE_001": {
+    "name": "Ysolde",
+    "area": "AREA_END_HUB",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_YSOLDE_NGPLUS_001"
+      }
+    ]
   }
 }

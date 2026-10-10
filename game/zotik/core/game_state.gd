@@ -26,6 +26,7 @@ var bounties := {}         # BOUNTY_* -> {state, progress}
 var arena := {}            # ARENA_* -> times won
 var casino := {"spins": 0, "best_win": 0}
 var play_time := 0.0
+var ng_plus := 0           # completed New Game+ restarts (0 = first playthrough)
 
 
 func _ready() -> void:
@@ -52,6 +53,29 @@ func reset_new_game() -> void:
 	arena = {}
 	casino = {"spins": 0, "best_win": 0}
 	play_time = 0.0
+	ng_plus = 0
+
+
+## New Game+: keeps what the player owns (items, gear, Lun, keepsakes, bestiary, arena and
+## casino records, look) and restarts the story: flags, quests, chests, puzzles, party and
+## position are reset; the finale flag stays so the endgame world remains open.
+func begin_new_game_plus() -> void:
+	var keep := {"inventory": inventory, "equipment": equipment, "currency": currency, "unique": unique_rewards, "custom": customization, "bestiary": bestiary, "arena": arena, "casino": casino, "play": play_time}
+	var next := ng_plus + 1
+	var finished := has_flag("FLAG_GAME_COMPLETE")
+	reset_new_game()
+	inventory = keep.inventory
+	equipment = keep.equipment
+	currency = keep.currency
+	unique_rewards = keep.unique
+	customization = keep.custom
+	bestiary = keep.bestiary
+	arena = keep.arena
+	casino = keep.casino
+	play_time = keep.play
+	ng_plus = next
+	if finished:
+		flags["FLAG_GAME_COMPLETE"] = true
 
 
 func set_flag(id: String, value: bool = true) -> void:
@@ -86,6 +110,7 @@ func to_dict() -> Dictionary:
 		"arena": arena.duplicate(),
 		"casino": casino.duplicate(),
 		"play_time": play_time,
+		"ng_plus": ng_plus,
 	}
 
 
@@ -154,6 +179,7 @@ func from_dict(d: Dictionary) -> bool:
 	if cz is Dictionary:
 		casino = {"spins": int(cz.get("spins", 0)), "best_win": int(cz.get("best_win", 0))}
 	play_time = float(d.get("play_time", 0.0))
+	ng_plus = int(d.get("ng_plus", 0))
 	return true
 
 
