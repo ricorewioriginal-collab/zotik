@@ -25,6 +25,7 @@ const PAGES := [
 		"Jeder Gegner hat Lebenspunkte und einen Bruch-Wert. Ist er voll, ist der Gegner kurz benommen und nimmt viel mehr Schaden („BREAK!“). Starke Angriffe sind dafür am besten.",
 		"Bei großen Gegnern leuchtet ein roter Kreis am Boden, bevor sie zuschlagen: Weich aus! Bosse haben mehrere Phasen und neue Angriffe, wenn sie schwächer werden.",
 		"In freier Wildnis, Kanälen, Dünen und Höhlen streifen außerdem Wildtiere und Wesen umher – jedes Mal andere und an anderen Stellen. Sie sind schwächer als die Wächter, bringen aber Lun und Material. In Dörfern und Städten bist du sicher.",
+		"Nach dem Finale öffnet sich über den Weltstein die Welt „Weltenriss“: sieben Superbosse (Weltenbrecher) mit einzigartigen EX-Belohnungen und die Halle der 100 mit zehn Rängen. Am Ende wartet der letzte Splitter.",
 	]],
 	["Quests", [
 		"Das Questlog (Taste L oder Symbol „Quests“) listet Hauptgeschichte und Nebenaufgaben mit dem aktuellen Schritt.",

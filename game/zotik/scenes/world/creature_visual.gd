@@ -64,6 +64,13 @@ const ARCHETYPES := {
 	"ENEMY_ECHOKRIEGER_001": ["model", "#c0d0ff"],
 	"ENEMY_WELTENWAECHTER_001": ["golem", "#80f0ff"],
 	"BOSS_ELYON_001": ["golem", "#c0ffff"],
+	"BOSS_END_WAECHTER_001": ["golem", "#d0a0ff"],
+	"BOSS_END_WURZEL_001": ["queen", "#a8ff70"],
+	"BOSS_END_KOLOSS_001": ["golem", "#ffd060"],
+	"BOSS_END_SANDKOENIG_001": ["golem", "#f0c070"],
+	"BOSS_END_ABYSS_001": ["queen", "#58e0f0"],
+	"BOSS_END_FROSTHERZ_001": ["golem", "#c8f0ff"],
+	"BOSS_END_FEUERKERN_001": ["golem", "#ff8030"],
 }
 
 ## Rigged models: file (assets/enemies/<file>.fbx), tint (replaces the flat model colour),

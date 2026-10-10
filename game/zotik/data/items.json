@@ -407,5 +407,89 @@
     },
     "price": 1080,
     "stack": 1
+  },
+  "ITEM_RIFT_ESSENCE_001": {
+    "name": "Rissessenz",
+    "type": "material",
+    "price": 300,
+    "stack": 99
+  },
+  "ITEM_LAST_SHARD_001": {
+    "name": "Der letzte Splitter",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
+  },
+  "WEAPON_WORLD_BLADE_EX_001": {
+    "name": "Weltenklinge EX",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 52
+    },
+    "unique": true,
+    "stack": 1
+  },
+  "WEAPON_STAR_STAFF_EX_001": {
+    "name": "Sternenstab EX",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 50
+    },
+    "unique": true,
+    "stack": 1
+  },
+  "WEAPON_WORLD_BREAKER_EX_001": {
+    "name": "Weltenbrecher EX",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 56
+    },
+    "unique": true,
+    "stack": 1
+  },
+  "WEAPON_SKY_BOW_EX_001": {
+    "name": "Himmelsbogen EX",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 50
+    },
+    "unique": true,
+    "stack": 1
+  },
+  "WEAPON_RIFT_DAGGERS_EX_001": {
+    "name": "Rissdolche EX",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 48
+    },
+    "unique": true,
+    "stack": 1
+  },
+  "WEAPON_MEMORY_MIRROR_EX_001": {
+    "name": "Erinnerungsspiegel EX",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 49
+    },
+    "unique": true,
+    "stack": 1
+  },
+  "ARMOR_WORLD_CORE_EX_001": {
+    "name": "Weltenkern-Panzer EX",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 22,
+      "max_hp": 80
+    },
+    "unique": true,
+    "stack": 1
   }
 }

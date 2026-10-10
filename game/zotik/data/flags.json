@@ -286,5 +286,80 @@
   },
   "FLAG_GAME_COMPLETE": {
     "desc": "Hauptgeschichte abgeschlossen"
+  },
+  "FLAG_END_ARRIVED": {
+    "desc": "Weltenriss betreten"
+  },
+  "FLAG_END_WAECHTER_MET": {
+    "desc": "Der erste Wächter gesehen"
+  },
+  "FLAG_END_WAECHTER_DEFEATED": {
+    "desc": "Der erste Wächter besiegt"
+  },
+  "FLAG_END_WURZEL_MET": {
+    "desc": "Die Wurzel ohne Ende gesehen"
+  },
+  "FLAG_END_WURZEL_DEFEATED": {
+    "desc": "Die Wurzel ohne Ende besiegt"
+  },
+  "FLAG_END_KOLOSS_MET": {
+    "desc": "Der Goldene Koloss gesehen"
+  },
+  "FLAG_END_KOLOSS_DEFEATED": {
+    "desc": "Der Goldene Koloss besiegt"
+  },
+  "FLAG_END_SANDKOENIG_MET": {
+    "desc": "Der Sandkönig gesehen"
+  },
+  "FLAG_END_SANDKOENIG_DEFEATED": {
+    "desc": "Der Sandkönig besiegt"
+  },
+  "FLAG_END_ABYSS_MET": {
+    "desc": "Der Abyss gesehen"
+  },
+  "FLAG_END_ABYSS_DEFEATED": {
+    "desc": "Der Abyss besiegt"
+  },
+  "FLAG_END_FROSTHERZ_MET": {
+    "desc": "Das Frostherz gesehen"
+  },
+  "FLAG_END_FROSTHERZ_DEFEATED": {
+    "desc": "Das Frostherz besiegt"
+  },
+  "FLAG_END_FEUERKERN_MET": {
+    "desc": "Der Feuerkern gesehen"
+  },
+  "FLAG_END_FEUERKERN_DEFEATED": {
+    "desc": "Der Feuerkern besiegt"
+  },
+  "FLAG_END_HALL_1": {
+    "desc": "Halle der 100: Rang 1 geschafft"
+  },
+  "FLAG_END_HALL_2": {
+    "desc": "Halle der 100: Rang 2 geschafft"
+  },
+  "FLAG_END_HALL_3": {
+    "desc": "Halle der 100: Rang 3 geschafft"
+  },
+  "FLAG_END_HALL_4": {
+    "desc": "Halle der 100: Rang 4 geschafft"
+  },
+  "FLAG_END_HALL_5": {
+    "desc": "Halle der 100: Rang 5 geschafft"
+  },
+  "FLAG_END_HALL_6": {
+    "desc": "Halle der 100: Rang 6 geschafft"
+  },
+  "FLAG_END_HALL_7": {
+    "desc": "Halle der 100: Rang 7 geschafft"
+  },
+  "FLAG_END_HALL_8": {
+    "desc": "Halle der 100: Rang 8 geschafft"
+  },
+  "FLAG_END_HALL_9": {
+    "desc": "Halle der 100: Rang 9 geschafft"
+  },
+  "FLAG_END_HALL_10": {
+    "desc": "Halle der 100: Rang 10 geschafft"
   }
 }

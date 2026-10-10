@@ -63,5 +63,1179 @@
       }
     ],
     "requires_flag": "FLAG_VAL_ARENA_BRONZE"
+  },
+  "ARENA_HALL_001": {
+    "name": "Halle der 100 – Rang 1 (Prüfungen 1–10)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_MONDFLEDERMAUS_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_MONDFLEDERMAUS_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_MONDFLEDERMAUS_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_MONDFLEDERMAUS_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFTLING_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_DUENENSCHLANGE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFTLING_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SANDSKORPION_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFTLING_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_LEUCHTQUALLE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GRUENSCHLEIM_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GRUENSCHLEIM_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_RIFFKRABBE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GRUENSCHLEIM_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_EISFLEDERMAUS_001",
+          "count": 1
+        }
+      ]
+    ],
+    "reward_currency": 400,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_1"
+      }
+    ],
+    "requires_flag": "FLAG_GAME_COMPLETE"
+  },
+  "ARENA_HALL_002": {
+    "name": "Halle der 100 – Rang 2 (Prüfungen 11–20)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_FROSTSPINNE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_FUNKENGEIST_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SUMPFFROSCH_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SUMPFFROSCH_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SUMPFFROSCH_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ASCHEKAEFER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WALDSPINNE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WALDSPINNE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WALDSPINNE_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_KANALSCHLEIM_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 1
+        }
+      ]
+    ],
+    "reward_currency": 650,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_2"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_1"
+  },
+  "ARENA_HALL_003": {
+    "name": "Halle der 100 – Rang 3 (Prüfungen 21–30)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_KANALSCHLEIM_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_MONDFLEDERMAUS_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_KANALSCHLEIM_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_RIFTLING_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SUMPFFROSCH_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_WALDSPINNE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_SANDGEIST_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_DUENENSCHLANGE_001",
+          "count": 1
+        }
+      ]
+    ],
+    "reward_currency": 900,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_3"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_2"
+  },
+  "ARENA_HALL_004": {
+    "name": "Halle der 100 – Rang 4 (Prüfungen 31–40)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SANDSKORPION_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_WUESTENSKELETT_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_RIFFKRABBE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SANDGEIST_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_EISGEIST_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SANDGEIST_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SANDGEIST_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_FROSTSPINNE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_DUENENSCHLANGE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_FROSTWOLF_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_DUENENSCHLANGE_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_DUENENSCHLANGE_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 2
+        }
+      ]
+    ],
+    "reward_currency": 1150,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 5
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_4"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_3"
+  },
+  "ARENA_HALL_005": {
+    "name": "Halle der 100 – Rang 5 (Prüfungen 41–50)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_SANDSKORPION_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_WOLKENSCHWINGE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SANDSKORPION_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SANDSKORPION_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_LEUCHTQUALLE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_LEUCHTQUALLE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_LEUCHTQUALLE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_MONDFLEDERMAUS_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WUESTENSKELETT_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_GRUENSCHLEIM_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WUESTENSKELETT_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WUESTENSKELETT_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_SUMPFFROSCH_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_KANALSCHLEIM_001",
+          "count": 2
+        }
+      ]
+    ],
+    "reward_currency": 1400,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 6
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_5"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_4"
+  },
+  "ARENA_HALL_006": {
+    "name": "Halle der 100 – Rang 6 (Prüfungen 51–60)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFFKRABBE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFFKRABBE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SANDGEIST_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_RIFFKRABBE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_DUENENSCHLANGE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_EISFLEDERMAUS_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_LEUCHTQUALLE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_EISFLEDERMAUS_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_WUESTENSKELETT_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_EISFLEDERMAUS_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_EISGEIST_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_EISFLEDERMAUS_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_EISGEIST_001",
+          "count": 4
+        }
+      ]
+    ],
+    "reward_currency": 1650,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 7
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_6"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_5"
+  },
+  "ARENA_HALL_007": {
+    "name": "Halle der 100 – Rang 7 (Prüfungen 61–70)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_EISGEIST_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FROSTSPINNE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FROSTSPINNE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FROSTSPINNE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FUNKENGEIST_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FUNKENGEIST_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FUNKENGEIST_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        }
+      ]
+    ],
+    "reward_currency": 1900,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 8
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_7"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_6"
+  },
+  "ARENA_HALL_008": {
+    "name": "Halle der 100 – Rang 8 (Prüfungen 71–80)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_FROSTWOLF_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FROSTWOLF_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FROSTWOLF_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ASCHEKAEFER_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        }
+      ]
+    ],
+    "reward_currency": 2150,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 9
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_8"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_7"
+  },
+  "ARENA_HALL_009": {
+    "name": "Halle der 100 – Rang 9 (Prüfungen 81–90)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_ASCHEKAEFER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ASCHEKAEFER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WOLKENSCHWINGE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WOLKENSCHWINGE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WOLKENSCHWINGE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 4
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        }
+      ]
+    ],
+    "reward_currency": 2400,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 10
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_9"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_8"
+  },
+  "ARENA_HALL_010": {
+    "name": "Halle der 100 – Rang 10 (Prüfungen 91–100)",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 3
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 4
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        }
+      ]
+    ],
+    "reward_currency": 2650,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 11
+      },
+      {
+        "id": "ITEM_LAST_SHARD_001",
+        "count": 1
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_HALL_10"
+      }
+    ],
+    "requires_flag": "FLAG_END_HALL_9"
   }
 }

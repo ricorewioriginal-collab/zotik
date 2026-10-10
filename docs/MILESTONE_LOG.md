@@ -839,3 +839,9 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - NPC ids Elio and Finn already exist (Elaris, Lunaris); the Elyndra townsperson is `NPC_TAVIS_001`.
 - Tests: `test_r13_elyndra` (8), `test_r14_golden_elyndra` (golden path from a chapter-9 save, restart check `golden_expected_ely.json`), `test_x01_full_playthrough` now plays chapters 1–10. Screenshots 41–44. Placeholder art, not final.
 
+## E01 – Endgame: Weltenriss, Weltenbrecher, Halle der 100 (Phase 7) – PASSED
+- World `WORLD_WELTENRISS` (chapter 11 "Nach dem Finale", unlocked by `FLAG_GAME_COMPLETE`; reached from any world stone): hub `AREA_END_HUB` (Rasha, savepoint, lore, seven gates) and seven arenas.
+- Superbosses (`BOSS_END_*`, 1700–2400 HP, three phases with summons and hazards) as in `ENDGAME.md`: Der erste Wächter, Die Wurzel ohne Ende, Der Goldene Koloss, Der Sandkönig, Der Abyss, Das Frostherz, Der Feuerkern. Not persistent (repeatable for Rissessenz, Lun and Elixiere); each defeat grants one unique EX item once: Weltenklinge EX, Sternenstab EX, Weltenbrecher EX, Himmelsbogen EX, Rissdolche EX, Erinnerungsspiegel EX and the armour Weltenkern-Panzer EX (the spec lists six EX weapons; the seventh boss pays an armour).
+- Halle der 100: `ARENA_HALL_001`–`010`, ten ranks of ten trials from data (100 waves, enemies from all worlds by strength; rank n needs rank n-1); rank 10 grants the unique "Der letzte Splitter". Arena menu title is now generic.
+- Tests: `test_r15_endgame` (5). Placeholder art, not final.
+

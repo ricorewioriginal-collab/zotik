@@ -1430,5 +1430,24 @@
         "id": "SHOP_ELY_KAEL_001"
       }
     ]
+  },
+  "DLG_RASHA_HALL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_RASHA_001",
+        "Willkommen in der Halle der 100, Splitterträger. Hundert Prüfungen, zehn Ränge – und am Ende wartet der letzte Splitter."
+      ],
+      [
+        "NPC_RASHA_001",
+        "Niederlagen kosten nichts. Aber Rang für Rang wird es wilder."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_menu",
+        "id": "arena"
+      }
+    ]
   }
 }

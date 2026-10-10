@@ -20,6 +20,7 @@ const WORLDS := {
 	"WORLD_NOCTARIS": {"sky_top": "#07051f", "sky_horizon": "#3a1a6a", "sun": "#a8a0ff", "sun_energy": 0.7, "pitch": -50.0, "fog": "#2a1a5a", "floor": "cobble", "boundary": "wall", "night": true, "fog_density": 0.013, "motes": {"color": "#c8a0ff", "amount": 90, "vy": 0.12, "vxz": 0.5, "y": 1.8, "h": 3.0, "size": 0.12, "life": 8.0}},
 	"WORLD_ASTRALIS": {"sky_top": "#1a2a7a", "sky_horizon": "#ff9ad0", "sun": "#ffe8d0", "sun_energy": 0.9, "pitch": -45.0, "fog": "#7a5aa8", "floor": "cobble", "boundary": "wall", "night": true, "fog_density": 0.01, "motes": {"color": "#ffe8a0", "amount": 90, "vy": 0.2, "vxz": 0.6, "y": 2.0, "h": 3.4, "size": 0.1, "life": 8.0}},
 	"WORLD_ELYNDRA": {"sky_top": "#050e26", "sky_horizon": "#3ac8c0", "sun": "#b0f0ff", "sun_energy": 0.8, "pitch": -48.0, "fog": "#2a5a7a", "floor": "cobble", "boundary": "wall", "night": true, "fog_density": 0.011, "motes": {"color": "#a0fff0", "amount": 100, "vy": 0.1, "vxz": 0.7, "y": 2.0, "h": 3.4, "size": 0.11, "life": 8.0}},
+	"WORLD_WELTENRISS": {"sky_top": "#0a0620", "sky_horizon": "#7a2ab0", "sun": "#d0b0ff", "sun_energy": 0.8, "pitch": -50.0, "fog": "#3a1a6a", "floor": "cobble", "boundary": "wall", "night": true, "fog_density": 0.012, "motes": {"color": "#ff90f0", "amount": 100, "vy": 0.12, "vxz": 0.7, "y": 2.0, "h": 3.4, "size": 0.11, "life": 8.0}},
 }
 
 ## prop name keyword -> shape/material kind (first match wins)
@@ -49,7 +50,7 @@ const PROPS_DIR := "res://assets/world/props/%s.gltf"
 ## CC0 Quaternius Medieval Village MegaKit (assets/world/village): roofs, doors, chimneys and plaster/brick textures for the houses
 const VILLAGE_DIR := "res://assets/world/village/%s.gltf"
 const VILLAGE_TEX := "res://assets/world/village/T_%s_BaseColor.png"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue", "WORLD_IGNARA": "red", "WORLD_NOCTARIS": "blue", "WORLD_ASTRALIS": "blue", "WORLD_ELYNDRA": "blue"}
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue", "WORLD_IGNARA": "red", "WORLD_NOCTARIS": "blue", "WORLD_ASTRALIS": "blue", "WORLD_ELYNDRA": "blue", "WORLD_WELTENRISS": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
@@ -64,6 +65,7 @@ const BACKDROP := {
 	"WORLD_NOCTARIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "tree_single_A", "building_home_B_blue"], ["rock_single_A", "trees_A_large", "rock_single_B"]],
 	"WORLD_ASTRALIS": [["building_tower_B_blue", "rock_single_B", "building_home_A_blue", "tree_single_B", "building_tower_A_blue"], ["rock_single_C", "trees_B_large", "rock_single_A"]],
 	"WORLD_ELYNDRA": [["building_tower_A_green", "rock_single_C", "building_home_B_blue", "building_tower_B_blue", "rock_single_A"], ["rock_single_B", "trees_A_large", "rock_single_C"]],
+	"WORLD_WELTENRISS": [["rock_single_A", "rock_single_B", "building_tower_A_blue", "rock_single_C", "rock_single_B"], ["rock_single_C", "rock_single_A", "rock_single_B"]],
 }
 
 static var _cache := {}

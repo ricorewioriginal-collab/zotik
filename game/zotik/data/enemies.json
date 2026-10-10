@@ -1806,5 +1806,586 @@
         }
       }
     ]
+  },
+  "BOSS_END_WAECHTER_001": {
+    "name": "Der erste Wächter",
+    "region": "WORLD_WELTENRISS",
+    "description": "Weltenbrecher-Superboss. Der erste Wächter wartet im Weltenriss auf alle, die das Finale überstanden haben.",
+    "hp": 1700,
+    "attack": 35,
+    "defense": 16,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 800,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 340,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_WAECHTER_DEFEATED"
+      },
+      {
+        "type": "give_item",
+        "id": "WEAPON_WORLD_BLADE_EX_001",
+        "count": 1
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Prüfung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 27
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Prüfung",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_MONDFLEDERMAUS_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 31
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Letzte Prüfung",
+        "attack_mult": 1.35,
+        "cooldown_mult": 0.72,
+        "summon": "ENEMY_RIFTLING_001",
+        "summon_count": 2,
+        "color": "#ff8080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 35
+        }
+      }
+    ]
+  },
+  "BOSS_END_WURZEL_001": {
+    "name": "Die Wurzel ohne Ende",
+    "region": "WORLD_WELTENRISS",
+    "description": "Weltenbrecher-Superboss. Die Wurzel ohne Ende wartet im Weltenriss auf alle, die das Finale überstanden haben.",
+    "hp": 1800,
+    "attack": 36,
+    "defense": 17,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 800,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 360,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_WURZEL_DEFEATED"
+      },
+      {
+        "type": "give_item",
+        "id": "WEAPON_STAR_STAFF_EX_001",
+        "count": 1
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Prüfung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 28
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Prüfung",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_WALDSPINNE_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 32
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Letzte Prüfung",
+        "attack_mult": 1.35,
+        "cooldown_mult": 0.72,
+        "summon": "ENEMY_SUMPFFROSCH_001",
+        "summon_count": 2,
+        "color": "#ff8080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 36
+        }
+      }
+    ]
+  },
+  "BOSS_END_KOLOSS_001": {
+    "name": "Der Goldene Koloss",
+    "region": "WORLD_WELTENRISS",
+    "description": "Weltenbrecher-Superboss. Der Goldene Koloss wartet im Weltenriss auf alle, die das Finale überstanden haben.",
+    "hp": 1950,
+    "attack": 37,
+    "defense": 20,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 800,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 390,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_KOLOSS_DEFEATED"
+      },
+      {
+        "type": "give_item",
+        "id": "WEAPON_WORLD_BREAKER_EX_001",
+        "count": 1
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Prüfung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 29
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Prüfung",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_KANALRATTE_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 33
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Letzte Prüfung",
+        "attack_mult": 1.35,
+        "cooldown_mult": 0.72,
+        "summon": "ENEMY_SCHLEUSENKRABBE_001",
+        "summon_count": 2,
+        "color": "#ff8080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 37
+        }
+      }
+    ]
+  },
+  "BOSS_END_SANDKOENIG_001": {
+    "name": "Der Sandkönig",
+    "region": "WORLD_WELTENRISS",
+    "description": "Weltenbrecher-Superboss. Der Sandkönig wartet im Weltenriss auf alle, die das Finale überstanden haben.",
+    "hp": 2000,
+    "attack": 38,
+    "defense": 18,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 800,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 400,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_SANDKOENIG_DEFEATED"
+      },
+      {
+        "type": "give_item",
+        "id": "WEAPON_SKY_BOW_EX_001",
+        "count": 1
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Prüfung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 30
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Prüfung",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_DUENENSCHLANGE_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 34
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Letzte Prüfung",
+        "attack_mult": 1.35,
+        "cooldown_mult": 0.72,
+        "summon": "ENEMY_WUESTENSKELETT_001",
+        "summon_count": 2,
+        "color": "#ff8080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 38
+        }
+      }
+    ]
+  },
+  "BOSS_END_ABYSS_001": {
+    "name": "Der Abyss",
+    "region": "WORLD_WELTENRISS",
+    "description": "Weltenbrecher-Superboss. Der Abyss wartet im Weltenriss auf alle, die das Finale überstanden haben.",
+    "hp": 2100,
+    "attack": 39,
+    "defense": 19,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 800,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 420,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_ABYSS_DEFEATED"
+      },
+      {
+        "type": "give_item",
+        "id": "WEAPON_RIFT_DAGGERS_EX_001",
+        "count": 1
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Prüfung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 31
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Prüfung",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_RIFFFROSCH_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 35
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Letzte Prüfung",
+        "attack_mult": 1.35,
+        "cooldown_mult": 0.72,
+        "summon": "ENEMY_ERTRUNKENER_001",
+        "summon_count": 2,
+        "color": "#ff8080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 39
+        }
+      }
+    ]
+  },
+  "BOSS_END_FROSTHERZ_001": {
+    "name": "Das Frostherz",
+    "region": "WORLD_WELTENRISS",
+    "description": "Weltenbrecher-Superboss. Das Frostherz wartet im Weltenriss auf alle, die das Finale überstanden haben.",
+    "hp": 2200,
+    "attack": 40,
+    "defense": 21,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 800,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 440,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_FROSTHERZ_DEFEATED"
+      },
+      {
+        "type": "give_item",
+        "id": "WEAPON_MEMORY_MIRROR_EX_001",
+        "count": 1
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Prüfung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 32
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Prüfung",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_EISFLEDERMAUS_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 36
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Letzte Prüfung",
+        "attack_mult": 1.35,
+        "cooldown_mult": 0.72,
+        "summon": "ENEMY_FROSTSPINNE_001",
+        "summon_count": 2,
+        "color": "#ff8080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 40
+        }
+      }
+    ]
+  },
+  "BOSS_END_FEUERKERN_001": {
+    "name": "Der Feuerkern",
+    "region": "WORLD_WELTENRISS",
+    "description": "Weltenbrecher-Superboss. Der Feuerkern wartet im Weltenriss auf alle, die das Finale überstanden haben.",
+    "hp": 2400,
+    "attack": 42,
+    "defense": 22,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 800,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 480,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_FEUERKERN_DEFEATED"
+      },
+      {
+        "type": "give_item",
+        "id": "ARMOR_WORLD_CORE_EX_001",
+        "count": 1
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Prüfung",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 34
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Prüfung",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_GLUEHWESPE_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 38
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Letzte Prüfung",
+        "attack_mult": 1.35,
+        "cooldown_mult": 0.72,
+        "summon": "ENEMY_GLUTDRACHE_001",
+        "summon_count": 2,
+        "color": "#ff8080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 42
+        }
+      }
+    ]
   }
 }

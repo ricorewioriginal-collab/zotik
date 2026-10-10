@@ -569,5 +569,67 @@
     "exits": [
       "AREA_ELY_GATE"
     ]
+  },
+  "AREA_END_WAECHTER": {
+    "name": "Weltenriss – Der erste Wächter",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_HUB"
+    ]
+  },
+  "AREA_END_WURZEL": {
+    "name": "Weltenriss – Die Wurzel ohne Ende",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_HUB"
+    ]
+  },
+  "AREA_END_KOLOSS": {
+    "name": "Weltenriss – Der Goldene Koloss",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_HUB"
+    ]
+  },
+  "AREA_END_SANDKOENIG": {
+    "name": "Weltenriss – Der Sandkönig",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_HUB"
+    ]
+  },
+  "AREA_END_ABYSS": {
+    "name": "Weltenriss – Der Abyss",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_HUB"
+    ]
+  },
+  "AREA_END_FROSTHERZ": {
+    "name": "Weltenriss – Das Frostherz",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_HUB"
+    ]
+  },
+  "AREA_END_FEUERKERN": {
+    "name": "Weltenriss – Der Feuerkern",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_HUB"
+    ]
+  },
+  "AREA_END_HUB": {
+    "name": "Weltenriss – Der Riss zwischen den Welten",
+    "world": "WORLD_WELTENRISS",
+    "exits": [
+      "AREA_END_WAECHTER",
+      "AREA_END_WURZEL",
+      "AREA_END_KOLOSS",
+      "AREA_END_SANDKOENIG",
+      "AREA_END_ABYSS",
+      "AREA_END_FROSTHERZ",
+      "AREA_END_FEUERKERN"
+    ]
   }
 }

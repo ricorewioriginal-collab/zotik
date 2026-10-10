@@ -7,7 +7,7 @@ var game: Node
 
 func refresh() -> void:
 	super()
-	title_label.text = "Arena von Valdoria"
+	title_label.text = "Arena"
 	info_label.text = "Niederlagen kosten nichts. Gegenstandsbelohnungen nur beim ersten Sieg."
 	var ids := Content.table("arena").keys()
 	ids.sort()
