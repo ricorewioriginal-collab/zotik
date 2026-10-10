@@ -154,6 +154,15 @@ func _run() -> void:
 	for c in game.companions.values():
 		c.snap_to_player()
 	await _shot("24_aqualis_neryx")
+	for f in ["FLAG_FRO_FOREST_OPEN", "FLAG_FRO_CITY_OPEN", "FLAG_FRO_ICE_DONE", "FLAG_FRO_WAECHTER_DEFEATED", "FLAG_FRO_AVARN_MET", "FLAG_FRO_ARRIVED"]:
+		gs.set_flag(f)
+	for pair in [["AREA_FRO_VILLAGE", "25_frosthain_village", Vector3(0, 0, 14)], ["AREA_FRO_FOREST", "26_frosthain_forest", Vector3(0, 0, 16)], ["AREA_FRO_CITY", "27_frosthain_city", Vector3(0, 0, 8)], ["AREA_FRO_CORE", "28_frosthain_avarn", Vector3(0, 0, 6)]]:
+		game.enter_area(pair[0], "default")
+		game.player.global_position = pair[2]
+		game.player.camera_pivot.rotation.y = 0.0
+		for c in game.companions.values():
+			c.snap_to_player()
+		await _shot(pair[1])
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	for _i in 20:

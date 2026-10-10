@@ -772,3 +772,11 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Quaternius Fantasy Props MegaKit (41 models): `Look.build_dressing` puts barrels, crates, benches, stools, buckets and banners around houses (deterministic, small colliders, keeps roads/exits free); layouts can name these models in `decor` (metre scale, no hex scale). Valdoria gets no grass (cobbled streets), grass is smaller (0.2–0.4 m).
 - Quaternius Medieval Village MegaKit (35 pieces): `Look._village_house` builds houses (stone base, plaster walls, timber frame, tiled roof fitted to the footprint, door with frame, chimney, windows that glow at night) instead of the old KayKit/box houses where the footprint is at least 4 × 4 m; `DECOR_MAP` swaps the KayKit trees, rocks, barrels, crates, buckets, weapon racks and fences in the layouts' decor for the metre-scaled models.
 - R03 (first step): soft rim light on all character materials (`Look.rim`); the characters themselves are still the modular Quaternius rig plus Zotik's primitive fox parts – real hero models need an artist.
+
+## R05 – Chapter 6 Frosthain (Phase 6) – PASSED
+- World `WORLD_FROSTHAIN` (chapter 6, unlocked by `FLAG_AQU_CHAPTER_COMPLETE`), six areas: Dorf Hjalm, Wärmehalle (smith Tormund, alchemist Brisa), Eiswald, gefrorene Stadt, Eistempel, Eiskern (arena).
+- Main quest `QUEST_MAIN_FRO_001` "Der Winter, der nichts vergisst" (Kaelen → city → memory-ice puzzle `PUZ_FRO_ICE_001`, five crystals in order 4-2-5-1-3 → Eiswächter → boss Avarn → report; 500 Lun, `FLAG_FRO_CHAPTER_COMPLETE`); side quest "Frostsplitter für Tormund" (5 shards, 240 Lun + Elixier).
+- New enemies Frostwolf, Eisgeist, Eiswächter (miniboss, persistent) and boss Avarn (980 HP, phases Eisschlag → Schneesturm with 2 Eisgeister → Erstarrung with a Frostwolf; circle and surge hazards). Items Frostsplitter, Wärmender Tee, Frostaxt, Pelzmantel; shops, lore, cutscenes, savepoints, chests.
+- Look: snow floor (Poly Haven snow_02), falling snow particles (`Look.build_weather`, fewer on web/Android), pines/dead trees as backdrop.
+- Tests: `test_r05_frosthain` (8), `test_r06_golden_frosthain` (golden path from a chapter-5 save, restart check `golden_expected_fro.json`), `test_x01_full_playthrough` now plays chapters 1–6. Screenshots 25–28.
+- Placeholder art, not final.

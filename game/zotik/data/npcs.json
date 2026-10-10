@@ -715,5 +715,103 @@
         "dialogue": "DLG_PERLA_SHOP_001"
       }
     ]
+  },
+  "NPC_KAELEN_001": {
+    "name": "Kaelen",
+    "area": "AREA_FRO_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_FRO_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_KAELEN_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_FRO_FOREST_OPEN"
+          }
+        ],
+        "dialogue": "DLG_KAELEN_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_FRO_001",
+            "step": 5
+          }
+        ],
+        "dialogue": "DLG_KAELEN_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_FRO_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_KAELEN_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_KAELEN_IDLE_001"
+      }
+    ]
+  },
+  "NPC_YSA_001": {
+    "name": "Ysa",
+    "area": "AREA_FRO_VILLAGE",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_YSA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_TORMUND_001": {
+    "name": "Tormund",
+    "area": "AREA_FRO_HALL",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_FRO_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_TORMUND_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_FRO_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_TORMUND_THANKS_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_TORMUND_SHOP_001"
+      }
+    ]
+  },
+  "NPC_BRISA_001": {
+    "name": "Brisa",
+    "area": "AREA_FRO_HALL",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_BRISA_SHOP_001"
+      }
+    ]
   }
 }

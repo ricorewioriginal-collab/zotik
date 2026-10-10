@@ -655,5 +655,105 @@
         "count": 1
       }
     ]
+  },
+  "QUEST_MAIN_FRO_001": {
+    "name": "Der Winter, der nichts vergisst",
+    "type": "main",
+    "completion_notice": "Kapitel 6 „Frosthain – Der Winter, der nichts vergisst“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Sprich mit Kaelen im Dorf Hjalm.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_KAELEN_001"
+        }
+      },
+      {
+        "objective": "Finde die gefrorene Stadt hinter dem Eiswald.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_FRO_CITY"
+        }
+      },
+      {
+        "objective": "Löse das Erinnerungseis in der Stadt.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_FRO_ICE_001"
+        }
+      },
+      {
+        "objective": "Besiege den Eiswächter im Tempel.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_EISWAECHTER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich Avarn, dem Eiskern.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_AVARN_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Kaelen im Dorf.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_KAELEN_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 500
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_FRO_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_FRO_001": {
+    "name": "Frostsplitter für Tormund",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 5 Frostsplitter (Eiswald, gefrorene Stadt).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_FROST_SHARD_001",
+          "count": 5
+        }
+      },
+      {
+        "objective": "Bring die Frostsplitter zu Tormund in die Wärmehalle.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_TORMUND_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_FROST_SHARD_001",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 240
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ]
   }
 }

@@ -850,5 +850,130 @@
         "Fünf Perlen, ohne Kratzer! Mein Elixier wird das Beste unter der Kuppel. Hier, deine Belohnung."
       ]
     ]
+  },
+  "DLG_KAELEN_LEAD_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KAELEN_001",
+        "Ihr kommt mitten im Winter, der nicht enden will. Seit der Eiskern erwacht ist, vergisst das Eis nichts mehr – und die Stadt dahinter ist darunter erstarrt."
+      ],
+      [
+        "NPC_KAELEN_001",
+        "Das Waldtor ist offen. Bleibt auf den Pfaden, die Frostwölfe jagen im Rudel. Am Weltenanker weiter vorn könnt ihr rasten und speichern."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_FRO_001"
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_FRO_FOREST_OPEN"
+      }
+    ]
+  },
+  "DLG_KAELEN_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KAELEN_001",
+        "Hinter dem Eiswald liegt die gefrorene Stadt. Dort schlägt der Eiskern – und dort muss sich das Eis erinnern, dass es einmal Wasser war."
+      ]
+    ]
+  },
+  "DLG_KAELEN_REPORT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KAELEN_001",
+        "Der Wind trägt wieder Schneeflocken statt Eissplitter. Hjalm atmet auf – dank euch."
+      ],
+      [
+        "NPC_KAELEN_001",
+        "Der Splitter, den ihr tragt … Er ruft nach weiteren Welten. Reist weiter, Zotik."
+      ]
+    ]
+  },
+  "DLG_KAELEN_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KAELEN_001",
+        "Die Wärmehalle ist voll, die Wege sind frei. Wenn ihr zurückkehrt, wartet hier immer ein Platz am Feuer."
+      ]
+    ]
+  },
+  "DLG_YSA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_YSA_001",
+        "Meine Großmutter sagte, im Eis der Stadt schläft jede Stimme, die je dort gesprochen hat. Nachts hört man sie manchmal flüstern."
+      ],
+      [
+        "NPC_YSA_001",
+        "Nehmt einen Tee mit. Kalte Hände zittern beim Kämpfen."
+      ]
+    ]
+  },
+  "DLG_TORMUND_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TORMUND_001",
+        "Für Frostäxte brauche ich Frostsplitter, und die Wölfe da draußen tragen sie im Fell. Bringst du mir fünf? Ich zahle gut!"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_FRO_001"
+      },
+      {
+        "type": "open_shop",
+        "id": "SHOP_FRO_SMITH_001"
+      }
+    ]
+  },
+  "DLG_TORMUND_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TORMUND_001",
+        "Fünf klare Splitter, ohne Riss! Daraus schmiede ich die besten Äxte des Nordens. Hier, deine Belohnung."
+      ]
+    ]
+  },
+  "DLG_TORMUND_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TORMUND_001",
+        "Frostaxt und Pelzmantel, gehärtet im Eis. Was der Winter nicht bricht, bricht auch kein Gegner."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_FRO_SMITH_001"
+      }
+    ]
+  },
+  "DLG_BRISA_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_BRISA_001",
+        "Frischer Tee und starke Tränke! Heiß getrunken wärmt er bis in die Fingerspitzen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_FRO_ALCHEMIST_001"
+      }
+    ]
   }
 }

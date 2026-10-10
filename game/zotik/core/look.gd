@@ -14,6 +14,7 @@ const WORLDS := {
 	"WORLD_ELARIS": {"sky_top": "#2f74d6", "sky_horizon": "#cdeeff", "sun": "#fff0c8", "sun_energy": 1.25, "pitch": -58.0, "fog": "#a8d8b0", "floor": "forest", "boundary": "hedge"},
 	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall"},
 	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall"},
+	"WORLD_FROSTHAIN": {"sky_top": "#5a86b8", "sky_horizon": "#e6f2ff", "sun": "#e8f0ff", "sun_energy": 1.0, "pitch": -30.0, "fog": "#d6e6f4", "floor": "snow", "boundary": "wall", "fog_density": 0.014, "snow": true},
 	"WORLD_AQUALIS": {"sky_top": "#0a3a6a", "sky_horizon": "#4ad0c8", "sun": "#a8f0ff", "sun_energy": 1.1, "pitch": -70.0, "fog": "#1a8aa8", "floor": "sand", "boundary": "wall", "fog_density": 0.016},
 }
 
@@ -30,7 +31,7 @@ const PROP_KINDS := [
 
 const EXIT_GAP := 6.0
 ## texture repeats per metre on floors (keeps cobbles/planks at a believable size)
-const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25, "sand": 0.2}
+const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25, "sand": 0.2, "snow": 0.25}
 
 ## tree models for placed "tree" props
 const TREES := ["CommonTree_1", "CommonTree_2", "CommonTree_3", "CommonTree_4", "CommonTree_5"]
@@ -44,7 +45,7 @@ const PROPS_DIR := "res://assets/world/props/%s.gltf"
 ## CC0 Quaternius Medieval Village MegaKit (assets/world/village): roofs, doors, chimneys and plaster/brick textures for the houses
 const VILLAGE_DIR := "res://assets/world/village/%s.gltf"
 const VILLAGE_TEX := "res://assets/world/village/T_%s_BaseColor.png"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue"}
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
@@ -53,6 +54,7 @@ const BACKDROP := {
 	"WORLD_ELARIS": [["CommonTree_2", "CommonTree_4", "Pine_1", "CommonTree_1", "Pine_3"], ["TwistedTree_2", "TwistedTree_3", "Pine_2"]],
 	"WORLD_VALDORIA": [["building_home_A_red", "building_home_B_red", "building_tavern_red", "building_tower_A_red", "building_home_A_red"], ["trees_A_large", "trees_B_large"]],
 	"WORLD_SOLMERA": [["rock_single_A", "rock_single_B", "tent", "rock_single_C", "building_tower_A_red"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
+	"WORLD_FROSTHAIN": [["Pine_1", "Pine_2", "Pine_3", "DeadTree_1", "Pine_2"], ["Pine_3", "Pine_1", "Pine_2", "DeadTree_2"]],
 	"WORLD_AQUALIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "rock_single_B", "building_home_B_blue"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 }
 
@@ -642,6 +644,38 @@ static func _lantern(parent: Node3D, pos: Vector3, yaw: float) -> Node3D:
 	cap.size = Vector3(0.26, 0.12, 0.26)
 	_mesh(n, cap, Vector3(0.5, 2.47, 0), wood, "Cap")
 	return n
+
+
+## Falling snow over the whole area (Frosthain): one CPUParticles3D, fewer flakes on web/Android.
+static func build_weather(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
+	if is_indoor(area_id, layout) or not style(area_id).get("snow", false):
+		return
+	var p := CPUParticles3D.new()
+	p.name = "Snow"
+	p.amount = 160 if low_end() else 700
+	p.lifetime = 9.0
+	p.preprocess = 9.0
+	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
+	p.emission_box_extents = Vector3(size.x / 2.0, 0.5, size.y / 2.0)
+	p.position = Vector3(0, 12, 0)
+	p.direction = Vector3(0.15, -1, 0.05)
+	p.spread = 12.0
+	p.initial_velocity_min = 1.2
+	p.initial_velocity_max = 2.2
+	p.gravity = Vector3(0.2, -0.3, 0.0)
+	p.scale_amount_min = 0.6
+	p.scale_amount_max = 1.4
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.09, 0.09)
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(1, 1, 1, 0.9)
+	mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	quad.material = mat
+	p.mesh = quad
+	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(p)
 
 
 ## Footprints of houses, roads and water (x/z rectangles) that dressing and flora keep clear.

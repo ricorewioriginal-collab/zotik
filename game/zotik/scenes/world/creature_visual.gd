@@ -28,6 +28,10 @@ const ARCHETYPES := {
 	"ENEMY_LEUCHTQUALLE_001": ["slime", "#9af0ff"],
 	"ENEMY_ARCHIVWAECHTER_001": ["golem", "#5ac8c0"],
 	"BOSS_NERYX_001": ["queen", "#58e0f0"],
+	"ENEMY_FROSTWOLF_001": ["wolf", "#bfe4ff"],
+	"ENEMY_EISGEIST_001": ["imp", "#d8f6ff"],
+	"ENEMY_EISWAECHTER_001": ["golem", "#9ad0f0"],
+	"BOSS_AVARN_001": ["golem", "#8ac8ff"],
 }
 
 var archetype := "imp"

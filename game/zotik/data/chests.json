@@ -122,5 +122,33 @@
       }
     ],
     "currency": 130
+  },
+  "CHEST_FRO_001": {
+    "area": "AREA_FRO_FOREST",
+    "contents": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_WARM_TEA_001",
+        "count": 3
+      }
+    ],
+    "currency": 110
+  },
+  "CHEST_FRO_002": {
+    "area": "AREA_FRO_CITY",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_FROST_SHARD_001",
+        "count": 2
+      }
+    ],
+    "currency": 140
   }
 }

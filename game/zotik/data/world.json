@@ -46,6 +46,16 @@
       "area": "AREA_AQU_ARCHIVE",
       "name": "Weltenanker im Weltenarchiv",
       "heals": true
+    },
+    "SAVEPOINT_FRO_FOREST_001": {
+      "area": "AREA_FRO_FOREST",
+      "name": "Weltenanker im Eiswald",
+      "heals": true
+    },
+    "SAVEPOINT_FRO_CITY_001": {
+      "area": "AREA_FRO_CITY",
+      "name": "Weltenanker in der gefrorenen Stadt",
+      "heals": true
     }
   },
   "uniques": {

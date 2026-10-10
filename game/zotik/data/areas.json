@@ -279,5 +279,63 @@
     "exits": [
       "AREA_AQU_VAULT"
     ]
+  },
+  "AREA_FRO_VILLAGE": {
+    "name": "Frosthain – Dorf Hjalm",
+    "world": "WORLD_FROSTHAIN",
+    "exits": [
+      "AREA_FRO_HALL",
+      "AREA_FRO_FOREST"
+    ],
+    "gate": {
+      "AREA_FRO_FOREST": "FLAG_FRO_FOREST_OPEN"
+    }
+  },
+  "AREA_FRO_HALL": {
+    "name": "Frosthain – Wärmehalle",
+    "world": "WORLD_FROSTHAIN",
+    "exits": [
+      "AREA_FRO_VILLAGE"
+    ]
+  },
+  "AREA_FRO_FOREST": {
+    "name": "Frosthain – Eiswald",
+    "world": "WORLD_FROSTHAIN",
+    "exits": [
+      "AREA_FRO_VILLAGE",
+      "AREA_FRO_CITY"
+    ],
+    "gate": {
+      "AREA_FRO_CITY": "FLAG_FRO_CITY_OPEN"
+    }
+  },
+  "AREA_FRO_CITY": {
+    "name": "Frosthain – Die gefrorene Stadt",
+    "world": "WORLD_FROSTHAIN",
+    "exits": [
+      "AREA_FRO_FOREST",
+      "AREA_FRO_TEMPLE"
+    ],
+    "gate": {
+      "AREA_FRO_TEMPLE": "FLAG_FRO_ICE_DONE"
+    }
+  },
+  "AREA_FRO_TEMPLE": {
+    "name": "Frosthain – Eistempel",
+    "world": "WORLD_FROSTHAIN",
+    "exits": [
+      "AREA_FRO_CITY",
+      "AREA_FRO_CORE"
+    ],
+    "gate": {
+      "AREA_FRO_CORE": "FLAG_FRO_WAECHTER_DEFEATED"
+    }
+  },
+  "AREA_FRO_CORE": {
+    "name": "Frosthain – Der Eiskern",
+    "world": "WORLD_FROSTHAIN",
+    "exits": [
+      "AREA_FRO_TEMPLE"
+    ]
   }
 }
