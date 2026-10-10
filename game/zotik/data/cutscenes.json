@@ -849,5 +849,113 @@
         "spawn": "AREA_ELY_LAYERS"
       }
     ]
+  },
+  "CUT_END_WAECHTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Boden gibt nach, und aus dem Riss steigt Der erste Wächter."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ein letztes Mal, und diesmal nur für uns."
+      ]
+    ]
+  },
+  "CUT_END_WURZEL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Boden gibt nach, und aus dem Riss steigt Die Wurzel ohne Ende."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ein letztes Mal, und diesmal nur für uns."
+      ]
+    ]
+  },
+  "CUT_END_KOLOSS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Boden gibt nach, und aus dem Riss steigt Der Goldene Koloss."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ein letztes Mal, und diesmal nur für uns."
+      ]
+    ]
+  },
+  "CUT_END_SANDKOENIG_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Boden gibt nach, und aus dem Riss steigt Der Sandkönig."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ein letztes Mal, und diesmal nur für uns."
+      ]
+    ]
+  },
+  "CUT_END_ABYSS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Boden gibt nach, und aus dem Riss steigt Der Abyss."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ein letztes Mal, und diesmal nur für uns."
+      ]
+    ]
+  },
+  "CUT_END_FROSTHERZ_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Boden gibt nach, und aus dem Riss steigt Das Frostherz."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ein letztes Mal, und diesmal nur für uns."
+      ]
+    ]
+  },
+  "CUT_END_FEUERKERN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Boden gibt nach, und aus dem Riss steigt Der Feuerkern."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Ein letztes Mal, und diesmal nur für uns."
+      ]
+    ]
+  },
+  "CUT_END_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Weltenriss. Hier laufen die Linien aller Welten zusammen – und manches, das sie zurückgelassen haben, wartet noch."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Sieben Wächter der Anfänge, größer als je zuvor. Und eine Halle, die uns prüft."
+      ],
+      [
+        "NPC_NIA_001",
+        "Dann prüfen wir uns eben."
+      ]
+    ]
   }
 }

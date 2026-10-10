@@ -2,9 +2,9 @@
 
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
-CURRENT PHASE: Phase 6 – Visual modernisation and more chapters (owner request 2026-10-10, see docs/PHASE_6_PLAN.md)
-CURRENT MILESTONE: R10_CHAPTER10_ELYNDRA
-STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06); Graphics pass PASSED (G01–G05, A01, U01, U02, C01); Phase 4 PASSED (S00–S05); Phase 5 PASSED (Q00–Q05); Phase 6 in progress
+CURRENT PHASE: Phase 7 – Endgame (owner request 2026-10-10, see docs/PHASE_7_PLAN.md; Phase 6 chapters 5–10 PASSED)
+CURRENT MILESTONE: E01_ENDGAME_WELTENRISS
+STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06); Graphics pass PASSED (G01–G05, A01, U01, U02, C01); Phase 4 PASSED (S00–S05); Phase 5 PASSED (Q00–Q05); Phase 6 PASSED (R01–R10, W02–W04); Phase 7 in progress
 
 ## Mandatory workflow
 1. Audit before implementation. Do not rebuild from scratch.

@@ -77,5 +77,13 @@
     "hub_area": "AREA_ELY_CITY",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_AST_CHAPTER_COMPLETE"
+  },
+  "WORLD_WELTENRISS": {
+    "name": "Weltenriss",
+    "chapter": 11,
+    "subtitle": "Nach dem Finale",
+    "hub_area": "AREA_END_HUB",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_GAME_COMPLETE"
   }
 }

@@ -238,5 +238,25 @@
         "Sechs Spiegel im Weltenspalt zeigen je ein Echo der Welten. Wer sie in der Reihenfolge weckt, in der die Welten einst getrennt wurden, öffnet das Tor zum Weltenkern."
       ]
     ]
+  },
+  "LORE_END_001": {
+    "title": "Der Weltenriss",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Nach dem Finale blieb ein Riss, den niemand schließen wollte: eine Stelle, an der die Welten einander Erinnerungen zuwerfen – und ihre ältesten Wächter."
+      ]
+    ]
+  },
+  "LORE_END_002": {
+    "title": "Die Weltenbrecher",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Sieben Wesen, so alt wie die Teilung des Kerns. Wer sie besiegt, trägt ihr Erbe: Waffen und Rüstung, die selbst die Splitter ehren."
+      ]
+    ]
   }
 }

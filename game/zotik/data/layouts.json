@@ -13548,5 +13548,1191 @@
         "r": 1.1
       }
     ]
+  },
+  "AREA_END_WAECHTER": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#241a3e",
+    "ambient": "#c8b0ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_END_HUB": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_HUB",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_WAECHTER_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_END_WAECHTER_001",
+        "once_flag": "FLAG_END_WAECHTER_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_WAECHTER_BOSS",
+        "enemy": "BOSS_END_WAECHTER_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_WURZEL": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#241a3e",
+    "ambient": "#c8b0ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_END_HUB": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_HUB",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_WURZEL_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_END_WURZEL_001",
+        "once_flag": "FLAG_END_WURZEL_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_WURZEL_BOSS",
+        "enemy": "BOSS_END_WURZEL_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_KOLOSS": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#241a3e",
+    "ambient": "#c8b0ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_END_HUB": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_HUB",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_KOLOSS_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_END_KOLOSS_001",
+        "once_flag": "FLAG_END_KOLOSS_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_KOLOSS_BOSS",
+        "enemy": "BOSS_END_KOLOSS_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_SANDKOENIG": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#241a3e",
+    "ambient": "#c8b0ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_END_HUB": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_HUB",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_SANDKOENIG_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_END_SANDKOENIG_001",
+        "once_flag": "FLAG_END_SANDKOENIG_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_SANDKOENIG_BOSS",
+        "enemy": "BOSS_END_SANDKOENIG_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_ABYSS": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#241a3e",
+    "ambient": "#c8b0ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_END_HUB": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_HUB",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_ABYSS_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_END_ABYSS_001",
+        "once_flag": "FLAG_END_ABYSS_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_ABYSS_BOSS",
+        "enemy": "BOSS_END_ABYSS_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_FROSTHERZ": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#241a3e",
+    "ambient": "#c8b0ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_END_HUB": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_HUB",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_FROSTHERZ_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_END_FROSTHERZ_001",
+        "once_flag": "FLAG_END_FROSTHERZ_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_FROSTHERZ_BOSS",
+        "enemy": "BOSS_END_FROSTHERZ_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_FEUERKERN": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#241a3e",
+    "ambient": "#c8b0ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_END_HUB": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_HUB",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_FEUERKERN_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_END_FEUERKERN_001",
+        "once_flag": "FLAG_END_FEUERKERN_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_FEUERKERN_BOSS",
+        "enemy": "BOSS_END_FEUERKERN_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_HUB": {
+    "size": [
+      70,
+      60
+    ],
+    "ground": "#2a2048",
+    "ambient": "#d0b8ff",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        22
+      ],
+      "travel": [
+        0,
+        0,
+        22
+      ],
+      "arena_center": [
+        0,
+        0,
+        8
+      ],
+      "AREA_END_WAECHTER": [
+        -27,
+        0,
+        -21
+      ],
+      "AREA_END_WURZEL": [
+        -18,
+        0,
+        -21
+      ],
+      "AREA_END_KOLOSS": [
+        -9,
+        0,
+        -21
+      ],
+      "AREA_END_SANDKOENIG": [
+        0,
+        0,
+        -21
+      ],
+      "AREA_END_ABYSS": [
+        9,
+        0,
+        -21
+      ],
+      "AREA_END_FROSTHERZ": [
+        18,
+        0,
+        -21
+      ],
+      "AREA_END_FEUERKERN": [
+        27,
+        0,
+        -21
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_WAECHTER",
+        "pos": [
+          -27,
+          0,
+          -26
+        ]
+      },
+      {
+        "to": "AREA_END_WURZEL",
+        "pos": [
+          -18,
+          0,
+          -26
+        ]
+      },
+      {
+        "to": "AREA_END_KOLOSS",
+        "pos": [
+          -9,
+          0,
+          -26
+        ]
+      },
+      {
+        "to": "AREA_END_SANDKOENIG",
+        "pos": [
+          0,
+          0,
+          -26
+        ]
+      },
+      {
+        "to": "AREA_END_ABYSS",
+        "pos": [
+          9,
+          0,
+          -26
+        ]
+      },
+      {
+        "to": "AREA_END_FROSTHERZ",
+        "pos": [
+          18,
+          0,
+          -26
+        ]
+      },
+      {
+        "to": "AREA_END_FEUERKERN",
+        "pos": [
+          27,
+          0,
+          -26
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "rift_pillar_a",
+        "pos": [
+          -30,
+          3,
+          10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      },
+      {
+        "name": "rift_pillar_b",
+        "pos": [
+          30,
+          3,
+          10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#4a3a7a"
+      }
+    ],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_END_001",
+        "pos": [
+          8,
+          0,
+          25
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_END_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          21
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_END_ARRIVAL_001",
+        "once_flag": "FLAG_END_ARRIVED"
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_HUB_001",
+        "pos": [
+          -10,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_RASHA_001",
+        "pos": [
+          0,
+          0,
+          16
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_END_001",
+        "pos": [
+          -16,
+          0,
+          12
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_END_002",
+        "pos": [
+          16,
+          0,
+          12
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "lantern",
+        "pos": [
+          -6,
+          0,
+          18
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          6,
+          0,
+          18
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "Banner_1",
+        "pos": [
+          -12,
+          0,
+          26
+        ]
+      },
+      {
+        "model": "Banner_2",
+        "pos": [
+          12,
+          0,
+          26
+        ]
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -31,
+          0,
+          22
+        ],
+        "scale": 1.6,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          31,
+          0,
+          22
+        ],
+        "scale": 1.6,
+        "r": 1.1
+      }
+    ]
   }
 }

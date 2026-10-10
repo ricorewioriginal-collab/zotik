@@ -96,6 +96,11 @@
       "area": "AREA_ELY_VOID",
       "name": "Weltenanker im Weltenspalt",
       "heals": true
+    },
+    "SAVEPOINT_END_HUB_001": {
+      "area": "AREA_END_HUB",
+      "name": "Weltenanker am Weltenriss",
+      "heals": true
     }
   },
   "uniques": {
