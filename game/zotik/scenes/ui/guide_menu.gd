@@ -27,7 +27,7 @@ const PAGES := [
 		"In freier Wildnis, Kanälen, Dünen und Höhlen streifen außerdem Wildtiere und Wesen umher – jedes Mal andere und an anderen Stellen. Sie sind schwächer als die Wächter, bringen aber Lun und Material. In Dörfern und Städten bist du sicher.",
 		"Nach dem Finale öffnet sich über den Weltstein die Welt „Weltenriss“: sieben Superbosse (Weltenbrecher) mit einzigartigen EX-Belohnungen und die Halle der 100 mit zehn Rängen. Am Ende wartet der letzte Splitter.",
 		"Hinter jedem besiegten Superboss öffnet sich im Norden seiner Arena ein begehbarer Endgame-Dungeon mit Wächtern, Truhen und einem Weltenanker.",
-		"Außerdem warten nach dem Finale Abschluss-Quests bei Kael, Eryn, Toren, Sela, Mirael und dem Professorium – und sieben Endgame-Dungeons (Rissläufe in fünf Riss-Arten, von klein bis Weltenriss) im Arena-Menü der Halle.",
+		"Außerdem warten nach dem Finale Abschluss-Quests bei Kael, Eryn, Toren, Sela, Nerea und dem Professorium – und sieben Endgame-Dungeons (Rissläufe in fünf Riss-Arten, von klein bis Weltenriss) im Arena-Menü der Halle.",
 		"Neues Spiel+: Ysolde im Weltenriss lässt die Geschichte von vorn beginnen. Du behältst Gegenstände, Ausrüstung, Lun, Andenken und Rekorde – dafür werden Gegner stärker, Bosse bekommen eine Raserei-Phase, es tauchen neue Chronik-Gegner und zusätzliche Truhen auf, und Händler Corvin im Weltenriss verkauft Chronik-Ausrüstung.",
 	]],
 	["Quests", [

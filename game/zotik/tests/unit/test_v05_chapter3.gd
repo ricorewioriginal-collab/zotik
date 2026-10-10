@@ -37,8 +37,8 @@ func test_arrival_starts_main_quest() -> void:
 	await physics_frames(3)
 	eq(Dialogue.active_id, "CUT_VAL_ARRIVAL_001", "arrival scene")
 	await finish_dialogues()
-	eq(Conditions.quest_step(MQ), 0, "quest active: report to Veyr")
-	eq(Quests.objective(MQ), "Melde dich bei Veyr in der Gildenhalle.", "objective text")
+	eq(Conditions.quest_step(MQ), 0, "quest active: report to Harlan")
+	eq(Quests.objective(MQ), "Melde dich bei Harlan in der Gildenhalle.", "objective text")
 
 
 func test_veyr_starts_quest_for_old_saves() -> void:
@@ -53,7 +53,7 @@ func test_main_quest_flow_through_dungeon() -> void:
 	GameState.set_flag("FLAG_VAL_ARRIVED")
 	Quests.start(MQ)
 	Dialogue.talk_to("NPC_TIBOR_001")
-	eq(Dialogue.active_id, "DLG_TIBOR_CLOSED_001", "gate needs Veyr first")
+	eq(Dialogue.active_id, "DLG_TIBOR_CLOSED_001", "gate needs Harlan first")
 	await finish_dialogues()
 	eq(Conditions.quest_step(MQ), 0, "talking to Tibor early does not skip")
 	Dialogue.talk_to("NPC_VEYR_001")
@@ -138,7 +138,7 @@ func test_defeat_completes_chapter() -> void:
 	var adds := boss.summons.duplicate()
 	boss.take_hit(9999)
 	check(GameState.has_flag("FLAG_BOSS_VAL_WAECHTER_DEFEATED"), "boss flag")
-	eq(Conditions.quest_step(MQ), 6, "report to Veyr")
+	eq(Conditions.quest_step(MQ), 6, "report to Harlan")
 	eq(Dialogue.active_id, "CUT_VAL_WAECHTER_DEFEAT_001", "defeat scene")
 	await finish_dialogues()
 	await frames(2)
@@ -147,7 +147,7 @@ func test_defeat_completes_chapter() -> void:
 	check(adds.all(func(a): return not is_instance_valid(a)), "summons removed")
 	var lun := GameState.currency
 	Dialogue.talk_to("NPC_VEYR_001")
-	eq(Dialogue.active_id, "DLG_VEYR_RETURN_001", "Veyr's report")
+	eq(Dialogue.active_id, "DLG_VEYR_RETURN_001", "Harlan's report")
 	await finish_dialogues()
 	eq(Conditions.quest_state(MQ), "COMPLETED", "chapter 3 done")
 	check(GameState.has_flag("FLAG_VAL_CHAPTER_COMPLETE"), "chapter flag")

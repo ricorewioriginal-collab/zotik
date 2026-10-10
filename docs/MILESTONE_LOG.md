@@ -961,3 +961,14 @@ An audit of all quests, cutscenes, dialogues and the story docs (30 findings, se
 ## W18 – Companion and chapter details (follow-up to W17)
 - Rovan comments on the sea in Aqualis (his guilt from the Great Break), Nia reacts to the suffering mountain in Ignara, Lyra tells in Astralis that her family's maps end there. Mirael mentions the Professorium's diving-machine plans (Nautilux hook, C-35). The Lunaris objective names the village where the Professorium is.
 - Still open (owner): look-alike names, superboss/dungeon pairing, keepsake item uses, endings (docs/CONFLICTS.md C-W17).
+
+## W19 – Owner decisions on the story audit (names, dungeon pairing, readable keepsakes)
+- Owner: do not rename main characters, side roles only. Renamed (names only, IDs unchanged): guild leader Veyr -> Harlan, Frosthain guide Kaelen -> Falk, Aqualis guide Mirael -> Nerea (and "Nereas Zahnrad"). Mira, Lyra, Veyra and Kael keep their names.
+- Superboss -> dungeon pairing by theme: Wurzel -> Der verlorene Wald, Koloss -> Die Stadt ohne Bewohner, Abyss -> Das Meer über dem Himmel, Feuerkern -> Der ewige Vulkan, Sandkönig -> Noctaris Null, Frosthertz -> Elyndra Vorher, Wächter -> Der Ort, den es nie gab (areas, layouts, spawns, gates; tests updated).
+- Keepsakes: the six character keepsakes, the last shard, the Orun echo and the seven shards have a readable text (`lore` on the item, "Lesen" in the inventory, opens in the dialogue box); Content.validate checks the references.
+- Tests: `test_w17_story_flow` has 9, `test_r15_endgame` uses the new pairing.
+
+## W20 – Erinnerungsbruch and three endings (owner: "mehrere Enden", "Erinnerungsbruch")
+- After Elyon falls, his memory breaks open (CUT_ELY_ELYON_DEFEAT_001): eight researchers split the core (Elyon, Veyra, the Professorium, Lyra's mother and others), a child who could hear the core (Zotik) touched it, Veyra sealed his resonance, Zotik's dreams are his own sound.
+- After the report to Veyra the player chooses what becomes of the core (`EndingMenu`, effect `open_menu: ending`): Getrennt bewahren (Veyra), Wieder verbinden (Elyon) or Neu knüpfen (Zotik). Each sets `FLAG_ENDING_CHOSEN` plus its own flag, plays an epilogue and changes Veyra's later lines; postponing is possible (Veyra asks again), the choice is final per playthrough and reset by New Game+.
+- Placeholder texts; the endings change dialogue and epilogue only, not the world. Tests: `test_w20_endings` (4), `test_r13_elyndra` follows the new Veyra lines.

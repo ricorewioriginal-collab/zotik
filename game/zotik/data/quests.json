@@ -355,7 +355,7 @@
     "completion_notice": "Kapitel 3 „Valdoria – Die Stadt, die niemals schläft“ abgeschlossen. Der Weltenstein führt weiter nach Solmera.",
     "steps": [
       {
-        "objective": "Melde dich bei Veyr in der Gildenhalle.",
+        "objective": "Melde dich bei Harlan in der Gildenhalle.",
         "condition": {
           "type": "talk",
           "npc": "NPC_VEYR_001"
@@ -399,7 +399,7 @@
         }
       },
       {
-        "objective": "Berichte Veyr in der Gildenhalle.",
+        "objective": "Berichte Harlan in der Gildenhalle.",
         "condition": {
           "type": "talk",
           "npc": "NPC_VEYR_001"
@@ -562,7 +562,7 @@
     "completion_notice": "Kapitel 5 „Aqualis – Die Stadt unter dem Meer“ abgeschlossen. Der Weltenstein führt weiter nach Frosthain.",
     "steps": [
       {
-        "objective": "Sprich mit Mirael am Korallentor.",
+        "objective": "Sprich mit Nerea am Korallentor.",
         "condition": {
           "type": "talk",
           "npc": "NPC_MIRAEL_001"
@@ -599,7 +599,7 @@
         }
       },
       {
-        "objective": "Berichte Mirael an der Kuppel.",
+        "objective": "Berichte Nerea an der Kuppel.",
         "condition": {
           "type": "talk",
           "npc": "NPC_MIRAEL_001"
@@ -662,7 +662,7 @@
     "completion_notice": "Kapitel 6 „Frosthain – Der Winter, der nichts vergisst“ abgeschlossen. Der Weltenstein führt weiter nach Ignara.",
     "steps": [
       {
-        "objective": "Sprich mit Kaelen im Dorf Hjalm.",
+        "objective": "Sprich mit Falk im Dorf Hjalm.",
         "condition": {
           "type": "talk",
           "npc": "NPC_KAELEN_001"
@@ -699,7 +699,7 @@
         }
       },
       {
-        "objective": "Berichte Kaelen im Dorf.",
+        "objective": "Berichte Falk im Dorf.",
         "condition": {
           "type": "talk",
           "npc": "NPC_KAELEN_001"
@@ -1296,7 +1296,7 @@
     ]
   },
   "QUEST_END_MIRAEL_001": {
-    "name": "Mirael und die Becken",
+    "name": "Nerea und die Becken",
     "type": "side",
     "steps": [
       {
@@ -1308,7 +1308,7 @@
         }
       },
       {
-        "objective": "Sprich mit Mirael.",
+        "objective": "Sprich mit Nerea.",
         "condition": {
           "type": "talk",
           "npc": "NPC_MIRAEL_001"

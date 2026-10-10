@@ -19,7 +19,8 @@
     "name": "Weltenkernsplitter (Echo)",
     "type": "key",
     "stack": 99,
-    "legacy_id": "rift_shard"
+    "legacy_id": "rift_shard",
+    "lore": "LORE_KEEP_ECHO_001"
   },
   "ITEM_LOST_DELIVERY_001": {
     "name": "Saris Lieferung",
@@ -419,7 +420,8 @@
     "type": "material",
     "price": 0,
     "unique": true,
-    "stack": 1
+    "stack": 1,
+    "lore": "LORE_KEEP_LASTSHARD_001"
   },
   "WEAPON_WORLD_BLADE_EX_001": {
     "name": "Weltenklinge EX",
@@ -497,42 +499,48 @@
     "type": "material",
     "price": 0,
     "unique": true,
-    "stack": 1
+    "stack": 1,
+    "lore": "LORE_KEEP_KAEL_001"
   },
   "ITEM_ERYN_DIARY_001": {
     "name": "Eryns Tagebuch",
     "type": "material",
     "price": 0,
     "unique": true,
-    "stack": 1
+    "stack": 1,
+    "lore": "LORE_KEEP_ERYN_001"
   },
   "ITEM_TOREN_BAND_001": {
     "name": "Torens Trainingsband",
     "type": "material",
     "price": 0,
     "unique": true,
-    "stack": 1
+    "stack": 1,
+    "lore": "LORE_KEEP_TOREN_001"
   },
   "ITEM_SELA_LEAF_001": {
     "name": "Selas Blatt",
     "type": "material",
     "price": 0,
     "unique": true,
-    "stack": 1
+    "stack": 1,
+    "lore": "LORE_KEEP_SELA_001"
   },
   "ITEM_MIRAEL_GEAR_001": {
-    "name": "Miraels Zahnrad",
+    "name": "Nereas Zahnrad",
     "type": "material",
     "price": 0,
     "unique": true,
-    "stack": 1
+    "stack": 1,
+    "lore": "LORE_KEEP_NEREA_001"
   },
   "ITEM_PROFESSORIUM_NOTES_001": {
     "name": "Notizen des Professoriums",
     "type": "material",
     "price": 0,
     "unique": true,
-    "stack": 1
+    "stack": 1,
+    "lore": "LORE_KEEP_PROFESSORIUM_001"
   },
   "ITEM_NEVER_SEAL_001": {
     "name": "Siegel des Ortes, den es nie gab",
@@ -582,48 +590,55 @@
     "type": "key",
     "stack": 1,
     "unique": true,
-    "price": 0
+    "price": 0,
+    "lore": "LORE_KEEP_SHARD_VAL_001"
   },
   "ITEM_SHARD_SOL_001": {
     "name": "Splitter der Sonne",
     "type": "key",
     "stack": 1,
     "unique": true,
-    "price": 0
+    "price": 0,
+    "lore": "LORE_KEEP_SHARD_SOL_001"
   },
   "ITEM_SHARD_AQU_001": {
     "name": "Splitter der Tiefe",
     "type": "key",
     "stack": 1,
     "unique": true,
-    "price": 0
+    "price": 0,
+    "lore": "LORE_KEEP_SHARD_AQU_001"
   },
   "ITEM_SHARD_FRO_001": {
     "name": "Splitter des Frosts",
     "type": "key",
     "stack": 1,
     "unique": true,
-    "price": 0
+    "price": 0,
+    "lore": "LORE_KEEP_SHARD_FRO_001"
   },
   "ITEM_SHARD_IGN_001": {
     "name": "Splitter der Glut",
     "type": "key",
     "stack": 1,
     "unique": true,
-    "price": 0
+    "price": 0,
+    "lore": "LORE_KEEP_SHARD_IGN_001"
   },
   "ITEM_SHARD_NOC_001": {
     "name": "Splitter der Erinnerung",
     "type": "key",
     "stack": 1,
     "unique": true,
-    "price": 0
+    "price": 0,
+    "lore": "LORE_KEEP_SHARD_NOC_001"
   },
   "ITEM_SHARD_AST_001": {
     "name": "Splitter der Sterne",
     "type": "key",
     "stack": 1,
     "unique": true,
-    "price": 0
+    "price": 0,
+    "lore": "LORE_KEEP_SHARD_AST_001"
   }
 }

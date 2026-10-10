@@ -1,7 +1,7 @@
 extends TestCase
 ## Chapter-6 golden path. Starts from a save at the end of chapter 5
 ## (Aqualis dome), loads it through the title, travels to Frosthain and plays
-## chapter 6 through real interactions: Kaelen, the forest, the city, the
+## chapter 6 through real interactions: Falk, the forest, the city, the
 ## memory-ice puzzle, the Eiswächter, Avarn, the side quest. Ends with a save that tests/restart_check.gd verifies in a fresh
 ## process.
 
@@ -90,7 +90,7 @@ func test_golden_path_chapter_six() -> void:
 	eq(Conditions.quest_step(S), 0, "side quest started")
 	game.shop_menu.close_menu()
 	await _exit_to("AREA_FRO_VILLAGE")
-	# Kaelen opens the Waldtor
+	# Falk opens the Waldtor
 	await _talk("NPC_KAELEN_001")
 	eq(Conditions.quest_step(M), 1, "find the city")
 	check(game.area.is_exit_open("AREA_FRO_FOREST"), "forest open")
@@ -136,7 +136,7 @@ func test_golden_path_chapter_six() -> void:
 	await frames(2)
 	await physics_frames(3)
 	eq(game.area.area_id, "AREA_FRO_VILLAGE", "back in the village")
-	# Report to Kaelen, then Tormund
+	# Report to Falk, then Tormund
 	await _talk("NPC_KAELEN_001")
 	eq(Conditions.quest_state(M), "COMPLETED", "chapter 6 completed")
 	check(GameState.has_flag("FLAG_FRO_CHAPTER_COMPLETE"), "chapter flag")

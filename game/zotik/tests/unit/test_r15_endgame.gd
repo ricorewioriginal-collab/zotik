@@ -4,6 +4,8 @@ extends TestCase
 
 var game: GameRoot
 const KEYS := ["WAECHTER", "WURZEL", "KOLOSS", "SANDKOENIG", "ABYSS", "FROSTHERZ", "FEUERKERN"]
+## the superboss arena that opens each dungeon (paired by theme, W19)
+const DUNGEON_OF := {"WURZEL": 1, "KOLOSS": 2, "ABYSS": 3, "FEUERKERN": 4, "SANDKOENIG": 5, "FROSTHERZ": 6, "WAECHTER": 7}
 
 
 func before_each() -> void:
@@ -140,7 +142,7 @@ func test_walkable_endgame_dungeons_open_after_the_superbosses() -> void:
 	GameState.set_flag("FLAG_GAME_COMPLETE")
 	for i in KEYS.size():
 		var arena: String = "AREA_END_" + KEYS[i]
-		var dungeon: String = "AREA_END_D%d" % (i + 1)
+		var dungeon: String = "AREA_END_D%d" % DUNGEON_OF[KEYS[i]]
 		game.enter_area(arena, "default")
 		await physics_frames(2)
 		check(not game.area.is_exit_open(dungeon), KEYS[i] + ": dungeon closed while the boss stands")
@@ -153,7 +155,7 @@ func test_walkable_endgame_dungeons_open_after_the_superbosses() -> void:
 			if game.area.entities[k] is Enemy:
 				enemies += 1
 		eq(enemies, 7, dungeon + " has seven enemies")
-		check(game.area.entities.has("CHEST_END_D%d_2" % (i + 1)) and game.area.entities.has("SAVEPOINT_END_D%d_001" % (i + 1)), dungeon + " has chests and a savepoint")
+		check(game.area.entities.has("CHEST_END_D%d_2" % DUNGEON_OF[KEYS[i]]) and game.area.entities.has("SAVEPOINT_END_D%d_001" % DUNGEON_OF[KEYS[i]]), dungeon + " has chests and a savepoint")
 
 
 func test_dungeon_vaults_open_with_their_puzzle() -> void:
@@ -184,7 +186,7 @@ func test_dungeon_bosses_guard_the_way_to_puzzle_and_vault() -> void:
 		var flag := "FLAG_END_D%d_BOSS_DEFEATED" % i
 		var data: Dictionary = Content.get_entry("enemies", bid)
 		check(data.phases.size() == 2 and int(data.hp) > 500, bid + " is a two-phase boss")
-		check(int(data.hp) < int(Content.get_entry("enemies", "BOSS_END_%s_001" % KEYS[i - 1]).hp), bid + " is weaker than the superboss")
+		check(int(data.hp) < int(Content.get_entry("enemies", "BOSS_END_%s_001" % DUNGEON_OF.find_key(i)).hp), bid + " is weaker than the superboss")
 		eq(data.on_defeat[0].id, flag, bid + " sets its flag")
 		GameState.flags.erase(flag)
 		GameState.defeated.erase("SPAWN_END_D%d_BOSS" % i)

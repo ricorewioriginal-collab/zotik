@@ -13776,7 +13776,7 @@
         0,
         16
       ],
-      "AREA_END_D1": [
+      "AREA_END_D7": [
         0,
         0,
         -16
@@ -13792,7 +13792,7 @@
         ]
       },
       {
-        "to": "AREA_END_D1",
+        "to": "AREA_END_D7",
         "pos": [
           0,
           0,
@@ -13920,7 +13920,7 @@
         0,
         16
       ],
-      "AREA_END_D2": [
+      "AREA_END_D1": [
         0,
         0,
         -16
@@ -13936,7 +13936,7 @@
         ]
       },
       {
-        "to": "AREA_END_D2",
+        "to": "AREA_END_D1",
         "pos": [
           0,
           0,
@@ -14064,7 +14064,7 @@
         0,
         16
       ],
-      "AREA_END_D3": [
+      "AREA_END_D2": [
         0,
         0,
         -16
@@ -14080,7 +14080,7 @@
         ]
       },
       {
-        "to": "AREA_END_D3",
+        "to": "AREA_END_D2",
         "pos": [
           0,
           0,
@@ -14208,7 +14208,7 @@
         0,
         16
       ],
-      "AREA_END_D4": [
+      "AREA_END_D5": [
         0,
         0,
         -16
@@ -14224,7 +14224,7 @@
         ]
       },
       {
-        "to": "AREA_END_D4",
+        "to": "AREA_END_D5",
         "pos": [
           0,
           0,
@@ -14352,7 +14352,7 @@
         0,
         16
       ],
-      "AREA_END_D5": [
+      "AREA_END_D3": [
         0,
         0,
         -16
@@ -14368,7 +14368,7 @@
         ]
       },
       {
-        "to": "AREA_END_D5",
+        "to": "AREA_END_D3",
         "pos": [
           0,
           0,
@@ -14640,7 +14640,7 @@
         0,
         16
       ],
-      "AREA_END_D7": [
+      "AREA_END_D4": [
         0,
         0,
         -16
@@ -14656,7 +14656,7 @@
         ]
       },
       {
-        "to": "AREA_END_D7",
+        "to": "AREA_END_D4",
         "pos": [
           0,
           0,
@@ -15066,7 +15066,7 @@
         0,
         30
       ],
-      "AREA_END_WAECHTER": [
+      "AREA_END_WURZEL": [
         0,
         0,
         30
@@ -15074,7 +15074,7 @@
     },
     "exits": [
       {
-        "to": "AREA_END_WAECHTER",
+        "to": "AREA_END_WURZEL",
         "pos": [
           0,
           0,
@@ -15363,7 +15363,7 @@
         0,
         30
       ],
-      "AREA_END_WURZEL": [
+      "AREA_END_KOLOSS": [
         0,
         0,
         30
@@ -15371,7 +15371,7 @@
     },
     "exits": [
       {
-        "to": "AREA_END_WURZEL",
+        "to": "AREA_END_KOLOSS",
         "pos": [
           0,
           0,
@@ -15660,7 +15660,7 @@
         0,
         30
       ],
-      "AREA_END_KOLOSS": [
+      "AREA_END_ABYSS": [
         0,
         0,
         30
@@ -15668,7 +15668,7 @@
     },
     "exits": [
       {
-        "to": "AREA_END_KOLOSS",
+        "to": "AREA_END_ABYSS",
         "pos": [
           0,
           0,
@@ -15957,7 +15957,7 @@
         0,
         30
       ],
-      "AREA_END_SANDKOENIG": [
+      "AREA_END_FEUERKERN": [
         0,
         0,
         30
@@ -15965,7 +15965,7 @@
     },
     "exits": [
       {
-        "to": "AREA_END_SANDKOENIG",
+        "to": "AREA_END_FEUERKERN",
         "pos": [
           0,
           0,
@@ -16254,7 +16254,7 @@
         0,
         30
       ],
-      "AREA_END_ABYSS": [
+      "AREA_END_SANDKOENIG": [
         0,
         0,
         30
@@ -16262,7 +16262,7 @@
     },
     "exits": [
       {
-        "to": "AREA_END_ABYSS",
+        "to": "AREA_END_SANDKOENIG",
         "pos": [
           0,
           0,
@@ -16848,7 +16848,7 @@
         0,
         30
       ],
-      "AREA_END_FEUERKERN": [
+      "AREA_END_WAECHTER": [
         0,
         0,
         30
@@ -16856,7 +16856,7 @@
     },
     "exits": [
       {
-        "to": "AREA_END_FEUERKERN",
+        "to": "AREA_END_WAECHTER",
         "pos": [
           0,
           0,

@@ -27,6 +27,7 @@ var bounty_menu: BountyMenu
 var bestiary_menu: BestiaryMenu
 var arena_menu: ArenaMenu
 var ngplus_menu: NgPlusMenu
+var ending_menu: EndingMenu
 var casino_menu: CasinoMenu
 var arena_run: ArenaRun
 var touch: TouchControls
@@ -88,12 +89,15 @@ func _ready() -> void:
 	ngplus_menu = NgPlusMenu.new()
 	ui.add_child(ngplus_menu)
 	ngplus_menu.closed.connect(_update_control)
+	ending_menu = EndingMenu.new()
+	ui.add_child(ending_menu)
+	ending_menu.closed.connect(_update_control)
 	arena_run = ArenaRun.new()
 	add_child(arena_run)
 	touch = TouchControls.new()
 	touch.game = self
 	ui.add_child(touch)
-	EventBus.menu_requested.connect(func(m): open_menu(arena_menu if m == "arena" else (ngplus_menu if m == "ngplus" else casino_menu)))
+	EventBus.menu_requested.connect(_on_menu_requested)
 	inventory_menu.closed.connect(_update_control)
 	EventBus.quest_updated.connect(func(_q): _update_objective())
 	EventBus.quest_completed.connect(_on_quest_completed)
@@ -139,7 +143,15 @@ func _on_dialogue_finished(_id: String) -> void:
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or transfer_menu.visible or pause_menu.visible or ui.get_node("GuideMenu").visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible or ngplus_menu.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or transfer_menu.visible or pause_menu.visible or ui.get_node("GuideMenu").visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible or ngplus_menu.visible or ending_menu.visible
+
+
+func _on_menu_requested(m: String) -> void:
+	match m:
+		"arena": open_menu(arena_menu)
+		"ngplus": open_menu(ngplus_menu)
+		"ending": open_menu(ending_menu)
+		_: open_menu(casino_menu)
 
 
 func _update_control() -> void:

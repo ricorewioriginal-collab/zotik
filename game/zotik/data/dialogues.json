@@ -358,7 +358,7 @@
       ],
       [
         "NPC_MARA_001",
-        "Die Gilde in Valdoria sammelt Berichte über jeden Riss, den man findet. Nehmt den Weltenstein – wenn jemand weiß, wo die Splitter liegen, dann Veyr."
+        "Die Gilde in Valdoria sammelt Berichte über jeden Riss, den man findet. Nehmt den Weltenstein – wenn jemand weiß, wo die Splitter liegen, dann Harlan."
       ]
     ]
   },
@@ -507,7 +507,7 @@
     "lines": [
       [
         "NPC_TIBOR_001",
-        "Veyr schickt euch? Na gut. Die Kristallströmung unten wird jeden Tag lauter."
+        "Harlan schickt euch? Na gut. Die Kristallströmung unten wird jeden Tag lauter."
       ],
       [
         "NPC_TIBOR_001",
@@ -584,7 +584,7 @@
     "lines": [
       [
         "NPC_TIBOR_001",
-        "Das Kanaltor bleibt zu. Ohne Veyrs Wort lasse ich niemanden da runter."
+        "Das Kanaltor bleibt zu. Ohne Harlans Wort lasse ich niemanden da runter."
       ]
     ]
   },
@@ -1392,6 +1392,12 @@
         "NPC_VEYRA_001",
         "Ihr habt getan, was wir nicht konnten. Die Welt bleibt frei für euch – geht, wohin ihr wollt. Ein Riss ist geblieben, den der Kern selbst offen hält: Er öffnet sich über den Weltenstein. Dort warten die Wächter der Anfänge."
       ]
+    ],
+    "effects": [
+      {
+        "type": "open_menu",
+        "id": "ending"
+      }
     ]
   },
   "DLG_VEYRA_AFTER_001": {
@@ -1716,6 +1722,48 @@
       [
         "NPC_VEYRA_001",
         "Jede Fassung des Kerns endet anders. Ich habe diese hier noch nicht gesehen. Vielleicht bist du diesmal schneller als Elyon."
+      ]
+    ]
+  },
+  "DLG_VEYRA_ENDING_ASK_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYRA_001",
+        "Der Kern wartet noch auf deine Antwort, Zotik. Du musst sie nicht heute geben – aber irgendwann."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_menu",
+        "id": "ending"
+      }
+    ]
+  },
+  "DLG_VEYRA_AFTER_SEPARATE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYRA_001",
+        "Die Welten ruhen, jede für sich. Ich wache über die Splitter – und der Weltenstein bleibt offen, wenn ihr mich besuchen wollt."
+      ]
+    ]
+  },
+  "DLG_VEYRA_AFTER_UNITE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYRA_001",
+        "Die Türen zwischen den Welten werden mehr. Elyon sieht sie jeden Tag wachsen, und ich gestehe: Es sieht weniger gefährlich aus, als ich dachte."
+      ]
+    ]
+  },
+  "DLG_VEYRA_AFTER_WEAVE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYRA_001",
+        "Ich spüre die Fäden, die du hältst, bis hierher. Der Kern hat endlich einen Zuhörer. Danke, Zotik."
       ]
     ]
   }

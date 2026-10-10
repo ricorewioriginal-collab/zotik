@@ -510,7 +510,7 @@
     ]
   },
   "NPC_VEYR_001": {
-    "name": "Veyr",
+    "name": "Harlan",
     "area": "AREA_VAL_GUILD",
     "dialogues": [
       {
@@ -709,7 +709,7 @@
     ]
   },
   "NPC_MIRAEL_001": {
-    "name": "Mirael",
+    "name": "Nerea",
     "area": "AREA_AQU_DOME",
     "dialogues": [
       {
@@ -840,7 +840,7 @@
     ]
   },
   "NPC_KAELEN_001": {
-    "name": "Kaelen",
+    "name": "Falk",
     "area": "AREA_FRO_VILLAGE",
     "dialogues": [
       {
@@ -1285,6 +1285,46 @@
           }
         ],
         "dialogue": "DLG_VEYRA_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ELY_CHAPTER_COMPLETE"
+          },
+          {
+            "type": "not_flag",
+            "id": "FLAG_ENDING_CHOSEN"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_ENDING_ASK_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ENDING_SEPARATE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_AFTER_SEPARATE_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ENDING_UNITE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_AFTER_UNITE_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ENDING_WEAVE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_AFTER_WEAVE_001"
       },
       {
         "when": [

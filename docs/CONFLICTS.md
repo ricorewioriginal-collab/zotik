@@ -53,3 +53,5 @@ Decisions taken without the owner (reversible text/data): the shard canon (seven
 4. Six keepsake items (Kael, Eryn, Toren, Sela, Mirael, Professorium) have no use; ITEM_LAST_SHARD_001 is a collectible with no effect.
 5. The NG+ lore books hold the best backstory but are only found in New Game+.
 6. No multiple endings / Erinnerungsbruch scene (STORY_MASTER mentions several end states).
+
+- C-W17 update (owner answers 2026-10-10): 1) rename side roles only: done (Harlan, Falk, Nerea); 2) superboss/dungeon pairing by theme: done; 3) keepsakes readable: done; 4) several endings and the Erinnerungsbruch scene: in progress (W20).

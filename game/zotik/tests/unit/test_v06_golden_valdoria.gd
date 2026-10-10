@@ -90,7 +90,7 @@ func test_golden_path_chapter_three() -> void:
 	Casino.rng.seed = 7
 	check(not Casino.spin(10).is_empty(), "spin")
 	game.casino_menu.close_menu()
-	# Guild: Veyr, bounty, arena
+	# Guild: Harlan, bounty, arena
 	await _exit_to("AREA_VAL_GUILD")
 	await _talk("NPC_VEYR_001")
 	eq(Conditions.quest_step(M), 1, "go to Tibor")
@@ -145,7 +145,7 @@ func test_golden_path_chapter_three() -> void:
 	await frames(2)
 	await physics_frames(3)
 	eq(game.area.area_id, "AREA_VAL_CANAL_GATE", "back at the canal gate")
-	# Lotte, then Veyr
+	# Lotte, then Harlan
 	await _exit_to("AREA_VAL_MARKET")
 	await _talk("NPC_LOTTE_001")
 	eq(Conditions.quest_state(S), "COMPLETED", "side quest completed")
