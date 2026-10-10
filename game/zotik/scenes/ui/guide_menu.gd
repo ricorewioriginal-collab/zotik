@@ -41,7 +41,7 @@ const PAGES := [
 		"Manche Rätsel verraten ihre Lösung in Gesprächen, Büchern oder Inschriften der Umgebung.",
 	]],
 	["Speichern und Heilen", [
-		"Weltenanker (leuchtende Kristalle) heilen die Gruppe und öffnen das Speichermenü mit drei Slots. Speichern geht außerdem jederzeit über das Zahnrad-Symbol (Hilfe & Einstellungen → Spielstand speichern). Ein belegter Slot fragt vor dem Überschreiben nach.",
+		"Weltenanker (leuchtende Kristalle) heilen die Gruppe und öffnen das Speichermenü mit drei Slots. Speichern geht außerdem jederzeit über das Zahnrad-Symbol (Hilfe & Einstellungen, dann „Spielstand speichern“). Ein belegter Slot fragt vor dem Überschreiben nach.",
 		"Zusätzlich speichert das Spiel automatisch in die Autospeicherung: bei jedem Gebietswechsel, wenn die App in den Hintergrund geht und im Browser beim Verlassen oder Verstecken der Seite. Sie erscheint am Titelbildschirm als „Laden: Autospeicherung“. Im Browser wird jeder Spielstand doppelt gesichert (Datei und Browser-Speicher).",
 		"Spielstand auf ein anderes Gerät bringen: Im Titelbildschirm oder im Pausemenü „Spielstand übertragen“ öffnen, bei einem Slot „Code erzeugen“ wählen und den Code kopieren (im Browser auch als Datei laden). Auf dem anderen Gerät denselben Menüpunkt öffnen, den Code einfügen und einen Slot zum Importieren wählen.",
 		"An Reisepunkten öffnet sich die Weltkarte, mit der du zwischen Orten und Welten reist, die du schon besucht hast.",

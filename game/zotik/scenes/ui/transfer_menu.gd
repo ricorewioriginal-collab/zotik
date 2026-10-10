@@ -34,7 +34,7 @@ func refresh() -> void:
 			actions.append(["Als Datei laden", _download_code])
 		add_row("Code weitergeben", actions)
 	add_heading("Importieren")
-	add_note("Code hier einfügen (Strg+V bzw. langes Tippen → Einfügen) und den Ziel-Slot wählen. Ein belegter Slot fragt vor dem Überschreiben nach.")
+	add_note("Code hier einfügen (Strg+V, am Handy langes Tippen und Einfügen) und den Ziel-Slot wählen. Ein belegter Slot fragt vor dem Überschreiben nach.")
 	var imp := TextEdit.new()
 	imp.text = _import_text
 	imp.placeholder_text = "ZOTIK1:…"
