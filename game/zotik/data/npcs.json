@@ -813,5 +813,103 @@
         "dialogue": "DLG_BRISA_SHOP_001"
       }
     ]
+  },
+  "NPC_BRENNA_001": {
+    "name": "Brenna",
+    "area": "AREA_IGN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_IGN_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_BRENNA_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_IGN_ASH_OPEN"
+          }
+        ],
+        "dialogue": "DLG_BRENNA_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_IGN_001",
+            "step": 5
+          }
+        ],
+        "dialogue": "DLG_BRENNA_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_IGN_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_BRENNA_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_BRENNA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_ORSK_001": {
+    "name": "Orsk",
+    "area": "AREA_IGN_VILLAGE",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ORSK_IDLE_001"
+      }
+    ]
+  },
+  "NPC_VAREK_001": {
+    "name": "Varek",
+    "area": "AREA_IGN_FORGE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_IGN_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_VAREK_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_IGN_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_VAREK_THANKS_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_VAREK_SHOP_001"
+      }
+    ]
+  },
+  "NPC_ZINNA_001": {
+    "name": "Zinna",
+    "area": "AREA_IGN_FORGE",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ZINNA_SHOP_001"
+      }
+    ]
   }
 }

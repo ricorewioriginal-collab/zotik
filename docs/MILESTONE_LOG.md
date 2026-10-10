@@ -788,3 +788,11 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 ## R03 (cont.) – Zotik closer to the master sheet (owner choice "Weg 2")
 - Image-to-3D results from the owner (texture atlas / extruded sheet) are not usable as models; used as reference only.
 - `ZotikVisual`: bushy upright tail (root, body, mid, white tip, fur tufts), larger ears with larger inner ears, ten fur tufts (crest, back, cheeks), brows, eye glints, scarf fold and second scarf end, strap and belt buckle. Character creator camera moved closer. Still primitive placeholder parts, not final art.
+
+## R06 – Chapter 7 Ignara (Phase 6) – PASSED
+- World `WORLD_IGNARA` (chapter 7, unlocked by `FLAG_FRO_CHAPTER_COMPLETE`), six areas: Kaldera, Große Esse (smith Varek, alchemist Zinna), Aschefelder, Minen, Magmakammer, Vulkanherz.
+- Main quest `QUEST_MAIN_IGN_001` "Das Feuer unter der Welt" (Brenna → mines → pressure valves `PUZ_IGN_VALVES_001` (valves 1 and 2) → Schmiedegolem → boss Magmarion → report; 550 Lun); side quest "Glutsteine für Varek" (5 embers, 260 Lun + Elixier).
+- Enemies Aschekäfer, Funkengeist, Schmiedegolem (miniboss, persistent), boss Magmarion (1060 HP, circle and surge hazards, summons). Items Glutstein, Glutbrot, Magmaklinge, Obsidianpanzer.
+- Look: dark red sky, rising embers (`Look.build_weather`, `embers` style), lava pools (`lava_pool` props glow, no collision), rocks and dead trees as backdrop.
+- Tests: `test_r07_ignara` (8), `test_r08_golden_ignara` (golden path from a chapter-6 save, restart check `golden_expected_ign.json`), `test_x01_full_playthrough` now plays chapters 1–7. Screenshots 29–32.
+- Owner's 3MF (Bambu Studio export, one untextured 1M-triangle mesh, looks like the extruded sheet) converted to GLB for inspection; not usable as a character. Placeholder art, not final.

@@ -56,6 +56,16 @@
       "area": "AREA_FRO_CITY",
       "name": "Weltenanker in der gefrorenen Stadt",
       "heals": true
+    },
+    "SAVEPOINT_IGN_ASH_001": {
+      "area": "AREA_IGN_ASH",
+      "name": "Weltenanker in den Aschefeldern",
+      "heals": true
+    },
+    "SAVEPOINT_IGN_MINES_001": {
+      "area": "AREA_IGN_MINES",
+      "name": "Weltenanker in den Minen",
+      "heals": true
     }
   },
   "uniques": {

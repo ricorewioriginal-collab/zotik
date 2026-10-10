@@ -163,6 +163,15 @@ func _run() -> void:
 		for c in game.companions.values():
 			c.snap_to_player()
 		await _shot(pair[1])
+	for f in ["FLAG_IGN_ASH_OPEN", "FLAG_IGN_MINES_OPEN", "FLAG_IGN_VALVES_DONE", "FLAG_IGN_WAECHTER_DEFEATED", "FLAG_IGN_MAGMARION_MET", "FLAG_IGN_ARRIVED"]:
+		gs.set_flag(f)
+	for pair in [["AREA_IGN_VILLAGE", "29_ignara_village", Vector3(0, 0, 14)], ["AREA_IGN_ASH", "30_ignara_ash", Vector3(0, 0, 16)], ["AREA_IGN_MINES", "31_ignara_mines", Vector3(0, 0, 8)], ["AREA_IGN_HEART", "32_ignara_magmarion", Vector3(0, 0, 6)]]:
+		game.enter_area(pair[0], "default")
+		game.player.global_position = pair[2]
+		game.player.camera_pivot.rotation.y = 0.0
+		for c in game.companions.values():
+			c.snap_to_player()
+		await _shot(pair[1])
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	for _i in 20:

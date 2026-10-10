@@ -263,5 +263,41 @@
     },
     "price": 740,
     "stack": 1
+  },
+  "ITEM_EMBER_001": {
+    "name": "Glutstein",
+    "type": "material",
+    "price": 38,
+    "stack": 99
+  },
+  "ITEM_GLUTBROT_001": {
+    "name": "Glutbrot",
+    "type": "consumable",
+    "effect": {
+      "heal": 100
+    },
+    "price": 36,
+    "stack": 99
+  },
+  "WEAPON_MAGMA_BLADE_001": {
+    "name": "Magmaklinge",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 30
+    },
+    "price": 820,
+    "stack": 1
+  },
+  "ARMOR_OBSIDIAN_001": {
+    "name": "Obsidianpanzer",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 11,
+      "max_hp": 35
+    },
+    "price": 800,
+    "stack": 1
   }
 }

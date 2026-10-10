@@ -755,5 +755,105 @@
         "count": 1
       }
     ]
+  },
+  "QUEST_MAIN_IGN_001": {
+    "name": "Das Feuer unter der Welt",
+    "type": "main",
+    "completion_notice": "Kapitel 7 „Ignara – Das Feuer unter der Welt“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Sprich mit Brenna in Kaldera.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_BRENNA_001"
+        }
+      },
+      {
+        "objective": "Finde die Minen hinter den Aschefeldern.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_IGN_MINES"
+        }
+      },
+      {
+        "objective": "Öffne die Druckventile in den Minen.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_IGN_VALVES_001"
+        }
+      },
+      {
+        "objective": "Besiege den Schmiedegolem in der Magmakammer.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_SCHMIEDEGOLEM_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich Magmarion im Vulkanherz.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_MAGMARION_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Brenna in Kaldera.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_BRENNA_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 550
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_IGN_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_IGN_001": {
+    "name": "Glutsteine für Varek",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 5 Glutsteine (Aschefelder, Minen).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_EMBER_001",
+          "count": 5
+        }
+      },
+      {
+        "objective": "Bring die Glutsteine zu Varek in die Große Esse.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_VAREK_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_EMBER_001",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 260
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ]
   }
 }

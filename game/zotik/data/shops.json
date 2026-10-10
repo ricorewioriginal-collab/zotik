@@ -91,5 +91,24 @@
       "ITEM_WARM_TEA_001"
     ],
     "sell_ratio": 0.5
+  },
+  "SHOP_IGN_SMITH_001": {
+    "npc": "NPC_VAREK_001",
+    "stock": [
+      "WEAPON_FROST_AXE_001",
+      "WEAPON_MAGMA_BLADE_001",
+      "ARMOR_OBSIDIAN_001"
+    ],
+    "sell_ratio": 0.5
+  },
+  "SHOP_IGN_ALCHEMIST_001": {
+    "npc": "NPC_ZINNA_001",
+    "stock": [
+      "ITEM_HEALING_POTION_001",
+      "ITEM_HI_POTION_001",
+      "ITEM_ELIXIR_001",
+      "ITEM_GLUTBROT_001"
+    ],
+    "sell_ratio": 0.5
   }
 }

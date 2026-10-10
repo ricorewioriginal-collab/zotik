@@ -337,5 +337,63 @@
     "exits": [
       "AREA_FRO_TEMPLE"
     ]
+  },
+  "AREA_IGN_VILLAGE": {
+    "name": "Ignara – Schmiedestadt Kaldera",
+    "world": "WORLD_IGNARA",
+    "exits": [
+      "AREA_IGN_FORGE",
+      "AREA_IGN_ASH"
+    ],
+    "gate": {
+      "AREA_IGN_ASH": "FLAG_IGN_ASH_OPEN"
+    }
+  },
+  "AREA_IGN_FORGE": {
+    "name": "Ignara – Die Große Esse",
+    "world": "WORLD_IGNARA",
+    "exits": [
+      "AREA_IGN_VILLAGE"
+    ]
+  },
+  "AREA_IGN_ASH": {
+    "name": "Ignara – Die Aschefelder",
+    "world": "WORLD_IGNARA",
+    "exits": [
+      "AREA_IGN_VILLAGE",
+      "AREA_IGN_MINES"
+    ],
+    "gate": {
+      "AREA_IGN_MINES": "FLAG_IGN_MINES_OPEN"
+    }
+  },
+  "AREA_IGN_MINES": {
+    "name": "Ignara – Die Minen",
+    "world": "WORLD_IGNARA",
+    "exits": [
+      "AREA_IGN_ASH",
+      "AREA_IGN_CHAMBER"
+    ],
+    "gate": {
+      "AREA_IGN_CHAMBER": "FLAG_IGN_VALVES_DONE"
+    }
+  },
+  "AREA_IGN_CHAMBER": {
+    "name": "Ignara – Die Magmakammer",
+    "world": "WORLD_IGNARA",
+    "exits": [
+      "AREA_IGN_MINES",
+      "AREA_IGN_HEART"
+    ],
+    "gate": {
+      "AREA_IGN_HEART": "FLAG_IGN_WAECHTER_DEFEATED"
+    }
+  },
+  "AREA_IGN_HEART": {
+    "name": "Ignara – Das Vulkanherz",
+    "world": "WORLD_IGNARA",
+    "exits": [
+      "AREA_IGN_CHAMBER"
+    ]
   }
 }

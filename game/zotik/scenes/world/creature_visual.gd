@@ -32,6 +32,10 @@ const ARCHETYPES := {
 	"ENEMY_EISGEIST_001": ["imp", "#d8f6ff"],
 	"ENEMY_EISWAECHTER_001": ["golem", "#9ad0f0"],
 	"BOSS_AVARN_001": ["golem", "#8ac8ff"],
+	"ENEMY_ASCHEKAEFER_001": ["crab", "#ff7a3a"],
+	"ENEMY_FUNKENGEIST_001": ["imp", "#ffd060"],
+	"ENEMY_SCHMIEDEGOLEM_001": ["golem", "#ff8a40"],
+	"BOSS_MAGMARION_001": ["golem", "#ff7020"],
 }
 
 var archetype := "imp"

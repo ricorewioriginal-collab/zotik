@@ -975,5 +975,130 @@
         "id": "SHOP_FRO_ALCHEMIST_001"
       }
     ]
+  },
+  "DLG_BRENNA_LEAD_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_BRENNA_001",
+        "Der Berg grollt, seit der Splitter in sein Herz gefallen ist. Die Essen glühen zu heiß, die Minen sind abgeriegelt – und niemand kommt mehr an die Glut heran, die wir zum Schmieden brauchen."
+      ],
+      [
+        "NPC_BRENNA_001",
+        "Das Aschetor ist offen. Bleibt auf den Pfaden, die Aschekäfer kennen jede Spalte. Am Weltenanker weiter vorn könnt ihr rasten und speichern."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_IGN_001"
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_IGN_ASH_OPEN"
+      }
+    ]
+  },
+  "DLG_BRENNA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_BRENNA_001",
+        "Hinter den Aschefeldern beginnen die Minen. Dort unten schlägt das Vulkanherz – und dort muss der Druck ab, bevor der Berg bricht."
+      ]
+    ]
+  },
+  "DLG_BRENNA_REPORT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_BRENNA_001",
+        "Der Berg atmet ruhig, und die Essen glühen wieder gleichmäßig. Kaldera schmiedet weiter – dank euch."
+      ],
+      [
+        "NPC_BRENNA_001",
+        "Der Splitter, den ihr tragt … Er ruft nach weiteren Welten. Reist weiter, Zotik."
+      ]
+    ]
+  },
+  "DLG_BRENNA_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_BRENNA_001",
+        "Die Essen brennen, die Wege sind frei. Wenn ihr zurückkehrt, wartet hier immer ein warmes Eisen für euch."
+      ]
+    ]
+  },
+  "DLG_ORSK_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ORSK_001",
+        "Meine Mutter sagte, der Berg singt, wenn er zufrieden ist. Seit Wochen singt er nicht mehr. Nur Husten."
+      ],
+      [
+        "NPC_ORSK_001",
+        "Nehmt Glutbrot mit. Warmes Essen macht mutig."
+      ]
+    ]
+  },
+  "DLG_VAREK_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VAREK_001",
+        "Für Magmaklingen brauche ich Glutsteine, und die Käfer in den Aschefeldern tragen sie im Panzer. Bringst du mir fünf? Ich zahle gut!"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_IGN_001"
+      },
+      {
+        "type": "open_shop",
+        "id": "SHOP_IGN_SMITH_001"
+      }
+    ]
+  },
+  "DLG_VAREK_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VAREK_001",
+        "Fünf Glutsteine, noch warm! Daraus schmiede ich die besten Klingen der Welt. Hier, deine Belohnung."
+      ]
+    ]
+  },
+  "DLG_VAREK_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VAREK_001",
+        "Magmaklinge und Obsidianpanzer, gehärtet im Berg selbst. Was die Hitze nicht bricht, bricht auch kein Gegner."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_IGN_SMITH_001"
+      }
+    ]
+  },
+  "DLG_ZINNA_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ZINNA_001",
+        "Heiße Tränke und frisches Glutbrot! Alles aus der Esse, alles mit Feuer im Bauch."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_IGN_ALCHEMIST_001"
+      }
+    ]
   }
 }

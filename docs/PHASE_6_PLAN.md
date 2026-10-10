@@ -16,6 +16,7 @@ The "Vorlage" is the concept art in `reference/concept_2026-10-02/` and `19_VISU
 | R03 | Character look: rim light + outline shader on people/enemies, richer hair/outfit variety, stronger tail/fur read |
 | R04 | Props and water: more CC0 models where the licence allows, animated water/waterfalls |
 | R05 (PASSED) | Chapter 6 (Frosthain, boss Avarn): world, areas, quests, boss, tests |
-| R06+ | Further chapters from `04_WORLDS/WORLDS_MASTER.md` (Ignara, Noctaris, Astralis), each with full regression |
+| R06 (PASSED) | Chapter 7 (Ignara, boss Magmarion) |
+| R07+ | Further chapters from `04_WORLDS/WORLDS_MASTER.md` (Noctaris, Astralis, Elyndra), each with full regression |
 
 Rules: one milestone at a time, screenshots as evidence, full regression before every merge, placeholder art is never reported as final (CLAUDE.md rule 6).

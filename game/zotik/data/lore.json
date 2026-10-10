@@ -118,5 +118,35 @@
         "Das Eis der Stadt bewahrt jeden Klang. Wer die Kristalle in der Reihenfolge ihrer Erinnerung berührt, taut ihre Tore auf; wer sie falsch weckt, hört nur das Echo des Frostes."
       ]
     ]
+  },
+  "LORE_IGN_001": {
+    "title": "Kaldera am Kraterrand",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die Schmiedestadt Kaldera klammert sich an den Rand eines schlafenden Vulkans. Ihre Essen speisen sich aus seiner Hitze – und ihre Bewohner lauschen jede Nacht auf sein Grollen."
+      ]
+    ]
+  },
+  "LORE_IGN_002": {
+    "title": "Magmarion, der Vulkanherz-Wächter",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Tief unter den Minen schlägt ein Herz aus flüssigem Gestein. Seit der Splitter in ihm steckt, schlägt es zu schnell, und der Berg zittert mit."
+      ]
+    ]
+  },
+  "LORE_IGN_003": {
+    "title": "Die Druckventile",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die alten Minenbauer leiteten den Druck des Berges durch vier Ventile ab. Wer sie falsch dreht, hört den Berg husten – wer sie richtig dreht, hört ihn ausatmen."
+      ]
+    ]
   }
 }

@@ -45,5 +45,13 @@
     "hub_area": "AREA_FRO_VILLAGE",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_AQU_CHAPTER_COMPLETE"
+  },
+  "WORLD_IGNARA": {
+    "name": "Ignara",
+    "chapter": 7,
+    "subtitle": "Das Feuer unter der Welt",
+    "hub_area": "AREA_IGN_VILLAGE",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_FRO_CHAPTER_COMPLETE"
   }
 }
