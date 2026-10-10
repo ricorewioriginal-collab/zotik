@@ -15125,6 +15125,49 @@
         ],
         "color": "#4a3a7a",
         "hidden_by_flag": "FLAG_END_D1_VAULT"
+      },
+      {
+        "name": "gate_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "gate_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "boss_gate",
+        "pos": [
+          0,
+          3,
+          -22
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a3a7a",
+        "hidden_by_flag": "FLAG_END_D1_BOSS_DEFEATED"
       }
     ],
     "entities": [
@@ -15173,9 +15216,9 @@
         "spawn": "SPAWN_END_D1_E5",
         "enemy": "ENEMY_DORNENWOLF_001",
         "pos": [
-          -8,
+          -9,
           0,
-          -10
+          -1
         ]
       },
       {
@@ -15183,19 +15226,9 @@
         "spawn": "SPAWN_END_D1_E6",
         "enemy": "ENEMY_WALDSPINNE_001",
         "pos": [
-          8,
+          9,
           0,
-          -10
-        ]
-      },
-      {
-        "type": "enemy",
-        "spawn": "SPAWN_END_D1_E7",
-        "enemy": "ENEMY_SUMPFFROSCH_001",
-        "pos": [
-          0,
-          0,
-          -22
+          -1
         ]
       },
       {
@@ -15242,6 +15275,17 @@
           0,
           -33
         ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_BOSS",
+        "enemy": "BOSS_END_D1_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
       }
     ],
     "decor": [
@@ -15378,6 +15422,49 @@
         ],
         "color": "#4a3a7a",
         "hidden_by_flag": "FLAG_END_D2_VAULT"
+      },
+      {
+        "name": "gate_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "gate_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "boss_gate",
+        "pos": [
+          0,
+          3,
+          -22
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a3a7a",
+        "hidden_by_flag": "FLAG_END_D2_BOSS_DEFEATED"
       }
     ],
     "entities": [
@@ -15426,9 +15513,9 @@
         "spawn": "SPAWN_END_D2_E5",
         "enemy": "ENEMY_KANALRATTE_001",
         "pos": [
-          -8,
+          -9,
           0,
-          -10
+          -1
         ]
       },
       {
@@ -15436,19 +15523,9 @@
         "spawn": "SPAWN_END_D2_E6",
         "enemy": "ENEMY_VERGESSENER_001",
         "pos": [
-          8,
+          9,
           0,
-          -10
-        ]
-      },
-      {
-        "type": "enemy",
-        "spawn": "SPAWN_END_D2_E7",
-        "enemy": "ENEMY_SCHATTENFALTER_001",
-        "pos": [
-          0,
-          0,
-          -22
+          -1
         ]
       },
       {
@@ -15495,6 +15572,17 @@
           0,
           -33
         ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_BOSS",
+        "enemy": "BOSS_END_D2_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
       }
     ],
     "decor": [
@@ -15631,6 +15719,49 @@
         ],
         "color": "#4a3a7a",
         "hidden_by_flag": "FLAG_END_D3_VAULT"
+      },
+      {
+        "name": "gate_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "gate_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "boss_gate",
+        "pos": [
+          0,
+          3,
+          -22
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a3a7a",
+        "hidden_by_flag": "FLAG_END_D3_BOSS_DEFEATED"
       }
     ],
     "entities": [
@@ -15679,9 +15810,9 @@
         "spawn": "SPAWN_END_D3_E5",
         "enemy": "ENEMY_RIFFFROSCH_001",
         "pos": [
-          -8,
+          -9,
           0,
-          -10
+          -1
         ]
       },
       {
@@ -15689,19 +15820,9 @@
         "spawn": "SPAWN_END_D3_E6",
         "enemy": "ENEMY_LEUCHTQUALLE_001",
         "pos": [
-          8,
+          9,
           0,
-          -10
-        ]
-      },
-      {
-        "type": "enemy",
-        "spawn": "SPAWN_END_D3_E7",
-        "enemy": "ENEMY_WOLKENSCHWINGE_001",
-        "pos": [
-          0,
-          0,
-          -22
+          -1
         ]
       },
       {
@@ -15748,6 +15869,17 @@
           0,
           -33
         ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_BOSS",
+        "enemy": "BOSS_END_D3_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
       }
     ],
     "decor": [
@@ -15884,6 +16016,49 @@
         ],
         "color": "#4a3a7a",
         "hidden_by_flag": "FLAG_END_D4_VAULT"
+      },
+      {
+        "name": "gate_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "gate_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "boss_gate",
+        "pos": [
+          0,
+          3,
+          -22
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a3a7a",
+        "hidden_by_flag": "FLAG_END_D4_BOSS_DEFEATED"
       }
     ],
     "entities": [
@@ -15932,9 +16107,9 @@
         "spawn": "SPAWN_END_D4_E5",
         "enemy": "ENEMY_GLUEHWESPE_001",
         "pos": [
-          -8,
+          -9,
           0,
-          -10
+          -1
         ]
       },
       {
@@ -15942,19 +16117,9 @@
         "spawn": "SPAWN_END_D4_E6",
         "enemy": "ENEMY_ASCHEKAEFER_001",
         "pos": [
-          8,
+          9,
           0,
-          -10
-        ]
-      },
-      {
-        "type": "enemy",
-        "spawn": "SPAWN_END_D4_E7",
-        "enemy": "ENEMY_FUNKENGEIST_001",
-        "pos": [
-          0,
-          0,
-          -22
+          -1
         ]
       },
       {
@@ -16001,6 +16166,17 @@
           0,
           -33
         ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_BOSS",
+        "enemy": "BOSS_END_D4_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
       }
     ],
     "decor": [
@@ -16137,6 +16313,49 @@
         ],
         "color": "#4a3a7a",
         "hidden_by_flag": "FLAG_END_D5_VAULT"
+      },
+      {
+        "name": "gate_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "gate_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "boss_gate",
+        "pos": [
+          0,
+          3,
+          -22
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a3a7a",
+        "hidden_by_flag": "FLAG_END_D5_BOSS_DEFEATED"
       }
     ],
     "entities": [
@@ -16185,9 +16404,9 @@
         "spawn": "SPAWN_END_D5_E5",
         "enemy": "ENEMY_SCHATTENFALTER_001",
         "pos": [
-          -8,
+          -9,
           0,
-          -10
+          -1
         ]
       },
       {
@@ -16195,19 +16414,9 @@
         "spawn": "SPAWN_END_D5_E6",
         "enemy": "ENEMY_VERGESSENER_001",
         "pos": [
-          8,
+          9,
           0,
-          -10
-        ]
-      },
-      {
-        "type": "enemy",
-        "spawn": "SPAWN_END_D5_E7",
-        "enemy": "ENEMY_ECHOKRIEGER_001",
-        "pos": [
-          0,
-          0,
-          -22
+          -1
         ]
       },
       {
@@ -16254,6 +16463,17 @@
           0,
           -33
         ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_BOSS",
+        "enemy": "BOSS_END_D5_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
       }
     ],
     "decor": [
@@ -16390,6 +16610,49 @@
         ],
         "color": "#4a3a7a",
         "hidden_by_flag": "FLAG_END_D6_VAULT"
+      },
+      {
+        "name": "gate_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "gate_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "boss_gate",
+        "pos": [
+          0,
+          3,
+          -22
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a3a7a",
+        "hidden_by_flag": "FLAG_END_D6_BOSS_DEFEATED"
       }
     ],
     "entities": [
@@ -16438,9 +16701,9 @@
         "spawn": "SPAWN_END_D6_E5",
         "enemy": "ENEMY_SPIEGELSPINNE_001",
         "pos": [
-          -8,
+          -9,
           0,
-          -10
+          -1
         ]
       },
       {
@@ -16448,19 +16711,9 @@
         "spawn": "SPAWN_END_D6_E6",
         "enemy": "ENEMY_ECHOKRIEGER_001",
         "pos": [
-          8,
+          9,
           0,
-          -10
-        ]
-      },
-      {
-        "type": "enemy",
-        "spawn": "SPAWN_END_D6_E7",
-        "enemy": "ENEMY_EISFLEDERMAUS_001",
-        "pos": [
-          0,
-          0,
-          -22
+          -1
         ]
       },
       {
@@ -16507,6 +16760,17 @@
           0,
           -33
         ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_BOSS",
+        "enemy": "BOSS_END_D6_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
       }
     ],
     "decor": [
@@ -16643,6 +16907,49 @@
         ],
         "color": "#4a3a7a",
         "hidden_by_flag": "FLAG_END_D7_VAULT"
+      },
+      {
+        "name": "gate_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "gate_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -22
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "boss_gate",
+        "pos": [
+          0,
+          3,
+          -22
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a3a7a",
+        "hidden_by_flag": "FLAG_END_D7_BOSS_DEFEATED"
       }
     ],
     "entities": [
@@ -16691,9 +16998,9 @@
         "spawn": "SPAWN_END_D7_E5",
         "enemy": "ENEMY_ECHOKRIEGER_001",
         "pos": [
-          -8,
+          -9,
           0,
-          -10
+          -1
         ]
       },
       {
@@ -16701,19 +17008,9 @@
         "spawn": "SPAWN_END_D7_E6",
         "enemy": "ENEMY_GLUTDRACHE_001",
         "pos": [
-          8,
+          9,
           0,
-          -10
-        ]
-      },
-      {
-        "type": "enemy",
-        "spawn": "SPAWN_END_D7_E7",
-        "enemy": "ENEMY_STERNENWAECHTER_001",
-        "pos": [
-          0,
-          0,
-          -22
+          -1
         ]
       },
       {
@@ -16760,6 +17057,17 @@
           0,
           -33
         ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_BOSS",
+        "enemy": "BOSS_END_D7_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ],
+        "persistent": true
       }
     ],
     "decor": [

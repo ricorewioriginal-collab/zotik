@@ -17,5 +17,6 @@ Source: `07_ENDGAME/ENDGAME.md`. The main story is complete (Phase 6); the world
 | E06 (PASSED) | NG+ secrets: seven hidden lore books |
 | E07 (PASSED) | Walkable endgame dungeons behind the seven superboss arenas |
 | E08 (PASSED) | Dungeon vaults: a dials puzzle opens a vault chest in each endgame dungeon |
+| E09 (PASSED) | A boss per endgame dungeon guards the way to the puzzle and the vault |
 
 Rules: one milestone at a time, full regression before every merge, placeholder art is never reported as final (CLAUDE.md rule 6).
