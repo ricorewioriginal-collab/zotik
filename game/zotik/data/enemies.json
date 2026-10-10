@@ -339,6 +339,10 @@
       {
         "id": "ITEM_HI_POTION_001",
         "count": 2
+      },
+      {
+        "id": "ITEM_SHARD_VAL_001",
+        "count": 1
       }
     ],
     "break": 160,
@@ -498,6 +502,10 @@
       {
         "id": "ITEM_HI_POTION_001",
         "count": 2
+      },
+      {
+        "id": "ITEM_SHARD_SOL_001",
+        "count": 1
       }
     ],
     "break": 190,
@@ -657,6 +665,10 @@
       {
         "id": "ITEM_HI_POTION_001",
         "count": 2
+      },
+      {
+        "id": "ITEM_SHARD_AQU_001",
+        "count": 1
       }
     ],
     "break": 200,
@@ -816,6 +828,10 @@
       {
         "id": "ITEM_HI_POTION_001",
         "count": 2
+      },
+      {
+        "id": "ITEM_SHARD_FRO_001",
+        "count": 1
       }
     ],
     "break": 215,
@@ -975,6 +991,10 @@
       {
         "id": "ITEM_HI_POTION_001",
         "count": 2
+      },
+      {
+        "id": "ITEM_SHARD_IGN_001",
+        "count": 1
       }
     ],
     "break": 230,
@@ -1411,6 +1431,10 @@
       {
         "id": "ITEM_HI_POTION_001",
         "count": 2
+      },
+      {
+        "id": "ITEM_SHARD_NOC_001",
+        "count": 1
       }
     ],
     "break": 250,
@@ -1570,6 +1594,10 @@
       {
         "id": "ITEM_HI_POTION_001",
         "count": 2
+      },
+      {
+        "id": "ITEM_SHARD_AST_001",
+        "count": 1
       }
     ],
     "break": 270,

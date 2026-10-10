@@ -190,7 +190,7 @@
   "QUEST_MAIN_ELA_001": {
     "name": "Der Wald, der sich erinnert",
     "type": "main",
-    "completion_notice": "Kapitel 2 „Elaris – Der Wald, der sich erinnert“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 2 „Elaris – Der Wald, der sich erinnert“ abgeschlossen. Der Weltenstein führt weiter nach Valdoria.",
     "steps": [
       {
         "objective": "Sprich mit Mara im Forschungsviertel.",
@@ -352,7 +352,7 @@
   "QUEST_MAIN_VAL_001": {
     "name": "Die Stadt, die niemals schläft",
     "type": "main",
-    "completion_notice": "Kapitel 3 „Valdoria – Die Stadt, die niemals schläft“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 3 „Valdoria – Die Stadt, die niemals schläft“ abgeschlossen. Der Weltenstein führt weiter nach Solmera.",
     "steps": [
       {
         "objective": "Melde dich bei Veyr in der Gildenhalle.",
@@ -459,7 +459,7 @@
   "QUEST_MAIN_SOL_001": {
     "name": "Wo der Sand sich erinnert",
     "type": "main",
-    "completion_notice": "Kapitel 4 „Solmera – Wo der Sand sich erinnert“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 4 „Solmera – Wo der Sand sich erinnert“ abgeschlossen. Der Weltenstein führt weiter nach Aqualis.",
     "steps": [
       {
         "objective": "Sprich mit Nuri in der Oase.",
@@ -559,7 +559,7 @@
   "QUEST_MAIN_AQU_001": {
     "name": "Die Stadt unter dem Meer",
     "type": "main",
-    "completion_notice": "Kapitel 5 „Aqualis – Die Stadt unter dem Meer“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 5 „Aqualis – Die Stadt unter dem Meer“ abgeschlossen. Der Weltenstein führt weiter nach Frosthain.",
     "steps": [
       {
         "objective": "Sprich mit Mirael am Korallentor.",
@@ -659,7 +659,7 @@
   "QUEST_MAIN_FRO_001": {
     "name": "Der Winter, der nichts vergisst",
     "type": "main",
-    "completion_notice": "Kapitel 6 „Frosthain – Der Winter, der nichts vergisst“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 6 „Frosthain – Der Winter, der nichts vergisst“ abgeschlossen. Der Weltenstein führt weiter nach Ignara.",
     "steps": [
       {
         "objective": "Sprich mit Kaelen im Dorf Hjalm.",
@@ -759,7 +759,7 @@
   "QUEST_MAIN_IGN_001": {
     "name": "Das Feuer unter der Welt",
     "type": "main",
-    "completion_notice": "Kapitel 7 „Ignara – Das Feuer unter der Welt“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 7 „Ignara – Das Feuer unter der Welt“ abgeschlossen. Der Weltenstein führt weiter nach Noctaris.",
     "steps": [
       {
         "objective": "Sprich mit Brenna in Kaldera.",
@@ -859,7 +859,7 @@
   "QUEST_MAIN_NOC_001": {
     "name": "Die Stadt, die sich erinnert",
     "type": "main",
-    "completion_notice": "Kapitel 8 „Noctaris – Die Stadt der Erinnerungen“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 8 „Noctaris – Die Stadt, die sich erinnert“ abgeschlossen. Der Weltenstein führt weiter nach Astralis.",
     "steps": [
       {
         "objective": "Sprich mit Eryn in Nocturna.",
@@ -959,7 +959,7 @@
   "QUEST_MAIN_AST_001": {
     "name": "Wenn die Sterne wandern",
     "type": "main",
-    "completion_notice": "Kapitel 9 „Astralis – Die Himmelswelt“ abgeschlossen. Fortsetzung folgt.",
+    "completion_notice": "Kapitel 9 „Astralis – Wenn die Sterne wandern“ abgeschlossen. Der Weltenstein führt weiter nach Elyndra.",
     "steps": [
       {
         "objective": "Sprich mit Aera im Wolkenhafen.",

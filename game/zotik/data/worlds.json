@@ -57,7 +57,7 @@
   "WORLD_NOCTARIS": {
     "name": "Noctaris",
     "chapter": 8,
-    "subtitle": "Die Stadt der Erinnerungen",
+    "subtitle": "Die Stadt, die sich erinnert",
     "hub_area": "AREA_NOC_CITY",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_IGN_CHAPTER_COMPLETE"
@@ -65,7 +65,7 @@
   "WORLD_ASTRALIS": {
     "name": "Astralis",
     "chapter": 9,
-    "subtitle": "Die Himmelswelt",
+    "subtitle": "Wenn die Sterne wandern",
     "hub_area": "AREA_AST_PORT",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_NOC_CHAPTER_COMPLETE"
@@ -73,7 +73,7 @@
   "WORLD_ELYNDRA": {
     "name": "Elyndra",
     "chapter": 10,
-    "subtitle": "Die Stadt zwischen den Welten",
+    "subtitle": "Der Weltenkern",
     "hub_area": "AREA_ELY_CITY",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_AST_CHAPTER_COMPLETE"
