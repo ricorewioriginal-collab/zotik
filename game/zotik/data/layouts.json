@@ -883,7 +883,15 @@
           -18
         ]
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_MONDFLEDERMAUS_001",
+        "ENEMY_GRUENSCHLEIM_001"
+      ],
+      "count": 3,
+      "radius": 7.0
+    }
   },
   "AREA_LUN_RUINS": {
     "size": [
@@ -1833,7 +1841,15 @@
           30
         ]
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_WALDSPINNE_001",
+        "ENEMY_SUMPFFROSCH_001"
+      ],
+      "count": 4,
+      "radius": 7.0
+    }
   },
   "AREA_ELA_TOWER": {
     "size": [
@@ -2051,7 +2067,14 @@
           20
         ]
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_WALDSPINNE_001"
+      ],
+      "count": 2,
+      "radius": 7.0
+    }
   },
   "AREA_ELA_ROOT_ARENA": {
     "size": [
@@ -3235,7 +3258,15 @@
           -4
         ]
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_KANALRATTE_001",
+        "ENEMY_SUMPFFROSCH_001"
+      ],
+      "count": 3,
+      "radius": 7.0
+    }
   },
   "AREA_VAL_CISTERN": {
     "size": [
@@ -4432,7 +4463,14 @@
         ],
         "rot": 30
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_DUENENSCHLANGE_001"
+      ],
+      "count": 4,
+      "radius": 7.0
+    }
   },
   "AREA_SOL_SUNKEN": {
     "size": [
@@ -4706,7 +4744,15 @@
         ],
         "scale": 1.6
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_WUESTENSKELETT_001",
+        "ENEMY_DUENENSCHLANGE_001"
+      ],
+      "count": 3,
+      "radius": 7.0
+    }
   },
   "AREA_SOL_SUN_HALL": {
     "size": [
@@ -5871,7 +5917,14 @@
         "rot": 50,
         "scale": 1.1
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_RIFFFROSCH_001"
+      ],
+      "count": 3,
+      "radius": 7.0
+    }
   },
   "AREA_AQU_ARCHIVE": {
     "size": [
@@ -6127,7 +6180,14 @@
         ],
         "scale": 1.6
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_ERTRUNKENER_001"
+      ],
+      "count": 2,
+      "radius": 7.0
+    }
   },
   "AREA_AQU_VAULT": {
     "size": [
@@ -7156,7 +7216,15 @@
           28
         ]
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_EISFLEDERMAUS_001",
+        "ENEMY_FROSTSPINNE_001"
+      ],
+      "count": 4,
+      "radius": 7.0
+    }
   },
   "AREA_FRO_CITY": {
     "size": [
@@ -7448,7 +7516,14 @@
         "scale": 1.0,
         "r": 0.7
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_EISFLEDERMAUS_001"
+      ],
+      "count": 2,
+      "radius": 7.0
+    }
   },
   "AREA_FRO_TEMPLE": {
     "size": [
@@ -8522,7 +8597,15 @@
           28
         ]
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_GLUEHWESPE_001",
+        "ENEMY_GLUTDRACHE_001"
+      ],
+      "count": 4,
+      "radius": 7.0
+    }
   },
   "AREA_IGN_MINES": {
     "size": [
@@ -8794,7 +8877,14 @@
           -8
         ]
       }
-    ]
+    ],
+    "roamers": {
+      "pool": [
+        "ENEMY_GLUEHWESPE_001"
+      ],
+      "count": 2,
+      "radius": 7.0
+    }
   },
   "AREA_IGN_CHAMBER": {
     "size": [

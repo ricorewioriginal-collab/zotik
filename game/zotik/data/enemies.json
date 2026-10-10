@@ -1036,5 +1036,282 @@
         }
       }
     ]
+  },
+  "ENEMY_MONDFLEDERMAUS_001": {
+    "name": "Mondfledermaus",
+    "hp": 24,
+    "attack": 6,
+    "defense": 1,
+    "move_speed": 4.2,
+    "aggro_range": 9.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 6,
+    "drops": [
+      {
+        "id": "ITEM_MOON_HERB_001",
+        "count": 1
+      }
+    ],
+    "break": 20,
+    "break_duration": 2.5,
+    "region": "WORLD_LUNARIS",
+    "description": "Streift bei Nacht durch die Mondwiesen und stürzt auf alles, was leuchtet."
+  },
+  "ENEMY_GRUENSCHLEIM_001": {
+    "name": "Grünschleim",
+    "hp": 34,
+    "attack": 6,
+    "defense": 1,
+    "move_speed": 1.8,
+    "aggro_range": 8.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 5,
+    "drops": [
+      {
+        "id": "ITEM_MOON_HERB_001",
+        "count": 1
+      }
+    ],
+    "break": 22,
+    "break_duration": 2.5,
+    "region": "WORLD_LUNARIS",
+    "description": "Zäher Schleim, der von den Rissen im Mondgras angelockt wird."
+  },
+  "ENEMY_WALDSPINNE_001": {
+    "name": "Waldspinne",
+    "hp": 48,
+    "attack": 9,
+    "defense": 2,
+    "move_speed": 3.8,
+    "aggro_range": 10.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 9,
+    "drops": [
+      {
+        "id": "ITEM_SPORE_001",
+        "count": 1
+      }
+    ],
+    "break": 28,
+    "break_duration": 2.5,
+    "region": "WORLD_ELARIS",
+    "description": "Webt zwischen den Wurzeln Fallen und springt Wanderer aus dem Dunkel an."
+  },
+  "ENEMY_SUMPFFROSCH_001": {
+    "name": "Sumpffrosch",
+    "hp": 42,
+    "attack": 8,
+    "defense": 2,
+    "move_speed": 3.0,
+    "aggro_range": 8.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 8,
+    "drops": [
+      {
+        "id": "ITEM_SPORE_001",
+        "count": 1
+      }
+    ],
+    "break": 24,
+    "break_duration": 2.5,
+    "region": "WORLD_ELARIS",
+    "description": "Quakt laut, bevor er mit der Zunge zuschnappt."
+  },
+  "ENEMY_KANALRATTE_001": {
+    "name": "Kanalratte",
+    "hp": 54,
+    "attack": 11,
+    "defense": 2,
+    "move_speed": 4.4,
+    "aggro_range": 10.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 10,
+    "drops": [
+      {
+        "id": "ITEM_SCRAP_001",
+        "count": 1
+      }
+    ],
+    "break": 28,
+    "break_duration": 2.5,
+    "region": "WORLD_VALDORIA",
+    "description": "Groß wie ein Hund und hungrig auf alles, was nach Essen riecht."
+  },
+  "ENEMY_DUENENSCHLANGE_001": {
+    "name": "Dünenschlange",
+    "hp": 72,
+    "attack": 15,
+    "defense": 4,
+    "move_speed": 3.6,
+    "aggro_range": 10.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 14,
+    "drops": [
+      {
+        "id": "ITEM_SUN_DUST_001",
+        "count": 1
+      }
+    ],
+    "break": 34,
+    "break_duration": 2.5,
+    "region": "WORLD_SOLMERA",
+    "description": "Gräbt sich in den heißen Sand und schnellt erst im letzten Moment hervor."
+  },
+  "ENEMY_WUESTENSKELETT_001": {
+    "name": "Wüstenskelett",
+    "hp": 92,
+    "attack": 16,
+    "defense": 6,
+    "move_speed": 3.2,
+    "aggro_range": 11.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 18,
+    "drops": [
+      {
+        "id": "ITEM_SUN_DUST_001",
+        "count": 1
+      }
+    ],
+    "break": 38,
+    "break_duration": 2.5,
+    "region": "WORLD_SOLMERA",
+    "description": "Von der Sonne gebleichte Knochen, die der Riss noch einmal erweckt hat."
+  },
+  "ENEMY_RIFFFROSCH_001": {
+    "name": "Riff-Frosch",
+    "hp": 82,
+    "attack": 17,
+    "defense": 5,
+    "move_speed": 3.2,
+    "aggro_range": 10.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 18,
+    "drops": [
+      {
+        "id": "ITEM_PEARL_001",
+        "count": 1
+      }
+    ],
+    "break": 36,
+    "break_duration": 2.5,
+    "region": "WORLD_AQUALIS",
+    "description": "Leuchtet in den Becken von Aqualis und spuckt Salzwasser nach Eindringlingen."
+  },
+  "ENEMY_ERTRUNKENER_001": {
+    "name": "Ertrunkener",
+    "hp": 112,
+    "attack": 18,
+    "defense": 8,
+    "move_speed": 3.0,
+    "aggro_range": 11.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 22,
+    "drops": [
+      {
+        "id": "ITEM_PEARL_001",
+        "count": 1
+      }
+    ],
+    "break": 42,
+    "break_duration": 2.5,
+    "region": "WORLD_AQUALIS",
+    "description": "Ein Archivwächter von einst, den das Wasser nie losgelassen hat."
+  },
+  "ENEMY_EISFLEDERMAUS_001": {
+    "name": "Eisfledermaus",
+    "hp": 86,
+    "attack": 20,
+    "defense": 5,
+    "move_speed": 4.4,
+    "aggro_range": 11.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 22,
+    "drops": [
+      {
+        "id": "ITEM_FROST_SHARD_001",
+        "count": 1
+      }
+    ],
+    "break": 38,
+    "break_duration": 2.5,
+    "region": "WORLD_FROSTHAIN",
+    "description": "Ihre Flügel tragen Raureif; ein Biss lässt die Glieder erstarren."
+  },
+  "ENEMY_FROSTSPINNE_001": {
+    "name": "Frostspinne",
+    "hp": 104,
+    "attack": 21,
+    "defense": 8,
+    "move_speed": 3.8,
+    "aggro_range": 10.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 24,
+    "drops": [
+      {
+        "id": "ITEM_FROST_SHARD_001",
+        "count": 1
+      }
+    ],
+    "break": 42,
+    "break_duration": 2.5,
+    "region": "WORLD_FROSTHAIN",
+    "description": "Ihr Netz glitzert wie Eiskristalle und bricht doch nie."
+  },
+  "ENEMY_GLUEHWESPE_001": {
+    "name": "Glühwespe",
+    "hp": 106,
+    "attack": 22,
+    "defense": 6,
+    "move_speed": 4.6,
+    "aggro_range": 11.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 24,
+    "drops": [
+      {
+        "id": "ITEM_EMBER_001",
+        "count": 1
+      }
+    ],
+    "break": 40,
+    "break_duration": 2.5,
+    "region": "WORLD_IGNARA",
+    "description": "Schwirrt aus den Aschefeldern auf und sticht mit glühendem Stachel."
+  },
+  "ENEMY_GLUTDRACHE_001": {
+    "name": "Glutdrache",
+    "hp": 172,
+    "attack": 25,
+    "defense": 10,
+    "move_speed": 3.2,
+    "aggro_range": 12.0,
+    "attack_range": 1.5,
+    "attack_cooldown": 1.4,
+    "currency": 42,
+    "drops": [
+      {
+        "id": "ITEM_EMBER_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 60,
+    "break_duration": 2.5,
+    "region": "WORLD_IGNARA",
+    "description": "Ein junger Drache der Aschefelder – noch klein, aber voller Feuer."
   }
 }
