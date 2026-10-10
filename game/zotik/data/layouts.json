@@ -15082,7 +15082,51 @@
         ]
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "name": "vault_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_door",
+        "pos": [
+          0,
+          3,
+          -30
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#4a3a7a",
+        "hidden_by_flag": "FLAG_END_D1_VAULT"
+      }
+    ],
     "entities": [
       {
         "type": "enemy",
@@ -15180,6 +15224,24 @@
           0,
           -28
         ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_END_D1_001",
+        "pos": [
+          -6,
+          0,
+          -25
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D1_VAULT",
+        "pos": [
+          0,
+          0,
+          -33
+        ]
       }
     ],
     "decor": [
@@ -15273,7 +15335,51 @@
         ]
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "name": "vault_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_door",
+        "pos": [
+          0,
+          3,
+          -30
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#4a3a7a",
+        "hidden_by_flag": "FLAG_END_D2_VAULT"
+      }
+    ],
     "entities": [
       {
         "type": "enemy",
@@ -15371,6 +15477,24 @@
           0,
           -28
         ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_END_D2_001",
+        "pos": [
+          -6,
+          0,
+          -25
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D2_VAULT",
+        "pos": [
+          0,
+          0,
+          -33
+        ]
       }
     ],
     "decor": [
@@ -15464,7 +15588,51 @@
         ]
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "name": "vault_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_door",
+        "pos": [
+          0,
+          3,
+          -30
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#4a3a7a",
+        "hidden_by_flag": "FLAG_END_D3_VAULT"
+      }
+    ],
     "entities": [
       {
         "type": "enemy",
@@ -15562,6 +15730,24 @@
           0,
           -28
         ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_END_D3_001",
+        "pos": [
+          -6,
+          0,
+          -25
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D3_VAULT",
+        "pos": [
+          0,
+          0,
+          -33
+        ]
       }
     ],
     "decor": [
@@ -15655,7 +15841,51 @@
         ]
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "name": "vault_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_door",
+        "pos": [
+          0,
+          3,
+          -30
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#4a3a7a",
+        "hidden_by_flag": "FLAG_END_D4_VAULT"
+      }
+    ],
     "entities": [
       {
         "type": "enemy",
@@ -15753,6 +15983,24 @@
           0,
           -28
         ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_END_D4_001",
+        "pos": [
+          -6,
+          0,
+          -25
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D4_VAULT",
+        "pos": [
+          0,
+          0,
+          -33
+        ]
       }
     ],
     "decor": [
@@ -15846,7 +16094,51 @@
         ]
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "name": "vault_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_door",
+        "pos": [
+          0,
+          3,
+          -30
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#4a3a7a",
+        "hidden_by_flag": "FLAG_END_D5_VAULT"
+      }
+    ],
     "entities": [
       {
         "type": "enemy",
@@ -15944,6 +16236,24 @@
           0,
           -28
         ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_END_D5_001",
+        "pos": [
+          -6,
+          0,
+          -25
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D5_VAULT",
+        "pos": [
+          0,
+          0,
+          -33
+        ]
       }
     ],
     "decor": [
@@ -16037,7 +16347,51 @@
         ]
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "name": "vault_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_door",
+        "pos": [
+          0,
+          3,
+          -30
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#4a3a7a",
+        "hidden_by_flag": "FLAG_END_D6_VAULT"
+      }
+    ],
     "entities": [
       {
         "type": "enemy",
@@ -16135,6 +16489,24 @@
           0,
           -28
         ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_END_D6_001",
+        "pos": [
+          -6,
+          0,
+          -25
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D6_VAULT",
+        "pos": [
+          0,
+          0,
+          -33
+        ]
       }
     ],
     "decor": [
@@ -16228,7 +16600,51 @@
         ]
       }
     ],
-    "props": [],
+    "props": [
+      {
+        "name": "vault_wall_w",
+        "pos": [
+          -14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_wall_e",
+        "pos": [
+          14.5,
+          2,
+          -30
+        ],
+        "size": [
+          21,
+          4,
+          2
+        ],
+        "color": "#2a2448"
+      },
+      {
+        "name": "vault_door",
+        "pos": [
+          0,
+          3,
+          -30
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#4a3a7a",
+        "hidden_by_flag": "FLAG_END_D7_VAULT"
+      }
+    ],
     "entities": [
       {
         "type": "enemy",
@@ -16325,6 +16741,24 @@
           20,
           0,
           -28
+        ]
+      },
+      {
+        "type": "puzzle",
+        "id": "PUZ_END_D7_001",
+        "pos": [
+          -6,
+          0,
+          -25
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D7_VAULT",
+        "pos": [
+          0,
+          0,
+          -33
         ]
       }
     ],

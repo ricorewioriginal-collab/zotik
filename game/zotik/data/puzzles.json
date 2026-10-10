@@ -452,5 +452,201 @@
       "Die Trennung begann bei den Welten, die zuletzt entdeckt wurden: zuerst die fünfte Spiegelsäule von links, dann die zweite.",
       "Spiegel 5, 2, 6, 1, 4, 3 (von links gezählt)."
     ]
+  },
+  "PUZ_END_D1_001": {
+    "name": "Siegel des Dungeons 1",
+    "area": "AREA_END_D1",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      1,
+      3,
+      2
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D1_VAULT"
+      }
+    ],
+    "hints": [
+      "Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Der verlorene Wald). Probiere, was die Scheiben nacheinander zeigen.",
+      "Die erste Scheibe muss 1-mal gedreht werden.",
+      "Drehungen von links nach rechts: 1, 3, 2."
+    ]
+  },
+  "PUZ_END_D2_001": {
+    "name": "Siegel des Dungeons 2",
+    "area": "AREA_END_D2",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      2,
+      0,
+      1
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D2_VAULT"
+      }
+    ],
+    "hints": [
+      "Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Die Stadt ohne Bewohner). Probiere, was die Scheiben nacheinander zeigen.",
+      "Die erste Scheibe muss 2-mal gedreht werden.",
+      "Drehungen von links nach rechts: 2, 0, 1."
+    ]
+  },
+  "PUZ_END_D3_001": {
+    "name": "Siegel des Dungeons 3",
+    "area": "AREA_END_D3",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      3,
+      1,
+      0
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D3_VAULT"
+      }
+    ],
+    "hints": [
+      "Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Das Meer über dem Himmel). Probiere, was die Scheiben nacheinander zeigen.",
+      "Die erste Scheibe muss 3-mal gedreht werden.",
+      "Drehungen von links nach rechts: 3, 1, 0."
+    ]
+  },
+  "PUZ_END_D4_001": {
+    "name": "Siegel des Dungeons 4",
+    "area": "AREA_END_D4",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      0,
+      2,
+      3
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D4_VAULT"
+      }
+    ],
+    "hints": [
+      "Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Der ewige Vulkan). Probiere, was die Scheiben nacheinander zeigen.",
+      "Die erste Scheibe muss 0-mal gedreht werden.",
+      "Drehungen von links nach rechts: 0, 2, 3."
+    ]
+  },
+  "PUZ_END_D5_001": {
+    "name": "Siegel des Dungeons 5",
+    "area": "AREA_END_D5",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      2,
+      2,
+      1
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D5_VAULT"
+      }
+    ],
+    "hints": [
+      "Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Noctaris Null). Probiere, was die Scheiben nacheinander zeigen.",
+      "Die erste Scheibe muss 2-mal gedreht werden.",
+      "Drehungen von links nach rechts: 2, 2, 1."
+    ]
+  },
+  "PUZ_END_D6_001": {
+    "name": "Siegel des Dungeons 6",
+    "area": "AREA_END_D6",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      1,
+      0,
+      3
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D6_VAULT"
+      }
+    ],
+    "hints": [
+      "Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Elyndra Vorher). Probiere, was die Scheiben nacheinander zeigen.",
+      "Die erste Scheibe muss 1-mal gedreht werden.",
+      "Drehungen von links nach rechts: 1, 0, 3."
+    ]
+  },
+  "PUZ_END_D7_001": {
+    "name": "Siegel des Dungeons 7",
+    "area": "AREA_END_D7",
+    "kind": "dials",
+    "dial_count": 3,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      3,
+      3,
+      2
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D7_VAULT"
+      }
+    ],
+    "hints": [
+      "Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Der Ort, den es nie gab). Probiere, was die Scheiben nacheinander zeigen.",
+      "Die erste Scheibe muss 3-mal gedreht werden.",
+      "Drehungen von links nach rechts: 3, 3, 2."
+    ]
   }
 }

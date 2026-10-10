@@ -154,3 +154,24 @@ func test_walkable_endgame_dungeons_open_after_the_superbosses() -> void:
 				enemies += 1
 		eq(enemies, 7, dungeon + " has seven enemies")
 		check(game.area.entities.has("CHEST_END_D%d_2" % (i + 1)) and game.area.entities.has("SAVEPOINT_END_D%d_001" % (i + 1)), dungeon + " has chests and a savepoint")
+
+
+func test_dungeon_vaults_open_with_their_puzzle() -> void:
+	for i in range(1, 8):
+		var area := "AREA_END_D%d" % i
+		var flag := "FLAG_END_D%d_VAULT" % i
+		var pz: Dictionary = Content.get_entry("puzzles", "PUZ_END_D%d_001" % i)
+		eq(pz.area, area, area + " puzzle area")
+		eq(pz.on_solved[0].id, flag, area + " puzzle sets the vault flag")
+		GameState.flags.erase(flag)
+		game.enter_area(area, "default")
+		await physics_frames(2)
+		check(game.area.entities.has("PUZ_END_D%d_001" % i) and game.area.entities.has("CHEST_END_D%d_VAULT" % i), area + " has puzzle and vault chest")
+		var door: Node = null
+		for f in game.area.flag_props:
+			if f.flag == flag:
+				door = f.node
+		check(door != null and door.visible, area + " vault door shut")
+		GameState.set_flag(flag)
+		await frames(2)
+		check(not door.visible, area + " vault door open after the puzzle")

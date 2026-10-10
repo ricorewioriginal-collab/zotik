@@ -890,3 +890,7 @@ Findings in the old code: saving was only possible at a Weltenanker (nothing els
 - The last device decides: while a controller is used the touch overlay hides and the pause help shows the controller layout; touch/mouse/keyboard bring it back. Menus focus their first button when a controller is used (B closes via ui_cancel). Rumble when Zotik is hit.
 - Touch buttons now sit like a controller: Y top, X left, B right, A bottom (A is always there and glows when something can be used).
 - Not testable here: real controllers over Bluetooth/Android/browser (Gamepad API). Tests: `test_w06_gamepad` (4); touch tests adjusted.
+
+## E08 – Dungeon vaults with puzzles (Phase 7)
+- Each of the seven endgame dungeons (`AREA_END_D1`–`D7`) now has a dials puzzle (`PUZ_END_Dn_001`, three hints) at the end. Solving it sets `FLAG_END_Dn_VAULT` and opens a door (wall + `hidden_by_flag`) to a vault with `CHEST_END_Dn_VAULT` (3 Rissessenz, 2 Elixiere, 1800 Lun).
+- Still placeholder art, no dungeon boss besides the superboss before it. Test: `test_r15_endgame` has one more test (9).

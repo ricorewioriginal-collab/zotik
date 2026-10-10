@@ -382,5 +382,26 @@
   },
   "FLAG_END_DUNGEON_7": {
     "desc": "Endgame-Dungeon 7 geschafft: Der Ort, den es nie gab"
+  },
+  "FLAG_END_D1_VAULT": {
+    "desc": "Schatzkammer von Der verlorene Wald geöffnet"
+  },
+  "FLAG_END_D2_VAULT": {
+    "desc": "Schatzkammer von Die Stadt ohne Bewohner geöffnet"
+  },
+  "FLAG_END_D3_VAULT": {
+    "desc": "Schatzkammer von Das Meer über dem Himmel geöffnet"
+  },
+  "FLAG_END_D4_VAULT": {
+    "desc": "Schatzkammer von Der ewige Vulkan geöffnet"
+  },
+  "FLAG_END_D5_VAULT": {
+    "desc": "Schatzkammer von Noctaris Null geöffnet"
+  },
+  "FLAG_END_D6_VAULT": {
+    "desc": "Schatzkammer von Elyndra Vorher geöffnet"
+  },
+  "FLAG_END_D7_VAULT": {
+    "desc": "Schatzkammer von Der Ort, den es nie gab geöffnet"
   }
 }
