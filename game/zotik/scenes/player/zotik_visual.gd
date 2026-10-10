@@ -26,6 +26,22 @@ const FLAT_COLORS := {"Male_Ranger_Legs": 0.45, "Male_Ranger_Body": 0.15}
 const BODY_SPEC := {"outfit": "Male_Ranger", "body": "Male", "human_head": false, "hide": ["Male_Ranger_Head_Hood", "Male_Ranger_Acc_Pauldron"]}
 
 
+## Fine fur and face details that are invisible at phone distance: hidden on the low graphics level
+## (about 20 fewer draw calls; the character creator keeps them, it shows Zotik up close).
+func set_detail(on: bool) -> void:
+	for k in 10:
+		_show("PLACEHOLDER_tuft_%d" % k, on)
+	for k in 6:
+		_show("PLACEHOLDER_tail_tuft_%d" % k, on)
+	for n in ["PLACEHOLDER_glint_l", "PLACEHOLDER_glint_r", "PLACEHOLDER_brow_l", "PLACEHOLDER_brow_r"]:
+		_show(n, on)
+
+
+func _show(part: String, on: bool) -> void:
+	if parts.has(part):
+		(parts[part] as MeshInstance3D).visible = on
+
+
 func _ready() -> void:
 	rig = CharacterRig.create_human(BODY_SPEC, 1.75)
 	add_child(rig)
@@ -88,6 +104,9 @@ func _ready() -> void:
 	_part("PLACEHOLDER_body", _capsule(0.01, 0.02), Vector3.ZERO)
 	parts["PLACEHOLDER_body"].visible = false
 	apply_customization()
+	if not is_in_group("creator_preview"):
+		add_to_group("zotik_visual")
+		set_detail(Quality.level() != "low")
 	if is_inside_tree() and get_tree().root.has_node("EventBus"):
 		EventBus.equipment_changed.connect(update_weapon)
 

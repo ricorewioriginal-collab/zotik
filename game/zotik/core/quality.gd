@@ -66,5 +66,7 @@ static func apply(tree: SceneTree) -> void:
 	Engine.max_fps = max_fps()
 	Engine.physics_ticks_per_second = physics_rate()
 	Engine.max_physics_steps_per_frame = max_physics_steps()
+	for v in tree.get_nodes_in_group("zotik_visual"):
+		v.set_detail(Quality.level() != "low")
 	for l in tree.root.find_children("*", "DirectionalLight3D", true, false):
 		(l as DirectionalLight3D).shadow_enabled = shadows()

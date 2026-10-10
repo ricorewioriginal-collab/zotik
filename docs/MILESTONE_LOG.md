@@ -944,3 +944,7 @@ Findings in the old code: saving was only possible at a Weltenanker (nothing els
 ## W15 – Less engine work on slow devices
 - On "Niedrig" the physics runs at 30 steps per second (the picture is capped at 30 fps anyway) and at most 2 steps per frame: a slow frame no longer causes a burst of catch-up physics steps that slows the next frame further (the usual stutter spiral on phones). "Mittel"/"Hoch" keep 60 steps and the engine default of 8.
 - Measured (headless, desktop): with every script of the village switched off one by one the frame time stays at about 6.9 ms, so the game scripts are not the cost; the rest is engine work (physics, animation, culling) plus rendering. Real numbers need the performance read-out from the owner's phone (pause menu).
+
+## W16 – Fewer draw calls for Zotik and idle NPCs on the low level
+- Low: Zotik's fine fur tufts (16), glints and brows (4) are hidden (about 20 fewer draw calls for the player, who had 56); the creator keeps them. NPC idle animations only within 16 m instead of 32 m.
+- Switching the graphics level in the pause menu applies at once.

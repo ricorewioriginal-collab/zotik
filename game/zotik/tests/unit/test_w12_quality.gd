@@ -48,3 +48,19 @@ func test_low_halves_the_physics_work_and_stops_catch_up_bursts() -> void:
 	check(Quality.physics_rate() == 30 and Quality.max_physics_steps() == 2, "low: 30 physics ticks, at most 2 steps per frame")
 	Settings.set_value("graphics", "high")
 	check(Quality.physics_rate() == 60 and Quality.max_physics_steps() == 8, "high: the engine defaults")
+
+
+func test_low_hides_fine_zotik_details_but_the_creator_keeps_them() -> void:
+	var v := ZotikVisual.new()
+	tree.root.add_child(v)
+	v.set_detail(false)
+	check(not v.parts["PLACEHOLDER_tuft_0"].visible and not v.parts["PLACEHOLDER_tail_tuft_3"].visible, "tufts hidden")
+	check(v.parts["PLACEHOLDER_head"].visible and v.parts["PLACEHOLDER_tail"].visible and v.parts["PLACEHOLDER_eye_l"].visible, "head, tail and eyes stay")
+	v.set_detail(true)
+	check(v.parts["PLACEHOLDER_tuft_0"].visible, "and back")
+	v.queue_free()
+	var c := ZotikVisual.new()
+	c.add_to_group("creator_preview")
+	tree.root.add_child(c)
+	check(not c.is_in_group("zotik_visual"), "the creator preview is never reduced")
+	c.queue_free()
