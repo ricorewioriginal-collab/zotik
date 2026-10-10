@@ -147,3 +147,43 @@ static func _freq(midi: int) -> float:
 ## MIDI note of a scale degree (degrees beyond the scale continue in the next octave).
 func _note(scale: Array, degree: int) -> int:
 	return int(_m.root) + int(scale[degree % scale.size()]) + 12 * (degree / scale.size())
+
+
+## Length of one loop of a mood in samples: four bars of four beats.
+func loop_samples() -> int:
+	return int(round(16.0 * 60.0 / float(_m.bpm) * RATE))
+
+
+## Mono 16-bit bytes for `count` samples of the mood from the current position (for looped streams);
+## the last 30 ms of a loop are faded so the wrap-around does not click.
+func render_bytes(count: int, loop_total: int) -> PackedByteArray:
+	var frames := render(count)
+	var out := PackedByteArray()
+	out.resize(count * 2)
+	var fade := int(0.03 * RATE)
+	var first := _n - count
+	for i in count:
+		var v := frames[i].x
+		var left := loop_total - (first + i)
+		if left < fade:
+			v *= maxf(0.0, float(left) / fade)
+		out.encode_s16(i * 2, int(clampf(v, -1.0, 1.0) * 32767.0))
+	return out
+
+
+static func make_stream(data: PackedByteArray) -> AudioStreamWAV:
+	var w := AudioStreamWAV.new()
+	w.format = AudioStreamWAV.FORMAT_16_BITS
+	w.mix_rate = RATE
+	w.stereo = false
+	w.data = data
+	w.loop_mode = AudioStreamWAV.LOOP_FORWARD
+	w.loop_begin = 0
+	w.loop_end = data.size() / 2
+	return w
+
+
+## The whole loop at once (tests, tools); the game builds it in small steps instead.
+static func build_loop(id: String) -> AudioStreamWAV:
+	var s := MusicSynth.new(id)
+	return make_stream(s.render_bytes(s.loop_samples(), s.loop_samples()))
