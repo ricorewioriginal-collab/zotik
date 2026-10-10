@@ -758,3 +758,9 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 
 ## U04 – Character creator in the new UI style
 - "Mein Zotik": title font, row plates and gold buttons like the menus, navy preview background instead of grey. Live check of the Pages build after #18: starts, Neryx data in the pck, game loads (software renderer, frame rate not representative).
+
+## R01 – Atmosphere (Phase 6)
+- Lunaris is now a night world: sky shader `assets/shaders/night_sky.gdshader` (gradient, twinkling stars, big moon with halo, soft aurora; no textures, works in the compatibility renderer), cool moonlit ground tint and path tint, moonlight sun.
+- `Look.build_flora`: tufts of grass (7 bent blades each) and glowing flowers as two MultiMeshes per area (Lunaris, Elaris, Valdoria, Solmera); fewer on web/Android; keeps roads, houses, water and exits free.
+- Lantern lamps are brighter and carry a warm OmniLight on PC (not on web/Android).
+- Placeholder/procedural art, not final.

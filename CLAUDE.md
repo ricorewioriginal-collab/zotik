@@ -2,9 +2,9 @@
 
 PROJECT: ZOTIK – Die Splitter der Welten
 ENGINE TARGET: Godot 4.7
-CURRENT PHASE: Phase 5 – Aqualis (owner request 2026-10-09, see docs/PHASE_5_PLAN.md)
-CURRENT MILESTONE: Q05_CHAPTER5_REGRESSION
-STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06); Graphics pass PASSED (G01–G05, A01, U01, U02, C01); Phase 4 PASSED (S00–S05); Phase 5 PASSED (Q00–Q05)
+CURRENT PHASE: Phase 6 – Visual modernisation and more chapters (owner request 2026-10-10, see docs/PHASE_6_PLAN.md)
+CURRENT MILESTONE: R01_ATMOSPHERE
+STATUS: Phase 1 PASSED (M00–M15); Phase 2 PASSED (E00–E08); Phase 3 PASSED (V00–V06); Graphics pass PASSED (G01–G05, A01, U01, U02, C01); Phase 4 PASSED (S00–S05); Phase 5 PASSED (Q00–Q05); Phase 6 in progress
 
 ## Mandatory workflow
 1. Audit before implementation. Do not rebuild from scratch.

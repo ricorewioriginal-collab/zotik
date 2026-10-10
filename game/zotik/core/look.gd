@@ -10,7 +10,7 @@ const INDOOR_KEYS := ["CAVE", "DUNGEON", "CANALS", "CISTERN", "FLOODGATE", "HOME
 
 ## sky_top, sky_horizon, sun colour, sun energy, sun pitch, fog colour, floor texture, boundary kind
 const WORLDS := {
-	"WORLD_LUNARIS": {"sky_top": "#1d2b66", "sky_horizon": "#b49ad8", "sun": "#dfe6ff", "sun_energy": 1.0, "pitch": -48.0, "fog": "#7a72b8", "floor": "grass", "boundary": "hedge"},
+	"WORLD_LUNARIS": {"sky_top": "#0a1140", "sky_horizon": "#4a3f9a", "sun": "#b8c8ff", "sun_energy": 0.8, "pitch": -48.0, "fog": "#3a3a8a", "floor": "grass", "boundary": "hedge", "night": true, "fog_density": 0.01},
 	"WORLD_ELARIS": {"sky_top": "#2f74d6", "sky_horizon": "#cdeeff", "sun": "#fff0c8", "sun_energy": 1.25, "pitch": -58.0, "fog": "#a8d8b0", "floor": "forest", "boundary": "hedge"},
 	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall"},
 	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall"},
@@ -104,14 +104,24 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 		env.fog_light_color = ambient.darkened(0.6)
 		env.fog_density = 0.025
 	else:
-		var sky_mat := ProceduralSkyMaterial.new()
-		sky_mat.sky_top_color = Color.html(st.sky_top)
-		sky_mat.sky_horizon_color = Color.html(st.sky_horizon)
-		sky_mat.ground_horizon_color = Color.html(st.sky_horizon)
-		sky_mat.ground_bottom_color = Color.html(st.sky_top).darkened(0.5)
-		sky_mat.sun_angle_max = 20.0
 		var sky := Sky.new()
-		sky.sky_material = sky_mat
+		if st.get("night", false):
+			var night := ShaderMaterial.new()
+			night.shader = load("res://assets/shaders/night_sky.gdshader")
+			night.set_shader_parameter("sky_top", Color.html(st.sky_top))
+			night.set_shader_parameter("sky_horizon", Color.html(st.sky_horizon))
+			night.set_shader_parameter("moon_dir", Vector3(-0.3, 0.2, -0.9))
+			night.set_shader_parameter("moon_size", 0.075)
+			sky.sky_material = night
+			sky.radiance_size = Sky.RADIANCE_SIZE_32 if low_end() else Sky.RADIANCE_SIZE_128
+		else:
+			var sky_mat := ProceduralSkyMaterial.new()
+			sky_mat.sky_top_color = Color.html(st.sky_top)
+			sky_mat.sky_horizon_color = Color.html(st.sky_horizon)
+			sky_mat.ground_horizon_color = Color.html(st.sky_horizon)
+			sky_mat.ground_bottom_color = Color.html(st.sky_top).darkened(0.5)
+			sky_mat.sun_angle_max = 20.0
+			sky.sky_material = sky_mat
 		env.background_mode = Environment.BG_SKY
 		env.sky = sky
 		env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
@@ -358,10 +368,11 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 const DECOR_SCALE := 5.0
 
 
-static func build_decor(parent: Node3D, layout: Dictionary) -> void:
+static func build_decor(parent: Node3D, layout: Dictionary, area_id: String = "") -> void:
 	var list: Array = layout.get("decor", [])
 	if list.is_empty():
 		return
+	var night: bool = area_id != "" and style(area_id).get("night", false)
 	var root := Node3D.new()
 	root.name = "Decor"
 	parent.add_child(root)
@@ -376,7 +387,7 @@ static func build_decor(parent: Node3D, layout: Dictionary) -> void:
 			plane.size = Vector2(float(d.size[0]), float(d.size[1]))
 			n = _mesh(root, plane, pos, water(Color(0.25, 0.5, 0.75)), "Water")
 		elif d.model == "path":
-			n = _path(root, pos, yaw, Vector2(float(d.size[0]), float(d.size[1])), str(d.get("tex", "cobble")))
+			n = _path(root, pos, yaw, Vector2(float(d.size[0]), float(d.size[1])), str(d.get("tex", "cobble")), night)
 		else:
 			n = _place(root, d.model, pos, DECOR_SCALE * float(d.get("scale", 1.0)), yaw)
 		if n and d.has("r"):
@@ -394,10 +405,10 @@ static func build_decor(parent: Node3D, layout: Dictionary) -> void:
 
 
 ## Flat road or plaza (visual only) laid just above the floor.
-static func _path(parent: Node3D, pos: Vector3, yaw: float, size: Vector2, tex: String) -> Node3D:
+static func _path(parent: Node3D, pos: Vector3, yaw: float, size: Vector2, tex: String, night: bool = false) -> Node3D:
 	var plane := PlaneMesh.new()
 	plane.size = size
-	var mi := _mesh(parent, plane, pos + Vector3(0, 0.02, 0), surface(tex, Color(0.92, 0.88, 0.8), FLOOR_SCALE.get(tex, 0.5)), "Path")
+	var mi := _mesh(parent, plane, pos + Vector3(0, 0.02, 0), surface(tex, Color(0.6, 0.66, 0.85) if night else Color(0.92, 0.88, 0.8), FLOOR_SCALE.get(tex, 0.5)), "Path")
 	mi.rotation.y = yaw
 	return mi
 
@@ -420,12 +431,123 @@ static func _lantern(parent: Node3D, pos: Vector3, yaw: float) -> Node3D:
 	var lamp := BoxMesh.new()
 	lamp.size = Vector3(0.16, 0.22, 0.16)
 	var amber := glow(Color(1.0, 0.65, 0.3))
-	amber.emission_energy_multiplier = 0.9
+	amber.emission_energy_multiplier = 2.4
 	_mesh(n, lamp, Vector3(0.5, 2.3, 0), amber, "Lamp")
+	if not low_end():
+		var light := OmniLight3D.new()
+		light.name = "LampLight"
+		light.position = Vector3(0.5, 2.2, 0)
+		light.light_color = Color(1.0, 0.72, 0.4)
+		light.light_energy = 1.6
+		light.omni_range = 7.0
+		n.add_child(light)
 	var cap := PrismMesh.new()
 	cap.size = Vector3(0.26, 0.12, 0.26)
 	_mesh(n, cap, Vector3(0.5, 2.47, 0), wood, "Cap")
 	return n
+
+
+## Ground tint: night worlds get a cool blue cast so the grass sits in the moonlight.
+static func ground_tint(area_id: String, layout: Dictionary) -> Color:
+	var c := Color.html(layout.get("ground", "#555555"))
+	if style(area_id).get("night", false) and not is_indoor(area_id, layout):
+		c = c.lerp(Color(0.3, 0.55, 0.9), 0.5).darkened(0.05)
+	return c
+
+
+const FLORA := {
+	"WORLD_LUNARIS": {"blade": ["#1f6f78", "#58d0b0"], "glow": "#7fd8ff", "count": 4200, "glow_count": 160},
+	"WORLD_ELARIS": {"blade": ["#2f7a35", "#8fd06a"], "glow": "#ffe08a", "count": 4200, "glow_count": 70},
+	"WORLD_VALDORIA": {"blade": ["#6a8a4a", "#b0c880"], "glow": "", "count": 900, "glow_count": 0},
+	"WORLD_SOLMERA": {"blade": ["#a08848", "#d8c078"], "glow": "", "count": 900, "glow_count": 0},
+}
+
+
+## Grass tufts and glowing flowers scattered over the open ground (G6-01):
+## one MultiMesh each, so it is a handful of draw calls even on the web.
+static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
+	if is_indoor(area_id, layout) or not FLORA.has(world_of(area_id)):
+		return
+	var cfg: Dictionary = FLORA[world_of(area_id)]
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(area_id + "flora")
+	# keep roads, houses, water and the exits free
+	var blocked: Array[Rect2] = []
+	for p in layout.get("props", []):
+		blocked.append(Rect2(float(p.pos[0]) - float(p.size[0]) / 2.0 - 0.8, float(p.pos[2]) - float(p.size[2]) / 2.0 - 0.8, float(p.size[0]) + 1.6, float(p.size[2]) + 1.6))
+	for d in layout.get("decor", []):
+		if d.has("size"):
+			blocked.append(Rect2(float(d.pos[0]) - float(d.size[0]) / 2.0 - 0.5, float(d.pos[2]) - float(d.size[1]) / 2.0 - 0.5, float(d.size[0]) + 1.0, float(d.size[1]) + 1.0))
+	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var root := Node3D.new()
+	root.name = "Flora"
+	parent.add_child(root)
+	var blade := ArrayMesh.new()
+	var verts := PackedVector3Array()
+	var cols := PackedColorArray()
+	var c0 := Color.html(cfg.blade[0])
+	var c1 := Color.html(cfg.blade[1])
+	# a tuft of seven thin, slightly bent blades
+	for k in 7:
+		var a := k * 2.4
+		var r := 0.05 + 0.04 * float(k % 3)
+		var base := Vector3(cos(a) * r, 0, sin(a) * r)
+		var dx := Vector3(cos(a + 1.57), 0, sin(a + 1.57))
+		var h := 0.22 + 0.06 * float(k % 4)
+		var lean := Vector3(cos(a), 0, sin(a)) * 0.07
+		verts.append_array([base - dx * 0.025, base + dx * 0.025, base + lean + Vector3(0, h, 0)])
+		cols.append_array([c0, c0, c1])
+	var arrays := []
+	arrays.resize(Mesh.ARRAY_MAX)
+	arrays[Mesh.ARRAY_VERTEX] = verts
+	arrays[Mesh.ARRAY_COLOR] = cols
+	blade.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+	var mat := StandardMaterial3D.new()
+	mat.vertex_color_use_as_albedo = true
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.roughness = 1.0
+	blade.surface_set_material(0, mat)
+	var count := int(cfg.count) / (3 if low_end() else 1)
+	var xforms: Array[Transform3D] = []
+	var glow_pts: Array[Vector3] = []
+	var tries := 0
+	while xforms.size() < count and tries < count * 3:
+		tries += 1
+		var p := Vector2(rng.randf_range(-size.x / 2.0 + 1.0, size.x / 2.0 - 1.0), rng.randf_range(-size.y / 2.0 + 1.0, size.y / 2.0 - 1.0))
+		if blocked.any(func(r: Rect2): return r.has_point(p)) or exits.any(func(e: Vector2): return e.distance_to(p) < 5.0):
+			continue
+		var t := Transform3D(Basis(Vector3.UP, rng.randf() * TAU).scaled(Vector3.ONE * rng.randf_range(0.8, 1.6)), Vector3(p.x, 0.0, p.y))
+		xforms.append(t)
+		if glow_pts.size() < int(cfg.glow_count) / (2 if low_end() else 1) and rng.randf() < 0.06:
+			glow_pts.append(Vector3(p.x, 0.0, p.y))
+	_multimesh(root, blade, xforms, "Grass")
+	if cfg.glow != "" and not glow_pts.is_empty():
+		var bulb := SphereMesh.new()
+		bulb.radius = 0.09
+		bulb.height = 0.18
+		bulb.radial_segments = 6
+		bulb.rings = 3
+		var gm := glow(Color.html(cfg.glow))
+		gm.emission_energy_multiplier = 2.2
+		bulb.material = gm
+		var bulbs: Array[Transform3D] = []
+		for gp in glow_pts:
+			bulbs.append(Transform3D(Basis.IDENTITY, gp + Vector3(0, rng.randf_range(0.25, 0.5), 0)))
+		_multimesh(root, bulb, bulbs, "Flowers")
+
+
+static func _multimesh(parent: Node3D, mesh: Mesh, xforms: Array[Transform3D], nm: String) -> void:
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = mesh
+	mm.instance_count = xforms.size()
+	for i in xforms.size():
+		mm.set_instance_transform(i, xforms[i])
+	var mi := MultiMeshInstance3D.new()
+	mi.name = nm
+	mi.multimesh = mm
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(mi)
 
 
 ## Landmarks far outside the walkable area (outdoor Lunaris/Valdoria): a
