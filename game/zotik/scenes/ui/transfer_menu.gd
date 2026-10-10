@@ -13,26 +13,12 @@ var _confirm := -1
 var _file_cb: JavaScriptObject
 
 
-func _ready() -> void:
-	super()
-	CloudSync.state_changed.connect(func(): if visible: refresh())
-
-
 func refresh() -> void:
 	super()
 	title_label.text = "Spielstand übertragen"
 	info_label.text = "Exportieren erzeugt einen Code (Kopieren oder als Datei), mit dem du einen Spielstand auf einem anderen Gerät oder Browser einspielen kannst."
-	if CloudSync.configured():
-		add_heading("Cloud-Speicher")
-		if CloudSync.signed_in():
-			var who: String = CloudSync.account_name if CloudSync.account_name != "" else "Google-Konto"
-			add_row("Mit Google verbunden: %s%s" % [who, " (%s)" % CloudSync.account_email if CloudSync.account_email != "" else ""], [["In Google speichern", CloudSync.sync], ["Mit Google wiederherstellen", CloudSync.restore], ["Abmelden", CloudSync.sign_out]])
-		elif CloudSync.user_code != "":
-			add_row("Code %s" % CloudSync.user_code, [["Abbrechen", CloudSync.sign_out]])
-		else:
-			add_row("Spielstand mit Google speichern oder auf diesem Gerät wiederherstellen", [["Mit Google anmelden", CloudSync.start_login]])
-		if CloudSync.message != "":
-			add_note(CloudSync.message)
+	add_heading("Cloud-Speicher")
+	add_cloud_row()
 	add_heading("Exportieren")
 	for slot in [SaveSystem.AUTO_SLOT, 1, 2, 3]:
 		var info := SaveSystem.slot_info(slot)

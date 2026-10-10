@@ -60,7 +60,7 @@ func _ready() -> void:
 			if info.status == SaveSystem.Status.RECOVERED_FROM_BACKUP:
 				text += " – Sicherung"
 			_add_button(box, "load_%d" % slot, text, _on_load.bind(slot))
-	_add_button(box, "transfer", "Spielstand übertragen (Export / Import)", _open_transfer)
+	_add_button(box, "transfer", "Spielstand übertragen (Google, Export / Import)", _open_transfer)
 	_add_button(box, "music", _music_text(), _toggle_music)
 	_add_button(box, "quit", "Beenden", App.quit_game)
 	buttons["new_game"].grab_focus.call_deferred()

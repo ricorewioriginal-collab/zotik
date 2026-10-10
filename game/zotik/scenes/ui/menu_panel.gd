@@ -44,6 +44,7 @@ func _ready() -> void:
 	box.add_child(close)
 	close_button = close
 	hide()
+	CloudSync.state_changed.connect(func(): if visible: refresh())
 
 
 func open() -> void:
@@ -102,6 +103,29 @@ func add_row(text: String, actions: Array) -> HBoxContainer:
 		row.add_child(b)
 	list.add_child(plate)
 	return row
+
+
+## Google cloud save: sign-in / restore row in the apps, a pointer to the Google button in the
+## browser. Says plainly that without Google the saves stay on this device.
+func add_cloud_row() -> void:
+	if OS.has_feature("web"):
+		add_note("Mit Google speichern: Knopf mit dem Google-Zeichen unten links im Fenster. Ohne Anmeldung wird nur lokal in diesem Browser gespeichert.")
+		return
+	if not CloudSync.configured():
+		return
+	if CloudSync.signed_in():
+		var who: String = CloudSync.account_name if CloudSync.account_name != "" else "Google-Konto"
+		add_row("Mit Google verbunden: %s%s" % [who, " (%s)" % CloudSync.account_email if CloudSync.account_email != "" else ""], [["In Google speichern", CloudSync.sync], ["Mit Google wiederherstellen", CloudSync.restore], ["Abmelden", CloudSync.sign_out]])
+	elif CloudSync.user_code != "":
+		add_row("Code %s" % CloudSync.user_code, [["Abbrechen", CloudSync.sign_out]])
+	else:
+		var row := add_row("Spielstand mit Google speichern oder wiederherstellen", [["Mit Google anmelden", CloudSync.start_login]])
+		for c in row.get_children():
+			if c is Button:
+				c.icon = CloudSync.google_icon()
+		add_note("Ohne Google-Anmeldung wird nur lokal auf diesem Gerät gespeichert.")
+	if CloudSync.message != "":
+		add_note(CloudSync.message)
 
 
 ## A heading line between groups of rows.
