@@ -346,6 +346,10 @@ func _validate_layouts(e: Array[String]) -> void:
 			for k in ["requires_flag", "hidden_by_flag"]:
 				if p.has(k):
 					_ref(e, "flags", p[k], area)
+		for id in l.get("roamers", {}).get("pool", []):
+			_ref(e, "enemies", id, area)
+			if get_entry("enemies", id).has("phases"):
+				e.append("%s: roamer %s must not be a boss" % [area, id])
 		for en in l.get("entities", []):
 			var ty: String = en.get("type", "")
 			if not ty in ENTITY_TYPES:

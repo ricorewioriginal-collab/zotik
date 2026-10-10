@@ -5,7 +5,7 @@ extends MenuPanel
 const PAGES := [
 	["Worum geht es?", [
 		"Du bist Zotik, ein orangefarbenes Fuchswesen mit großem Schweif. Die Welten sind in Splitter zerbrochen. Du reist von Welt zu Welt, hilfst den Bewohnern, löst Rätsel, besiegst Wächter und findest Stück für Stück heraus, was den Weltenkern zerbrochen hat.",
-		"Die Reise geht durch fünf Welten: Lunaris (Start), Elaris, Valdoria, Solmera und Aqualis. Jede Welt hat mehrere Orte, eigene Händler, Rätsel und einen großen Gegner am Ende.",
+		"Die Reise geht durch sieben Welten: Lunaris (Start), Elaris, Valdoria, Solmera, Aqualis, Frosthain und Ignara. Jede Welt hat mehrere Orte, eigene Händler, Rätsel und einen großen Gegner am Ende.",
 		"Du kannst nichts falsch machen: Das Spiel zeigt dir rechts oben unter „Aktuelles Ziel“, was als Nächstes zu tun ist.",
 	]],
 	["Bewegen und Kamera", [
@@ -24,6 +24,7 @@ const PAGES := [
 		"Touch: Gegner antippen, dann läuft Zotik hin und kämpft. Doppeltippen = ausweichen. Die Aktionstasten unten rechts gibt es zusätzlich.",
 		"Jeder Gegner hat Lebenspunkte und einen Bruch-Wert. Ist er voll, ist der Gegner kurz benommen und nimmt viel mehr Schaden („BREAK!“). Starke Angriffe sind dafür am besten.",
 		"Bei großen Gegnern leuchtet ein roter Kreis am Boden, bevor sie zuschlagen: Weich aus! Bosse haben mehrere Phasen und neue Angriffe, wenn sie schwächer werden.",
+		"In freier Wildnis, Kanälen, Dünen und Höhlen streifen außerdem Wildtiere und Wesen umher – jedes Mal andere und an anderen Stellen. Sie sind schwächer als die Wächter, bringen aber Lun und Material. In Dörfern und Städten bist du sicher.",
 	]],
 	["Quests", [
 		"Das Questlog (Taste L oder Symbol „Quests“) listet Hauptgeschichte und Nebenaufgaben mit dem aktuellen Schritt.",

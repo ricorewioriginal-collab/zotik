@@ -9,6 +9,8 @@ const WALL_HEIGHT := 5.0
 ## Exits ignore the player for this long after the area was built, so a
 ## stale position from the previous area can never chain a transition.
 const EXIT_GRACE_MSEC := 250
+## Random encounters (layout "roamers") are off in headless runs (tests) unless forced on.
+static var roamers_force := false
 
 var area_id := ""
 var layout := {}
@@ -16,6 +18,7 @@ var exits := {}          # target -> {trigger, barrier, gate_flag}
 var flag_props := []     # [{node, body, flag}]
 var entities := {}       # spawn/id -> node
 var skipped := []
+var roamers := []        # random-encounter enemies (not part of `entities`)
 var _built_msec := 0
 
 
@@ -63,8 +66,70 @@ func build(id: String, factories: Dictionary) -> void:
 		add_child(node)
 		node.position = _v(en.pos)
 		entities[en.get("spawn", en.get("id", ""))] = node
+	_spawn_roamers(factories)
 	EventBus.flag_changed.connect(_on_flag_changed)
 	refresh_gates()
+
+
+## Random encounters: a few non-persistent wanderers from the layout's pool, placed on free ground
+## away from the entries, exits, props and the fixed enemies. New each time the area is built.
+func _spawn_roamers(factories: Dictionary) -> void:
+	var cfg: Dictionary = layout.get("roamers", {})
+	var make: Callable = factories.get("enemy", Callable())
+	if cfg.is_empty() or not make.is_valid():
+		return
+	if DisplayServer.get_name() == "headless" and not roamers_force:
+		return
+	var size: Array = layout.get("size", [20, 20])
+	var blocked := Look._blocked_rects(layout)
+	var keep_out: Array[Vector2] = []
+	for k in layout.get("spawns", {}):
+		var sp := spawn_point(k)
+		keep_out.append(Vector2(sp.x, sp.z))
+	for x in layout.get("exits", []):
+		keep_out.append(Vector2(float(x.pos[0]), float(x.pos[2])))
+	for en in layout.get("entities", []):
+		if en.type != "puzzle" and en.type != "savepoint" and en.type != "chest":
+			continue
+		keep_out.append(Vector2(float(en.pos[0]), float(en.pos[2])))
+	var pool: Array = cfg.pool
+	var n := 0
+	for i in int(cfg.get("count", 2)):
+		for attempt in 30:
+			var p := Vector2(randf_range(-size[0] / 2.0 + 5.0, size[0] / 2.0 - 5.0), randf_range(-size[1] / 2.0 + 5.0, size[1] / 2.0 - 5.0))
+			if not _roamer_spot_ok(p, blocked, keep_out):
+				continue
+			var e = make.call({"enemy": pool[randi() % pool.size()], "spawn": "SPAWN_ROAM_%d" % n, "pos": [p.x, 0, p.y]})
+			if e == null:
+				break
+			e.roam = float(cfg.get("radius", 7.0))
+			e.position = Vector3(p.x, 0, p.y)
+			add_child(e)
+			roamers.append(e)
+			n += 1
+			break
+
+
+func _roamer_spot_ok(p: Vector2, blocked: Array[Rect2], keep_out: Array[Vector2]) -> bool:
+	for r in blocked:
+		if r.grow(1.5).has_point(p):
+			return false
+	for k in keep_out:
+		if k.distance_squared_to(p) < 100.0:
+			return false
+	var floors: Array = layout.get("floors", [])
+	if not floors.is_empty():
+		var on_floor := false
+		for f in floors:
+			if absf(p.x - float(f.pos[0])) < float(f.size[0]) / 2.0 - 2.0 and absf(p.y - float(f.pos[2])) < float(f.size[2]) / 2.0 - 2.0:
+				on_floor = true
+				break
+		if not on_floor:
+			return false
+	for e in roamers:
+		if Vector2(e.position.x, e.position.z).distance_squared_to(p) < 36.0:
+			return false
+	return true
 
 
 func spawn_point(key: String) -> Vector3:

@@ -808,3 +808,11 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - HUD: no per-frame tree search, re-layout only when its inputs change, style boxes touched only when the colour changes. NPC idle animations only within 32 m.
 - After (low-end settings, warmed): Lunaris 626 draws / 489k primitives, area builds 14–137 ms (other worlds 14–70 ms).
 - Real devices were not measured (no GPU here); the owner should try the live site.
+
+## W04 – Enemy looks and random encounters (owner: "mehr random Gegner, auch die Optik der Gegner")
+- `CreatureVisual.MODELS`: nine rigged, animated CC0 models (Quaternius Animated Easy Enemies / Lowpoly Animated Monsters: Bat, Dragon, Frog, Rat, Skeleton, Slime, Snake, Spider, Wasp; `assets/enemies`, 1.2 MB imported). The adapter fits the model to a nominal size, replaces the flat colours with a per-enemy tint, plays idle/walk/attack/hit/death clips from the enemy state and shows wind-up/break/hit as a colour overlay. Same `animate/lunge/die/set_tint` interface as the procedural archetypes; bosses and golems stay procedural. Existing Sandskorpion, Aschekäfer and Kanalschleim now use models.
+- 13 new enemies (Mondfledermaus, Grünschleim, Waldspinne, Sumpffrosch, Kanalratte, Dünenschlange, Wüstenskelett, Riff-Frosch, Ertrunkener, Eisfledermaus, Frostspinne, Glühwespe, Glutdrache), weaker than the guardians, scaled per world.
+- Random encounters: layouts may carry `"roamers": {"pool", "count", "radius"}`. `WorldArea._spawn_roamers` places non-persistent wanderers on free ground (not near entries, exits, props, puzzles, chests or each other; inside the floors where an area has custom ones) every time the area is built; they stroll within their radius while idle, then chase and fight like any enemy and are not remembered as defeated. 13 wild/dungeon areas have them; hubs and boss arenas stay safe. Off in headless runs unless `WorldArea.roamers_force` (tests stay deterministic). The content check validates the pools.
+- In-game guide: seven worlds, hint about wandering enemies.
+- Tests: `test_w04_roamers` (4). `tools/enemy_preview.gd` renders all models in a row. Placeholder art, not final.
+

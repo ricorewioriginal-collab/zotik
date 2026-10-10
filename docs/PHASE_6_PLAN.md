@@ -17,6 +17,8 @@ The "Vorlage" is the concept art in `reference/concept_2026-10-02/` and `19_VISU
 | R04 | Props and water: more CC0 models where the licence allows, animated water/waterfalls |
 | R05 (PASSED) | Chapter 6 (Frosthain, boss Avarn): world, areas, quests, boss, tests |
 | R06 (PASSED) | Chapter 7 (Ignara, boss Magmarion) |
+| W03 (PASSED) | Smoother running and world changes (chunked flora, warm-up, loading veil, HUD caching) |
+| W04 (PASSED) | Enemy looks: rigged animated CC0 models (Quaternius) for 16 enemies; random encounters (layout `roamers`) in the wild areas |
 | R07+ | Further chapters from `04_WORLDS/WORLDS_MASTER.md` (Noctaris, Astralis, Elyndra), each with full regression |
 
 Rules: one milestone at a time, screenshots as evidence, full regression before every merge, placeholder art is never reported as final (CLAUDE.md rule 6).
