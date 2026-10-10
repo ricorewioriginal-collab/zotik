@@ -79,6 +79,7 @@ static func use(id: String, player: Node) -> bool:
 	remove(id, 1)
 	if heal > 0 and player and player.has_method("heal"):
 		player.heal(heal)
+		Sfx.play("heal")
 	return true
 
 

@@ -104,6 +104,7 @@ func _physics_process(delta: float) -> void:
 		is_blocking = Input.is_action_pressed("block") and not is_dodging
 		if Input.is_action_just_pressed("jump") and is_on_floor() and not is_dodging:
 			velocity.y = JUMP_VELOCITY
+			Sfx.play("jump")
 	else:
 		is_blocking = false
 	var dir := move_direction(input)
@@ -128,7 +129,9 @@ func _physics_process(delta: float) -> void:
 			face(lock_target.global_position - global_position)
 		elif dir.length() > 0.01:
 			face(dir)
+	var was_airborne := not is_on_floor()
 	move_and_slide()
+	_footsteps(delta, was_airborne)
 	visual.animate(self)
 	camera_pivot.global_position = global_position + Vector3(0, 1.0, 0)
 	_update_interactable()
@@ -247,7 +250,7 @@ func attack(strong: bool = false) -> int:
 		e.take_hit(power, brk, strong)
 		hits += 1
 	visual.swing(strong)
-	Sfx.play("hit" if hits > 0 else "swing")
+	Sfx.play("hit" if hits > 0 else ("swing_strong" if strong else "swing"))
 	attacked.emit(hits)
 	return hits
 
@@ -281,7 +284,25 @@ func forward() -> Vector3:
 	return Vector3(0, 0, -1).rotated(Vector3.UP, visual.rotation.y)
 
 
+var _step_clock := 0.0
+
+
+## Footstep on the ground at a walking rhythm, a thud when landing.
+func _footsteps(delta: float, was_airborne: bool) -> void:
+	if was_airborne and is_on_floor():
+		Sfx.play("land")
+	var speed := Vector2(velocity.x, velocity.z).length()
+	if is_on_floor() and speed > 1.0 and not is_dodging:
+		_step_clock -= delta * speed / 4.0
+		if _step_clock <= 0.0:
+			_step_clock = 0.45
+			Sfx.play("step")
+	else:
+		_step_clock = 0.0
+
+
 func start_dodge(dir: Vector3) -> void:
+	Sfx.play("dodge")
 	is_dodging = true
 	dodge_time_left = float(stats.dodge_time)
 	invulnerable_time = float(stats.iframe_time)
@@ -296,7 +317,7 @@ func take_damage(raw_attack: int) -> int:
 	if is_blocking:
 		dmg = maxi(1, int(round(dmg * (1.0 - float(stats.block_reduction)))))
 	GameState.player.hp = maxi(0, int(GameState.player.hp) - dmg)
-	Sfx.play("hurt")
+	Sfx.play("block" if is_blocking else "hurt")
 	visual.hurt()
 	damaged.emit(dmg)
 	if GameState.player.hp == 0:
