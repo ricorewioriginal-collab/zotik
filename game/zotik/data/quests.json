@@ -125,7 +125,7 @@
         ]
       },
       {
-        "objective": "Sprich mit dem Professorium.",
+        "objective": "Sprich mit dem Professorium im Dorf Lunaris.",
         "condition": {
           "type": "talk",
           "npc": "NPC_PROFESSORIUM_001"
