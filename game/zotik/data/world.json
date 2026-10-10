@@ -101,6 +101,41 @@
       "area": "AREA_END_HUB",
       "name": "Weltenanker am Weltenriss",
       "heals": true
+    },
+    "SAVEPOINT_END_D1_001": {
+      "area": "AREA_END_D1",
+      "name": "Weltenanker – Der verlorene Wald",
+      "heals": true
+    },
+    "SAVEPOINT_END_D2_001": {
+      "area": "AREA_END_D2",
+      "name": "Weltenanker – Die Stadt ohne Bewohner",
+      "heals": true
+    },
+    "SAVEPOINT_END_D3_001": {
+      "area": "AREA_END_D3",
+      "name": "Weltenanker – Das Meer über dem Himmel",
+      "heals": true
+    },
+    "SAVEPOINT_END_D4_001": {
+      "area": "AREA_END_D4",
+      "name": "Weltenanker – Der ewige Vulkan",
+      "heals": true
+    },
+    "SAVEPOINT_END_D5_001": {
+      "area": "AREA_END_D5",
+      "name": "Weltenanker – Noctaris Null",
+      "heals": true
+    },
+    "SAVEPOINT_END_D6_001": {
+      "area": "AREA_END_D6",
+      "name": "Weltenanker – Elyndra Vorher",
+      "heals": true
+    },
+    "SAVEPOINT_END_D7_001": {
+      "area": "AREA_END_D7",
+      "name": "Weltenanker – Der Ort, den es nie gab",
+      "heals": true
     }
   },
   "uniques": {

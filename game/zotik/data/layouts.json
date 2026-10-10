@@ -13775,6 +13775,11 @@
         0,
         0,
         16
+      ],
+      "AREA_END_D1": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -13784,6 +13789,14 @@
           0,
           0,
           19
+        ]
+      },
+      {
+        "to": "AREA_END_D1",
+        "pos": [
+          0,
+          0,
+          -19
         ]
       }
     ],
@@ -13906,6 +13919,11 @@
         0,
         0,
         16
+      ],
+      "AREA_END_D2": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -13915,6 +13933,14 @@
           0,
           0,
           19
+        ]
+      },
+      {
+        "to": "AREA_END_D2",
+        "pos": [
+          0,
+          0,
+          -19
         ]
       }
     ],
@@ -14037,6 +14063,11 @@
         0,
         0,
         16
+      ],
+      "AREA_END_D3": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -14046,6 +14077,14 @@
           0,
           0,
           19
+        ]
+      },
+      {
+        "to": "AREA_END_D3",
+        "pos": [
+          0,
+          0,
+          -19
         ]
       }
     ],
@@ -14168,6 +14207,11 @@
         0,
         0,
         16
+      ],
+      "AREA_END_D4": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -14177,6 +14221,14 @@
           0,
           0,
           19
+        ]
+      },
+      {
+        "to": "AREA_END_D4",
+        "pos": [
+          0,
+          0,
+          -19
         ]
       }
     ],
@@ -14299,6 +14351,11 @@
         0,
         0,
         16
+      ],
+      "AREA_END_D5": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -14308,6 +14365,14 @@
           0,
           0,
           19
+        ]
+      },
+      {
+        "to": "AREA_END_D5",
+        "pos": [
+          0,
+          0,
+          -19
         ]
       }
     ],
@@ -14430,6 +14495,11 @@
         0,
         0,
         16
+      ],
+      "AREA_END_D6": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -14439,6 +14509,14 @@
           0,
           0,
           19
+        ]
+      },
+      {
+        "to": "AREA_END_D6",
+        "pos": [
+          0,
+          0,
+          -19
         ]
       }
     ],
@@ -14561,6 +14639,11 @@
         0,
         0,
         16
+      ],
+      "AREA_END_D7": [
+        0,
+        0,
+        -16
       ]
     },
     "exits": [
@@ -14570,6 +14653,14 @@
           0,
           0,
           19
+        ]
+      },
+      {
+        "to": "AREA_END_D7",
+        "pos": [
+          0,
+          0,
+          -19
         ]
       }
     ],
@@ -14958,6 +15049,1343 @@
         ],
         "scale": 1.6,
         "r": 1.1
+      }
+    ]
+  },
+  "AREA_END_D1": {
+    "size": [
+      50,
+      70
+    ],
+    "ground": "#1e3a26",
+    "ambient": "#a8e0b0",
+    "floor_tex": "grass",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_END_WAECHTER": [
+        0,
+        0,
+        30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_WAECHTER",
+        "pos": [
+          0,
+          0,
+          33
+        ]
+      }
+    ],
+    "props": [],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_E1",
+        "enemy": "ENEMY_DORNENWOLF_001",
+        "pos": [
+          -12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_E2",
+        "enemy": "ENEMY_WALDSPINNE_001",
+        "pos": [
+          12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_E3",
+        "enemy": "ENEMY_SUMPFFROSCH_001",
+        "pos": [
+          -14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_E4",
+        "enemy": "ENEMY_MOONWOLF_001",
+        "pos": [
+          14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_E5",
+        "enemy": "ENEMY_DORNENWOLF_001",
+        "pos": [
+          -8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_E6",
+        "enemy": "ENEMY_WALDSPINNE_001",
+        "pos": [
+          8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D1_E7",
+        "enemy": "ENEMY_SUMPFFROSCH_001",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_D1_001",
+        "pos": [
+          10,
+          0,
+          28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D1_1",
+        "pos": [
+          -20,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D1_2",
+        "pos": [
+          20,
+          0,
+          -28
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -5,
+          0,
+          26
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          5,
+          0,
+          26
+        ],
+        "r": 0.25
+      }
+    ]
+  },
+  "AREA_END_D2": {
+    "size": [
+      50,
+      70
+    ],
+    "ground": "#3a3a48",
+    "ambient": "#c8c8e0",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_END_WURZEL": [
+        0,
+        0,
+        30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_WURZEL",
+        "pos": [
+          0,
+          0,
+          33
+        ]
+      }
+    ],
+    "props": [],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_E1",
+        "enemy": "ENEMY_KANALRATTE_001",
+        "pos": [
+          -12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_E2",
+        "enemy": "ENEMY_VERGESSENER_001",
+        "pos": [
+          12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_E3",
+        "enemy": "ENEMY_SCHATTENFALTER_001",
+        "pos": [
+          -14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_E4",
+        "enemy": "ENEMY_ROSTGOLEM_001",
+        "pos": [
+          14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_E5",
+        "enemy": "ENEMY_KANALRATTE_001",
+        "pos": [
+          -8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_E6",
+        "enemy": "ENEMY_VERGESSENER_001",
+        "pos": [
+          8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D2_E7",
+        "enemy": "ENEMY_SCHATTENFALTER_001",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_D2_001",
+        "pos": [
+          10,
+          0,
+          28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D2_1",
+        "pos": [
+          -20,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D2_2",
+        "pos": [
+          20,
+          0,
+          -28
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -5,
+          0,
+          26
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          5,
+          0,
+          26
+        ],
+        "r": 0.25
+      }
+    ]
+  },
+  "AREA_END_D3": {
+    "size": [
+      50,
+      70
+    ],
+    "ground": "#2a5a78",
+    "ambient": "#a0e0ff",
+    "floor_tex": "sand",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_END_KOLOSS": [
+        0,
+        0,
+        30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_KOLOSS",
+        "pos": [
+          0,
+          0,
+          33
+        ]
+      }
+    ],
+    "props": [],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_E1",
+        "enemy": "ENEMY_RIFFFROSCH_001",
+        "pos": [
+          -12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_E2",
+        "enemy": "ENEMY_LEUCHTQUALLE_001",
+        "pos": [
+          12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_E3",
+        "enemy": "ENEMY_WOLKENSCHWINGE_001",
+        "pos": [
+          -14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_E4",
+        "enemy": "ENEMY_ERTRUNKENER_001",
+        "pos": [
+          14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_E5",
+        "enemy": "ENEMY_RIFFFROSCH_001",
+        "pos": [
+          -8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_E6",
+        "enemy": "ENEMY_LEUCHTQUALLE_001",
+        "pos": [
+          8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D3_E7",
+        "enemy": "ENEMY_WOLKENSCHWINGE_001",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_D3_001",
+        "pos": [
+          10,
+          0,
+          28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D3_1",
+        "pos": [
+          -20,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D3_2",
+        "pos": [
+          20,
+          0,
+          -28
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -5,
+          0,
+          26
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          5,
+          0,
+          26
+        ],
+        "r": 0.25
+      }
+    ]
+  },
+  "AREA_END_D4": {
+    "size": [
+      50,
+      70
+    ],
+    "ground": "#4a2a22",
+    "ambient": "#ffc090",
+    "floor_tex": "rock",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_END_SANDKOENIG": [
+        0,
+        0,
+        30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_SANDKOENIG",
+        "pos": [
+          0,
+          0,
+          33
+        ]
+      }
+    ],
+    "props": [],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_E1",
+        "enemy": "ENEMY_GLUEHWESPE_001",
+        "pos": [
+          -12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_E2",
+        "enemy": "ENEMY_ASCHEKAEFER_001",
+        "pos": [
+          12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_E3",
+        "enemy": "ENEMY_FUNKENGEIST_001",
+        "pos": [
+          -14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_E4",
+        "enemy": "ENEMY_GLUTDRACHE_001",
+        "pos": [
+          14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_E5",
+        "enemy": "ENEMY_GLUEHWESPE_001",
+        "pos": [
+          -8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_E6",
+        "enemy": "ENEMY_ASCHEKAEFER_001",
+        "pos": [
+          8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D4_E7",
+        "enemy": "ENEMY_FUNKENGEIST_001",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_D4_001",
+        "pos": [
+          10,
+          0,
+          28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D4_1",
+        "pos": [
+          -20,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D4_2",
+        "pos": [
+          20,
+          0,
+          -28
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -5,
+          0,
+          26
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          5,
+          0,
+          26
+        ],
+        "r": 0.25
+      }
+    ]
+  },
+  "AREA_END_D5": {
+    "size": [
+      50,
+      70
+    ],
+    "ground": "#1c1632",
+    "ambient": "#b0a0f0",
+    "floor_tex": "cobble",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_END_ABYSS": [
+        0,
+        0,
+        30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_ABYSS",
+        "pos": [
+          0,
+          0,
+          33
+        ]
+      }
+    ],
+    "props": [],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_E1",
+        "enemy": "ENEMY_SCHATTENFALTER_001",
+        "pos": [
+          -12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_E2",
+        "enemy": "ENEMY_VERGESSENER_001",
+        "pos": [
+          12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_E3",
+        "enemy": "ENEMY_ECHOKRIEGER_001",
+        "pos": [
+          -14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_E4",
+        "enemy": "ENEMY_SPIEGELSPINNE_001",
+        "pos": [
+          14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_E5",
+        "enemy": "ENEMY_SCHATTENFALTER_001",
+        "pos": [
+          -8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_E6",
+        "enemy": "ENEMY_VERGESSENER_001",
+        "pos": [
+          8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D5_E7",
+        "enemy": "ENEMY_ECHOKRIEGER_001",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_D5_001",
+        "pos": [
+          10,
+          0,
+          28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D5_1",
+        "pos": [
+          -20,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D5_2",
+        "pos": [
+          20,
+          0,
+          -28
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -5,
+          0,
+          26
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          5,
+          0,
+          26
+        ],
+        "r": 0.25
+      }
+    ]
+  },
+  "AREA_END_D6": {
+    "size": [
+      50,
+      70
+    ],
+    "ground": "#2c4a6a",
+    "ambient": "#d0f0ff",
+    "floor_tex": "snow",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_END_FROSTHERZ": [
+        0,
+        0,
+        30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_FROSTHERZ",
+        "pos": [
+          0,
+          0,
+          33
+        ]
+      }
+    ],
+    "props": [],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_E1",
+        "enemy": "ENEMY_SPIEGELSPINNE_001",
+        "pos": [
+          -12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_E2",
+        "enemy": "ENEMY_ECHOKRIEGER_001",
+        "pos": [
+          12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_E3",
+        "enemy": "ENEMY_EISFLEDERMAUS_001",
+        "pos": [
+          -14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_E4",
+        "enemy": "ENEMY_FROSTSPINNE_001",
+        "pos": [
+          14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_E5",
+        "enemy": "ENEMY_SPIEGELSPINNE_001",
+        "pos": [
+          -8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_E6",
+        "enemy": "ENEMY_ECHOKRIEGER_001",
+        "pos": [
+          8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D6_E7",
+        "enemy": "ENEMY_EISFLEDERMAUS_001",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_D6_001",
+        "pos": [
+          10,
+          0,
+          28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D6_1",
+        "pos": [
+          -20,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D6_2",
+        "pos": [
+          20,
+          0,
+          -28
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -5,
+          0,
+          26
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          5,
+          0,
+          26
+        ],
+        "r": 0.25
+      }
+    ]
+  },
+  "AREA_END_D7": {
+    "size": [
+      50,
+      70
+    ],
+    "ground": "#2a1838",
+    "ambient": "#e0b0ff",
+    "floor_tex": "rock",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        30
+      ],
+      "AREA_END_FEUERKERN": [
+        0,
+        0,
+        30
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_END_FEUERKERN",
+        "pos": [
+          0,
+          0,
+          33
+        ]
+      }
+    ],
+    "props": [],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_E1",
+        "enemy": "ENEMY_ECHOKRIEGER_001",
+        "pos": [
+          -12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_E2",
+        "enemy": "ENEMY_GLUTDRACHE_001",
+        "pos": [
+          12,
+          0,
+          18
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_E3",
+        "enemy": "ENEMY_STERNENWAECHTER_001",
+        "pos": [
+          -14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_E4",
+        "enemy": "ENEMY_ERTRUNKENER_001",
+        "pos": [
+          14,
+          0,
+          4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_E5",
+        "enemy": "ENEMY_ECHOKRIEGER_001",
+        "pos": [
+          -8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_E6",
+        "enemy": "ENEMY_GLUTDRACHE_001",
+        "pos": [
+          8,
+          0,
+          -10
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_END_D7_E7",
+        "enemy": "ENEMY_STERNENWAECHTER_001",
+        "pos": [
+          0,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_END_D7_001",
+        "pos": [
+          10,
+          0,
+          28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D7_1",
+        "pos": [
+          -20,
+          0,
+          -28
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_END_D7_2",
+        "pos": [
+          20,
+          0,
+          -28
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          22,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -5,
+          0,
+          26
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          5,
+          0,
+          26
+        ],
+        "r": 0.25
       }
     ]
   }

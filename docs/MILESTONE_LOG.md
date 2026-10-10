@@ -870,3 +870,8 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 ## E06 – New Game+ secrets (Phase 7) – PASSED
 - Seven hidden lore books (`LORE_NG_001`–`007`, layout `ng_entities`, one per wild area of the first seven worlds) that exist only in NG+ and hint at the alternate history behind the bosses ("Geheimnisse" of the spec). Test: `test_r18_ngplus_extras` now has 6 tests.
 
+## E07 – Walkable endgame dungeons (Phase 7) – PASSED
+- Each superboss arena has a northern exit (`AREA_END_D1`–`D7`, opens when that superboss is defeated): a 50x70 dungeon with seven enemies from the matching worlds (not persistent, they return on re-entry), a savepoint and two chests (Rissessenz, Lun, Elixiere). Names and themes follow `ENDGAME.md`: Der verlorene Wald, Die Stadt ohne Bewohner, Das Meer über dem Himmel, Der ewige Vulkan, Noctaris Null, Elyndra Vorher, Der Ort, den es nie gab.
+- Still simple: one open area each, no puzzles or dungeon boss besides the superboss before it. Placeholder art, not final.
+- Test: `test_r15_endgame` has one more test (8).
+

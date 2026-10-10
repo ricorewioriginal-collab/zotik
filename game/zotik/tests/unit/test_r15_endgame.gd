@@ -40,7 +40,7 @@ func test_weltenriss_unlocks_with_the_finale() -> void:
 	eq(game.area.exits.size(), 7, "seven superboss gates")
 	for k in KEYS:
 		check(game.area.exits.has("AREA_END_" + k) and game.area.is_exit_open("AREA_END_" + k), "gate to " + k)
-		check(Content.get_entry("areas", "AREA_END_" + k).exits == ["AREA_END_HUB"], k + " leads back")
+		check("AREA_END_HUB" in Content.get_entry("areas", "AREA_END_" + k).exits, k + " leads back")
 
 
 func test_superbosses_are_defined_with_phases_and_rewards() -> void:
@@ -134,3 +134,23 @@ func test_rift_modifier_toughens_enemies() -> void:
 	var wb := int(Content.enemy(w.enemy_id).hp)
 	eq(w.max_hp, int(round(wb * 1.9)), "world rift: 1.9x hp")
 	eq(w.attack_mult, 1.5, "world rift: 1.5x attack")
+
+
+func test_walkable_endgame_dungeons_open_after_the_superbosses() -> void:
+	GameState.set_flag("FLAG_GAME_COMPLETE")
+	for i in KEYS.size():
+		var arena: String = "AREA_END_" + KEYS[i]
+		var dungeon: String = "AREA_END_D%d" % (i + 1)
+		game.enter_area(arena, "default")
+		await physics_frames(2)
+		check(not game.area.is_exit_open(dungeon), KEYS[i] + ": dungeon closed while the boss stands")
+		GameState.set_flag("FLAG_END_%s_DEFEATED" % KEYS[i])
+		check(game.area.is_exit_open(dungeon), KEYS[i] + ": dungeon open after the boss")
+		game.enter_area(dungeon, arena)
+		await physics_frames(2)
+		var enemies := 0
+		for k in game.area.entities:
+			if game.area.entities[k] is Enemy:
+				enemies += 1
+		eq(enemies, 7, dungeon + " has seven enemies")
+		check(game.area.entities.has("CHEST_END_D%d_2" % (i + 1)) and game.area.entities.has("SAVEPOINT_END_D%d_001" % (i + 1)), dungeon + " has chests and a savepoint")
