@@ -201,6 +201,9 @@ func _build_bottom() -> void:
 	prompt_box.visible = false
 
 
+var _area_id := "\u0000"
+
+
 func _process(delta: float) -> void:
 	var hp := int(GameState.player.get("hp", 0))
 	var mx := maxi(1, int(GameState.player.get("max_hp", 1)))
@@ -212,7 +215,10 @@ func _process(delta: float) -> void:
 		(hp_bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.25, 0.8, 0.4) if hp_ok else Color(0.9, 0.25, 0.2)
 	hp_label.text = "%d / %d" % [hp, mx]
 	lun_label.text = "%d Lun" % GameState.currency
-	area_label.text = str(Content.get_entry("areas", GameState.player.get("area", "")).get("name", ""))
+	var area_id: String = GameState.player.get("area", "")
+	if area_id != _area_id:  # the name only changes with the area
+		_area_id = area_id
+		area_label.text = str(Content.get_entry("areas", area_id).get("name", ""))
 	if _area_title == null:
 		_area_title = find_child("AreaTitle", true, false) as Label
 	_area_title.text = area_label.text
