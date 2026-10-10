@@ -148,5 +148,32 @@
   },
   "FLAG_AQU_CHAPTER_COMPLETE": {
     "desc": "Kapitel 5 (Aqualis) abgeschlossen"
+  },
+  "FLAG_FRO_ARRIVED": {
+    "desc": "Frosthain betreten"
+  },
+  "FLAG_FRO_FOREST_OPEN": {
+    "desc": "Das Waldtor von Hjalm ist offen"
+  },
+  "FLAG_FRO_CITY_SEEN": {
+    "desc": "Die gefrorene Stadt gesehen"
+  },
+  "FLAG_FRO_CITY_OPEN": {
+    "desc": "Der Weg in die gefrorene Stadt ist frei"
+  },
+  "FLAG_FRO_ICE_DONE": {
+    "desc": "Erinnerungseis gelöst"
+  },
+  "FLAG_FRO_WAECHTER_DEFEATED": {
+    "desc": "Eiswächter des Tempels besiegt"
+  },
+  "FLAG_FRO_AVARN_MET": {
+    "desc": "Begegnung mit Avarn gesehen"
+  },
+  "FLAG_BOSS_FRO_AVARN_DEFEATED": {
+    "desc": "Avarn, der Eiskern, besiegt"
+  },
+  "FLAG_FRO_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 6 (Frosthain) abgeschlossen"
   }
 }

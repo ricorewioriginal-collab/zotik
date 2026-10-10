@@ -406,5 +406,92 @@
         "spawn": "AREA_AQU_CAVES"
       }
     ]
+  },
+  "CUT_FRO_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Frosthain. Der Winter, der nichts vergisst. Zwischen verschneiten Dächern steigt Rauch aus dem Dorf Hjalm, und jenseits der Wälder glimmt ein kaltes, blaues Licht."
+      ],
+      [
+        "NPC_NIA_001",
+        "Meine Zehen sind schon steif, und wir sind erst fünf Schritte gegangen!"
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der vierte Splitter hat die Zeit hier erstarren lassen. Fragen wir im Dorf nach dem Weg."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_FRO_001"
+      }
+    ]
+  },
+  "CUT_FRO_CITY_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Hinter den Bäumen öffnet sich der Wald, und die gefrorene Stadt liegt vor euch – Türme aus Eis, Straßen aus Glas, mittendrin ein Licht, das schlägt wie ein Herz."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Niemand hat hier je einen Fuß hingesetzt und ist gleich wieder umgekehrt."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann gehen wir auf der anderen Seite wieder raus."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_FRO_CITY_OPEN"
+      }
+    ]
+  },
+  "CUT_FRO_AVARN_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_AVARN_001",
+        "Ich bewahre jeden Atemzug. Nichts darf vergehen, nichts darf sich ändern."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der vierte Splitter sitzt in seiner Brust. Er friert die Zeit ein, um nichts zu verlieren."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann taut es auf. Alles, was bleibt, muss irgendwann weitergehen."
+      ]
+    ]
+  },
+  "CUT_FRO_AVARN_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Avarn zerspringt in tausend funkelnde Flocken. Der Wind trägt sie davon, und in der Stille glimmt ein Splitter wie ein Stern im Schnee."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Vier Splitter, vier Welten – und nun der fünfte. Jemand verteilt sie mit Absicht."
+      ],
+      [
+        "NPC_NIA_001",
+        "Erst zurück zu Kaelen. Und zu einem heißen Tee."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_FRO_VILLAGE",
+        "spawn": "AREA_FRO_FOREST"
+      }
+    ]
   }
 }

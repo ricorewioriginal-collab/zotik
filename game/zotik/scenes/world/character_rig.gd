@@ -110,6 +110,9 @@ static func create_human(spec: Dictionary, height: float) -> CharacterRig:
 	for side in [["right", "hand_r"], ["left", "hand_l"]]:
 		if spec.has(side[0]):
 			r._human_weapon(str(spec[side[0]]), side[1])
+	for mi in r.meshes():
+		for i in (mi as MeshInstance3D).mesh.get_surface_count():
+			Look.rim((mi as MeshInstance3D).mesh.surface_get_material(i), 0.2)
 	r.play("idle")
 	return r
 

@@ -227,5 +227,41 @@
     },
     "price": 680,
     "stack": 1
+  },
+  "ITEM_FROST_SHARD_001": {
+    "name": "Frostsplitter",
+    "type": "material",
+    "price": 34,
+    "stack": 99
+  },
+  "ITEM_WARM_TEA_001": {
+    "name": "Wärmender Tee",
+    "type": "consumable",
+    "effect": {
+      "heal": 90
+    },
+    "price": 32,
+    "stack": 99
+  },
+  "WEAPON_FROST_AXE_001": {
+    "name": "Frostaxt",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 26
+    },
+    "price": 720,
+    "stack": 1
+  },
+  "ARMOR_FUR_COAT_001": {
+    "name": "Pelzmantel",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 10,
+      "max_hp": 30
+    },
+    "price": 740,
+    "stack": 1
   }
 }

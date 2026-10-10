@@ -758,3 +758,25 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 
 ## U04 – Character creator in the new UI style
 - "Mein Zotik": title font, row plates and gold buttons like the menus, navy preview background instead of grey. Live check of the Pages build after #18: starts, Neryx data in the pck, game loads (software renderer, frame rate not representative).
+
+## R01 – Atmosphere (Phase 6)
+- Lunaris is now a night world: sky shader `assets/shaders/night_sky.gdshader` (gradient, twinkling stars, big moon with halo, soft aurora; no textures, works in the compatibility renderer), cool moonlit ground tint and path tint, moonlight sun.
+- `Look.build_flora`: tufts of grass (7 bent blades each) and glowing flowers as two MultiMeshes per area (Lunaris, Elaris, Valdoria, Solmera); fewer on web/Android; keeps roads, houses, water and exits free.
+- Lantern lamps are brighter and carry a warm OmniLight on PC (not on web/Android).
+- Placeholder/procedural art, not final.
+
+## R04 (early) – Quaternius Stylized Nature models
+- 40 CC0 models (trees, pines, bushes, rocks, grass, flowers, mushrooms, pebbles) in `assets/world/nature`; `Look.model()` falls back to this folder, `_place_h` scales to a height in metres.
+- Used for: placed "tree" props, the tree rows beyond the border (Lunaris, Elaris), and the flora scatter (grass, flowers, mushrooms as MultiMeshes; thinner on web/Android).
+- Source via itch.io download page (free, CC0); textures 512 px keep the build small.
+- Quaternius Fantasy Props MegaKit (41 models): `Look.build_dressing` puts barrels, crates, benches, stools, buckets and banners around houses (deterministic, small colliders, keeps roads/exits free); layouts can name these models in `decor` (metre scale, no hex scale). Valdoria gets no grass (cobbled streets), grass is smaller (0.2–0.4 m).
+- Quaternius Medieval Village MegaKit (35 pieces): `Look._village_house` builds houses (stone base, plaster walls, timber frame, tiled roof fitted to the footprint, door with frame, chimney, windows that glow at night) instead of the old KayKit/box houses where the footprint is at least 4 × 4 m; `DECOR_MAP` swaps the KayKit trees, rocks, barrels, crates, buckets, weapon racks and fences in the layouts' decor for the metre-scaled models.
+- R03 (first step): soft rim light on all character materials (`Look.rim`); the characters themselves are still the modular Quaternius rig plus Zotik's primitive fox parts – real hero models need an artist.
+
+## R05 – Chapter 6 Frosthain (Phase 6) – PASSED
+- World `WORLD_FROSTHAIN` (chapter 6, unlocked by `FLAG_AQU_CHAPTER_COMPLETE`), six areas: Dorf Hjalm, Wärmehalle (smith Tormund, alchemist Brisa), Eiswald, gefrorene Stadt, Eistempel, Eiskern (arena).
+- Main quest `QUEST_MAIN_FRO_001` "Der Winter, der nichts vergisst" (Kaelen → city → memory-ice puzzle `PUZ_FRO_ICE_001`, five crystals in order 4-2-5-1-3 → Eiswächter → boss Avarn → report; 500 Lun, `FLAG_FRO_CHAPTER_COMPLETE`); side quest "Frostsplitter für Tormund" (5 shards, 240 Lun + Elixier).
+- New enemies Frostwolf, Eisgeist, Eiswächter (miniboss, persistent) and boss Avarn (980 HP, phases Eisschlag → Schneesturm with 2 Eisgeister → Erstarrung with a Frostwolf; circle and surge hazards). Items Frostsplitter, Wärmender Tee, Frostaxt, Pelzmantel; shops, lore, cutscenes, savepoints, chests.
+- Look: snow floor (Poly Haven snow_02), falling snow particles (`Look.build_weather`, fewer on web/Android), pines/dead trees as backdrop.
+- Tests: `test_r05_frosthain` (8), `test_r06_golden_frosthain` (golden path from a chapter-5 save, restart check `golden_expected_fro.json`), `test_x01_full_playthrough` now plays chapters 1–6. Screenshots 25–28.
+- Placeholder art, not final.

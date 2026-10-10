@@ -37,5 +37,13 @@
     "hub_area": "AREA_AQU_DOME",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_SOL_CHAPTER_COMPLETE"
+  },
+  "WORLD_FROSTHAIN": {
+    "name": "Frosthain",
+    "chapter": 6,
+    "subtitle": "Der Winter, der nichts vergisst",
+    "hub_area": "AREA_FRO_VILLAGE",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_AQU_CHAPTER_COMPLETE"
   }
 }

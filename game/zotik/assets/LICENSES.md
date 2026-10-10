@@ -2,7 +2,7 @@
 
 | Path | Source | License |
 |---|---|---|
-| `assets/textures/*` | Poly Haven (polyhaven.com): leafy_grass, forrest_ground_01, cobblestone_floor_01, castle_brick_07, painted_plaster_wall, wood_planks, rock_wall_08, bark_brown_02, roof_tiles_14, aerial_sand. Downscaled to 512 px. | CC0 |
+| `assets/textures/*` | Poly Haven (polyhaven.com): snow_02, leafy_grass, forrest_ground_01, cobblestone_floor_01, castle_brick_07, painted_plaster_wall, wood_planks, rock_wall_08, bark_brown_02, roof_tiles_14, aerial_sand. Downscaled to 512 px. | CC0 |
 
 All other visuals are generated in code (placeholders or procedural shapes).
 | `assets/characters/kaykit/*` | KayKit Adventurers Character Pack 1.0 by Kay Lousberg (kaylousberg.com), rigged and animated | CC0 (see `LICENSE.txt` there) |
@@ -11,3 +11,6 @@ All other visuals are generated in code (placeholders or procedural shapes).
 | `assets/ui/title_bg.jpg`, `assets/ui/portraits/*` | Cut from the owner's party poster (`reference/concept_2026-10-02/20_party_poster.jpg`) | Owner's own concept art – interim UI art, not approved final art |
 | `assets/characters/quaternius/*` | Quaternius: Universal Base Characters [Standard], Modular Character Outfits – Fantasy [Standard], Universal Animation Library [Standard] (quaternius.com / itch.io; textures downscaled to 1024 px; animations extracted into `ual_anims.res`) | CC0 |
 | `compositor/*` | "Color Grading" compositor effect by Rytelier (Godot Asset Store), runtime part only (no editor plugin). PC build, optional, off by default | MIT (see `compositor/LICENSE.txt`) |
+| `assets/world/nature/*` | Quaternius "Stylized Nature MegaKit [Standard]" (quaternius.com / itch.io), curated 40 models; textures downscaled to 512 px, normal maps and baked vertex colours removed, red twisted-tree leaves recoloured green | CC0 (see `LICENSE.txt` there) |
+| `assets/world/props/*` | Quaternius "Fantasy Props MegaKit [Standard]" (quaternius.com / itch.io), curated 41 models; trim-sheet base-colour textures downscaled to 1024 px, normal/ORM maps removed | CC0 (see `LICENSE.txt` there) |
+| `assets/world/village/*` | Quaternius "Medieval Village MegaKit [Standard]" (quaternius.com / itch.io), curated 35 pieces (roofs, doors, chimneys, balconies, fences) and plaster/brick/timber base-colour textures at 512 px | CC0 (see `LICENSE.txt` there) |

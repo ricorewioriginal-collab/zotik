@@ -28,7 +28,7 @@ func build(id: String, factories: Dictionary) -> void:
 	var size: Array = layout.get("size", [20, 20])
 	var floors: Array = layout.get("floors", [{"pos": [0, -0.5, 0], "size": [size[0], 1, size[1]]}])
 	var floor_tex := Look.floor_texture(area_id, layout)
-	var floor_mat := Look.surface(floor_tex, Color.html(layout.get("ground", "#555555")), Look.FLOOR_SCALE.get(floor_tex, 0.25))
+	var floor_mat := Look.surface(floor_tex, Look.ground_tint(area_id, layout), Look.FLOOR_SCALE.get(floor_tex, 0.25))
 	for f in floors:
 		var fl := _box("PLACEHOLDER_floor", _v(f.pos), _v(f.size), Color.html(layout.get("ground", "#555555")), true)
 		fl.add_to_group("ground")
@@ -40,7 +40,10 @@ func build(id: String, factories: Dictionary) -> void:
 	Look.build_boundary(self, area_id, layout, Vector2(size[0], size[1]), WALL_HEIGHT)
 	Look.build_backdrop(self, area_id, layout, Vector2(size[0], size[1]))
 	Look.build_sky_features(self, area_id, layout, Vector2(size[0], size[1]))
-	Look.build_decor(self, layout)
+	Look.build_flora(self, area_id, layout, Vector2(size[0], size[1]))
+	Look.build_dressing(self, area_id, layout)
+	Look.build_weather(self, area_id, layout, Vector2(size[0], size[1]))
+	Look.build_decor(self, layout, area_id)
 	for p in layout.get("props", []):
 		var node := _prop("PLACEHOLDER_" + str(p.name), str(p.name), _v(p.pos), _v(p.size), Color.html(p.color), p.get("collision", true))
 		if p.has("requires_flag"):

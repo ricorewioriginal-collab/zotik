@@ -6395,5 +6395,1333 @@
         "r": 1.0
       }
     ]
+  },
+  "AREA_FRO_VILLAGE": {
+    "size": [
+      70,
+      60
+    ],
+    "ground": "#dfe9f2",
+    "ambient": "#e6f2ff",
+    "floor_tex": "snow",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        20
+      ],
+      "travel": [
+        0,
+        0,
+        20
+      ],
+      "AREA_FRO_HALL": [
+        29,
+        0,
+        0
+      ],
+      "AREA_FRO_FOREST": [
+        0,
+        0,
+        -22
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_FRO_HALL",
+        "pos": [
+          33,
+          0,
+          0
+        ]
+      },
+      {
+        "to": "AREA_FRO_FOREST",
+        "pos": [
+          0,
+          0,
+          -26
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "house_a",
+        "pos": [
+          -22,
+          3,
+          -14
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#9ab8d0"
+      },
+      {
+        "name": "house_b",
+        "pos": [
+          -22,
+          3,
+          12
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#9ab8d0"
+      },
+      {
+        "name": "house_c",
+        "pos": [
+          20,
+          3,
+          -18
+        ],
+        "size": [
+          9,
+          6,
+          8
+        ],
+        "color": "#9ab8d0"
+      },
+      {
+        "name": "wald_gate",
+        "pos": [
+          0,
+          3,
+          -28.5
+        ],
+        "size": [
+          14,
+          6,
+          2
+        ],
+        "color": "#6a8aa8",
+        "hidden_by_flag": "FLAG_FRO_FOREST_OPEN"
+      }
+    ],
+    "entities": [
+      {
+        "type": "travel",
+        "id": "TRAVEL_FRO_001",
+        "pos": [
+          4,
+          0,
+          23
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_FRO_ARRIVAL",
+        "pos": [
+          0,
+          1,
+          19
+        ],
+        "size": [
+          8,
+          3,
+          6
+        ],
+        "cutscene": "CUT_FRO_ARRIVAL_001",
+        "once_flag": "FLAG_FRO_ARRIVED"
+      },
+      {
+        "type": "npc",
+        "id": "NPC_KAELEN_001",
+        "pos": [
+          -4,
+          0,
+          -22
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_YSA_001",
+        "pos": [
+          16,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_FRO_001",
+        "pos": [
+          -14,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_FRO_002",
+        "pos": [
+          -11,
+          0,
+          2
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          10
+        ],
+        "size": [
+          24,
+          14
+        ],
+        "tex": "cobble"
+      },
+      {
+        "model": "path",
+        "pos": [
+          0,
+          0,
+          -8
+        ],
+        "size": [
+          5,
+          28
+        ],
+        "tex": "cobble"
+      },
+      {
+        "model": "path",
+        "pos": [
+          20,
+          0,
+          0
+        ],
+        "size": [
+          30,
+          5
+        ],
+        "tex": "cobble"
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -10,
+          0,
+          16
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          10,
+          0,
+          16
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          -3.5,
+          0,
+          -6
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          3.5,
+          0,
+          -14
+        ],
+        "r": 0.25,
+        "rot": 180
+      },
+      {
+        "model": "lantern",
+        "pos": [
+          24,
+          0,
+          3.5
+        ],
+        "r": 0.25
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          -17,
+          0,
+          -8
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          -17.2,
+          0,
+          -9.3
+        ],
+        "rot": 20,
+        "r": 0.6
+      },
+      {
+        "model": "bucket_water",
+        "pos": [
+          4.5,
+          0,
+          -3
+        ]
+      },
+      {
+        "model": "Banner_1",
+        "pos": [
+          -6,
+          0,
+          22
+        ]
+      },
+      {
+        "model": "Banner_2",
+        "pos": [
+          7,
+          0,
+          22
+        ]
+      },
+      {
+        "model": "Pine_1",
+        "pos": [
+          -30,
+          0,
+          18
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_2",
+        "pos": [
+          30,
+          0,
+          20
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_3",
+        "pos": [
+          -31,
+          0,
+          -24
+        ],
+        "scale": 1.2,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_1",
+        "pos": [
+          31,
+          0,
+          -26
+        ],
+        "scale": 1.2,
+        "r": 0.7
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          3.5,
+          0,
+          -9
+        ],
+        "scale": 0.7,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          17,
+          0,
+          -8.5
+        ],
+        "scale": 0.7,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -31,
+          0,
+          -10
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
+  },
+  "AREA_FRO_HALL": {
+    "size": [
+      40,
+      30
+    ],
+    "ground": "#c8d8e6",
+    "ambient": "#ffe6c8",
+    "floor_tex": "snow",
+    "indoor": true,
+    "spawns": {
+      "default": [
+        -16,
+        0,
+        0
+      ],
+      "AREA_FRO_VILLAGE": [
+        -16,
+        0,
+        0
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_FRO_VILLAGE",
+        "pos": [
+          -19,
+          0,
+          0
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "hall_table",
+        "pos": [
+          2,
+          0.5,
+          -6
+        ],
+        "size": [
+          6,
+          1,
+          2
+        ],
+        "color": "#8a5a30"
+      }
+    ],
+    "entities": [
+      {
+        "type": "npc",
+        "id": "NPC_TORMUND_001",
+        "pos": [
+          10,
+          0,
+          -8
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_BRISA_001",
+        "pos": [
+          10,
+          0,
+          8
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Bench",
+        "pos": [
+          0,
+          0,
+          10
+        ],
+        "rot": 90
+      },
+      {
+        "model": "Barrel",
+        "pos": [
+          16,
+          0,
+          -12
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "Crate_Wooden",
+        "pos": [
+          16,
+          0,
+          12
+        ],
+        "r": 0.6
+      },
+      {
+        "model": "Torch_Metal",
+        "pos": [
+          -18,
+          1.4,
+          -8
+        ]
+      },
+      {
+        "model": "Torch_Metal",
+        "pos": [
+          -18,
+          1.4,
+          8
+        ]
+      }
+    ]
+  },
+  "AREA_FRO_FOREST": {
+    "size": [
+      60,
+      80
+    ],
+    "ground": "#d4e2ee",
+    "ambient": "#dff0ff",
+    "floor_tex": "snow",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        34
+      ],
+      "AREA_FRO_VILLAGE": [
+        0,
+        0,
+        34
+      ],
+      "AREA_FRO_CITY": [
+        0,
+        0,
+        -32
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_FRO_VILLAGE",
+        "pos": [
+          0,
+          0,
+          37
+        ]
+      },
+      {
+        "to": "AREA_FRO_CITY",
+        "pos": [
+          0,
+          0,
+          -36
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "ice_gate",
+        "pos": [
+          0,
+          3,
+          -38
+        ],
+        "size": [
+          14,
+          6,
+          2
+        ],
+        "color": "#8ac0e0",
+        "hidden_by_flag": "FLAG_FRO_CITY_OPEN"
+      }
+    ],
+    "entities": [
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_FRO_FOREST_001",
+        "pos": [
+          10,
+          0,
+          22
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_FOREST_WOLF_1",
+        "enemy": "ENEMY_FROSTWOLF_001",
+        "pos": [
+          -12,
+          0,
+          8
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_FOREST_WOLF_2",
+        "enemy": "ENEMY_FROSTWOLF_001",
+        "pos": [
+          14,
+          0,
+          -4
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_FOREST_GEIST_1",
+        "enemy": "ENEMY_EISGEIST_001",
+        "pos": [
+          0,
+          0,
+          -14
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_FOREST_GEIST_2",
+        "enemy": "ENEMY_EISGEIST_001",
+        "pos": [
+          -14,
+          0,
+          -26
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_FRO_001",
+        "pos": [
+          -22,
+          0,
+          -32
+        ]
+      },
+      {
+        "type": "trigger",
+        "id": "TRIGGER_FRO_CITY",
+        "pos": [
+          0,
+          1,
+          -31
+        ],
+        "size": [
+          14,
+          3,
+          6
+        ],
+        "cutscene": "CUT_FRO_CITY_001",
+        "once_flag": "FLAG_FRO_CITY_SEEN"
+      }
+    ],
+    "decor": [
+      {
+        "model": "Pine_2",
+        "pos": [
+          -26,
+          0,
+          -30
+        ],
+        "scale": 1.1,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_3",
+        "pos": [
+          26,
+          0,
+          -28
+        ],
+        "scale": 1.1,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_1",
+        "pos": [
+          -27,
+          0,
+          12
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_2",
+        "pos": [
+          27,
+          0,
+          8
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_3",
+        "pos": [
+          -8,
+          0,
+          -8
+        ],
+        "scale": 0.9,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_1",
+        "pos": [
+          12,
+          0,
+          -18
+        ],
+        "scale": 0.9,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_2",
+        "pos": [
+          -18,
+          0,
+          -12
+        ],
+        "scale": 0.9,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_3",
+        "pos": [
+          20,
+          0,
+          16
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_1",
+        "pos": [
+          6,
+          0,
+          30
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_2",
+        "pos": [
+          -22,
+          0,
+          30
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "DeadTree_1",
+        "pos": [
+          -14,
+          0,
+          -2
+        ],
+        "scale": 0.8,
+        "r": 0.6
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          -20,
+          0,
+          22
+        ],
+        "scale": 1.2,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          22,
+          0,
+          -8
+        ],
+        "scale": 1.2,
+        "r": 1.1
+      },
+      {
+        "model": "Banner_1",
+        "pos": [
+          -4,
+          0,
+          28
+        ]
+      }
+    ]
+  },
+  "AREA_FRO_CITY": {
+    "size": [
+      50,
+      60
+    ],
+    "ground": "#cfdde8",
+    "ambient": "#d8ecff",
+    "floor_tex": "snow",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        26
+      ],
+      "AREA_FRO_FOREST": [
+        0,
+        0,
+        26
+      ],
+      "AREA_FRO_TEMPLE": [
+        0,
+        0,
+        -24
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_FRO_FOREST",
+        "pos": [
+          0,
+          0,
+          28
+        ]
+      },
+      {
+        "to": "AREA_FRO_TEMPLE",
+        "pos": [
+          0,
+          0,
+          -28
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "ice_wall_w",
+        "pos": [
+          -16,
+          2,
+          -6
+        ],
+        "size": [
+          2,
+          4,
+          16
+        ],
+        "color": "#9ac8e8"
+      },
+      {
+        "name": "ice_wall_e",
+        "pos": [
+          16,
+          2,
+          -6
+        ],
+        "size": [
+          2,
+          4,
+          16
+        ],
+        "color": "#9ac8e8"
+      },
+      {
+        "name": "ice_wall_n1",
+        "pos": [
+          -9,
+          2,
+          -22
+        ],
+        "size": [
+          14,
+          4,
+          2
+        ],
+        "color": "#9ac8e8"
+      },
+      {
+        "name": "ice_wall_n2",
+        "pos": [
+          9,
+          2,
+          -22
+        ],
+        "size": [
+          14,
+          4,
+          2
+        ],
+        "color": "#9ac8e8"
+      },
+      {
+        "name": "temple_door",
+        "pos": [
+          0,
+          3,
+          -28.5
+        ],
+        "size": [
+          8,
+          6,
+          1
+        ],
+        "color": "#6a98c0",
+        "hidden_by_flag": "FLAG_FRO_ICE_DONE"
+      }
+    ],
+    "entities": [
+      {
+        "type": "puzzle",
+        "id": "PUZ_FRO_ICE_001",
+        "pos": [
+          0,
+          0,
+          -12
+        ]
+      },
+      {
+        "type": "savepoint",
+        "id": "SAVEPOINT_FRO_CITY_001",
+        "pos": [
+          10,
+          0,
+          20
+        ]
+      },
+      {
+        "type": "chest",
+        "id": "CHEST_FRO_002",
+        "pos": [
+          -20,
+          0,
+          -24
+        ]
+      },
+      {
+        "type": "lore",
+        "id": "LORE_FRO_003",
+        "pos": [
+          -6,
+          0,
+          -17
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_CITY_WOLF_1",
+        "enemy": "ENEMY_FROSTWOLF_001",
+        "pos": [
+          -10,
+          0,
+          12
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_CITY_WOLF_2",
+        "enemy": "ENEMY_FROSTWOLF_001",
+        "pos": [
+          12,
+          0,
+          2
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_CITY_GEIST_1",
+        "enemy": "ENEMY_EISGEIST_001",
+        "pos": [
+          -12,
+          0,
+          -2
+        ]
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_CITY_GEIST_2",
+        "enemy": "ENEMY_EISGEIST_001",
+        "pos": [
+          8,
+          0,
+          -12
+        ]
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -21,
+          0,
+          16
+        ],
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          21,
+          0,
+          12
+        ],
+        "scale": 1.2,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -20,
+          0,
+          -8
+        ],
+        "scale": 1.1,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          20,
+          0,
+          -20
+        ],
+        "scale": 1.3,
+        "r": 1.1
+      },
+      {
+        "model": "barrel",
+        "pos": [
+          6,
+          0,
+          22
+        ],
+        "r": 0.5
+      },
+      {
+        "model": "crate_A_big",
+        "pos": [
+          14,
+          0,
+          22
+        ],
+        "rot": 25,
+        "r": 0.6
+      },
+      {
+        "model": "Banner_2",
+        "pos": [
+          -4,
+          0,
+          -8
+        ]
+      },
+      {
+        "model": "Banner_1",
+        "pos": [
+          4,
+          0,
+          -8
+        ]
+      },
+      {
+        "model": "Pine_2",
+        "pos": [
+          -23,
+          0,
+          24
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      },
+      {
+        "model": "Pine_1",
+        "pos": [
+          23,
+          0,
+          26
+        ],
+        "scale": 1.0,
+        "r": 0.7
+      }
+    ]
+  },
+  "AREA_FRO_TEMPLE": {
+    "size": [
+      40,
+      40
+    ],
+    "ground": "#c8d6e4",
+    "ambient": "#d0e6ff",
+    "floor_tex": "snow",
+    "indoor": true,
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_FRO_CITY": [
+        0,
+        0,
+        16
+      ],
+      "AREA_FRO_CORE": [
+        0,
+        0,
+        -14
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_FRO_CITY",
+        "pos": [
+          0,
+          0,
+          18
+        ]
+      },
+      {
+        "to": "AREA_FRO_CORE",
+        "pos": [
+          0,
+          0,
+          -18
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "temple_pillar_w",
+        "pos": [
+          -12,
+          3,
+          -4
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#8ab8d8"
+      },
+      {
+        "name": "temple_pillar_e",
+        "pos": [
+          12,
+          3,
+          -4
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#8ab8d8"
+      },
+      {
+        "name": "temple_pillar_w2",
+        "pos": [
+          -12,
+          3,
+          8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#8ab8d8"
+      },
+      {
+        "name": "temple_pillar_e2",
+        "pos": [
+          12,
+          3,
+          8
+        ],
+        "size": [
+          2,
+          6,
+          2
+        ],
+        "color": "#8ab8d8"
+      }
+    ],
+    "entities": [
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_TEMPLE_WAECHTER",
+        "enemy": "ENEMY_EISWAECHTER_001",
+        "pos": [
+          0,
+          0,
+          -8
+        ],
+        "persistent": true
+      }
+    ],
+    "decor": [
+      {
+        "model": "Torch_Metal",
+        "pos": [
+          -6,
+          1.4,
+          12
+        ]
+      },
+      {
+        "model": "Torch_Metal",
+        "pos": [
+          6,
+          1.4,
+          12
+        ]
+      },
+      {
+        "model": "Banner_2",
+        "pos": [
+          -6,
+          0,
+          12
+        ]
+      }
+    ]
+  },
+  "AREA_FRO_CORE": {
+    "size": [
+      44,
+      44
+    ],
+    "ground": "#bcd0e2",
+    "ambient": "#cfe6ff",
+    "floor_tex": "snow",
+    "spawns": {
+      "default": [
+        0,
+        0,
+        16
+      ],
+      "AREA_FRO_TEMPLE": [
+        0,
+        0,
+        16
+      ]
+    },
+    "exits": [
+      {
+        "to": "AREA_FRO_TEMPLE",
+        "pos": [
+          0,
+          0,
+          19
+        ]
+      }
+    ],
+    "props": [
+      {
+        "name": "core_pillar_w",
+        "pos": [
+          -14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#8ac0e8"
+      },
+      {
+        "name": "core_pillar_e",
+        "pos": [
+          14,
+          3,
+          -10
+        ],
+        "size": [
+          3,
+          6,
+          3
+        ],
+        "color": "#8ac0e8"
+      }
+    ],
+    "entities": [
+      {
+        "type": "trigger",
+        "id": "TRIGGER_FRO_AVARN_INTRO",
+        "pos": [
+          0,
+          1,
+          9
+        ],
+        "size": [
+          20,
+          3,
+          3
+        ],
+        "cutscene": "CUT_FRO_AVARN_001",
+        "once_flag": "FLAG_FRO_AVARN_MET"
+      },
+      {
+        "type": "enemy",
+        "spawn": "SPAWN_FRO_CORE_AVARN",
+        "enemy": "BOSS_AVARN_001",
+        "pos": [
+          0,
+          0,
+          -6
+        ],
+        "persistent": true
+      }
+    ],
+    "decor": [
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          -19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_2",
+        "pos": [
+          19,
+          0,
+          12
+        ],
+        "scale": 1.5,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_3",
+        "pos": [
+          -19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      },
+      {
+        "model": "Rock_Medium_1",
+        "pos": [
+          19,
+          0,
+          -16
+        ],
+        "scale": 1.4,
+        "r": 1.1
+      }
+    ]
   }
 }

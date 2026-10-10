@@ -88,5 +88,35 @@
         "Das Archiv bewahrt seine Schriften im fließenden Wasser. Wer die Strömungen versteht, kann jede Kammer öffnen; wer sie zornig macht, ertrinkt in Erinnerungen."
       ]
     ]
+  },
+  "LORE_FRO_001": {
+    "title": "Hjalm unter dem Schnee",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Das Dorf Hjalm duckt sich in den Schatten der Eiswälder. Seine Bewohner heizen die Wärmehalle Tag und Nacht – denn draußen vergisst der Winter niemanden."
+      ]
+    ]
+  },
+  "LORE_FRO_002": {
+    "title": "Avarn, der Eiskern",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Im Herzen der gefrorenen Stadt schlägt ein Kern aus Eis. Wer ihn berührt, sieht sein ganzes Leben noch einmal – Wort für Wort, Atemzug für Atemzug."
+      ]
+    ]
+  },
+  "LORE_FRO_003": {
+    "title": "Erinnerungseis",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Das Eis der Stadt bewahrt jeden Klang. Wer die Kristalle in der Reihenfolge ihrer Erinnerung berührt, taut ihre Tore auf; wer sie falsch weckt, hört nur das Echo des Frostes."
+      ]
+    ]
   }
 }

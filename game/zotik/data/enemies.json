@@ -718,5 +718,164 @@
         }
       }
     ]
+  },
+  "ENEMY_FROSTWOLF_001": {
+    "name": "Frostwolf",
+    "region": "WORLD_FROSTHAIN",
+    "description": "Jagt im Rudel durch den Eiswald. Sein Fell ist so dicht, dass nur starke Schläge das Eis darunter brechen.",
+    "hp": 120,
+    "attack": 20,
+    "defense": 8,
+    "move_speed": 4.2,
+    "aggro_range": 12.0,
+    "attack_range": 1.9,
+    "attack_cooldown": 1.2,
+    "currency": 24,
+    "drops": [
+      {
+        "id": "ITEM_FROST_SHARD_001",
+        "count": 1
+      }
+    ],
+    "break": 50,
+    "break_duration": 3.0
+  },
+  "ENEMY_EISGEIST_001": {
+    "name": "Eisgeist",
+    "region": "WORLD_FROSTHAIN",
+    "description": "Ein Hauch von Erinnerung, zu Eis erstarrt. Er schwebt lautlos und schlägt mit klirrender Kälte zu.",
+    "hp": 80,
+    "attack": 21,
+    "defense": 4,
+    "move_speed": 3.2,
+    "aggro_range": 11.0,
+    "attack_range": 1.8,
+    "attack_cooldown": 1.3,
+    "currency": 20,
+    "drops": [
+      {
+        "id": "ITEM_FROST_SHARD_001",
+        "count": 2
+      }
+    ],
+    "break": 36,
+    "break_duration": 2.5
+  },
+  "ENEMY_EISWAECHTER_001": {
+    "name": "Eiswächter",
+    "region": "WORLD_FROSTHAIN",
+    "description": "Ein Koloss aus Gletschereis, der den Tempel hütet. Langsam, aber schwer – Break lässt seinen Panzer splittern.",
+    "hp": 340,
+    "attack": 24,
+    "defense": 10,
+    "move_speed": 2.0,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 1.9,
+    "currency": 140,
+    "drops": [
+      {
+        "id": "ITEM_FROST_SHARD_001",
+        "count": 5
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 125,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_FRO_WAECHTER_DEFEATED"
+      }
+    ]
+  },
+  "BOSS_AVARN_001": {
+    "name": "Avarn",
+    "region": "WORLD_FROSTHAIN",
+    "description": "Der Eiskern von Frosthain. Ein Splitter des Weltenkerns lässt ihn die Zeit gefrieren und Erinnerungen als Eisstürme zurückkehren.",
+    "hp": 980,
+    "attack": 23,
+    "defense": 10,
+    "move_speed": 2.0,
+    "aggro_range": 30.0,
+    "attack_range": 3.6,
+    "attack_cooldown": 1.8,
+    "currency": 340,
+    "drops": [
+      {
+        "id": "ITEM_FROST_SHARD_001",
+        "count": 8
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "break": 215,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_BOSS_FRO_AVARN_DEFEATED"
+      },
+      {
+        "type": "play_cutscene",
+        "id": "CUT_FRO_AVARN_DEFEAT_001"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Eisschlag",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#8ad8ff",
+        "hazard": {
+          "interval": 5.0,
+          "radius": 2.5,
+          "delay": 1.2,
+          "damage": 17
+        }
+      },
+      {
+        "from_hp_ratio": 0.6,
+        "name": "Schneesturm",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.9,
+        "summon": "ENEMY_EISGEIST_001",
+        "summon_count": 2,
+        "color": "#b8ecff",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.5,
+          "width": 3.0,
+          "delay": 1.3,
+          "damage": 21
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Erstarrung",
+        "attack_mult": 1.3,
+        "cooldown_mult": 0.75,
+        "summon": "ENEMY_FROSTWOLF_001",
+        "summon_count": 1,
+        "color": "#e8f8ff",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.2,
+          "width": 3.6,
+          "delay": 1.1,
+          "damage": 25
+        }
+      }
+    ]
   }
 }

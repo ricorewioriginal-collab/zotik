@@ -10,10 +10,11 @@ const INDOOR_KEYS := ["CAVE", "DUNGEON", "CANALS", "CISTERN", "FLOODGATE", "HOME
 
 ## sky_top, sky_horizon, sun colour, sun energy, sun pitch, fog colour, floor texture, boundary kind
 const WORLDS := {
-	"WORLD_LUNARIS": {"sky_top": "#1d2b66", "sky_horizon": "#b49ad8", "sun": "#dfe6ff", "sun_energy": 1.0, "pitch": -48.0, "fog": "#7a72b8", "floor": "grass", "boundary": "hedge"},
+	"WORLD_LUNARIS": {"sky_top": "#0a1140", "sky_horizon": "#4a3f9a", "sun": "#b8c8ff", "sun_energy": 0.8, "pitch": -48.0, "fog": "#3a3a8a", "floor": "grass", "boundary": "hedge", "night": true, "fog_density": 0.01},
 	"WORLD_ELARIS": {"sky_top": "#2f74d6", "sky_horizon": "#cdeeff", "sun": "#fff0c8", "sun_energy": 1.25, "pitch": -58.0, "fog": "#a8d8b0", "floor": "forest", "boundary": "hedge"},
 	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall"},
 	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall"},
+	"WORLD_FROSTHAIN": {"sky_top": "#5a86b8", "sky_horizon": "#e6f2ff", "sun": "#e8f0ff", "sun_energy": 1.0, "pitch": -30.0, "fog": "#d6e6f4", "floor": "snow", "boundary": "wall", "fog_density": 0.014, "snow": true},
 	"WORLD_AQUALIS": {"sky_top": "#0a3a6a", "sky_horizon": "#4ad0c8", "sun": "#a8f0ff", "sun_energy": 1.1, "pitch": -70.0, "fog": "#1a8aa8", "floor": "sand", "boundary": "wall", "fog_density": 0.016},
 }
 
@@ -30,19 +31,30 @@ const PROP_KINDS := [
 
 const EXIT_GAP := 6.0
 ## texture repeats per metre on floors (keeps cobbles/planks at a believable size)
-const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25, "sand": 0.2}
+const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25, "sand": 0.2, "snow": 0.25}
+
+## tree models for placed "tree" props
+const TREES := ["CommonTree_1", "CommonTree_2", "CommonTree_3", "CommonTree_4", "CommonTree_5"]
 
 ## CC0 KayKit Medieval Hexagon models (assets/world/kaykit), G04
 const MODEL_DIR := "res://assets/world/kaykit/%s.gltf"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue"}
+## CC0 Quaternius Stylized Nature MegaKit (assets/world/nature), R04: trees, rocks, grass, flowers
+const NATURE_DIR := "res://assets/world/nature/%s.gltf"
+## CC0 Quaternius Fantasy Props MegaKit (assets/world/props): barrels, crates, benches, stalls, banners, torches
+const PROPS_DIR := "res://assets/world/props/%s.gltf"
+## CC0 Quaternius Medieval Village MegaKit (assets/world/village): roofs, doors, chimneys and plaster/brick textures for the houses
+const VILLAGE_DIR := "res://assets/world/village/%s.gltf"
+const VILLAGE_TEX := "res://assets/world/village/T_%s_BaseColor.png"
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
 const BACKDROP := {
-	"WORLD_LUNARIS": [["trees_A_medium", "tree_single_A", "trees_A_large", "tree_single_B"], ["trees_A_large", "trees_A_medium"]],
-	"WORLD_ELARIS": [["trees_B_large", "trees_B_medium", "tree_single_B", "trees_A_large"], ["trees_B_large", "trees_A_large"]],
+	"WORLD_LUNARIS": [["CommonTree_1", "CommonTree_3", "CommonTree_5", "Pine_2", "CommonTree_2"], ["TwistedTree_1", "TwistedTree_2", "Pine_1", "TwistedTree_3"]],
+	"WORLD_ELARIS": [["CommonTree_2", "CommonTree_4", "Pine_1", "CommonTree_1", "Pine_3"], ["TwistedTree_2", "TwistedTree_3", "Pine_2"]],
 	"WORLD_VALDORIA": [["building_home_A_red", "building_home_B_red", "building_tavern_red", "building_tower_A_red", "building_home_A_red"], ["trees_A_large", "trees_B_large"]],
 	"WORLD_SOLMERA": [["rock_single_A", "rock_single_B", "tent", "rock_single_C", "building_tower_A_red"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
+	"WORLD_FROSTHAIN": [["Pine_1", "Pine_2", "Pine_3", "DeadTree_1", "Pine_2"], ["Pine_3", "Pine_1", "Pine_2", "DeadTree_2"]],
 	"WORLD_AQUALIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "rock_single_B", "building_home_B_blue"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 }
 
@@ -104,14 +116,24 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 		env.fog_light_color = ambient.darkened(0.6)
 		env.fog_density = 0.025
 	else:
-		var sky_mat := ProceduralSkyMaterial.new()
-		sky_mat.sky_top_color = Color.html(st.sky_top)
-		sky_mat.sky_horizon_color = Color.html(st.sky_horizon)
-		sky_mat.ground_horizon_color = Color.html(st.sky_horizon)
-		sky_mat.ground_bottom_color = Color.html(st.sky_top).darkened(0.5)
-		sky_mat.sun_angle_max = 20.0
 		var sky := Sky.new()
-		sky.sky_material = sky_mat
+		if st.get("night", false):
+			var night := ShaderMaterial.new()
+			night.shader = load("res://assets/shaders/night_sky.gdshader")
+			night.set_shader_parameter("sky_top", Color.html(st.sky_top))
+			night.set_shader_parameter("sky_horizon", Color.html(st.sky_horizon))
+			night.set_shader_parameter("moon_dir", Vector3(-0.3, 0.2, -0.9))
+			night.set_shader_parameter("moon_size", 0.075)
+			sky.sky_material = night
+			sky.radiance_size = Sky.RADIANCE_SIZE_32 if low_end() else Sky.RADIANCE_SIZE_128
+		else:
+			var sky_mat := ProceduralSkyMaterial.new()
+			sky_mat.sky_top_color = Color.html(st.sky_top)
+			sky_mat.sky_horizon_color = Color.html(st.sky_horizon)
+			sky_mat.ground_horizon_color = Color.html(st.sky_horizon)
+			sky_mat.ground_bottom_color = Color.html(st.sky_top).darkened(0.5)
+			sky_mat.sun_angle_max = 20.0
+			sky.sky_material = sky_mat
 		env.background_mode = Environment.BG_SKY
 		env.sky = sky
 		env.ambient_light_source = Environment.AMBIENT_SOURCE_SKY
@@ -244,10 +266,20 @@ static func build_prop(root: Node3D, prop_name: String, size: Vector3, color: Co
 			_mesh(root, b, Vector3.ZERO, surface("brick" if world_style.get("boundary", "") == "wall" else "rock", color, 0.3))
 
 
-## Instance of a KayKit model plus its unscaled bounds (cached per name).
-static func model(name: String) -> Array:
+## True for the metre-scaled kits (nature, props); the KayKit hex models use their own units.
+static func is_metric(name: String) -> bool:
+	return ResourceLoader.exists(NATURE_DIR % name) or ResourceLoader.exists(PROPS_DIR % name) or ResourceLoader.exists(VILLAGE_DIR % name)
+
+
+static func _entry(name: String) -> Array:
 	if not _models.has(name):
 		var path := MODEL_DIR % name
+		if not ResourceLoader.exists(path):
+			path = NATURE_DIR % name
+		if not ResourceLoader.exists(path):
+			path = PROPS_DIR % name
+		if not ResourceLoader.exists(path):
+			path = VILLAGE_DIR % name
 		if not ResourceLoader.exists(path):
 			_models[name] = [null, AABB()]
 		else:
@@ -259,9 +291,26 @@ static func model(name: String) -> Array:
 				var a: AABB = (mi as MeshInstance3D).transform * (mi as MeshInstance3D).get_aabb()
 				box = a if first else box.merge(a)
 				first = false
+				if path.begins_with("res://assets/world/nature"):
+					# the kit bakes autumn colours into the vertices: use the plain green/natural textures
+					var mesh := (mi as MeshInstance3D).mesh
+					for i in mesh.get_surface_count():
+						var sm := mesh.surface_get_material(i)
+						if sm is StandardMaterial3D:
+							(sm as StandardMaterial3D).vertex_color_use_as_albedo = false
 			probe.free()
 			_models[name] = [scene, box]
-	var entry: Array = _models[name]
+	return _models[name]
+
+
+## Bounding box of a model (empty AABB if it does not exist); no node is created.
+static func model_box(name: String) -> AABB:
+	return _entry(name)[1]
+
+
+## Instance of a model plus its unscaled bounds (cached per name).
+static func model(name: String) -> Array:
+	var entry: Array = _entry(name)
 	return [(entry[0] as PackedScene).instantiate() if entry[0] else null, entry[1]]
 
 
@@ -275,6 +324,145 @@ static func _place(parent: Node3D, name: String, pos: Vector3, scl: float, yaw: 
 	n.position = pos - Vector3(0, (m[1] as AABB).position.y * scl, 0)
 	parent.add_child(n)
 	return n
+
+
+## Like _place, but scales the model to a target height in metres.
+static func _place_h(parent: Node3D, name: String, pos: Vector3, height: float, yaw: float = 0.0) -> Node3D:
+	var box := model_box(name)
+	if box.size.y <= 0.0:
+		return null
+	return _place(parent, name, pos, height / box.size.y, yaw)
+
+
+## Soft rim light on character materials: a bright edge that separates people from the scene (R03).
+static func rim(m: Material, amount: float) -> void:
+	if m is StandardMaterial3D:
+		(m as StandardMaterial3D).rim_enabled = true
+		(m as StandardMaterial3D).rim = amount
+		(m as StandardMaterial3D).rim_tint = 0.8
+
+
+## Plaster/brick/timber material from the village kit (world-space triplanar, tintable).
+static func village_surface(tex: String, tint: Color, scale: float = 0.3) -> StandardMaterial3D:
+	var key := "V%s|%s|%s" % [tex, tint.to_html(), scale]
+	if _cache.has(key):
+		return _cache[key]
+	var m := StandardMaterial3D.new()
+	m.albedo_texture = load(VILLAGE_TEX % tex)
+	m.albedo_color = tint
+	m.uv1_triplanar = true
+	m.uv1_world_triplanar = true
+	m.uv1_scale = Vector3.ONE * scale
+	m.roughness = 0.9
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	_cache[key] = m
+	return m
+
+
+## Model scaled per axis so its footprint fills width x depth, standing on y = 0 of `pivot`.
+static func _fit(pivot: Node3D, name: String, width: float, depth: float, sy: float, long_axis_x: bool = false) -> Node3D:
+	var m: Array = model(name)
+	if m[0] == null:
+		return null
+	var n: Node3D = m[0]
+	var box: AABB = m[1]
+	var sx := width / box.size.x
+	var sz := depth / box.size.z
+	n.scale = Vector3(sx, sy, sz)
+	n.position = Vector3(-(box.position.x + box.size.x / 2.0) * sx, -box.position.y * sy, -(box.position.z + box.size.z / 2.0) * sz)
+	pivot.add_child(n)
+	return n
+
+
+## A real-looking house from the village kit (G6): plaster walls on a stone base,
+## timber frame, a tiled roof fitted to the footprint, door with frame, chimney
+## and lit windows. Footprint and height come from the layout prop.
+static func _village_house(prop_root: Node3D, prop_name: String, size: Vector3, world_style: Dictionary) -> void:
+	var root := Node3D.new()
+	root.name = "Building"
+	prop_root.add_child(root)
+	var w := size.x
+	var d := size.z
+	var h := size.y
+	var night: bool = world_style.get("night", false)
+	var wall_h := minf(h, 4.6) if h > 4.6 else h
+	var wall_col := Color(0.88, 0.84, 0.78)
+	match _world_key(world_style):
+		"blue": wall_col = Color(0.8, 0.84, 0.95)
+		"green": wall_col = Color(0.92, 0.9, 0.78)
+		"red": wall_col = Color(0.95, 0.82, 0.7)
+	if night:
+		wall_col = wall_col.darkened(0.12)
+	var plaster := village_surface("Plaster", wall_col, 0.35)
+	var stone := village_surface("UnevenBrick", Color(0.85, 0.85, 0.9), 0.5)
+	var wood := village_surface("WoodTrim", Color(0.75, 0.6, 0.5), 0.6)
+	var base_h := minf(1.0, wall_h * 0.3)
+	var top_y := -h / 2.0 + wall_h
+	# stone base and plaster upper walls
+	var base := BoxMesh.new()
+	base.size = Vector3(w, base_h, d)
+	_mesh(root, base, Vector3(0, -h / 2.0 + base_h / 2.0, 0), stone, "Base")
+	var upper := BoxMesh.new()
+	upper.size = Vector3(w - 0.12, wall_h - base_h, d - 0.12)
+	_mesh(root, upper, Vector3(0, -h / 2.0 + base_h + (wall_h - base_h) / 2.0, 0), plaster, "Walls")
+	# timber frame: corner posts and a beam under the roof
+	for sx_ in [-1, 1]:
+		for sz_ in [-1, 1]:
+			var post := BoxMesh.new()
+			post.size = Vector3(0.22, wall_h - base_h, 0.22)
+			_mesh(root, post, Vector3(sx_ * (w / 2.0 - 0.05), -h / 2.0 + base_h + (wall_h - base_h) / 2.0, sz_ * (d / 2.0 - 0.05)), wood, "Post")
+	for side in [-1, 1]:
+		var beam_x := BoxMesh.new()
+		beam_x.size = Vector3(w + 0.1, 0.2, 0.2)
+		_mesh(root, beam_x, Vector3(0, top_y - 0.1, side * (d / 2.0 - 0.05)), wood, "BeamX")
+		var beam_z := BoxMesh.new()
+		beam_z.size = Vector3(0.2, 0.2, d + 0.1)
+		_mesh(root, beam_z, Vector3(side * (w / 2.0 - 0.05), top_y - 0.1, 0), wood, "BeamZ")
+	# roof from the kit: ridge along the longer side
+	var long_x := w >= d
+	var long_len := maxf(w, d)
+	var short_len := minf(w, d)
+	var ratio := long_len / short_len
+	var roof_name := "Roof_RoundTiles_4x4"
+	if short_len >= 8.0:
+		roof_name = "Roof_RoundTiles_8x8" if ratio < 1.2 else ("Roof_RoundTiles_8x10" if ratio < 1.5 else "Roof_RoundTiles_8x12")
+	elif short_len >= 6.0:
+		roof_name = "Roof_RoundTiles_6x6" if ratio < 1.2 else ("Roof_RoundTiles_6x8" if ratio < 1.5 else "Roof_RoundTiles_6x10")
+	else:
+		roof_name = "Roof_RoundTiles_4x4" if ratio < 1.2 else ("Roof_RoundTiles_4x6" if ratio < 1.6 else "Roof_RoundTiles_4x8")
+	var pivot := Node3D.new()
+	pivot.name = "RoofPivot"
+	pivot.position = Vector3(0, top_y, 0)
+	pivot.rotation.y = 0.0 if not long_x else PI / 2.0
+	root.add_child(pivot)
+	var rb := model_box(roof_name)
+	var sy := clampf((short_len + 1.2) / rb.size.x, 0.7, 1.5)
+	var roof := _fit(pivot, roof_name, short_len + 1.2, long_len + 1.2, sy)
+	if roof:
+		roof.name = "Roof"
+		var tiles := village_surface("RoundTiles", Color(0.95, 0.62, 0.45) if not night else Color(0.75, 0.55, 0.5), 0.4)
+		for mi in roof.find_children("*", "MeshInstance3D", true, false):
+			(mi as MeshInstance3D).material_override = tiles
+	# door with frame on the front (+z) face, bottom at the floor
+	var frame := _place(root, "DoorFrame_Round_WoodDark", Vector3(0, -h / 2.0, d / 2.0 - 0.1), 1.0, 0.0)
+	if frame:
+		frame.name = "DoorFrame"
+	var door := _place(root, "Door_1_Round", Vector3(0, -h / 2.0, d / 2.0 + 0.02), 1.0, 0.0)
+	if door:
+		door.name = "Door"
+	# chimney on the roof
+	var chim := _place(root, "Prop_Chimney", Vector3(w * 0.25 if long_x else w * 0.3, top_y + 1.0, d * 0.15 if long_x else d * 0.25), 1.0, 0.0)
+	if chim:
+		chim.name = "Chimney"
+	# windows: two on each long face, warm light at night
+	var win_mat := glow(Color(1.0, 0.78, 0.45)) if night else glow(Color(0.55, 0.7, 0.85))
+	win_mat.emission_energy_multiplier = 2.0 if night else 0.25
+	var wh := clampf(wall_h * 0.28, 0.6, 1.0)
+	for sd in [-1, 1]:
+		for k in [-1, 1]:
+			var win := BoxMesh.new()
+			win.size = Vector3(0.7, wh, 0.05)
+			_mesh(root, win, Vector3(k * w * 0.28, -h / 2.0 + base_h + (wall_h - base_h) * 0.55, sd * (d / 2.0 + 0.01)), win_mat, "Window")
 
 
 static func building_for(prop_name: String, world_style: Dictionary) -> String:
@@ -300,7 +488,10 @@ static func _model_building(root: Node3D, prop_name: String, size: Vector3, worl
 	var nm := building_for(prop_name, world_style)
 	if nm == "":
 		return false
-	var box: AABB = model(nm)[1]
+	if size.x >= 4.0 and size.z >= 4.0 and ResourceLoader.exists(VILLAGE_TEX % "Plaster") and world_style.get("boundary", "") != "":
+		_village_house(root, prop_name, size, world_style)
+		return true
+	var box := model_box(nm)
 	var scl := minf(size.x / box.size.x, size.z / box.size.z)
 	var n := _place(root, nm, Vector3(0, -size.y / 2.0, 0), scl)
 	if n:
@@ -309,8 +500,7 @@ static func _model_building(root: Node3D, prop_name: String, size: Vector3, worl
 
 
 static func _model_tree(root: Node3D, prop_name: String, size: Vector3) -> bool:
-	var nm := "tree_single_B" if prop_name.contains("living") or prop_name.hash() % 2 == 0 else "tree_single_A"
-	var n := _place(root, nm, Vector3(0, -size.y / 2.0, 0), size.y / 1.1)
+	var n: Node3D = _place_h(root, TREES[absi(prop_name.hash()) % TREES.size()], Vector3(0, -size.y / 2.0, 0), maxf(size.y, 5.0), float(absi(prop_name.hash()) % 628) / 100.0)
 	if n:
 		n.name = "Tree"
 	return n != null
@@ -349,19 +539,32 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 				var models: Array = spec[0]
 				var nm: String = models[rng.randi() % models.size()]
 				var yaw := atan2(-p.x, -p.y) if town else rng.randf() * TAU
-				_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw)
+				if ResourceLoader.exists(NATURE_DIR % nm):
+					# metre-scaled nature model: inner row 7-12 m, outer row 14-24 m
+					var tall := rng.randf_range(7.0, 12.0) if spec[1] < 10.0 else rng.randf_range(14.0, 24.0)
+					_place_h(root, nm, Vector3(p.x, -0.05, p.y), tall, yaw)
+				else:
+					_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw)
 
 
 ## Small hand-placed dressing from layout "decor" (G05): KayKit models or
 ## procedural lanterns, with an optional thin collider ("r", metres) so the
 ## player does not walk through barrels. Scale 1 = hex-pack units × DECOR_SCALE.
 const DECOR_SCALE := 5.0
+## KayKit decor names that now use the metre-scaled kits: name -> [model, scale (or tree height in m at scale 1)]
+const DECOR_MAP := {
+	"tree_single_A": ["@tree", 6.5], "tree_single_B": ["@tree", 6.5],
+	"rock_single_A": ["Rock_Medium_1", 0.8], "rock_single_B": ["Rock_Medium_2", 0.8], "rock_single_C": ["Rock_Medium_3", 0.8],
+	"barrel": ["Barrel", 1.0], "crate_A_big": ["Crate_Wooden", 1.0], "crate_B_small": ["Crate_Wooden", 0.7],
+	"bucket_water": ["Bucket_Wooden_1", 1.0], "weaponrack": ["WeaponStand", 1.0], "fence_wood_straight": ["Prop_WoodenFence_Single", 1.0],
+}
 
 
-static func build_decor(parent: Node3D, layout: Dictionary) -> void:
+static func build_decor(parent: Node3D, layout: Dictionary, area_id: String = "") -> void:
 	var list: Array = layout.get("decor", [])
 	if list.is_empty():
 		return
+	var night: bool = area_id != "" and style(area_id).get("night", false)
 	var root := Node3D.new()
 	root.name = "Decor"
 	parent.add_child(root)
@@ -376,9 +579,16 @@ static func build_decor(parent: Node3D, layout: Dictionary) -> void:
 			plane.size = Vector2(float(d.size[0]), float(d.size[1]))
 			n = _mesh(root, plane, pos, water(Color(0.25, 0.5, 0.75)), "Water")
 		elif d.model == "path":
-			n = _path(root, pos, yaw, Vector2(float(d.size[0]), float(d.size[1])), str(d.get("tex", "cobble")))
+			n = _path(root, pos, yaw, Vector2(float(d.size[0]), float(d.size[1])), str(d.get("tex", "cobble")), night)
+		elif DECOR_MAP.has(d.model) and (DECOR_MAP[d.model][0] == "@tree" or is_metric(DECOR_MAP[d.model][0])):
+			var m: Array = DECOR_MAP[d.model]
+			var variant: String = m[0] if m[0] != "@tree" else TREES[absi(int(pos.x * 7.0 + pos.z * 13.0)) % TREES.size()]
+			if m[0] == "@tree":
+				n = _place_h(root, variant, pos, float(m[1]) * float(d.get("scale", 1.0)), yaw)
+			else:
+				n = _place(root, variant, pos, float(m[1]) * float(d.get("scale", 1.0)), yaw)
 		else:
-			n = _place(root, d.model, pos, DECOR_SCALE * float(d.get("scale", 1.0)), yaw)
+			n = _place(root, d.model, pos, (1.0 if is_metric(d.model) else DECOR_SCALE) * float(d.get("scale", 1.0)), yaw)
 		if n and d.has("r"):
 			var body := StaticBody3D.new()
 			body.name = "DecorCollider"
@@ -394,10 +604,10 @@ static func build_decor(parent: Node3D, layout: Dictionary) -> void:
 
 
 ## Flat road or plaza (visual only) laid just above the floor.
-static func _path(parent: Node3D, pos: Vector3, yaw: float, size: Vector2, tex: String) -> Node3D:
+static func _path(parent: Node3D, pos: Vector3, yaw: float, size: Vector2, tex: String, night: bool = false) -> Node3D:
 	var plane := PlaneMesh.new()
 	plane.size = size
-	var mi := _mesh(parent, plane, pos + Vector3(0, 0.02, 0), surface(tex, Color(0.92, 0.88, 0.8), FLOOR_SCALE.get(tex, 0.5)), "Path")
+	var mi := _mesh(parent, plane, pos + Vector3(0, 0.02, 0), surface(tex, Color(0.6, 0.66, 0.85) if night else Color(0.92, 0.88, 0.8), FLOOR_SCALE.get(tex, 0.5)), "Path")
 	mi.rotation.y = yaw
 	return mi
 
@@ -420,12 +630,226 @@ static func _lantern(parent: Node3D, pos: Vector3, yaw: float) -> Node3D:
 	var lamp := BoxMesh.new()
 	lamp.size = Vector3(0.16, 0.22, 0.16)
 	var amber := glow(Color(1.0, 0.65, 0.3))
-	amber.emission_energy_multiplier = 0.9
+	amber.emission_energy_multiplier = 2.4
 	_mesh(n, lamp, Vector3(0.5, 2.3, 0), amber, "Lamp")
+	if not low_end():
+		var light := OmniLight3D.new()
+		light.name = "LampLight"
+		light.position = Vector3(0.5, 2.2, 0)
+		light.light_color = Color(1.0, 0.72, 0.4)
+		light.light_energy = 1.6
+		light.omni_range = 7.0
+		n.add_child(light)
 	var cap := PrismMesh.new()
 	cap.size = Vector3(0.26, 0.12, 0.26)
 	_mesh(n, cap, Vector3(0.5, 2.47, 0), wood, "Cap")
 	return n
+
+
+## Falling snow over the whole area (Frosthain): one CPUParticles3D, fewer flakes on web/Android.
+static func build_weather(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
+	if is_indoor(area_id, layout) or not style(area_id).get("snow", false):
+		return
+	var p := CPUParticles3D.new()
+	p.name = "Snow"
+	p.amount = 160 if low_end() else 700
+	p.lifetime = 9.0
+	p.preprocess = 9.0
+	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
+	p.emission_box_extents = Vector3(size.x / 2.0, 0.5, size.y / 2.0)
+	p.position = Vector3(0, 12, 0)
+	p.direction = Vector3(0.15, -1, 0.05)
+	p.spread = 12.0
+	p.initial_velocity_min = 1.2
+	p.initial_velocity_max = 2.2
+	p.gravity = Vector3(0.2, -0.3, 0.0)
+	p.scale_amount_min = 0.6
+	p.scale_amount_max = 1.4
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.09, 0.09)
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color(1, 1, 1, 0.9)
+	mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	quad.material = mat
+	p.mesh = quad
+	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(p)
+
+
+## Footprints of houses, roads and water (x/z rectangles) that dressing and flora keep clear.
+static func _blocked_rects(layout: Dictionary) -> Array[Rect2]:
+	var blocked: Array[Rect2] = []
+	for p in layout.get("props", []):
+		blocked.append(Rect2(float(p.pos[0]) - float(p.size[0]) / 2.0 - 0.8, float(p.pos[2]) - float(p.size[2]) / 2.0 - 0.8, float(p.size[0]) + 1.6, float(p.size[2]) + 1.6))
+	for d in layout.get("decor", []):
+		if d.has("size"):
+			blocked.append(Rect2(float(d.pos[0]) - float(d.size[0]) / 2.0 - 0.5, float(d.pos[2]) - float(d.size[1]) / 2.0 - 0.5, float(d.size[0]) + 1.0, float(d.size[1]) + 1.0))
+	return blocked
+
+
+## Ground tint: night worlds get a cool blue cast so the grass sits in the moonlight.
+static func ground_tint(area_id: String, layout: Dictionary) -> Color:
+	var c := Color.html(layout.get("ground", "#555555"))
+	if style(area_id).get("night", false) and not is_indoor(area_id, layout):
+		c = c.lerp(Color(0.3, 0.55, 0.9), 0.5).darkened(0.05)
+	return c
+
+
+## grass / flower / mushroom models (Quaternius, metres: grass ~1 m, so scaled down) and their tint
+const FLORA := {
+	"WORLD_LUNARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group"], "mush": ["Mushroom_Common"], "tint": "#9fc8ff", "flower_tint": "#a8c8ff", "count": 2600, "flower_count": 260, "mush_count": 70, "glow": "#7fd8ff", "glow_count": 160},
+	"WORLD_ELARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group", "Clover_1"], "mush": ["Mushroom_Common", "Mushroom_Laetiporus"], "tint": "#e8ffd0", "flower_tint": "#ffffff", "count": 2600, "flower_count": 220, "mush_count": 50, "glow": "#ffe08a", "glow_count": 60},
+	"WORLD_SOLMERA": {"grass": ["Grass_Wispy_Short", "Plant_1"], "flowers": [], "mush": [], "tint": "#e8cc88", "flower_tint": "#ffffff", "count": 500, "flower_count": 0, "mush_count": 0, "glow": "", "glow_count": 0},
+}
+static var _flora_meshes := {}
+
+
+## First mesh of a nature model with every surface material tinted.
+static func nature_mesh(name: String, tint: Color) -> Mesh:
+	var key := name + tint.to_html()
+	if _flora_meshes.has(key):
+		return _flora_meshes[key]
+	var entry := _entry(name)
+	var result: Mesh = null
+	if entry[0]:
+		var probe: Node3D = (entry[0] as PackedScene).instantiate()
+		var found := probe.find_children("*", "MeshInstance3D", true, false)
+		if not found.is_empty():
+			result = ((found[0] as MeshInstance3D).mesh as Mesh).duplicate()
+			for i in result.get_surface_count():
+				var m := result.surface_get_material(i)
+				if m is StandardMaterial3D:
+					m = m.duplicate()
+					(m as StandardMaterial3D).albedo_color = tint
+					result.surface_set_material(i, m)
+		probe.free()
+	_flora_meshes[key] = result
+	return result
+
+
+## Grass, flowers, mushrooms and glowing buds scattered over the open ground
+## (R01/R04): Quaternius models as MultiMeshes, so it is a handful of draw
+## calls even on the web.
+static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
+	if is_indoor(area_id, layout) or not FLORA.has(world_of(area_id)):
+		return
+	var cfg: Dictionary = FLORA[world_of(area_id)]
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(area_id + "flora")
+	var blocked := _blocked_rects(layout)
+	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var root := Node3D.new()
+	root.name = "Flora"
+	parent.add_child(root)
+	var div := 3 if low_end() else 1
+	var groups := [["Grass", cfg.grass, Color.html(cfg.tint), int(cfg.count) / div, 0.2, 0.4], ["Flowers", cfg.flowers, Color.html(cfg.flower_tint), int(cfg.flower_count) / div, 0.25, 0.42], ["Mushrooms", cfg.mush, Color(1, 1, 1), int(cfg.mush_count) / div, 0.35, 0.7]]
+	var glow_pts: Array[Vector3] = []
+	for g in groups:
+		var names: Array = g[1]
+		if names.is_empty() or int(g[3]) <= 0:
+			continue
+		# one MultiMesh per model of the group
+		var per := maxi(1, int(g[3]) / names.size())
+		for nm in names:
+			var mesh := nature_mesh(nm, g[2])
+			if mesh == null:
+				continue
+			var xforms: Array[Transform3D] = []
+			var tries := 0
+			while xforms.size() < per and tries < per * 3:
+				tries += 1
+				var p := Vector2(rng.randf_range(-size.x / 2.0 + 1.0, size.x / 2.0 - 1.0), rng.randf_range(-size.y / 2.0 + 1.0, size.y / 2.0 - 1.0))
+				if blocked.any(func(r: Rect2): return r.has_point(p)) or exits.any(func(e: Vector2): return e.distance_to(p) < 5.0):
+					continue
+				var sc := rng.randf_range(g[4], g[5])
+				xforms.append(Transform3D(Basis(Vector3.UP, rng.randf() * TAU).scaled(Vector3.ONE * sc), Vector3(p.x, 0.0, p.y)))
+				if g[0] == "Grass" and glow_pts.size() < int(cfg.glow_count) / div and rng.randf() < 0.05:
+					glow_pts.append(Vector3(p.x, 0.0, p.y))
+			_multimesh(root, mesh, xforms, g[0] + "_" + nm)
+	if cfg.glow != "" and not glow_pts.is_empty():
+		var bulb := SphereMesh.new()
+		bulb.radius = 0.09
+		bulb.height = 0.18
+		bulb.radial_segments = 6
+		bulb.rings = 3
+		var gm := glow(Color.html(cfg.glow))
+		gm.emission_energy_multiplier = 2.2
+		bulb.material = gm
+		var bulbs: Array[Transform3D] = []
+		for gp in glow_pts:
+			bulbs.append(Transform3D(Basis.IDENTITY, gp + Vector3(0, rng.randf_range(0.25, 0.5), 0)))
+		_multimesh(root, bulb, bulbs, "Buds")
+
+
+static func _multimesh(parent: Node3D, mesh: Mesh, xforms: Array[Transform3D], nm: String) -> void:
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = mesh
+	mm.instance_count = xforms.size()
+	for i in xforms.size():
+		mm.set_instance_transform(i, xforms[i])
+	var mi := MultiMeshInstance3D.new()
+	mi.name = nm
+	mi.multimesh = mm
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(mi)
+
+
+## Small everyday props around houses (barrels, crates, benches, banners) so
+## villages do not look empty (R04). Deterministic per area; keeps roads,
+## exits and other buildings free.
+const DRESSING := ["Barrel", "Crate_Wooden", "Barrel_Apples", "FarmCrate_Apple", "Bench", "Stool", "Bucket_Wooden_1", "Crate_Metal", "Banner_1"]
+
+
+static func build_dressing(parent: Node3D, area_id: String, layout: Dictionary) -> void:
+	if is_indoor(area_id, layout) or world_of(area_id) == "WORLD_AQUALIS":
+		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(area_id + "dress")
+	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var rects := _blocked_rects(layout)
+	var root := Node3D.new()
+	root.name = "Dressing"
+	parent.add_child(root)
+	for p in layout.get("props", []):
+		if prop_kind(str(p.name)) != "house" or p.has("requires_flag") or p.has("hidden_by_flag"):
+			continue
+		var cx := float(p.pos[0])
+		var cz := float(p.pos[2])
+		var hx := float(p.size[0]) / 2.0
+		var hz := float(p.size[2]) / 2.0
+		for k in 3:
+			var nm: String = DRESSING[rng.randi() % DRESSING.size()]
+			var side := rng.randi() % 4
+			var along := rng.randf_range(-0.7, 0.7)
+			var pos := Vector3.ZERO
+			var yaw := 0.0
+			match side:
+				0: pos = Vector3(cx + along * hx, 0, cz + hz + 0.9); yaw = 0.0
+				1: pos = Vector3(cx + along * hx, 0, cz - hz - 0.9); yaw = PI
+				2: pos = Vector3(cx + hx + 0.9, 0, cz + along * hz); yaw = PI / 2.0
+				_: pos = Vector3(cx - hx - 0.9, 0, cz + along * hz); yaw = -PI / 2.0
+			var p2 := Vector2(pos.x, pos.z)
+			if exits.any(func(e: Vector2): return e.distance_to(p2) < 6.0):
+				continue
+			# outside every other footprint (the own house is allowed: the item stands next to it)
+			if rects.any(func(r: Rect2): return r.has_point(p2) and not r.grow(0.0).has_point(Vector2(cx, cz))):
+				continue
+			var n := _place(root, nm, pos, 1.0, yaw + rng.randf_range(-0.3, 0.3))
+			if n and not nm.begins_with("Banner"):
+				var body := StaticBody3D.new()
+				body.name = "DressingCollider"
+				var cs := CollisionShape3D.new()
+				var cyl := CylinderShape3D.new()
+				cyl.radius = 0.4
+				cyl.height = 1.0
+				cs.shape = cyl
+				cs.position.y = 0.5
+				body.add_child(cs)
+				body.position = pos
+				root.add_child(body)
 
 
 ## Landmarks far outside the walkable area (outdoor Lunaris/Valdoria): a

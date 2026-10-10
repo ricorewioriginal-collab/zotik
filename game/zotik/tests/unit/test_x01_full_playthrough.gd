@@ -1,7 +1,7 @@
 extends TestCase
 ## X01: the whole game in one session, without prepared saves. New game from
 ## the title, chapter 1 in Lunaris, Weltenstein to Elaris, chapter 2,
-## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, Weltenstein to Aqualis, chapter 5, then save -> reset -> load through the
+## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, Weltenstein to Aqualis, chapter 5, Weltenstein to Frosthain, chapter 6, then save -> reset -> load through the
 ## title. Unlike the per-chapter golden paths (m15/e08/v06) every chapter
 ## starts from the state the previous one really produced, so a broken
 ## hand-over between chapters fails here.
@@ -319,6 +319,52 @@ func _chapter_five() -> void:
 	eq(Conditions.quest_state(S), "COMPLETED", "Aqualis side quest completed")
 
 
+func _chapter_six() -> void:
+	const M := "QUEST_MAIN_FRO_001"
+	const S := "QUEST_SIDE_FRO_001"
+	await _exit_to("AREA_AQU_DOME")
+	await _travel("TRAVEL_AQU_001", "WORLD_FROSTHAIN", "CUT_FRO_ARRIVAL_001")
+	eq(game.area.area_id, "AREA_FRO_VILLAGE", "in the village")
+	await _exit_to("AREA_FRO_HALL")
+	await _talk("NPC_TORMUND_001")
+	eq(Conditions.quest_step(S), 0, "Frosthain side quest started")
+	game.shop_menu.close_menu()
+	await _exit_to("AREA_FRO_VILLAGE")
+	await _talk("NPC_KAELEN_001")
+	eq(Conditions.quest_step(M), 1, "find the city")
+	await _exit_to("AREA_FRO_FOREST")
+	for id in ["SPAWN_FRO_FOREST_WOLF_1", "SPAWN_FRO_FOREST_WOLF_2", "SPAWN_FRO_FOREST_GEIST_1", "SPAWN_FRO_FOREST_GEIST_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_FRO_001"].interact(game.player)
+	await _use_savepoint("SAVEPOINT_FRO_FOREST_001", 2)
+	await _boss_intro("TRIGGER_FRO_CITY", "CUT_FRO_CITY_001")
+	await _exit_to("AREA_FRO_CITY")
+	eq(Conditions.quest_step(M), 2, "ice next")
+	for id in ["SPAWN_FRO_CITY_WOLF_1", "SPAWN_FRO_CITY_WOLF_2", "SPAWN_FRO_CITY_GEIST_1", "SPAWN_FRO_CITY_GEIST_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_FRO_002"].interact(game.player)
+	var node: PuzzleNode = game.area.entities["PUZ_FRO_ICE_001"]
+	for i in [3, 1, 4, 0, 2]:
+		node.parts[i].interact(game.player)
+	eq(Conditions.quest_step(M), 3, "Eiswächter next")
+	await _exit_to("AREA_FRO_TEMPLE")
+	await _defeat_spawn("SPAWN_FRO_TEMPLE_WAECHTER")
+	eq(Conditions.quest_step(M), 4, "Avarn next")
+	await _exit_to("AREA_FRO_CORE")
+	await _boss_intro("TRIGGER_FRO_AVARN_INTRO", "CUT_FRO_AVARN_001")
+	await _defeat_spawn("SPAWN_FRO_CORE_AVARN")
+	eq(Dialogue.active_id, "CUT_FRO_AVARN_DEFEAT_001", "defeat scene")
+	await finish_dialogues()
+	await frames(2)
+	await physics_frames(3)
+	eq(game.area.area_id, "AREA_FRO_VILLAGE", "back in the village")
+	await _talk("NPC_KAELEN_001")
+	eq(Conditions.quest_state(M), "COMPLETED", "chapter 6 completed")
+	await _exit_to("AREA_FRO_HALL")
+	await _talk("NPC_TORMUND_001")
+	eq(Conditions.quest_state(S), "COMPLETED", "Frosthain side quest completed")
+
+
 ## Saved state minus play_time, which keeps counting once the game runs.
 func _state_without_clock() -> String:
 	var d := GameState.to_dict()
@@ -337,7 +383,8 @@ func test_full_playthrough() -> void:
 	await _chapter_three()
 	await _chapter_four()
 	await _chapter_five()
-	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001"]:
+	await _chapter_six()
+	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001", "QUEST_MAIN_FRO_001", "QUEST_SIDE_FRO_001"]:
 		eq(Conditions.quest_state(q), "COMPLETED", q)
 	eq(GameState.party.size(), 3, "full party at the end")
 	# Save -> fresh state -> load through the title
@@ -350,7 +397,7 @@ func test_full_playthrough() -> void:
 	await frames(3)
 	game = tree.current_scene
 	await physics_frames(2)
-	eq(game.area.area_id, "AREA_AQU_HARBOUR", "loaded where the game was saved")
+	eq(game.area.area_id, "AREA_FRO_HALL", "loaded where the game was saved")
 	eq(game.companions.size(), 3, "party restored")
 	eq(_state_without_clock(), expected, "state survives save/load")
 	SaveSystem.save_dir = "user://saves/"
