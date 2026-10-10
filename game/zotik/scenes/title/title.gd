@@ -9,6 +9,7 @@ var buttons := {}
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	Warmup.run.call_deferred(self)
+	Music.set_mood("title")
 	var bg_color := ColorRect.new()
 	bg_color.color = Color(0.02, 0.03, 0.07)
 	bg_color.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -60,6 +61,7 @@ func _ready() -> void:
 				text += " – Sicherung"
 			_add_button(box, "load_%d" % slot, text, _on_load.bind(slot))
 	_add_button(box, "transfer", "Spielstand übertragen (Export / Import)", _open_transfer)
+	_add_button(box, "music", _music_text(), _toggle_music)
 	_add_button(box, "quit", "Beenden", App.quit_game)
 	buttons["new_game"].grab_focus.call_deferred()
 
@@ -82,6 +84,17 @@ func _add_button(box: Control, id: String, text: String, cb: Callable) -> void:
 	b.pressed.connect(cb)
 	box.add_child(b)
 	buttons[id] = b
+
+
+func _music_text() -> String:
+	return "Musik: %s" % ("an" if Settings.get_value("music_enabled") else "aus")
+
+
+func _toggle_music() -> void:
+	Settings.set_value("music_enabled", not Settings.get_value("music_enabled"))
+	Settings.save_settings()
+	Music.apply_settings()
+	buttons["music"].text = _music_text()
 
 
 func _time(t: float) -> String:

@@ -149,6 +149,7 @@ func _physics_process(delta: float) -> void:
 				state = State.WINDUP
 				timer = WINDUP_TIME
 				_set_tint(Color(1, 0.3, 0.3))
+				Sfx.play("windup")
 			else:
 				_move_to((target.global_position - global_position).normalized() * speed, delta)
 		State.WINDUP:
@@ -260,6 +261,7 @@ func take_hit(attack_value: int, break_amount: float = 0.0, interrupt: bool = fa
 
 func _start_break() -> void:
 	state = State.BROKEN
+	Sfx.play("break")
 	timer = float(data.get("break_duration", 2.0))
 	velocity = Vector3.ZERO
 	_set_tint(Color(1.6, 1.4, 0.4))

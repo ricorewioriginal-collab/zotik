@@ -25,6 +25,7 @@ Settings="*res://core/settings.gd"
 Quests="*res://core/quests.gd"
 Dialogue="*res://core/dialogue.gd"
 Sfx="*res://core/sfx.gd"
+Music="*res://core/music.gd"
 Guild="*res://core/guild.gd"
 
 [display]

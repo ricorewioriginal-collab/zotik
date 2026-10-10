@@ -16,6 +16,10 @@ func refresh() -> void:
 	add_note(Gamepad.HELP)
 	add_row("Spielanleitung: Ziel, Steuerung, Kampf, Rätsel, Quests", [["Öffnen", _open_guide]])
 	add_heading("Einstellungen")
+	add_row("Musik: %s" % _on(Settings.get_value("music_enabled")), [["Umschalten", _toggle_music]])
+	add_row("Musiklautstärke: %d %%" % roundi(float(Settings.get_value("music_volume")) * 100.0), [["Ändern", _cycle_music_volume]])
+	add_row("Soundeffekte: %s" % _on(Settings.get_value("sfx_enabled")), [["Umschalten", _toggle_sfx]])
+	add_row("Effektlautstärke: %d %%" % roundi(float(Settings.get_value("sfx_volume")) * 100.0), [["Ändern", _cycle_sfx_volume]])
 	add_row("Kamera invertieren: %s" % _on(Settings.get_value("camera_invert")), [["Umschalten", _toggle_invert]])
 	add_row("Casino (Familienoption): %s" % ("erlaubt" if Settings.get_value("casino_enabled") else "deaktiviert"), [["Umschalten", _toggle_casino]])
 	if ColorGrade.available():
@@ -113,6 +117,37 @@ static func _next_of(options: Array, current: float) -> float:
 func _toggle_touch_buttons() -> void:
 	Settings.set_value("touch_buttons", not Settings.get_value("touch_buttons"))
 	Settings.save_settings()
+	refresh()
+
+
+const MUSIC_VOLUMES := [0.2, 0.4, 0.6, 0.8, 1.0]
+
+
+func _toggle_music() -> void:
+	Settings.set_value("music_enabled", not Settings.get_value("music_enabled"))
+	Settings.save_settings()
+	Music.apply_settings()
+	refresh()
+
+
+func _cycle_music_volume() -> void:
+	Settings.set_value("music_volume", _next_of(MUSIC_VOLUMES, float(Settings.get_value("music_volume"))))
+	Settings.save_settings()
+	Music.apply_settings()
+	refresh()
+
+
+func _toggle_sfx() -> void:
+	Settings.set_value("sfx_enabled", not Settings.get_value("sfx_enabled"))
+	Settings.save_settings()
+	Sfx.play("click")
+	refresh()
+
+
+func _cycle_sfx_volume() -> void:
+	Settings.set_value("sfx_volume", _next_of(MUSIC_VOLUMES, float(Settings.get_value("sfx_volume"))))
+	Settings.save_settings()
+	Sfx.play("pickup")
 	refresh()
 
 
