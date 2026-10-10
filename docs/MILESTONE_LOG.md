@@ -780,3 +780,7 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - Look: snow floor (Poly Haven snow_02), falling snow particles (`Look.build_weather`, fewer on web/Android), pines/dead trees as backdrop.
 - Tests: `test_r05_frosthain` (8), `test_r06_golden_frosthain` (golden path from a chapter-5 save, restart check `golden_expected_fro.json`), `test_x01_full_playthrough` now plays chapters 1–6. Screenshots 25–28.
 - Placeholder art, not final.
+
+## W02 – Web weight after Phase 6
+- Live check after #20: the web `index.pck` grew from 35 MB to 49 MB (served size). Cause: the new Quaternius textures imported lossless.
+- Fix: textures of the three Quaternius kits and all albedo textures import lossy (WebP, quality 0.75). The new textures go from 5.7 MB to 0.5 MB, the old albedo set from 9.7 MB to 6.3 MB (imported size). Look unchanged in screenshots.
