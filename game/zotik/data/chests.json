@@ -598,5 +598,103 @@
       }
     ],
     "currency": 1200
+  },
+  "CHEST_END_D1_VAULT": {
+    "area": "AREA_END_D1",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ],
+    "currency": 1800
+  },
+  "CHEST_END_D2_VAULT": {
+    "area": "AREA_END_D2",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ],
+    "currency": 1800
+  },
+  "CHEST_END_D3_VAULT": {
+    "area": "AREA_END_D3",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ],
+    "currency": 1800
+  },
+  "CHEST_END_D4_VAULT": {
+    "area": "AREA_END_D4",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ],
+    "currency": 1800
+  },
+  "CHEST_END_D5_VAULT": {
+    "area": "AREA_END_D5",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ],
+    "currency": 1800
+  },
+  "CHEST_END_D6_VAULT": {
+    "area": "AREA_END_D6",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ],
+    "currency": 1800
+  },
+  "CHEST_END_D7_VAULT": {
+    "area": "AREA_END_D7",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ],
+    "currency": 1800
   }
 }
