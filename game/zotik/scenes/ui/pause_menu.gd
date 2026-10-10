@@ -10,7 +10,7 @@ const TOUCH_HELP := "Stick unten links: laufen · rechte Bildschirmhälfte wisch
 func refresh() -> void:
 	super()
 	title_label.text = "Hilfe & Einstellungen"
-	info_label.text = "Spielzeit %d:%02d · Speichern ist am Weltenanker möglich." % [int(GameState.play_time) / 3600, (int(GameState.play_time) / 60) % 60]
+	info_label.text = "Spielzeit %d:%02d · Speichern geht hier jederzeit, zusätzlich gibt es eine Autospeicherung." % [int(GameState.play_time) / 3600, (int(GameState.play_time) / 60) % 60]
 	add_heading("Steuerung")
 	add_note(TOUCH_HELP if TouchControls.wanted() else KEYBOARD_HELP)
 	add_row("Spielanleitung: Ziel, Steuerung, Kampf, Rätsel, Quests", [["Öffnen", _open_guide]])
@@ -25,8 +25,29 @@ func refresh() -> void:
 		add_row("Touch-Deckkraft: %d %%" % roundi(float(Settings.get_value("touch_opacity")) * 100.0), [["Ändern", _cycle_touch_opacity]])
 		add_row("Aktionstasten: %s" % _on(Settings.get_value("touch_buttons")), [["Umschalten", _toggle_touch_buttons]])
 	add_heading("Spiel")
-	add_row("Zum Titelbildschirm (ungespeicherter Fortschritt geht verloren)", [["Titel", _to_title]])
+	add_row("Spielstand speichern (3 Slots)", [["Speichern", _open_save]])
+	add_row("Spielstand auf ein anderes Gerät übertragen (Export / Import)", [["Öffnen", _open_transfer]])
+	add_row("Zum Titelbildschirm (speichert vorher automatisch)", [["Titel", _to_title]])
 	add_row("Spiel beenden", [["Beenden", App.quit_game]])
+
+
+func _open_transfer() -> void:
+	hide()
+	var game := get_parent().get_parent()
+	var tm: TransferMenu = game.transfer_menu
+	tm.closed.connect(func():
+		open()
+		game._update_control(), CONNECT_ONE_SHOT)
+	tm.open()
+
+
+func _open_save() -> void:
+	hide()
+	var game := get_parent().get_parent()
+	game.save_menu.closed.connect(func():
+		open()
+		game._update_control(), CONNECT_ONE_SHOT)
+	game.save_menu.open()
 
 
 func _open_guide() -> void:
@@ -102,4 +123,5 @@ func _toggle_casino() -> void:
 
 func _to_title() -> void:
 	hide()
+	SaveSystem.autosave()
 	App.goto_scene(App.SCENE_TITLE)

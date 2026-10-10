@@ -51,15 +51,26 @@ func _ready() -> void:
 	version.offset_top = -34
 	add_child(version)
 	_add_button(box, "new_game", "Neues Spiel", _on_new_game)
-	for slot in range(1, SaveSystem.SLOT_COUNT + 1):
+	for slot in [SaveSystem.AUTO_SLOT, 1, 2, 3]:
 		var info := SaveSystem.slot_info(slot)
 		if info.status in [SaveSystem.Status.OK, SaveSystem.Status.RECOVERED_FROM_BACKUP]:
-			var text := "Laden: Slot %d – %s (%s)" % [slot, Content.get_entry("areas", info.area).get("name", info.area), _time(info.play_time)]
+			var slot_name := "Autospeicherung" if slot == SaveSystem.AUTO_SLOT else "Slot %d" % slot
+			var text := "Laden: %s – %s (%s)" % [slot_name, Content.get_entry("areas", info.area).get("name", info.area), _time(info.play_time)]
 			if info.status == SaveSystem.Status.RECOVERED_FROM_BACKUP:
 				text += " – Sicherung"
 			_add_button(box, "load_%d" % slot, text, _on_load.bind(slot))
+	_add_button(box, "transfer", "Spielstand übertragen (Export / Import)", _open_transfer)
 	_add_button(box, "quit", "Beenden", App.quit_game)
 	buttons["new_game"].grab_focus.call_deferred()
+
+
+func _open_transfer() -> void:
+	var tm := TransferMenu.new()
+	add_child(tm)
+	# a new save appears in the load list: rebuild the title
+	tm.imported.connect(func(): App.goto_scene.call_deferred(App.SCENE_TITLE))
+	tm.closed.connect(tm.queue_free)
+	tm.open()
 
 
 func _add_button(box: Control, id: String, text: String, cb: Callable) -> void:
