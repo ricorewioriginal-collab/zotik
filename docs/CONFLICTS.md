@@ -43,3 +43,13 @@ Format: ID – description – status / interim handling. Interim handling is th
 - C-32 – C01 character models. The free Quaternius packs contain only peasant and ranger outfits, with no mage robe. – Interim: Lyra wears a blue-tinted peasant outfit with long blue hair and a staff (see C-28). Zotik is the ranger outfit with fur-coloured arms and a fox head, ears, scarf and tail on the shared skeleton. Both are placeholders until production models exist; the paid pack versions or custom models can replace them through `CharacterRig.create_human`.
 - C-34 – Phase 4 (Solmera) assumptions, owner request 2026-10-03. The master documents only name the world, its settings and the boss Kharos. – Interim: all NPC names, dialogue, the oasis/bazaar layout and the Nuri guide arc are placeholder content in the style of chapters 2–3. Solmera unlocks with `FLAG_VAL_CHAPTER_COMPLETE`. The KayKit houses are red-roofed (no desert variant in the free pack), so they are placeholders for sandstone architecture. Sand floor: Poly Haven `aerial_sand`, CC0.
 - C-35 – Phase 5 (Aqualis) assumptions, owner request 2026-10-09. The master documents only name the world, its settings, the dungeon "Das Weltenarchiv" and the boss Neryx; the Nautilux gets its underwater ability in Solmera according to `WORLDS_MASTER.md`, but no Solmera content uses it. – Interim: Aqualis is a walkable dome city (no swimming mode) and the Nautilux is not used yet. Mirael is the guide NPC; all other names, dialogue and layouts are placeholders in the style of chapters 2–4. Aqualis unlocks with `FLAG_SOL_CHAPTER_COMPLETE`.
+
+
+## C-W17 – Story coherence audit (2026-10-10, owner: "vieles ergibt noch keinen Sinn")
+Decisions taken without the owner (reversible text/data): the shard canon (seven shards in chapters 3-9; echoes in chapters 1-2), "Veyra scattered, Elyon collects", Mira's partial reveal, Elyon staying with Veyra. Open for the owner:
+1. Names that are easy to confuse: Veyr/Veyra, Kael/Kaelen, Mira/Mirael (IDs stay; only `name` fields could change).
+2. Superboss and dungeon pairing follows list order, not theme (e.g. Sandkönig opens the volcano dungeon). ENDGAME.md lists both separately; re-pairing needs a decision.
+3. Companion arcs (Rovan's guilt, Lyra's family, Nia), Professorium's erased memory and the Nautilux (C-35) have only single lines.
+4. Six keepsake items (Kael, Eryn, Toren, Sela, Mirael, Professorium) have no use; ITEM_LAST_SHARD_001 is a collectible with no effect.
+5. The NG+ lore books hold the best backstory but are only found in New Game+.
+6. No multiple endings / Erinnerungsbruch scene (STORY_MASTER mentions several end states).

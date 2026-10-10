@@ -16,7 +16,7 @@
     "stack": 99
   },
   "ITEM_RIFT_SHARD_001": {
-    "name": "Weltenkernsplitter",
+    "name": "Weltenkernsplitter (Echo)",
     "type": "key",
     "stack": 99,
     "legacy_id": "rift_shard"
@@ -576,5 +576,54 @@
     },
     "price": 260,
     "stack": 99
+  },
+  "ITEM_SHARD_VAL_001": {
+    "name": "Splitter der Strömung",
+    "type": "key",
+    "stack": 1,
+    "unique": true,
+    "price": 0
+  },
+  "ITEM_SHARD_SOL_001": {
+    "name": "Splitter der Sonne",
+    "type": "key",
+    "stack": 1,
+    "unique": true,
+    "price": 0
+  },
+  "ITEM_SHARD_AQU_001": {
+    "name": "Splitter der Tiefe",
+    "type": "key",
+    "stack": 1,
+    "unique": true,
+    "price": 0
+  },
+  "ITEM_SHARD_FRO_001": {
+    "name": "Splitter des Frosts",
+    "type": "key",
+    "stack": 1,
+    "unique": true,
+    "price": 0
+  },
+  "ITEM_SHARD_IGN_001": {
+    "name": "Splitter der Glut",
+    "type": "key",
+    "stack": 1,
+    "unique": true,
+    "price": 0
+  },
+  "ITEM_SHARD_NOC_001": {
+    "name": "Splitter der Erinnerung",
+    "type": "key",
+    "stack": 1,
+    "unique": true,
+    "price": 0
+  },
+  "ITEM_SHARD_AST_001": {
+    "name": "Splitter der Sterne",
+    "type": "key",
+    "stack": 1,
+    "unique": true,
+    "price": 0
   }
 }

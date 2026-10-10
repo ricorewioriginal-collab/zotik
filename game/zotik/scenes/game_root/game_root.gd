@@ -104,7 +104,7 @@ func _ready() -> void:
 	world.add_child(player)
 	beacon = ObjectiveBeacon.new()
 	world.add_child(beacon)
-	EventBus.flag_changed.connect(func(_f, _v): update_beacon.call_deferred())
+	EventBus.flag_changed.connect(func(_f, _v): _update_objective.call_deferred())
 	EventBus.enemy_defeated.connect(func(_e): update_beacon.call_deferred())
 	EventBus.chest_opened.connect(func(_c): update_beacon.call_deferred())
 	player.interactable_changed.connect(hud.set_prompt)
@@ -176,6 +176,8 @@ func update_beacon() -> void:
 		return
 	beacon_target = ""
 	var target := Navigator.step_target(Navigator.guided_quest())
+	if target.is_empty():
+		target = Navigator.world_target()
 	var pos = null
 	if not target.is_empty():
 		if target.area == area.area_id:
@@ -255,6 +257,8 @@ func _update_objective() -> void:
 	var lines := []
 	for id in Quests.active_quests():
 		lines.append(("» " if Content.get_entry("quests", id).get("type") == "main" else "• ") + Quests.objective(id))
+	if Navigator.world_objective() != "":
+		lines.insert(0, "» " + Navigator.world_objective())
 	hud.set_objective("\n".join(lines))
 	update_beacon.call_deferred()
 

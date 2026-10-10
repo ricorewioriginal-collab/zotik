@@ -47,8 +47,16 @@
         "Der große Riss flackert. Bilder fremder Welten ziehen vorbei."
       ],
       [
+        "BOSS_ORUN_001",
+        "Ich habe diesen Riss gehütet, seit der Kern zerbrach. Du hörst ihn, Weltenhörer – darum durfte ich dich nicht gehen lassen, ohne dich zu prüfen."
+      ],
+      [
         "NARRATOR",
         "Im Licht liegt eine Klinge, die auf Zotik zu antworten scheint."
+      ],
+      [
+        "BOSS_ORUN_001",
+        "Ein Echo des Kerns steckt in ihr. Es wird dich zu den Splittern führen, die verstreut wurden. Finde sie, bevor es ein anderer tut."
       ]
     ]
   },
@@ -64,8 +72,12 @@
         "Das ist also der Resonanzträger. Dann hat es begonnen."
       ],
       [
-        "NARRATOR",
-        "Fortsetzung folgt."
+        "NPC_LYRA_001",
+        "Der Weltenstein im Dorf führt zu den anderen Welten. Meine Familie hat in Elaris geforscht – dort fangen wir an, Zotik."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann zeig mir den Weg."
       ]
     ],
     "effects": [
@@ -191,6 +203,10 @@
       [
         "NPC_LYRA_001",
         "Die Risse wurden auch hier gemeldet. Unter der Stadt, in den alten Kanälen."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Mara hat uns einen Brief an die Gilde mitgegeben. Wir sollen uns bei Veyr melden."
       ]
     ],
     "effects": [
@@ -209,7 +225,7 @@
       ],
       [
         "NPC_LYRA_001",
-        "Ein Splitter des Weltenkerns – genau wie bei der Wurzelkönigin!"
+        "Ein Splitter des Weltenkerns! Die Wurzelkönigin trug nur sein Echo – das hier ist der erste echte."
       ],
       [
         "CHAR_ZOTIK",
@@ -227,6 +243,10 @@
       [
         "NPC_LYRA_001",
         "Jemand hat diese Splitter verteilt. Mit Absicht."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Wenn die Aufzeichnungen meiner Familie stimmen, gibt es sieben. Der erste lag hier."
       ],
       [
         "NPC_NIA_001",
@@ -309,7 +329,7 @@
       ],
       [
         "NPC_LYRA_001",
-        "Drei Splitter, drei Welten. Jemand verteilt sie – und wir folgen der Spur."
+        "Zwei Splitter, zwei Welten. Jemand hat sie verstreut – und wir folgen der Spur."
       ],
       [
         "NPC_NIA_001",
@@ -375,7 +395,7 @@
       ],
       [
         "NPC_LYRA_001",
-        "Der vierte Splitter – er sitzt in ihrem Kern und treibt die Strudel an."
+        "Der dritte Splitter – er sitzt in ihrem Kern und treibt die Strudel an."
       ],
       [
         "CHAR_ZOTIK",
@@ -392,7 +412,7 @@
       ],
       [
         "NPC_LYRA_001",
-        "Vier Splitter, vier Welten. Wer sie verteilt, kennt jede Strömung."
+        "Drei Splitter, drei Welten. Wer sie verstreut hat, kennt jede Strömung."
       ],
       [
         "NPC_NIA_001",
@@ -838,6 +858,10 @@
         "Dann lass uns zeigen, wie man bewahrt, ohne zu verschmelzen."
       ],
       [
+        "NPC_LYRA_001",
+        "Der Kern bleibt ruhig, solange die Splitter getrennt bleiben – und doch miteinander verbunden."
+      ],
+      [
         "NPC_NIA_001",
         "Gehen wir nach Hause. Alle Heime, die wir haben."
       ]
@@ -858,8 +882,12 @@
         "Der Boden gibt nach, und aus dem Riss steigt Der erste Wächter."
       ],
       [
+        "NPC_LYRA_001",
+        "Der Wächter stand hier schon, bevor der Kern zerbrach."
+      ],
+      [
         "CHAR_ZOTIK",
-        "Ein letztes Mal, und diesmal nur für uns."
+        "Dann zeigen wir ihm, was wir seitdem gelernt haben."
       ]
     ]
   },
@@ -871,8 +899,12 @@
         "Der Boden gibt nach, und aus dem Riss steigt Die Wurzel ohne Ende."
       ],
       [
+        "NPC_LYRA_001",
+        "Die Wurzel ohne Ende – ein Echo der Wurzelkönigin, nur größer."
+      ],
+      [
         "CHAR_ZOTIK",
-        "Ein letztes Mal, und diesmal nur für uns."
+        "Diesmal ohne zu vergessen."
       ]
     ]
   },
@@ -884,8 +916,12 @@
         "Der Boden gibt nach, und aus dem Riss steigt Der Goldene Koloss."
       ],
       [
+        "NPC_LYRA_001",
+        "So viel Gold, und er kann nichts davon behalten."
+      ],
+      [
         "CHAR_ZOTIK",
-        "Ein letztes Mal, und diesmal nur für uns."
+        "Er kann es gern abgeben."
       ]
     ]
   },
@@ -897,8 +933,12 @@
         "Der Boden gibt nach, und aus dem Riss steigt Der Sandkönig."
       ],
       [
+        "NPC_LYRA_001",
+        "Kharos' Erinnerung, ohne Ketten – der Sandkönig."
+      ],
+      [
         "CHAR_ZOTIK",
-        "Ein letztes Mal, und diesmal nur für uns."
+        "Dann sorgen wir dafür, dass sie diesmal ruht."
       ]
     ]
   },
@@ -910,8 +950,12 @@
         "Der Boden gibt nach, und aus dem Riss steigt Der Abyss."
       ],
       [
+        "NPC_LYRA_001",
+        "Die Tiefe selbst hat sich erhoben – Neryx' Strudel, geboren aus dem Abgrund."
+      ],
+      [
         "CHAR_ZOTIK",
-        "Ein letztes Mal, und diesmal nur für uns."
+        "Haltet euch fest."
       ]
     ]
   },
@@ -923,8 +967,12 @@
         "Der Boden gibt nach, und aus dem Riss steigt Das Frostherz."
       ],
       [
+        "NPC_LYRA_001",
+        "Avarns Winter, der nie getaut ist."
+      ],
+      [
         "CHAR_ZOTIK",
-        "Ein letztes Mal, und diesmal nur für uns."
+        "Dann bringen wir den Frühling."
       ]
     ]
   },
@@ -936,8 +984,12 @@
         "Der Boden gibt nach, und aus dem Riss steigt Der Feuerkern."
       ],
       [
+        "NPC_LYRA_001",
+        "Magmarions Glut, ohne den Berg, der sie hält."
+      ],
+      [
         "CHAR_ZOTIK",
-        "Ein letztes Mal, und diesmal nur für uns."
+        "Sie hat lange genug gebrannt."
       ]
     ]
   },
@@ -947,6 +999,10 @@
       [
         "NARRATOR",
         "Der Weltenriss. Hier laufen die Linien aller Welten zusammen – und manches, das sie zurückgelassen haben, wartet noch."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der Kern hat sich beruhigt, aber der Riss ist geblieben. Er hält die Erinnerung an alles, was die Welten zurückgelassen haben."
       ],
       [
         "NPC_LYRA_001",

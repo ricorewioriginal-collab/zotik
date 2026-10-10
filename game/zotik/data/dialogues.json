@@ -56,6 +56,14 @@
     "lines": [
       [
         "NPC_MIRA_001",
+        "Ich schulde dir eine Antwort. Meine Familie hütet seit Generationen den Mondwald, weil wir wussten, dass dort etwas schläft. Ich wusste nur nicht, dass du derjenige bist, der es weckt."
+      ],
+      [
+        "NPC_MIRA_001",
+        "Der Weltenstein im Dorf trägt dich dorthin, wo die Risse herkommen. Lyra weiß, wie man ihn öffnet."
+      ],
+      [
+        "NPC_MIRA_001",
         "Was auch immer da draußen wartet – Lunaris bleibt dein Zuhause."
       ]
     ]
@@ -270,6 +278,10 @@
       [
         "NPC_LYRA_001",
         "Die Risse sind kein Zufall. Meine Familie erforscht den Weltenkern seit Jahren."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der Weltenstein am Dorfplatz wartet auf dich. Hinter ihm liegt Elaris, die erste Welt auf unserer Spur."
       ]
     ]
   },
@@ -346,7 +358,7 @@
       ],
       [
         "NPC_MARA_001",
-        "Eure Reise ist noch lange nicht zu Ende."
+        "Die Gilde in Valdoria sammelt Berichte über jeden Riss, den man findet. Nehmt den Weltenstein – wenn jemand weiß, wo die Splitter liegen, dann Veyr."
       ]
     ]
   },
@@ -546,7 +558,15 @@
       ],
       [
         "NPC_VEYR_001",
+        "In unseren Akten taucht ein Name auf, immer wieder durchgestrichen: Elyon. Wer das ist, weiß ich nicht."
+      ],
+      [
+        "NPC_VEYR_001",
         "Die Gilde steht in eurer Schuld. Valdoria schläft heute ruhiger."
+      ],
+      [
+        "NPC_VEYR_001",
+        "Wollt ihr der Spur folgen: Solmera. Karawanenführer berichten von einem Koloss in den Dünen, der bei jedem Sturm lauter wird."
       ]
     ]
   },
@@ -685,7 +705,7 @@
       ],
       [
         "NPC_NURI_001",
-        "Der Splitter, den ihr tragt … Er ruft nach den nächsten Welten. Reist weiter, Zotik."
+        "Der Splitter, den ihr tragt, zieht euch weiter. Unter dem Meer, in Aqualis, soll ein Archiv liegen, das alles verzeichnet – dort wartet das Nächste. Reist weiter, Zotik."
       ]
     ]
   },
@@ -810,7 +830,7 @@
       ],
       [
         "NPC_MIRAEL_001",
-        "Der Splitter, den ihr tragt … Er ruft nach der nächsten Welt. Reist weiter, Zotik."
+        "Aus dem Norden, aus Frosthain, kommen seit Wochen Boten, die nicht aufhören zu frieren – die Zeit steht dort still. Das klingt nach eurem nächsten Splitter. Reist weiter, Zotik."
       ]
     ]
   },
@@ -892,7 +912,7 @@
       ],
       [
         "NPC_KAELEN_001",
-        "Der Splitter, den ihr tragt … Er ruft nach weiteren Welten. Reist weiter, Zotik."
+        "Im Süden brennt ein Berg zu heiß: Ignara. Die Schmiede dort rufen nach Hilfe. Wenn ein Splitter dort steckt, findet ihr ihn. Reist weiter, Zotik."
       ]
     ]
   },
@@ -1017,7 +1037,7 @@
       ],
       [
         "NPC_BRENNA_001",
-        "Der Splitter, den ihr tragt … Er ruft nach weiteren Welten. Reist weiter, Zotik."
+        "Wer weiter will, nimmt den Weltenstein nach Noctaris – die Stadt, die sich erinnert, hat ihre Erinnerungen verloren. Dort steckt der Nächste. Reist weiter, Zotik."
       ]
     ]
   },
@@ -1142,7 +1162,7 @@
       ],
       [
         "NPC_ERYN_001",
-        "Der Splitter, den ihr tragt, zeigt zwei Versionen dieser Welt. Zwei Seiten derselben Wahrheit. Geht weiter, Zotik – und glaubt nicht jeder Erinnerung."
+        "Der Splitter, den ihr tragt, zeigt zwei Versionen dieser Welt. Die andere Seite liegt hoch über den Wolken: Astralis. Geht weiter, Zotik – und glaubt nicht jeder Erinnerung."
       ]
     ]
   },
@@ -1362,7 +1382,11 @@
       ],
       [
         "NPC_VEYRA_001",
-        "Ihr habt getan, was wir nicht konnten. Die Welt bleibt frei für euch – geht, wohin ihr wollt. Und wenn ihr einen neuen Riss seht, ihr wisst, wo ihr mich findet."
+        "Elyon bleibt bei mir in Elyndra. Er hat verstanden, dass Bewahren nicht Verschmelzen heißt."
+      ],
+      [
+        "NPC_VEYRA_001",
+        "Ihr habt getan, was wir nicht konnten. Die Welt bleibt frei für euch – geht, wohin ihr wollt. Ein Riss ist geblieben, den der Kern selbst offen hält: Er öffnet sich über den Weltenstein. Dort warten die Wächter der Anfänge."
       ]
     ]
   },
