@@ -129,7 +129,10 @@ func test_defeat_completes_the_chapter() -> void:
 	check(GameState.has_flag("FLAG_ELY_CHAPTER_COMPLETE"), "chapter flag")
 	check(GameState.has_flag("FLAG_GAME_COMPLETE"), "story complete")
 	eq(GameState.currency, lun + 900, "reward")
-	eq(Dialogue.select_for_npc("NPC_VEYRA_001"), "DLG_VEYRA_AFTER_001", "after dialogue")
+	eq(Dialogue.select_for_npc("NPC_VEYRA_001"), "DLG_VEYRA_ENDING_ASK_001", "after the report Veyra asks for the ending until it is chosen (W20)")
+	GameState.set_flag("FLAG_ENDING_CHOSEN")
+	GameState.set_flag("FLAG_ENDING_SEPARATE")
+	eq(Dialogue.select_for_npc("NPC_VEYRA_001"), "DLG_VEYRA_AFTER_SEPARATE_001", "then she follows the chosen ending")
 
 
 func test_boss_stays_defeated_after_reload() -> void:

@@ -424,5 +424,17 @@
   },
   "FLAG_END_D7_BOSS_DEFEATED": {
     "desc": "Dungeon-Boss Der Namenlose besiegt"
+  },
+  "FLAG_ENDING_CHOSEN": {
+    "desc": "Das Ende der Hauptgeschichte wurde gewählt"
+  },
+  "FLAG_ENDING_SEPARATE": {
+    "desc": "Ende: Getrennt bewahren"
+  },
+  "FLAG_ENDING_UNITE": {
+    "desc": "Ende: Wieder verbinden"
+  },
+  "FLAG_ENDING_WEAVE": {
+    "desc": "Ende: Neu knüpfen"
   }
 }

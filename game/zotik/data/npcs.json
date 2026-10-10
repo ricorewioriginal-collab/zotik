@@ -1291,6 +1291,46 @@
           {
             "type": "flag",
             "id": "FLAG_ELY_CHAPTER_COMPLETE"
+          },
+          {
+            "type": "not_flag",
+            "id": "FLAG_ENDING_CHOSEN"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_ENDING_ASK_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ENDING_SEPARATE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_AFTER_SEPARATE_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ENDING_UNITE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_AFTER_UNITE_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ENDING_WEAVE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_AFTER_WEAVE_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ELY_CHAPTER_COMPLETE"
           }
         ],
         "dialogue": "DLG_VEYRA_AFTER_001"

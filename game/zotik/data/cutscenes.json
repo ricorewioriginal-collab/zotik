@@ -862,6 +862,30 @@
         "Elyon sinkt auf die Knie. Der Weltenkern über ihm pulsiert ruhig, und die Splitter in Zotiks Tasche antworten mit einem leisen Klang – sieben Töne, ein Akkord."
       ],
       [
+        "NARRATOR",
+        "Dann bricht Elyons Erinnerung auf, und alle sehen sie: den Tag, an dem der Kern geteilt wurde."
+      ],
+      [
+        "BOSS_ELYON_001",
+        "Wir waren acht. Veyra, das Professorium, Lyras Mutter, ich – und die Eltern eines Kindes, das den Kern hören konnte."
+      ],
+      [
+        "NARRATOR",
+        "Ein Kind, das die Hände auf den Kern legt. Ein Licht. Ein Schrei, der Welten zerreißt."
+      ],
+      [
+        "BOSS_ELYON_001",
+        "Dich, Zotik. Der Kern antwortete dir, und aus dem Teilen wurde der Bruch. Veyra versiegelte deinen Klang, um dich zu schützen. Ich wollte alles zurückholen, was wir verloren hatten."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Meine Träume. Das Flüstern. Das war kein Fremder – das war ich selbst."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Meine Familie war dabei. Darum hat mir der Weltenstein die Tür geöffnet."
+      ],
+      [
         "BOSS_ELYON_001",
         "Ich wollte nur, dass nichts verloren geht."
       ],
@@ -1023,6 +1047,65 @@
       [
         "NPC_NIA_001",
         "Dann prüfen wir uns eben."
+      ]
+    ]
+  },
+  "CUT_ENDING_SEPARATE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYRA_001",
+        "Dann bleiben die Welten, wie sie sind: getrennt, aber nicht mehr blind füreinander. Ich bewache die Splitter weiter."
+      ],
+      [
+        "NARRATOR",
+        "Die sieben Splitter ruhen wieder an ihren Orten. Die Wächter der Anfänge schlafen, und der Weltenstein bleibt offen für alle, die reisen wollen."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann reisen wir weiter."
+      ]
+    ]
+  },
+  "CUT_ENDING_UNITE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_ELYON_001",
+        "Dann lassen wir sie wachsen – langsam, Welt für Welt."
+      ],
+      [
+        "NARRATOR",
+        "Die Splitter fügen sich in den Kern. Die Grenzen zwischen den Welten werden dünn, und an manchen Orten stehen plötzlich Türen, wo keine waren."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Es wird Jahre dauern. Aber niemand muss mehr verloren gehen."
+      ],
+      [
+        "NPC_VEYRA_001",
+        "Ich hoffe, ihr habt recht."
+      ]
+    ]
+  },
+  "CUT_ENDING_WEAVE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "CHAR_ZOTIK",
+        "Wir verbinden sie nicht. Wir hören ihnen zu."
+      ],
+      [
+        "NARRATOR",
+        "Zotiks Klang, so lange versiegelt, öffnet sich. Die sieben Töne antworten einer nach dem anderen, und zwischen den Welten spannen sich dünne Fäden aus Licht."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Ein Weltenhörer, der die Fäden hält. Das hat der Kern all die Jahre gebraucht."
+      ],
+      [
+        "NPC_VEYRA_001",
+        "Und das gibt dem Wort Bewahren einen neuen Sinn."
       ]
     ]
   }
