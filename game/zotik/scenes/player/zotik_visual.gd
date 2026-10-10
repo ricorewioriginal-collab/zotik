@@ -29,21 +29,41 @@ func _ready() -> void:
 	_bone_part("Head", "PLACEHOLDER_cheek_r", _sphere(0.085), Vector3(-0.13, 1.61, 0.11), Vector3(0, 0, -30), Vector3(1.3, 0.8, 0.9))
 	_bone_part("Head", "PLACEHOLDER_muzzle", _sphere(0.075), Vector3(0, 1.62, 0.2), Vector3.ZERO, Vector3(1.0, 0.75, 1.35))
 	_bone_part("Head", "PLACEHOLDER_nose", _sphere(0.03), Vector3(0, 1.645, 0.3))
-	_bone_part("Head", "PLACEHOLDER_ear_l", _cone(0.09, 0.29), Vector3(0.13, 1.93, -0.01), Vector3(0, 0, -16))
-	_bone_part("Head", "PLACEHOLDER_ear_r", _cone(0.09, 0.29), Vector3(-0.13, 1.93, -0.01), Vector3(0, 0, 16))
-	_bone_part("Head", "PLACEHOLDER_ear_inner_l", _cone(0.048, 0.18), Vector3(0.13, 1.91, 0.028), Vector3(0, 0, -16))
-	_bone_part("Head", "PLACEHOLDER_ear_inner_r", _cone(0.048, 0.18), Vector3(-0.13, 1.91, 0.028), Vector3(0, 0, 16))
+	_bone_part("Head", "PLACEHOLDER_ear_l", _cone(0.1, 0.36), Vector3(0.13, 1.95, -0.01), Vector3(0, 0, -16))
+	_bone_part("Head", "PLACEHOLDER_ear_r", _cone(0.1, 0.36), Vector3(-0.13, 1.95, -0.01), Vector3(0, 0, 16))
+	_bone_part("Head", "PLACEHOLDER_ear_inner_l", _cone(0.055, 0.24), Vector3(0.13, 1.93, 0.03), Vector3(0, 0, -16))
+	_bone_part("Head", "PLACEHOLDER_ear_inner_r", _cone(0.055, 0.24), Vector3(-0.13, 1.93, 0.03), Vector3(0, 0, 16))
 	_bone_part("Head", "PLACEHOLDER_eye_l", _sphere(0.042), Vector3(0.085, 1.72, 0.198), Vector3.ZERO, Vector3(0.8, 1.0, 0.6))
 	_bone_part("Head", "PLACEHOLDER_eye_r", _sphere(0.042), Vector3(-0.085, 1.72, 0.198), Vector3.ZERO, Vector3(0.8, 1.0, 0.6))
 	_bone_part("Head", "PLACEHOLDER_pupil_l", _sphere(0.021), Vector3(0.085, 1.72, 0.222))
 	_bone_part("Head", "PLACEHOLDER_pupil_r", _sphere(0.021), Vector3(-0.085, 1.72, 0.222))
 	_bone_part("Head", "PLACEHOLDER_hair", _cone(0.13, 0.16), Vector3(0, 1.85, 0.07), Vector3(35, 0, 0))
+	# spiky fur: crest, back tufts and cheek fluff (like the master sheet)
+	var tufts := [[Vector3(0, 1.9, 0.03), Vector3(-15, 0, 0), 0.17], [Vector3(0.07, 1.89, 0.05), Vector3(-10, 0, -22), 0.15], [Vector3(-0.07, 1.89, 0.05), Vector3(-10, 0, 22), 0.15],
+		[Vector3(0.14, 1.85, 0.0), Vector3(0, 0, -48), 0.15], [Vector3(-0.14, 1.85, 0.0), Vector3(0, 0, 48), 0.15], [Vector3(0, 1.83, -0.1), Vector3(-50, 0, 0), 0.15],
+		[Vector3(0.19, 1.63, 0.08), Vector3(0, 0, -75), 0.12], [Vector3(-0.19, 1.63, 0.08), Vector3(0, 0, 75), 0.12], [Vector3(0.17, 1.57, 0.1), Vector3(0, 0, -105), 0.1], [Vector3(-0.17, 1.57, 0.1), Vector3(0, 0, 105), 0.1]]
+	for k in tufts.size():
+		_bone_part("Head", "PLACEHOLDER_tuft_%d" % k, _cone(0.06, tufts[k][2] * 1.4), tufts[k][0], tufts[k][1])
+	_bone_part("Head", "PLACEHOLDER_brow_l", _box(Vector3(0.075, 0.014, 0.02)), Vector3(0.085, 1.775, 0.2), Vector3(0, 0, -12))
+	_bone_part("Head", "PLACEHOLDER_brow_r", _box(Vector3(0.075, 0.014, 0.02)), Vector3(-0.085, 1.775, 0.2), Vector3(0, 0, 12))
+	_bone_part("Head", "PLACEHOLDER_glint_l", _sphere(0.012), Vector3(0.1, 1.735, 0.232))
+	_bone_part("Head", "PLACEHOLDER_glint_r", _sphere(0.012), Vector3(-0.07, 1.735, 0.232))
 	_bone_part("neck_01", "PLACEHOLDER_scarf", _torus(0.1, 0.18), Vector3(0, 1.44, 0.02), Vector3(8, 0, 0), Vector3(1.0, 1.15, 1.0))
+	_bone_part("neck_01", "PLACEHOLDER_scarf_fold", _torus(0.09, 0.2), Vector3(0, 1.4, 0.03), Vector3(-10, 0, 0), Vector3(1.0, 1.0, 1.0))
+	_bone_part("spine_03", "PLACEHOLDER_scarf_end2", _box(Vector3(0.07, 0.2, 0.03)), Vector3(-0.1, 1.34, 0.15), Vector3(-10, 0, 14))
+	_bone_part("spine_03", "PLACEHOLDER_strap", _box(Vector3(0.035, 0.5, 0.02)), Vector3(0.0, 1.2, 0.14), Vector3(0, 0, 38))
+	_bone_part("pelvis", "PLACEHOLDER_buckle", _box(Vector3(0.05, 0.05, 0.02)), Vector3(0, 1.0, 0.175))
 	_bone_part("spine_03", "PLACEHOLDER_scarf_end", _box(Vector3(0.08, 0.26, 0.03)), Vector3(0.09, 1.33, 0.15), Vector3(-12, 0, -12))
 	_bone_part("neck_01", "PLACEHOLDER_chest", _sphere(0.07), Vector3(0, 1.54, 0.15), Vector3.ZERO, Vector3(1.2, 0.9, 0.6))
 	_bone_part("pelvis", "PLACEHOLDER_outfit", _torus(0.15, 0.175), Vector3(0, 1.0, 0))
-	_bone_part("pelvis", "PLACEHOLDER_tail", _capsule(0.12, 0.62), Vector3(0, 1.0, -0.26), Vector3(-58, 0, 0))
-	_bone_part("pelvis", "PLACEHOLDER_tail_tip", _sphere(0.11), Vector3(0, 1.2, -0.48))
+	# bushy tail: root sphere, a fat curved body and a white tip, held up behind him
+	_bone_part("pelvis", "PLACEHOLDER_tail_root", _sphere(0.12), Vector3(0, 1.0, -0.17))
+	_bone_part("pelvis", "PLACEHOLDER_tail", _capsule(0.15, 0.5), Vector3(0, 1.12, -0.33), Vector3(-38, 0, 0))
+	_bone_part("pelvis", "PLACEHOLDER_tail_mid", _sphere(0.19), Vector3(0, 1.28, -0.43), Vector3.ZERO, Vector3(1.0, 1.25, 1.0))
+	_bone_part("pelvis", "PLACEHOLDER_tail_tip", _sphere(0.13), Vector3(0, 1.47, -0.46), Vector3.ZERO, Vector3(1.0, 1.4, 1.0))
+	for k in 6:
+		var a := k * 1.05
+		_bone_part("pelvis", "PLACEHOLDER_tail_tuft_%d" % k, _cone(0.05, 0.17), Vector3(cos(a) * 0.17, 1.2 + k * 0.045, -0.4 - sin(a) * 0.1), Vector3(-25, 0, -cos(a) * 60))
 	_bone_part("pelvis", "PLACEHOLDER_shoulder_bag", _box(Vector3(0.11, 0.13, 0.06)), Vector3(0.19, 0.95, 0.02))
 	# blade in the right hand (bone space, same grip as CharacterRig weapons)
 	var sword: Array = CharacterRig.HUMAN_WEAPONS.sword
@@ -69,6 +89,20 @@ func apply_customization() -> void:
 	var outfit := Customization.color("outfit")
 	for p in ["PLACEHOLDER_body", "PLACEHOLDER_head", "PLACEHOLDER_ear_l", "PLACEHOLDER_ear_r", "PLACEHOLDER_tail", "PLACEHOLDER_hair", "PLACEHOLDER_cheek_l", "PLACEHOLDER_cheek_r"]:
 		_color(p, fur)
+	for k in 10:
+		_color("PLACEHOLDER_tuft_%d" % k, fur if k < 6 else Color(0.98, 0.92, 0.84))
+	for k in 6:
+		_color("PLACEHOLDER_tail_tuft_%d" % k, fur)
+	_color("PLACEHOLDER_tail_root", fur)
+	_color("PLACEHOLDER_tail_mid", fur)
+	_color("PLACEHOLDER_brow_l", fur.darkened(0.45))
+	_color("PLACEHOLDER_brow_r", fur.darkened(0.45))
+	_color("PLACEHOLDER_glint_l", Color.WHITE)
+	_color("PLACEHOLDER_glint_r", Color.WHITE)
+	_color("PLACEHOLDER_scarf_fold", Customization.color("scarf").darkened(0.15))
+	_color("PLACEHOLDER_scarf_end2", Customization.color("scarf"))
+	_color("PLACEHOLDER_strap", Color(0.35, 0.22, 0.12))
+	_color("PLACEHOLDER_buckle", Color(0.85, 0.7, 0.3))
 	for p in ["PLACEHOLDER_muzzle", "PLACEHOLDER_chest", "PLACEHOLDER_tail_tip", "PLACEHOLDER_ear_inner_l", "PLACEHOLDER_ear_inner_r"]:
 		_color(p, Color(0.98, 0.92, 0.84))
 	_color("PLACEHOLDER_nose", Color(0.15, 0.1, 0.08))

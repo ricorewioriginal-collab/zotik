@@ -784,3 +784,7 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 ## W02 – Web weight after Phase 6
 - Live check after #20: the web `index.pck` grew from 35 MB to 49 MB (served size). Cause: the new Quaternius textures imported lossless.
 - Fix: textures of the three Quaternius kits and all albedo textures import lossy (WebP, quality 0.75). The new textures go from 5.7 MB to 0.5 MB, the old albedo set from 9.7 MB to 6.3 MB (imported size). Look unchanged in screenshots.
+
+## R03 (cont.) – Zotik closer to the master sheet (owner choice "Weg 2")
+- Image-to-3D results from the owner (texture atlas / extruded sheet) are not usable as models; used as reference only.
+- `ZotikVisual`: bushy upright tail (root, body, mid, white tip, fur tufts), larger ears with larger inner ears, ten fur tufts (crest, back, cheeks), brows, eye glints, scarf fold and second scarf end, strap and belt buckle. Character creator camera moved closer. Still primitive placeholder parts, not final art.
