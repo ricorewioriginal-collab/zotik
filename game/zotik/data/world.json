@@ -86,6 +86,16 @@
       "area": "AREA_AST_RUINS",
       "name": "Weltenanker in den Sternenruinen",
       "heals": true
+    },
+    "SAVEPOINT_ELY_LAYERS_001": {
+      "area": "AREA_ELY_LAYERS",
+      "name": "Weltenanker in den Realitätsebenen",
+      "heals": true
+    },
+    "SAVEPOINT_ELY_VOID_001": {
+      "area": "AREA_ELY_VOID",
+      "name": "Weltenanker im Weltenspalt",
+      "heals": true
     }
   },
   "uniques": {

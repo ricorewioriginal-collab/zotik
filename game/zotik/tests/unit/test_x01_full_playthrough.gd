@@ -505,6 +505,52 @@ func _chapter_nine() -> void:
 	eq(Conditions.quest_state(S), "COMPLETED", "Astralis side quest completed")
 
 
+func _chapter_ten() -> void:
+	const M := "QUEST_MAIN_ELY_001"
+	const S := "QUEST_SIDE_ELY_001"
+	await _exit_to("AREA_AST_PORT")
+	await _travel("TRAVEL_AST_001", "WORLD_ELYNDRA", "CUT_ELY_ARRIVAL_001")
+	eq(game.area.area_id, "AREA_ELY_CITY", "in Elyndra")
+	await _exit_to("AREA_ELY_QUARTER")
+	await _talk("NPC_KAEL_001")
+	eq(Conditions.quest_step(S), 0, "Elyndra side quest started")
+	game.shop_menu.close_menu()
+	await _exit_to("AREA_ELY_CITY")
+	await _talk("NPC_VEYRA_001")
+	eq(Conditions.quest_step(M), 1, "find the void")
+	await _exit_to("AREA_ELY_LAYERS")
+	for id in ["SPAWN_ELY_LAYERS_SPINNE_1", "SPAWN_ELY_LAYERS_SPINNE_2", "SPAWN_ELY_LAYERS_KRIEGER_1", "SPAWN_ELY_LAYERS_KRIEGER_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_ELY_001"].interact(game.player)
+	await _use_savepoint("SAVEPOINT_ELY_LAYERS_001", 2)
+	await _boss_intro("TRIGGER_ELY_VOID", "CUT_ELY_VOID_001")
+	await _exit_to("AREA_ELY_VOID")
+	eq(Conditions.quest_step(M), 2, "memory puzzle next")
+	for id in ["SPAWN_ELY_VOID_SPINNE_1", "SPAWN_ELY_VOID_SPINNE_2", "SPAWN_ELY_VOID_KRIEGER_1", "SPAWN_ELY_VOID_KRIEGER_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_ELY_002"].interact(game.player)
+	var node: PuzzleNode = game.area.entities["PUZ_ELY_ECHO_001"]
+	for i in [4, 1, 5, 0, 3, 2]:
+		node.parts[i].interact(game.player)
+	eq(Conditions.quest_step(M), 3, "Tempelwächter next")
+	await _exit_to("AREA_ELY_GATE")
+	await _defeat_spawn("SPAWN_ELY_GATE_WAECHTER")
+	eq(Conditions.quest_step(M), 4, "Hüter next")
+	await _exit_to("AREA_ELY_CORE")
+	await _boss_intro("TRIGGER_ELY_ELYON_INTRO", "CUT_ELY_ELYON_001")
+	await _defeat_spawn("SPAWN_ELY_CORE_ELYON")
+	eq(Dialogue.active_id, "CUT_ELY_ELYON_DEFEAT_001", "defeat scene")
+	await finish_dialogues()
+	await frames(2)
+	await physics_frames(3)
+	eq(game.area.area_id, "AREA_ELY_CITY", "back in Elyndra")
+	await _talk("NPC_VEYRA_001")
+	eq(Conditions.quest_state(M), "COMPLETED", "chapter 10 completed")
+	await _exit_to("AREA_ELY_QUARTER")
+	await _talk("NPC_KAEL_001")
+	eq(Conditions.quest_state(S), "COMPLETED", "Elyndra side quest completed")
+
+
 ## Saved state minus play_time, which keeps counting once the game runs.
 func _state_without_clock() -> String:
 	var d := GameState.to_dict()
@@ -527,7 +573,8 @@ func test_full_playthrough() -> void:
 	await _chapter_seven()
 	await _chapter_eight()
 	await _chapter_nine()
-	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001", "QUEST_MAIN_FRO_001", "QUEST_SIDE_FRO_001", "QUEST_MAIN_IGN_001", "QUEST_SIDE_IGN_001", "QUEST_MAIN_NOC_001", "QUEST_SIDE_NOC_001", "QUEST_MAIN_AST_001", "QUEST_SIDE_AST_001"]:
+	await _chapter_ten()
+	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001", "QUEST_MAIN_FRO_001", "QUEST_SIDE_FRO_001", "QUEST_MAIN_IGN_001", "QUEST_SIDE_IGN_001", "QUEST_MAIN_NOC_001", "QUEST_SIDE_NOC_001", "QUEST_MAIN_AST_001", "QUEST_SIDE_AST_001", "QUEST_MAIN_ELY_001", "QUEST_SIDE_ELY_001"]:
 		eq(Conditions.quest_state(q), "COMPLETED", q)
 	eq(GameState.party.size(), 3, "full party at the end")
 	# Save -> fresh state -> load through the title
@@ -540,7 +587,7 @@ func test_full_playthrough() -> void:
 	await frames(3)
 	game = tree.current_scene
 	await physics_frames(2)
-	eq(game.area.area_id, "AREA_AST_GARDEN", "loaded where the game was saved")
+	eq(game.area.area_id, "AREA_ELY_QUARTER", "loaded where the game was saved")
 	eq(game.companions.size(), 3, "party restored")
 	eq(_state_without_clock(), expected, "state survives save/load")
 	SaveSystem.save_dir = "user://saves/"

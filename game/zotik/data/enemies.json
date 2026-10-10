@@ -1631,5 +1631,180 @@
         }
       }
     ]
+  },
+  "ENEMY_SPIEGELSPINNE_001": {
+    "name": "Spiegelspinne",
+    "region": "WORLD_ELYNDRA",
+    "description": "Eine Spinne aus Spiegelglas, die sich in jeder Wirklichkeit ein wenig anders zeigt.",
+    "hp": 140,
+    "attack": 28,
+    "defense": 8,
+    "move_speed": 4.0,
+    "aggro_range": 12.0,
+    "attack_range": 1.9,
+    "attack_cooldown": 1.2,
+    "currency": 32,
+    "drops": [
+      {
+        "id": "ITEM_ECHO_001",
+        "count": 1
+      }
+    ],
+    "break": 50,
+    "break_duration": 2.5
+  },
+  "ENEMY_ECHOKRIEGER_001": {
+    "name": "Echokrieger",
+    "region": "WORLD_ELYNDRA",
+    "description": "Das Echo eines Kriegers, der nie in dieser Welt kämpfte. Er schlägt zu, als wäre es das erste Mal – und das letzte.",
+    "hp": 185,
+    "attack": 29,
+    "defense": 14,
+    "move_speed": 3.2,
+    "aggro_range": 11.0,
+    "attack_range": 2.0,
+    "attack_cooldown": 1.4,
+    "currency": 34,
+    "drops": [
+      {
+        "id": "ITEM_ECHO_001",
+        "count": 2
+      }
+    ],
+    "break": 66,
+    "break_duration": 3.0
+  },
+  "ENEMY_WELTENWAECHTER_001": {
+    "name": "Weltenwächter",
+    "region": "WORLD_ELYNDRA",
+    "description": "Der Wächter am Tor zum Weltenkern. Ein starker Bruch lässt seine Panzerung kurz aufklaffen.",
+    "hp": 520,
+    "attack": 33,
+    "defense": 15,
+    "move_speed": 2.0,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 1.9,
+    "currency": 190,
+    "drops": [
+      {
+        "id": "ITEM_ECHO_001",
+        "count": 5
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 165,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELY_WAECHTER_DEFEATED"
+      }
+    ]
+  },
+  "BOSS_ELYON_001": {
+    "name": "Elyon",
+    "region": "WORLD_ELYNDRA",
+    "description": "Der frühere Projektleiter. Er will die geteilten Welten wieder verbinden – um jeden Preis.",
+    "hp": 1450,
+    "attack": 32,
+    "defense": 14,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.6,
+    "attack_cooldown": 1.7,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_ECHO_001",
+        "count": 10
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "break": 300,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_BOSS_ELY_ELYON_DEFEATED"
+      },
+      {
+        "type": "play_cutscene",
+        "id": "CUT_ELY_ELYON_DEFEAT_001"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Weltenschlag",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#80f0ff",
+        "hazard": {
+          "interval": 5.0,
+          "radius": 2.8,
+          "delay": 1.2,
+          "damage": 25
+        }
+      },
+      {
+        "from_hp_ratio": 0.7,
+        "name": "Erinnerungsbruch",
+        "attack_mult": 1.12,
+        "cooldown_mult": 0.92,
+        "summon": "ENEMY_ECHOKRIEGER_001",
+        "summon_count": 2,
+        "color": "#c0a0ff",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.5,
+          "width": 3.0,
+          "delay": 1.3,
+          "damage": 29
+        }
+      },
+      {
+        "from_hp_ratio": 0.45,
+        "name": "Teilung",
+        "attack_mult": 1.25,
+        "cooldown_mult": 0.82,
+        "summon": "ENEMY_SPIEGELSPINNE_001",
+        "summon_count": 2,
+        "color": "#ffa0e0",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.8,
+          "width": 3.4,
+          "delay": 1.2,
+          "damage": 32
+        }
+      },
+      {
+        "from_hp_ratio": 0.2,
+        "name": "Weltenkern",
+        "attack_mult": 1.4,
+        "cooldown_mult": 0.7,
+        "summon": "ENEMY_ECHOKRIEGER_001",
+        "summon_count": 1,
+        "color": "#ffffff",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.0,
+          "width": 3.8,
+          "delay": 1.0,
+          "damage": 35
+        }
+      }
+    ]
   }
 }

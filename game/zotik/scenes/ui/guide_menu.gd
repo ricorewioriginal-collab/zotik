@@ -5,7 +5,7 @@ extends MenuPanel
 const PAGES := [
 	["Worum geht es?", [
 		"Du bist Zotik, ein orangefarbenes Fuchswesen mit großem Schweif. Die Welten sind in Splitter zerbrochen. Du reist von Welt zu Welt, hilfst den Bewohnern, löst Rätsel, besiegst Wächter und findest Stück für Stück heraus, was den Weltenkern zerbrochen hat.",
-		"Die Reise geht durch neun Welten: Lunaris (Start), Elaris, Valdoria, Solmera, Aqualis, Frosthain, Ignara, Noctaris und Astralis. Jede Welt hat mehrere Orte, eigene Händler, Rätsel und einen großen Gegner am Ende.",
+		"Die Reise geht durch zehn Welten: Lunaris (Start), Elaris, Valdoria, Solmera, Aqualis, Frosthain, Ignara, Noctaris, Astralis und Elyndra. Jede Welt hat mehrere Orte, eigene Händler, Rätsel und einen großen Gegner am Ende.",
 		"Du kannst nichts falsch machen: Das Spiel zeigt dir rechts oben unter „Aktuelles Ziel“, was als Nächstes zu tun ist.",
 	]],
 	["Bewegen und Kamera", [

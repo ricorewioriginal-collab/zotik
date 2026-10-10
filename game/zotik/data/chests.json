@@ -234,5 +234,33 @@
       }
     ],
     "currency": 170
+  },
+  "CHEST_ELY_001": {
+    "area": "AREA_ELY_LAYERS",
+    "contents": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_WELTENWASSER_001",
+        "count": 3
+      }
+    ],
+    "currency": 150
+  },
+  "CHEST_ELY_002": {
+    "area": "AREA_ELY_VOID",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ECHO_001",
+        "count": 2
+      }
+    ],
+    "currency": 180
   }
 }

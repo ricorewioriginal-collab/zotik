@@ -22,6 +22,7 @@ The "Vorlage" is the concept art in `reference/concept_2026-10-02/` and `19_VISU
 | R07 (PASSED) | Ambient particles per world (fireflies, pollen, dust, bubbles) |
 | R08 (PASSED) | Chapter 8 (Noctaris, boss Erinnerungshüter) |
 | R09 (PASSED) | Chapter 9 (Astralis, boss Solyra) |
-| R10+ | Elyndra (finale material from `07_ENDGAME/ENDGAME.md`), each with full regression |
+| R10 (PASSED) | Chapter 10 (Elyndra, final boss Elyon) – the main story is complete |
+| R11+ | Endgame from `07_ENDGAME/ENDGAME.md` (new rift kinds, endgame dungeons, super bosses, Halle der 100, NG+), each with full regression |
 
 Rules: one milestone at a time, screenshots as evidence, full regression before every merge, placeholder art is never reported as final (CLAUDE.md rule 6).
