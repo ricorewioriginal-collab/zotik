@@ -769,3 +769,4 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - 40 CC0 models (trees, pines, bushes, rocks, grass, flowers, mushrooms, pebbles) in `assets/world/nature`; `Look.model()` falls back to this folder, `_place_h` scales to a height in metres.
 - Used for: placed "tree" props, the tree rows beyond the border (Lunaris, Elaris), and the flora scatter (grass, flowers, mushrooms as MultiMeshes; thinner on web/Android).
 - Source via itch.io download page (free, CC0); textures 512 px keep the build small.
+- Quaternius Fantasy Props MegaKit (41 models): `Look.build_dressing` puts barrels, crates, benches, stools, buckets and banners around houses (deterministic, small colliders, keeps roads/exits free); layouts can name these models in `decor` (metre scale, no hex scale). Valdoria gets no grass (cobbled streets), grass is smaller (0.2–0.4 m).

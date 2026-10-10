@@ -41,6 +41,7 @@ func build(id: String, factories: Dictionary) -> void:
 	Look.build_backdrop(self, area_id, layout, Vector2(size[0], size[1]))
 	Look.build_sky_features(self, area_id, layout, Vector2(size[0], size[1]))
 	Look.build_flora(self, area_id, layout, Vector2(size[0], size[1]))
+	Look.build_dressing(self, area_id, layout)
 	Look.build_decor(self, layout, area_id)
 	for p in layout.get("props", []):
 		var node := _prop("PLACEHOLDER_" + str(p.name), str(p.name), _v(p.pos), _v(p.size), Color.html(p.color), p.get("collision", true))

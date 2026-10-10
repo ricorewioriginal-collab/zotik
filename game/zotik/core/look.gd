@@ -39,6 +39,8 @@ const TREES := ["CommonTree_1", "CommonTree_2", "CommonTree_3", "CommonTree_4", 
 const MODEL_DIR := "res://assets/world/kaykit/%s.gltf"
 ## CC0 Quaternius Stylized Nature MegaKit (assets/world/nature), R04: trees, rocks, grass, flowers
 const NATURE_DIR := "res://assets/world/nature/%s.gltf"
+## CC0 Quaternius Fantasy Props MegaKit (assets/world/props): barrels, crates, benches, stalls, banners, torches
+const PROPS_DIR := "res://assets/world/props/%s.gltf"
 const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
@@ -260,11 +262,18 @@ static func build_prop(root: Node3D, prop_name: String, size: Vector3, color: Co
 
 
 ## Instance of a KayKit model plus its unscaled bounds (cached per name).
+## True for the metre-scaled kits (nature, props); the KayKit hex models use their own units.
+static func is_metric(name: String) -> bool:
+	return ResourceLoader.exists(NATURE_DIR % name) or ResourceLoader.exists(PROPS_DIR % name)
+
+
 static func _entry(name: String) -> Array:
 	if not _models.has(name):
 		var path := MODEL_DIR % name
 		if not ResourceLoader.exists(path):
 			path = NATURE_DIR % name
+		if not ResourceLoader.exists(path):
+			path = PROPS_DIR % name
 		if not ResourceLoader.exists(path):
 			_models[name] = [null, AABB()]
 		else:
@@ -424,7 +433,7 @@ static func build_decor(parent: Node3D, layout: Dictionary, area_id: String = ""
 		elif d.model == "path":
 			n = _path(root, pos, yaw, Vector2(float(d.size[0]), float(d.size[1])), str(d.get("tex", "cobble")), night)
 		else:
-			n = _place(root, d.model, pos, DECOR_SCALE * float(d.get("scale", 1.0)), yaw)
+			n = _place(root, d.model, pos, (1.0 if is_metric(d.model) else DECOR_SCALE) * float(d.get("scale", 1.0)), yaw)
 		if n and d.has("r"):
 			var body := StaticBody3D.new()
 			body.name = "DecorCollider"
@@ -482,6 +491,17 @@ static func _lantern(parent: Node3D, pos: Vector3, yaw: float) -> Node3D:
 	return n
 
 
+## Footprints of houses, roads and water (x/z rectangles) that dressing and flora keep clear.
+static func _blocked_rects(layout: Dictionary) -> Array[Rect2]:
+	var blocked: Array[Rect2] = []
+	for p in layout.get("props", []):
+		blocked.append(Rect2(float(p.pos[0]) - float(p.size[0]) / 2.0 - 0.8, float(p.pos[2]) - float(p.size[2]) / 2.0 - 0.8, float(p.size[0]) + 1.6, float(p.size[2]) + 1.6))
+	for d in layout.get("decor", []):
+		if d.has("size"):
+			blocked.append(Rect2(float(d.pos[0]) - float(d.size[0]) / 2.0 - 0.5, float(d.pos[2]) - float(d.size[1]) / 2.0 - 0.5, float(d.size[0]) + 1.0, float(d.size[1]) + 1.0))
+	return blocked
+
+
 ## Ground tint: night worlds get a cool blue cast so the grass sits in the moonlight.
 static func ground_tint(area_id: String, layout: Dictionary) -> Color:
 	var c := Color.html(layout.get("ground", "#555555"))
@@ -494,7 +514,6 @@ static func ground_tint(area_id: String, layout: Dictionary) -> Color:
 const FLORA := {
 	"WORLD_LUNARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group"], "mush": ["Mushroom_Common"], "tint": "#9fc8ff", "flower_tint": "#a8c8ff", "count": 2600, "flower_count": 260, "mush_count": 70, "glow": "#7fd8ff", "glow_count": 160},
 	"WORLD_ELARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group", "Clover_1"], "mush": ["Mushroom_Common", "Mushroom_Laetiporus"], "tint": "#e8ffd0", "flower_tint": "#ffffff", "count": 2600, "flower_count": 220, "mush_count": 50, "glow": "#ffe08a", "glow_count": 60},
-	"WORLD_VALDORIA": {"grass": ["Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group"], "mush": [], "tint": "#d8e8b8", "flower_tint": "#ffffff", "count": 700, "flower_count": 60, "mush_count": 0, "glow": "", "glow_count": 0},
 	"WORLD_SOLMERA": {"grass": ["Grass_Wispy_Short", "Plant_1"], "flowers": [], "mush": [], "tint": "#e8cc88", "flower_tint": "#ffffff", "count": 500, "flower_count": 0, "mush_count": 0, "glow": "", "glow_count": 0},
 }
 static var _flora_meshes := {}
@@ -532,19 +551,13 @@ static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, siz
 	var cfg: Dictionary = FLORA[world_of(area_id)]
 	var rng := RandomNumberGenerator.new()
 	rng.seed = hash(area_id + "flora")
-	# keep roads, houses, water and the exits free
-	var blocked: Array[Rect2] = []
-	for p in layout.get("props", []):
-		blocked.append(Rect2(float(p.pos[0]) - float(p.size[0]) / 2.0 - 0.8, float(p.pos[2]) - float(p.size[2]) / 2.0 - 0.8, float(p.size[0]) + 1.6, float(p.size[2]) + 1.6))
-	for d in layout.get("decor", []):
-		if d.has("size"):
-			blocked.append(Rect2(float(d.pos[0]) - float(d.size[0]) / 2.0 - 0.5, float(d.pos[2]) - float(d.size[1]) / 2.0 - 0.5, float(d.size[0]) + 1.0, float(d.size[1]) + 1.0))
+	var blocked := _blocked_rects(layout)
 	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
 	var root := Node3D.new()
 	root.name = "Flora"
 	parent.add_child(root)
 	var div := 3 if low_end() else 1
-	var groups := [["Grass", cfg.grass, Color.html(cfg.tint), int(cfg.count) / div, 0.28, 0.55], ["Flowers", cfg.flowers, Color.html(cfg.flower_tint), int(cfg.flower_count) / div, 0.3, 0.5], ["Mushrooms", cfg.mush, Color(1, 1, 1), int(cfg.mush_count) / div, 0.35, 0.7]]
+	var groups := [["Grass", cfg.grass, Color.html(cfg.tint), int(cfg.count) / div, 0.2, 0.4], ["Flowers", cfg.flowers, Color.html(cfg.flower_tint), int(cfg.flower_count) / div, 0.25, 0.42], ["Mushrooms", cfg.mush, Color(1, 1, 1), int(cfg.mush_count) / div, 0.35, 0.7]]
 	var glow_pts: Array[Vector3] = []
 	for g in groups:
 		var names: Array = g[1]
@@ -595,6 +608,61 @@ static func _multimesh(parent: Node3D, mesh: Mesh, xforms: Array[Transform3D], n
 	mi.multimesh = mm
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(mi)
+
+
+## Small everyday props around houses (barrels, crates, benches, banners) so
+## villages do not look empty (R04). Deterministic per area; keeps roads,
+## exits and other buildings free.
+const DRESSING := ["Barrel", "Crate_Wooden", "Barrel_Apples", "FarmCrate_Apple", "Bench", "Stool", "Bucket_Wooden_1", "Crate_Metal", "Banner_1"]
+
+
+static func build_dressing(parent: Node3D, area_id: String, layout: Dictionary) -> void:
+	if is_indoor(area_id, layout) or world_of(area_id) == "WORLD_AQUALIS":
+		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(area_id + "dress")
+	var exits: Array = layout.get("exits", []).map(func(x): return Vector2(float(x.pos[0]), float(x.pos[2])))
+	var rects := _blocked_rects(layout)
+	var root := Node3D.new()
+	root.name = "Dressing"
+	parent.add_child(root)
+	for p in layout.get("props", []):
+		if prop_kind(str(p.name)) != "house" or p.has("requires_flag") or p.has("hidden_by_flag"):
+			continue
+		var cx := float(p.pos[0])
+		var cz := float(p.pos[2])
+		var hx := float(p.size[0]) / 2.0
+		var hz := float(p.size[2]) / 2.0
+		for k in 3:
+			var nm: String = DRESSING[rng.randi() % DRESSING.size()]
+			var side := rng.randi() % 4
+			var along := rng.randf_range(-0.7, 0.7)
+			var pos := Vector3.ZERO
+			var yaw := 0.0
+			match side:
+				0: pos = Vector3(cx + along * hx, 0, cz + hz + 0.9); yaw = 0.0
+				1: pos = Vector3(cx + along * hx, 0, cz - hz - 0.9); yaw = PI
+				2: pos = Vector3(cx + hx + 0.9, 0, cz + along * hz); yaw = PI / 2.0
+				_: pos = Vector3(cx - hx - 0.9, 0, cz + along * hz); yaw = -PI / 2.0
+			var p2 := Vector2(pos.x, pos.z)
+			if exits.any(func(e: Vector2): return e.distance_to(p2) < 6.0):
+				continue
+			# outside every other footprint (the own house is allowed: the item stands next to it)
+			if rects.any(func(r: Rect2): return r.has_point(p2) and not r.grow(0.0).has_point(Vector2(cx, cz))):
+				continue
+			var n := _place(root, nm, pos, 1.0, yaw + rng.randf_range(-0.3, 0.3))
+			if n and not nm.begins_with("Banner"):
+				var body := StaticBody3D.new()
+				body.name = "DressingCollider"
+				var cs := CollisionShape3D.new()
+				var cyl := CylinderShape3D.new()
+				cyl.radius = 0.4
+				cyl.height = 1.0
+				cs.shape = cyl
+				cs.position.y = 0.5
+				body.add_child(cs)
+				body.position = pos
+				root.add_child(body)
 
 
 ## Landmarks far outside the walkable area (outdoor Lunaris/Valdoria): a
