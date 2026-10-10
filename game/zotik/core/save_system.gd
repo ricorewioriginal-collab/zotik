@@ -4,9 +4,15 @@ extends Node
 ## - Atomic write: write .tmp, keep previous valid save as .bak, rename.
 ## - Corrupt or tampered slot: the file is kept as .corrupt and the .bak is loaded.
 ## - Newer schema versions are rejected (no unsafe downgrade).
+## - Slot 0 is the autosave (area changes, app pause, page hide); slots 1-3 are manual.
+## - Browser: every save is mirrored synchronously into localStorage, because the
+##   IndexedDB file system behind user:// is flushed asynchronously and can be lost when
+##   the tab closes; loading takes the newest valid copy of file and mirror.
 
 const SCHEMA_VERSION := 2
 const SLOT_COUNT := 3
+const AUTO_SLOT := 0
+const MIRROR_PREFIX := "zotik_save_"
 
 enum Status { OK, EMPTY, RECOVERED_FROM_BACKUP, CORRUPT, UNSUPPORTED_VERSION, IO_ERROR }
 
@@ -16,6 +22,11 @@ signal loaded(slot: int, status: Status)
 var save_dir := "user://saves/"
 ## Migration callables: from version N to N+1, keyed by N.
 var migrations := {}
+## Tests: a Dictionary here replaces the browser localStorage (slot -> text); null = real one.
+var mirror_override = null
+## Autosaves only while a game is running (set by the game root), never in headless tests.
+var autosave_ready := false
+var _page_cb: JavaScriptObject
 
 ## Built-in migrations shipped with the game (tests may replace `migrations`).
 const BUILTIN_MIGRATIONS := {1: "_migrate_1_to_2"}
@@ -23,6 +34,25 @@ const BUILTIN_MIGRATIONS := {1: "_migrate_1_to_2"}
 
 func _ready() -> void:
 	reset_migrations()
+	if OS.has_feature("web"):
+		_hook_page_events()
+
+
+## Browser: save when the page is hidden or closed (synchronous localStorage mirror).
+func _hook_page_events() -> void:
+	_page_cb = JavaScriptBridge.create_callback(func(_args): autosave())
+	var win := JavaScriptBridge.get_interface("window")
+	if win == null:
+		return
+	win.addEventListener("pagehide", _page_cb)
+	win.addEventListener("beforeunload", _page_cb)
+	JavaScriptBridge.get_interface("document").addEventListener("visibilitychange", _page_cb)
+
+
+## Quiet save into slot 0 while a game is running.
+func autosave() -> void:
+	if autosave_ready and GameState.player.get("area", "") != "":
+		save_slot(AUTO_SLOT)
 
 
 func reset_migrations() -> void:
@@ -39,11 +69,42 @@ func _migrate_1_to_2(d: Dictionary) -> Dictionary:
 
 
 func slot_path(slot: int) -> String:
-	return save_dir.path_join("slot_%02d.json" % slot)
+	return save_dir.path_join("autosave.json" if slot == AUTO_SLOT else "slot_%02d.json" % slot)
+
+
+func _use_mirror() -> bool:
+	return mirror_override != null or OS.has_feature("web")
+
+
+func _mirror_write(slot: int, text: String) -> bool:
+	if mirror_override != null:
+		mirror_override[slot] = text
+		return true
+	if not OS.has_feature("web"):
+		return false
+	var key := JSON.stringify(MIRROR_PREFIX + str(slot))
+	var ok = JavaScriptBridge.eval("(function(){try{localStorage.setItem(%s,%s);return true;}catch(e){return false;}})()" % [key, JSON.stringify(text)])
+	return ok == true
+
+
+func _mirror_read(slot: int) -> String:
+	if mirror_override != null:
+		return str(mirror_override.get(slot, ""))
+	if not OS.has_feature("web"):
+		return ""
+	var v = JavaScriptBridge.eval("(function(){try{return localStorage.getItem(%s)||'';}catch(e){return '';}})()" % JSON.stringify(MIRROR_PREFIX + str(slot)))
+	return str(v) if v != null else ""
+
+
+func _mirror_remove(slot: int) -> void:
+	if mirror_override != null:
+		mirror_override.erase(slot)
+	elif OS.has_feature("web"):
+		JavaScriptBridge.eval("(function(){try{localStorage.removeItem(%s);}catch(e){}})()" % JSON.stringify(MIRROR_PREFIX + str(slot)))
 
 
 func save_slot(slot: int) -> Status:
-	if slot < 1 or slot > SLOT_COUNT:
+	if slot < AUTO_SLOT or slot > SLOT_COUNT:
 		return Status.IO_ERROR
 	DirAccess.make_dir_recursive_absolute(save_dir)
 	EventBus.sync_state.emit()
@@ -58,35 +119,73 @@ func save_slot(slot: int) -> Status:
 		"checksum": _checksum(data),
 		"data": data,
 	}
-	var path := slot_path(slot)
-	var tmp := path + ".tmp"
-	var f := FileAccess.open(tmp, FileAccess.WRITE)
-	if f == null:
-		return Status.IO_ERROR
-	f.store_string(JSON.stringify(env, "\t"))
-	f.close()
-	if _read_envelope(tmp).status != Status.OK:
-		DirAccess.remove_absolute(tmp)
-		return Status.IO_ERROR
-	if FileAccess.file_exists(path) and _read_envelope(path).status == Status.OK:
-		DirAccess.copy_absolute(path, path + ".bak")
-	if DirAccess.rename_absolute(tmp, path) != OK:
+	var text := JSON.stringify(env, "\t")
+	var file_ok := _write_file(slot, text)
+	var mirror_ok := _use_mirror() and _mirror_write(slot, text)
+	if not file_ok and not mirror_ok:
 		return Status.IO_ERROR
 	saved.emit(slot)
 	return Status.OK
 
 
-func load_slot(slot: int) -> Status:
+## Writes the slot file. Native: temp file + backup + rename. Browser: straight write
+## (every closed file triggers the IndexedDB flush; a rename would not).
+func _write_file(slot: int, text: String) -> bool:
 	var path := slot_path(slot)
-	var res := _read_envelope(path)
-	var status: Status = res.status
-	if status == Status.CORRUPT:
+	var web := OS.has_feature("web")
+	if FileAccess.file_exists(path) and _read_envelope(path).status == Status.OK:
+		DirAccess.copy_absolute(path, path + ".bak")
+	var target := path if web else path + ".tmp"
+	var f := FileAccess.open(target, FileAccess.WRITE)
+	if f == null:
+		return false
+	f.store_string(text)
+	f.close()
+	if _read_envelope(target).status != Status.OK:
+		DirAccess.remove_absolute(target)
+		return false
+	if web:
+		return true
+	if DirAccess.rename_absolute(target, path) != OK:
+		# some platforms refuse to rename over an existing file
+		DirAccess.remove_absolute(path)
+		if DirAccess.rename_absolute(target, path) != OK:
+			return false
+	return true
+
+
+## Newest valid copy of a slot from the file and the browser mirror.
+## Returns {status, env, data}; falls back to the file's .bak, then reports the problem.
+func _best(slot: int) -> Dictionary:
+	var path := slot_path(slot)
+	var from_file := _read_envelope(path)
+	var from_mirror := {"status": Status.EMPTY}
+	if _use_mirror():
+		var text := _mirror_read(slot)
+		if text != "":
+			from_mirror = _parse_envelope(text)
+	if from_file.status == Status.OK and from_mirror.status == Status.OK:
+		return from_mirror if str(from_mirror.env.get("saved_at", "")) > str(from_file.env.get("saved_at", "")) else from_file
+	if from_file.status == Status.OK:
+		return from_file
+	if from_mirror.status == Status.OK:
+		return from_mirror
+	if from_file.status == Status.CORRUPT:
 		var bak := _read_envelope(path + ".bak")
-		DirAccess.copy_absolute(path, path + ".corrupt")
 		if bak.status == Status.OK:
-			res = bak
-			status = Status.RECOVERED_FROM_BACKUP
-	if res.status != Status.OK:
+			bak["status"] = Status.RECOVERED_FROM_BACKUP
+			return bak
+	if from_file.status == Status.EMPTY and from_mirror.status != Status.EMPTY:
+		return from_mirror
+	return from_file
+
+
+func load_slot(slot: int) -> Status:
+	var res := _best(slot)
+	var status: Status = res.status
+	if _read_envelope(slot_path(slot)).status == Status.CORRUPT:
+		DirAccess.copy_absolute(slot_path(slot), slot_path(slot) + ".corrupt")
+	if status != Status.OK and status != Status.RECOVERED_FROM_BACKUP:
 		loaded.emit(slot, status)
 		return status
 	var snapshot := GameState.to_dict()
@@ -99,13 +198,9 @@ func load_slot(slot: int) -> Status:
 
 
 func slot_info(slot: int) -> Dictionary:
-	var res := _read_envelope(slot_path(slot))
+	var res := _best(slot)
 	var status: Status = res.status
-	if status == Status.CORRUPT:
-		res = _read_envelope(slot_path(slot) + ".bak")
-		if res.status == Status.OK:
-			status = Status.RECOVERED_FROM_BACKUP
-	if res.status != Status.OK:
+	if status != Status.OK and status != Status.RECOVERED_FROM_BACKUP:
 		return {"slot": slot, "status": status}
 	return {"slot": slot, "status": status, "saved_at": res.env.get("saved_at", ""), "area": res.env.get("area", ""), "play_time": res.env.get("play_time", 0.0)}
 
@@ -114,11 +209,12 @@ func delete_slot(slot: int) -> void:
 	for suffix in ["", ".bak", ".tmp", ".corrupt"]:
 		if FileAccess.file_exists(slot_path(slot) + suffix):
 			DirAccess.remove_absolute(slot_path(slot) + suffix)
+	_mirror_remove(slot)
 
 
 func any_save_exists() -> bool:
-	for s in range(1, SLOT_COUNT + 1):
-		if FileAccess.file_exists(slot_path(s)):
+	for s in range(AUTO_SLOT, SLOT_COUNT + 1):
+		if FileAccess.file_exists(slot_path(s)) or (_use_mirror() and _mirror_read(s) != ""):
 			return true
 	return false
 
@@ -130,7 +226,11 @@ func _read_envelope(path: String) -> Dictionary:
 	var f := FileAccess.open(path, FileAccess.READ)
 	if f == null:
 		return {"status": Status.IO_ERROR}
-	var env = JSON.parse_string(f.get_as_text())
+	return _parse_envelope(f.get_as_text())
+
+
+func _parse_envelope(text: String) -> Dictionary:
+	var env = JSON.parse_string(text)
 	if not env is Dictionary or not env.get("data") is Dictionary or not env.has("schema_version"):
 		return {"status": Status.CORRUPT}
 	var version := int(env.schema_version)

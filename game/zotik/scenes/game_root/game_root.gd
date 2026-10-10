@@ -37,6 +37,7 @@ var _entry_spawn := Vector3.ZERO
 
 
 func _ready() -> void:
+	SaveSystem.autosave_ready = DisplayServer.get_name() != "headless"
 	add_to_group("game_root")
 	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create, "lore": LoreBook.create, "bounty_board": BountyBoard.create, "casino": CasinoEntrance.create}
 	Dialogue.reset()
@@ -153,6 +154,13 @@ func _update_mouse() -> void:
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_APPLICATION_FOCUS_IN and is_instance_valid(player):
 		_update_mouse()
+	elif what == NOTIFICATION_APPLICATION_PAUSED or what == NOTIFICATION_APPLICATION_FOCUS_OUT or what == NOTIFICATION_WM_CLOSE_REQUEST:
+		# Android: app to background; browser: tab hidden; desktop: window closed
+		SaveSystem.autosave()
+
+
+func _exit_tree() -> void:
+	SaveSystem.autosave_ready = false
 
 
 ## Places the beacon on the guided objective, or on the exit towards it.
@@ -297,6 +305,7 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	GameState.player.area = area_id
 	_sync_state()
 	_sync_party()
+	SaveSystem.autosave()
 	for c in companions.values():
 		c.snap_to_player()
 	_update_objective()

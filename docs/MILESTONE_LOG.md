@@ -875,3 +875,10 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - Still simple: one open area each, no puzzles or dungeon boss besides the superboss before it. Placeholder art, not final.
 - Test: `test_r15_endgame` has one more test (8).
 
+## W05 – Reliable saves with several slots, web and Android (owner: "das klappt aktuell noch nicht wirklich zuverlässig")
+Findings in the old code: saving was only possible at a Weltenanker (nothing else, no autosave), an overwrite had no confirmation, and in the browser the file system behind `user://` (IndexedDB) is flushed asynchronously, a rename does not trigger the flush, and a lost/blocked IndexedDB or a closed tab silently lost progress.
+- `SaveSystem`: slot 0 = autosave (area changes, Android pause, focus loss/close, browser `pagehide`/`beforeunload`/`visibilitychange`); slots 1–3 manual. Browser: every save is mirrored synchronously into `localStorage`; load takes the newest valid copy of file and mirror (so a lost IndexedDB, a corrupt file or a stale mirror still restore the newest valid state); the web build writes the file directly (no temp+rename) and a save counts as OK if either copy was written. Native: temp file, backup, rename (with a remove-and-retry fallback for platforms that refuse to rename over a file).
+- UI: pause menu entry "Spielstand speichern" (works anywhere), slot list with area, play time and date, overwrite confirmation, title screen offers the autosave plus all used slots, "zum Titelbildschirm" saves first. Autosave is off in headless tests unless `SaveSystem.autosave_ready`.
+- Not testable here: the real browser (localStorage, page events) and Android lifecycle; the mirror is tested through `SaveSystem.mirror_override`. Please test on the live site: save, reload the page, load; close the tab and come back.
+- Tests: `test_w05_saves` (8); existing save, golden and restart tests unchanged and green.
+
