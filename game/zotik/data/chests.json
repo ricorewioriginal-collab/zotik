@@ -402,5 +402,201 @@
       }
     ],
     "currency": 400
+  },
+  "CHEST_END_D1_1": {
+    "area": "AREA_END_D1",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 900
+  },
+  "CHEST_END_D1_2": {
+    "area": "AREA_END_D1",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 3
+      }
+    ],
+    "currency": 1200
+  },
+  "CHEST_END_D2_1": {
+    "area": "AREA_END_D2",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 900
+  },
+  "CHEST_END_D2_2": {
+    "area": "AREA_END_D2",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 3
+      }
+    ],
+    "currency": 1200
+  },
+  "CHEST_END_D3_1": {
+    "area": "AREA_END_D3",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 900
+  },
+  "CHEST_END_D3_2": {
+    "area": "AREA_END_D3",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 3
+      }
+    ],
+    "currency": 1200
+  },
+  "CHEST_END_D4_1": {
+    "area": "AREA_END_D4",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 900
+  },
+  "CHEST_END_D4_2": {
+    "area": "AREA_END_D4",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 3
+      }
+    ],
+    "currency": 1200
+  },
+  "CHEST_END_D5_1": {
+    "area": "AREA_END_D5",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 900
+  },
+  "CHEST_END_D5_2": {
+    "area": "AREA_END_D5",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 3
+      }
+    ],
+    "currency": 1200
+  },
+  "CHEST_END_D6_1": {
+    "area": "AREA_END_D6",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 900
+  },
+  "CHEST_END_D6_2": {
+    "area": "AREA_END_D6",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 3
+      }
+    ],
+    "currency": 1200
+  },
+  "CHEST_END_D7_1": {
+    "area": "AREA_END_D7",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "currency": 900
+  },
+  "CHEST_END_D7_2": {
+    "area": "AREA_END_D7",
+    "contents": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 3
+      }
+    ],
+    "currency": 1200
   }
 }

@@ -4,7 +4,7 @@ Source: `07_ENDGAME/ENDGAME.md`. The main story is complete (Phase 6); the world
 
 ## Scope and honest limits
 - Done with data and the existing systems (arena, bosses, unique rewards); everything is placeholder art.
-- The seven endgame dungeons of the master list are built as wave-based rift runs (the arena machinery with difficulty modifiers), not as walkable dungeon maps.
+- The seven endgame dungeons of the master list exist twice: as wave-based rift runs (arena machinery with difficulty modifiers) and, since E07, as walkable dungeon areas behind the superboss arenas.
 
 ## Milestones
 | ID | Content |
@@ -15,5 +15,6 @@ Source: `07_ENDGAME/ENDGAME.md`. The main story is complete (Phase 6); the world
 | E04 (PASSED) | NG+: restart with kept belongings, enemy scaling per level, extra rage phase for bosses |
 | E05 (PASSED) | NG+ extras: four NG+-only enemy types, extra chests, Chronik items and shop, NG+ dialogue lines |
 | E06 (PASSED) | NG+ secrets: seven hidden lore books |
+| E07 (PASSED) | Walkable endgame dungeons behind the seven superboss arenas |
 
 Rules: one milestone at a time, full regression before every merge, placeholder art is never reported as final (CLAUDE.md rule 6).
