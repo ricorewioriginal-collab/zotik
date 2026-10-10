@@ -1,7 +1,7 @@
 extends TestCase
 ## X01: the whole game in one session, without prepared saves. New game from
 ## the title, chapter 1 in Lunaris, Weltenstein to Elaris, chapter 2,
-## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, Weltenstein to Aqualis, chapter 5, Weltenstein to Frosthain, chapter 6, then save -> reset -> load through the
+## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, Weltenstein to Aqualis, chapter 5, Weltenstein to Frosthain, chapter 6, Weltenstein to Ignara, chapter 7, then save -> reset -> load through the
 ## title. Unlike the per-chapter golden paths (m15/e08/v06) every chapter
 ## starts from the state the previous one really produced, so a broken
 ## hand-over between chapters fails here.
@@ -365,6 +365,52 @@ func _chapter_six() -> void:
 	eq(Conditions.quest_state(S), "COMPLETED", "Frosthain side quest completed")
 
 
+func _chapter_seven() -> void:
+	const M := "QUEST_MAIN_IGN_001"
+	const S := "QUEST_SIDE_IGN_001"
+	await _exit_to("AREA_FRO_VILLAGE")
+	await _travel("TRAVEL_FRO_001", "WORLD_IGNARA", "CUT_IGN_ARRIVAL_001")
+	eq(game.area.area_id, "AREA_IGN_VILLAGE", "in Kaldera")
+	await _exit_to("AREA_IGN_FORGE")
+	await _talk("NPC_VAREK_001")
+	eq(Conditions.quest_step(S), 0, "Ignara side quest started")
+	game.shop_menu.close_menu()
+	await _exit_to("AREA_IGN_VILLAGE")
+	await _talk("NPC_BRENNA_001")
+	eq(Conditions.quest_step(M), 1, "find the mines")
+	await _exit_to("AREA_IGN_ASH")
+	for id in ["SPAWN_IGN_ASH_KAEFER_1", "SPAWN_IGN_ASH_KAEFER_2", "SPAWN_IGN_ASH_FUNKE_1", "SPAWN_IGN_ASH_FUNKE_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_IGN_001"].interact(game.player)
+	await _use_savepoint("SAVEPOINT_IGN_ASH_001", 2)
+	await _boss_intro("TRIGGER_IGN_MINES", "CUT_IGN_MINES_001")
+	await _exit_to("AREA_IGN_MINES")
+	eq(Conditions.quest_step(M), 2, "valves next")
+	for id in ["SPAWN_IGN_MINES_KAEFER_1", "SPAWN_IGN_MINES_KAEFER_2", "SPAWN_IGN_MINES_FUNKE_1", "SPAWN_IGN_MINES_FUNKE_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_IGN_002"].interact(game.player)
+	var node: PuzzleNode = game.area.entities["PUZ_IGN_VALVES_001"]
+	node.parts[0].interact(game.player)
+	node.parts[1].interact(game.player)
+	eq(Conditions.quest_step(M), 3, "Schmiedegolem next")
+	await _exit_to("AREA_IGN_CHAMBER")
+	await _defeat_spawn("SPAWN_IGN_CHAMBER_WAECHTER")
+	eq(Conditions.quest_step(M), 4, "Magmarion next")
+	await _exit_to("AREA_IGN_HEART")
+	await _boss_intro("TRIGGER_IGN_MAGMARION_INTRO", "CUT_IGN_MAGMARION_001")
+	await _defeat_spawn("SPAWN_IGN_HEART_MAGMARION")
+	eq(Dialogue.active_id, "CUT_IGN_MAGMARION_DEFEAT_001", "defeat scene")
+	await finish_dialogues()
+	await frames(2)
+	await physics_frames(3)
+	eq(game.area.area_id, "AREA_IGN_VILLAGE", "back in Kaldera")
+	await _talk("NPC_BRENNA_001")
+	eq(Conditions.quest_state(M), "COMPLETED", "chapter 7 completed")
+	await _exit_to("AREA_IGN_FORGE")
+	await _talk("NPC_VAREK_001")
+	eq(Conditions.quest_state(S), "COMPLETED", "Ignara side quest completed")
+
+
 ## Saved state minus play_time, which keeps counting once the game runs.
 func _state_without_clock() -> String:
 	var d := GameState.to_dict()
@@ -384,7 +430,8 @@ func test_full_playthrough() -> void:
 	await _chapter_four()
 	await _chapter_five()
 	await _chapter_six()
-	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001", "QUEST_MAIN_FRO_001", "QUEST_SIDE_FRO_001"]:
+	await _chapter_seven()
+	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001", "QUEST_MAIN_FRO_001", "QUEST_SIDE_FRO_001", "QUEST_MAIN_IGN_001", "QUEST_SIDE_IGN_001"]:
 		eq(Conditions.quest_state(q), "COMPLETED", q)
 	eq(GameState.party.size(), 3, "full party at the end")
 	# Save -> fresh state -> load through the title
@@ -397,7 +444,7 @@ func test_full_playthrough() -> void:
 	await frames(3)
 	game = tree.current_scene
 	await physics_frames(2)
-	eq(game.area.area_id, "AREA_FRO_HALL", "loaded where the game was saved")
+	eq(game.area.area_id, "AREA_IGN_FORGE", "loaded where the game was saved")
 	eq(game.companions.size(), 3, "party restored")
 	eq(_state_without_clock(), expected, "state survives save/load")
 	SaveSystem.save_dir = "user://saves/"

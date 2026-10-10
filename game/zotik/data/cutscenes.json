@@ -493,5 +493,92 @@
         "spawn": "AREA_FRO_FOREST"
       }
     ]
+  },
+  "CUT_IGN_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Ignara. Das Feuer unter der Welt. Über Kaldera hängt roter Dunst, und aus dem Krater darüber steigen Funken wie umgekehrter Schnee."
+      ],
+      [
+        "NPC_NIA_001",
+        "Nach Frosthain ist mir endlich warm. Zu warm, vielleicht."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der fünfte Splitter steckt im Herzen des Berges. Fragen wir in der Stadt nach dem Weg in die Minen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_IGN_001"
+      }
+    ]
+  },
+  "CUT_IGN_MINES_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Am Ende der Aschefelder klafft das Tor der Minen. Aus der Tiefe pulst rotes Licht, im Takt eines viel zu schnellen Herzschlags."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Das ist kein Berggrollen. Das ist ein Herz."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann bringen wir es zur Ruhe."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_IGN_MINES_OPEN"
+      }
+    ]
+  },
+  "CUT_IGN_MAGMARION_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_MAGMARION_001",
+        "Ich halte den Berg zusammen. Jeder Funke, jede Flamme – alles brennt durch mich."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der Splitter sitzt in seiner Brust. Er treibt das Magma an und lässt ihn nicht ruhen."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann lassen wir das Feuer endlich ausatmen."
+      ]
+    ]
+  },
+  "CUT_IGN_MAGMARION_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Magmarion zerfällt zu glühender Asche. Der Berg seufzt tief, und im Rauch schwebt ein Splitter, warm wie ein Sonnenuntergang."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Fünf Splitter, fünf Welten. Jemand sammelt sie nicht – jemand verteilt sie."
+      ],
+      [
+        "NPC_NIA_001",
+        "Erst zurück zu Brenna. Und ein kühles Getränk."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_IGN_VILLAGE",
+        "spawn": "AREA_IGN_ASH"
+      }
+    ]
   }
 }

@@ -877,5 +877,164 @@
         }
       }
     ]
+  },
+  "ENEMY_ASCHEKAEFER_001": {
+    "name": "Aschekäfer",
+    "region": "WORLD_IGNARA",
+    "description": "Ein Käfer mit glühendem Panzer, der in den Aschefeldern nach Wärme sucht. Der Panzer bricht erst unter starken Schlägen.",
+    "hp": 135,
+    "attack": 22,
+    "defense": 11,
+    "move_speed": 3.8,
+    "aggro_range": 11.0,
+    "attack_range": 1.9,
+    "attack_cooldown": 1.2,
+    "currency": 26,
+    "drops": [
+      {
+        "id": "ITEM_EMBER_001",
+        "count": 1
+      }
+    ],
+    "break": 55,
+    "break_duration": 3.0
+  },
+  "ENEMY_FUNKENGEIST_001": {
+    "name": "Funkengeist",
+    "region": "WORLD_IGNARA",
+    "description": "Ein tanzender Funke aus der Glut der Essen. Er schwebt flink und versengt, was er berührt.",
+    "hp": 90,
+    "attack": 23,
+    "defense": 4,
+    "move_speed": 3.4,
+    "aggro_range": 12.0,
+    "attack_range": 1.8,
+    "attack_cooldown": 1.3,
+    "currency": 22,
+    "drops": [
+      {
+        "id": "ITEM_EMBER_001",
+        "count": 2
+      }
+    ],
+    "break": 40,
+    "break_duration": 2.5
+  },
+  "ENEMY_SCHMIEDEGOLEM_001": {
+    "name": "Schmiedegolem",
+    "region": "WORLD_IGNARA",
+    "description": "Ein Koloss aus Schlacke und Eisen, der die Minen hütet. Langsam, aber schwer – Break lässt seinen Panzer splittern.",
+    "hp": 380,
+    "attack": 27,
+    "defense": 12,
+    "move_speed": 2.0,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 1.9,
+    "currency": 150,
+    "drops": [
+      {
+        "id": "ITEM_EMBER_001",
+        "count": 5
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 135,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_IGN_WAECHTER_DEFEATED"
+      }
+    ]
+  },
+  "BOSS_MAGMARION_001": {
+    "name": "Magmarion",
+    "region": "WORLD_IGNARA",
+    "description": "Der Wächter des Vulkanherzens. Ein Splitter des Weltenkerns treibt sein Magma an und lässt den Berg brüllen.",
+    "hp": 1060,
+    "attack": 26,
+    "defense": 11,
+    "move_speed": 2.0,
+    "aggro_range": 30.0,
+    "attack_range": 3.6,
+    "attack_cooldown": 1.8,
+    "currency": 380,
+    "drops": [
+      {
+        "id": "ITEM_EMBER_001",
+        "count": 8
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "break": 230,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_BOSS_IGN_MAGMARION_DEFEATED"
+      },
+      {
+        "type": "play_cutscene",
+        "id": "CUT_IGN_MAGMARION_DEFEAT_001"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Magmaschlag",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ff8a30",
+        "hazard": {
+          "interval": 5.0,
+          "radius": 2.6,
+          "delay": 1.2,
+          "damage": 19
+        }
+      },
+      {
+        "from_hp_ratio": 0.6,
+        "name": "Lavawelle",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.9,
+        "summon": "ENEMY_FUNKENGEIST_001",
+        "summon_count": 2,
+        "color": "#ffb040",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.5,
+          "width": 3.0,
+          "delay": 1.3,
+          "damage": 23
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Vulkanausbruch",
+        "attack_mult": 1.3,
+        "cooldown_mult": 0.75,
+        "summon": "ENEMY_ASCHEKAEFER_001",
+        "summon_count": 1,
+        "color": "#ffe060",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.2,
+          "width": 3.6,
+          "delay": 1.1,
+          "damage": 27
+        }
+      }
+    ]
   }
 }

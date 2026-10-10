@@ -175,5 +175,32 @@
   },
   "FLAG_FRO_CHAPTER_COMPLETE": {
     "desc": "Kapitel 6 (Frosthain) abgeschlossen"
+  },
+  "FLAG_IGN_ARRIVED": {
+    "desc": "Ignara betreten"
+  },
+  "FLAG_IGN_ASH_OPEN": {
+    "desc": "Das Aschetor von Kaldera ist offen"
+  },
+  "FLAG_IGN_MINES_SEEN": {
+    "desc": "Die Minen gesehen"
+  },
+  "FLAG_IGN_MINES_OPEN": {
+    "desc": "Der Weg in die Minen ist frei"
+  },
+  "FLAG_IGN_VALVES_DONE": {
+    "desc": "Druckventile der Minen gelöst"
+  },
+  "FLAG_IGN_WAECHTER_DEFEATED": {
+    "desc": "Schmiedegolem besiegt"
+  },
+  "FLAG_IGN_MAGMARION_MET": {
+    "desc": "Begegnung mit Magmarion gesehen"
+  },
+  "FLAG_BOSS_IGN_MAGMARION_DEFEATED": {
+    "desc": "Magmarion besiegt"
+  },
+  "FLAG_IGN_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 7 (Ignara) abgeschlossen"
   }
 }

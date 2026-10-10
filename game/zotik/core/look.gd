@@ -15,13 +15,14 @@ const WORLDS := {
 	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall"},
 	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall"},
 	"WORLD_FROSTHAIN": {"sky_top": "#5a86b8", "sky_horizon": "#e6f2ff", "sun": "#e8f0ff", "sun_energy": 1.0, "pitch": -30.0, "fog": "#d6e6f4", "floor": "snow", "boundary": "wall", "fog_density": 0.014, "snow": true},
+	"WORLD_IGNARA": {"sky_top": "#3a1218", "sky_horizon": "#ff7a3a", "sun": "#ffb070", "sun_energy": 1.1, "pitch": -25.0, "fog": "#6a2a1a", "floor": "rock", "boundary": "wall", "fog_density": 0.012, "embers": true},
 	"WORLD_AQUALIS": {"sky_top": "#0a3a6a", "sky_horizon": "#4ad0c8", "sun": "#a8f0ff", "sun_energy": 1.1, "pitch": -70.0, "fog": "#1a8aa8", "floor": "sand", "boundary": "wall", "fog_density": 0.016},
 }
 
 ## prop name keyword -> shape/material kind (first match wins)
 const PROP_KINDS := [
 	["water", ["stream", "canal_water", "flooded_channel", "water_basin"]],
-	["glow", ["rift_glow", "great_rift", "resonance_bridge", "professorium_machine"]],
+	["glow", ["rift_glow", "great_rift", "resonance_bridge", "professorium_machine", "lava"]],
 	["tree", ["tree"]],
 	["roots", ["root_"]],
 	["house", ["house", "shop_", "research_hall", "workshop", "smithy", "guild_hall", "library", "casino", "valve_house"]],
@@ -45,7 +46,7 @@ const PROPS_DIR := "res://assets/world/props/%s.gltf"
 ## CC0 Quaternius Medieval Village MegaKit (assets/world/village): roofs, doors, chimneys and plaster/brick textures for the houses
 const VILLAGE_DIR := "res://assets/world/village/%s.gltf"
 const VILLAGE_TEX := "res://assets/world/village/T_%s_BaseColor.png"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue"}
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue", "WORLD_IGNARA": "red"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
@@ -55,6 +56,7 @@ const BACKDROP := {
 	"WORLD_VALDORIA": [["building_home_A_red", "building_home_B_red", "building_tavern_red", "building_tower_A_red", "building_home_A_red"], ["trees_A_large", "trees_B_large"]],
 	"WORLD_SOLMERA": [["rock_single_A", "rock_single_B", "tent", "rock_single_C", "building_tower_A_red"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 	"WORLD_FROSTHAIN": [["Pine_1", "Pine_2", "Pine_3", "DeadTree_1", "Pine_2"], ["Pine_3", "Pine_1", "Pine_2", "DeadTree_2"]],
+	"WORLD_IGNARA": [["Rock_Medium_1", "DeadTree_1", "Rock_Medium_2", "DeadTree_2", "Rock_Medium_3"], ["Rock_Medium_3", "Rock_Medium_1", "DeadTree_2", "Rock_Medium_2"]],
 	"WORLD_AQUALIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "rock_single_B", "building_home_B_blue"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 }
 
@@ -648,28 +650,30 @@ static func _lantern(parent: Node3D, pos: Vector3, yaw: float) -> Node3D:
 
 ## Falling snow over the whole area (Frosthain): one CPUParticles3D, fewer flakes on web/Android.
 static func build_weather(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
-	if is_indoor(area_id, layout) or not style(area_id).get("snow", false):
+	var st := style(area_id)
+	if is_indoor(area_id, layout) or not (st.get("snow", false) or st.get("embers", false)):
 		return
+	var embers: bool = st.get("embers", false)
 	var p := CPUParticles3D.new()
-	p.name = "Snow"
+	p.name = "Embers" if embers else "Snow"
 	p.amount = 160 if low_end() else 700
 	p.lifetime = 9.0
 	p.preprocess = 9.0
 	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
 	p.emission_box_extents = Vector3(size.x / 2.0, 0.5, size.y / 2.0)
-	p.position = Vector3(0, 12, 0)
-	p.direction = Vector3(0.15, -1, 0.05)
+	p.position = Vector3(0, 1 if st.get("embers", false) else 12, 0)
+	p.direction = Vector3(0.15, 1.0 if embers else -1.0, 0.05)
 	p.spread = 12.0
 	p.initial_velocity_min = 1.2
 	p.initial_velocity_max = 2.2
-	p.gravity = Vector3(0.2, -0.3, 0.0)
+	p.gravity = Vector3(0.2, 0.2 if embers else -0.3, 0.0)
 	p.scale_amount_min = 0.6
 	p.scale_amount_max = 1.4
 	var quad := QuadMesh.new()
 	quad.size = Vector2(0.09, 0.09)
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	mat.albedo_color = Color(1, 1, 1, 0.9)
+	mat.albedo_color = Color(1.0, 0.55, 0.2, 0.95) if embers else Color(1, 1, 1, 0.9)
 	mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	quad.material = mat

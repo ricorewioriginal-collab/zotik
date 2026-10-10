@@ -150,5 +150,33 @@
       }
     ],
     "currency": 140
+  },
+  "CHEST_IGN_001": {
+    "area": "AREA_IGN_ASH",
+    "contents": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_GLUTBROT_001",
+        "count": 3
+      }
+    ],
+    "currency": 120
+  },
+  "CHEST_IGN_002": {
+    "area": "AREA_IGN_MINES",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_EMBER_001",
+        "count": 2
+      }
+    ],
+    "currency": 150
   }
 }
