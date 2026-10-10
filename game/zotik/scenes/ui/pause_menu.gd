@@ -12,7 +12,8 @@ func refresh() -> void:
 	title_label.text = "Hilfe & Einstellungen"
 	info_label.text = "Spielzeit %d:%02d · Speichern geht hier jederzeit, zusätzlich gibt es eine Autospeicherung." % [int(GameState.play_time) / 3600, (int(GameState.play_time) / 60) % 60]
 	add_heading("Steuerung")
-	add_note(TOUCH_HELP if TouchControls.wanted() else KEYBOARD_HELP)
+	add_note(TOUCH_HELP if TouchControls.wanted() and not Gamepad.active else KEYBOARD_HELP)
+	add_note(Gamepad.HELP)
 	add_row("Spielanleitung: Ziel, Steuerung, Kampf, Rätsel, Quests", [["Öffnen", _open_guide]])
 	add_heading("Einstellungen")
 	add_row("Kamera invertieren: %s" % _on(Settings.get_value("camera_invert")), [["Umschalten", _toggle_invert]])

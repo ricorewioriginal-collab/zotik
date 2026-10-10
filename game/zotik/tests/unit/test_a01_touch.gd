@@ -43,7 +43,7 @@ func test_visible_only_when_wanted_and_free() -> void:
 
 func test_buttons_emit_actions() -> void:
 	var size_v := touch.get_viewport_rect().size
-	var attack_pos := size_v - Vector2(90, 100)
+	var attack_pos := size_v - Vector2(190, 150)
 	eq(touch.action_at(attack_pos), "attack", "attack button under the thumb")
 	touch._on_press(0, attack_pos)
 	await frames(1)
@@ -105,15 +105,16 @@ func test_interact_button_only_when_something_is_usable() -> void:
 	await physics_frames(3)
 	await frames(2)
 	var size_v := touch.get_viewport_rect().size
-	var spot := size_v - Vector2(250, 150)
+	var spot := size_v - Vector2(120, 80)
 	check(game.player.current_interactable == null, "nothing in reach")
-	eq(touch.action_at(spot), "", "no Benutzen button in the open")
+	var dim: float = touch._panels["interact"].modulate.a
+	eq(touch.action_at(spot), "interact", "A button is always there")
 	var mira: Npc = game.area.entities["NPC_MIRA_001"]
 	game.player.global_position = mira.global_position + Vector3(0, 0, 1.5)
 	await physics_frames(3)
 	await frames(2)
 	check(game.player.current_interactable != null, "Mira in reach")
-	eq(touch.action_at(spot), "interact", "Benutzen appears next to her")
+	check(touch._panels["interact"].modulate.a > dim, "A glows next to her")
 
 
 func test_buttons_are_calm_and_scale_with_settings() -> void:
@@ -297,7 +298,7 @@ func test_double_tap_dodges() -> void:
 
 
 func test_buttons_can_be_switched_off() -> void:
-	var attack_pos := touch.get_viewport_rect().size - Vector2(90, 100)
+	var attack_pos := touch.get_viewport_rect().size - Vector2(190, 150)
 	eq(touch.action_at(attack_pos), "attack", "buttons on by default")
 	Settings.set_value("touch_buttons", false)
 	await frames(2)
