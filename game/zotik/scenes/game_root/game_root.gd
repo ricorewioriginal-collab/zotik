@@ -109,7 +109,9 @@ func _ready() -> void:
 	player.interactable_changed.connect(hud.set_prompt)
 	inventory_menu.player = player
 	player.died.connect(_on_player_died)
-	player.damaged.connect(func(_d): hud.flash_hurt())
+	player.damaged.connect(func(_d):
+		hud.flash_hurt()
+		Gamepad.rumble(0.4, 0.1, 0.18))
 	EventBus.sync_state.connect(_sync_state)
 	EventBus.party_changed.connect(_sync_party)
 	EventBus.travel_requested.connect(func(a, s): transition.call_deferred(a, s))

@@ -8,11 +8,23 @@ const SCENE_GAME_ROOT := "res://scenes/game_root/game_root.tscn"
 const SCENE_CHARACTER_CREATOR := "res://scenes/character_creator/character_creator.tscn"
 
 signal scene_changed(path: String)
+signal input_device_changed(gamepad: bool)
 signal new_game_started
 
 var current_scene_path := ""
 ## Set by continue_game(): the game root restores the saved position.
 var pending_load := false
+
+
+func _ready() -> void:
+	Gamepad.install()
+
+
+func _input(event: InputEvent) -> void:
+	var was := Gamepad.active
+	Gamepad.note_event(event)
+	if Gamepad.active != was:
+		input_device_changed.emit(Gamepad.active)
 
 
 func goto_scene(path: String) -> Error:

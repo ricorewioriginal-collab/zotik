@@ -22,13 +22,14 @@ const TAP_PICK_RADIUS := 90.0    # screen px around a tapped object
 const TAP_REACH := 1.7           # tapped objects within INTERACT_RANGE * this are used at once
 const ACTIONS := [
 	# [action, label, anchor offset from bottom-right (x, y), radius, kind]
-	["attack", "Angriff", Vector2(90, 100), 38.0, "main"],
-	["dodge", "Rolle", Vector2(180, 70), 30.0, "main"],
-	["jump", "Sprung", Vector2(60, 190), 30.0, "main"],
-	["strong_attack", "Stark", Vector2(160, 160), 26.0, "minor"],
-	["block", "Block", Vector2(250, 60), 24.0, "minor"],
-	["use_item", "Trank", Vector2(140, 245), 24.0, "minor"],
-	["interact", "Nutzen", Vector2(250, 150), 34.0, "context"],
+	# A/B/X/Y sit like on a controller: Y top, X left, B right, A bottom.
+	["attack", "X\nAngriff", Vector2(190, 150), 38.0, "main"],
+	["dodge", "B\nRolle", Vector2(50, 150), 30.0, "main"],
+	["interact", "A\nNutzen", Vector2(120, 80), 34.0, "main"],
+	["strong_attack", "Y\nStark", Vector2(120, 220), 26.0, "minor"],
+	["jump", "Sprung", Vector2(50, 250), 30.0, "main"],
+	["use_item", "Trank", Vector2(200, 240), 24.0, "minor"],
+	["block", "Block", Vector2(260, 70), 24.0, "minor"],
 ]
 
 var game: Node
@@ -83,36 +84,30 @@ func buttons_on() -> bool:
 
 func _process(_delta: float) -> void:
 	var busy: bool = Dialogue.is_active() or (game != null and game.is_menu_open())
-	var show: bool = (force or wanted()) and not busy and (game == null or game.player.control_enabled)
+	var show: bool = (force or wanted()) and not Gamepad.active and not busy and (game == null or game.player.control_enabled)
 	if visible and not show:
 		_release_all()
 	visible = show
 	_set_touch_bindings(force or wanted())
 	if game:
-		game.hud.touch_mode = force or wanted()
+		game.hud.touch_mode = (force or wanted()) and not Gamepad.active
 	if _applied != [ui_scale(), ui_opacity(), buttons_on()]:
 		_layout()
 	_update_context()
 
 
-## "Nutzen" is only offered while the player stands next to something usable.
+## The A button is always there; it glows while something can be used.
 func _update_context() -> void:
 	var p: Panel = _panels.get("interact")
-	if p == null:
+	if p == null or not p.visible:
 		return
 	var can: bool = game != null and game.player.current_interactable != null
-	if p.visible != can:
-		p.visible = can
-		_rebuild_rects()
-		if not can:
-			for i in _buttons.keys():
-				if _buttons[i] == "interact":
-					_send("interact", false)
-					_buttons.erase(i)
 	if can:
 		var pulse := 0.85 + 0.15 * sin(Time.get_ticks_msec() / 220.0)
 		if not _buttons.values().has("interact"):
 			p.modulate = Color(1, 1, 1, minf(1.0, ui_opacity() + 0.25) * pulse)
+	else:
+		p.modulate = Color(1, 1, 1, ui_opacity() * 0.5)
 
 
 ## Touch screens turn every tap into an emulated left click. Mouse-button
@@ -160,7 +155,7 @@ func _layout() -> void:
 		p.scale = Vector2.ONE * s
 		p.position = center - p.size / 2.0
 		p.modulate = Color(1, 1, 1, op if a[4] != "minor" else op * 0.8)
-		p.visible = false if a[4] == "context" else buttons_on()
+		p.visible = buttons_on()
 	_rebuild_rects()
 
 

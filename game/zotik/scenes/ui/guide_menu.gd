@@ -21,7 +21,7 @@ const PAGES := [
 	]],
 	["Kämpfen", [
 		"PC: Linksklick oder J = schneller Angriff. K = starker Angriff, der den Bruch-Wert des Gegners senkt. F = ausweichen (kurz unverwundbar). Rechtsklick = blocken. Q = Gegner anvisieren. R = Heiltrank benutzen.",
-		"Touch: Gegner antippen, dann läuft Zotik hin und kämpft. Doppeltippen = ausweichen. Die Aktionstasten unten rechts gibt es zusätzlich.",
+		"Touch: Gegner antippen, dann läuft Zotik hin und kämpft. Doppeltippen = ausweichen. Die Tasten unten rechts liegen wie am Controller: Y oben, X links, B rechts, A unten.",
 		"Jeder Gegner hat Lebenspunkte und einen Bruch-Wert. Ist er voll, ist der Gegner kurz benommen und nimmt viel mehr Schaden („BREAK!“). Starke Angriffe sind dafür am besten.",
 		"Bei großen Gegnern leuchtet ein roter Kreis am Boden, bevor sie zuschlagen: Weich aus! Bosse haben mehrere Phasen und neue Angriffe, wenn sie schwächer werden.",
 		"In freier Wildnis, Kanälen, Dünen und Höhlen streifen außerdem Wildtiere und Wesen umher – jedes Mal andere und an anderen Stellen. Sie sind schwächer als die Wächter, bringen aber Lun und Material. In Dörfern und Städten bist du sicher.",
@@ -58,6 +58,10 @@ const PAGES := [
 	["Nebenbei", [
 		"Arena und Kopfgeldtafeln bieten zusätzliche Kämpfe mit Belohnung. Das Casino ist eine Familienoption und lässt sich in den Einstellungen ausschalten.",
 		"Alles Wichtige zu Einstellungen, Touch-Steuerung und Spiel beenden findest du im Zahnrad oben links.",
+	]],
+	["Controller", [
+		"Gamepads (auch Handy-Aufsteck-Controller per Bluetooth oder USB) funktionieren auf PC, Android und im Browser. Linker Stick laufen, rechter Stick Kamera, A sprechen/benutzen, B ausweichen, X angreifen, Y starker Angriff.",
+		"LB blocken, RB anvisieren, RT angreifen, Stick-Klick rechts springen. Steuerkreuz: oben Heiltrank, links Inventar, rechts Quests, unten Bestiarium. Start öffnet Hilfe und Einstellungen. In Menüs wählst du mit dem Steuerkreuz, A bestätigt, B geht zurück.",
 	]],
 	["Wenn du nicht weiter weißt", [
 		"1. Schau im Questlog nach dem aktuellen Schritt. 2. Folge dem Leuchtstrahl. 3. Sprich noch einmal mit der Person, die dir die Aufgabe gegeben hat. 4. Bei Rätseln: H für einen Hinweis. 5. Bei Kämpfen: ausweichen statt draufhauen, Heiltränke mitnehmen, bei einem Anker speichern und heilen.",

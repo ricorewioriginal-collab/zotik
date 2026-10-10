@@ -7,6 +7,7 @@ signal closed
 var title_label: Label
 var info_label: Label
 var list: VBoxContainer
+var close_button: Button
 
 
 func _ready() -> void:
@@ -41,6 +42,7 @@ func _ready() -> void:
 	style_button(close, true)
 	close.pressed.connect(close_menu)
 	box.add_child(close)
+	close_button = close
 	hide()
 
 
@@ -59,6 +61,20 @@ func refresh() -> void:
 	for c in list.get_children():
 		list.remove_child(c)
 		c.queue_free()
+	if Gamepad.active:
+		_focus_first.call_deferred()
+
+
+## Controller navigation needs a focused control: the first usable button, else "Schließen".
+func _focus_first() -> void:
+	if not visible or not is_inside_tree():
+		return
+	for b in list.find_children("*", "Button", true, false):
+		if not (b as Button).disabled:
+			(b as Button).grab_focus()
+			return
+	if close_button:
+		close_button.grab_focus()
 
 
 ## A list row: dark rounded plate with the text on the left and gold buttons

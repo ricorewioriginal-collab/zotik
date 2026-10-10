@@ -97,6 +97,10 @@ func _physics_process(delta: float) -> void:
 	if control_enabled and not dead:
 		input = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 		camera_pivot.rotation.y += (Input.get_action_strength("camera_left") - Input.get_action_strength("camera_right")) * CAMERA_SPEED * delta
+		var pitch := Input.get_action_strength("camera_down") - Input.get_action_strength("camera_up")
+		if pitch != 0.0:
+			var inv := -1.0 if Settings.get_value("camera_invert") else 1.0
+			spring_arm.rotation.x = clampf(spring_arm.rotation.x - pitch * CAMERA_SPEED * delta * inv, deg_to_rad(-60), deg_to_rad(20))
 		is_blocking = Input.is_action_pressed("block") and not is_dodging
 		if Input.is_action_just_pressed("jump") and is_on_floor() and not is_dodging:
 			velocity.y = JUMP_VELOCITY
