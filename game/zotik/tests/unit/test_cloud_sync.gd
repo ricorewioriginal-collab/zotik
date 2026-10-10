@@ -53,5 +53,7 @@ func test_raw_text_and_store_raw_round_trip() -> void:
 	check(not SaveSystem.store_raw(9, text), "bad slot refused")
 
 
-func test_not_configured_is_inert() -> void:
-	check(not C.new().configured(), "no client id means disabled")
+func test_signed_out_by_default() -> void:
+	var c := C.new()
+	check(not c.signed_in(), "fresh instance is signed out")
+	c.free()

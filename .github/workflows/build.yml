@@ -61,6 +61,15 @@ jobs:
           echo "GODOT_ANDROID_KEYSTORE_DEBUG_PATH=$HOME/debug.keystore" >> "$GITHUB_ENV"
           echo "GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey" >> "$GITHUB_ENV"
           echo "GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android" >> "$GITHUB_ENV"
+      - name: Cloud-Speicher OAuth-Client einsetzen (optional, aus den Repository-Secrets)
+        env:
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+        run: |
+          if [ -n "$GOOGLE_OAUTH_CLIENT_ID" ] && [ -n "$GOOGLE_OAUTH_CLIENT_SECRET" ]; then
+            sed -i "s|^const OAUTH_CLIENT_ID := \"\"|const OAUTH_CLIENT_ID := \"$GOOGLE_OAUTH_CLIENT_ID\"|; s|^const OAUTH_CLIENT_SECRET := \"\"|const OAUTH_CLIENT_SECRET := \"$GOOGLE_OAUTH_CLIENT_SECRET\"|" game/zotik/core/cloud_sync.gd
+            grep -c 'OAUTH_CLIENT_ID := "[^"]' game/zotik/core/cloud_sync.gd
+          fi
       - name: Import project
         run: ~/godot/godot --headless --path game/zotik --import || true
       - name: Export
