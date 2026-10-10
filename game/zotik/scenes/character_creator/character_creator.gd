@@ -116,6 +116,7 @@ func _ready() -> void:
 func _build_preview() -> void:
 	await get_tree().process_frame
 	preview = ZotikVisual.new()
+	preview.add_to_group("creator_preview")
 	preview.rotation.y = PI  # face the preview camera
 	_viewport.add_child(preview)
 	if _loading:

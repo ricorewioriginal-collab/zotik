@@ -95,7 +95,7 @@ func _process(delta: float) -> void:
 	_gate = 0.5
 	var p := get_tree().get_first_node_in_group("player") as Node3D
 	if p != null:
-		rig.anim.process_mode = Node.PROCESS_MODE_INHERIT if global_position.distance_to(p.global_position) < ANIM_RANGE else Node.PROCESS_MODE_DISABLED
+		rig.anim.process_mode = Node.PROCESS_MODE_INHERIT if global_position.distance_to(p.global_position) < (ANIM_RANGE * 0.5 if Quality.level() == "low" else ANIM_RANGE) else Node.PROCESS_MODE_DISABLED
 
 
 func _ready() -> void:
