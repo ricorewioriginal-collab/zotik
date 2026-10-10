@@ -199,6 +199,15 @@ func _run() -> void:
 		for c in game.companions.values():
 			c.snap_to_player()
 		await _shot(pair[1])
+	gs.set_flag("FLAG_GAME_COMPLETE")
+	gs.set_flag("FLAG_END_WAECHTER_DEFEATED")
+	for pair in [["AREA_END_HUB", "45_weltenriss_hub", Vector3(0, 0, 18)], ["AREA_END_WAECHTER", "46_weltenriss_superboss", Vector3(0, 0, 8)], ["AREA_END_D1", "47_endgame_dungeon", Vector3(0, 0, 24)]]:
+		game.enter_area(pair[0], "default")
+		game.player.global_position = pair[2]
+		game.player.camera_pivot.rotation.y = 0.0
+		for c in game.companions.values():
+			c.snap_to_player()
+		await _shot(pair[1])
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	for _i in 20:
