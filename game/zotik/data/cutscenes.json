@@ -398,6 +398,10 @@
         "Der dritte Splitter – er sitzt in ihrem Kern und treibt die Strudel an."
       ],
       [
+        "NPC_ROVAN_001",
+        "Das Meer erinnert sich an den Bruch. Ich habe das Geräusch damals gehört – und bin gelaufen."
+      ],
+      [
         "CHAR_ZOTIK",
         "Dann lassen wir die Strömung diesmal los."
       ]
@@ -572,6 +576,10 @@
         "Der Splitter sitzt in seiner Brust. Er treibt das Magma an und lässt ihn nicht ruhen."
       ],
       [
+        "NPC_NIA_001",
+        "Der Berg leidet, das sieht man. Los, bevor ich es mir anders überlege."
+      ],
+      [
         "CHAR_ZOTIK",
         "Dann lassen wir das Feuer endlich ausatmen."
       ]
@@ -744,6 +752,10 @@
       [
         "NPC_LYRA_001",
         "Der Splitter sitzt in ihrem Kern. Er lässt sie die Sterne verschieben."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Die Karten meiner Familie enden hier. Sie wussten, dass es Astralis gibt – und haben nie gewagt, es zu betreten."
       ],
       [
         "CHAR_ZOTIK",

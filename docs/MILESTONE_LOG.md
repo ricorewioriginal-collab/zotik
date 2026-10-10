@@ -957,3 +957,7 @@ An audit of all quests, cutscenes, dialogues and the story docs (30 findings, se
 - Finale and endgame: Elyon's fate (stays with Veyra), the shards stay separate but linked, the Weltenriss is announced by Veyra and explained by Lyra on arrival; the seven superboss intros are now boss-specific. Valdoria arrival mentions Mara's letter to the guild (why Veyr knows the party). Chapter titles of Noctaris, Astralis and Elyndra are the same in quest and world name; the lore line about "Regionen Elyndras" in Valdoria is corrected.
 - Not done (owner decisions or larger work, logged in CONFLICTS): look-alike names Veyr/Veyra, Kael/Kaelen, Mira/Mirael; superboss-to-dungeon pairing by theme; companion arcs (Rovan's guilt, Lyra's family), the Professorium and Nautilux hook, keepsake items without use, NG+ lore books moved into the first run, endings and the Erinnerungsbruch scene.
 - Tests: `test_w17_story_flow` (5).
+
+## W18 – Companion and chapter details (follow-up to W17)
+- Rovan comments on the sea in Aqualis (his guilt from the Great Break), Nia reacts to the suffering mountain in Ignara, Lyra tells in Astralis that her family's maps end there. Mirael mentions the Professorium's diving-machine plans (Nautilux hook, C-35). The Lunaris objective names the village where the Professorium is.
+- Still open (owner): look-alike names, superboss/dungeon pairing, keepsake item uses, endings (docs/CONFLICTS.md C-W17).
