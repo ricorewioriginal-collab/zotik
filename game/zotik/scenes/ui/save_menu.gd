@@ -19,6 +19,7 @@ func refresh() -> void:
 		if used:
 			label = "Wirklich überschreiben?" if _confirm == slot else "Überschreiben"
 		add_row(text, [[label, save.bind(slot)]])
+	add_cloud_row()
 	_confirm = -1
 
 

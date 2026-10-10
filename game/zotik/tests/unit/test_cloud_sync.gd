@@ -57,3 +57,8 @@ func test_signed_out_by_default() -> void:
 	var c := C.new()
 	check(not c.signed_in(), "fresh instance is signed out")
 	c.free()
+
+
+func test_google_icon_builds() -> void:
+	var tex := C.google_icon()
+	check(tex != null and tex.get_width() > 8, "Google icon texture is created from the SVG")

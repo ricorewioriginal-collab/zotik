@@ -33,7 +33,8 @@ func refresh() -> void:
 		add_row("Aktionstasten: %s" % _on(Settings.get_value("touch_buttons")), [["Umschalten", _toggle_touch_buttons]])
 	add_heading("Spiel")
 	add_row("Spielstand speichern (3 Slots)", [["Speichern", _open_save]])
-	add_row("Spielstand auf ein anderes Gerät übertragen (Export / Import)", [["Öffnen", _open_transfer]])
+	add_cloud_row()
+	add_row("Spielstand auf ein anderes Gerät übertragen (Google, Export / Import)", [["Öffnen", _open_transfer]])
 	add_row("Zum Titelbildschirm (speichert vorher automatisch)", [["Titel", _to_title]])
 	add_row("Spiel beenden", [["Beenden", App.quit_game]])
 
