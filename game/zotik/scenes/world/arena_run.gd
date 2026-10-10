@@ -50,11 +50,23 @@ func _next_wave() -> void:
 			e.home = e.position
 			e.data = e.data.duplicate()
 			e.data["aggro_range"] = 60.0
+			_apply_modifier(e)
 			e.defeated.connect(_on_defeated)
 			alive.append(e)
 			n += 1
 	wave_started.emit(wave)
 	EventBus.notify.emit("Welle %d / %d" % [wave + 1, waves.size()])
+
+
+## Rift kinds (data "modifier": {"hp", "attack"}): tougher and harder-hitting enemies.
+func _apply_modifier(e: Enemy) -> void:
+	var mod: Dictionary = Content.get_entry("arena", challenge_id).get("modifier", {})
+	if mod.is_empty():
+		return
+	e.max_hp = int(round(e.max_hp * float(mod.get("hp", 1.0))))
+	e.hp = e.max_hp
+	e.attack_mult = float(mod.get("attack", 1.0))
+	e._update_label()
 
 
 func _on_defeated(e: Enemy) -> void:

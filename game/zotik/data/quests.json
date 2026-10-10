@@ -1159,5 +1159,211 @@
         "count": 2
       }
     ]
+  },
+  "QUEST_END_KAEL_001": {
+    "name": "Kaels Schwester",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Besiege 6 Echokrieger in Elyndra.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 6
+        }
+      },
+      {
+        "objective": "Sprich mit Kael.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_KAEL_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 1500
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_KAEL_COMPASS_001",
+        "count": 1
+      }
+    ]
+  },
+  "QUEST_END_ERYN_001": {
+    "name": "Eryns Archiv",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 10 Erinnerungssplitter.",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_MEMORY_001",
+          "count": 10
+        }
+      },
+      {
+        "objective": "Sprich mit Eryn.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_ERYN_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_MEMORY_001",
+            "count": 10
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 1500
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ERYN_DIARY_001",
+        "count": 1
+      }
+    ]
+  },
+  "QUEST_END_TOREN_001": {
+    "name": "Torens Prüfung",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Besiege 8 Mondfledermäuse in Lunaris.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_MONDFLEDERMAUS_001",
+          "count": 8
+        }
+      },
+      {
+        "objective": "Sprich mit Toren.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_TOREN_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 1200
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_TOREN_BAND_001",
+        "count": 1
+      }
+    ]
+  },
+  "QUEST_END_SELA_001": {
+    "name": "Selas Wald",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Besiege 8 Waldspinnen in Elaris.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_WALDSPINNE_001",
+          "count": 8
+        }
+      },
+      {
+        "objective": "Sprich mit Sela.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_SELA_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 1300
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_SELA_LEAF_001",
+        "count": 1
+      }
+    ]
+  },
+  "QUEST_END_MIRAEL_001": {
+    "name": "Mirael und die Becken",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Besiege 8 Riff-Frösche in Aqualis.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 8
+        }
+      },
+      {
+        "objective": "Sprich mit Mirael.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_MIRAEL_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 1400
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_MIRAEL_GEAR_001",
+        "count": 1
+      }
+    ]
+  },
+  "QUEST_END_PROFESSORIUM_001": {
+    "name": "Das letzte Experiment",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 6 Rissessenz (Weltenbrecher im Weltenriss).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_RIFT_ESSENCE_001",
+          "count": 6
+        }
+      },
+      {
+        "objective": "Sprich mit Professorium.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_PROFESSORIUM_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_RIFT_ESSENCE_001",
+            "count": 6
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 2500
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_PROFESSORIUM_NOTES_001",
+        "count": 1
+      }
+    ]
   }
 }

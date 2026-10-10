@@ -1449,5 +1449,149 @@
         "id": "arena"
       }
     ]
+  },
+  "DLG_KAEL_END_OFFER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KAEL_001",
+        "Die Echos meiner Schwester werden klarer, seit der Kern ruht. Aber die Echokrieger zerreißen sie jedes Mal wieder. Besiege sechs von ihnen – dann kann ich sie vielleicht festhalten."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_END_KAEL_001"
+      }
+    ]
+  },
+  "DLG_KAEL_END_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KAEL_001",
+        "Sie hat mir zugewunken. Nur kurz, aber sie hat gewinkt. Hier, nimm meinen Kompass – er zeigt immer zu den Menschen, die einem wichtig sind."
+      ]
+    ]
+  },
+  "DLG_ERYN_END_OFFER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ERYN_001",
+        "Ich schreibe alles auf, woran ich mich sicher erinnere. Für ein vollständiges Archiv fehlen mir zehn Erinnerungssplitter – echte, keine, die sich gestern erst ausgedacht wurden."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_END_ERYN_001"
+      }
+    ]
+  },
+  "DLG_ERYN_END_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ERYN_001",
+        "Zehn Splitter, klar wie Quellwasser. Mein Archiv ist vollständig. Das Tagebuch gehört jetzt dir – es enthält nur, was wirklich geschah."
+      ]
+    ]
+  },
+  "DLG_TOREN_END_OFFER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TOREN_001",
+        "Du bist weit gekommen, seit du hier das erste Mal ein Schwert gehalten hast. Eine letzte Übung: Acht Mondfledermäuse, schnell und im Dunkeln. Wer die schafft, hat nichts mehr zu lernen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_END_TOREN_001"
+      }
+    ]
+  },
+  "DLG_TOREN_END_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_TOREN_001",
+        "Acht Fledermäuse, nicht ein Kratzer. Ich habe dir nichts mehr beizubringen. Nimm mein Trainingsband – du hast es dir verdient."
+      ]
+    ]
+  },
+  "DLG_SELA_END_OFFER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Der Wald von Elaris erholt sich, aber die Waldspinnen spinnen ihn zu. Besiege acht von ihnen, damit die Wege wieder frei sind."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_END_SELA_001"
+      }
+    ]
+  },
+  "DLG_SELA_END_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Der Wald atmet wieder! Hier, ein Blatt vom ältesten Baum – es bringt Glück und Sonne in jede Tasche."
+      ]
+    ]
+  },
+  "DLG_MIRAEL_END_OFFER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Die Becken von Aqualis müssen sauber bleiben, sonst steht die Stadt still. Die Riff-Frösche verstopfen die Zuläufe. Acht von ihnen, und ich baue euch ein Andenken."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_END_MIRAEL_001"
+      }
+    ]
+  },
+  "DLG_MIRAEL_END_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Sauber! Die Pumpen laufen wie nie. Mein Lieblingszahnrad – es ist aus dem ersten Prototyp. Pass gut darauf auf."
+      ]
+    ]
+  },
+  "DLG_PROFESSORIUM_END_OFFER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PROFESSORIUM_001",
+        "Ich habe mein ganzes Leben den Rissen gewidmet. Für mein letztes Experiment brauche ich sechs Rissessenz – die gibt es nur bei den Weltenbrechern im Weltenriss. Wagst du es?"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_END_PROFESSORIUM_001"
+      }
+    ]
+  },
+  "DLG_PROFESSORIUM_END_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_PROFESSORIUM_001",
+        "Sechs Proben, perfekt erhalten! Damit ist meine Arbeit abgeschlossen. Meine Notizen gehören dir – sie erklären alles, was ich über die Welt weiß."
+      ]
+    ]
   }
 }

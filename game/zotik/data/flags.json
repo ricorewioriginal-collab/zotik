@@ -361,5 +361,26 @@
   },
   "FLAG_END_HALL_10": {
     "desc": "Halle der 100: Rang 10 geschafft"
+  },
+  "FLAG_END_DUNGEON_1": {
+    "desc": "Endgame-Dungeon 1 geschafft: Der verlorene Wald"
+  },
+  "FLAG_END_DUNGEON_2": {
+    "desc": "Endgame-Dungeon 2 geschafft: Die Stadt ohne Bewohner"
+  },
+  "FLAG_END_DUNGEON_3": {
+    "desc": "Endgame-Dungeon 3 geschafft: Das Meer über dem Himmel"
+  },
+  "FLAG_END_DUNGEON_4": {
+    "desc": "Endgame-Dungeon 4 geschafft: Der ewige Vulkan"
+  },
+  "FLAG_END_DUNGEON_5": {
+    "desc": "Endgame-Dungeon 5 geschafft: Noctaris Null"
+  },
+  "FLAG_END_DUNGEON_6": {
+    "desc": "Endgame-Dungeon 6 geschafft: Elyndra Vorher"
+  },
+  "FLAG_END_DUNGEON_7": {
+    "desc": "Endgame-Dungeon 7 geschafft: Der Ort, den es nie gab"
   }
 }

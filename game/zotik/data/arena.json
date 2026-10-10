@@ -1237,5 +1237,527 @@
       }
     ],
     "requires_flag": "FLAG_END_HALL_9"
+  },
+  "ARENA_DUNGEON_001": {
+    "name": "Kleiner Riss: Der verlorene Wald",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SUMPFFROSCH_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WALDSPINNE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SUMPFFROSCH_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_MOONWOLF_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_PILZLING_001",
+          "count": 1
+        },
+        {
+          "enemy": "ENEMY_DORNENWOLF_001",
+          "count": 2
+        }
+      ]
+    ],
+    "modifier": {
+      "hp": 1.0,
+      "attack": 1.0
+    },
+    "rift_kind": "klein",
+    "reward_currency": 1000,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_DUNGEON_1"
+      }
+    ],
+    "requires_flag": "FLAG_GAME_COMPLETE"
+  },
+  "ARENA_DUNGEON_002": {
+    "name": "Erinnerungsriss: Die Stadt ohne Bewohner",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHLEUSENKRABBE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ROSTGOLEM_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ROSTGOLEM_001",
+          "count": 1
+        },
+        {
+          "enemy": "ENEMY_KANALRATTE_001",
+          "count": 2
+        }
+      ]
+    ],
+    "modifier": {
+      "hp": 1.25,
+      "attack": 1.25
+    },
+    "rift_kind": "erinnerung",
+    "reward_currency": 1300,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 4
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_DUNGEON_2"
+      }
+    ],
+    "requires_flag": "FLAG_END_DUNGEON_1"
+  },
+  "ARENA_DUNGEON_003": {
+    "name": "Tiefer Riss: Das Meer über dem Himmel",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_WOLKENSCHWINGE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_LEUCHTQUALLE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WOLKENSCHWINGE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 1
+        },
+        {
+          "enemy": "ENEMY_RIFFFROSCH_001",
+          "count": 2
+        }
+      ]
+    ],
+    "modifier": {
+      "hp": 1.4,
+      "attack": 1.2
+    },
+    "rift_kind": "tief",
+    "reward_currency": 1600,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 5
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_DUNGEON_3"
+      }
+    ],
+    "requires_flag": "FLAG_END_DUNGEON_2"
+  },
+  "ARENA_DUNGEON_004": {
+    "name": "Instabiler Riss: Der ewige Vulkan",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_FUNKENGEIST_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ASCHEKAEFER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FUNKENGEIST_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SCHMIEDEGOLEM_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SCHMIEDEGOLEM_001",
+          "count": 1
+        },
+        {
+          "enemy": "ENEMY_GLUEHWESPE_001",
+          "count": 2
+        }
+      ]
+    ],
+    "modifier": {
+      "hp": 1.5,
+      "attack": 1.3
+    },
+    "rift_kind": "instabil",
+    "reward_currency": 1900,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 6
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_DUNGEON_4"
+      }
+    ],
+    "requires_flag": "FLAG_END_DUNGEON_3"
+  },
+  "ARENA_DUNGEON_005": {
+    "name": "Erinnerungsriss: Noctaris Null",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_VERGESSENER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_NULLWAECHTER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_NULLWAECHTER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 1
+        },
+        {
+          "enemy": "ENEMY_SCHATTENFALTER_001",
+          "count": 2
+        }
+      ]
+    ],
+    "modifier": {
+      "hp": 1.25,
+      "attack": 1.25
+    },
+    "rift_kind": "erinnerung",
+    "reward_currency": 2200,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 7
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_DUNGEON_5"
+      }
+    ],
+    "requires_flag": "FLAG_END_DUNGEON_4"
+  },
+  "ARENA_DUNGEON_006": {
+    "name": "Weltenriss: Elyndra Vorher",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_EISFLEDERMAUS_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_FROSTSPINNE_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_EISFLEDERMAUS_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_WELTENWAECHTER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_FROSTSPINNE_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_WELTENWAECHTER_001",
+          "count": 1
+        },
+        {
+          "enemy": "ENEMY_SPIEGELSPINNE_001",
+          "count": 2
+        }
+      ]
+    ],
+    "modifier": {
+      "hp": 1.9,
+      "attack": 1.5
+    },
+    "rift_kind": "welten",
+    "reward_currency": 2500,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 8
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_DUNGEON_6"
+      }
+    ],
+    "requires_flag": "FLAG_END_DUNGEON_5"
+  },
+  "ARENA_DUNGEON_007": {
+    "name": "Weltenriss: Der Ort, den es nie gab",
+    "waves": [
+      [
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_GLUTDRACHE_001",
+          "count": 2
+        },
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_STERNENWAECHTER_001",
+          "count": 3
+        },
+        {
+          "enemy": "BOSS_END_WAECHTER_001",
+          "count": 1
+        }
+      ],
+      [
+        {
+          "enemy": "ENEMY_ERTRUNKENER_001",
+          "count": 3
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 2
+        }
+      ],
+      [
+        {
+          "enemy": "BOSS_END_WAECHTER_001",
+          "count": 1
+        },
+        {
+          "enemy": "ENEMY_ECHOKRIEGER_001",
+          "count": 2
+        }
+      ]
+    ],
+    "modifier": {
+      "hp": 1.9,
+      "attack": 1.5
+    },
+    "rift_kind": "welten",
+    "reward_currency": 2800,
+    "first_clear": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 9
+      },
+      {
+        "id": "ITEM_NEVER_SEAL_001",
+        "count": 1
+      }
+    ],
+    "on_first_clear": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_DUNGEON_7"
+      }
+    ],
+    "requires_flag": "FLAG_END_DUNGEON_6"
   }
 }

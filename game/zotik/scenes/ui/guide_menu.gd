@@ -26,6 +26,7 @@ const PAGES := [
 		"Bei großen Gegnern leuchtet ein roter Kreis am Boden, bevor sie zuschlagen: Weich aus! Bosse haben mehrere Phasen und neue Angriffe, wenn sie schwächer werden.",
 		"In freier Wildnis, Kanälen, Dünen und Höhlen streifen außerdem Wildtiere und Wesen umher – jedes Mal andere und an anderen Stellen. Sie sind schwächer als die Wächter, bringen aber Lun und Material. In Dörfern und Städten bist du sicher.",
 		"Nach dem Finale öffnet sich über den Weltstein die Welt „Weltenriss“: sieben Superbosse (Weltenbrecher) mit einzigartigen EX-Belohnungen und die Halle der 100 mit zehn Rängen. Am Ende wartet der letzte Splitter.",
+		"Außerdem warten nach dem Finale Abschluss-Quests bei Kael, Eryn, Toren, Sela, Mirael und dem Professorium – und sieben Endgame-Dungeons (Rissläufe in fünf Riss-Arten, von klein bis Weltenriss) im Arena-Menü der Halle.",
 	]],
 	["Quests", [
 		"Das Questlog (Taste L oder Symbol „Quests“) listet Hauptgeschichte und Nebenaufgaben mit dem aktuellen Schritt.",
