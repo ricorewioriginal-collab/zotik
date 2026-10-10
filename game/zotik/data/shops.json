@@ -121,5 +121,16 @@
       "ITEM_TRAUMTEE_001"
     ],
     "sell_ratio": 0.5
+  },
+  "SHOP_AST_SORA_001": {
+    "npc": "NPC_SORA_001",
+    "stock": [
+      "WEAPON_STAR_LANCE_001",
+      "ARMOR_CLOUD_001",
+      "ITEM_HI_POTION_001",
+      "ITEM_ELIXIR_001",
+      "ITEM_HIMMELSBROT_001"
+    ],
+    "sell_ratio": 0.5
   }
 }

@@ -44,6 +44,9 @@ const LOOKS := {
 	"NPC_ERYN_001": [{"outfit": "Female_Ranger", "body": "Female", "hair": "Hair_Long", "hair_color": Color(0.75, 0.7, 0.95), "hide": ["Female_Ranger_Head_Hood"], "tint": Color(0.85, 0.8, 1.0), "right": "staff"}, 1.7],
 	"NPC_OSSIAN_001": [{"outfit": "Male_Peasant", "body": "Male", "hair": "Hair_SimpleParted", "beard": true, "hair_color": Color(0.85, 0.85, 0.95), "tint": Color(0.75, 0.75, 0.95), "right": "staff"}, 1.72],
 	"NPC_NYX_001": [{"outfit": "Female_Peasant", "body": "Female", "hair": "Hair_Buns", "hair_color": Color(0.3, 0.15, 0.45), "tint": Color(0.85, 0.75, 1.0)}, 1.68],
+	"NPC_AERA_001": [{"outfit": "Female_Ranger", "body": "Female", "hair": "Hair_Buns", "hair_color": Color(0.95, 0.55, 0.65), "hide": ["Female_Ranger_Head_Hood"], "tint": Color(1.0, 0.9, 0.95), "right": "sword"}, 1.7],
+	"NPC_ILVO_001": [{"outfit": "Male_Peasant", "body": "Male", "hair": "Hair_Buzzed", "hair_color": Color(0.6, 0.55, 0.45), "tint": Color(0.9, 0.9, 1.0)}, 1.74],
+	"NPC_SORA_001": [{"outfit": "Female_Peasant", "body": "Female", "hair": "Hair_Long", "hair_color": Color(0.9, 0.8, 0.5), "tint": Color(1.0, 0.95, 0.85), "right": "staff"}, 1.66],
 	"NPC_KASIMIR_001": [{"outfit": "Male_Ranger", "body": "Male", "hair": "Hair_Buzzed", "hide": ["Male_Ranger_Head_Hood"], "right": "sword", "left": "shield"}, 1.86],
 }
 

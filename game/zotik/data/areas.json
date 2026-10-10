@@ -453,5 +453,63 @@
     "exits": [
       "AREA_NOC_CHAMBER"
     ]
+  },
+  "AREA_AST_PORT": {
+    "name": "Astralis – Wolkenhafen",
+    "world": "WORLD_ASTRALIS",
+    "exits": [
+      "AREA_AST_GARDEN",
+      "AREA_AST_ISLES"
+    ],
+    "gate": {
+      "AREA_AST_ISLES": "FLAG_AST_ISLES_OPEN"
+    }
+  },
+  "AREA_AST_GARDEN": {
+    "name": "Astralis – Die Sternengärten",
+    "world": "WORLD_ASTRALIS",
+    "exits": [
+      "AREA_AST_PORT"
+    ]
+  },
+  "AREA_AST_ISLES": {
+    "name": "Astralis – Die Schwebeinseln",
+    "world": "WORLD_ASTRALIS",
+    "exits": [
+      "AREA_AST_PORT",
+      "AREA_AST_RUINS"
+    ],
+    "gate": {
+      "AREA_AST_RUINS": "FLAG_AST_RUINS_OPEN"
+    }
+  },
+  "AREA_AST_RUINS": {
+    "name": "Astralis – Die Sternenruinen",
+    "world": "WORLD_ASTRALIS",
+    "exits": [
+      "AREA_AST_ISLES",
+      "AREA_AST_TEMPLE"
+    ],
+    "gate": {
+      "AREA_AST_TEMPLE": "FLAG_AST_DIALS_DONE"
+    }
+  },
+  "AREA_AST_TEMPLE": {
+    "name": "Astralis – Der Sternentempel",
+    "world": "WORLD_ASTRALIS",
+    "exits": [
+      "AREA_AST_RUINS",
+      "AREA_AST_SUMMIT"
+    ],
+    "gate": {
+      "AREA_AST_SUMMIT": "FLAG_AST_WAECHTER_DEFEATED"
+    }
+  },
+  "AREA_AST_SUMMIT": {
+    "name": "Astralis – Der Sternengipfel",
+    "world": "WORLD_ASTRALIS",
+    "exits": [
+      "AREA_AST_TEMPLE"
+    ]
   }
 }

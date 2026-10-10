@@ -999,5 +999,93 @@
         "dialogue": "DLG_NYX_SHOP_001"
       }
     ]
+  },
+  "NPC_AERA_001": {
+    "name": "Aera",
+    "area": "AREA_AST_PORT",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_AST_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_AERA_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_AST_ISLES_OPEN"
+          }
+        ],
+        "dialogue": "DLG_AERA_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_AST_001",
+            "step": 5
+          }
+        ],
+        "dialogue": "DLG_AERA_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_AST_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_AERA_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_AERA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_ILVO_001": {
+    "name": "Ilvo",
+    "area": "AREA_AST_PORT",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_ILVO_IDLE_001"
+      }
+    ]
+  },
+  "NPC_SORA_001": {
+    "name": "Sora",
+    "area": "AREA_AST_GARDEN",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_AST_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_SORA_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_AST_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_SORA_THANKS_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_SORA_SHOP_001"
+      }
+    ]
   }
 }

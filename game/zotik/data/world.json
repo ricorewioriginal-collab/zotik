@@ -76,6 +76,16 @@
       "area": "AREA_NOC_NULL",
       "name": "Weltenanker im Nullkern",
       "heals": true
+    },
+    "SAVEPOINT_AST_ISLES_001": {
+      "area": "AREA_AST_ISLES",
+      "name": "Weltenanker auf den Schwebeinseln",
+      "heals": true
+    },
+    "SAVEPOINT_AST_RUINS_001": {
+      "area": "AREA_AST_RUINS",
+      "name": "Weltenanker in den Sternenruinen",
+      "heals": true
     }
   },
   "uniques": {

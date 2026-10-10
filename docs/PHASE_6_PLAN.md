@@ -21,6 +21,7 @@ The "Vorlage" is the concept art in `reference/concept_2026-10-02/` and `19_VISU
 | W04 (PASSED) | Enemy looks: rigged animated CC0 models (Quaternius) for 16 enemies; random encounters (layout `roamers`) in the wild areas |
 | R07 (PASSED) | Ambient particles per world (fireflies, pollen, dust, bubbles) |
 | R08 (PASSED) | Chapter 8 (Noctaris, boss Erinnerungshüter) |
-| R09+ | Further chapters from `04_WORLDS/WORLDS_MASTER.md` (Astralis, Elyndra), each with full regression |
+| R09 (PASSED) | Chapter 9 (Astralis, boss Solyra) |
+| R10+ | Elyndra (finale material from `07_ENDGAME/ENDGAME.md`), each with full regression |
 
 Rules: one milestone at a time, screenshots as evidence, full regression before every merge, placeholder art is never reported as final (CLAUDE.md rule 6).

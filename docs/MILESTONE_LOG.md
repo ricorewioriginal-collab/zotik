@@ -826,3 +826,9 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - Story: the Splitter in the Erinnerungsherz makes the Hüter write memories that never happened (reveal from `STORY_MASTER.md`: memories can be stored and reproduced via the Weltenkern).
 - Tests: `test_r09_noctaris` (9, incl. the motes), `test_r10_golden_noctaris` (golden path from a chapter-7 save, restart check `golden_expected_noc.json`), `test_x01_full_playthrough` now plays chapters 1–8. Screenshots 33–36. Placeholder art, not final.
 
+## R09 – Chapter 9 Astralis (Phase 6) – PASSED
+- World `WORLD_ASTRALIS` (chapter 9, unlocked by `FLAG_NOC_CHAPTER_COMPLETE`, reached from the Noctaris travel stone), six areas: Wolkenhafen, Sternengärten (Sora's shop), Schwebeinseln, Sternenruinen, Sternentempel, Sternengipfel. Dusk sky with a pink horizon, drifting golden motes, flora with glowing blooms.
+- Main quest `QUEST_MAIN_AST_001` "Wenn die Sterne wandern" (Aera, the navigator from `CHARACTERS_MASTER.md` → ruins → star dials `PUZ_AST_DIALS_001` (turns 2, 0, 3, 1, then ignite) → Tempelwächter → boss Astralgeist Solyra → report; 650 Lun); side quest "Sternenstaub für Sora" (5 Sternenstaub, 320 Lun + Elixier). New NPCs Aera, Ilvo, Sora.
+- Enemies Wolkenschwinge (bat model), Sternenwächter (skeleton model), Tempelwächter (miniboss, persistent), boss Solyra (1250 HP, three phases with summons and surges); random encounters in the islands and the ruins. Items Sternenstaub, Himmelsbrot, Sternenlanze, Wolkenmantel.
+- Tests: `test_r11_astralis` (8), `test_r12_golden_astralis` (golden path from a chapter-8 save, restart check `golden_expected_ast.json`), `test_x01_full_playthrough` now plays chapters 1–9. Screenshots 37–40. Placeholder art, not final.
+

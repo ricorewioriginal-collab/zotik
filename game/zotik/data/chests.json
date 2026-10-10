@@ -206,5 +206,33 @@
       }
     ],
     "currency": 160
+  },
+  "CHEST_AST_001": {
+    "area": "AREA_AST_ISLES",
+    "contents": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_HIMMELSBROT_001",
+        "count": 3
+      }
+    ],
+    "currency": 140
+  },
+  "CHEST_AST_002": {
+    "area": "AREA_AST_RUINS",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_STARDUST_001",
+        "count": 2
+      }
+    ],
+    "currency": 170
   }
 }

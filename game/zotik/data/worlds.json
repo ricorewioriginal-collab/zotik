@@ -61,5 +61,13 @@
     "hub_area": "AREA_NOC_CITY",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_IGN_CHAPTER_COMPLETE"
+  },
+  "WORLD_ASTRALIS": {
+    "name": "Astralis",
+    "chapter": 9,
+    "subtitle": "Die Himmelswelt",
+    "hub_area": "AREA_AST_PORT",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_NOC_CHAPTER_COMPLETE"
   }
 }

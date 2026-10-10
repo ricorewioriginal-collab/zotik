@@ -18,6 +18,7 @@ const WORLDS := {
 	"WORLD_IGNARA": {"sky_top": "#3a1218", "sky_horizon": "#ff7a3a", "sun": "#ffb070", "sun_energy": 1.1, "pitch": -25.0, "fog": "#6a2a1a", "floor": "rock", "boundary": "wall", "fog_density": 0.012, "embers": true},
 	"WORLD_AQUALIS": {"sky_top": "#0a3a6a", "sky_horizon": "#4ad0c8", "sun": "#a8f0ff", "sun_energy": 1.1, "pitch": -70.0, "fog": "#1a8aa8", "floor": "sand", "boundary": "wall", "fog_density": 0.016, "motes": {"color": "#bff8ff", "amount": 90, "vy": 0.9, "vxz": 0.2, "y": 0.2, "h": 1.0, "size": 0.1, "life": 7.0}},
 	"WORLD_NOCTARIS": {"sky_top": "#07051f", "sky_horizon": "#3a1a6a", "sun": "#a8a0ff", "sun_energy": 0.7, "pitch": -50.0, "fog": "#2a1a5a", "floor": "cobble", "boundary": "wall", "night": true, "fog_density": 0.013, "motes": {"color": "#c8a0ff", "amount": 90, "vy": 0.12, "vxz": 0.5, "y": 1.8, "h": 3.0, "size": 0.12, "life": 8.0}},
+	"WORLD_ASTRALIS": {"sky_top": "#1a2a7a", "sky_horizon": "#ff9ad0", "sun": "#ffe8d0", "sun_energy": 0.9, "pitch": -45.0, "fog": "#7a5aa8", "floor": "cobble", "boundary": "wall", "night": true, "fog_density": 0.01, "motes": {"color": "#ffe8a0", "amount": 90, "vy": 0.2, "vxz": 0.6, "y": 2.0, "h": 3.4, "size": 0.1, "life": 8.0}},
 }
 
 ## prop name keyword -> shape/material kind (first match wins)
@@ -47,7 +48,7 @@ const PROPS_DIR := "res://assets/world/props/%s.gltf"
 ## CC0 Quaternius Medieval Village MegaKit (assets/world/village): roofs, doors, chimneys and plaster/brick textures for the houses
 const VILLAGE_DIR := "res://assets/world/village/%s.gltf"
 const VILLAGE_TEX := "res://assets/world/village/T_%s_BaseColor.png"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue", "WORLD_IGNARA": "red", "WORLD_NOCTARIS": "blue"}
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue", "WORLD_IGNARA": "red", "WORLD_NOCTARIS": "blue", "WORLD_ASTRALIS": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
@@ -60,6 +61,7 @@ const BACKDROP := {
 	"WORLD_IGNARA": [["Rock_Medium_1", "DeadTree_1", "Rock_Medium_2", "DeadTree_2", "Rock_Medium_3"], ["Rock_Medium_3", "Rock_Medium_1", "DeadTree_2", "Rock_Medium_2"]],
 	"WORLD_AQUALIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "rock_single_B", "building_home_B_blue"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 	"WORLD_NOCTARIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "tree_single_A", "building_home_B_blue"], ["rock_single_A", "trees_A_large", "rock_single_B"]],
+	"WORLD_ASTRALIS": [["building_tower_B_blue", "rock_single_B", "building_home_A_blue", "tree_single_B", "building_tower_A_blue"], ["rock_single_C", "trees_B_large", "rock_single_A"]],
 }
 
 static var _cache := {}
@@ -771,6 +773,7 @@ static func ground_tint(area_id: String, layout: Dictionary) -> Color:
 const FLORA := {
 	"WORLD_LUNARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group"], "mush": ["Mushroom_Common"], "tint": "#9fc8ff", "flower_tint": "#a8c8ff", "count": 2600, "flower_count": 260, "mush_count": 70, "glow": "#7fd8ff", "glow_count": 160},
 	"WORLD_ELARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group", "Clover_1"], "mush": ["Mushroom_Common", "Mushroom_Laetiporus"], "tint": "#e8ffd0", "flower_tint": "#ffffff", "count": 2600, "flower_count": 220, "mush_count": 50, "glow": "#ffe08a", "glow_count": 60},
+	"WORLD_ASTRALIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short"], "flowers": ["Flower_3_Group"], "mush": [], "tint": "#c8b8ff", "flower_tint": "#ffe8ff", "count": 900, "flower_count": 120, "mush_count": 0, "glow": "#ffe0a0", "glow_count": 140},
 	"WORLD_NOCTARIS": {"grass": ["Grass_Wispy_Short"], "flowers": [], "mush": [], "tint": "#8a7ac8", "flower_tint": "#ffffff", "count": 700, "flower_count": 0, "mush_count": 0, "glow": "#b080ff", "glow_count": 120},
 	"WORLD_SOLMERA": {"grass": ["Grass_Wispy_Short", "Plant_1"], "flowers": [], "mush": [], "tint": "#e8cc88", "flower_tint": "#ffffff", "count": 500, "flower_count": 0, "mush_count": 0, "glow": "", "glow_count": 0},
 }
