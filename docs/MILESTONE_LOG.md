@@ -867,3 +867,6 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - Bossphasen come from E04 (Raserei phase); secrets are not part of this step.
 - Test: `test_r18_ngplus_extras` (5).
 
+## E06 – New Game+ secrets (Phase 7) – PASSED
+- Seven hidden lore books (`LORE_NG_001`–`007`, layout `ng_entities`, one per wild area of the first seven worlds) that exist only in NG+ and hint at the alternate history behind the bosses ("Geheimnisse" of the spec). Test: `test_r18_ngplus_extras` now has 6 tests.
+

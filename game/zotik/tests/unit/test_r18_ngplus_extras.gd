@@ -81,3 +81,19 @@ func test_story_npcs_comment_on_the_second_run() -> void:
 	GameState.set_flag("FLAG_LUN_CHAPTER_COMPLETE", false)
 	eq(Dialogue.select_for_npc("NPC_MIRA_001"), "DLG_MIRA_NGPLUS_001", "Mira notices (when nothing else applies)")
 	check(before != "", "baseline dialogue exists")
+
+
+func test_secret_lore_books_only_in_new_game_plus() -> void:
+	GameState.set_flag("FLAG_LUN_FOREST_UNLOCKED")
+	game.enter_area("AREA_LUN_FOREST", "default")
+	await physics_frames(2)
+	check(not game.area.entities.has("LORE_NG_001"), "no secret in the first playthrough")
+	GameState.ng_plus = 1
+	game.enter_area("AREA_LUN_FOREST", "default")
+	await physics_frames(2)
+	check(game.area.entities.has("LORE_NG_001"), "secret book in NG+")
+	var n := 0
+	for id in Content.table("lore"):
+		if str(id).begins_with("LORE_NG_"):
+			n += 1
+	eq(n, 7, "seven secrets")
