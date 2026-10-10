@@ -898,3 +898,8 @@ Findings in the old code: saving was only possible at a Weltenanker (nothing els
 ## W07 – Fast travel to touched Weltenanker (workflow)
 - Touching an anchor sets `FLAG_ANCHOR_<savepoint id>` (stored in the normal flags, no save format change). The world map lists the touched anchors under their world with a "Reisen" button (arrival at the area's default spawn); worlds still travel to their hub as before. Guide section added.
 - Tests: `test_w07_fast_travel` (3).
+
+## W08 – Quest tracking and fight start-up stutter (owner: "es ruckelt beim angreifen")
+- Quest tracking: the quest log offers "Verfolgen" per active quest; the followed quest moves to the front of the objective list and the guide beacon follows it (`FLAG_TRACK_<quest>` in the normal flags, no save format change; ends with the quest). Tests: `test_w08_quest_tracking` (3).
+- Stutter: on the web/Android renderers new shader/pipeline variants and new font glyphs are built the first time they are drawn, which shows up as hitches at the first hits of a fight. `Prewarm` (scenes/game_root/prewarm.gd) draws the hit/wind-up/break overlays on a skinned and an unskinned mesh, the death-burst glow and the damage-number digits for three frames in front of the camera when the first area is entered. Damage numbers now use a 64 px font (was 96 px with a large outline; `pixel_size` keeps the size) which makes each new number cheaper.
+- Not measurable here (headless/xvfb, no real GPU): the effect on real phones and browsers. Please test the first fights on the live site and report whether the stutter is gone, reduced or unchanged.

@@ -317,6 +317,9 @@ func enter_area(area_id: String, spawn: String, pos_override = null) -> void:
 	_update_objective()
 	area_loaded.emit(area_id)
 	EventBus.area_entered.emit(area_id)
+	if not _prewarmed:
+		_prewarmed = true
+		Prewarm.run.call_deferred(self)
 
 
 func start_arena(id: String) -> bool:
@@ -361,6 +364,7 @@ func _on_exit_requested(target: String) -> void:
 	transition(target, area.area_id)
 
 
+var _prewarmed := false
 var _veil: ColorRect
 var _transitioning := false
 
