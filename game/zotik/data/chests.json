@@ -262,5 +262,145 @@
       }
     ],
     "currency": 180
+  },
+  "CHEST_NG_001": {
+    "area": "AREA_LUN_FOREST",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_002": {
+    "area": "AREA_ELA_FOREST",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_003": {
+    "area": "AREA_VAL_CANALS",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_004": {
+    "area": "AREA_SOL_DUNES",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_005": {
+    "area": "AREA_AQU_CAVES",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_006": {
+    "area": "AREA_FRO_FOREST",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_007": {
+    "area": "AREA_IGN_ASH",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_008": {
+    "area": "AREA_NOC_LANES",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_009": {
+    "area": "AREA_AST_ISLES",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
+  },
+  "CHEST_NG_010": {
+    "area": "AREA_ELY_LAYERS",
+    "contents": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "currency": 400
   }
 }

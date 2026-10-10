@@ -71,6 +71,10 @@ const ARCHETYPES := {
 	"BOSS_END_ABYSS_001": ["queen", "#58e0f0"],
 	"BOSS_END_FROSTHERZ_001": ["golem", "#c8f0ff"],
 	"BOSS_END_FEUERKERN_001": ["golem", "#ff8030"],
+	"ENEMY_NG_SCHATTENWOLF_001": ["wolf", "#c080ff"],
+	"ENEMY_NG_SPINNE_001": ["model", "#ff60a0"],
+	"ENEMY_NG_DRACHE_001": ["model", "#ffd040"],
+	"ENEMY_NG_WAECHTER_001": ["model", "#40e0ff"],
 }
 
 ## Rigged models: file (assets/enemies/<file>.fbx), tint (replaces the flat model colour),
@@ -98,6 +102,9 @@ const MODELS := {
 	"ENEMY_STERNENWAECHTER_001": {"file": "Skeleton", "tint": "#d8c070"},
 	"ENEMY_SPIEGELSPINNE_001": {"file": "Spider", "tint": "#b8d8e8"},
 	"ENEMY_ECHOKRIEGER_001": {"file": "Skeleton", "tint": "#8aa8d8"},
+	"ENEMY_NG_SPINNE_001": {"file": "Spider", "tint": "#d04080"},
+	"ENEMY_NG_DRACHE_001": {"file": "Dragon", "tint": "#e0b020", "hover": 0.5},
+	"ENEMY_NG_WAECHTER_001": {"file": "Skeleton", "tint": "#30c8e0"},
 }
 
 ## nominal size of a model (longest side) before the enemy's size factor

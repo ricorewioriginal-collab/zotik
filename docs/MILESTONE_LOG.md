@@ -861,3 +861,9 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - Not done (spec: "nicht bloß höhere Werte"): NG+-only enemy types, items, chest positions and dialogues. The numeric scaling and the rage phase are the first step.
 - Tests: `test_r17_ngplus` (4). Placeholder art, not final.
 
+## E05 – New Game+ extras (Phase 7) – PASSED
+- Spec: "Neue Gegner, Items, Bossphasen, Truhenpositionen, Geheimnisse und Dialoge; nicht bloß höhere Werte."
+- New enemies only in NG+: Chronik-Schattenwolf, Chronikspinne, Chronikdrache, Chronikwächter (layout `roamers.ng_pool`; they drop Chronikfragmente). Extra chests only in NG+ (layout `ng_entities`, ten chests in the wild areas, +50% Lun per level in all chests). New dialogue condition `ng_plus` (level); six story NPCs (Mira, Sela, Mirael, Kaelen, Eryn, Veyra) have NG+ lines that show once their story lines are done. Corvin (Weltenriss hub) sells Chronikklinge, Chronikpanzer and Chronik-Elixier from NG+ on.
+- Bossphasen come from E04 (Raserei phase); secrets are not part of this step.
+- Test: `test_r18_ngplus_extras` (5).
+

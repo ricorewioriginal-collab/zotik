@@ -2387,5 +2387,89 @@
         }
       }
     ]
+  },
+  "ENEMY_NG_SCHATTENWOLF_001": {
+    "name": "Chronik-Schattenwolf",
+    "region": "WORLD_WELTENRISS",
+    "description": "Ein Wolf aus verblasster Zeit. Er taucht nur auf, wenn die Reise ein zweites Mal beginnt.",
+    "hp": 260,
+    "attack": 26,
+    "defense": 12,
+    "move_speed": 5.2,
+    "aggro_range": 13.0,
+    "attack_range": 2.0,
+    "attack_cooldown": 1.2,
+    "currency": 60,
+    "drops": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 1
+      }
+    ],
+    "break": 65,
+    "break_duration": 3.0
+  },
+  "ENEMY_NG_SPINNE_001": {
+    "name": "Chronikspinne",
+    "region": "WORLD_WELTENRISS",
+    "description": "Webt Zeitfäden um alle, die ihre Geschichte schon einmal erlebt haben.",
+    "hp": 230,
+    "attack": 27,
+    "defense": 11,
+    "move_speed": 4.4,
+    "aggro_range": 13.0,
+    "attack_range": 2.0,
+    "attack_cooldown": 1.2,
+    "currency": 60,
+    "drops": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 1
+      }
+    ],
+    "break": 57,
+    "break_duration": 3.0
+  },
+  "ENEMY_NG_DRACHE_001": {
+    "name": "Chronikdrache",
+    "region": "WORLD_WELTENRISS",
+    "description": "Ein Drache, der jede Version der Welt zugleich bewacht.",
+    "hp": 380,
+    "attack": 31,
+    "defense": 15,
+    "move_speed": 3.6,
+    "aggro_range": 13.0,
+    "attack_range": 2.0,
+    "attack_cooldown": 1.2,
+    "currency": 60,
+    "drops": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 1
+      }
+    ],
+    "break": 95,
+    "break_duration": 3.0
+  },
+  "ENEMY_NG_WAECHTER_001": {
+    "name": "Chronikwächter",
+    "region": "WORLD_WELTENRISS",
+    "description": "Ein Wächter, der nur im zweiten Durchgang erwacht.",
+    "hp": 320,
+    "attack": 29,
+    "defense": 16,
+    "move_speed": 3.4,
+    "aggro_range": 13.0,
+    "attack_range": 2.0,
+    "attack_cooldown": 1.2,
+    "currency": 60,
+    "drops": [
+      {
+        "id": "ITEM_CHRONICLE_001",
+        "count": 1
+      }
+    ],
+    "break": 80,
+    "break_duration": 3.0
   }
 }

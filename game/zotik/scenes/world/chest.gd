@@ -61,9 +61,10 @@ func interact(_player: Node) -> void:
 		var n := Inventory.add(c.id, int(c.count))
 		if n > 0:
 			got.append("%dx %s" % [n, Content.item(c.id).name])
-	if int(data.get("currency", 0)) > 0:
-		Inventory.add_currency(int(data.currency))
-		got.append("%d Lun" % int(data.currency))
+	var lun := int(round(float(data.get("currency", 0)) * (1.0 + 0.5 * GameState.ng_plus)))
+	if lun > 0:
+		Inventory.add_currency(lun)
+		got.append("%d Lun" % lun)
 	GameState.chests_opened[chest_id] = true
 	EventBus.chest_opened.emit(chest_id)
 	EventBus.notify.emit("Erhalten: " + ", ".join(got))

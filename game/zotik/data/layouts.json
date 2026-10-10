@@ -890,8 +890,22 @@
         "ENEMY_GRUENSCHLEIM_001"
       ],
       "count": 3,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_SCHATTENWOLF_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_001",
+        "pos": [
+          -10.2,
+          0,
+          -20.3
+        ]
+      }
+    ]
   },
   "AREA_LUN_RUINS": {
     "size": [
@@ -1848,8 +1862,23 @@
         "ENEMY_SUMPFFROSCH_001"
       ],
       "count": 4,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_SCHATTENWOLF_001",
+        "ENEMY_NG_SPINNE_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_002",
+        "pos": [
+          7.2,
+          0,
+          -29.1
+        ]
+      }
+    ]
   },
   "AREA_ELA_TOWER": {
     "size": [
@@ -3265,8 +3294,22 @@
         "ENEMY_SUMPFFROSCH_001"
       ],
       "count": 3,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_SPINNE_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_003",
+        "pos": [
+          13.3,
+          0,
+          -23.6
+        ]
+      }
+    ]
   },
   "AREA_VAL_CISTERN": {
     "size": [
@@ -4469,8 +4512,22 @@
         "ENEMY_DUENENSCHLANGE_001"
       ],
       "count": 4,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_WAECHTER_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_004",
+        "pos": [
+          17.2,
+          0,
+          -14.3
+        ]
+      }
+    ]
   },
   "AREA_SOL_SUNKEN": {
     "size": [
@@ -5923,8 +5980,23 @@
         "ENEMY_RIFFFROSCH_001"
       ],
       "count": 3,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_WAECHTER_001",
+        "ENEMY_NG_SPINNE_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_005",
+        "pos": [
+          -9.2,
+          0,
+          21.5
+        ]
+      }
+    ]
   },
   "AREA_AQU_ARCHIVE": {
     "size": [
@@ -7223,8 +7295,23 @@
         "ENEMY_FROSTSPINNE_001"
       ],
       "count": 4,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_SCHATTENWOLF_001",
+        "ENEMY_NG_WAECHTER_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_006",
+        "pos": [
+          6.7,
+          0,
+          -8.7
+        ]
+      }
+    ]
   },
   "AREA_FRO_CITY": {
     "size": [
@@ -8604,8 +8691,22 @@
         "ENEMY_GLUTDRACHE_001"
       ],
       "count": 4,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_DRACHE_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_007",
+        "pos": [
+          -21.1,
+          0,
+          -20.0
+        ]
+      }
+    ]
   },
   "AREA_IGN_MINES": {
     "size": [
@@ -10066,8 +10167,23 @@
         "ENEMY_VERGESSENER_001"
       ],
       "count": 4,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_DRACHE_001",
+        "ENEMY_NG_WAECHTER_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_008",
+        "pos": [
+          14.1,
+          0,
+          13.5
+        ]
+      }
+    ]
   },
   "AREA_NOC_NULL": {
     "size": [
@@ -11519,8 +11635,22 @@
         "ENEMY_STERNENWAECHTER_001"
       ],
       "count": 4,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_DRACHE_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_009",
+        "pos": [
+          1.2,
+          0,
+          25.5
+        ]
+      }
+    ]
   },
   "AREA_AST_RUINS": {
     "size": [
@@ -12972,8 +13102,23 @@
         "ENEMY_ECHOKRIEGER_001"
       ],
       "count": 4,
-      "radius": 7.0
-    }
+      "radius": 7.0,
+      "ng_pool": [
+        "ENEMY_NG_DRACHE_001",
+        "ENEMY_NG_WAECHTER_001"
+      ]
+    },
+    "ng_entities": [
+      {
+        "type": "chest",
+        "id": "CHEST_NG_010",
+        "pos": [
+          11.0,
+          0,
+          -14.4
+        ]
+      }
+    ]
   },
   "AREA_ELY_VOID": {
     "size": [
@@ -14681,6 +14826,15 @@
         "id": "NPC_YSOLDE_001",
         "pos": [
           -9,
+          0,
+          15
+        ]
+      },
+      {
+        "type": "npc",
+        "id": "NPC_CORVIN_001",
+        "pos": [
+          10,
           0,
           15
         ]

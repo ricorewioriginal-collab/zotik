@@ -18,6 +18,7 @@ static func check(g: Dictionary) -> bool:
 		"flag": return GameState.has_flag(g.id)
 		"not_flag": return not GameState.has_flag(g.id)
 		"has_item": return Inventory.count(g.id) >= int(g.get("count", 1))
+		"ng_plus": return GameState.ng_plus >= int(g.get("level", 1))
 	return false
 
 

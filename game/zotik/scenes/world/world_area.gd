@@ -55,7 +55,10 @@ func build(id: String, factories: Dictionary) -> void:
 			flag_props.append({"node": node, "flag": p.hidden_by_flag, "invert": true})
 	for x in layout.get("exits", []):
 		_exit(x)
-	for en in layout.get("entities", []):
+	var ents: Array = layout.get("entities", []).duplicate()
+	if GameState.ng_plus > 0:
+		ents.append_array(layout.get("ng_entities", []))  # New Game+ only (extra chests)
+	for en in ents:
 		var f: Callable = factories.get(en.type, Callable())
 		if not f.is_valid():
 			skipped.append(en)
@@ -92,7 +95,9 @@ func _spawn_roamers(factories: Dictionary) -> void:
 		if en.type != "puzzle" and en.type != "savepoint" and en.type != "chest":
 			continue
 		keep_out.append(Vector2(float(en.pos[0]), float(en.pos[2])))
-	var pool: Array = cfg.pool
+	var pool: Array = cfg.pool.duplicate()
+	if GameState.ng_plus > 0:
+		pool.append_array(cfg.get("ng_pool", []))
 	var n := 0
 	for i in int(cfg.get("count", 2)):
 		for attempt in 30:
