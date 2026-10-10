@@ -67,6 +67,22 @@ func savepoint(id: String) -> Dictionary:
 	return world.get("savepoints", {}).get(id, {})
 
 
+## Flag set when a Weltenanker was touched; the world map offers those for fast travel.
+static func anchor_flag(savepoint_id: String) -> String:
+	return "FLAG_ANCHOR_" + savepoint_id
+
+
+## Touched anchors of one world as [savepoint id, area id], in a stable order.
+func anchors_of(world_id: String) -> Array:
+	var out := []
+	for id in world.get("savepoints", {}):
+		var area: String = world.savepoints[id].get("area", "")
+		if GameState.has_flag(anchor_flag(id)) and world_of(area) == world_id:
+			out.append([id, area])
+	out.sort_custom(func(a, b): return a[0] < b[0])
+	return out
+
+
 func combat() -> Dictionary:
 	return world.get("combat", {})
 
