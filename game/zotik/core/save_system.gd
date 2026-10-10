@@ -197,22 +197,15 @@ func export_code(slot: int) -> String:
 func import_code(code: String, slot: int) -> Status:
 	if slot < 1 or slot > SLOT_COUNT:
 		return Status.IO_ERROR
-	var clean := code.strip_edges().replace("\n", "").replace("\r", "").replace(" ", "")
-	if not clean.begins_with(CODE_PREFIX):
-		return Status.CORRUPT
-	var parts := clean.trim_prefix(CODE_PREFIX).split(":", false)
-	if parts.size() != 2 or not parts[0].is_valid_int():
-		return Status.CORRUPT
-	var size := int(parts[0])
-	if size <= 0 or size > CODE_MAX_BYTES:
-		return Status.CORRUPT
-	var packed := Marshalls.base64_to_raw(parts[1])
-	if packed.is_empty():
-		return Status.CORRUPT
-	var bytes := packed.decompress(size, FileAccess.COMPRESSION_DEFLATE)
-	if bytes.size() != size:
-		return Status.CORRUPT
-	var text := bytes.get_string_from_utf8()
+	var text := ""
+	var clean := code.strip_edges()
+	if clean.begins_with("{"):
+		# a raw save file (slot_01.json copied from another device)
+		text = clean
+	else:
+		text = _decode_code(clean.replace("\n", "").replace("\r", "").replace(" ", "").replace("\t", ""))
+		if text == "":
+			return Status.CORRUPT
 	var res := _parse_envelope(text)
 	if res.status != Status.OK:
 		return res.status
@@ -223,6 +216,25 @@ func import_code(code: String, slot: int) -> Status:
 		return Status.IO_ERROR
 	saved.emit(slot)
 	return Status.OK
+
+
+## "ZOTIK1:<size>:<base64>" -> envelope JSON text, "" if anything is wrong.
+func _decode_code(clean: String) -> String:
+	if not clean.begins_with(CODE_PREFIX):
+		return ""
+	var parts := clean.trim_prefix(CODE_PREFIX).split(":", false)
+	if parts.size() != 2 or not parts[0].is_valid_int():
+		return ""
+	var size := int(parts[0])
+	if size <= 0 or size > CODE_MAX_BYTES:
+		return ""
+	var packed := Marshalls.base64_to_raw(parts[1])
+	if packed.is_empty():
+		return ""
+	var bytes := packed.decompress(size, FileAccess.COMPRESSION_DEFLATE)
+	if bytes.size() != size:
+		return ""
+	return bytes.get_string_from_utf8()
 
 
 func load_slot(slot: int) -> Status:

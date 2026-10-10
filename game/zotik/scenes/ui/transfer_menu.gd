@@ -10,6 +10,7 @@ var _export_code := ""
 var _import_text := ""
 var _result := ""
 var _confirm := -1
+var _file_cb: JavaScriptObject
 
 
 func refresh() -> void:
@@ -32,6 +33,8 @@ func refresh() -> void:
 		var actions := [["In Zwischenablage kopieren", _copy_code]]
 		if OS.has_feature("web"):
 			actions.append(["Als Datei laden", _download_code])
+		elif _native_files():
+			actions.append(["Als Datei speichern", _save_code_file])
 		add_row("Code weitergeben", actions)
 	add_heading("Importieren")
 	add_note("Code hier einfügen (Strg+V, am Handy langes Tippen und Einfügen) und den Ziel-Slot wählen. Ein belegter Slot fragt vor dem Überschreiben nach.")
@@ -42,7 +45,10 @@ func refresh() -> void:
 	imp.custom_minimum_size = Vector2(760, 90)
 	imp.text_changed.connect(func(): _import_text = imp.text)
 	list.add_child(imp)
-	add_row("Aus der Zwischenablage einfügen", [["Einfügen", _paste.bind(imp)]])
+	var pick := [["Einfügen", _paste.bind(imp)]]
+	if OS.has_feature("web") or _native_files():
+		pick.append(["Datei wählen", _pick_file])
+	add_row("Code aus der Zwischenablage einfügen oder aus einer Datei laden (Export-Datei oder kopierte Spielstand-Datei slot_01.json)", pick)
 	for slot in range(1, SaveSystem.SLOT_COUNT + 1):
 		var used: bool = SaveSystem.slot_info(slot).status in [SaveSystem.Status.OK, SaveSystem.Status.RECOVERED_FROM_BACKUP]
 		var label := "Importieren"
@@ -73,6 +79,59 @@ func _copy_code() -> void:
 func _download_code() -> void:
 	var fname := "zotik_%s.txt" % ("autosave" if _export_slot == SaveSystem.AUTO_SLOT else "slot%d" % _export_slot)
 	JavaScriptBridge.download_buffer(_export_code.to_utf8_buffer(), fname, "text/plain")
+
+
+static func _native_files() -> bool:
+	return DisplayServer.has_feature(DisplayServer.FEATURE_NATIVE_DIALOG_FILE)
+
+
+## Browser: a hidden file input; native: the system file dialog (Windows, macOS, Linux, Android).
+func _pick_file() -> void:
+	if OS.has_feature("web"):
+		_file_cb = JavaScriptBridge.create_callback(func(args): _apply_file_text(str(args[0]) if args.size() > 0 else ""))
+		JavaScriptBridge.get_interface("window").zotikImportCb = _file_cb
+		JavaScriptBridge.eval("(function(){var i=document.createElement('input');i.type='file';i.accept='.txt,.json,.zotik,text/plain,application/json';i.onchange=function(){var f=i.files[0];if(!f){return;}var r=new FileReader();r.onload=function(){window.zotikImportCb(String(r.result));};r.readAsText(f);};i.click();})()")
+	elif _native_files():
+		DisplayServer.file_dialog_show("Spielstand-Datei wählen", "", "", false, DisplayServer.FILE_DIALOG_MODE_OPEN_FILE, PackedStringArray(["*.txt,*.json,*.zotik ; Spielstand"]), _on_native_file)
+
+
+func _on_native_file(ok: bool, paths: PackedStringArray, _filter: int) -> void:
+	if not ok or paths.is_empty():
+		return
+	var text := FileAccess.get_file_as_string(paths[0])
+	if text == "" and FileAccess.get_open_error() != OK:
+		_result = "Die Datei konnte nicht gelesen werden."
+		refresh()
+		return
+	_apply_file_text(text)
+
+
+## Text of a chosen file: the Spielstand code or a raw save file. The slot is chosen next.
+func _apply_file_text(text: String) -> void:
+	_import_text = text.strip_edges()
+	if _import_text == "":
+		_result = "Die Datei ist leer."
+	elif _import_text.length() > SaveSystem.CODE_MAX_BYTES:
+		_import_text = ""
+		_result = "Die Datei ist zu groß für einen Spielstand."
+	else:
+		_result = "Datei geladen. Jetzt unten den Ziel-Slot wählen."
+	refresh()
+
+
+func _save_code_file() -> void:
+	var fname := "zotik_%s.txt" % ("autosave" if _export_slot == SaveSystem.AUTO_SLOT else "slot%d" % _export_slot)
+	DisplayServer.file_dialog_show("Spielstand-Datei speichern", "", fname, false, DisplayServer.FILE_DIALOG_MODE_SAVE_FILE, PackedStringArray(["*.txt ; Spielstand"]), func(ok: bool, paths: PackedStringArray, _f: int):
+		if not ok or paths.is_empty():
+			return
+		var f := FileAccess.open(paths[0], FileAccess.WRITE)
+		if f == null:
+			_result = "Die Datei konnte nicht geschrieben werden."
+		else:
+			f.store_string(_export_code)
+			f.close()
+			_result = "Datei gespeichert."
+		refresh())
 
 
 func _paste(imp: TextEdit) -> void:

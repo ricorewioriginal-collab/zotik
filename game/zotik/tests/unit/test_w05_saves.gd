@@ -208,3 +208,29 @@ func test_transfer_menu_imports_with_confirmation() -> void:
 	menu._make_code(1)
 	check(menu._export_code == code, "export code shown in the menu")
 	menu.queue_free()
+
+
+func test_import_accepts_a_raw_save_file() -> void:
+	_state("AREA_ELA_TOWN", 616)
+	SaveSystem.save_slot(1)
+	var raw := FileAccess.get_file_as_string(SaveSystem.slot_path(1))
+	eq(SaveSystem.import_code(raw, 2), SaveSystem.Status.OK, "raw slot file")
+	GameState.reset_new_game()
+	eq(SaveSystem.load_slot(2), SaveSystem.Status.OK, "load")
+	eq(GameState.currency, 616, "content")
+	eq(SaveSystem.import_code("{\"data\": 1}", 3), SaveSystem.Status.CORRUPT, "garbage json is refused")
+
+
+func test_file_text_is_taken_over_by_the_transfer_menu() -> void:
+	_state("AREA_LUN_VILLAGE", 77)
+	SaveSystem.save_slot(1)
+	var code := SaveSystem.export_code(1)
+	var menu := TransferMenu.new()
+	tree.root.add_child(menu)
+	menu.open()
+	menu._apply_file_text("\n" + code + "\n")
+	eq(menu._import_text, code, "text from the file, trimmed")
+	check(menu._result.contains("Ziel-Slot"), "asks for the slot next")
+	menu._apply_file_text("   ")
+	check(menu._result.contains("leer"), "empty file reported")
+	menu.queue_free()
