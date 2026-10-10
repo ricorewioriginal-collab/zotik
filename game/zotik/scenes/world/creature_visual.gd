@@ -52,6 +52,10 @@ const ARCHETYPES := {
 	"ENEMY_FROSTSPINNE_001": ["model", "#bfe4ff"],
 	"ENEMY_GLUEHWESPE_001": ["model", "#ffd060"],
 	"ENEMY_GLUTDRACHE_001": ["model", "#ff8a40"],
+	"ENEMY_SCHATTENFALTER_001": ["model", "#b080ff"],
+	"ENEMY_VERGESSENER_001": ["model", "#a090e0"],
+	"ENEMY_NULLWAECHTER_001": ["golem", "#b080ff"],
+	"BOSS_ERINNERUNGSHUETER_001": ["golem", "#d0a8ff"],
 }
 
 ## Rigged models: file (assets/enemies/<file>.fbx), tint (replaces the flat model colour),
@@ -73,6 +77,8 @@ const MODELS := {
 	"ENEMY_FROSTSPINNE_001": {"file": "Spider", "tint": "#8ab8d8"},
 	"ENEMY_GLUEHWESPE_001": {"file": "Wasp", "tint": "#e8a020", "hover": 0.6},
 	"ENEMY_GLUTDRACHE_001": {"file": "Dragon", "tint": "#a83a1a", "hover": 0.5},
+	"ENEMY_SCHATTENFALTER_001": {"file": "Bat", "tint": "#5a3a9a", "hover": 0.7},
+	"ENEMY_VERGESSENER_001": {"file": "Skeleton", "tint": "#7a6aa8"},
 }
 
 ## nominal size of a model (longest side) before the enemy's size factor

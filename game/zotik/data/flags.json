@@ -202,5 +202,32 @@
   },
   "FLAG_IGN_CHAPTER_COMPLETE": {
     "desc": "Kapitel 7 (Ignara) abgeschlossen"
+  },
+  "FLAG_NOC_ARRIVED": {
+    "desc": "Noctaris betreten"
+  },
+  "FLAG_NOC_LANES_OPEN": {
+    "desc": "Die Vergessenen Gassen sind offen"
+  },
+  "FLAG_NOC_NULL_SEEN": {
+    "desc": "Den Nullkern gesehen"
+  },
+  "FLAG_NOC_NULL_OPEN": {
+    "desc": "Der Weg zum Nullkern ist frei"
+  },
+  "FLAG_NOC_MEMORY_DONE": {
+    "desc": "Erinnerungsfolge im Nullkern gelöst"
+  },
+  "FLAG_NOC_WAECHTER_DEFEATED": {
+    "desc": "Nullwächter besiegt"
+  },
+  "FLAG_NOC_HUETER_MET": {
+    "desc": "Begegnung mit dem Erinnerungshüter gesehen"
+  },
+  "FLAG_BOSS_NOC_HUETER_DEFEATED": {
+    "desc": "Erinnerungshüter besiegt"
+  },
+  "FLAG_NOC_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 8 (Noctaris) abgeschlossen"
   }
 }

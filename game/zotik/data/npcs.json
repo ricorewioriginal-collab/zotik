@@ -911,5 +911,93 @@
         "dialogue": "DLG_ZINNA_SHOP_001"
       }
     ]
+  },
+  "NPC_ERYN_001": {
+    "name": "Eryn",
+    "area": "AREA_NOC_CITY",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_NOC_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_ERYN_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_NOC_LANES_OPEN"
+          }
+        ],
+        "dialogue": "DLG_ERYN_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_NOC_001",
+            "step": 5
+          }
+        ],
+        "dialogue": "DLG_ERYN_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_NOC_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_ERYN_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_ERYN_IDLE_001"
+      }
+    ]
+  },
+  "NPC_OSSIAN_001": {
+    "name": "Ossian",
+    "area": "AREA_NOC_CITY",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_OSSIAN_IDLE_001"
+      }
+    ]
+  },
+  "NPC_NYX_001": {
+    "name": "Nyx",
+    "area": "AREA_NOC_ARCHIVE",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_NOC_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_NYX_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_NOC_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_NYX_THANKS_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_NYX_SHOP_001"
+      }
+    ]
   }
 }

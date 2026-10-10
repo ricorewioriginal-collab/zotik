@@ -10,13 +10,14 @@ const INDOOR_KEYS := ["CAVE", "DUNGEON", "CANALS", "CISTERN", "FLOODGATE", "HOME
 
 ## sky_top, sky_horizon, sun colour, sun energy, sun pitch, fog colour, floor texture, boundary kind
 const WORLDS := {
-	"WORLD_LUNARIS": {"sky_top": "#0a1140", "sky_horizon": "#4a3f9a", "sun": "#b8c8ff", "sun_energy": 0.8, "pitch": -48.0, "fog": "#3a3a8a", "floor": "grass", "boundary": "hedge", "night": true, "fog_density": 0.01},
-	"WORLD_ELARIS": {"sky_top": "#2f74d6", "sky_horizon": "#cdeeff", "sun": "#fff0c8", "sun_energy": 1.25, "pitch": -58.0, "fog": "#a8d8b0", "floor": "forest", "boundary": "hedge"},
-	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall"},
-	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall"},
+	"WORLD_LUNARIS": {"sky_top": "#0a1140", "sky_horizon": "#4a3f9a", "sun": "#b8c8ff", "sun_energy": 0.8, "pitch": -48.0, "fog": "#3a3a8a", "floor": "grass", "boundary": "hedge", "night": true, "fog_density": 0.01, "motes": {"color": "#d8ff8a", "amount": 70, "vy": 0.15, "vxz": 0.5, "y": 1.6, "h": 2.6, "size": 0.12, "life": 7.0}},
+	"WORLD_ELARIS": {"sky_top": "#2f74d6", "sky_horizon": "#cdeeff", "sun": "#fff0c8", "sun_energy": 1.25, "pitch": -58.0, "fog": "#a8d8b0", "floor": "forest", "boundary": "hedge", "motes": {"color": "#fff0b0", "amount": 90, "vy": 0.25, "vxz": 0.6, "y": 1.8, "h": 3.2, "size": 0.08, "life": 8.0}},
+	"WORLD_VALDORIA": {"sky_top": "#2b4c9c", "sky_horizon": "#ffc48e", "sun": "#ffd8a0", "sun_energy": 1.2, "pitch": -35.0, "fog": "#e6b892", "floor": "cobble", "boundary": "wall", "motes": {"color": "#ffe0c0", "amount": 50, "vy": 0.1, "vxz": 0.4, "y": 2.0, "h": 3.5, "size": 0.07, "life": 8.0}},
+	"WORLD_SOLMERA": {"sky_top": "#3b82d9", "sky_horizon": "#ffe0ae", "sun": "#fff2c8", "sun_energy": 1.5, "pitch": -55.0, "fog": "#f2d4a0", "floor": "sand", "boundary": "wall", "motes": {"color": "#f0d8a0", "amount": 120, "vy": 0.05, "vxz": 2.2, "y": 1.2, "h": 2.5, "size": 0.06, "life": 6.0}},
 	"WORLD_FROSTHAIN": {"sky_top": "#5a86b8", "sky_horizon": "#e6f2ff", "sun": "#e8f0ff", "sun_energy": 1.0, "pitch": -30.0, "fog": "#d6e6f4", "floor": "snow", "boundary": "wall", "fog_density": 0.014, "snow": true},
 	"WORLD_IGNARA": {"sky_top": "#3a1218", "sky_horizon": "#ff7a3a", "sun": "#ffb070", "sun_energy": 1.1, "pitch": -25.0, "fog": "#6a2a1a", "floor": "rock", "boundary": "wall", "fog_density": 0.012, "embers": true},
-	"WORLD_AQUALIS": {"sky_top": "#0a3a6a", "sky_horizon": "#4ad0c8", "sun": "#a8f0ff", "sun_energy": 1.1, "pitch": -70.0, "fog": "#1a8aa8", "floor": "sand", "boundary": "wall", "fog_density": 0.016},
+	"WORLD_AQUALIS": {"sky_top": "#0a3a6a", "sky_horizon": "#4ad0c8", "sun": "#a8f0ff", "sun_energy": 1.1, "pitch": -70.0, "fog": "#1a8aa8", "floor": "sand", "boundary": "wall", "fog_density": 0.016, "motes": {"color": "#bff8ff", "amount": 90, "vy": 0.9, "vxz": 0.2, "y": 0.2, "h": 1.0, "size": 0.1, "life": 7.0}},
+	"WORLD_NOCTARIS": {"sky_top": "#07051f", "sky_horizon": "#3a1a6a", "sun": "#a8a0ff", "sun_energy": 0.7, "pitch": -50.0, "fog": "#2a1a5a", "floor": "cobble", "boundary": "wall", "night": true, "fog_density": 0.013, "motes": {"color": "#c8a0ff", "amount": 90, "vy": 0.12, "vxz": 0.5, "y": 1.8, "h": 3.0, "size": 0.12, "life": 8.0}},
 }
 
 ## prop name keyword -> shape/material kind (first match wins)
@@ -46,7 +47,7 @@ const PROPS_DIR := "res://assets/world/props/%s.gltf"
 ## CC0 Quaternius Medieval Village MegaKit (assets/world/village): roofs, doors, chimneys and plaster/brick textures for the houses
 const VILLAGE_DIR := "res://assets/world/village/%s.gltf"
 const VILLAGE_TEX := "res://assets/world/village/T_%s_BaseColor.png"
-const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue", "WORLD_IGNARA": "red"}
+const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue", "WORLD_FROSTHAIN": "blue", "WORLD_IGNARA": "red", "WORLD_NOCTARIS": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
@@ -58,6 +59,7 @@ const BACKDROP := {
 	"WORLD_FROSTHAIN": [["Pine_1", "Pine_2", "Pine_3", "DeadTree_1", "Pine_2"], ["Pine_3", "Pine_1", "Pine_2", "DeadTree_2"]],
 	"WORLD_IGNARA": [["Rock_Medium_1", "DeadTree_1", "Rock_Medium_2", "DeadTree_2", "Rock_Medium_3"], ["Rock_Medium_3", "Rock_Medium_1", "DeadTree_2", "Rock_Medium_2"]],
 	"WORLD_AQUALIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "rock_single_B", "building_home_B_blue"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
+	"WORLD_NOCTARIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "tree_single_A", "building_home_B_blue"], ["rock_single_A", "trees_A_large", "rock_single_B"]],
 }
 
 static var _cache := {}
@@ -679,7 +681,11 @@ static func _lantern(parent: Node3D, pos: Vector3, yaw: float) -> Node3D:
 ## Falling snow over the whole area (Frosthain): one CPUParticles3D, fewer flakes on web/Android.
 static func build_weather(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
 	var st := style(area_id)
-	if is_indoor(area_id, layout) or not (st.get("snow", false) or st.get("embers", false)):
+	if is_indoor(area_id, layout):
+		return
+	if st.has("motes"):
+		_build_motes(parent, st.motes, size)
+	if not (st.get("snow", false) or st.get("embers", false)):
 		return
 	var embers: bool = st.get("embers", false)
 	var p := CPUParticles3D.new()
@@ -702,6 +708,38 @@ static func build_weather(parent: Node3D, area_id: String, layout: Dictionary, s
 	var mat := StandardMaterial3D.new()
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.albedo_color = Color(1.0, 0.55, 0.2, 0.95) if embers else Color(1, 1, 1, 0.9)
+	mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	quad.material = mat
+	p.mesh = quad
+	p.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(p)
+
+
+## Ambient particles per world: fireflies, pollen, dust, bubbles. A few soft glowing quads that
+## drift around the player's end of the area (fewer on web/Android).
+static func _build_motes(parent: Node3D, cfg: Dictionary, size: Vector2) -> void:
+	var p := CPUParticles3D.new()
+	p.name = "Motes"
+	p.amount = int(cfg.amount) / (3 if low_end() else 1)
+	p.lifetime = float(cfg.life)
+	p.preprocess = float(cfg.life)
+	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_BOX
+	p.emission_box_extents = Vector3(size.x / 2.0, float(cfg.h) / 2.0, size.y / 2.0)
+	p.position = Vector3(0, float(cfg.y), 0)
+	p.direction = Vector3(1, 0.3, 0.4)
+	p.spread = 180.0
+	p.initial_velocity_min = float(cfg.vxz) * 0.4
+	p.initial_velocity_max = float(cfg.vxz)
+	p.gravity = Vector3(0, float(cfg.vy), 0)
+	p.scale_amount_min = 0.6
+	p.scale_amount_max = 1.5
+	var quad := QuadMesh.new()
+	quad.size = Vector2.ONE * float(cfg.size)
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_color = Color.html(cfg.color)
+	mat.albedo_color.a = 0.8
 	mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	quad.material = mat
@@ -733,6 +771,7 @@ static func ground_tint(area_id: String, layout: Dictionary) -> Color:
 const FLORA := {
 	"WORLD_LUNARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group"], "mush": ["Mushroom_Common"], "tint": "#9fc8ff", "flower_tint": "#a8c8ff", "count": 2600, "flower_count": 260, "mush_count": 70, "glow": "#7fd8ff", "glow_count": 160},
 	"WORLD_ELARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group", "Clover_1"], "mush": ["Mushroom_Common", "Mushroom_Laetiporus"], "tint": "#e8ffd0", "flower_tint": "#ffffff", "count": 2600, "flower_count": 220, "mush_count": 50, "glow": "#ffe08a", "glow_count": 60},
+	"WORLD_NOCTARIS": {"grass": ["Grass_Wispy_Short"], "flowers": [], "mush": [], "tint": "#8a7ac8", "flower_tint": "#ffffff", "count": 700, "flower_count": 0, "mush_count": 0, "glow": "#b080ff", "glow_count": 120},
 	"WORLD_SOLMERA": {"grass": ["Grass_Wispy_Short", "Plant_1"], "flowers": [], "mush": [], "tint": "#e8cc88", "flower_tint": "#ffffff", "count": 500, "flower_count": 0, "mush_count": 0, "glow": "", "glow_count": 0},
 }
 static var _flora_meshes := {}

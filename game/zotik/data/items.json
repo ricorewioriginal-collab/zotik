@@ -299,5 +299,41 @@
     },
     "price": 800,
     "stack": 1
+  },
+  "ITEM_MEMORY_001": {
+    "name": "Erinnerungssplitter",
+    "type": "material",
+    "price": 42,
+    "stack": 99
+  },
+  "ITEM_TRAUMTEE_001": {
+    "name": "Traumtee",
+    "type": "consumable",
+    "effect": {
+      "heal": 110
+    },
+    "price": 40,
+    "stack": 99
+  },
+  "WEAPON_NIGHT_BLADE_001": {
+    "name": "Nachtklinge",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 33
+    },
+    "price": 900,
+    "stack": 1
+  },
+  "ARMOR_VEIL_001": {
+    "name": "Schleiergewand",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 12,
+      "max_hp": 40
+    },
+    "price": 880,
+    "stack": 1
   }
 }

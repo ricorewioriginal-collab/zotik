@@ -172,6 +172,15 @@ func _run() -> void:
 		for c in game.companions.values():
 			c.snap_to_player()
 		await _shot(pair[1])
+	for f in ["FLAG_NOC_LANES_OPEN", "FLAG_NOC_NULL_OPEN", "FLAG_NOC_MEMORY_DONE", "FLAG_NOC_WAECHTER_DEFEATED", "FLAG_NOC_HUETER_MET", "FLAG_NOC_ARRIVED"]:
+		gs.set_flag(f)
+	for pair in [["AREA_NOC_CITY", "33_noctaris_city", Vector3(0, 0, 14)], ["AREA_NOC_LANES", "34_noctaris_lanes", Vector3(0, 0, 16)], ["AREA_NOC_NULL", "35_noctaris_null", Vector3(0, 0, 8)], ["AREA_NOC_CORE", "36_noctaris_core", Vector3(0, 0, 6)]]:
+		game.enter_area(pair[0], "default")
+		game.player.global_position = pair[2]
+		game.player.camera_pivot.rotation.y = 0.0
+		for c in game.companions.values():
+			c.snap_to_player()
+		await _shot(pair[1])
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	for _i in 20:

@@ -66,6 +66,16 @@
       "area": "AREA_IGN_MINES",
       "name": "Weltenanker in den Minen",
       "heals": true
+    },
+    "SAVEPOINT_NOC_LANES_001": {
+      "area": "AREA_NOC_LANES",
+      "name": "Weltenanker in den Vergessenen Gassen",
+      "heals": true
+    },
+    "SAVEPOINT_NOC_NULL_001": {
+      "area": "AREA_NOC_NULL",
+      "name": "Weltenanker im Nullkern",
+      "heals": true
     }
   },
   "uniques": {
