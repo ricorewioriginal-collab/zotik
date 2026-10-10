@@ -940,3 +940,7 @@ Findings in the old code: saving was only possible at a Weltenanker (nothing els
 - The unused KayKit adventurer folder (`assets/characters/kaykit`, legacy rigs replaced by the Quaternius humans) is excluded from all exports entirely, not only the .glb files.
 - Tried and rejected: VRAM-compressed textures with mipmaps (ETC2/ASTC for phones) would save GPU memory but make the download bigger (+8 MB desktop only, +26 MB with the mobile formats), which is the opposite of what the owner asked for.
 - The download is cached by the browser after the first start and does not cause stutter while playing; the frame rate work is in W12/W13.
+
+## W15 – Less engine work on slow devices
+- On "Niedrig" the physics runs at 30 steps per second (the picture is capped at 30 fps anyway) and at most 2 steps per frame: a slow frame no longer causes a burst of catch-up physics steps that slows the next frame further (the usual stutter spiral on phones). "Mittel"/"Hoch" keep 60 steps and the engine default of 8.
+- Measured (headless, desktop): with every script of the village switched off one by one the frame time stays at about 6.9 ms, so the game scripts are not the cost; the rest is engine work (physics, animation, culling) plus rendering. Real numbers need the performance read-out from the owner's phone (pause menu).

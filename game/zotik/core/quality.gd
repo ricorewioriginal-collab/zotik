@@ -28,6 +28,16 @@ static func shadows() -> bool:
 	return level() != "low"
 
 
+## Physics steps per second: half the work on low (the picture is capped at 30 fps anyway).
+static func physics_rate() -> int:
+	return 30 if level() == "low" else 60
+
+
+## A slow frame must not trigger a burst of physics steps (which makes the next frame slower still).
+static func max_physics_steps() -> int:
+	return 2 if level() == "low" else 8
+
+
 ## Frame cap: 30 on low (an even 30 feels smoother than an uneven 45), the display rate otherwise.
 static func max_fps() -> int:
 	return 30 if level() == "low" else 0
@@ -54,5 +64,7 @@ static func apply(tree: SceneTree) -> void:
 		return
 	tree.root.scaling_3d_scale = render_scale()
 	Engine.max_fps = max_fps()
+	Engine.physics_ticks_per_second = physics_rate()
+	Engine.max_physics_steps_per_frame = max_physics_steps()
 	for l in tree.root.find_children("*", "DirectionalLight3D", true, false):
 		(l as DirectionalLight3D).shadow_enabled = shadows()
