@@ -97,3 +97,40 @@ func test_halle_rank_one_and_the_last_shard() -> void:
 	for i in 10:
 		await _clear_wave()
 	eq(Inventory.count("ITEM_LAST_SHARD_001"), 1, "the last shard")
+
+
+func test_endgame_dungeons_are_rift_runs_with_modifiers() -> void:
+	var ids := Content.table("arena").keys().filter(func(i): return str(i).begins_with("ARENA_DUNGEON_"))
+	ids.sort()
+	eq(ids.size(), 7, "seven endgame dungeons")
+	var kinds := {}
+	for id in ids:
+		var a := Content.get_entry("arena", id)
+		kinds[a.rift_kind] = true
+		eq(a.waves.size(), 5, str(id) + " has five waves")
+	for k in ["klein", "tief", "erinnerung", "instabil", "welten"]:
+		check(kinds.has(k), "rift kind " + k)
+	GameState.set_flag("FLAG_GAME_COMPLETE")
+	check(ArenaRun.unlocked("ARENA_DUNGEON_001") and not ArenaRun.unlocked("ARENA_DUNGEON_002"), "dungeons unlock in order")
+
+
+func test_rift_modifier_toughens_enemies() -> void:
+	GameState.set_flag("FLAG_GAME_COMPLETE")
+	game.enter_area("AREA_END_HUB", "travel")
+	await physics_frames(3)
+	await finish_dialogues()
+	check(game.start_arena("ARENA_DUNGEON_001"), "first dungeon starts")
+	var e: Enemy = game.arena_run.alive[0]
+	var base := int(Content.enemy(e.enemy_id).hp)
+	eq(e.max_hp, int(round(base * 1.0)), "small rift: normal hp")
+	game.arena_run.lose()
+	await tree.create_timer(0.1).timeout
+	for i in range(1, 6):
+		GameState.set_flag("FLAG_END_DUNGEON_%d" % i)
+	game.enter_area("AREA_END_HUB", "travel")
+	await physics_frames(3)
+	check(game.start_arena("ARENA_DUNGEON_006"), "Elyndra Vorher starts")
+	var w: Enemy = game.arena_run.alive[0]
+	var wb := int(Content.enemy(w.enemy_id).hp)
+	eq(w.max_hp, int(round(wb * 1.9)), "world rift: 1.9x hp")
+	eq(w.attack_mult, 1.5, "world rift: 1.5x attack")

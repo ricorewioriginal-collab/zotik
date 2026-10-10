@@ -845,3 +845,13 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - Halle der 100: `ARENA_HALL_001`–`010`, ten ranks of ten trials from data (100 waves, enemies from all worlds by strength; rank n needs rank n-1); rank 10 grants the unique "Der letzte Splitter". Arena menu title is now generic.
 - Tests: `test_r15_endgame` (5). Placeholder art, not final.
 
+## E02 – Character end quests (Phase 7) – PASSED
+- Six end quests after the finale (`FLAG_GAME_COMPLETE`), offered by the NPC's first dialogue until taken: Kael (6 Echokrieger), Eryn (10 Erinnerungssplitter), Toren (8 Mondfledermäuse, Lunaris), Sela (8 Waldspinnen, Elaris), Mirael (8 Riff-Frösche, Aqualis) and the Professorium (6 Rissessenz). Each pays Lun and a unique keepsake item. All three end-quest targets in the wild are roamers, so they are repeatable.
+- Test: `test_r16_end_quests` (2).
+
+## E03 – Endgame dungeons and rift kinds (Phase 7) – PASSED
+- `ARENA_DUNGEON_001`–`007`: Der verlorene Wald, Die Stadt ohne Bewohner, Das Meer über dem Himmel, Der ewige Vulkan, Noctaris Null, Elyndra Vorher, Der Ort, den es nie gab. Five waves each with enemies from the matching worlds; the last one ends with a boss wave. Unlocked in order after the finale; first clears give Rissessenz, the last one the unique "Siegel des Ortes, den es nie gab".
+- Rift kinds as arena `modifier` (hp and attack multipliers, applied in `ArenaRun`): klein 1.0/1.0, tief 1.4/1.2, Erinnerungsriss 1.25/1.25, instabil 1.5/1.3, Weltenriss 1.9/1.5. Bosses use their own per-phase attack multipliers, so the modifier affects their HP only.
+- Limits: the dungeons are rift runs in the Weltenriss hub, not walkable maps (logged in the Phase 7 plan).
+- Tests: two more tests in `test_r15_endgame`.
+

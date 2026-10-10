@@ -491,5 +491,54 @@
     },
     "unique": true,
     "stack": 1
+  },
+  "ITEM_KAEL_COMPASS_001": {
+    "name": "Kaels Kompass",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
+  },
+  "ITEM_ERYN_DIARY_001": {
+    "name": "Eryns Tagebuch",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
+  },
+  "ITEM_TOREN_BAND_001": {
+    "name": "Torens Trainingsband",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
+  },
+  "ITEM_SELA_LEAF_001": {
+    "name": "Selas Blatt",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
+  },
+  "ITEM_MIRAEL_GEAR_001": {
+    "name": "Miraels Zahnrad",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
+  },
+  "ITEM_PROFESSORIUM_NOTES_001": {
+    "name": "Notizen des Professoriums",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
+  },
+  "ITEM_NEVER_SEAL_001": {
+    "name": "Siegel des Ortes, den es nie gab",
+    "type": "material",
+    "price": 0,
+    "unique": true,
+    "stack": 1
   }
 }

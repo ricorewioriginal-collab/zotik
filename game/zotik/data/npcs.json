@@ -56,6 +56,30 @@
         "when": [
           {
             "type": "quest_step",
+            "id": "QUEST_END_TOREN_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_TOREN_END_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_GAME_COMPLETE"
+          },
+          {
+            "type": "quest_state",
+            "id": "QUEST_END_TOREN_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_TOREN_END_OFFER_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
             "id": "QUEST_MAIN_LUN_001",
             "step": 1
           }
@@ -203,6 +227,30 @@
         "when": [
           {
             "type": "quest_step",
+            "id": "QUEST_END_PROFESSORIUM_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_PROFESSORIUM_END_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_GAME_COMPLETE"
+          },
+          {
+            "type": "quest_state",
+            "id": "QUEST_END_PROFESSORIUM_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_PROFESSORIUM_END_OFFER_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
             "id": "QUEST_MAIN_LUN_001",
             "step": 12
           }
@@ -281,6 +329,30 @@
     "name": "Sela",
     "area": "AREA_ELA_TOWN",
     "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_END_SELA_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_SELA_END_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_GAME_COMPLETE"
+          },
+          {
+            "type": "quest_state",
+            "id": "QUEST_END_SELA_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_SELA_END_OFFER_001"
+      },
       {
         "when": [
           {
@@ -625,6 +697,30 @@
       {
         "when": [
           {
+            "type": "quest_step",
+            "id": "QUEST_END_MIRAEL_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_MIRAEL_END_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_GAME_COMPLETE"
+          },
+          {
+            "type": "quest_state",
+            "id": "QUEST_END_MIRAEL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_MIRAEL_END_OFFER_001"
+      },
+      {
+        "when": [
+          {
             "type": "quest_state",
             "id": "QUEST_MAIN_AQU_001",
             "state": "INACTIVE"
@@ -919,6 +1015,30 @@
       {
         "when": [
           {
+            "type": "quest_step",
+            "id": "QUEST_END_ERYN_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_ERYN_END_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_GAME_COMPLETE"
+          },
+          {
+            "type": "quest_state",
+            "id": "QUEST_END_ERYN_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_ERYN_END_OFFER_001"
+      },
+      {
+        "when": [
+          {
             "type": "quest_state",
             "id": "QUEST_MAIN_NOC_001",
             "state": "INACTIVE"
@@ -1150,6 +1270,30 @@
     "name": "Kael",
     "area": "AREA_ELY_QUARTER",
     "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_END_KAEL_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_KAEL_END_THANKS_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_GAME_COMPLETE"
+          },
+          {
+            "type": "quest_state",
+            "id": "QUEST_END_KAEL_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_KAEL_END_OFFER_001"
+      },
       {
         "when": [
           {
