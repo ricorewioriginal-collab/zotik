@@ -575,10 +575,10 @@
     "world": "WORLD_WELTENRISS",
     "exits": [
       "AREA_END_HUB",
-      "AREA_END_D1"
+      "AREA_END_D7"
     ],
     "gate": {
-      "AREA_END_D1": "FLAG_END_WAECHTER_DEFEATED"
+      "AREA_END_D7": "FLAG_END_WAECHTER_DEFEATED"
     }
   },
   "AREA_END_WURZEL": {
@@ -586,10 +586,10 @@
     "world": "WORLD_WELTENRISS",
     "exits": [
       "AREA_END_HUB",
-      "AREA_END_D2"
+      "AREA_END_D1"
     ],
     "gate": {
-      "AREA_END_D2": "FLAG_END_WURZEL_DEFEATED"
+      "AREA_END_D1": "FLAG_END_WURZEL_DEFEATED"
     }
   },
   "AREA_END_KOLOSS": {
@@ -597,10 +597,10 @@
     "world": "WORLD_WELTENRISS",
     "exits": [
       "AREA_END_HUB",
-      "AREA_END_D3"
+      "AREA_END_D2"
     ],
     "gate": {
-      "AREA_END_D3": "FLAG_END_KOLOSS_DEFEATED"
+      "AREA_END_D2": "FLAG_END_KOLOSS_DEFEATED"
     }
   },
   "AREA_END_SANDKOENIG": {
@@ -608,10 +608,10 @@
     "world": "WORLD_WELTENRISS",
     "exits": [
       "AREA_END_HUB",
-      "AREA_END_D4"
+      "AREA_END_D5"
     ],
     "gate": {
-      "AREA_END_D4": "FLAG_END_SANDKOENIG_DEFEATED"
+      "AREA_END_D5": "FLAG_END_SANDKOENIG_DEFEATED"
     }
   },
   "AREA_END_ABYSS": {
@@ -619,10 +619,10 @@
     "world": "WORLD_WELTENRISS",
     "exits": [
       "AREA_END_HUB",
-      "AREA_END_D5"
+      "AREA_END_D3"
     ],
     "gate": {
-      "AREA_END_D5": "FLAG_END_ABYSS_DEFEATED"
+      "AREA_END_D3": "FLAG_END_ABYSS_DEFEATED"
     }
   },
   "AREA_END_FROSTHERZ": {
@@ -641,10 +641,10 @@
     "world": "WORLD_WELTENRISS",
     "exits": [
       "AREA_END_HUB",
-      "AREA_END_D7"
+      "AREA_END_D4"
     ],
     "gate": {
-      "AREA_END_D7": "FLAG_END_FEUERKERN_DEFEATED"
+      "AREA_END_D4": "FLAG_END_FEUERKERN_DEFEATED"
     }
   },
   "AREA_END_HUB": {
@@ -664,35 +664,35 @@
     "name": "Weltenriss – Der verlorene Wald (Dungeon)",
     "world": "WORLD_WELTENRISS",
     "exits": [
-      "AREA_END_WAECHTER"
+      "AREA_END_WURZEL"
     ]
   },
   "AREA_END_D2": {
     "name": "Weltenriss – Die Stadt ohne Bewohner (Dungeon)",
     "world": "WORLD_WELTENRISS",
     "exits": [
-      "AREA_END_WURZEL"
+      "AREA_END_KOLOSS"
     ]
   },
   "AREA_END_D3": {
     "name": "Weltenriss – Das Meer über dem Himmel (Dungeon)",
     "world": "WORLD_WELTENRISS",
     "exits": [
-      "AREA_END_KOLOSS"
+      "AREA_END_ABYSS"
     ]
   },
   "AREA_END_D4": {
     "name": "Weltenriss – Der ewige Vulkan (Dungeon)",
     "world": "WORLD_WELTENRISS",
     "exits": [
-      "AREA_END_SANDKOENIG"
+      "AREA_END_FEUERKERN"
     ]
   },
   "AREA_END_D5": {
     "name": "Weltenriss – Noctaris Null (Dungeon)",
     "world": "WORLD_WELTENRISS",
     "exits": [
-      "AREA_END_ABYSS"
+      "AREA_END_SANDKOENIG"
     ]
   },
   "AREA_END_D6": {
@@ -706,7 +706,7 @@
     "name": "Weltenriss – Der Ort, den es nie gab (Dungeon)",
     "world": "WORLD_WELTENRISS",
     "exits": [
-      "AREA_END_FEUERKERN"
+      "AREA_END_WAECHTER"
     ]
   }
 }

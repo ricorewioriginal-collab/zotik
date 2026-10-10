@@ -1,7 +1,7 @@
 extends TestCase
 ## Chapter-5 golden path. Starts from a save at the end of chapter 4
 ## (Solmera oasis), loads it through the title, travels to Aqualis and plays
-## chapter 5 through real interactions: Mirael, the caves, the archive, the
+## chapter 5 through real interactions: Nerea, the caves, the archive, the
 ## current puzzle, the Archivwächter, Neryx, the side quest. Ends with a save that tests/restart_check.gd verifies in a fresh
 ## process.
 
@@ -89,7 +89,7 @@ func test_golden_path_chapter_five() -> void:
 	eq(Conditions.quest_step(S), 0, "side quest started")
 	game.shop_menu.close_menu()
 	await _exit_to("AREA_AQU_DOME")
-	# Mirael opens the Korallentor
+	# Nerea opens the Korallentor
 	await _talk("NPC_MIRAEL_001")
 	eq(Conditions.quest_step(M), 1, "find the archive")
 	check(game.area.is_exit_open("AREA_AQU_CAVES"), "caves open")
@@ -135,7 +135,7 @@ func test_golden_path_chapter_five() -> void:
 	await frames(2)
 	await physics_frames(3)
 	eq(game.area.area_id, "AREA_AQU_DOME", "back in the dome")
-	# Report to Mirael, then Perla
+	# Report to Nerea, then Perla
 	await _talk("NPC_MIRAEL_001")
 	eq(Conditions.quest_state(M), "COMPLETED", "chapter 5 completed")
 	check(GameState.has_flag("FLAG_AQU_CHAPTER_COMPLETE"), "chapter flag")

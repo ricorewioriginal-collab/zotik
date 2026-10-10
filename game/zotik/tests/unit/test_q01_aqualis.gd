@@ -55,7 +55,7 @@ func test_districts_connect_and_caves_stay_closed() -> void:
 	check(game.area.is_exit_open("AREA_AQU_HARBOUR"), "dome -> harbour")
 	eq(Navigator.next_hop("AREA_AQU_HARBOUR", "AREA_AQU_DOME"), "AREA_AQU_DOME", "harbour -> dome")
 	var gate := game.area.find_child("PLACEHOLDER_cave_gate", true, false)
-	check(gate != null and gate.visible, "coral gate is closed until Mirael opens it (Q02)")
+	check(gate != null and gate.visible, "coral gate is closed until Nerea opens it (Q02)")
 
 
 func test_steles_readable() -> void:

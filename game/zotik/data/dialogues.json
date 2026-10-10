@@ -358,7 +358,7 @@
       ],
       [
         "NPC_MARA_001",
-        "Die Gilde in Valdoria sammelt Berichte über jeden Riss, den man findet. Nehmt den Weltenstein – wenn jemand weiß, wo die Splitter liegen, dann Veyr."
+        "Die Gilde in Valdoria sammelt Berichte über jeden Riss, den man findet. Nehmt den Weltenstein – wenn jemand weiß, wo die Splitter liegen, dann Harlan."
       ]
     ]
   },
@@ -507,7 +507,7 @@
     "lines": [
       [
         "NPC_TIBOR_001",
-        "Veyr schickt euch? Na gut. Die Kristallströmung unten wird jeden Tag lauter."
+        "Harlan schickt euch? Na gut. Die Kristallströmung unten wird jeden Tag lauter."
       ],
       [
         "NPC_TIBOR_001",
@@ -584,7 +584,7 @@
     "lines": [
       [
         "NPC_TIBOR_001",
-        "Das Kanaltor bleibt zu. Ohne Veyrs Wort lasse ich niemanden da runter."
+        "Das Kanaltor bleibt zu. Ohne Harlans Wort lasse ich niemanden da runter."
       ]
     ]
   },

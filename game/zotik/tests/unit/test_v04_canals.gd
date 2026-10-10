@@ -27,7 +27,7 @@ func test_tibor_opens_canal_gate() -> void:
 	game.enter_area("AREA_VAL_CANAL_GATE", "default")
 	await physics_frames(2)
 	check(not game.area.is_exit_open("AREA_VAL_CANALS"), "gate closed at first")
-	eq(Dialogue.select_for_npc("NPC_TIBOR_001"), "DLG_TIBOR_CLOSED_001", "needs Veyr's word (V05)")
+	eq(Dialogue.select_for_npc("NPC_TIBOR_001"), "DLG_TIBOR_CLOSED_001", "needs Harlan's word (V05)")
 	Quests.start("QUEST_MAIN_VAL_001")
 	Dialogue.talk_to("NPC_VEYR_001")
 	await finish_dialogues()

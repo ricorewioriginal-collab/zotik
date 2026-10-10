@@ -328,5 +328,183 @@
         "Magmarion erinnert sich an einen Berg, der höher war. Jemand hat ihn geteilt, so wie den Kern."
       ]
     ]
+  },
+  "LORE_KEEP_KAEL_001": {
+    "title": "Kaels Kompass",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die Nadel zeigt nie nach Norden. Sie zeigt auf den nächsten Riss, egal wie weit er entfernt ist."
+      ],
+      [
+        "NARRATOR",
+        "Kael sagte einmal: Ein Kompass, der die Welt nicht versteht, ist ehrlicher als eine Karte, die sie falsch erklärt."
+      ]
+    ]
+  },
+  "LORE_KEEP_ERYN_001": {
+    "title": "Eryns Tagebuch",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Nur Dinge, die wirklich geschahen, stehen hier."
+      ],
+      [
+        "NARRATOR",
+        "Eintrag eins: Der Morgen war gelb und kalt und wunderschön. Ich schreibe ihn auf, damit er nicht noch einmal verloren geht."
+      ]
+    ]
+  },
+  "LORE_KEEP_TOREN_001": {
+    "title": "Torens Trainingsband",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Ein abgewetztes Band, an den Rändern ausgefranst. Toren trug es an dem Tag, an dem er aufhörte, Gegner zu suchen, und anfing, Schüler zu unterrichten."
+      ],
+      [
+        "NARRATOR",
+        "Auf der Innenseite sind Kerben: eine für jeden, der von hier aus stärker weggegangen ist, als er kam."
+      ]
+    ]
+  },
+  "LORE_KEEP_SELA_001": {
+    "title": "Selas Blatt",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Ein Blatt aus dem lebenden Wald von Elaris, das nie welkt. Sela sagt, der Wald vergisst nichts, solange jemand ein Stück davon bei sich trägt."
+      ],
+      [
+        "NARRATOR",
+        "Es riecht nach Regen und nach dem Weg, der sich beim Gehen leise verschiebt."
+      ]
+    ]
+  },
+  "LORE_KEEP_NEREA_001": {
+    "title": "Nereas Zahnrad",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Ein kleines Zahnrad aus Messing, vom Salz des Meeres angefressen. Nerea fand es in den Plänen einer Maschine, die in tiefes Wasser tauchen sollte."
+      ],
+      [
+        "NARRATOR",
+        "Sie hat die Maschine nie gebaut. Aber sie sagt, ein Zahnrad, das auf seine Maschine wartet, hat mehr Geduld als die meisten Menschen."
+      ]
+    ]
+  },
+  "LORE_KEEP_PROFESSORIUM_001": {
+    "title": "Notizen des Professoriums",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Ich habe vergessen, was ich vergessen wollte. Nur die Notizen blieben, und sie sind unvollständig."
+      ],
+      [
+        "NARRATOR",
+        "Ich war dabei, als sie den Kern teilten. Ich habe meinen Namen aus den Akten gestrichen, und danach auch aus mir. Wenn du das liest: Verzeih mir, und gib den Splittern nie einen einzigen Befehl."
+      ]
+    ]
+  },
+  "LORE_KEEP_LASTSHARD_001": {
+    "title": "Der letzte Splitter",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Er ist kein Stück des Kerns, sondern sein Nachklang. Er entstand in dem Augenblick, als Elyon fiel und der Kern still wurde."
+      ],
+      [
+        "NARRATOR",
+        "Wer ihn in der Hand hält, hört sieben Töne, die einander kennen, und einen achten, der niemandem gehört."
+      ]
+    ]
+  },
+  "LORE_KEEP_ECHO_001": {
+    "title": "Weltenkernsplitter (Echo)",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Ein Echo, kein Splitter: Orun hat es seit dem Bruch bewahrt. In der Weltenklinge klingt es weiter und weist den Weg zu den sieben echten Splittern."
+      ]
+    ]
+  },
+  "LORE_KEEP_SHARD_VAL_001": {
+    "title": "Splitter der Strömung",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Er klingt wie Wasser unter einer Stadt, die nie schläft. Der Kanalwächter trug ihn, ohne zu wissen, wofür."
+      ]
+    ]
+  },
+  "LORE_KEEP_SHARD_SOL_001": {
+    "title": "Splitter der Sonne",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Warm wie Sand am Abend. Kharos hat ihn bewahrt, wie die Wüste alles bewahrt: still und für immer."
+      ]
+    ]
+  },
+  "LORE_KEEP_SHARD_AQU_001": {
+    "title": "Splitter der Tiefe",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Er glimmt wie eine Perle und zieht wie eine Strömung. Neryx hielt ihn fest, bis das Meer selbst ihn nicht mehr losließ."
+      ]
+    ]
+  },
+  "LORE_KEEP_SHARD_FRO_001": {
+    "title": "Splitter des Frosts",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Kalt wie ein Atemzug im Winter. Avarn fror die Zeit ein, um nichts zu verlieren, und verlor dabei alles, was sich bewegt."
+      ]
+    ]
+  },
+  "LORE_KEEP_SHARD_IGN_001": {
+    "title": "Splitter der Glut",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Er schlägt wie ein Herz, nur zu schnell. Magmarion hielt den Berg zusammen, bis der Berg ihn beinahe zerriss."
+      ]
+    ]
+  },
+  "LORE_KEEP_SHARD_NOC_001": {
+    "title": "Splitter der Erinnerung",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Er zeigt, was war, und was nie war, und lässt es gleich echt wirken. Darum sagt Eryn: Glaubt nicht jeder Erinnerung."
+      ]
+    ]
+  },
+  "LORE_KEEP_SHARD_AST_001": {
+    "title": "Splitter der Sterne",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Leicht wie eine Feder und doch das Gewicht eines ganzen Himmels. Solyra webte mit ihm die Sterne, bis sie sich verschoben."
+      ]
+    ]
   }
 }

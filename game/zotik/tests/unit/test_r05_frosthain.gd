@@ -38,8 +38,8 @@ func test_arrival_starts_the_main_quest() -> void:
 	game.enter_area("AREA_FRO_VILLAGE", "travel")
 	await physics_frames(3)
 	await finish_dialogues()
-	eq(Conditions.quest_step(MQ), 0, "quest active: talk to Kaelen")
-	eq(Quests.objective(MQ), "Sprich mit Kaelen im Dorf Hjalm.", "objective")
+	eq(Conditions.quest_step(MQ), 0, "quest active: talk to Falk")
+	eq(Quests.objective(MQ), "Sprich mit Falk im Dorf Hjalm.", "objective")
 
 
 func test_kaelen_starts_the_quest_for_older_saves() -> void:
@@ -110,7 +110,7 @@ func test_defeat_completes_the_chapter() -> void:
 	var adds := boss.summons.duplicate()
 	boss.take_hit(9999)
 	check(GameState.has_flag("FLAG_BOSS_FRO_AVARN_DEFEATED"), "boss flag")
-	eq(Conditions.quest_step(MQ), 5, "report to Kaelen")
+	eq(Conditions.quest_step(MQ), 5, "report to Falk")
 	eq(Dialogue.active_id, "CUT_FRO_AVARN_DEFEAT_001", "defeat scene")
 	await finish_dialogues()
 	await frames(2)
@@ -120,7 +120,7 @@ func test_defeat_completes_the_chapter() -> void:
 	eq(Guild.kills("BOSS_AVARN_001"), 1, "bestiary")
 	var lun := GameState.currency
 	Dialogue.talk_to("NPC_KAELEN_001")
-	eq(Dialogue.active_id, "DLG_KAELEN_REPORT_001", "Kaelen's report")
+	eq(Dialogue.active_id, "DLG_KAELEN_REPORT_001", "Falk's report")
 	await finish_dialogues()
 	eq(Conditions.quest_state(MQ), "COMPLETED", "chapter 6 done")
 	check(GameState.has_flag("FLAG_FRO_CHAPTER_COMPLETE"), "chapter flag")

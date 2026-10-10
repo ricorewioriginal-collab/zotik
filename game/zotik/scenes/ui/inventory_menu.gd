@@ -21,6 +21,8 @@ func refresh() -> void:
 				actions.append(["Ablegen", unequip.bind(it.slot)])
 		elif it.get("type") == "consumable":
 			actions.append(["Benutzen", use.bind(id)])
+		if it.has("lore"):
+			actions.append(["Lesen", read.bind(id)])
 		add_row("%s  x%d" % [it.name, Inventory.count(id)], actions)
 
 
@@ -32,6 +34,15 @@ func equip(id: String) -> void:
 func unequip(slot: String) -> void:
 	Inventory.unequip(slot)
 	refresh()
+
+
+## Keepsakes and shards carry a short text: it opens in the dialogue box.
+func read(id: String) -> void:
+	var lore: String = Content.item(id).get("lore", "")
+	if lore == "":
+		return
+	close_menu()
+	Dialogue.read_lore(lore)
 
 
 func use(id: String) -> void:

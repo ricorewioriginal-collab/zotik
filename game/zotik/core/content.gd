@@ -165,6 +165,8 @@ func validate() -> Array[String]:
 			e.append("%s: party member needs hp > 0" % id)
 	for id in table("items"):
 		var it: Dictionary = table("items")[id]
+		if it.has("lore"):
+			_ref(e, "lore", it.lore, id)
 		if it.get("type") in ["weapon", "accessory", "armor"] and not it.has("slot"):
 			e.append("%s: equipment without slot" % id)
 	var defaults := {}

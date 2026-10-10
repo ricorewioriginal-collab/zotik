@@ -1,5 +1,5 @@
 extends TestCase
-## E02: character end quests (Kael, Eryn, Toren, Sela, Mirael, Professorium) after the finale.
+## E02: character end quests (Kael, Eryn, Toren, Sela, Nerea, Professorium) after the finale.
 
 var game: GameRoot
 const CASES := [

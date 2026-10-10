@@ -38,8 +38,8 @@ func test_arrival_starts_the_main_quest() -> void:
 	game.enter_area("AREA_AQU_DOME", "travel")
 	await physics_frames(3)
 	await finish_dialogues()
-	eq(Conditions.quest_step(MQ), 0, "quest active: talk to Mirael")
-	eq(Quests.objective(MQ), "Sprich mit Mirael am Korallentor.", "objective")
+	eq(Conditions.quest_step(MQ), 0, "quest active: talk to Nerea")
+	eq(Quests.objective(MQ), "Sprich mit Nerea am Korallentor.", "objective")
 
 
 func test_mirael_starts_the_quest_for_older_saves() -> void:
@@ -110,7 +110,7 @@ func test_defeat_completes_the_chapter() -> void:
 	var adds := boss.summons.duplicate()
 	boss.take_hit(9999)
 	check(GameState.has_flag("FLAG_BOSS_AQU_NERYX_DEFEATED"), "boss flag")
-	eq(Conditions.quest_step(MQ), 5, "report to Mirael")
+	eq(Conditions.quest_step(MQ), 5, "report to Nerea")
 	eq(Dialogue.active_id, "CUT_AQU_NERYX_DEFEAT_001", "defeat scene")
 	await finish_dialogues()
 	await frames(2)
@@ -120,7 +120,7 @@ func test_defeat_completes_the_chapter() -> void:
 	eq(Guild.kills("BOSS_NERYX_001"), 1, "bestiary")
 	var lun := GameState.currency
 	Dialogue.talk_to("NPC_MIRAEL_001")
-	eq(Dialogue.active_id, "DLG_MIRAEL_REPORT_001", "Mirael's report")
+	eq(Dialogue.active_id, "DLG_MIRAEL_REPORT_001", "Nerea's report")
 	await finish_dialogues()
 	eq(Conditions.quest_state(MQ), "COMPLETED", "chapter 5 done")
 	check(GameState.has_flag("FLAG_AQU_CHAPTER_COMPLETE"), "chapter flag")

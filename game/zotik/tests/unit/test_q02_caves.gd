@@ -1,5 +1,5 @@
 extends TestCase
-## Q02: the coral caves of Aqualis. Mirael opens the Korallentor, sea enemies,
+## Q02: the coral caves of Aqualis. Nerea opens the Korallentor, sea enemies,
 ## drifting-current look, anchor and chest.
 
 var game: GameRoot
@@ -28,7 +28,7 @@ func test_mirael_opens_the_coral_gate() -> void:
 	game.enter_area("AREA_AQU_DOME", "default")
 	await physics_frames(2)
 	check(not game.area.is_exit_open("AREA_AQU_CAVES"), "caves closed at first")
-	eq(Dialogue.select_for_npc("NPC_MIRAEL_001"), "DLG_MIRAEL_LEAD_001", "Mirael offers to lead")
+	eq(Dialogue.select_for_npc("NPC_MIRAEL_001"), "DLG_MIRAEL_LEAD_001", "Nerea offers to lead")
 	Dialogue.talk_to("NPC_MIRAEL_001")
 	await finish_dialogues()
 	check(game.area.is_exit_open("AREA_AQU_CAVES"), "caves open")
