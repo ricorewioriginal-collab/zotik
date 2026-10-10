@@ -276,6 +276,19 @@ func _end_break() -> void:
 	_update_label()
 
 
+## The floating damage number (also drawn once by Prewarm so its glyphs exist before the first hit).
+static func damage_label(text: String) -> Label3D:
+	var num := Label3D.new()
+	num.text = text
+	num.font_size = 64
+	num.outline_size = 12
+	num.modulate = Color(1, 0.9, 0.3)
+	num.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	num.no_depth_test = true
+	num.pixel_size = 0.0075  # keeps the on-screen size of the former 96 px label
+	return num
+
+
 ## Hit flash, knockback and a floating damage number.
 func _hit_feedback(dmg: int) -> void:
 	if not is_inside_tree():
@@ -287,13 +300,7 @@ func _hit_feedback(dmg: int) -> void:
 		var away := global_position - p.global_position
 		away.y = 0.0
 		velocity += away.normalized() * 4.0
-	var num := Label3D.new()
-	num.text = str(dmg)
-	num.font_size = 96
-	num.outline_size = 18
-	num.modulate = Color(1, 0.9, 0.3)
-	num.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	num.no_depth_test = true
+	var num := damage_label(str(dmg))
 	get_parent().add_child(num)
 	num.global_position = global_position + Vector3(0, label.position.y + 0.3, 0)
 	var tw := num.create_tween()

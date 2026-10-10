@@ -4,6 +4,7 @@ extends Node
 ## as {state, step, progress}.
 
 const MAIN := "QUEST_MAIN_LUN_001"
+const TRACK_PREFIX := "FLAG_TRACK_"
 
 var _busy := false
 var _pending: Array = []
@@ -59,7 +60,30 @@ func active_quests() -> Array:
 		if a == MAIN or b == MAIN:
 			return a == MAIN
 		return a < b)
+	var tracked := tracked_quest()
+	if tracked != "" and out.has(tracked):
+		out.erase(tracked)
+		out.push_front(tracked)
 	return out
+
+
+## The quest the player chose to follow (guide beacon and first objective line), if still active.
+func tracked_quest() -> String:
+	for id in Content.table("quests"):
+		if GameState.has_flag(TRACK_PREFIX + id) and Conditions.quest_state(id) == "ACTIVE":
+			return id
+	return ""
+
+
+## Follow one active quest; only one is followed at a time.
+func track(id: String) -> void:
+	if Conditions.quest_state(id) != "ACTIVE":
+		return
+	for q in Content.table("quests"):
+		if q != id and GameState.has_flag(TRACK_PREFIX + q):
+			GameState.set_flag(TRACK_PREFIX + q, false)
+	GameState.set_flag(TRACK_PREFIX + id)
+	EventBus.quest_updated.emit(id)
 
 
 ## Events are processed one after another; effects that raise new events
