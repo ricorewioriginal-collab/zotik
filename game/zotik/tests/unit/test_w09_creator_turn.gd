@@ -7,7 +7,7 @@ var creator: Control
 func before_each() -> void:
 	GameState.reset_new_game()
 	App.goto_scene(App.SCENE_CHARACTER_CREATOR)
-	await frames(3)
+	await frames(5)
 	creator = tree.current_scene
 
 

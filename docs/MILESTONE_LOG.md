@@ -928,3 +928,8 @@ Findings in the old code: saving was only possible at a Weltenanker (nothing els
 - Graphics quality (`Quality`, pause menu "Grafik": Niedrig / Mittel / Hoch / automatic): Niedrig renders the 3D picture at 60 % (the UI stays sharp), no sun shadows, 30 fps cap (an even 30 feels smoother than an uneven 45); Mittel 80 %, shadows; Hoch full. Phones and browsers start on Niedrig, PCs on Hoch. `Viewport.scaling_3d_scale` works with the compatibility renderer (checked under xvfb).
 - Not measurable here: real frame rates on the owner's phone. If it is still not smooth on Niedrig, the next steps are fewer objects per area and a lower backdrop/flora density; please tell me the device and whether the stutter is constant or only in fights.
 - Tests: `test_w12_quality` (3), `test_w10_music` has 9.
+
+## W13 – Performance read-out and a faster Zotik creator (owner: Xiaomi Redmi Note 15 Pro+, "der Zotik-Generator ist sehr langsam am Laden und zu bedienen")
+- Pause menu "Leistungsanzeige": one line at the top (fps, average and worst frame of the last half second, draw calls, graphics level) to report stutter with numbers (`PerfOverlay`, setting `perf_overlay`, off by default).
+- Creator: the buttons appear at once ("Zotik wird geladen ..."), the model is built after the first frame; on the Niedrig level the 3D preview is drawn with half the pixels per side (`stretch_shrink 2`), no MSAA and no shadow atlas. Measured on the desktop (xvfb, software GL): creator ready in 400 ms cold, an option change takes 1.3 ms; the per-frame cost of the preview is the render, which is what the lower resolution reduces. Not measurable here: the real phone.
+- Tests: `test_w12_quality` has 4.

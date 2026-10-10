@@ -42,6 +42,7 @@ func _ready() -> void:
 	add_to_group("game_root")
 	factories = {"trigger": CutsceneTrigger.create, "npc": Npc.create, "chest": Chest.create, "enemy": Enemy.create, "puzzle": PuzzleNode.create, "savepoint": Savepoint.create, "unique": UniquePedestal.create, "travel": TravelPoint.create, "platform": MovingPlatform.create, "lore": LoreBook.create, "bounty_board": BountyBoard.create, "casino": CasinoEntrance.create}
 	Dialogue.reset()
+	ui.add_child(PerfOverlay.new())
 	hud = Hud.new()
 	hud.game = self
 	ui.add_child(hud)
