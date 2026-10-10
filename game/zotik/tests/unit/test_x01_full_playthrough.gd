@@ -414,7 +414,7 @@ func _chapter_seven() -> void:
 func _chapter_eight() -> void:
 	const M := "QUEST_MAIN_NOC_001"
 	const S := "QUEST_SIDE_NOC_001"
-	await _exit_to("AREA_NOC_CITY__PREV")
+	await _exit_to("AREA_IGN_VILLAGE")
 	await _travel("TRAVEL_IGN_001", "WORLD_NOCTARIS", "CUT_NOC_ARRIVAL_001")
 	eq(game.area.area_id, "AREA_NOC_CITY", "in Nocturna")
 	await _exit_to("AREA_NOC_ARCHIVE")

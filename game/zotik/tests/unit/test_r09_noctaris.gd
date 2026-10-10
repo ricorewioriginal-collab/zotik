@@ -163,7 +163,7 @@ func test_side_quest_nyx() -> void:
 
 
 func test_worlds_have_ambient_motes() -> void:
-	for area in ["AREA_NOC_CITY", "AREA_LUN_FOREST", "AREA_SOL_DUNES", "AREA_AQU_CAVES"]:
+	for area in ["AREA_NOC_CITY", "AREA_LUN_FOREST", "AREA_SOL_DUNES", "AREA_AQU_DOME"]:
 		game.enter_area(area, "default")
 		await physics_frames(2)
 		check(game.area.get_node_or_null("Motes") != null, area + " has ambient particles")
