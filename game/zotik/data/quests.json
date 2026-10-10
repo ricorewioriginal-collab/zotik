@@ -955,5 +955,105 @@
         "count": 1
       }
     ]
+  },
+  "QUEST_MAIN_AST_001": {
+    "name": "Wenn die Sterne wandern",
+    "type": "main",
+    "completion_notice": "Kapitel 9 „Astralis – Die Himmelswelt“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Sprich mit Aera im Wolkenhafen.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_AERA_001"
+        }
+      },
+      {
+        "objective": "Finde die Sternenruinen hinter den Schwebeinseln.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_AST_RUINS"
+        }
+      },
+      {
+        "objective": "Stelle die Sternenscheiben in den Ruinen richtig ein.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_AST_DIALS_001"
+        }
+      },
+      {
+        "objective": "Besiege den Tempelwächter im Sternentempel.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_TEMPELWAECHTER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich Solyra auf dem Sternengipfel.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_SOLYRA_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Aera im Wolkenhafen.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_AERA_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 650
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_AST_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_AST_001": {
+    "name": "Sternenstaub für Sora",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 5 Sternenstaub (Schwebeinseln, Ruinen).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_STARDUST_001",
+          "count": 5
+        }
+      },
+      {
+        "objective": "Bring den Sternenstaub zu Sora in die Sternengärten.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_SORA_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_STARDUST_001",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 320
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ]
   }
 }

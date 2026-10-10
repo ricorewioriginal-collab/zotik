@@ -229,5 +229,32 @@
   },
   "FLAG_NOC_CHAPTER_COMPLETE": {
     "desc": "Kapitel 8 (Noctaris) abgeschlossen"
+  },
+  "FLAG_AST_ARRIVED": {
+    "desc": "Astralis betreten"
+  },
+  "FLAG_AST_ISLES_OPEN": {
+    "desc": "Der Weg zu den Schwebeinseln ist offen"
+  },
+  "FLAG_AST_RUINS_SEEN": {
+    "desc": "Die Sternenruinen gesehen"
+  },
+  "FLAG_AST_RUINS_OPEN": {
+    "desc": "Der Weg zu den Sternenruinen ist frei"
+  },
+  "FLAG_AST_DIALS_DONE": {
+    "desc": "Sternenscheiben der Ruinen gelöst"
+  },
+  "FLAG_AST_WAECHTER_DEFEATED": {
+    "desc": "Tempelwächter besiegt"
+  },
+  "FLAG_AST_SOLYRA_MET": {
+    "desc": "Begegnung mit Solyra gesehen"
+  },
+  "FLAG_BOSS_AST_SOLYRA_DEFEATED": {
+    "desc": "Astralgeist Solyra besiegt"
+  },
+  "FLAG_AST_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 9 (Astralis) abgeschlossen"
   }
 }

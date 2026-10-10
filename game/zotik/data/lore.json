@@ -178,5 +178,35 @@
         "Fünf Säulen im Nullkern halten je eine Erinnerung. Wer sie in der Reihenfolge weckt, in der sie wirklich geschahen, öffnet die Tür zum Herzen der Stadt."
       ]
     ]
+  },
+  "LORE_AST_001": {
+    "title": "Der Wolkenhafen",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Astralis besteht aus Inseln, die auf Wolken ruhen. Der Wolkenhafen ist ihr Tor: Von hier legen die Luftschiffe ab, und hier warten die Navigatoren auf günstigen Wind."
+      ]
+    ]
+  },
+  "LORE_AST_002": {
+    "title": "Astralgeist Solyra",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Solyra webt die Sternbilder, unter denen Astralis navigiert. Seit ein Splitter in ihrem Kern steckt, verschieben sich die Sterne – und mit ihnen die Inseln."
+      ]
+    ]
+  },
+  "LORE_AST_003": {
+    "title": "Die Sternenscheiben",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Vier Scheiben zeigen den Himmel zu vier Jahreszeiten. Wer sie in der Reihenfolge der Wanderung dreht, öffnet den Sternentempel."
+      ]
+    ]
   }
 }

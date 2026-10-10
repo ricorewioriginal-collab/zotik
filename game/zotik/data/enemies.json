@@ -1472,5 +1472,164 @@
         }
       }
     ]
+  },
+  "ENEMY_WOLKENSCHWINGE_001": {
+    "name": "Wolkenschwinge",
+    "region": "WORLD_ASTRALIS",
+    "description": "Ein goldgefiederter Segler der Himmelsinseln. Er stürzt aus den Wolken auf alles, was glänzt.",
+    "hp": 125,
+    "attack": 26,
+    "defense": 7,
+    "move_speed": 4.6,
+    "aggro_range": 12.0,
+    "attack_range": 1.8,
+    "attack_cooldown": 1.2,
+    "currency": 28,
+    "drops": [
+      {
+        "id": "ITEM_STARDUST_001",
+        "count": 1
+      }
+    ],
+    "break": 46,
+    "break_duration": 2.5
+  },
+  "ENEMY_STERNENWAECHTER_001": {
+    "name": "Sternenwächter",
+    "region": "WORLD_ASTRALIS",
+    "description": "Ein alter Wächter der Sternenruinen, dessen Knochen das Licht der Sterne speichern.",
+    "hp": 165,
+    "attack": 27,
+    "defense": 13,
+    "move_speed": 3.2,
+    "aggro_range": 11.0,
+    "attack_range": 2.0,
+    "attack_cooldown": 1.4,
+    "currency": 30,
+    "drops": [
+      {
+        "id": "ITEM_STARDUST_001",
+        "count": 2
+      }
+    ],
+    "break": 62,
+    "break_duration": 3.0
+  },
+  "ENEMY_TEMPELWAECHTER_001": {
+    "name": "Tempelwächter",
+    "region": "WORLD_ASTRALIS",
+    "description": "Ein Koloss aus Sternenstein, der den Tempel hütet. Ein starker Bruch lässt seine Rüstung aufbrechen.",
+    "hp": 460,
+    "attack": 31,
+    "defense": 14,
+    "move_speed": 2.0,
+    "aggro_range": 13.0,
+    "attack_range": 2.8,
+    "attack_cooldown": 1.9,
+    "currency": 170,
+    "drops": [
+      {
+        "id": "ITEM_STARDUST_001",
+        "count": 5
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 1
+      }
+    ],
+    "break": 155,
+    "break_duration": 4.0,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_AST_WAECHTER_DEFEATED"
+      }
+    ]
+  },
+  "BOSS_SOLYRA_001": {
+    "name": "Astralgeist Solyra",
+    "region": "WORLD_ASTRALIS",
+    "description": "Die Weberin der Sternbilder. Ein Splitter des Weltenkerns lässt sie die Sterne verschieben.",
+    "hp": 1250,
+    "attack": 30,
+    "defense": 13,
+    "move_speed": 2.0,
+    "aggro_range": 30.0,
+    "attack_range": 3.6,
+    "attack_cooldown": 1.8,
+    "currency": 450,
+    "drops": [
+      {
+        "id": "ITEM_STARDUST_001",
+        "count": 8
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      }
+    ],
+    "break": 270,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_BOSS_AST_SOLYRA_DEFEATED"
+      },
+      {
+        "type": "play_cutscene",
+        "id": "CUT_AST_SOLYRA_DEFEAT_001"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Sternenschlag",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffe080",
+        "hazard": {
+          "interval": 5.0,
+          "radius": 2.6,
+          "delay": 1.2,
+          "damage": 23
+        }
+      },
+      {
+        "from_hp_ratio": 0.6,
+        "name": "Sternschnuppenregen",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.9,
+        "summon": "ENEMY_WOLKENSCHWINGE_001",
+        "summon_count": 2,
+        "color": "#ffc0f0",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.5,
+          "width": 3.0,
+          "delay": 1.3,
+          "damage": 27
+        }
+      },
+      {
+        "from_hp_ratio": 0.3,
+        "name": "Verschobene Sterne",
+        "attack_mult": 1.3,
+        "cooldown_mult": 0.75,
+        "summon": "ENEMY_STERNENWAECHTER_001",
+        "summon_count": 1,
+        "color": "#ffffff",
+        "hazard": {
+          "kind": "surge",
+          "interval": 3.2,
+          "width": 3.6,
+          "delay": 1.1,
+          "damage": 31
+        }
+      }
+    ]
   }
 }

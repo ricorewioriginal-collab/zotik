@@ -1210,5 +1210,115 @@
         "id": "SHOP_NOC_NYX_001"
       }
     ]
+  },
+  "DLG_AERA_LEAD_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_AERA_001",
+        "Aera, Navigatorin des Wolkenhafens – und die beste, falls jemand fragt. Niemand fragt. Aber es stimmt."
+      ],
+      [
+        "NPC_AERA_001",
+        "Seit der Splitter in Solyras Kern steckt, verschieben sich die Sterne, und meine Karten stimmen nicht mehr. Die Schwebeinseln sind erreichbar – ich zeige euch den Weg, bis die Ruinen kommen. Danach ist es euer Rennen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_AST_001"
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_AST_ISLES_OPEN"
+      }
+    ]
+  },
+  "DLG_AERA_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_AERA_001",
+        "Hinter den Schwebeinseln liegen die Sternenruinen, dahinter der Sternentempel. Wer Solyra erreicht, sieht die Welt von oben. Ich war fast da. Fast zählt, oder?"
+      ]
+    ]
+  },
+  "DLG_AERA_REPORT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_AERA_001",
+        "Die Sterne stehen wieder, wo sie hingehören! Ich hab es gespürt, als der Wind sich gedreht hat."
+      ],
+      [
+        "NPC_AERA_001",
+        "Ihr tragt jetzt sieben Splitter. Zwei Versionen der Welt, ein Kern dazwischen. Elyndra liegt dort, wo sie sich treffen – und ich ahne, dass wir uns wiedersehen."
+      ]
+    ]
+  },
+  "DLG_AERA_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_AERA_001",
+        "Die Luftschiffe fahren wieder nach Plan. Wenn ihr zurückkommt, fliege ich euch, wohin ihr wollt – gegen jede Konkurrenz."
+      ]
+    ]
+  },
+  "DLG_ILVO_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ILVO_001",
+        "Ich warte seit drei Wochen auf Rückenwind. Aera sagt, der kommt, wenn man aufhört, darauf zu warten."
+      ],
+      [
+        "NPC_ILVO_001",
+        "Ich warte trotzdem."
+      ]
+    ]
+  },
+  "DLG_SORA_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SORA_001",
+        "In den Sternengärten wächst nichts ohne Sternenstaub. Die Wolkenschwingen und die Wächter der Ruinen tragen ihn bei sich. Bringst du mir fünf Portionen?"
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_AST_001"
+      },
+      {
+        "type": "open_shop",
+        "id": "SHOP_AST_SORA_001"
+      }
+    ]
+  },
+  "DLG_SORA_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SORA_001",
+        "Fünf Portionen, glitzernd frisch! Meine Blumen werden leuchten wie nie. Hier, deine Belohnung."
+      ]
+    ]
+  },
+  "DLG_SORA_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SORA_001",
+        "Sternenlanze und Wolkenmantel, geschmiedet aus Himmelsstahl und gewebt aus Morgennebel. Und Himmelsbrot, frisch aus dem Gartenofen."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_AST_SORA_001"
+      }
+    ]
   }
 }

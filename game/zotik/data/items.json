@@ -335,5 +335,41 @@
     },
     "price": 880,
     "stack": 1
+  },
+  "ITEM_STARDUST_001": {
+    "name": "Sternenstaub",
+    "type": "material",
+    "price": 46,
+    "stack": 99
+  },
+  "ITEM_HIMMELSBROT_001": {
+    "name": "Himmelsbrot",
+    "type": "consumable",
+    "effect": {
+      "heal": 120
+    },
+    "price": 44,
+    "stack": 99
+  },
+  "WEAPON_STAR_LANCE_001": {
+    "name": "Sternenlanze",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 36
+    },
+    "price": 980,
+    "stack": 1
+  },
+  "ARMOR_CLOUD_001": {
+    "name": "Wolkenmantel",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 13,
+      "max_hp": 45
+    },
+    "price": 960,
+    "stack": 1
   }
 }

@@ -376,5 +376,46 @@
       "Beginne mit der vierten Säule von links. Danach die erste, dann die letzte.",
       "Säulen 4, 1, 5, 2, 3 (von links gezählt)."
     ]
+  },
+  "PUZ_AST_DIALS_001": {
+    "name": "Sternenscheiben",
+    "area": "AREA_AST_RUINS",
+    "kind": "dials",
+    "dial_count": 4,
+    "dial_states": 4,
+    "initial": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "solution": [
+      2,
+      0,
+      3,
+      1
+    ],
+    "part_prompt": "Sternenscheibe drehen",
+    "plate_prompt": "Sternbild entzünden",
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_AST_DIALS_DONE"
+      },
+      {
+        "type": "give_currency",
+        "amount": 130
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_STARDUST_001",
+        "count": 3
+      }
+    ],
+    "hints": [
+      "Vier Scheiben zeigen den Himmel zu vier Jahreszeiten: Frühling, Sommer, Herbst, Winter. Jede lässt sich Jahreszeit für Jahreszeit weiterdrehen.",
+      "Das Wandbild zeigt die Wanderung der Vögel: Sie brechen im Herbst auf, ruhen im Frühling, fliegen im Winter weiter und kehren im Sommer zurück – von links nach rechts.",
+      "Erste Scheibe zweimal drehen (Herbst), zweite gar nicht (Frühling), dritte dreimal (Winter), vierte einmal (Sommer). Dann das Sternbild entzünden."
+    ]
   }
 }

@@ -667,5 +667,92 @@
         "spawn": "AREA_NOC_LANES"
       }
     ]
+  },
+  "CUT_AST_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Astralis. Inseln auf Wolken, Brücken aus Licht, und über allem ein Himmel, der näher ist als irgendwo sonst. Luftschiffe gleiten durch den Wolkenhafen."
+      ],
+      [
+        "NPC_NIA_001",
+        "Mir wird gleich schwindelig. Und es ist wunderschön."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der siebte Splitter. Und Astralis zeigt die andere Version der Welt – die, die Noctaris gespiegelt hat. Wir suchen die Navigatoren."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_AST_001"
+      }
+    ]
+  },
+  "CUT_AST_RUINS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Am Ende der Schwebeinseln ragen die Sternenruinen aus den Wolken. Ihre Bögen sind aus Licht, und die Sterne darüber stehen falsch."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Das sind nicht die Sterne, die ich kenne."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann bringen wir sie zurück an ihren Platz."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_AST_RUINS_OPEN"
+      }
+    ]
+  },
+  "CUT_AST_SOLYRA_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_SOLYRA_001",
+        "Ich webe, was oben ist, und halte, was unten fällt. Wer an meinen Fäden zieht, stürzt."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der Splitter sitzt in ihrem Kern. Er lässt sie die Sterne verschieben."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann weben wir sie neu."
+      ]
+    ]
+  },
+  "CUT_AST_SOLYRA_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Solyra löst sich in Sternenstaub auf, und für einen Augenblick steht der Himmel still und klar. Dann steigt ein Splitter aus dem Licht, leicht wie eine Feder."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Sieben Splitter. Zwei Versionen der Welt, die einander spiegeln – und eine Stadt dazwischen."
+      ],
+      [
+        "NPC_NIA_001",
+        "Erst zurück zu Aera. Ich brauche festen Boden. Kurz."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_AST_PORT",
+        "spawn": "AREA_AST_ISLES"
+      }
+    ]
   }
 }
