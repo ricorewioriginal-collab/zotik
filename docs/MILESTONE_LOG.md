@@ -764,3 +764,8 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - `Look.build_flora`: tufts of grass (7 bent blades each) and glowing flowers as two MultiMeshes per area (Lunaris, Elaris, Valdoria, Solmera); fewer on web/Android; keeps roads, houses, water and exits free.
 - Lantern lamps are brighter and carry a warm OmniLight on PC (not on web/Android).
 - Placeholder/procedural art, not final.
+
+## R04 (early) – Quaternius Stylized Nature models
+- 40 CC0 models (trees, pines, bushes, rocks, grass, flowers, mushrooms, pebbles) in `assets/world/nature`; `Look.model()` falls back to this folder, `_place_h` scales to a height in metres.
+- Used for: placed "tree" props, the tree rows beyond the border (Lunaris, Elaris), and the flora scatter (grass, flowers, mushrooms as MultiMeshes; thinner on web/Android).
+- Source via itch.io download page (free, CC0); textures 512 px keep the build small.

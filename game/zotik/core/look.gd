@@ -32,15 +32,20 @@ const EXIT_GAP := 6.0
 ## texture repeats per metre on floors (keeps cobbles/planks at a believable size)
 const FLOOR_SCALE := {"cobble": 0.55, "wood": 0.6, "rock": 0.3, "grass": 0.25, "forest": 0.25, "sand": 0.2}
 
+## tree models for placed "tree" props
+const TREES := ["CommonTree_1", "CommonTree_2", "CommonTree_3", "CommonTree_4", "CommonTree_5"]
+
 ## CC0 KayKit Medieval Hexagon models (assets/world/kaykit), G04
 const MODEL_DIR := "res://assets/world/kaykit/%s.gltf"
+## CC0 Quaternius Stylized Nature MegaKit (assets/world/nature), R04: trees, rocks, grass, flowers
+const NATURE_DIR := "res://assets/world/nature/%s.gltf"
 const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
 ## backdrop beyond the area border: [inner row models, outer row models]
 const BACKDROP := {
-	"WORLD_LUNARIS": [["trees_A_medium", "tree_single_A", "trees_A_large", "tree_single_B"], ["trees_A_large", "trees_A_medium"]],
-	"WORLD_ELARIS": [["trees_B_large", "trees_B_medium", "tree_single_B", "trees_A_large"], ["trees_B_large", "trees_A_large"]],
+	"WORLD_LUNARIS": [["CommonTree_1", "CommonTree_3", "CommonTree_5", "Pine_2", "CommonTree_2"], ["TwistedTree_1", "TwistedTree_2", "Pine_1", "TwistedTree_3"]],
+	"WORLD_ELARIS": [["CommonTree_2", "CommonTree_4", "Pine_1", "CommonTree_1", "Pine_3"], ["TwistedTree_2", "TwistedTree_3", "Pine_2"]],
 	"WORLD_VALDORIA": [["building_home_A_red", "building_home_B_red", "building_tavern_red", "building_tower_A_red", "building_home_A_red"], ["trees_A_large", "trees_B_large"]],
 	"WORLD_SOLMERA": [["rock_single_A", "rock_single_B", "tent", "rock_single_C", "building_tower_A_red"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
 	"WORLD_AQUALIS": [["building_tower_A_blue", "rock_single_A", "building_home_A_blue", "rock_single_B", "building_home_B_blue"], ["rock_single_A", "rock_single_C", "rock_single_B"]],
@@ -255,9 +260,11 @@ static func build_prop(root: Node3D, prop_name: String, size: Vector3, color: Co
 
 
 ## Instance of a KayKit model plus its unscaled bounds (cached per name).
-static func model(name: String) -> Array:
+static func _entry(name: String) -> Array:
 	if not _models.has(name):
 		var path := MODEL_DIR % name
+		if not ResourceLoader.exists(path):
+			path = NATURE_DIR % name
 		if not ResourceLoader.exists(path):
 			_models[name] = [null, AABB()]
 		else:
@@ -269,9 +276,25 @@ static func model(name: String) -> Array:
 				var a: AABB = (mi as MeshInstance3D).transform * (mi as MeshInstance3D).get_aabb()
 				box = a if first else box.merge(a)
 				first = false
+				if path.begins_with("res://assets/world/nature"):
+					# the kit bakes autumn colours into the vertices: use the plain green/natural textures
+					var mesh := (mi as MeshInstance3D).mesh
+					for i in mesh.get_surface_count():
+						var sm := mesh.surface_get_material(i)
+						if sm is StandardMaterial3D:
+							(sm as StandardMaterial3D).vertex_color_use_as_albedo = false
 			probe.free()
 			_models[name] = [scene, box]
-	var entry: Array = _models[name]
+	return _models[name]
+
+
+## Bounding box of a model (empty AABB if it does not exist); no node is created.
+static func model_box(name: String) -> AABB:
+	return _entry(name)[1]
+
+
+static func model(name: String) -> Array:
+	var entry: Array = _entry(name)
 	return [(entry[0] as PackedScene).instantiate() if entry[0] else null, entry[1]]
 
 
@@ -285,6 +308,14 @@ static func _place(parent: Node3D, name: String, pos: Vector3, scl: float, yaw: 
 	n.position = pos - Vector3(0, (m[1] as AABB).position.y * scl, 0)
 	parent.add_child(n)
 	return n
+
+
+## Like _place, but scales the model to a target height in metres.
+static func _place_h(parent: Node3D, name: String, pos: Vector3, height: float, yaw: float = 0.0) -> Node3D:
+	var box := model_box(name)
+	if box.size.y <= 0.0:
+		return null
+	return _place(parent, name, pos, height / box.size.y, yaw)
 
 
 static func building_for(prop_name: String, world_style: Dictionary) -> String:
@@ -310,7 +341,7 @@ static func _model_building(root: Node3D, prop_name: String, size: Vector3, worl
 	var nm := building_for(prop_name, world_style)
 	if nm == "":
 		return false
-	var box: AABB = model(nm)[1]
+	var box := model_box(nm)
 	var scl := minf(size.x / box.size.x, size.z / box.size.z)
 	var n := _place(root, nm, Vector3(0, -size.y / 2.0, 0), scl)
 	if n:
@@ -319,8 +350,7 @@ static func _model_building(root: Node3D, prop_name: String, size: Vector3, worl
 
 
 static func _model_tree(root: Node3D, prop_name: String, size: Vector3) -> bool:
-	var nm := "tree_single_B" if prop_name.contains("living") or prop_name.hash() % 2 == 0 else "tree_single_A"
-	var n := _place(root, nm, Vector3(0, -size.y / 2.0, 0), size.y / 1.1)
+	var n: Node3D = _place_h(root, TREES[absi(prop_name.hash()) % TREES.size()], Vector3(0, -size.y / 2.0, 0), maxf(size.y, 5.0), float(absi(prop_name.hash()) % 628) / 100.0)
 	if n:
 		n.name = "Tree"
 	return n != null
@@ -359,7 +389,12 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 				var models: Array = spec[0]
 				var nm: String = models[rng.randi() % models.size()]
 				var yaw := atan2(-p.x, -p.y) if town else rng.randf() * TAU
-				_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw)
+				if ResourceLoader.exists(NATURE_DIR % nm):
+					# metre-scaled nature model: inner row 7-12 m, outer row 14-24 m
+					var tall := rng.randf_range(7.0, 12.0) if spec[1] < 10.0 else rng.randf_range(14.0, 24.0)
+					_place_h(root, nm, Vector3(p.x, -0.05, p.y), tall, yaw)
+				else:
+					_place(root, nm, Vector3(p.x, -0.05, p.y), rng.randf_range(spec[3], spec[4]), yaw)
 
 
 ## Small hand-placed dressing from layout "decor" (G05): KayKit models or
@@ -455,16 +490,42 @@ static func ground_tint(area_id: String, layout: Dictionary) -> Color:
 	return c
 
 
+## grass / flower / mushroom models (Quaternius, metres: grass ~1 m, so scaled down) and their tint
 const FLORA := {
-	"WORLD_LUNARIS": {"blade": ["#1f6f78", "#58d0b0"], "glow": "#7fd8ff", "count": 4200, "glow_count": 160},
-	"WORLD_ELARIS": {"blade": ["#2f7a35", "#8fd06a"], "glow": "#ffe08a", "count": 4200, "glow_count": 70},
-	"WORLD_VALDORIA": {"blade": ["#6a8a4a", "#b0c880"], "glow": "", "count": 900, "glow_count": 0},
-	"WORLD_SOLMERA": {"blade": ["#a08848", "#d8c078"], "glow": "", "count": 900, "glow_count": 0},
+	"WORLD_LUNARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group"], "mush": ["Mushroom_Common"], "tint": "#9fc8ff", "flower_tint": "#a8c8ff", "count": 2600, "flower_count": 260, "mush_count": 70, "glow": "#7fd8ff", "glow_count": 160},
+	"WORLD_ELARIS": {"grass": ["Grass_Wispy_Short", "Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group", "Flower_4_Group", "Clover_1"], "mush": ["Mushroom_Common", "Mushroom_Laetiporus"], "tint": "#e8ffd0", "flower_tint": "#ffffff", "count": 2600, "flower_count": 220, "mush_count": 50, "glow": "#ffe08a", "glow_count": 60},
+	"WORLD_VALDORIA": {"grass": ["Grass_Common_Short", "Grass_Common_Tall"], "flowers": ["Flower_3_Group"], "mush": [], "tint": "#d8e8b8", "flower_tint": "#ffffff", "count": 700, "flower_count": 60, "mush_count": 0, "glow": "", "glow_count": 0},
+	"WORLD_SOLMERA": {"grass": ["Grass_Wispy_Short", "Plant_1"], "flowers": [], "mush": [], "tint": "#e8cc88", "flower_tint": "#ffffff", "count": 500, "flower_count": 0, "mush_count": 0, "glow": "", "glow_count": 0},
 }
+static var _flora_meshes := {}
 
 
-## Grass tufts and glowing flowers scattered over the open ground (G6-01):
-## one MultiMesh each, so it is a handful of draw calls even on the web.
+## First mesh of a nature model with every surface material tinted.
+static func nature_mesh(name: String, tint: Color) -> Mesh:
+	var key := name + tint.to_html()
+	if _flora_meshes.has(key):
+		return _flora_meshes[key]
+	var entry := _entry(name)
+	var result: Mesh = null
+	if entry[0]:
+		var probe: Node3D = (entry[0] as PackedScene).instantiate()
+		var found := probe.find_children("*", "MeshInstance3D", true, false)
+		if not found.is_empty():
+			result = ((found[0] as MeshInstance3D).mesh as Mesh).duplicate()
+			for i in result.get_surface_count():
+				var m := result.surface_get_material(i)
+				if m is StandardMaterial3D:
+					m = m.duplicate()
+					(m as StandardMaterial3D).albedo_color = tint
+					result.surface_set_material(i, m)
+		probe.free()
+	_flora_meshes[key] = result
+	return result
+
+
+## Grass, flowers, mushrooms and glowing buds scattered over the open ground
+## (R01/R04): Quaternius models as MultiMeshes, so it is a handful of draw
+## calls even on the web.
 static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, size: Vector2) -> void:
 	if is_indoor(area_id, layout) or not FLORA.has(world_of(area_id)):
 		return
@@ -482,45 +543,31 @@ static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, siz
 	var root := Node3D.new()
 	root.name = "Flora"
 	parent.add_child(root)
-	var blade := ArrayMesh.new()
-	var verts := PackedVector3Array()
-	var cols := PackedColorArray()
-	var c0 := Color.html(cfg.blade[0])
-	var c1 := Color.html(cfg.blade[1])
-	# a tuft of seven thin, slightly bent blades
-	for k in 7:
-		var a := k * 2.4
-		var r := 0.05 + 0.04 * float(k % 3)
-		var base := Vector3(cos(a) * r, 0, sin(a) * r)
-		var dx := Vector3(cos(a + 1.57), 0, sin(a + 1.57))
-		var h := 0.22 + 0.06 * float(k % 4)
-		var lean := Vector3(cos(a), 0, sin(a)) * 0.07
-		verts.append_array([base - dx * 0.025, base + dx * 0.025, base + lean + Vector3(0, h, 0)])
-		cols.append_array([c0, c0, c1])
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = verts
-	arrays[Mesh.ARRAY_COLOR] = cols
-	blade.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	var mat := StandardMaterial3D.new()
-	mat.vertex_color_use_as_albedo = true
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-	mat.roughness = 1.0
-	blade.surface_set_material(0, mat)
-	var count := int(cfg.count) / (3 if low_end() else 1)
-	var xforms: Array[Transform3D] = []
+	var div := 3 if low_end() else 1
+	var groups := [["Grass", cfg.grass, Color.html(cfg.tint), int(cfg.count) / div, 0.28, 0.55], ["Flowers", cfg.flowers, Color.html(cfg.flower_tint), int(cfg.flower_count) / div, 0.3, 0.5], ["Mushrooms", cfg.mush, Color(1, 1, 1), int(cfg.mush_count) / div, 0.35, 0.7]]
 	var glow_pts: Array[Vector3] = []
-	var tries := 0
-	while xforms.size() < count and tries < count * 3:
-		tries += 1
-		var p := Vector2(rng.randf_range(-size.x / 2.0 + 1.0, size.x / 2.0 - 1.0), rng.randf_range(-size.y / 2.0 + 1.0, size.y / 2.0 - 1.0))
-		if blocked.any(func(r: Rect2): return r.has_point(p)) or exits.any(func(e: Vector2): return e.distance_to(p) < 5.0):
+	for g in groups:
+		var names: Array = g[1]
+		if names.is_empty() or int(g[3]) <= 0:
 			continue
-		var t := Transform3D(Basis(Vector3.UP, rng.randf() * TAU).scaled(Vector3.ONE * rng.randf_range(0.8, 1.6)), Vector3(p.x, 0.0, p.y))
-		xforms.append(t)
-		if glow_pts.size() < int(cfg.glow_count) / (2 if low_end() else 1) and rng.randf() < 0.06:
-			glow_pts.append(Vector3(p.x, 0.0, p.y))
-	_multimesh(root, blade, xforms, "Grass")
+		# one MultiMesh per model of the group
+		var per := maxi(1, int(g[3]) / names.size())
+		for nm in names:
+			var mesh := nature_mesh(nm, g[2])
+			if mesh == null:
+				continue
+			var xforms: Array[Transform3D] = []
+			var tries := 0
+			while xforms.size() < per and tries < per * 3:
+				tries += 1
+				var p := Vector2(rng.randf_range(-size.x / 2.0 + 1.0, size.x / 2.0 - 1.0), rng.randf_range(-size.y / 2.0 + 1.0, size.y / 2.0 - 1.0))
+				if blocked.any(func(r: Rect2): return r.has_point(p)) or exits.any(func(e: Vector2): return e.distance_to(p) < 5.0):
+					continue
+				var sc := rng.randf_range(g[4], g[5])
+				xforms.append(Transform3D(Basis(Vector3.UP, rng.randf() * TAU).scaled(Vector3.ONE * sc), Vector3(p.x, 0.0, p.y)))
+				if g[0] == "Grass" and glow_pts.size() < int(cfg.glow_count) / div and rng.randf() < 0.05:
+					glow_pts.append(Vector3(p.x, 0.0, p.y))
+			_multimesh(root, mesh, xforms, g[0] + "_" + nm)
 	if cfg.glow != "" and not glow_pts.is_empty():
 		var bulb := SphereMesh.new()
 		bulb.radius = 0.09
@@ -533,7 +580,7 @@ static func build_flora(parent: Node3D, area_id: String, layout: Dictionary, siz
 		var bulbs: Array[Transform3D] = []
 		for gp in glow_pts:
 			bulbs.append(Transform3D(Basis.IDENTITY, gp + Vector3(0, rng.randf_range(0.25, 0.5), 0)))
-		_multimesh(root, bulb, bulbs, "Flowers")
+		_multimesh(root, bulb, bulbs, "Buds")
 
 
 static func _multimesh(parent: Node3D, mesh: Mesh, xforms: Array[Transform3D], nm: String) -> void:
