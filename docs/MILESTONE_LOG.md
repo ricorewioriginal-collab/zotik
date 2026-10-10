@@ -933,3 +933,10 @@ Findings in the old code: saving was only possible at a Weltenanker (nothing els
 - Pause menu "Leistungsanzeige": one line at the top (fps, average and worst frame of the last half second, draw calls, graphics level) to report stutter with numbers (`PerfOverlay`, setting `perf_overlay`, off by default).
 - Creator: the buttons appear at once ("Zotik wird geladen ..."), the model is built after the first frame; on the Niedrig level the 3D preview is drawn with half the pixels per side (`stretch_shrink 2`), no MSAA and no shadow atlas. Measured on the desktop (xvfb, software GL): creator ready in 400 ms cold, an option change takes 1.3 ms; the per-frame cost of the preview is the render, which is what the lower resolution reduces. Not measurable here: the real phone.
 - Tests: `test_w12_quality` has 4.
+
+## W14 – Smaller download without visible loss (owner: "assets verkleinern ohne dass es pixelig wird")
+- Measured with `godot --export-pack "Web"`: 32.9 MB -> 24.5 MB (-26 %).
+- 26 textures (ground, character and body maps, title picture) were stored lossless; they are now lossy WebP (quality 0.85, normal maps 0.9, title picture 0.9), visually unchanged (checked in the village screenshot). The texture sizes themselves were not reduced, so nothing gets blurrier.
+- The unused KayKit adventurer folder (`assets/characters/kaykit`, legacy rigs replaced by the Quaternius humans) is excluded from all exports entirely, not only the .glb files.
+- Tried and rejected: VRAM-compressed textures with mipmaps (ETC2/ASTC for phones) would save GPU memory but make the download bigger (+8 MB desktop only, +26 MB with the mobile formats), which is the opposite of what the owner asked for.
+- The download is cached by the browser after the first start and does not cause stutter while playing; the frame rate work is in W12/W13.
