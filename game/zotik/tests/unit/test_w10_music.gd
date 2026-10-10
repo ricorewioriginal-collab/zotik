@@ -64,3 +64,26 @@ func test_buttons_click_and_rapid_repeats_are_throttled() -> void:
 	Sfx.play("click")
 	eq(Sfx._last.click, first, "second click inside the gap is dropped")
 	b.queue_free()
+
+
+func test_loops_are_seamless_and_the_right_length() -> void:
+	for id in ["title", "WORLD_LUNARIS", "boss"]:
+		var syn := MusicSynth.new(id)
+		var total := syn.loop_samples()
+		var bytes := syn.render_bytes(total, total)
+		eq(bytes.size(), total * 2, id + ": exactly four bars of mono 16-bit")
+		check(absi(bytes.decode_s16(bytes.size() - 2)) < 400, id + ": loop ends near silence")
+		var stream := MusicSynth.make_stream(bytes)
+		eq(stream.loop_mode, AudioStreamWAV.LOOP_FORWARD, id + ": loops")
+		eq(stream.loop_end, total, id + ": loop covers the whole stream")
+
+
+func test_build_in_slices_equals_one_go() -> void:
+	var a := MusicSynth.new("WORLD_ELARIS")
+	var total := a.loop_samples()
+	var whole := a.render_bytes(total, total)
+	var b := MusicSynth.new("WORLD_ELARIS")
+	var sliced := PackedByteArray()
+	while sliced.size() < total * 2:
+		sliced.append_array(b.render_bytes(mini(Music.SLICE_SAMPLES, total - sliced.size() / 2), total))
+	check(sliced == whole, "slicing the work changes nothing")
