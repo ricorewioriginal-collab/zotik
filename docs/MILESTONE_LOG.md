@@ -894,3 +894,7 @@ Findings in the old code: saving was only possible at a Weltenanker (nothing els
 ## E08 – Dungeon vaults with puzzles (Phase 7)
 - Each of the seven endgame dungeons (`AREA_END_D1`–`D7`) now has a dials puzzle (`PUZ_END_Dn_001`, three hints) at the end. Solving it sets `FLAG_END_Dn_VAULT` and opens a door (wall + `hidden_by_flag`) to a vault with `CHEST_END_Dn_VAULT` (3 Rissessenz, 2 Elixiere, 1800 Lun).
 - Still placeholder art, no dungeon boss besides the superboss before it. Test: `test_r15_endgame` has one more test (9).
+
+## W07 – Fast travel to touched Weltenanker (workflow)
+- Touching an anchor sets `FLAG_ANCHOR_<savepoint id>` (stored in the normal flags, no save format change). The world map lists the touched anchors under their world with a "Reisen" button (arrival at the area's default spawn); worlds still travel to their hub as before. Guide section added.
+- Tests: `test_w07_fast_travel` (3).

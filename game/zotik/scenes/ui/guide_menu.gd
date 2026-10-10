@@ -55,6 +55,9 @@ const PAGES := [
 		"Im Lauf der Reise schließen sich dir Gefährten an. Sie kämpfen mit, haben eigene Lebenspunkte und stehen links oben unter Zotiks Anzeige.",
 		"Das Bestiarium (Taste B) sammelt, was du über Gegner gelernt hast – Schwächen, Angriffe und Fundorte.",
 	]],
+	["Schnellreise", [
+		"Jedes Mal, wenn du einen Weltenanker berührst, merkt sich das Spiel ihn. In der Weltkarte erscheinen besuchte Anker unter ihrer Welt, und ein Druck auf Reisen bringt dich direkt dorthin.",
+	]],
 	["Nebenbei", [
 		"Arena und Kopfgeldtafeln bieten zusätzliche Kämpfe mit Belohnung. Das Casino ist eine Familienoption und lässt sich in den Einstellungen ausschalten.",
 		"Alles Wichtige zu Einstellungen, Touch-Steuerung und Spiel beenden findest du im Zahnrad oben links.",

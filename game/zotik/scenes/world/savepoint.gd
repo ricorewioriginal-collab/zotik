@@ -30,6 +30,7 @@ static func create(entry: Dictionary) -> Savepoint:
 func interact(player: Node) -> void:
 	if Content.savepoint(savepoint_id).get("heals", false) and player.has_method("revive_full"):
 		player.revive_full()
+	GameState.set_flag(Content.anchor_flag(savepoint_id))  # remembered for the map's fast travel
 	EventBus.savepoint_used.emit(savepoint_id)
 	var root := get_tree().get_first_node_in_group("game_root")
 	if root:

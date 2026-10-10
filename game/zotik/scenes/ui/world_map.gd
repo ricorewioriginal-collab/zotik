@@ -17,6 +17,11 @@ func refresh() -> void:
 			add_row(label + "  (hier)", [])
 		elif Content.world_unlocked(id):
 			add_row(label, [["Reisen", travel.bind(id)]])
+		if Content.world_unlocked(id):
+			for a in Content.anchors_of(id):
+				var here_area: bool = a[1] == GameState.player.get("area", "")
+				var aname := "   Anker: " + str(Content.get_entry("areas", a[1]).get("name", a[1]))
+				add_row(aname + ("  (hier)" if here_area else ""), [] if here_area else [["Reisen", travel_to_area.bind(a[1])]])
 		else:
 			add_row("Kapitel %d: ??? – noch versiegelt" % int(wd.chapter), [])
 
@@ -27,3 +32,9 @@ func travel(world_id: String) -> void:
 	var wd := Content.get_entry("worlds", world_id)
 	close_menu()
 	Effects.apply({"type": "travel", "area": wd.hub_area, "spawn": wd.hub_spawn})
+
+
+## Fast travel to a Weltenanker the player has touched before.
+func travel_to_area(area_id: String) -> void:
+	close_menu()
+	Effects.apply({"type": "travel", "area": area_id, "spawn": "default"})
