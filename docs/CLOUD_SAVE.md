@@ -8,6 +8,7 @@ Spielstände folgen dem Spieler zwischen Web-Version und Apps. Gleiches Firebase
 ## Apps (Windows, Linux, Android)
 `core/cloud_sync.gd` (Autoload `CloudSync`), Menü: Pause → „Spielstand übertragen“ → „Cloud-Speicher“.
 - Anmeldung: Google-Gerätecode (Code in der App, Eingabe auf google.com/device), getauscht gegen einen Firebase-Nutzer. Gespeichert wird nur das Refresh-Token in `user://cloud.cfg`.
+- Anzeige: verbundenes Google-Konto (Name, E-Mail), „In Google speichern“, „Mit Google wiederherstellen“ (ersetzt die lokalen Slots durch den Cloud-Stand), „Abmelden“.
 - Pro Slot gewinnt der neuere Stand (`saved_at`). Abgleich beim Start, nach jedem Speichern (5 s verzögert) und beim Pausieren der App.
 - Aus, solange kein OAuth-Client gesetzt ist. Die Zugangsdaten stehen nicht im Repo (GitHub Push-Schutz), der Build setzt sie aus den Repository-Secrets `GOOGLE_OAUTH_CLIENT_ID` und `GOOGLE_OAUTH_CLIENT_SECRET` in `cloud_sync.gd` ein.
 

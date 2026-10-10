@@ -24,6 +24,8 @@ const COMPRESS_FROM := 20000
 const MAX_DOC := 900000
 
 var message := ""
+var account_name := ""
+var account_email := ""
 var user_code := ""
 var verify_url := ""
 var _refresh := ""
@@ -49,6 +51,8 @@ func _ready() -> void:
 	var cfg := ConfigFile.new()
 	if cfg.load(CFG_PATH) == OK:
 		_refresh = str(cfg.get_value("auth", "refresh", ""))
+		account_name = str(cfg.get_value("auth", "name", ""))
+		account_email = str(cfg.get_value("auth", "email", ""))
 	_timer = Timer.new()
 	_timer.one_shot = true
 	_timer.wait_time = 5.0
@@ -183,6 +187,8 @@ func _firebase_login(google_id_token: String) -> void:
 	if r.code != 200 or not r.json.has("refreshToken"):
 		_login_end("Firebase-Anmeldung fehlgeschlagen (%d)." % r.code)
 		return
+	account_name = str(r.json.get("displayName", ""))
+	account_email = str(r.json.get("email", ""))
 	_apply_token(str(r.json.idToken), str(r.json.refreshToken), str(r.json.localId), int(r.json.get("expiresIn", 3600)))
 	_login_running = false
 	user_code = ""
@@ -200,6 +206,8 @@ func sign_out() -> void:
 	_refresh = ""
 	_uid = ""
 	_id_token = ""
+	account_name = ""
+	account_email = ""
 	_login_running = false
 	user_code = ""
 	DirAccess.remove_absolute(CFG_PATH)
@@ -213,6 +221,8 @@ func _apply_token(id_token: String, refresh: String, uid: String, expires_in: in
 	_token_exp = int(Time.get_unix_time_from_system()) + expires_in
 	var cfg := ConfigFile.new()
 	cfg.set_value("auth", "refresh", refresh)
+	cfg.set_value("auth", "name", account_name)
+	cfg.set_value("auth", "email", account_email)
 	cfg.save(CFG_PATH)
 
 
@@ -240,6 +250,33 @@ func sync() -> void:
 	var msg := await _sync_inner()
 	_busy = false
 	_status(msg)
+
+
+## Replaces the local saves with the cloud copy of every slot (explicit "restore").
+func restore() -> void:
+	if _busy or not signed_in():
+		return
+	_busy = true
+	_status("Stelle wieder her …")
+	var msg := await _restore_inner()
+	_busy = false
+	_status(msg)
+
+
+func _restore_inner() -> String:
+	if not await _ensure_token():
+		return "Bitte erneut anmelden."
+	var g := await _http(_doc_url(), HTTPClient.METHOD_GET, PackedStringArray(["Authorization: Bearer " + _id_token]), "")
+	if g.code == 404:
+		return "In der Cloud liegt noch kein Spielstand."
+	if g.code != 200:
+		return "Laden fehlgeschlagen (%d)." % g.code
+	var remote := decode_doc(str(g.json.get("fields", {}).get("d", {}).get("stringValue", "")))
+	var n := 0
+	for k in remote:
+		if SaveSystem.store_raw(int(str(k).substr(KEY_PREFIX.length())), str(remote[k].get("v", ""))):
+			n += 1
+	return "%d Spielstand/-stände aus der Cloud wiederhergestellt." % n if n > 0 else "In der Cloud liegt noch kein Spielstand."
 
 
 func _sync_inner() -> String:

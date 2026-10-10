@@ -25,11 +25,12 @@ func refresh() -> void:
 	if CloudSync.configured():
 		add_heading("Cloud-Speicher")
 		if CloudSync.signed_in():
-			add_row("Spielstände automatisch zwischen deinen Geräten abgleichen", [["Jetzt synchronisieren", CloudSync.sync], ["Abmelden", CloudSync.sign_out]])
+			var who: String = CloudSync.account_name if CloudSync.account_name != "" else "Google-Konto"
+			add_row("Mit Google verbunden: %s%s" % [who, " (%s)" % CloudSync.account_email if CloudSync.account_email != "" else ""], [["In Google speichern", CloudSync.sync], ["Mit Google wiederherstellen", CloudSync.restore], ["Abmelden", CloudSync.sign_out]])
 		elif CloudSync.user_code != "":
 			add_row("Code %s" % CloudSync.user_code, [["Abbrechen", CloudSync.sign_out]])
 		else:
-			add_row("Mit deinem Google-Konto anmelden, damit dein Fortschritt auf allen Geräten gleich ist", [["Anmelden", CloudSync.start_login]])
+			add_row("Spielstand mit Google speichern oder auf diesem Gerät wiederherstellen", [["Mit Google anmelden", CloudSync.start_login]])
 		if CloudSync.message != "":
 			add_note(CloudSync.message)
 	add_heading("Exportieren")
