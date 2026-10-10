@@ -60,6 +60,10 @@ const ARCHETYPES := {
 	"ENEMY_STERNENWAECHTER_001": ["model", "#ffe8a0"],
 	"ENEMY_TEMPELWAECHTER_001": ["golem", "#ffe080"],
 	"BOSS_SOLYRA_001": ["golem", "#fff0c0"],
+	"ENEMY_SPIEGELSPINNE_001": ["model", "#a0fff0"],
+	"ENEMY_ECHOKRIEGER_001": ["model", "#c0d0ff"],
+	"ENEMY_WELTENWAECHTER_001": ["golem", "#80f0ff"],
+	"BOSS_ELYON_001": ["golem", "#c0ffff"],
 }
 
 ## Rigged models: file (assets/enemies/<file>.fbx), tint (replaces the flat model colour),
@@ -85,6 +89,8 @@ const MODELS := {
 	"ENEMY_VERGESSENER_001": {"file": "Skeleton", "tint": "#7a6aa8"},
 	"ENEMY_WOLKENSCHWINGE_001": {"file": "Bat", "tint": "#e8b840", "hover": 0.8},
 	"ENEMY_STERNENWAECHTER_001": {"file": "Skeleton", "tint": "#d8c070"},
+	"ENEMY_SPIEGELSPINNE_001": {"file": "Spider", "tint": "#b8d8e8"},
+	"ENEMY_ECHOKRIEGER_001": {"file": "Skeleton", "tint": "#8aa8d8"},
 }
 
 ## nominal size of a model (longest side) before the enemy's size factor

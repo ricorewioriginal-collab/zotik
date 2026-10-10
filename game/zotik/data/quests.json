@@ -1055,5 +1055,109 @@
         "count": 1
       }
     ]
+  },
+  "QUEST_MAIN_ELY_001": {
+    "name": "Der Weltenkern",
+    "type": "main",
+    "completion_notice": "Kapitel 10 „Elyndra – Die Stadt zwischen den Welten“ abgeschlossen. Die Hauptgeschichte ist erzählt – die Welt bleibt frei spielbar.",
+    "steps": [
+      {
+        "objective": "Sprich mit Veyra in Elyndra.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_VEYRA_001"
+        }
+      },
+      {
+        "objective": "Finde den Weltenspalt hinter den Realitätsebenen.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_ELY_VOID"
+        }
+      },
+      {
+        "objective": "Wecke die Spiegel im Weltenspalt in der richtigen Reihenfolge.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_ELY_ECHO_001"
+        }
+      },
+      {
+        "objective": "Besiege den Weltenwächter am Wächtertor.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_WELTENWAECHTER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich Elyon im Weltenkern.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_ELYON_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Veyra in Elyndra.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_VEYRA_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 900
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELY_CHAPTER_COMPLETE"
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_GAME_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_ELY_001": {
+    "name": "Echos für Kael",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 5 Echosplitter (Realitätsebenen, Weltenspalt).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_ECHO_001",
+          "count": 5
+        }
+      },
+      {
+        "objective": "Bring die Echosplitter zu Kael ins Spiegelviertel.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_KAEL_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_ECHO_001",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 350
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ELIXIR_001",
+        "count": 2
+      }
+    ]
   }
 }

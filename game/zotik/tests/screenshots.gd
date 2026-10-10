@@ -190,6 +190,15 @@ func _run() -> void:
 		for c in game.companions.values():
 			c.snap_to_player()
 		await _shot(pair[1])
+	for f in ["FLAG_ELY_LAYERS_OPEN", "FLAG_ELY_VOID_OPEN", "FLAG_ELY_ECHO_DONE", "FLAG_ELY_WAECHTER_DEFEATED", "FLAG_ELY_ELYON_MET", "FLAG_ELY_ARRIVED"]:
+		gs.set_flag(f)
+	for pair in [["AREA_ELY_CITY", "41_elyndra_city", Vector3(0, 0, 14)], ["AREA_ELY_LAYERS", "42_elyndra_layers", Vector3(0, 0, 16)], ["AREA_ELY_VOID", "43_elyndra_void", Vector3(0, 0, 8)], ["AREA_ELY_CORE", "44_elyndra_core", Vector3(0, 0, 6)]]:
+		game.enter_area(pair[0], "default")
+		game.player.global_position = pair[2]
+		game.player.camera_pivot.rotation.y = 0.0
+		for c in game.companions.values():
+			c.snap_to_player()
+		await _shot(pair[1])
 	game.enter_area("AREA_VAL_MARKET", "default")
 	game.player.global_position = Vector3(0, 0, 12)
 	for _i in 20:

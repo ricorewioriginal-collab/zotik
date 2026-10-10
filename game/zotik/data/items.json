@@ -371,5 +371,41 @@
     },
     "price": 960,
     "stack": 1
+  },
+  "ITEM_ECHO_001": {
+    "name": "Echosplitter",
+    "type": "material",
+    "price": 50,
+    "stack": 99
+  },
+  "ITEM_WELTENWASSER_001": {
+    "name": "Weltenwasser",
+    "type": "consumable",
+    "effect": {
+      "heal": 130
+    },
+    "price": 48,
+    "stack": 99
+  },
+  "WEAPON_MIRROR_BLADE_001": {
+    "name": "Spiegelklinge",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 40
+    },
+    "price": 1100,
+    "stack": 1
+  },
+  "ARMOR_MIRROR_001": {
+    "name": "Spiegelpanzer",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 15,
+      "max_hp": 50
+    },
+    "price": 1080,
+    "stack": 1
   }
 }

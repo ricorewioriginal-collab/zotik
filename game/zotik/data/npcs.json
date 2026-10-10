@@ -1087,5 +1087,93 @@
         "dialogue": "DLG_SORA_SHOP_001"
       }
     ]
+  },
+  "NPC_VEYRA_001": {
+    "name": "Veyra",
+    "area": "AREA_ELY_CITY",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_MAIN_ELY_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "not_flag",
+            "id": "FLAG_ELY_LAYERS_OPEN"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_LEAD_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_MAIN_ELY_001",
+            "step": 5
+          }
+        ],
+        "dialogue": "DLG_VEYRA_REPORT_001"
+      },
+      {
+        "when": [
+          {
+            "type": "flag",
+            "id": "FLAG_ELY_CHAPTER_COMPLETE"
+          }
+        ],
+        "dialogue": "DLG_VEYRA_AFTER_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_VEYRA_IDLE_001"
+      }
+    ]
+  },
+  "NPC_TAVIS_001": {
+    "name": "Tavis",
+    "area": "AREA_ELY_CITY",
+    "dialogues": [
+      {
+        "when": [],
+        "dialogue": "DLG_TAVIS_IDLE_001"
+      }
+    ]
+  },
+  "NPC_KAEL_001": {
+    "name": "Kael",
+    "area": "AREA_ELY_QUARTER",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "quest_state",
+            "id": "QUEST_SIDE_ELY_001",
+            "state": "INACTIVE"
+          }
+        ],
+        "dialogue": "DLG_KAEL_QUEST_001"
+      },
+      {
+        "when": [
+          {
+            "type": "quest_step",
+            "id": "QUEST_SIDE_ELY_001",
+            "step": 1
+          }
+        ],
+        "dialogue": "DLG_KAEL_THANKS_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_KAEL_SHOP_001"
+      }
+    ]
   }
 }

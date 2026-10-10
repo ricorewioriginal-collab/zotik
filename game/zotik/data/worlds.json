@@ -69,5 +69,13 @@
     "hub_area": "AREA_AST_PORT",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_NOC_CHAPTER_COMPLETE"
+  },
+  "WORLD_ELYNDRA": {
+    "name": "Elyndra",
+    "chapter": 10,
+    "subtitle": "Die Stadt zwischen den Welten",
+    "hub_area": "AREA_ELY_CITY",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_AST_CHAPTER_COMPLETE"
   }
 }

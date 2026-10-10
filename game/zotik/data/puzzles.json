@@ -417,5 +417,40 @@
       "Das Wandbild zeigt die Wanderung der Vögel: Sie brechen im Herbst auf, ruhen im Frühling, fliegen im Winter weiter und kehren im Sommer zurück – von links nach rechts.",
       "Erste Scheibe zweimal drehen (Herbst), zweite gar nicht (Frühling), dritte dreimal (Winter), vierte einmal (Sommer). Dann das Sternbild entzünden."
     ]
+  },
+  "PUZ_ELY_ECHO_001": {
+    "name": "Echofolge",
+    "area": "AREA_ELY_VOID",
+    "kind": "sequence",
+    "nodes": 6,
+    "initial": [],
+    "solution": [
+      4,
+      1,
+      5,
+      0,
+      3,
+      2
+    ],
+    "on_solved": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELY_ECHO_DONE"
+      },
+      {
+        "type": "give_currency",
+        "amount": 140
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ECHO_001",
+        "count": 3
+      }
+    ],
+    "hints": [
+      "Sechs Spiegel zeigen je ein Echo der Welten. Sie müssen in der Reihenfolge geweckt werden, in der die Welten einst getrennt wurden.",
+      "Die Trennung begann bei den Welten, die zuletzt entdeckt wurden: zuerst die fünfte Spiegelsäule von links, dann die zweite.",
+      "Spiegel 5, 2, 6, 1, 4, 3 (von links gezählt)."
+    ]
   }
 }

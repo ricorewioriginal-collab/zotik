@@ -256,5 +256,35 @@
   },
   "FLAG_AST_CHAPTER_COMPLETE": {
     "desc": "Kapitel 9 (Astralis) abgeschlossen"
+  },
+  "FLAG_ELY_ARRIVED": {
+    "desc": "Elyndra betreten"
+  },
+  "FLAG_ELY_LAYERS_OPEN": {
+    "desc": "Der Weg in die Realitätsebenen ist offen"
+  },
+  "FLAG_ELY_VOID_SEEN": {
+    "desc": "Den Weltenspalt gesehen"
+  },
+  "FLAG_ELY_VOID_OPEN": {
+    "desc": "Der Weg zum Weltenspalt ist frei"
+  },
+  "FLAG_ELY_ECHO_DONE": {
+    "desc": "Echofolge im Weltenspalt gelöst"
+  },
+  "FLAG_ELY_WAECHTER_DEFEATED": {
+    "desc": "Weltenwächter besiegt"
+  },
+  "FLAG_ELY_ELYON_MET": {
+    "desc": "Begegnung mit Elyon gesehen"
+  },
+  "FLAG_BOSS_ELY_ELYON_DEFEATED": {
+    "desc": "Elyon besiegt"
+  },
+  "FLAG_ELY_CHAPTER_COMPLETE": {
+    "desc": "Kapitel 10 (Elyndra) abgeschlossen"
+  },
+  "FLAG_GAME_COMPLETE": {
+    "desc": "Hauptgeschichte abgeschlossen"
   }
 }

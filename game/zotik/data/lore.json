@@ -208,5 +208,35 @@
         "Vier Scheiben zeigen den Himmel zu vier Jahreszeiten. Wer sie in der Reihenfolge der Wanderung dreht, öffnet den Sternentempel."
       ]
     ]
+  },
+  "LORE_ELY_001": {
+    "title": "Elyndra, die Stadt dazwischen",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Elyndra liegt dort, wo die Welten einander berühren. Ihre Straßen führen in mehrere Wirklichkeiten zugleich – wer sich verirrt, kommt nicht nur an einem anderen Ort, sondern in einer anderen Version davon heraus."
+      ]
+    ]
+  },
+  "LORE_ELY_002": {
+    "title": "Elyon, der Projektleiter",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Elyon leitete das Projekt, das den Weltenkern teilte. Er wollte retten, was zerbrach – und hat die Welten nur noch weiter auseinandergetrieben. Nun sammelt er die Splitter, um alles wieder zusammenzufügen."
+      ]
+    ]
+  },
+  "LORE_ELY_003": {
+    "title": "Die Echofolge",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Sechs Spiegel im Weltenspalt zeigen je ein Echo der Welten. Wer sie in der Reihenfolge weckt, in der die Welten einst getrennt wurden, öffnet das Tor zum Weltenkern."
+      ]
+    ]
   }
 }

@@ -754,5 +754,100 @@
         "spawn": "AREA_AST_ISLES"
       }
     ]
+  },
+  "CUT_ELY_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Elyndra. Straßen, die sich in der Luft verzweigen, Häuser, die in mehreren Wirklichkeiten zugleich stehen, und über allem ein Himmel aus Spiegeln, in dem sich alle Welten zeigen."
+      ],
+      [
+        "NPC_NIA_001",
+        "Ich sehe Lunaris da oben. Und Frosthain. Und – ist das Valdoria?"
+      ],
+      [
+        "NPC_LYRA_001",
+        "Das ist der Ort, an dem alles zusammenläuft. Der Weltenkern ist nah. Suchen wir jemanden, der sich auskennt."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_ELY_001"
+      }
+    ]
+  },
+  "CUT_ELY_VOID_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Am Ende der Realitätsebenen klafft der Weltenspalt: ein Riss, so groß wie eine Stadt, in dem sich Echos aller Welten spiegeln."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Ich sehe mich selbst. Dutzende Male."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann suchen wir den Weg, der wirklich unser ist."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_ELY_VOID_OPEN"
+      }
+    ]
+  },
+  "CUT_ELY_ELYON_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_ELYON_001",
+        "Ihr habt die Splitter gebracht. Sieben Stück – genug, um den Kern zu schließen. Gebt sie mir, und die Welten sind wieder eins."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Elyon. Du willst nicht retten. Du willst nicht verlieren."
+      ],
+      [
+        "BOSS_ELYON_001",
+        "Ist das nicht dasselbe?"
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Nein. Und wir geben dir nichts."
+      ]
+    ]
+  },
+  "CUT_ELY_ELYON_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Elyon sinkt auf die Knie. Der Weltenkern über ihm pulsiert ruhig, und die Splitter in Zotiks Tasche antworten mit einem leisen Klang – sieben Töne, ein Akkord."
+      ],
+      [
+        "BOSS_ELYON_001",
+        "Ich wollte nur, dass nichts verloren geht."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Dann lass uns zeigen, wie man bewahrt, ohne zu verschmelzen."
+      ],
+      [
+        "NPC_NIA_001",
+        "Gehen wir nach Hause. Alle Heime, die wir haben."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_ELY_CITY",
+        "spawn": "AREA_ELY_LAYERS"
+      }
+    ]
   }
 }

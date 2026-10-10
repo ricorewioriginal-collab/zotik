@@ -511,5 +511,63 @@
     "exits": [
       "AREA_AST_TEMPLE"
     ]
+  },
+  "AREA_ELY_CITY": {
+    "name": "Elyndra – Die Stadt zwischen den Welten",
+    "world": "WORLD_ELYNDRA",
+    "exits": [
+      "AREA_ELY_QUARTER",
+      "AREA_ELY_LAYERS"
+    ],
+    "gate": {
+      "AREA_ELY_LAYERS": "FLAG_ELY_LAYERS_OPEN"
+    }
+  },
+  "AREA_ELY_QUARTER": {
+    "name": "Elyndra – Das Spiegelviertel",
+    "world": "WORLD_ELYNDRA",
+    "exits": [
+      "AREA_ELY_CITY"
+    ]
+  },
+  "AREA_ELY_LAYERS": {
+    "name": "Elyndra – Die Realitätsebenen",
+    "world": "WORLD_ELYNDRA",
+    "exits": [
+      "AREA_ELY_CITY",
+      "AREA_ELY_VOID"
+    ],
+    "gate": {
+      "AREA_ELY_VOID": "FLAG_ELY_VOID_OPEN"
+    }
+  },
+  "AREA_ELY_VOID": {
+    "name": "Elyndra – Der Weltenspalt",
+    "world": "WORLD_ELYNDRA",
+    "exits": [
+      "AREA_ELY_LAYERS",
+      "AREA_ELY_GATE"
+    ],
+    "gate": {
+      "AREA_ELY_GATE": "FLAG_ELY_ECHO_DONE"
+    }
+  },
+  "AREA_ELY_GATE": {
+    "name": "Elyndra – Das Wächtertor",
+    "world": "WORLD_ELYNDRA",
+    "exits": [
+      "AREA_ELY_VOID",
+      "AREA_ELY_CORE"
+    ],
+    "gate": {
+      "AREA_ELY_CORE": "FLAG_ELY_WAECHTER_DEFEATED"
+    }
+  },
+  "AREA_ELY_CORE": {
+    "name": "Elyndra – Der Weltenkern",
+    "world": "WORLD_ELYNDRA",
+    "exits": [
+      "AREA_ELY_GATE"
+    ]
   }
 }
