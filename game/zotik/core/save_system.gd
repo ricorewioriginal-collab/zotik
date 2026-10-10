@@ -254,6 +254,30 @@ func load_slot(slot: int) -> Status:
 	return status
 
 
+## Raw envelope text of the newest valid copy of a slot ("" if none), for cloud sync.
+func raw_text(slot: int) -> String:
+	var path := slot_path(slot)
+	var from_file := _read_envelope(path)
+	var text := ""
+	if from_file.status == Status.OK:
+		text = FileAccess.get_file_as_string(path)
+	if _use_mirror():
+		var m := _mirror_read(slot)
+		if m != "" and _parse_envelope(m).status == Status.OK and str(JSON.parse_string(m).get("saved_at", "")) > str(JSON.parse_string(text).get("saved_at", "") if text != "" else ""):
+			text = m
+	return text
+
+
+## Stores an envelope text (validated like an import) into any slot 0-3 without emitting `saved`.
+func store_raw(slot: int, text: String) -> bool:
+	if slot < AUTO_SLOT or slot > SLOT_COUNT or _parse_envelope(text).status != Status.OK:
+		return false
+	DirAccess.make_dir_recursive_absolute(save_dir)
+	var file_ok := _write_file(slot, text)
+	var mirror_ok := _use_mirror() and _mirror_write(slot, text)
+	return file_ok or mirror_ok
+
+
 func slot_info(slot: int) -> Dictionary:
 	var res := _best(slot)
 	var status: Status = res.status
