@@ -41,6 +41,9 @@ const MODEL_DIR := "res://assets/world/kaykit/%s.gltf"
 const NATURE_DIR := "res://assets/world/nature/%s.gltf"
 ## CC0 Quaternius Fantasy Props MegaKit (assets/world/props): barrels, crates, benches, stalls, banners, torches
 const PROPS_DIR := "res://assets/world/props/%s.gltf"
+## CC0 Quaternius Medieval Village MegaKit (assets/world/village): roofs, doors, chimneys and plaster/brick textures for the houses
+const VILLAGE_DIR := "res://assets/world/village/%s.gltf"
+const VILLAGE_TEX := "res://assets/world/village/T_%s_BaseColor.png"
 const WORLD_COLOR := {"WORLD_LUNARIS": "blue", "WORLD_ELARIS": "green", "WORLD_VALDORIA": "red", "WORLD_SOLMERA": "red", "WORLD_AQUALIS": "blue"}
 ## prop name keyword -> building model ("%s" = world colour variant)
 const BUILDINGS := [["smithy", "building_blacksmith_red"], ["workshop", "building_blacksmith_red"], ["market", "building_market_red"], ["shop_", "building_market_red"], ["library", "building_church_red"], ["research_hall", "building_church_red"], ["guild_hall", "building_tavern_%s"], ["house", "building_home_%s"]]
@@ -261,10 +264,9 @@ static func build_prop(root: Node3D, prop_name: String, size: Vector3, color: Co
 			_mesh(root, b, Vector3.ZERO, surface("brick" if world_style.get("boundary", "") == "wall" else "rock", color, 0.3))
 
 
-## Instance of a KayKit model plus its unscaled bounds (cached per name).
 ## True for the metre-scaled kits (nature, props); the KayKit hex models use their own units.
 static func is_metric(name: String) -> bool:
-	return ResourceLoader.exists(NATURE_DIR % name) or ResourceLoader.exists(PROPS_DIR % name)
+	return ResourceLoader.exists(NATURE_DIR % name) or ResourceLoader.exists(PROPS_DIR % name) or ResourceLoader.exists(VILLAGE_DIR % name)
 
 
 static func _entry(name: String) -> Array:
@@ -274,6 +276,8 @@ static func _entry(name: String) -> Array:
 			path = NATURE_DIR % name
 		if not ResourceLoader.exists(path):
 			path = PROPS_DIR % name
+		if not ResourceLoader.exists(path):
+			path = VILLAGE_DIR % name
 		if not ResourceLoader.exists(path):
 			_models[name] = [null, AABB()]
 		else:
@@ -302,6 +306,7 @@ static func model_box(name: String) -> AABB:
 	return _entry(name)[1]
 
 
+## Instance of a model plus its unscaled bounds (cached per name).
 static func model(name: String) -> Array:
 	var entry: Array = _entry(name)
 	return [(entry[0] as PackedScene).instantiate() if entry[0] else null, entry[1]]
@@ -327,6 +332,129 @@ static func _place_h(parent: Node3D, name: String, pos: Vector3, height: float, 
 	return _place(parent, name, pos, height / box.size.y, yaw)
 
 
+## Plaster/brick/timber material from the village kit (world-space triplanar, tintable).
+static func village_surface(tex: String, tint: Color, scale: float = 0.3) -> StandardMaterial3D:
+	var key := "V%s|%s|%s" % [tex, tint.to_html(), scale]
+	if _cache.has(key):
+		return _cache[key]
+	var m := StandardMaterial3D.new()
+	m.albedo_texture = load(VILLAGE_TEX % tex)
+	m.albedo_color = tint
+	m.uv1_triplanar = true
+	m.uv1_world_triplanar = true
+	m.uv1_scale = Vector3.ONE * scale
+	m.roughness = 0.9
+	m.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+	_cache[key] = m
+	return m
+
+
+## Model scaled per axis so its footprint fills width x depth, standing on y = 0 of `pivot`.
+static func _fit(pivot: Node3D, name: String, width: float, depth: float, sy: float, long_axis_x: bool = false) -> Node3D:
+	var m: Array = model(name)
+	if m[0] == null:
+		return null
+	var n: Node3D = m[0]
+	var box: AABB = m[1]
+	var sx := width / box.size.x
+	var sz := depth / box.size.z
+	n.scale = Vector3(sx, sy, sz)
+	n.position = Vector3(-(box.position.x + box.size.x / 2.0) * sx, -box.position.y * sy, -(box.position.z + box.size.z / 2.0) * sz)
+	pivot.add_child(n)
+	return n
+
+
+## A real-looking house from the village kit (G6): plaster walls on a stone base,
+## timber frame, a tiled roof fitted to the footprint, door with frame, chimney
+## and lit windows. Footprint and height come from the layout prop.
+static func _village_house(prop_root: Node3D, prop_name: String, size: Vector3, world_style: Dictionary) -> void:
+	var root := Node3D.new()
+	root.name = "Building"
+	prop_root.add_child(root)
+	var w := size.x
+	var d := size.z
+	var h := size.y
+	var night: bool = world_style.get("night", false)
+	var wall_h := minf(h, 4.6) if h > 4.6 else h
+	var wall_col := Color(0.88, 0.84, 0.78)
+	match _world_key(world_style):
+		"blue": wall_col = Color(0.8, 0.84, 0.95)
+		"green": wall_col = Color(0.92, 0.9, 0.78)
+		"red": wall_col = Color(0.95, 0.82, 0.7)
+	if night:
+		wall_col = wall_col.darkened(0.12)
+	var plaster := village_surface("Plaster", wall_col, 0.35)
+	var stone := village_surface("UnevenBrick", Color(0.85, 0.85, 0.9), 0.5)
+	var wood := village_surface("WoodTrim", Color(0.75, 0.6, 0.5), 0.6)
+	var base_h := minf(1.0, wall_h * 0.3)
+	var top_y := -h / 2.0 + wall_h
+	# stone base and plaster upper walls
+	var base := BoxMesh.new()
+	base.size = Vector3(w, base_h, d)
+	_mesh(root, base, Vector3(0, -h / 2.0 + base_h / 2.0, 0), stone, "Base")
+	var upper := BoxMesh.new()
+	upper.size = Vector3(w - 0.12, wall_h - base_h, d - 0.12)
+	_mesh(root, upper, Vector3(0, -h / 2.0 + base_h + (wall_h - base_h) / 2.0, 0), plaster, "Walls")
+	# timber frame: corner posts and a beam under the roof
+	for sx_ in [-1, 1]:
+		for sz_ in [-1, 1]:
+			var post := BoxMesh.new()
+			post.size = Vector3(0.22, wall_h - base_h, 0.22)
+			_mesh(root, post, Vector3(sx_ * (w / 2.0 - 0.05), -h / 2.0 + base_h + (wall_h - base_h) / 2.0, sz_ * (d / 2.0 - 0.05)), wood, "Post")
+	for side in [-1, 1]:
+		var beam_x := BoxMesh.new()
+		beam_x.size = Vector3(w + 0.1, 0.2, 0.2)
+		_mesh(root, beam_x, Vector3(0, top_y - 0.1, side * (d / 2.0 - 0.05)), wood, "BeamX")
+		var beam_z := BoxMesh.new()
+		beam_z.size = Vector3(0.2, 0.2, d + 0.1)
+		_mesh(root, beam_z, Vector3(side * (w / 2.0 - 0.05), top_y - 0.1, 0), wood, "BeamZ")
+	# roof from the kit: ridge along the longer side
+	var long_x := w >= d
+	var long_len := maxf(w, d)
+	var short_len := minf(w, d)
+	var ratio := long_len / short_len
+	var roof_name := "Roof_RoundTiles_4x4"
+	if short_len >= 8.0:
+		roof_name = "Roof_RoundTiles_8x8" if ratio < 1.2 else ("Roof_RoundTiles_8x10" if ratio < 1.5 else "Roof_RoundTiles_8x12")
+	elif short_len >= 6.0:
+		roof_name = "Roof_RoundTiles_6x6" if ratio < 1.2 else ("Roof_RoundTiles_6x8" if ratio < 1.5 else "Roof_RoundTiles_6x10")
+	else:
+		roof_name = "Roof_RoundTiles_4x4" if ratio < 1.2 else ("Roof_RoundTiles_4x6" if ratio < 1.6 else "Roof_RoundTiles_4x8")
+	var pivot := Node3D.new()
+	pivot.name = "RoofPivot"
+	pivot.position = Vector3(0, top_y, 0)
+	pivot.rotation.y = 0.0 if not long_x else PI / 2.0
+	root.add_child(pivot)
+	var rb := model_box(roof_name)
+	var sy := clampf((short_len + 1.2) / rb.size.x, 0.7, 1.5)
+	var roof := _fit(pivot, roof_name, short_len + 1.2, long_len + 1.2, sy)
+	if roof:
+		roof.name = "Roof"
+		var tiles := village_surface("RoundTiles", Color(0.95, 0.62, 0.45) if not night else Color(0.75, 0.55, 0.5), 0.4)
+		for mi in roof.find_children("*", "MeshInstance3D", true, false):
+			(mi as MeshInstance3D).material_override = tiles
+	# door with frame on the front (+z) face, bottom at the floor
+	var frame := _place(root, "DoorFrame_Round_WoodDark", Vector3(0, -h / 2.0, d / 2.0 - 0.1), 1.0, 0.0)
+	if frame:
+		frame.name = "DoorFrame"
+	var door := _place(root, "Door_1_Round", Vector3(0, -h / 2.0, d / 2.0 + 0.02), 1.0, 0.0)
+	if door:
+		door.name = "Door"
+	# chimney on the roof
+	var chim := _place(root, "Prop_Chimney", Vector3(w * 0.25 if long_x else w * 0.3, top_y + 1.0, d * 0.15 if long_x else d * 0.25), 1.0, 0.0)
+	if chim:
+		chim.name = "Chimney"
+	# windows: two on each long face, warm light at night
+	var win_mat := glow(Color(1.0, 0.78, 0.45)) if night else glow(Color(0.55, 0.7, 0.85))
+	win_mat.emission_energy_multiplier = 2.0 if night else 0.25
+	var wh := clampf(wall_h * 0.28, 0.6, 1.0)
+	for sd in [-1, 1]:
+		for k in [-1, 1]:
+			var win := BoxMesh.new()
+			win.size = Vector3(0.7, wh, 0.05)
+			_mesh(root, win, Vector3(k * w * 0.28, -h / 2.0 + base_h + (wall_h - base_h) * 0.55, sd * (d / 2.0 + 0.01)), win_mat, "Window")
+
+
 static func building_for(prop_name: String, world_style: Dictionary) -> String:
 	var colour: String = WORLD_COLOR.get(_world_key(world_style), "red")
 	for b in BUILDINGS:
@@ -350,6 +478,9 @@ static func _model_building(root: Node3D, prop_name: String, size: Vector3, worl
 	var nm := building_for(prop_name, world_style)
 	if nm == "":
 		return false
+	if size.x >= 4.0 and size.z >= 4.0 and ResourceLoader.exists(VILLAGE_TEX % "Plaster") and world_style.get("boundary", "") != "":
+		_village_house(root, prop_name, size, world_style)
+		return true
 	var box := model_box(nm)
 	var scl := minf(size.x / box.size.x, size.z / box.size.z)
 	var n := _place(root, nm, Vector3(0, -size.y / 2.0, 0), scl)
@@ -410,6 +541,13 @@ static func build_backdrop(parent: Node3D, area_id: String, layout: Dictionary, 
 ## procedural lanterns, with an optional thin collider ("r", metres) so the
 ## player does not walk through barrels. Scale 1 = hex-pack units × DECOR_SCALE.
 const DECOR_SCALE := 5.0
+## KayKit decor names that now use the metre-scaled kits: name -> [model, scale (or tree height in m at scale 1)]
+const DECOR_MAP := {
+	"tree_single_A": ["@tree", 6.5], "tree_single_B": ["@tree", 6.5],
+	"rock_single_A": ["Rock_Medium_1", 0.8], "rock_single_B": ["Rock_Medium_2", 0.8], "rock_single_C": ["Rock_Medium_3", 0.8],
+	"barrel": ["Barrel", 1.0], "crate_A_big": ["Crate_Wooden", 1.0], "crate_B_small": ["Crate_Wooden", 0.7],
+	"bucket_water": ["Bucket_Wooden_1", 1.0], "weaponrack": ["WeaponStand", 1.0], "fence_wood_straight": ["Prop_WoodenFence_Single", 1.0],
+}
 
 
 static func build_decor(parent: Node3D, layout: Dictionary, area_id: String = "") -> void:
@@ -432,6 +570,13 @@ static func build_decor(parent: Node3D, layout: Dictionary, area_id: String = ""
 			n = _mesh(root, plane, pos, water(Color(0.25, 0.5, 0.75)), "Water")
 		elif d.model == "path":
 			n = _path(root, pos, yaw, Vector2(float(d.size[0]), float(d.size[1])), str(d.get("tex", "cobble")), night)
+		elif DECOR_MAP.has(d.model) and (DECOR_MAP[d.model][0] == "@tree" or is_metric(DECOR_MAP[d.model][0])):
+			var m: Array = DECOR_MAP[d.model]
+			var variant: String = m[0] if m[0] != "@tree" else TREES[absi(int(pos.x * 7.0 + pos.z * 13.0)) % TREES.size()]
+			if m[0] == "@tree":
+				n = _place_h(root, variant, pos, float(m[1]) * float(d.get("scale", 1.0)), yaw)
+			else:
+				n = _place(root, variant, pos, float(m[1]) * float(d.get("scale", 1.0)), yaw)
 		else:
 			n = _place(root, d.model, pos, (1.0 if is_metric(d.model) else DECOR_SCALE) * float(d.get("scale", 1.0)), yaw)
 		if n and d.has("r"):

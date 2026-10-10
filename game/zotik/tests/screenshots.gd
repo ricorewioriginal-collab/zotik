@@ -35,6 +35,9 @@ func _run() -> void:
 	game.enter_area("AREA_LUN_VILLAGE", "default")
 	game.player.global_position = Vector3(0, 0, 8)
 	await _shot("04_village")
+	game.player.global_position = Vector3(8, 0, 26)
+	game.player.camera_pivot.rotation.y = 0.5
+	await _shot("04a_village_house")
 	game.player.global_position = Vector3(-2, 0, 2)
 	game.player.camera_pivot.rotation.y = PI
 	game.update_beacon()
