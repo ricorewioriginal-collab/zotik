@@ -14,5 +14,6 @@ Source: `07_ENDGAME/ENDGAME.md`. The main story is complete (Phase 6); the world
 | E03 (PASSED) | Endgame dungeons (Der verlorene Wald … Der Ort, den es nie gab) as rift runs with five rift kinds |
 | E04 (PASSED) | NG+: restart with kept belongings, enemy scaling per level, extra rage phase for bosses |
 | E05 (PASSED) | NG+ extras: four NG+-only enemy types, extra chests, Chronik items and shop, NG+ dialogue lines |
+| E06 (PASSED) | NG+ secrets: seven hidden lore books |
 
 Rules: one milestone at a time, full regression before every merge, placeholder art is never reported as final (CLAUDE.md rule 6).

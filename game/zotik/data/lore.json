@@ -258,5 +258,75 @@
         "Sieben Wesen, so alt wie die Teilung des Kerns. Wer sie besiegt, trägt ihr Erbe: Waffen und Rüstung, die selbst die Splitter ehren."
       ]
     ]
+  },
+  "LORE_NG_001": {
+    "title": "Geheimnis: Die erste Fassung",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Im ersten Durchgang fiel der Mond in den Wald. Im zweiten bleibt er stehen – und beobachtet, wer ihn damals gesehen hat."
+      ]
+    ]
+  },
+  "LORE_NG_002": {
+    "title": "Geheimnis: Wurzeln, die sich erinnern",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Die Wurzelkönigin wuchs aus einem Samen, den jemand mitgebracht hat. Wer, steht nicht in diesem Buch – nur, dass er zwei Gesichter hatte."
+      ]
+    ]
+  },
+  "LORE_NG_003": {
+    "title": "Geheimnis: Die Kanäle, die nie fließen",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Unter Valdoria läuft ein Kanal, der in keiner Karte steht. Wer ihm folgt, kommt dort an, wo er gestartet ist – nur früher."
+      ]
+    ]
+  },
+  "LORE_NG_004": {
+    "title": "Geheimnis: Der Sand zählt mit",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Jeder Schritt in den Dünen wird gezählt. Kharos kennt die Zahl. Er behält sie für sich."
+      ]
+    ]
+  },
+  "LORE_NG_005": {
+    "title": "Geheimnis: Das Echo unter dem Wasser",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Neryx singt dieselbe Strophe seit Jahrhunderten. Beim zweiten Mal hörst du, dass sie eine zweite Stimme hat."
+      ]
+    ]
+  },
+  "LORE_NG_006": {
+    "title": "Geheimnis: Schnee auf alten Spuren",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Avarn trägt Spuren im Eis, die nicht seine sind. Sie führen aus der Welt hinaus – und wieder hinein."
+      ]
+    ]
+  },
+  "LORE_NG_007": {
+    "title": "Geheimnis: Asche, die vorher Berg war",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Magmarion erinnert sich an einen Berg, der höher war. Jemand hat ihn geteilt, so wie den Kern."
+      ]
+    ]
   }
 }
