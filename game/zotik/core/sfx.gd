@@ -122,11 +122,11 @@ static func _synth(d: Dictionary) -> AudioStreamWAV:
 
 ## A short jingle: notes one after another, each plucked.
 static func _synth_sequence(d: Dictionary) -> AudioStreamWAV:
-	var total := 0.0
+	var total := 0
 	for note in d.seq:
-		total += float(note[1])
+		total += int(RATE * float(note[1]))
 	var data := PackedByteArray()
-	data.resize(int(RATE * total) * 2)
+	data.resize(total * 2)
 	var i := 0
 	for note in d.seq:
 		var count := int(RATE * float(note[1]))

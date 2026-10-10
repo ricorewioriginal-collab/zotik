@@ -85,5 +85,15 @@ func test_build_in_slices_equals_one_go() -> void:
 	var b := MusicSynth.new("WORLD_ELARIS")
 	var sliced := PackedByteArray()
 	while sliced.size() < total * 2:
-		sliced.append_array(b.render_bytes(mini(Music.SLICE_SAMPLES, total - sliced.size() / 2), total))
+		sliced.append_array(b.render_bytes(mini(512, total - sliced.size() / 2), total))
 	check(sliced == whole, "slicing the work changes nothing")
+
+
+func test_every_mood_has_a_baked_looping_file() -> void:
+	for id in MusicSynth.MOODS:
+		var path := "res://assets/music/%s.wav" % id
+		check(ResourceLoader.exists(path), id + ": baked file exists")
+		var st := load(path) as AudioStreamWAV
+		check(st != null and st.loop_mode == AudioStreamWAV.LOOP_FORWARD, id + ": loops")
+		var syn := MusicSynth.new(id)
+		check(absi(st.get_length() * st.mix_rate - syn.loop_samples()) < 8, id + ": the baked loop has the loop length of the synth")

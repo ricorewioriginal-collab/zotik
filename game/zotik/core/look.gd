@@ -188,7 +188,7 @@ static func build_environment(parent: Node, area_id: String, layout: Dictionary)
 	sun.rotation_degrees = Vector3(float(st.pitch), -25, 0)
 	sun.light_color = Color.html(st.sun)
 	sun.light_energy = float(st.sun_energy) * (0.45 if indoor else 1.0)
-	sun.shadow_enabled = true
+	sun.shadow_enabled = Quality.shadows()
 	sun.shadow_blur = 1.5
 	sun.directional_shadow_max_distance = 35.0 if low_end() else 60.0
 	if low_end():
