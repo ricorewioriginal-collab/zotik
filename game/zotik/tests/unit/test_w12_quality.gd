@@ -41,3 +41,10 @@ func test_performance_read_out_is_off_by_default_and_readable() -> void:
 	check(not Settings.DEFAULTS.perf_overlay, "off by default")
 	Settings.set_value("graphics", "low")
 	eq(PerfOverlay.report(30, 0.5, 0.05, 321), "60 fps | 17 ms (max 50) | 321 draws | Niedrig", "report line")
+
+
+func test_low_halves_the_physics_work_and_stops_catch_up_bursts() -> void:
+	Settings.set_value("graphics", "low")
+	check(Quality.physics_rate() == 30 and Quality.max_physics_steps() == 2, "low: 30 physics ticks, at most 2 steps per frame")
+	Settings.set_value("graphics", "high")
+	check(Quality.physics_rate() == 60 and Quality.max_physics_steps() == 8, "high: the engine defaults")
