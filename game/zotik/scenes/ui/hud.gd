@@ -33,6 +33,9 @@ var portrait: TextureRect
 var party_box: VBoxContainer
 var _party_ids: Array = []
 var _notify_time := 0.0
+var _hp_ok := true
+var _area_title: Label
+var _place_key: Array = []
 
 
 func _ready() -> void:
@@ -203,11 +206,16 @@ func _process(delta: float) -> void:
 	var mx := maxi(1, int(GameState.player.get("max_hp", 1)))
 	hp_bar.max_value = mx
 	hp_bar.value = hp
-	(hp_bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.25, 0.8, 0.4) if hp * 3 > mx else Color(0.9, 0.25, 0.2)
+	var hp_ok := hp * 3 > mx
+	if hp_ok != _hp_ok:  # touch the style box only when the colour really changes (it redraws the bar)
+		_hp_ok = hp_ok
+		(hp_bar.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.25, 0.8, 0.4) if hp_ok else Color(0.9, 0.25, 0.2)
 	hp_label.text = "%d / %d" % [hp, mx]
 	lun_label.text = "%d Lun" % GameState.currency
 	area_label.text = str(Content.get_entry("areas", GameState.player.get("area", "")).get("name", ""))
-	(find_child("AreaTitle", true, false) as Label).text = area_label.text
+	if _area_title == null:
+		_area_title = find_child("AreaTitle", true, false) as Label
+	_area_title.text = area_label.text
 	var boss: Boss = null
 	for n in get_tree().get_nodes_in_group("enemy"):
 		if n is Boss and n.engaged():
@@ -223,7 +231,10 @@ func _process(delta: float) -> void:
 	var busy: bool = Dialogue.is_active()
 	_sync_party()
 	icon_bar.visible = not busy
-	_place_icon_bar()
+	var place_key := [touch_mode, _party_ids.size()]
+	if place_key != _place_key:  # re-layout only when the layout inputs change
+		_place_key = place_key
+		_place_icon_bar()
 	prompt_box.visible = prompt_label.text != "" and not busy
 	hurt_flash.color.a = maxf(0.0, hurt_flash.color.a - delta * 1.2)
 	gear.visible = not busy
@@ -321,7 +332,10 @@ func _sync_party() -> void:
 		bar.value = 0.0 if comp.dead else 1.0 - clampf(comp.attack_cd / maxf(cd, 0.01), 0.0, 1.0)
 		hpb.max_value = comp.max_hp()
 		hpb.value = comp.hp()
-		(hpb.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.25, 0.8, 0.4) if comp.hp() * 3 > comp.max_hp() else Color(0.9, 0.25, 0.2)
+		var ok: bool = comp.hp() * 3 > comp.max_hp()
+		if f.get_meta("hp_ok", null) != ok:
+			f.set_meta("hp_ok", ok)
+			(hpb.get_theme_stylebox("fill") as StyleBoxFlat).bg_color = Color(0.25, 0.8, 0.4) if ok else Color(0.9, 0.25, 0.2)
 		(f.get_meta("hp_label") as Label).text = "k.o." if comp.dead else "%d / %d" % [comp.hp(), comp.max_hp()]
 		f.modulate = Color(0.6, 0.6, 0.65) if comp.dead else Color.WHITE
 

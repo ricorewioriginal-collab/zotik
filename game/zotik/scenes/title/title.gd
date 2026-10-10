@@ -8,6 +8,7 @@ var buttons := {}
 
 func _ready() -> void:
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	Warmup.run.call_deferred(self)
 	var bg_color := ColorRect.new()
 	bg_color.color = Color(0.02, 0.03, 0.07)
 	bg_color.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)

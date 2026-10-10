@@ -103,7 +103,7 @@ func _ready() -> void:
 	player.damaged.connect(func(_d): hud.flash_hurt())
 	EventBus.sync_state.connect(_sync_state)
 	EventBus.party_changed.connect(_sync_party)
-	EventBus.travel_requested.connect(func(a, s): enter_area.call_deferred(a, s))
+	EventBus.travel_requested.connect(func(a, s): transition.call_deferred(a, s))
 	if App.pending_load:
 		App.pending_load = false
 		var pos: Array = GameState.player.position
@@ -339,7 +339,46 @@ func _sync_party() -> void:
 
 
 func _on_exit_requested(target: String) -> void:
-	enter_area(target, area.area_id)
+	transition(target, area.area_id)
+
+
+var _veil: ColorRect
+var _transitioning := false
+
+
+## Area change with a short dark veil: the (synchronous) area build then happens
+## behind a loading screen instead of a frozen picture. Without a window (tests,
+## headless) it is a plain enter_area.
+func transition(area_id: String, spawn: String) -> void:
+	if DisplayServer.get_name() == "headless" or _transitioning:
+		enter_area(area_id, spawn)
+		return
+	_transitioning = true
+	if _veil == null:
+		_veil = ColorRect.new()
+		_veil.name = "LoadingVeil"
+		_veil.color = Color(0.02, 0.03, 0.07, 1.0)
+		_veil.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+		_veil.mouse_filter = Control.MOUSE_FILTER_STOP
+		var lb := UiStyle.title("Die Welt wird geladen …", 26, UiStyle.GOLD)
+		lb.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+		lb.grow_horizontal = Control.GROW_DIRECTION_BOTH
+		_veil.add_child(lb)
+		ui.add_child(_veil)
+	_veil.modulate.a = 0.0
+	_veil.show()
+	var tin := create_tween()
+	tin.tween_property(_veil, "modulate:a", 1.0, 0.18)
+	await tin.finished
+	await get_tree().process_frame  # make sure the veil is on screen before the heavy work
+	enter_area(area_id, spawn)
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var tout := create_tween()
+	tout.tween_property(_veil, "modulate:a", 0.0, 0.4)
+	await tout.finished
+	_veil.hide()
+	_transitioning = false
 
 
 func _sync_state() -> void:

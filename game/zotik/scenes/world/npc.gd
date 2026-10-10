@@ -45,6 +45,10 @@ const LOOKS := {
 }
 
 var npc_id := ""
+var rig: CharacterRig
+var _gate := 0.0
+## Idle animation only plays near the player: ten rigs animating all the time cost real frame time on the web.
+const ANIM_RANGE := 32.0
 
 
 static func create(entry: Dictionary) -> Npc:
@@ -54,6 +58,7 @@ static func create(entry: Dictionary) -> Npc:
 	n.prompt = "Sprechen mit " + str(Content.get_entry("npcs", entry.id).name)
 	var look: Array = LOOKS.get(entry.id, [{"outfit": "Male_Peasant", "body": "Male", "hair": "Hair_Buzzed"}, 1.75])
 	var rig := CharacterRig.create_human(look[0], float(look[1]))
+	n.rig = rig
 	n.add_child(rig)
 	var label := Label3D.new()
 	label.text = str(Content.get_entry("npcs", entry.id).name)
@@ -69,6 +74,16 @@ static func create(entry: Dictionary) -> Npc:
 	sb.add_child(cs)
 	n.add_child(sb)
 	return n
+
+
+func _process(delta: float) -> void:
+	_gate -= delta
+	if _gate > 0.0 or rig == null:
+		return
+	_gate = 0.5
+	var p := get_tree().get_first_node_in_group("player") as Node3D
+	if p != null:
+		rig.anim.process_mode = Node.PROCESS_MODE_INHERIT if global_position.distance_to(p.global_position) < ANIM_RANGE else Node.PROCESS_MODE_DISABLED
 
 
 func _ready() -> void:
