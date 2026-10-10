@@ -403,5 +403,26 @@
   },
   "FLAG_END_D7_VAULT": {
     "desc": "Schatzkammer von Der Ort, den es nie gab geöffnet"
+  },
+  "FLAG_END_D1_BOSS_DEFEATED": {
+    "desc": "Dungeon-Boss Der Waldhüter besiegt"
+  },
+  "FLAG_END_D2_BOSS_DEFEATED": {
+    "desc": "Dungeon-Boss Der leere Torwächter besiegt"
+  },
+  "FLAG_END_D3_BOSS_DEFEATED": {
+    "desc": "Dungeon-Boss Die Himmelsmuräne besiegt"
+  },
+  "FLAG_END_D4_BOSS_DEFEATED": {
+    "desc": "Dungeon-Boss Der Aschenkönig besiegt"
+  },
+  "FLAG_END_D5_BOSS_DEFEATED": {
+    "desc": "Dungeon-Boss Der Nullschatten besiegt"
+  },
+  "FLAG_END_D6_BOSS_DEFEATED": {
+    "desc": "Dungeon-Boss Das Echo der Quelle besiegt"
+  },
+  "FLAG_END_D7_BOSS_DEFEATED": {
+    "desc": "Dungeon-Boss Der Namenlose besiegt"
   }
 }

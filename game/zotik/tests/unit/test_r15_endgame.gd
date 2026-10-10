@@ -175,3 +175,46 @@ func test_dungeon_vaults_open_with_their_puzzle() -> void:
 		GameState.set_flag(flag)
 		await frames(2)
 		check(not door.visible, area + " vault door open after the puzzle")
+
+
+func test_dungeon_bosses_guard_the_way_to_puzzle_and_vault() -> void:
+	for i in range(1, 8):
+		var area := "AREA_END_D%d" % i
+		var bid := "BOSS_END_D%d_001" % i
+		var flag := "FLAG_END_D%d_BOSS_DEFEATED" % i
+		var data: Dictionary = Content.get_entry("enemies", bid)
+		check(data.phases.size() == 2 and int(data.hp) > 500, bid + " is a two-phase boss")
+		check(int(data.hp) < int(Content.get_entry("enemies", "BOSS_END_%s_001" % KEYS[i - 1]).hp), bid + " is weaker than the superboss")
+		eq(data.on_defeat[0].id, flag, bid + " sets its flag")
+		GameState.flags.erase(flag)
+		GameState.defeated.erase("SPAWN_END_D%d_BOSS" % i)
+		game.enter_area(area, "default")
+		await physics_frames(2)
+		var boss: Node = game.area.entities.get("SPAWN_END_D%d_BOSS" % i)
+		check(boss is Boss, area + " has its boss")
+		var gate: Node = null
+		for f in game.area.flag_props:
+			if f.flag == flag:
+				gate = f.node
+		check(gate != null and gate.visible, area + " boss gate shut")
+		GameState.set_flag(flag)
+		await frames(2)
+		check(not gate.visible, area + " boss gate open after the boss")
+
+
+func test_a_dungeon_boss_can_be_beaten_and_opens_its_gate() -> void:
+	var flag := "FLAG_END_D1_BOSS_DEFEATED"
+	GameState.flags.erase(flag)
+	GameState.defeated.erase("SPAWN_END_D1_BOSS")
+	game.enter_area("AREA_END_D1", "default")
+	await physics_frames(2)
+	var boss: Boss = game.area.entities["SPAWN_END_D1_BOSS"]
+	var essence := Inventory.count("ITEM_RIFT_ESSENCE_001")
+	var guard := 0
+	while not boss.is_dead() and guard < 400:
+		boss.take_hit(200, 50.0, false)
+		guard += 1
+	check(boss.is_dead(), "boss dies from damage")
+	check(GameState.has_flag(flag), "defeat sets the gate flag")
+	eq(Inventory.count("ITEM_RIFT_ESSENCE_001"), essence + 3, "drops three rift essences")
+	check(GameState.defeated.has("SPAWN_END_D1_BOSS"), "stays defeated")

@@ -2471,5 +2471,439 @@
     ],
     "break": 80,
     "break_duration": 3.0
+  },
+  "BOSS_END_D1_001": {
+    "name": "Der Waldhüter",
+    "region": "WORLD_WELTENRISS",
+    "description": "Wächter des Dungeons \"Der verlorene Wald\". Wer ihn besiegt, öffnet den Weg zu Rätsel und Schatzkammer.",
+    "hp": 935,
+    "attack": 28,
+    "defense": 12,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 170,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D1_BOSS_DEFEATED"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Phase",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 21
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Phase",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_DORNENWOLF_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 24
+        }
+      }
+    ]
+  },
+  "BOSS_END_D2_001": {
+    "name": "Der leere Torwächter",
+    "region": "WORLD_WELTENRISS",
+    "description": "Wächter des Dungeons \"Die Stadt ohne Bewohner\". Wer ihn besiegt, öffnet den Weg zu Rätsel und Schatzkammer.",
+    "hp": 990,
+    "attack": 28,
+    "defense": 13,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 180,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D2_BOSS_DEFEATED"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Phase",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 22
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Phase",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_KANALRATTE_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 25
+        }
+      }
+    ]
+  },
+  "BOSS_END_D3_001": {
+    "name": "Die Himmelsmuräne",
+    "region": "WORLD_WELTENRISS",
+    "description": "Wächter des Dungeons \"Das Meer über dem Himmel\". Wer ihn besiegt, öffnet den Weg zu Rätsel und Schatzkammer.",
+    "hp": 1072,
+    "attack": 29,
+    "defense": 16,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 195,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D3_BOSS_DEFEATED"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Phase",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 23
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Phase",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_RIFFFROSCH_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 26
+        }
+      }
+    ]
+  },
+  "BOSS_END_D4_001": {
+    "name": "Der Aschenkönig",
+    "region": "WORLD_WELTENRISS",
+    "description": "Wächter des Dungeons \"Der ewige Vulkan\". Wer ihn besiegt, öffnet den Weg zu Rätsel und Schatzkammer.",
+    "hp": 1100,
+    "attack": 30,
+    "defense": 14,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 200,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D4_BOSS_DEFEATED"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Phase",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 24
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Phase",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_GLUEHWESPE_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 27
+        }
+      }
+    ]
+  },
+  "BOSS_END_D5_001": {
+    "name": "Der Nullschatten",
+    "region": "WORLD_WELTENRISS",
+    "description": "Wächter des Dungeons \"Noctaris Null\". Wer ihn besiegt, öffnet den Weg zu Rätsel und Schatzkammer.",
+    "hp": 1155,
+    "attack": 31,
+    "defense": 15,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 210,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D5_BOSS_DEFEATED"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Phase",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 24
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Phase",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_SCHATTENFALTER_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 28
+        }
+      }
+    ]
+  },
+  "BOSS_END_D6_001": {
+    "name": "Das Echo der Quelle",
+    "region": "WORLD_WELTENRISS",
+    "description": "Wächter des Dungeons \"Elyndra Vorher\". Wer ihn besiegt, öffnet den Weg zu Rätsel und Schatzkammer.",
+    "hp": 1210,
+    "attack": 32,
+    "defense": 16,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 220,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D6_BOSS_DEFEATED"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Phase",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 25
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Phase",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_SPIEGELSPINNE_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 28
+        }
+      }
+    ]
+  },
+  "BOSS_END_D7_001": {
+    "name": "Der Namenlose",
+    "region": "WORLD_WELTENRISS",
+    "description": "Wächter des Dungeons \"Der Ort, den es nie gab\". Wer ihn besiegt, öffnet den Weg zu Rätsel und Schatzkammer.",
+    "hp": 1320,
+    "attack": 33,
+    "defense": 17,
+    "move_speed": 2.2,
+    "aggro_range": 30.0,
+    "attack_range": 3.8,
+    "attack_cooldown": 1.6,
+    "currency": 600,
+    "drops": [
+      {
+        "id": "ITEM_RIFT_ESSENCE_001",
+        "count": 3
+      },
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ],
+    "break": 240,
+    "break_duration": 4.5,
+    "on_defeat": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_END_D7_BOSS_DEFEATED"
+      }
+    ],
+    "phases": [
+      {
+        "from_hp_ratio": 1.0,
+        "name": "Erste Phase",
+        "attack_mult": 1.0,
+        "cooldown_mult": 1.0,
+        "color": "#ffffff",
+        "hazard": {
+          "interval": 4.6,
+          "radius": 3.0,
+          "delay": 1.1,
+          "damage": 27
+        }
+      },
+      {
+        "from_hp_ratio": 0.65,
+        "name": "Zweite Phase",
+        "attack_mult": 1.15,
+        "cooldown_mult": 0.88,
+        "summon": "ENEMY_ECHOKRIEGER_001",
+        "summon_count": 2,
+        "color": "#ffd080",
+        "hazard": {
+          "kind": "surge",
+          "interval": 4.0,
+          "width": 3.2,
+          "delay": 1.2,
+          "damage": 30
+        }
+      }
+    ]
   }
 }
