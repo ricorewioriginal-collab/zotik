@@ -1593,5 +1593,24 @@
         "Sechs Proben, perfekt erhalten! Damit ist meine Arbeit abgeschlossen. Meine Notizen gehören dir – sie erklären alles, was ich über die Welt weiß."
       ]
     ]
+  },
+  "DLG_YSOLDE_NGPLUS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_YSOLDE_001",
+        "Ich bin Ysolde, Chronistin des Weltenrisses. Ich schreibe auf, was geschah – und ich kann die Seiten zurückblättern."
+      ],
+      [
+        "NPC_YSOLDE_001",
+        "Wenn du magst, beginnt deine Reise von Neuem. Du behältst, was du trägst. Aber die Welt erinnert sich an dich, und ihre Wächter sind stärker geworden."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_menu",
+        "id": "ngplus"
+      }
+    ]
   }
 }

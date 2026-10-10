@@ -281,7 +281,7 @@ func _effects(e: Array[String], list: Array, owner: String) -> void:
 			"play_cutscene": _ref(e, "cutscenes", fx.id, owner)
 			"join_party": _ref(e, "party", fx.id, owner)
 			"open_menu":
-				if not fx.id in ["arena", "casino"]:
+				if not fx.id in ["arena", "casino", "ngplus"]:
 					e.append("%s: unknown menu %s" % [owner, fx.id])
 			"travel":
 				_ref(e, "areas", fx.area, owner)

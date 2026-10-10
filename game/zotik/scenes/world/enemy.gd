@@ -54,7 +54,7 @@ func setup(entry: Dictionary) -> void:
 	spawn_id = entry.spawn
 	persistent = entry.get("persistent", false)
 	name = spawn_id
-	data = Content.enemy(enemy_id)
+	data = _ng_scaled(Content.enemy(enemy_id))
 	max_hp = int(data.hp)
 	hp = max_hp
 	break_max = float(data.get("break", 0))
@@ -80,6 +80,33 @@ func setup(entry: Dictionary) -> void:
 
 func _ready() -> void:
 	home = position
+
+
+## New Game+ makes every enemy tougher (+50% hp, +35% attack, +25% defence and +50% Lun per
+## level) and gives bosses an extra "Raserei" phase at 12% hp.
+static func _ng_scaled(base: Dictionary) -> Dictionary:
+	var n: int = GameState.ng_plus
+	if n <= 0:
+		return base
+	var d := base.duplicate(true)
+	d.hp = int(round(float(d.hp) * (1.0 + 0.5 * n)))
+	d.attack = int(round(float(d.attack) * (1.0 + 0.35 * n)))
+	d.defense = int(round(float(d.defense) * (1.0 + 0.25 * n)))
+	d.currency = int(round(float(d.get("currency", 0)) * (1.0 + 0.5 * n)))
+	var phases: Array = d.get("phases", [])
+	if not phases.is_empty() and float(phases[-1].from_hp_ratio) > 0.12:
+		var last: Dictionary = phases[-1].duplicate(true)
+		last.from_hp_ratio = 0.12
+		last.name = "Raserei (NG+)"
+		last.attack_mult = float(last.get("attack_mult", 1.0)) * 1.2
+		last.cooldown_mult = float(last.get("cooldown_mult", 1.0)) * 0.85
+		last.color = "#ff4040"
+		if last.has("hazard"):
+			last.hazard.interval = float(last.hazard.interval) * 0.8
+			last.hazard.damage = int(round(float(last.hazard.damage) * 1.1))
+		last.erase("summon")
+		phases.append(last)
+	return d
 
 
 func is_dead() -> bool:

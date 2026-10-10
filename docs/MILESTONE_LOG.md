@@ -855,3 +855,9 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - Limits: the dungeons are rift runs in the Weltenriss hub, not walkable maps (logged in the Phase 7 plan).
 - Tests: two more tests in `test_r15_endgame`.
 
+## E04 – New Game+ (Phase 7) – PASSED (first part)
+- `GameState.ng_plus` (saved, default 0) and `GameState.begin_new_game_plus()`: keeps inventory, equipment, Lun, unique keepsakes, bestiary, arena and casino records, look and play time; resets flags (except the finale flag, so the Weltenriss stays open), quests, chests, puzzles, defeats, party and position. Ysolde (Weltenriss hub) opens the `NgPlusMenu`, which restarts the game scene at the start.
+- Enemies per NG+ level: +50% HP, +35% attack, +25% defence, +50% Lun; bosses get an extra "Raserei (NG+)" phase at 12% HP (faster attacks and hazards).
+- Not done (spec: "nicht bloß höhere Werte"): NG+-only enemy types, items, chest positions and dialogues. The numeric scaling and the rage phase are the first step.
+- Tests: `test_r17_ngplus` (4). Placeholder art, not final.
+
