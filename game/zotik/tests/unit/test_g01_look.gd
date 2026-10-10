@@ -32,7 +32,7 @@ func test_web_and_mobile_stay_light() -> void:
 	for key in ["msaa_3d.web=0", "msaa_3d.mobile=0", "directional_shadow/size.web=2048", "directional_shadow/size.mobile=2048"]:
 		check(text.contains(key), "project.godot keeps " + key)
 	var exports := FileAccess.get_file_as_string("res://export_presets.cfg")
-	check(exports.contains("assets/characters/kaykit/*.glb"), "the big KayKit models stay out of the exports")
+	check(exports.contains("assets/characters/kaykit/*"), "the unused KayKit adventurers stay out of the exports")
 	# own icon and loading image instead of the default Godot ones
 	var icon := str(ProjectSettings.get_setting("application/config/icon", ""))
 	check(icon.contains("assets/icons/icon.png") and ResourceLoader.exists(icon), "project icon is Zotik")
