@@ -18,6 +18,7 @@ var pending_load := false
 
 func _ready() -> void:
 	Gamepad.install()
+	Quality.apply.call_deferred(get_tree())  # after Settings has loaded
 
 
 func _input(event: InputEvent) -> void:

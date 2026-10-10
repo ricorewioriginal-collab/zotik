@@ -5,7 +5,7 @@ extends RefCounted
 ## nothing and never hitches on load; `Music` streams it into an AudioStreamGenerator.
 ## Placeholder music, not a final score.
 
-const RATE := 11025
+const RATE := 22050
 const TABLE := 2048
 const MINOR := [0, 2, 3, 5, 7, 8, 10]
 const MAJOR := [0, 2, 4, 5, 7, 9, 11]
