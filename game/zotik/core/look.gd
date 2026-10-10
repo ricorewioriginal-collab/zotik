@@ -332,6 +332,14 @@ static func _place_h(parent: Node3D, name: String, pos: Vector3, height: float, 
 	return _place(parent, name, pos, height / box.size.y, yaw)
 
 
+## Soft rim light on character materials: a bright edge that separates people from the scene (R03).
+static func rim(m: Material, amount: float) -> void:
+	if m is StandardMaterial3D:
+		(m as StandardMaterial3D).rim_enabled = true
+		(m as StandardMaterial3D).rim = amount
+		(m as StandardMaterial3D).rim_tint = 0.8
+
+
 ## Plaster/brick/timber material from the village kit (world-space triplanar, tintable).
 static func village_surface(tex: String, tint: Color, scale: float = 0.3) -> StandardMaterial3D:
 	var key := "V%s|%s|%s" % [tex, tint.to_html(), scale]

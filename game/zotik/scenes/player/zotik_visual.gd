@@ -173,7 +173,9 @@ func _bone_part(bone: String, name: String, mesh: Mesh, pos: Vector3, rot := Vec
 
 
 func _color(name: String, c: Color) -> void:
-	(parts[name].material_override as StandardMaterial3D).albedo_color = c
+	var m := parts[name].material_override as StandardMaterial3D
+	m.albedo_color = c
+	Look.rim(m, 0.2)
 
 
 static func _box(size: Vector3) -> Mesh:
