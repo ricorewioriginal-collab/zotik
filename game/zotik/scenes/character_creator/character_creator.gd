@@ -6,6 +6,12 @@ const LABELS := {"fur_shade": "Fellton", "scarf": "Schal", "outfit": "Kleidung"}
 var preview: ZotikVisual
 var value_labels := {}
 var confirm_button: Button
+var _dragging := false
+var _idle := 10.0  # seconds since the player last turned Zotik by hand
+const AUTO_SPIN := 0.6
+const DRAG_SENS := 0.012
+const STICK_SPIN := 3.0
+const RESUME_AFTER := 3.0
 
 
 func _ready() -> void:
@@ -24,6 +30,7 @@ func _ready() -> void:
 	vpc.stretch = true
 	vpc.custom_minimum_size = Vector2(520, 640)
 	row.add_child(vpc)
+	vpc.gui_input.connect(_on_preview_input)
 	var vp := SubViewport.new()
 	vp.own_world_3d = true
 	vpc.add_child(vp)
@@ -86,12 +93,38 @@ func _ready() -> void:
 	MenuPanel.style_button(confirm_button, true)
 	confirm_button.pressed.connect(confirm)
 	box.add_child(confirm_button)
+	var hint := Label.new()
+	hint.text = "Zotik mit Maus oder Finger ziehen, um ihn um 360 Grad zu drehen (Controller: rechter Stick)."
+	hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	hint.add_theme_font_size_override("font_size", 14)
+	hint.modulate = Color(1, 1, 1, 0.7)
+	box.add_child(hint)
 	_refresh()
 	confirm_button.grab_focus.call_deferred()
 
 
 func _process(delta: float) -> void:
-	preview.rotation.y += delta * 0.6
+	var stick := Input.get_axis("camera_left", "camera_right")
+	if absf(stick) > 0.1:
+		preview.rotation.y += stick * STICK_SPIN * delta
+		_idle = 0.0
+	_idle += delta
+	if not _dragging and _idle > RESUME_AFTER:
+		preview.rotation.y += delta * AUTO_SPIN
+
+
+## Drag with the mouse or a finger to turn Zotik all the way round; the slow spin resumes afterwards.
+func _on_preview_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		_dragging = event.pressed
+		_idle = 0.0
+	elif event is InputEventMouseMotion and _dragging:
+		turn(event.relative.x * DRAG_SENS)
+
+
+func turn(angle: float) -> void:
+	preview.rotation.y = wrapf(preview.rotation.y + angle, -PI, PI)
+	_idle = 0.0
 
 
 func change(option: String, step: int) -> void:

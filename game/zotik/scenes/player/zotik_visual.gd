@@ -16,13 +16,20 @@ var _model_from_skeleton := Transform3D.IDENTITY
 
 ## Interim scale (C-23): Zotik ≈ 1.2 m next to ≈ 1.65–1.8 m humans.
 const SCALE := 0.68
+## Master-sheet proportions: stocky body, big head with big ears, big tail (the rig is a tall human).
+const BODY_WIDTH := 1.15
+const BODY_HEIGHT := 0.82
+const HEAD_SCALE := 1.32
+const HEAD_CENTER := Vector3(0, 1.6, 0.0)
+## meshes drawn flat in the outfit colour instead of the rig texture: darkened by this much
+const FLAT_COLORS := {"Male_Ranger_Legs": 0.45, "Male_Ranger_Body": 0.15}
 const BODY_SPEC := {"outfit": "Male_Ranger", "body": "Male", "human_head": false, "hide": ["Male_Ranger_Head_Hood", "Male_Ranger_Acc_Pauldron"]}
 
 
 func _ready() -> void:
 	rig = CharacterRig.create_human(BODY_SPEC, 1.75)
 	add_child(rig)
-	scale = Vector3.ONE * SCALE
+	scale = Vector3(SCALE * BODY_WIDTH, SCALE * BODY_HEIGHT, SCALE * BODY_WIDTH)
 	_model_from_skeleton = rig.model.global_transform.affine_inverse() * rig.skeleton.global_transform
 	_bone_part("Head", "PLACEHOLDER_head", _sphere(0.22), Vector3(0, 1.69, 0.02), Vector3.ZERO, Vector3(1.05, 0.95, 1.0))
 	_bone_part("Head", "PLACEHOLDER_cheek_l", _sphere(0.085), Vector3(0.13, 1.61, 0.11), Vector3(0, 0, 30), Vector3(1.3, 0.8, 0.9))
@@ -56,14 +63,15 @@ func _ready() -> void:
 	_bone_part("spine_03", "PLACEHOLDER_scarf_end", _box(Vector3(0.08, 0.26, 0.03)), Vector3(0.09, 1.33, 0.15), Vector3(-12, 0, -12))
 	_bone_part("neck_01", "PLACEHOLDER_chest", _sphere(0.07), Vector3(0, 1.54, 0.15), Vector3.ZERO, Vector3(1.2, 0.9, 0.6))
 	_bone_part("pelvis", "PLACEHOLDER_outfit", _torus(0.15, 0.175), Vector3(0, 1.0, 0))
-	# bushy tail: root sphere, a fat curved body and a white tip, held up behind him
+	# bushy tail: a fat arc that swings out to the side and up (visible from the front), white tip
 	_bone_part("pelvis", "PLACEHOLDER_tail_root", _sphere(0.12), Vector3(0, 1.0, -0.17))
-	_bone_part("pelvis", "PLACEHOLDER_tail", _capsule(0.15, 0.5), Vector3(0, 1.12, -0.33), Vector3(-38, 0, 0))
-	_bone_part("pelvis", "PLACEHOLDER_tail_mid", _sphere(0.19), Vector3(0, 1.28, -0.43), Vector3.ZERO, Vector3(1.0, 1.25, 1.0))
-	_bone_part("pelvis", "PLACEHOLDER_tail_tip", _sphere(0.13), Vector3(0, 1.47, -0.46), Vector3.ZERO, Vector3(1.0, 1.4, 1.0))
+	_bone_part("pelvis", "PLACEHOLDER_tail", _sphere(0.17), Vector3(0.07, 0.98, -0.36))
+	_bone_part("pelvis", "PLACEHOLDER_tail_mid", _sphere(0.22), Vector3(0.16, 1.04, -0.5), Vector3.ZERO, Vector3(1.0, 1.1, 1.0))
+	_bone_part("pelvis", "PLACEHOLDER_tail_mid2", _sphere(0.24), Vector3(0.27, 1.2, -0.56), Vector3.ZERO, Vector3(1.0, 1.25, 1.0))
+	_bone_part("pelvis", "PLACEHOLDER_tail_tip", _sphere(0.17), Vector3(0.33, 1.42, -0.54), Vector3.ZERO, Vector3(1.0, 1.5, 1.0))
 	for k in 6:
-		var a := k * 1.05
-		_bone_part("pelvis", "PLACEHOLDER_tail_tuft_%d" % k, _cone(0.05, 0.17), Vector3(cos(a) * 0.17, 1.2 + k * 0.045, -0.4 - sin(a) * 0.1), Vector3(-25, 0, -cos(a) * 60))
+		var a2 := k * 1.05
+		_bone_part("pelvis", "PLACEHOLDER_tail_tuft_%d" % k, _cone(0.05, 0.17), Vector3(0.08 + k * 0.045 + cos(a2) * 0.1, 1.0 + k * 0.07, -0.42 - sin(a2) * 0.12), Vector3(-25, 0, -50 - cos(a2) * 30))
 	_bone_part("pelvis", "PLACEHOLDER_shoulder_bag", _box(Vector3(0.11, 0.13, 0.06)), Vector3(0.19, 0.95, 0.02))
 	# blade in the right hand (bone space, same grip as CharacterRig weapons)
 	var sword: Array = CharacterRig.HUMAN_WEAPONS.sword
@@ -95,6 +103,7 @@ func apply_customization() -> void:
 		_color("PLACEHOLDER_tail_tuft_%d" % k, fur)
 	_color("PLACEHOLDER_tail_root", fur)
 	_color("PLACEHOLDER_tail_mid", fur)
+	_color("PLACEHOLDER_tail_mid2", fur)
 	_color("PLACEHOLDER_brow_l", fur.darkened(0.45))
 	_color("PLACEHOLDER_brow_r", fur.darkened(0.45))
 	_color("PLACEHOLDER_glint_l", Color.WHITE)
@@ -124,9 +133,13 @@ func apply_customization() -> void:
 				if base == null:
 					continue
 				var m := base.duplicate() as StandardMaterial3D
-				if base.resource_name.contains("Regular"):
-					m.albedo_texture = null
+				var flat = FLAT_COLORS.get(mi.name)
+				if base.resource_name.contains("Regular") or mi.name == "Male_Ranger_Arms":
+					m.albedo_texture = null  # bare arms: fur like the master sheet
 					m.albedo_color = fur
+				elif flat != null:
+					m.albedo_texture = null  # leather vest and baggy trousers in the outfit colour
+					m.albedo_color = outfit.darkened(float(flat))
 				else:
 					m.albedo_color = outfit.lerp(Color.WHITE, 0.55)
 				mi.set_surface_override_material(i, m)
@@ -198,6 +211,9 @@ func _bone_part(bone: String, name: String, mesh: Mesh, pos: Vector3, rot := Vec
 	mi.name = name
 	mi.mesh = mesh
 	mi.material_override = StandardMaterial3D.new()
+	if bone == "Head":
+		pos = HEAD_CENTER + (pos - HEAD_CENTER) * HEAD_SCALE
+		scl *= HEAD_SCALE
 	var idx := rig.skeleton.find_bone(bone)
 	var rest := rig.skeleton.get_bone_global_rest(idx)
 	var want := Transform3D(Basis.from_euler(rot * PI / 180.0).scaled(scl), pos)
