@@ -143,5 +143,15 @@
       "ITEM_WELTENWASSER_001"
     ],
     "sell_ratio": 0.5
+  },
+  "SHOP_END_CORVIN_001": {
+    "npc": "NPC_CORVIN_001",
+    "stock": [
+      "WEAPON_CHRONICLE_BLADE_001",
+      "ARMOR_CHRONICLE_001",
+      "ITEM_CHRONIK_ELIXIR_001",
+      "ITEM_ELIXIR_001"
+    ],
+    "sell_ratio": 0.5
   }
 }

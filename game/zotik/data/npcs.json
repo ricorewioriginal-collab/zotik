@@ -43,6 +43,15 @@
         "dialogue": "DLG_MIRA_FOREST_001"
       },
       {
+        "when": [
+          {
+            "type": "ng_plus",
+            "level": 1
+          }
+        ],
+        "dialogue": "DLG_MIRA_NGPLUS_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_MIRA_IDLE_001"
       }
@@ -382,6 +391,15 @@
           }
         ],
         "dialogue": "DLG_SELA_AFTER_001"
+      },
+      {
+        "when": [
+          {
+            "type": "ng_plus",
+            "level": 1
+          }
+        ],
+        "dialogue": "DLG_SELA_NGPLUS_001"
       },
       {
         "when": [],
@@ -757,6 +775,15 @@
         "dialogue": "DLG_MIRAEL_AFTER_001"
       },
       {
+        "when": [
+          {
+            "type": "ng_plus",
+            "level": 1
+          }
+        ],
+        "dialogue": "DLG_MIRAEL_NGPLUS_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_MIRAEL_IDLE_001"
       }
@@ -853,6 +880,15 @@
           }
         ],
         "dialogue": "DLG_KAELEN_AFTER_001"
+      },
+      {
+        "when": [
+          {
+            "type": "ng_plus",
+            "level": 1
+          }
+        ],
+        "dialogue": "DLG_KAELEN_NGPLUS_001"
       },
       {
         "when": [],
@@ -1075,6 +1111,15 @@
         "dialogue": "DLG_ERYN_AFTER_001"
       },
       {
+        "when": [
+          {
+            "type": "ng_plus",
+            "level": 1
+          }
+        ],
+        "dialogue": "DLG_ERYN_NGPLUS_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_ERYN_IDLE_001"
       }
@@ -1251,6 +1296,15 @@
         "dialogue": "DLG_VEYRA_AFTER_001"
       },
       {
+        "when": [
+          {
+            "type": "ng_plus",
+            "level": 1
+          }
+        ],
+        "dialogue": "DLG_VEYRA_NGPLUS_001"
+      },
+      {
         "when": [],
         "dialogue": "DLG_VEYRA_IDLE_001"
       }
@@ -1337,6 +1391,25 @@
       {
         "when": [],
         "dialogue": "DLG_YSOLDE_NGPLUS_001"
+      }
+    ]
+  },
+  "NPC_CORVIN_001": {
+    "name": "Corvin",
+    "area": "AREA_END_HUB",
+    "dialogues": [
+      {
+        "when": [
+          {
+            "type": "ng_plus",
+            "level": 1
+          }
+        ],
+        "dialogue": "DLG_CORVIN_SHOP_001"
+      },
+      {
+        "when": [],
+        "dialogue": "DLG_CORVIN_LOCKED_001"
       }
     ]
   }

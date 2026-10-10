@@ -52,6 +52,7 @@ const LOOKS := {
 	"NPC_KAEL_001": [{"outfit": "Male_Ranger", "body": "Male", "hair": "Hair_Buzzed", "hair_color": Color(0.25, 0.15, 0.1), "hide": ["Male_Ranger_Head_Hood"], "tint": Color(0.9, 0.95, 1.0), "right": "sword"}, 1.8],
 	"NPC_RASHA_001": [{"outfit": "Female_Ranger", "body": "Female", "hair": "Hair_Long", "hair_color": Color(0.85, 0.3, 0.55), "hide": ["Female_Ranger_Head_Hood"], "tint": Color(1.0, 0.85, 0.95), "right": "sword"}, 1.72],
 	"NPC_YSOLDE_001": [{"outfit": "Female_Peasant", "body": "Female", "hair": "Hair_Long", "hair_color": Color(0.9, 0.9, 1.0), "tint": Color(0.85, 0.8, 1.0), "right": "staff"}, 1.68],
+	"NPC_CORVIN_001": [{"outfit": "Male_Ranger", "body": "Male", "hair": "Hair_SimpleParted", "beard": true, "hair_color": Color(0.25, 0.2, 0.35), "hide": ["Male_Ranger_Head_Hood"], "tint": Color(0.9, 0.85, 1.0), "right": "staff"}, 1.8],
 	"NPC_KASIMIR_001": [{"outfit": "Male_Ranger", "body": "Male", "hair": "Hair_Buzzed", "hide": ["Male_Ranger_Head_Hood"], "right": "sword", "left": "shield"}, 1.86],
 }
 

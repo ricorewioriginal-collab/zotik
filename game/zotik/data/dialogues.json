@@ -1612,5 +1612,83 @@
         "id": "ngplus"
       }
     ]
+  },
+  "DLG_CORVIN_LOCKED_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_CORVIN_001",
+        "Ich handle mit Dingen aus der zweiten Fassung der Welt. Komm wieder, wenn du bei Ysolde ein Neues Spiel+ begonnen hast."
+      ]
+    ]
+  },
+  "DLG_CORVIN_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_CORVIN_001",
+        "Chronikfragmente! Die bekommst du nur von Wesen, die es beim ersten Mal nicht gab. Dafür gibt es Klingen und Panzer, die selbst Bosse im zweiten Durchgang fürchten."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_END_CORVIN_001"
+      }
+    ]
+  },
+  "DLG_MIRA_NGPLUS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRA_001",
+        "Du bist wieder da, und doch ist es, als hätten wir uns noch nie gesehen. Ich habe das Gefühl, die Risse wissen mehr über uns als wir selbst."
+      ]
+    ]
+  },
+  "DLG_SELA_NGPLUS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_SELA_001",
+        "Die Wälder rauschen anders als beim ersten Mal. Fremde Tiere streifen umher. Pass auf dich auf, Zotik – ich glaube, die Welt prüft dich ein zweites Mal."
+      ]
+    ]
+  },
+  "DLG_MIRAEL_NGPLUS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_MIRAEL_001",
+        "Meine Becken zeigen Echos von früher. Dieselben Frösche, dieselben Pumpen – und doch hat sich alles um eine Winzigkeit verschoben."
+      ]
+    ]
+  },
+  "DLG_KAELEN_NGPLUS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_KAELEN_001",
+        "Der Schnee fällt in einer Reihenfolge, die ich kenne. Heute fällt er anders. Die Welt erinnert sich – und sie ist wachsamer geworden."
+      ]
+    ]
+  },
+  "DLG_ERYN_NGPLUS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ERYN_001",
+        "Ich erinnere mich an diese Reise. Ich erinnere mich an eine zweite, die noch nicht geschehen ist. Zum ersten Mal sind beide wahr."
+      ]
+    ]
+  },
+  "DLG_VEYRA_NGPLUS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_VEYRA_001",
+        "Jede Fassung des Kerns endet anders. Ich habe diese hier noch nicht gesehen. Vielleicht bist du diesmal schneller als Elyon."
+      ]
+    ]
   }
 }

@@ -14,7 +14,7 @@ const CANONICAL_IDS := ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "PUZ_LUN_MOO
 const EFFECT_TYPES := ["set_flag", "give_item", "take_item", "give_currency", "start_quest", "equip", "open_shop", "play_cutscene", "travel", "join_party", "open_menu"]
 const ENTITY_TYPES := ["npc", "enemy", "chest", "puzzle", "savepoint", "unique", "trigger", "travel", "platform", "lore", "bounty_board", "casino"]
 const CONDITION_TYPES := ["talk", "defeat", "area", "puzzle", "savepoint", "item"]
-const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item"]
+const GATE_TYPES := ["quest_step", "quest_state", "flag", "not_flag", "has_item", "ng_plus"]
 
 var tables := {}
 var world := {}
@@ -310,6 +310,7 @@ func _gate(e: Array[String], g: Dictionary, owner: String) -> void:
 		"quest_step", "quest_state": _ref(e, "quests", g.id, owner)
 		"flag", "not_flag": _ref(e, "flags", g.id, owner)
 		"has_item": _ref(e, "items", g.id, owner)
+		"ng_plus": pass
 		_: e.append("%s: unknown gate %s" % [owner, g.get("type", "")])
 
 
@@ -346,11 +347,11 @@ func _validate_layouts(e: Array[String]) -> void:
 			for k in ["requires_flag", "hidden_by_flag"]:
 				if p.has(k):
 					_ref(e, "flags", p[k], area)
-		for id in l.get("roamers", {}).get("pool", []):
+		for id in l.get("roamers", {}).get("pool", []) + l.get("roamers", {}).get("ng_pool", []):
 			_ref(e, "enemies", id, area)
 			if get_entry("enemies", id).has("phases"):
 				e.append("%s: roamer %s must not be a boss" % [area, id])
-		for en in l.get("entities", []):
+		for en in l.get("entities", []) + l.get("ng_entities", []):
 			var ty: String = en.get("type", "")
 			if not ty in ENTITY_TYPES:
 				e.append("%s: unknown entity type %s" % [area, ty])

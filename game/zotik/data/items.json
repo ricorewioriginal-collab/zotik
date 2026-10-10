@@ -540,5 +540,41 @@
     "price": 0,
     "unique": true,
     "stack": 1
+  },
+  "ITEM_CHRONICLE_001": {
+    "name": "Chronikfragment",
+    "type": "material",
+    "price": 150,
+    "stack": 99
+  },
+  "WEAPON_CHRONICLE_BLADE_001": {
+    "name": "Chronikklinge",
+    "type": "weapon",
+    "slot": "weapon",
+    "stats": {
+      "attack": 62
+    },
+    "price": 4200,
+    "stack": 1
+  },
+  "ARMOR_CHRONICLE_001": {
+    "name": "Chronikpanzer",
+    "type": "armor",
+    "slot": "armor",
+    "stats": {
+      "defense": 26,
+      "max_hp": 110
+    },
+    "price": 4000,
+    "stack": 1
+  },
+  "ITEM_CHRONIK_ELIXIR_001": {
+    "name": "Chronik-Elixier",
+    "type": "consumable",
+    "effect": {
+      "heal": 400
+    },
+    "price": 260,
+    "stack": 99
   }
 }
