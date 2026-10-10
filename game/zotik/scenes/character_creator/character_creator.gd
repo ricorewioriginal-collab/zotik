@@ -43,7 +43,7 @@ func _ready() -> void:
 	preview.rotation.y = PI  # face the preview camera
 	vp.add_child(preview)
 	var cam := Camera3D.new()
-	cam.position = Vector3(0, 0.75, 2.3)
+	cam.position = Vector3(0, 0.85, 1.75)
 	vp.add_child(cam)
 	var box := VBoxContainer.new()
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
