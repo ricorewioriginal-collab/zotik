@@ -35,3 +35,9 @@ func test_the_sun_follows_the_quality() -> void:
 	sun.shadow_enabled = Quality.shadows()
 	check(not sun.shadow_enabled, "low turns the shadows off")
 	sun.queue_free()
+
+
+func test_performance_read_out_is_off_by_default_and_readable() -> void:
+	check(not Settings.DEFAULTS.perf_overlay, "off by default")
+	Settings.set_value("graphics", "low")
+	eq(PerfOverlay.report(30, 0.5, 0.05, 321), "60 fps | 17 ms (max 50) | 321 draws | Niedrig", "report line")

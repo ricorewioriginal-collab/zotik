@@ -6,6 +6,8 @@ const LABELS := {"fur_shade": "Fellton", "scarf": "Schal", "outfit": "Kleidung"}
 var preview: ZotikVisual
 var value_labels := {}
 var confirm_button: Button
+var _viewport: SubViewport
+var _loading: Label
 var _dragging := false
 var _idle := 10.0  # seconds since the player last turned Zotik by hand
 const AUTO_SPIN := 0.6
@@ -28,12 +30,20 @@ func _ready() -> void:
 	add_child(row)
 	var vpc := SubViewportContainer.new()
 	vpc.stretch = true
+	vpc.stretch_shrink = 2 if Quality.level() == "low" else 1  # half the pixels per side on phones
 	vpc.custom_minimum_size = Vector2(520, 640)
 	row.add_child(vpc)
 	vpc.gui_input.connect(_on_preview_input)
 	var vp := SubViewport.new()
 	vp.own_world_3d = true
+	vp.msaa_3d = Viewport.MSAA_DISABLED
+	vp.positional_shadow_atlas_size = 0  # no point lights here: skip the shadow atlas
 	vpc.add_child(vp)
+	_loading = Label.new()
+	_loading.text = "Zotik wird geladen ..."
+	_loading.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
+	_loading.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	vpc.add_child(_loading)
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
 	env.background_color = Color(0.08, 0.12, 0.22)
@@ -46,12 +56,10 @@ func _ready() -> void:
 	var light := DirectionalLight3D.new()
 	light.rotation_degrees = Vector3(-40, 30, 0)
 	vp.add_child(light)
-	preview = ZotikVisual.new()
-	preview.rotation.y = PI  # face the preview camera
-	vp.add_child(preview)
 	var cam := Camera3D.new()
 	cam.position = Vector3(0, 0.85, 1.75)
 	vp.add_child(cam)
+	_viewport = vp
 	var box := VBoxContainer.new()
 	box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	box.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -101,9 +109,24 @@ func _ready() -> void:
 	box.add_child(hint)
 	_refresh()
 	confirm_button.grab_focus.call_deferred()
+	_build_preview.call_deferred()
+
+
+## The model is built after the first frame: the buttons show up at once, Zotik follows.
+func _build_preview() -> void:
+	await get_tree().process_frame
+	preview = ZotikVisual.new()
+	preview.rotation.y = PI  # face the preview camera
+	_viewport.add_child(preview)
+	if _loading:
+		_loading.queue_free()
+		_loading = null
+	_refresh()
 
 
 func _process(delta: float) -> void:
+	if preview == null:
+		return
 	var stick := Input.get_axis("camera_left", "camera_right")
 	if absf(stick) > 0.1:
 		preview.rotation.y += stick * STICK_SPIN * delta
@@ -123,6 +146,8 @@ func _on_preview_input(event: InputEvent) -> void:
 
 
 func turn(angle: float) -> void:
+	if preview == null:
+		return
 	preview.rotation.y = wrapf(preview.rotation.y + angle, -PI, PI)
 	_idle = 0.0
 
@@ -135,7 +160,8 @@ func change(option: String, step: int) -> void:
 func _refresh() -> void:
 	for opt in value_labels:
 		value_labels[opt].text = str(Content.get_entry("cosmetics", GameState.customization[opt]).name).get_slice(": ", 1)
-	preview.apply_customization()
+	if preview:
+		preview.apply_customization()
 
 
 func confirm() -> void:

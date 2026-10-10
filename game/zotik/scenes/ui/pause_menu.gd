@@ -17,6 +17,7 @@ func refresh() -> void:
 	add_row("Spielanleitung: Ziel, Steuerung, Kampf, Rätsel, Quests", [["Öffnen", _open_guide]])
 	add_heading("Einstellungen")
 	add_row("Grafik: %s (Niedrig ist am flüssigsten)" % Quality.label(), [["Ändern", _cycle_graphics]])
+	add_row("Leistungsanzeige (FPS, für Fehlermeldungen): %s" % _on(Settings.get_value("perf_overlay")), [["Umschalten", _toggle_perf]])
 	add_row("Musik: %s" % _on(Settings.get_value("music_enabled")), [["Umschalten", _toggle_music]])
 	add_row("Musiklautstärke: %d %%" % roundi(float(Settings.get_value("music_volume")) * 100.0), [["Ändern", _cycle_music_volume]])
 	add_row("Soundeffekte: %s" % _on(Settings.get_value("sfx_enabled")), [["Umschalten", _toggle_sfx]])
@@ -122,6 +123,12 @@ func _toggle_touch_buttons() -> void:
 
 
 const MUSIC_VOLUMES := [0.2, 0.4, 0.6, 0.8, 1.0]
+
+
+func _toggle_perf() -> void:
+	Settings.set_value("perf_overlay", not Settings.get_value("perf_overlay"))
+	Settings.save_settings()
+	refresh()
 
 
 func _cycle_graphics() -> void:
