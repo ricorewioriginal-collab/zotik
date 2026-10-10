@@ -755,3 +755,6 @@ Standing owner approval was recorded in `CLAUDE.md` (rule 8 update). The plan is
 - New area `AREA_AQU_ABYSS` behind the vault (gated by `FLAG_AQU_WAECHTER_DEFEATED`), boss `BOSS_NERYX_001`: 860 HP, three phases (Strömung → Strudel with 2 Leuchtquallen → Tiefendruck with a Riffkrabbe); the whirlpool/pressure hazards reuse the existing circle and surge kinds (ground circle, travelling surge), intro and defeat scenes, persistent defeat, bestiary entry. Placeholder look (golem model, concept art not final).
 - Tests: `test_q04_neryx` (8), `test_q05_golden_aqualis` (golden path from a chapter-4 save plus restart check `golden_expected_aqu.json`), `test_x01_full_playthrough` now plays chapters 1–5 and saves/loads at the end.
 - Screenshot 24 (Neryx arena).
+
+## U04 – Character creator in the new UI style
+- "Mein Zotik": title font, row plates and gold buttons like the menus, navy preview background instead of grey. Live check of the Pages build after #18: starts, Neryx data in the pck, game loads (software renderer, frame rate not representative).
