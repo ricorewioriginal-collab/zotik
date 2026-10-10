@@ -148,5 +148,35 @@
         "Die alten Minenbauer leiteten den Druck des Berges durch vier Ventile ab. Wer sie falsch dreht, hört den Berg husten – wer sie richtig dreht, hört ihn ausatmen."
       ]
     ]
+  },
+  "LORE_NOC_001": {
+    "title": "Nocturna, die Stadt ohne Morgen",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "In Nocturna ist es immer Nacht. Die Bewohner sagen, der Morgen sei vergessen worden – und weil niemand sich erinnert, fragt auch niemand nach ihm."
+      ]
+    ]
+  },
+  "LORE_NOC_002": {
+    "title": "Der Erinnerungshüter",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Er bewahrt, was die Welt vergessen will. Seit ein Splitter des Weltenkerns in ihm steckt, bewahrt er auch, was nie geschehen ist – und die Stadt zweifelt an ihrer eigenen Geschichte."
+      ]
+    ]
+  },
+  "LORE_NOC_003": {
+    "title": "Die Erinnerungsfolge",
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Fünf Säulen im Nullkern halten je eine Erinnerung. Wer sie in der Reihenfolge weckt, in der sie wirklich geschahen, öffnet die Tür zum Herzen der Stadt."
+      ]
+    ]
   }
 }

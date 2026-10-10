@@ -580,5 +580,92 @@
         "spawn": "AREA_IGN_ASH"
       }
     ]
+  },
+  "CUT_NOC_ARRIVAL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Noctaris. Die Stadt der Erinnerungen. Über Nocturna steht kein Mond und keine Sonne – nur ein tiefes, violettes Dunkel, in dem Tausende Laternen treiben."
+      ],
+      [
+        "NPC_NIA_001",
+        "Hier ist es nie Tag?"
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der sechste Splitter. Und Noctaris zeigt eine zweite Version der Welt, getrennt von unserer. Fragen wir nach jemandem, der sich auskennt."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_NOC_001"
+      }
+    ]
+  },
+  "CUT_NOC_NULL_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Am Ende der Vergessenen Gassen steht ein Tor aus reinem Dunkel. Wer hineinsieht, erinnert sich an Dinge, die nie waren."
+      ],
+      [
+        "NPC_ROVAN_001",
+        "Ich sehe mein Haus. Es hat ein rotes Dach. Ich hatte nie ein rotes Dach."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann gehen wir hinein, solange wir noch wissen, wer wir sind."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "set_flag",
+        "id": "FLAG_NOC_NULL_OPEN"
+      }
+    ]
+  },
+  "CUT_NOC_HUETER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "BOSS_ERINNERUNGSHUETER_001",
+        "Ich bewahre alles. Auch das, was nie war. Besonders das, was nie war."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Der Splitter sitzt in seiner Brust. Er schreibt Erinnerungen, die die Welt nie erlebt hat."
+      ],
+      [
+        "CHAR_ZOTIK",
+        "Dann sorgen wir dafür, dass nur Wahres bleibt."
+      ]
+    ]
+  },
+  "CUT_NOC_HUETER_DEFEAT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NARRATOR",
+        "Der Erinnerungshüter zerfällt zu Tausenden Lichtpunkten, und jeder zeigt kurz ein Bild: ein Gesicht, ein Haus, ein Morgen. Dann steigt ein Splitter aus dem Dunkel, kühl wie Mondlicht."
+      ],
+      [
+        "NPC_LYRA_001",
+        "Sechs Splitter. Und zwei Versionen der Welt, die der Kern gespeichert hat. Wer hat das so gebaut?"
+      ],
+      [
+        "NPC_NIA_001",
+        "Erst zurück zu Eryn. Ich will wissen, ob es morgen wird."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "travel",
+        "area": "AREA_NOC_CITY",
+        "spawn": "AREA_NOC_LANES"
+      }
+    ]
   }
 }

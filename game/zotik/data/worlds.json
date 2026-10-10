@@ -53,5 +53,13 @@
     "hub_area": "AREA_IGN_VILLAGE",
     "hub_spawn": "travel",
     "requires_flag": "FLAG_FRO_CHAPTER_COMPLETE"
+  },
+  "WORLD_NOCTARIS": {
+    "name": "Noctaris",
+    "chapter": 8,
+    "subtitle": "Die Stadt der Erinnerungen",
+    "hub_area": "AREA_NOC_CITY",
+    "hub_spawn": "travel",
+    "requires_flag": "FLAG_IGN_CHAPTER_COMPLETE"
   }
 }

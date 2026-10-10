@@ -816,3 +816,13 @@ Measured with the compatibility renderer under xvfb (`ZOTIK_LOWEND=1` forces the
 - In-game guide: seven worlds, hint about wandering enemies.
 - Tests: `test_w04_roamers` (4). `tools/enemy_preview.gd` renders all models in a row. Placeholder art, not final.
 
+## R07 – Ambient particles per world
+- `Look._build_motes`: soft glowing quads drifting over the whole area, configured per world in `Look.WORLDS[...].motes`: fireflies (Lunaris), pollen (Elaris), dust (Valdoria, Solmera), bubbles (Aqualis), violet motes (Noctaris). A third of the amount on web/Android, none indoors.
+
+## R08 – Chapter 8 Noctaris (Phase 6) – PASSED
+- World `WORLD_NOCTARIS` (chapter 8, unlocked by `FLAG_IGN_CHAPTER_COMPLETE`, reached from the Ignara travel stone), six areas: Nocturna, Erinnerungsarchiv (Nyx's shop), Vergessene Gassen, Nullkern, Leere Kammer, Erinnerungsherz. Eternal night with a violet sky, lanterns and drifting motes.
+- Main quest `QUEST_MAIN_NOC_001` "Die Stadt, die sich erinnert" (Eryn → Nullkern → memory sequence `PUZ_NOC_MEMORY_001` (columns 4, 1, 5, 2, 3) → Nullwächter → boss Erinnerungshüter → report; 600 Lun); side quest "Splitter für Nyx" (5 Erinnerungssplitter, 300 Lun + Elixier). Eryn (archivist who remembers things that never happened, per `CHARACTERS_MASTER.md`), Ossian and Nyx are new NPCs.
+- Enemies Schattenfalter (bat model), Vergessener (skeleton model), Nullwächter (miniboss, persistent), boss Erinnerungshüter (1150 HP, circle and surge hazards, summons); both fixed and random encounters (`roamers` in the lanes and the Nullkern). Items Erinnerungssplitter, Traumtee, Nachtklinge, Schleiergewand.
+- Story: the Splitter in the Erinnerungsherz makes the Hüter write memories that never happened (reveal from `STORY_MASTER.md`: memories can be stored and reproduced via the Weltenkern).
+- Tests: `test_r09_noctaris` (9, incl. the motes), `test_r10_golden_noctaris` (golden path from a chapter-7 save, restart check `golden_expected_noc.json`), `test_x01_full_playthrough` now plays chapters 1–8. Screenshots 33–36. Placeholder art, not final.
+

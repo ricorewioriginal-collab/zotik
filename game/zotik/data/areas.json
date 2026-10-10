@@ -395,5 +395,63 @@
     "exits": [
       "AREA_IGN_CHAMBER"
     ]
+  },
+  "AREA_NOC_CITY": {
+    "name": "Noctaris – Nocturna",
+    "world": "WORLD_NOCTARIS",
+    "exits": [
+      "AREA_NOC_ARCHIVE",
+      "AREA_NOC_LANES"
+    ],
+    "gate": {
+      "AREA_NOC_LANES": "FLAG_NOC_LANES_OPEN"
+    }
+  },
+  "AREA_NOC_ARCHIVE": {
+    "name": "Noctaris – Das Erinnerungsarchiv",
+    "world": "WORLD_NOCTARIS",
+    "exits": [
+      "AREA_NOC_CITY"
+    ]
+  },
+  "AREA_NOC_LANES": {
+    "name": "Noctaris – Die Vergessenen Gassen",
+    "world": "WORLD_NOCTARIS",
+    "exits": [
+      "AREA_NOC_CITY",
+      "AREA_NOC_NULL"
+    ],
+    "gate": {
+      "AREA_NOC_NULL": "FLAG_NOC_NULL_OPEN"
+    }
+  },
+  "AREA_NOC_NULL": {
+    "name": "Noctaris – Der Nullkern",
+    "world": "WORLD_NOCTARIS",
+    "exits": [
+      "AREA_NOC_LANES",
+      "AREA_NOC_CHAMBER"
+    ],
+    "gate": {
+      "AREA_NOC_CHAMBER": "FLAG_NOC_MEMORY_DONE"
+    }
+  },
+  "AREA_NOC_CHAMBER": {
+    "name": "Noctaris – Die Leere Kammer",
+    "world": "WORLD_NOCTARIS",
+    "exits": [
+      "AREA_NOC_NULL",
+      "AREA_NOC_CORE"
+    ],
+    "gate": {
+      "AREA_NOC_CORE": "FLAG_NOC_WAECHTER_DEFEATED"
+    }
+  },
+  "AREA_NOC_CORE": {
+    "name": "Noctaris – Das Erinnerungsherz",
+    "world": "WORLD_NOCTARIS",
+    "exits": [
+      "AREA_NOC_CHAMBER"
+    ]
   }
 }

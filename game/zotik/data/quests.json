@@ -855,5 +855,105 @@
         "count": 1
       }
     ]
+  },
+  "QUEST_MAIN_NOC_001": {
+    "name": "Die Stadt, die sich erinnert",
+    "type": "main",
+    "completion_notice": "Kapitel 8 „Noctaris – Die Stadt der Erinnerungen“ abgeschlossen. Fortsetzung folgt.",
+    "steps": [
+      {
+        "objective": "Sprich mit Eryn in Nocturna.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_ERYN_001"
+        }
+      },
+      {
+        "objective": "Finde den Nullkern hinter den Vergessenen Gassen.",
+        "condition": {
+          "type": "area",
+          "area": "AREA_NOC_NULL"
+        }
+      },
+      {
+        "objective": "Wecke die Erinnerungen im Nullkern in der richtigen Reihenfolge.",
+        "condition": {
+          "type": "puzzle",
+          "puzzle": "PUZ_NOC_MEMORY_001"
+        }
+      },
+      {
+        "objective": "Besiege den Nullwächter in der Leeren Kammer.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "ENEMY_NULLWAECHTER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Stelle dich dem Erinnerungshüter im Erinnerungsherz.",
+        "condition": {
+          "type": "defeat",
+          "enemy": "BOSS_ERINNERUNGSHUETER_001",
+          "count": 1
+        }
+      },
+      {
+        "objective": "Berichte Eryn in Nocturna.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_ERYN_001"
+        }
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 600
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_NOC_CHAPTER_COMPLETE"
+      }
+    ]
+  },
+  "QUEST_SIDE_NOC_001": {
+    "name": "Splitter für Nyx",
+    "type": "side",
+    "steps": [
+      {
+        "objective": "Sammle 5 Erinnerungssplitter (Gassen, Nullkern).",
+        "condition": {
+          "type": "item",
+          "item": "ITEM_MEMORY_001",
+          "count": 5
+        }
+      },
+      {
+        "objective": "Bring die Splitter zu Nyx ins Erinnerungsarchiv.",
+        "condition": {
+          "type": "talk",
+          "npc": "NPC_NYX_001"
+        },
+        "on_complete": [
+          {
+            "type": "take_item",
+            "id": "ITEM_MEMORY_001",
+            "count": 5
+          }
+        ]
+      }
+    ],
+    "rewards": [
+      {
+        "type": "give_currency",
+        "amount": 300
+      },
+      {
+        "type": "give_item",
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      }
+    ]
   }
 }

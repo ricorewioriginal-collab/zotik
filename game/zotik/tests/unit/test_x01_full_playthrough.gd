@@ -1,7 +1,7 @@
 extends TestCase
 ## X01: the whole game in one session, without prepared saves. New game from
 ## the title, chapter 1 in Lunaris, Weltenstein to Elaris, chapter 2,
-## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, Weltenstein to Aqualis, chapter 5, Weltenstein to Frosthain, chapter 6, Weltenstein to Ignara, chapter 7, then save -> reset -> load through the
+## Weltenstein to Valdoria, chapter 3, Weltenstein to Solmera, chapter 4, Weltenstein to Aqualis, chapter 5, Weltenstein to Frosthain, chapter 6, Weltenstein to Ignara, chapter 7, Weltenstein to Noctaris, chapter 8, then save -> reset -> load through the
 ## title. Unlike the per-chapter golden paths (m15/e08/v06) every chapter
 ## starts from the state the previous one really produced, so a broken
 ## hand-over between chapters fails here.
@@ -411,6 +411,52 @@ func _chapter_seven() -> void:
 	eq(Conditions.quest_state(S), "COMPLETED", "Ignara side quest completed")
 
 
+func _chapter_eight() -> void:
+	const M := "QUEST_MAIN_NOC_001"
+	const S := "QUEST_SIDE_NOC_001"
+	await _exit_to("AREA_IGN_VILLAGE")
+	await _travel("TRAVEL_IGN_001", "WORLD_NOCTARIS", "CUT_NOC_ARRIVAL_001")
+	eq(game.area.area_id, "AREA_NOC_CITY", "in Nocturna")
+	await _exit_to("AREA_NOC_ARCHIVE")
+	await _talk("NPC_NYX_001")
+	eq(Conditions.quest_step(S), 0, "Noctaris side quest started")
+	game.shop_menu.close_menu()
+	await _exit_to("AREA_NOC_CITY")
+	await _talk("NPC_ERYN_001")
+	eq(Conditions.quest_step(M), 1, "find the Nullkern")
+	await _exit_to("AREA_NOC_LANES")
+	for id in ["SPAWN_NOC_LANES_FALTER_1", "SPAWN_NOC_LANES_FALTER_2", "SPAWN_NOC_LANES_VERGESSENER_1", "SPAWN_NOC_LANES_VERGESSENER_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_NOC_001"].interact(game.player)
+	await _use_savepoint("SAVEPOINT_NOC_LANES_001", 2)
+	await _boss_intro("TRIGGER_NOC_NULL", "CUT_NOC_NULL_001")
+	await _exit_to("AREA_NOC_NULL")
+	eq(Conditions.quest_step(M), 2, "memory puzzle next")
+	for id in ["SPAWN_NOC_NULL_FALTER_1", "SPAWN_NOC_NULL_FALTER_2", "SPAWN_NOC_NULL_VERGESSENER_1", "SPAWN_NOC_NULL_VERGESSENER_2"]:
+		await _defeat_spawn(id)
+	game.area.entities["CHEST_NOC_002"].interact(game.player)
+	var node: PuzzleNode = game.area.entities["PUZ_NOC_MEMORY_001"]
+	for i in [3, 0, 4, 1, 2]:
+		node.parts[i].interact(game.player)
+	eq(Conditions.quest_step(M), 3, "Nullwächter next")
+	await _exit_to("AREA_NOC_CHAMBER")
+	await _defeat_spawn("SPAWN_NOC_CHAMBER_WAECHTER")
+	eq(Conditions.quest_step(M), 4, "Hüter next")
+	await _exit_to("AREA_NOC_CORE")
+	await _boss_intro("TRIGGER_NOC_HUETER_INTRO", "CUT_NOC_HUETER_001")
+	await _defeat_spawn("SPAWN_NOC_CORE_HUETER")
+	eq(Dialogue.active_id, "CUT_NOC_HUETER_DEFEAT_001", "defeat scene")
+	await finish_dialogues()
+	await frames(2)
+	await physics_frames(3)
+	eq(game.area.area_id, "AREA_NOC_CITY", "back in Nocturna")
+	await _talk("NPC_ERYN_001")
+	eq(Conditions.quest_state(M), "COMPLETED", "chapter 8 completed")
+	await _exit_to("AREA_NOC_ARCHIVE")
+	await _talk("NPC_NYX_001")
+	eq(Conditions.quest_state(S), "COMPLETED", "Noctaris side quest completed")
+
+
 ## Saved state minus play_time, which keeps counting once the game runs.
 func _state_without_clock() -> String:
 	var d := GameState.to_dict()
@@ -431,7 +477,8 @@ func test_full_playthrough() -> void:
 	await _chapter_five()
 	await _chapter_six()
 	await _chapter_seven()
-	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001", "QUEST_MAIN_FRO_001", "QUEST_SIDE_FRO_001", "QUEST_MAIN_IGN_001", "QUEST_SIDE_IGN_001"]:
+	await _chapter_eight()
+	for q in ["QUEST_MAIN_LUN_001", "QUEST_SIDE_LUN_001", "QUEST_MAIN_ELA_001", "QUEST_SIDE_ELA_001", "QUEST_MAIN_VAL_001", "QUEST_SIDE_VAL_001", "QUEST_MAIN_SOL_001", "QUEST_SIDE_SOL_001", "QUEST_MAIN_AQU_001", "QUEST_SIDE_AQU_001", "QUEST_MAIN_FRO_001", "QUEST_SIDE_FRO_001", "QUEST_MAIN_IGN_001", "QUEST_SIDE_IGN_001", "QUEST_MAIN_NOC_001", "QUEST_SIDE_NOC_001"]:
 		eq(Conditions.quest_state(q), "COMPLETED", q)
 	eq(GameState.party.size(), 3, "full party at the end")
 	# Save -> fresh state -> load through the title
@@ -444,7 +491,7 @@ func test_full_playthrough() -> void:
 	await frames(3)
 	game = tree.current_scene
 	await physics_frames(2)
-	eq(game.area.area_id, "AREA_IGN_FORGE", "loaded where the game was saved")
+	eq(game.area.area_id, "AREA_NOC_ARCHIVE", "loaded where the game was saved")
 	eq(game.companions.size(), 3, "party restored")
 	eq(_state_without_clock(), expected, "state survives save/load")
 	SaveSystem.save_dir = "user://saves/"

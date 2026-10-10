@@ -178,5 +178,33 @@
       }
     ],
     "currency": 150
+  },
+  "CHEST_NOC_001": {
+    "area": "AREA_NOC_LANES",
+    "contents": [
+      {
+        "id": "ITEM_HI_POTION_001",
+        "count": 2
+      },
+      {
+        "id": "ITEM_TRAUMTEE_001",
+        "count": 3
+      }
+    ],
+    "currency": 130
+  },
+  "CHEST_NOC_002": {
+    "area": "AREA_NOC_NULL",
+    "contents": [
+      {
+        "id": "ITEM_ELIXIR_001",
+        "count": 1
+      },
+      {
+        "id": "ITEM_MEMORY_001",
+        "count": 2
+      }
+    ],
+    "currency": 160
   }
 }

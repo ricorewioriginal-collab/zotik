@@ -110,5 +110,16 @@
       "ITEM_GLUTBROT_001"
     ],
     "sell_ratio": 0.5
+  },
+  "SHOP_NOC_NYX_001": {
+    "npc": "NPC_NYX_001",
+    "stock": [
+      "WEAPON_NIGHT_BLADE_001",
+      "ARMOR_VEIL_001",
+      "ITEM_HI_POTION_001",
+      "ITEM_ELIXIR_001",
+      "ITEM_TRAUMTEE_001"
+    ],
+    "sell_ratio": 0.5
   }
 }

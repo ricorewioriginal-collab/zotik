@@ -1100,5 +1100,115 @@
         "id": "SHOP_IGN_ALCHEMIST_001"
       }
     ]
+  },
+  "DLG_ERYN_LEAD_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ERYN_001",
+        "Ich bin Eryn, Archivarin von Nocturna. Ich erinnere mich an Dinge, die nie geschehen sind – und ich erinnere mich nicht an Dinge, die jeder andere für wahr hält. In dieser Stadt lernt man, beides auszuhalten."
+      ],
+      [
+        "NPC_ERYN_001",
+        "Seit der Splitter im Erinnerungsherz steckt, werden es mehr. Straßen, die es nie gab. Menschen, die niemand kennt. Die Vergessenen Gassen sind offen – bleibt bei dem, woran ihr euch sicher seid."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_MAIN_NOC_001"
+      },
+      {
+        "type": "set_flag",
+        "id": "FLAG_NOC_LANES_OPEN"
+      }
+    ]
+  },
+  "DLG_ERYN_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ERYN_001",
+        "Hinter den Gassen liegt der Nullkern. Dort bewahrt der Hüter, was die Stadt vergessen will. Ihr müsst ihn zur Ruhe bringen, bevor die Stadt sich selbst vergisst."
+      ]
+    ]
+  },
+  "DLG_ERYN_REPORT_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ERYN_001",
+        "Ich erinnere mich wieder an den Morgen. Zum ersten Mal seit Jahren. Er war gelb und kalt und wunderschön."
+      ],
+      [
+        "NPC_ERYN_001",
+        "Der Splitter, den ihr tragt, zeigt zwei Versionen dieser Welt. Zwei Seiten derselben Wahrheit. Geht weiter, Zotik – und glaubt nicht jeder Erinnerung."
+      ]
+    ]
+  },
+  "DLG_ERYN_AFTER_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_ERYN_001",
+        "Die Straßen sind wieder nur die, die es gibt. Wenn ihr zurückkehrt, erzähle ich euch, woran ich mich erinnere – und ihr sagt mir, was davon wahr war."
+      ]
+    ]
+  },
+  "DLG_OSSIAN_IDLE_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_OSSIAN_001",
+        "Ich zünde die Laternen an, jeden Abend. Heute war es doch der gleiche Abend wie gestern? Oder gestern wie heute?"
+      ],
+      [
+        "NPC_OSSIAN_001",
+        "Egal. Solange sie brennen, finden wir den Weg nach Hause."
+      ]
+    ]
+  },
+  "DLG_NYX_QUEST_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NYX_001",
+        "Erinnerungssplitter sind die Währung dieser Stadt. Die Schattenfalter und die Vergessenen tragen sie bei sich. Bring mir fünf, und ich beweise dir, dass ich nicht nur Händlerin bin."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "start_quest",
+        "id": "QUEST_SIDE_NOC_001"
+      },
+      {
+        "type": "open_shop",
+        "id": "SHOP_NOC_NYX_001"
+      }
+    ]
+  },
+  "DLG_NYX_THANKS_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NYX_001",
+        "Fünf Splitter, klar und kalt. Daraus webe ich Gewänder, die selbst Schatten nicht durchdringen. Hier, deine Belohnung."
+      ]
+    ]
+  },
+  "DLG_NYX_SHOP_001": {
+    "placeholder": true,
+    "lines": [
+      [
+        "NPC_NYX_001",
+        "Nachtklinge und Schleiergewand, gewoben aus Erinnerung und Nacht. Und Traumtee, wenn du mal wieder nicht weißt, was echt ist."
+      ]
+    ],
+    "effects": [
+      {
+        "type": "open_shop",
+        "id": "SHOP_NOC_NYX_001"
+      }
+    ]
   }
 }
