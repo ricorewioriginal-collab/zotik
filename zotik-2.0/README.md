@@ -8,3 +8,8 @@ Moderne 3D-Neuaufbau-Variante von **Zotik – Die Splitter der Welten**: eine Da
 - **Speicherstand**: `localStorage`, Schlüssel `zotik2_save_slot1` (Autosave). Das Cloud-Skript aus easygames (`anmacha-cloud.js`, Spielname `zotik2`) hängt sich dort ein; das Godot-Zotik bleibt unberührt.
 
 Umbenennen in `zotik/`: nur den Ordner umbenennen, es gibt keine absoluten Pfade im Spiel.
+
+## Titelscreen, HUD und Handy-Ansicht
+- Konsolen-Titelscreen nach dem Key-Art-Vorbild: Logo, Menü mit Leuchtbalken (Pfeiltasten/Enter oder Tippen), Untermenü „Steuerung".
+- HUD und Dialoge zeigen die Originalfiguren (Gesichter aus den Master-Sheets: Zotik, Mira, Professorium, Felli).
+- Menü, Aufgaben und Steuerung sind für Hoch- und Querformat kompakt (Tabs, scrollbar); Handy zeigt Touch-Steuerung statt Tastaturliste.
