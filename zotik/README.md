@@ -35,7 +35,14 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
 - Öffnet im Weltentor, sobald Elyndra geschafft ist (Ankunfts-Zwischensequenz, Hub mit Veyra, Kael, Eryn, Toren).
 - **Sieben Siegel** im Norden, je mit Zwischensequenz: Weltenbrecher (Der erste Wächter, Die Wurzel ohne Ende, Der Goldene Koloss, Der Sandkönig, Der Abyss, Das Frostherz, Der Feuerkern) → Wächter des Dungeons → Siegel-Rätsel (Scheiben) → Schatzkammer mit Splittern und Tränken. Fortschritt in `end`.
 - **Drei Enden** bei Veyra, wenn alle Siegel gebrochen sind: Getrennt bewahren, Vereinen, Verweben (jeweils mit Zwischensequenz, später änderbar). Gewählt wird in `ending`.
-- Vereinfacht gegenüber dem alten Spiel: Die Dungeons sind Siegel-Stationen mit Wächterkampf statt begehbarer Räume; Nebenaufträge der Figuren, Halle der 100 und NG+ fehlen noch.
+- Vereinfacht gegenüber dem alten Spiel: Die Dungeons sind Siegel-Stationen mit Wächterkampf statt begehbarer Räume.
+
+## Casino, Nautilux, Nebenaufträge, Halle der 100, NG+
+- **Golden Star Casino** in Valdoria (Kapitel 3): Kristallslots mit Einsätzen 10/50/100, nur virtuelle Splitter, abschaltbar (Familienoption, `cas.off`).
+- **Nautilux** (Professorium schenkt sie nach Kapitel 1, `fl.naut`): schwebendes Fahrzeug, V (am Handy 🚤) steigt ein und aus, rammt Gegner; nach Kapitel 4 mit Tauchmodul (Shift = Turbo). Steigt bei Dialog, Reise und Tod automatisch ab.
+- **Nebenaufträge** im Weltenriss-Hub (Sela, Nerea, Professorium, Kael, Eryn, Toren): zählen Gegner in Lunaris, Elaris, Aqualis, Elyndra, Erinnerungssplitter und Rissessenz; Belohnung sind Splitter und ein Andenken (+1,5 Angriff). Stand im Menü unter „Nebenaufträge“.
+- **Halle der 100**: 100 Prüfungen in Wellen, jede zehnte ein Bosskampf, Rang-Belohnungen (`hall`). Vereinfacht gegenüber dem alten Spiel (Wellen statt Arena-Rängen).
+- **Neues Spiel+**: nach einem Ende bei Veyra wählbar. Behält Stufe, Splitter, Waffen, Andenken, Nautilux, Gefährten, Halle und Nebenaufträge; Gegner mit +50 % Leben und +35 % Angriff je Stufe, Bosse mit Raserei-Phase.
 
 ## Grafikupdate (Oktober 2026)
 - Terrain: kleine prozedurale, gekachelte Bodenstruktur sowie feinere Farbvariation; Weg nach Lunaris mit flachen Randsteinen.
