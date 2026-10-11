@@ -14,6 +14,10 @@ const AUTO_SPIN := 0.6
 const DRAG_SENS := 0.012
 const STICK_SPIN := 3.0
 const RESUME_AFTER := 3.0
+## The preview is redrawn this often on low-end devices (the turntable looks fine at 20 and costs a
+## third of the GPU/CPU time); on high it follows the display.
+const LOW_PREVIEW_FPS := 20.0
+var _redraw_wait := 0.0
 
 
 func _ready() -> void:
@@ -38,6 +42,8 @@ func _ready() -> void:
 	vp.own_world_3d = true
 	vp.msaa_3d = Viewport.MSAA_DISABLED
 	vp.positional_shadow_atlas_size = 0  # no point lights here: skip the shadow atlas
+	if Quality.level() != "high":
+		vp.render_target_update_mode = SubViewport.UPDATE_DISABLED  # redrawn by hand in _process (throttled)
 	vpc.add_child(vp)
 	_loading = Label.new()
 	_loading.text = "Zotik wird geladen ..."
@@ -119,6 +125,9 @@ func _build_preview() -> void:
 	preview.add_to_group("creator_preview")
 	preview.rotation.y = PI  # face the preview camera
 	_viewport.add_child(preview)
+	if Quality.level() != "high":
+		preview.set_detail(false)  # the turntable is small on these devices: skip the fine fur and face details
+		preview.rig.anim.pause()  # a still pose: no skeleton update per frame
 	if _loading:
 		_loading.queue_free()
 		_loading = null
@@ -128,6 +137,11 @@ func _build_preview() -> void:
 func _process(delta: float) -> void:
 	if preview == null:
 		return
+	if _viewport.render_target_update_mode == SubViewport.UPDATE_DISABLED:
+		_redraw_wait -= delta
+		if _redraw_wait <= 0.0:
+			_redraw_wait = 1.0 / LOW_PREVIEW_FPS
+			_viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 	var stick := Input.get_axis("camera_left", "camera_right")
 	if absf(stick) > 0.1:
 		preview.rotation.y += stick * STICK_SPIN * delta
