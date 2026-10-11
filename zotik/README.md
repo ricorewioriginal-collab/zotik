@@ -16,3 +16,11 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
 - Ablauf: Startscreen („Tippen oder Taste drücken") → Ladebalken → Menü (Neues Spiel / Spiel laden / Steuerung) → Speicherplatz (3 Slots) → „Mein Zotik" (Fellton, Schal, Kleidung; nur bei neuem Spiel) → Spawn im Dorf.
 - Speicherstände: `zotik2_save_slot1` bis `zotik2_save_slot3`; die Auswahl wird im Spielstand (`cos`) gespeichert.
 - Häuser sind begehbar: Tür vorn, Innenraum mit Möbeln (Taverne, Schmiede, drei Wohnhäuser), Wandkollision, Dach und Wände blenden beim Betreten aus; in drei Häusern liegt eine Truhe.
+
+## Grafikupdate (Oktober 2026)
+- Terrain: kleine prozedurale, gekachelte Bodenstruktur sowie feinere Farbvariation; Weg nach Lunaris mit flachen Randsteinen.
+- Mondwald: vollere Baumkronen mit hellen Blattspitzen. Zusätzliche Kronenteile und Wegsteine nutzen Instancing für geringe Draw-Call-Kosten.
+- Dorf: steinerne Sockel und Türstufen, helle Eckleisten, gefasste Fenster mit Sprossen und Fensterbänken, Dachkanten und Dachspitzen. Dachdetails werden beim Betreten zusammen mit den Dächern ausgeblendet.
+- Etwas klareres Mondlicht und weniger dichter Fernnebel. Speicherformat, Kollisionen und Weltpositionen bleiben gleich.
+
+Prüfung: Inline-JavaScript syntaktisch geprüft; vollständiger Weltaufbau mit Three.js r128 und simuliertem Renderer geprüft. Alle zehn Instancing-Gruppen bleiben innerhalb ihrer Kapazität, und die 592 Kollisionskreise entsprechen exakt dem vorherigen Stand. Ein echter Browser- oder Handytest war in dieser Umgebung nicht möglich.

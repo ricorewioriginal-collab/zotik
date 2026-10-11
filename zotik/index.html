@@ -186,10 +186,10 @@ const cv=$('cv');
 const renderer=new T.WebGLRenderer({canvas:cv,antialias:!TOUCH,powerPreference:'high-performance'});
 renderer.setPixelRatio(Math.min(devicePixelRatio||1,TOUCH?1.6:2));
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
-renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=.95;
+renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
 const scene=new T.Scene();
 const FOG=new T.Color(0x2a3a86);
-scene.fog=new T.FogExp2(FOG,.0042);
+scene.fog=new T.FogExp2(FOG,.0037);
 const camera=new T.PerspectiveCamera(58,1,.2,1800);
 function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=w/h<.8?70:58;camera.updateProjectionMatrix()}
 addEventListener('resize',resize);resize();
@@ -225,7 +225,7 @@ const MOON_DIR=new T.Vector3(-.42,.5,-.76).normalize();
 }
 
 /* ================= Licht ================= */
-const hemi=new T.HemisphereLight(0x6f8cf0,0x1a2a44,.5);scene.add(hemi);
+const hemi=new T.HemisphereLight(0x849de9,0x244348,.64);scene.add(hemi);
 const moonL=new T.DirectionalLight(0xc4d4ff,1.15);moonL.castShadow=true;
 const SH=TOUCH?1024:2048;moonL.shadow.mapSize.set(SH,SH);const sc=moonL.shadow.camera;sc.left=-34;sc.right=34;sc.top=34;sc.bottom=-34;sc.near=1;sc.far=190;moonL.shadow.bias=-.0006;moonL.shadow.normalBias=.04;
 scene.add(moonL,moonL.target);
@@ -233,6 +233,18 @@ const auraL=new T.PointLight(0xffd6a0,1.1,15,1.5);scene.add(auraL);
 
 /* ================= Terrain ================= */
 const TW=270,TD=320,TCX=0,TCZ=-76;
+// Small repeating colour texture adds ground detail without another draw call or download.
+function groundTexture(){
+  const canvas=document.createElement('canvas');canvas.width=canvas.height=128;
+  const ctx=canvas.getContext('2d'),random=mul32(71042);
+  ctx.fillStyle='#fafaf8';ctx.fillRect(0,0,128,128);
+  for(let i=0;i<950;i++){
+    const x=random()*128,y=random()*128,r=.25+random()*1.5;
+    ctx.fillStyle=i%4===0?'rgba(92,81,71,.13)':i%3===0?'rgba(132,153,121,.13)':'rgba(54,73,61,.08)';
+    ctx.beginPath();ctx.ellipse(x,y,r,r*(.45+random()),random()*6.28,0,6.283);ctx.fill();
+  }
+  const tex=new T.CanvasTexture(canvas);tex.wrapS=tex.wrapT=T.RepeatWrapping;tex.repeat.set(TW/9,TD/9);tex.anisotropy=4;return tex;
+}
 const terrain=(()=>{
   const g=new T.PlaneGeometry(TW,TD,135,160);g.rotateX(-Math.PI/2);g.translate(TCX,0,TCZ);
   const p=g.attributes.position,col=new Float32Array(p.count*3),c=new T.Color();
@@ -241,14 +253,15 @@ const terrain=(()=>{
     const x=p.getX(i),z=p.getZ(i),h=hgt(x,z);p.setY(i,h);
     const dv=Math.hypot(x,z),da=Math.hypot(x-ARENA.x,z-ARENA.z);
     c.copy(cF).lerp(cV,1-sm(10,50,dv)).lerp(cG,(1-sm(0,24,dv))*.4);
-    const nz=Math.sin(x*.7)*Math.cos(z*.63)*.5+.5;c.offsetHSL(0,0,(nz-.5)*.06);
-    const pd=Math.abs(x-PATHX(z));if(z<42&&z>-158)c.lerp(cP,(1-sm(1.6,4.2,pd))*.85);
+    const nz=Math.sin(x*.7)*Math.cos(z*.63)*.5+.5,detail=Math.sin(x*.29+z*.23)*Math.cos(z*.34-x*.13);
+    c.offsetHSL(0,0,(nz-.5)*.055+detail*.016);
+    const pd=Math.abs(x-PATHX(z));if(z<42&&z>-158){c.lerp(cP,(1-sm(1.6,4.2,pd))*.9);c.lerp(cP,sm(3.2,4.1,pd)*(1-sm(4.1,5.3,pd))*.24)}
     c.lerp(cC,(1-sm(26,36,da))*.9);
     if(h>5)c.lerp(cR,sm(5,12,h));
     col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b;
   }
   g.setAttribute('color',new T.BufferAttribute(col,3));g.computeVertexNormals();
-  const m=new T.Mesh(g,new T.MeshStandardMaterial({vertexColors:true,roughness:.95}));m.receiveShadow=true;scene.add(m);return m;
+  const m=new T.Mesh(g,new T.MeshStandardMaterial({vertexColors:true,map:groundTexture(),roughness:.95}));m.receiveShadow=true;scene.add(m);return m;
 })();
 
 /* ================= Props (instanziert) ================= */
@@ -266,6 +279,7 @@ const iShroom=inst(new T.SphereGeometry(1,8,6,0,6.283,0,1.6),new T.MeshBasicMate
 const iStem=inst(new T.CylinderGeometry(.18,.25,1,6),new T.MeshStandardMaterial({color:0xcfd8ee,roughness:.9}),260,false);
 const iCrys=inst(new T.OctahedronGeometry(1),new T.MeshStandardMaterial({color:0xffffff,emissive:0x2a6cff,emissiveIntensity:1.6,roughness:.25}),240,false);
 const iFlower=inst(new T.SphereGeometry(1,6,5),new T.MeshBasicMaterial({color:0xffffff}),900,false);
+const iPave=inst(new T.DodecahedronGeometry(1,0),new T.MeshStandardMaterial({color:0xffffff,roughness:1,flatShading:true}),200,false);
 const LEAF=[0x2fae8e,0x3ab59a,0x2a8fb0,0x6a58c8,0x45b86a],FOL=[0x1e7a5c,0x2a8c64,0x1c6a78];
 function nearPath(x,z,d){return z<44&&z>-160&&Math.abs(x-PATHX(z))<d}
 (function scatter(){
@@ -278,7 +292,7 @@ function nearPath(x,z,d){return z<44&&z>-160&&Math.abs(x-PATHX(z))<d}
     const h=hgt(x,z),s=wr(.9,1.7),pine=WR()<.45,col=pick(LEAF);
     put(iTrunk,x,h+s*1.1,z,.55*s,s*2.4,.55*s,0,0x4a3328);
     if(pine){for(let k=0;k<3;k++)put(iPine,x,h+s*(2.3+k*1.35),z,s*(2.2-k*.55),s*2.2,s*(2.2-k*.55),WR()*6,k==2?0x7be0d0:col)}
-    else{put(iCan,x,h+s*3.6,z,s*2.4,s*1.9,s*2.4,WR()*6,col);put(iCan,x+s*.9,h+s*2.8,z+s*.4,s*1.5,s*1.2,s*1.5,WR()*6,pick(LEAF));put(iCan,x-s*.7,h+s*3.0,z-s*.6,s*1.4,s*1.1,s*1.4,WR()*6,pick(LEAF))}
+    else{put(iCan,x,h+s*3.6,z,s*2.4,s*1.9,s*2.4,WR()*6,col);put(iCan,x+s*.9,h+s*2.8,z+s*.4,s*1.5,s*1.2,s*1.5,WR()*6,pick(LEAF));put(iCan,x-s*.7,h+s*3.0,z-s*.6,s*1.4,s*1.1,s*1.4,WR()*6,pick(LEAF));put(iCan,x+s*.15,h+s*4.35,z-s*.15,s*1.15,s*.82,s*1.15,0,0x8acfb4)}
     addCol(x,z,.75*s);n++;
   }
   for(let i=0;i<5200;i++){
@@ -309,6 +323,10 @@ function nearPath(x,z,d){return z<44&&z>-160&&Math.abs(x-PATHX(z))<d}
   }
   /* Kristallkranz um die Arena */
   for(let k=0;k<26;k++){const a=k/26*Math.PI*2,rr=wr(25,30),x=ARENA.x+Math.cos(a)*rr,z=ARENA.z+Math.sin(a)*rr;if(z>ARENA.z+10&&Math.abs(x-ARENA.x)<10)continue;const s=wr(1.4,3.2),h=hgt(x,z);put(iCrys,x,h+s*.9,z,s*.45,s*1.5,s*.45,WR()*6,pick([0x5aa6ff,0x8a6cff,0x58d6ff]),(WR()-.5)*.4,(WR()-.5)*.4);addCol(x,z,s*.45)}
+  // Flat, irregular border stones make the route readable in moonlight.
+  const pathRand=mul32(4292);
+  for(let i=0;i<170;i++){const z=-145+i*1.04,side=i%2?-1:1,x=PATHX(z)+side*(3.1+pathRand()*.8),h=hgt(x,z);if(h>7)continue;
+    const scale=.3+pathRand()*.38;put(iPave,x,h+.055,z,scale,.07,scale*(.65+pathRand()*.7),pathRand()*6.28,i%5===0?0xb9acc0:0xb9af9e)}
 })();
 for(const im of INST){im.count=im.userData.n;im.instanceMatrix.needsUpdate=true;if(im.instanceColor)im.instanceColor.needsUpdate=true}
 
@@ -332,15 +350,30 @@ function house(x,z,w,d,h,wall,roof,ry,opt){
   for(const sd of [-1,1]){wallBox(sd*(w/2-t/2),0,t,d,H,0);solid(sd*(w/2-t/2),0,t/2,d/2)}
   for(const sd of [-1,1]){const cx=sd*(w/2+dw)/2,hx=(w/2-dw)/2;wallBox(cx,d/2-t/2,hx*2,t,H,0);solid(cx,d/2-t/2,hx,t/2)}
   wallBox(0,d/2-t/2,dw*2,t,H-2.4,2.4);
+  const stone=M(0xb2a8a2,{r:1}),trim=M(0xf2dfba,{r:.9});
+  g.add(mk(G.box,stone,0,.03,0,w+.22,.22,d+.22,false));
+  for(const sx of [-1,1])for(const sz of [-1,1])g.add(mk(G.box,trim,sx*(w/2-.14),H*.5,sz*(d/2-.14),.2,H-.28,.2,false));
   /* Türrahmen und offenes Türblatt */
   const wd=M(0x4a2e1c).clone();H0.fm=wd;for(const sd of [-1,1])g.add(mk(G.box,wd,sd*(dw+.05),1.2,d/2-t/2,.12,2.4,t+.06,false));g.add(mk(G.box,wd,0,2.45,d/2-t/2,dw*2+.2,.12,t+.06,false));
   const leaf=mk(G.box,wd,-dw-.1,1.2,d/2+.4,.1,2.3,.8,false);g.add(leaf);const wins=[];
+  g.add(mk(G.box,stone,0,.08,d/2+.43,dw*2.35,.16,.9,false));
   /* Boden, Decke, Dach */
   g.add(mk(G.box,M(0x7a5a3a,{r:.9,e:0x2a1a0c,ei:1}),0,.17,0,w-.2,.1,d-.2,false));
   const ceil=mk(G.box,M(0x5a4636,{r:.9}),0,h+.15,0,w-.2,.12,d-.2,false);g.add(ceil);H0.ceil=ceil;
-  const rf=mk(G.cone,M(roof,{r:.7,e:0x14142a,ei:1}),0,h+.2+h*.28,0,(w/Math.SQRT2)*1.22,h*.56,(d/Math.SQRT2)*1.22);rf.rotation.y=Math.PI/4;g.add(rf);H0.roof=rf;
+  const roofGroup=new T.Group(),rf=mk(G.cone,M(roof,{r:.7,e:0x14142a,ei:1}),0,h+.2+h*.28,0,(w/Math.SQRT2)*1.22,h*.56,(d/Math.SQRT2)*1.22);
+  rf.rotation.y=Math.PI/4;roofGroup.add(rf);
+  const fascia=M(0xd0b899,{r:.9});
+  for(const sx of [-1,1])roofGroup.add(mk(G.box,fascia,sx*(w/2+.16),h+.23,0,.12,.13,d+.58,false));
+  for(const sz of [-1,1])roofGroup.add(mk(G.box,fascia,0,h+.23,sz*(d/2+.16),w+.58,.13,.12,false));
+  roofGroup.add(mk(G.oct,M(0xe4c594,{m:.35,r:.4}),0,h+h*.56+.27,0,.22,.35,.22,false));
+  g.add(roofGroup);H0.roof=roofGroup;
   /* Fenster */
-  for(const sd of [-1,1])for(const m of [mk(G.box,M(WARM,{e:WARM,ei:1.1}),sd*w*.32,h*.62,d/2+.04,.8,.9,.05,false),mk(G.box,M(0x5a3a26),sd*w*.32,h*.62,d/2+.02,1.05,1.15,.04,false),mk(G.box,M(WARM,{e:WARM,ei:1.1}),w/2+.04,h*.62,sd*d*.25,.05,.8,.8,false)]){g.add(m);wins.push(m)}
+  for(const sd of [-1,1])for(const m of [mk(G.box,M(WARM,{e:WARM,ei:1.1}),sd*w*.32,h*.62,d/2+.04,.8,.9,.05,false),mk(G.box,M(0x5a3a26),sd*w*.32,h*.62,d/2+.02,1.05,1.15,.04,false),mk(G.box,M(0xf4dec0),sd*w*.32,h*.62-.61,d/2+.1,1.2,.12,.25,false)]){g.add(m);wins.push(m)}
+  const frame=M(0xf4dec0,{r:.86}),shutter=M(0x5a6a79,{r:.85});
+  for(const sx of [-1,1])for(const sz of [-1,1]){
+    const y=h*.62,z=sz*d*.25,x=sx*(w/2+.06);
+    for(const m of [mk(G.box,frame,x,y,z,.07,1.15,1.06,false),mk(G.box,M(WARM,{e:WARM,ei:.7}),x+sx*.045,y,z,.08,.82,.83,false),mk(G.box,frame,x+sx*.1,y,z,.1,.055,.85,false),mk(G.box,frame,x+sx*.09,y-.61,z,.25,.12,1.22,false),mk(G.box,shutter,x+sx*.02,y,z+sz*.68,.11,1.05,.22,false)]){g.add(m);wins.push(m)}
+  }
   H0.wins=wins;
   if(opt.chimney){const cm=mk(G.box,M(0x5a5a6a),w*.25,h+.9,-d*.2,.9,2,.9);g.add(cm);g.add(glow(0xff7a2a,3.4,w*.25,h+2.1,-d*.2,.7))}
   /* Einrichtung */
