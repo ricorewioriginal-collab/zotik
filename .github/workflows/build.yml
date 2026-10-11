@@ -103,6 +103,9 @@ jobs:
           path: |
             build/*.zip
             build/*.apk
+      - name: Zotik 2.0 (Browser) mit auf Pages legen
+        if: github.ref == 'refs/heads/main'
+        run: mkdir -p build/web/zotik-2.0 && cp zotik-2.0/index.html build/web/zotik-2.0/
       - uses: actions/upload-pages-artifact@v3
         if: github.ref == 'refs/heads/main'
         with:
