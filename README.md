@@ -1,14 +1,12 @@
 # ZOTIK – Die Splitter der Welten
 
-## Jetzt spielen (Kapitel 1 Lunaris, Kapitel 2 Elaris, Kapitel 3 Valdoria)
-- **Windows:** [ZOTIK-windows-x86_64.zip](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-windows-x86_64.zip) herunterladen, entpacken und `ZOTIK.exe` starten. Windows SmartScreen warnt eventuell, weil die Datei nicht signiert ist: „Weitere Informationen → Trotzdem ausführen“.
-- **Linux:** [ZOTIK-linux-x86_64.zip](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-linux-x86_64.zip), dann `ZOTIK.x86_64` starten.
-- **Android:** [ZOTIK-android-arm64.apk](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-android-arm64.apk) auf dem Handy herunterladen und installieren. Dafür muss „Installation aus unbekannten Quellen“ erlaubt sein; die APK ist debug-signiert. Die Steuerung erfolgt per Touch: Stick links, Kamera rechts wischen, Aktionsknöpfe rechts unten.
-- **Browser:** Die Web-Version wird automatisch auf GitHub Pages veröffentlicht, sobald Pages einmalig aktiviert ist: *Settings → Pages → Build and deployment → Source: GitHub Actions*. Danach läuft sie unter `https://ricorewioriginal-collab.github.io/zotik/`.
-- Steuerung: F1 im Spiel blendet die Tastenhilfe ein und aus (Details in `zotik-old/README.md`).
-- Alle Grafiken, Sounds und Dialogtexte sind Platzhalter.
+## Jetzt spielen
+- **Neues Zotik im Browser:** [ZOTIK auf GitHub Pages](https://ricorewioriginal-collab.github.io/zotik/) – auch auf dem Smartphone spielbar.
+- **Alte Godot-Version (`zotik-old/`):** [Windows](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-windows-x86_64.zip), [Linux](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-linux-x86_64.zip), [Android](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-android-arm64.apk) und [Web-Archiv als ZIP](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-web.zip). Diese Downloads bleiben als letzter Stand erhalten und werden nicht mehr automatisch neu gebaut.
 
-Jeder Merge auf `main` baut die Downloads neu (Release `phase1-latest`).
+Änderungen an `zotik/` veröffentlichen die Browser-Version automatisch auf GitHub Pages. Die automatischen Godot-Builds und -Tests für `zotik-old/` sind abgeschaltet.
+
+## Archivierte Godot-Projektplanung
 
 Gesamter bisher ausgearbeiteter Projektstand.
 
@@ -43,4 +41,4 @@ Neue verbindliche Ergänzungen befinden sich in:
 
 ## Ordner
 - `zotik/`: neues Zotik (3D im Browser, Einzeldatei), Startseite der Pages-Seite.
-- `zotik-old/`: altes Godot-Zotik (frühere `game/zotik`), Web-Build unter `/zotik-old/`.
+- `zotik-old/`: archiviertes Godot-Zotik (frühere `game/zotik`); unter `/zotik-old/` liegt ein Link zum letzten Release.

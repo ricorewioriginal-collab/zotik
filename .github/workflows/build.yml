@@ -1,141 +1,43 @@
-name: build
+name: Publish Zotik Web
 
-# Exports playable builds (Windows, Linux, Web, Android APK). On main they are published
-# as the rolling GitHub release "phase1-latest"; the web build is also
-# deployed to GitHub Pages when Pages is enabled for the repository.
 on:
   push:
     branches: [main]
-  pull_request:
+    paths:
+      - 'zotik/**'
+      - '.github/workflows/build.yml'
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
 concurrency:
-  group: build-${{ github.ref }}
+  group: zotik-pages
   cancel-in-progress: true
 
 jobs:
-  export:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    env:
-      GODOT_VERSION: 4.7-stable
-    steps:
-      - uses: actions/checkout@v4
-      - name: Cache Godot and export templates
-        id: cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/godot
-            ~/.local/share/godot/export_templates
-          key: godot-export-${{ env.GODOT_VERSION }}-android
-      - name: Download Godot and templates
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: |
-          mkdir -p ~/godot ~/.local/share/godot/export_templates/4.7.stable
-          base="https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}"
-          curl -sSL -o /tmp/godot.zip "$base/Godot_v${GODOT_VERSION}_linux.x86_64.zip"
-          unzip -q /tmp/godot.zip -d ~/godot
-          mv ~/godot/Godot_v${GODOT_VERSION}_linux.x86_64 ~/godot/godot
-          curl -sSL -o /tmp/templates.tpz "$base/Godot_v${GODOT_VERSION}_export_templates.tpz"
-          unzip -q /tmp/templates.tpz -d /tmp/tpl
-          for f in windows_release_x86_64.exe linux_release.x86_64 web_nothreads_release.zip android_debug.apk android_release.apk version.txt; do
-            mv /tmp/tpl/templates/$f ~/.local/share/godot/export_templates/4.7.stable/
-          done
-          rm -rf /tmp/tpl /tmp/templates.tpz
-      - uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: '17'
-      - name: Configure Android export (SDK, debug keystore)
-        run: |
-          mkdir -p ~/.config/godot
-          printf '[gd_resource type="EditorSettings" format=3]\n\n[resource]\nexport/android/android_sdk_path = "%s"\nexport/android/java_sdk_path = "%s"\n' "$ANDROID_SDK_ROOT" "$JAVA_HOME" > ~/.config/godot/editor_settings-4.7.tres
-          keytool -genkeypair -v -keystore ~/debug.keystore -storepass android -alias androiddebugkey -keypass android \
-            -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
-          echo "GODOT_ANDROID_KEYSTORE_DEBUG_PATH=$HOME/debug.keystore" >> "$GITHUB_ENV"
-          echo "GODOT_ANDROID_KEYSTORE_DEBUG_USER=androiddebugkey" >> "$GITHUB_ENV"
-          echo "GODOT_ANDROID_KEYSTORE_DEBUG_PASSWORD=android" >> "$GITHUB_ENV"
-      - name: Cloud-Speicher OAuth-Client einsetzen (optional, aus den Repository-Secrets)
-        env:
-          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
-          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
-        run: |
-          if [ -n "$GOOGLE_OAUTH_CLIENT_ID" ] && [ -n "$GOOGLE_OAUTH_CLIENT_SECRET" ]; then
-            sed -i "s|^const OAUTH_CLIENT_ID := \"\"|const OAUTH_CLIENT_ID := \"$GOOGLE_OAUTH_CLIENT_ID\"|; s|^const OAUTH_CLIENT_SECRET := \"\"|const OAUTH_CLIENT_SECRET := \"$GOOGLE_OAUTH_CLIENT_SECRET\"|" zotik-old/core/cloud_sync.gd
-            grep -c 'OAUTH_CLIENT_ID := "[^"]' zotik-old/core/cloud_sync.gd
-          fi
-      - name: Import project
-        run: ~/godot/godot --headless --path zotik-old --import || true
-      - name: Export
-        run: |
-          mkdir -p build/windows build/linux build/web build/android
-          ~/godot/godot --headless --path zotik-old --export-release "Windows Desktop" ../build/windows/ZOTIK.exe
-          ~/godot/godot --headless --path zotik-old --export-release "Linux" ../build/linux/ZOTIK.x86_64
-          ~/godot/godot --headless --path zotik-old --export-release "Web" ../build/web/index.html
-          ~/godot/godot --headless --path zotik-old --export-debug "Android" ../build/android/ZOTIK.apk
-          ls -la build/*
-          test -s build/windows/ZOTIK.exe && test -s build/linux/ZOTIK.x86_64 && test -s build/web/index.html && test -s build/android/ZOTIK.apk
-          unzip -l build/android/ZOTIK.apk | grep -q "lib/arm64-v8a/libgodot_android.so"
-      - name: Smoke test Linux build (boots and reaches the title)
-        run: |
-          out=$(timeout 60 build/linux/ZOTIK.x86_64 --headless --quit-after 120 2>&1 || true)
-          echo "$out"
-          echo "$out" | grep -q "ZOTIK .* – boot"
-          echo "$out" | grep -q "CONTENT OK"
-          ! echo "$out" | grep -q "SCRIPT ERROR"
-      - name: Package
-        run: |
-          cd build
-          (cd windows && zip -qr ../ZOTIK-windows-x86_64.zip .)
-          (cd linux && zip -qr ../ZOTIK-linux-x86_64.zip .)
-          (cd web && zip -qr ../ZOTIK-web.zip .)
-          cp android/ZOTIK.apk ZOTIK-android-arm64.apk
-          ls -la *.zip *.apk
-      - uses: actions/upload-artifact@v4
-        with:
-          name: zotik-builds
-          path: |
-            build/*.zip
-            build/*.apk
-      - name: Seite zusammenstellen (neues Zotik am Stamm, altes Zotik unter /zotik-old/)
-        if: github.ref == 'refs/heads/main'
-        run: |
-          mkdir -p build/pages/zotik-old build/pages/zotik-2.0
-          cp -r build/web/. build/pages/zotik-old/
-          cp zotik/index.html build/pages/index.html
-          printf '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../"><title>Zotik</title><a href="../">Zotik</a>' > build/pages/zotik-2.0/index.html
-      - uses: actions/upload-pages-artifact@v3
-        if: github.ref == 'refs/heads/main'
-        with:
-          path: build/pages
-      - name: Publish rolling release
-        if: github.ref == 'refs/heads/main'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh release delete phase1-latest --yes --cleanup-tag || true
-          gh release create phase1-latest build/*.zip build/*.apk \
-            --title "ZOTIK Phase 1 – aktueller Build" \
-            --notes "Automatischer Build von ${GITHUB_SHA::7}. Windows: ZIP entpacken, ZOTIK.exe starten. Linux: ZOTIK.x86_64 starten. Android: ZOTIK-android-arm64.apk aufs Handy laden und installieren (Installation aus unbekannten Quellen erlauben). Web: im Browser über GitHub Pages (falls aktiviert) oder lokal mit einem Webserver. Alle Grafiken, Sounds und Dialogtexte sind Platzhalter." \
-            --prerelease
-
   pages:
-    needs: export
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    continue-on-error: true
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
         with:
           enablement: true
+      - name: Prepare site
+        run: |
+          mkdir -p site/zotik-old site/zotik-2.0
+          cp zotik/index.html site/index.html
+          printf '%s\n' '<!doctype html><html lang="de"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=../"><title>Zotik</title><a href="../">Neues Zotik spielen</a></html>' > site/zotik-2.0/index.html
+          printf '%s\n' '<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Zotik-Archiv</title><body style="max-width:40rem;margin:3rem auto;padding:1rem;font:1.1rem/1.5 system-ui,sans-serif;background:#101827;color:#f6f6f3"><h1>Altes Zotik (Archiv)</h1><p>Die frühere Godot-Version wird nicht mehr automatisch gebaut.</p><p><a style="color:#9de4e8" href="https://github.com/ricorewioriginal-collab/zotik/releases/tag/phase1-latest">Letzten Build herunterladen</a> · <a style="color:#9de4e8" href="../">Neues Zotik spielen</a></p></body></html>' > site/zotik-old/index.html
+          test -s site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
       - id: deploy
         uses: actions/deploy-pages@v4
