@@ -5,7 +5,7 @@
 set -euo pipefail
 GODOT="${GODOT:?set GODOT to a Godot 4.7 binary}"
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-PROJ="$ROOT/game/zotik"
+PROJ="$ROOT/zotik-old"
 "$ROOT/tools/run_tests.sh" "$@"
 echo "== restart check (new process)"
 timeout 120 "$GODOT" --headless --path "$PROJ" -s res://tests/restart_check.gd

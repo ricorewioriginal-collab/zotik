@@ -98,7 +98,7 @@ Recorded in `docs/CONFLICTS.md` (C-04 … C-09 added by this audit).
 
 ## 5. Recommended migration actions
 1. Leave `game/legacy_starter/` untouched as historical input.
-2. Create the Phase-1 project as a new Godot 4.7 project in `game/zotik/` (M01), reusing input names, movement reference and item concepts from the starter.
+2. Create the Phase-1 project as a new Godot 4.7 project in `zotik-old/` (M01), reusing input names, movement reference and item concepts from the starter.
 3. Implement saves from scratch per contract: schema version, per-slot backup, atomic write, typed restore (M02).
 4. Introduce a content registry that validates all cross-references at test time (M03).
 5. Add a headless test runner so every milestone has executable acceptance tests.

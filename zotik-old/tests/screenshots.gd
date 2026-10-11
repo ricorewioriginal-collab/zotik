@@ -1,6 +1,6 @@
 extends SceneTree
 ## Renders reference screenshots (needs a display, e.g. xvfb-run).
-## godot --path game/zotik -s res://tests/screenshots.gd -- <out_dir>
+## godot --path zotik-old -s res://tests/screenshots.gd -- <out_dir>
 
 var out := "user://shots"
 

@@ -1,7 +1,7 @@
 extends SceneTree
 ## Bakes the procedural music into assets/music/<mood>.wav (run when MusicSynth changes):
-## Copy this file to game/zotik/tests/, run
-##   godot --headless --path game/zotik -s res://tests/bake_music.gd
+## Copy this file to zotik-old/tests/, run
+##   godot --headless --path zotik-old -s res://tests/bake_music.gd
 ## remove the copy, then import once more; the .wav.import files keep edit/loop_mode=2 (forward).
 func _initialize() -> void:
 	DirAccess.make_dir_recursive_absolute("res://assets/music")

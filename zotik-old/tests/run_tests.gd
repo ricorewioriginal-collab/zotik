@@ -1,6 +1,6 @@
 extends SceneTree
 ## Headless test runner.
-## godot --headless --path game/zotik -s res://tests/run_tests.gd [-- filter]
+## godot --headless --path zotik-old -s res://tests/run_tests.gd [-- filter]
 ## Exit code 0 = all passed, 1 = failures.
 
 const DIR := "res://tests/unit/"

@@ -6,7 +6,7 @@ extends SceneTree
 ## (see export_presets.cfg, exclude_filter).
 ##
 ## Run once after changing the sources:
-##   godot --headless --path game/zotik -s res://tools/bake_weapon_meshes.gd
+##   godot --headless --path zotik-old -s res://tools/bake_weapon_meshes.gd
 
 const KAYKIT := "res://assets/characters/kaykit/%s.glb"
 const OUT_DIR := "res://assets/characters/weapons/"
