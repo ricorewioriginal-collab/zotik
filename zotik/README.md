@@ -21,10 +21,16 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
 ## Kapitel 2 bis 10 (Welten-Baukasten)
 - Nach Kapitel 1 öffnet das **Weltentor** (Standbild mit Ring im Dorf, `E`) das Menü „Weltreise". Jede Welt öffnet erst, wenn die vorige geschafft ist; man kann jederzeit zurückreisen.
 - Jede Welt hat eigene Palette, Himmel, Nebel, Bäume/Props, Wahrzeichen am Horizont, Dorf mit Ältester/Ältestem und drei Bewohnern (der erste handelt), vier Gegnerarten (Fernkämpfer, Nahkämpfer, Wächter, Boss) und Truhen.
-- Ablauf je Kapitel: mit der Ältesten sprechen → ins Umland gehen → 5 Gegner vertreiben → 3 Anlagen aktivieren (ab Kapitel 6 in Zahlenfolge) → Wächter besiegen (Siegel bricht) → Boss in der Arena → Bericht und Belohnung.
+- Ablauf je Kapitel: mit der Ältesten sprechen → ins Umland gehen → 5 Gegner vertreiben → das Rätsel der Welt lösen → Wächter besiegen (Siegel bricht) → Boss in der Arena → Bericht und Belohnung.
 - Namen, Gegner, Bosse und Aufgaben stammen aus dem alten Spiel (`zotik-old/data/*.json`): Wurzelkönigin, Kanalwächter, Kharos, Neryx, Avarn, Magmarion, Erinnerungshüter, Solyra, Elyon.
 - Fortschritt je Kapitel im Spielstand (`ch`, `cd`), alte Spielstände laden unverändert. Daten der Kapitel: `CHP` im Skript, Aufbau in `buildWorld`.
-- Noch nicht enthalten: Begleiter-Gruppe (z. B. Nia, Rovan, Lyra), Rätsel und Zwischensequenzen der alten Version.
+
+## Begleiter, Rätsel und Zwischensequenzen (aus der alten Version)
+- **Begleiter:** Lyra (Heilerin, schließt sich beim ersten Besuch von Elaris an), Nia (Bogenschützin, im Forschungsviertel ansprechen) und Rovan (Nahkämpfer, im Wald von Elaris). Sie folgen, kämpfen mit, Lyra heilt bei wenig Leben; Symbole neben dem Porträt, Liste im Inventar. Gespeichert in `party`.
+- **Rätsel** (neue Oberfläche mit Hinweisen, Esc schließt): Lunaris hat Mondtor-Scheiben und Resonanzkristalle, die das Risstor öffnen; jede Welt hat ein eigenes Rätsel (Scheiben, Reihenfolge oder Ventile) vor dem Wächter. Daten `PZD` im Skript, Lösungen in `pz`.
+- **Zwischensequenzen** (Kinobalken, Sprecher mit Porträt): Traum zum Spielstart, Orun-Begegnung und Riss-Vision in Lunaris, Lyras Ankunft, je Welt Ankunft, Rätsel/Ruinen, Boss und Abschluss. Daten `CUT`.
+- **Orun** ist der zweite Boss in Lunaris (nach dem Mondwolf) und gibt die Weltenklinge (+8 Angriff).
+- Noch offen: das Endspiel (sieben Siegel-Dungeons, Enden).
 
 ## Grafikupdate (Oktober 2026)
 - Terrain: kleine prozedurale, gekachelte Bodenstruktur sowie feinere Farbvariation; Weg nach Lunaris mit flachen Randsteinen.
