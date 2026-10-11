@@ -111,7 +111,7 @@ body.touch #joy{display:block}
 .pzr{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}.pzb,.pzd,.pzn{font:inherit;color:#fff;background:#22305c;border:2px solid #4a5a9a;border-radius:12px;padding:10px 14px;cursor:pointer;min-width:64px}.pzd{font-size:30px;min-width:70px;min-height:70px;border-radius:50%}.pzn{font-size:15px;min-width:92px;min-height:60px}.pzn.on{background:#2f8a5a;border-color:#7dffb2}.pzb:active,.pzd:active,.pzn:active{transform:scale(.94)}
 .pzc{padding:8px 10px;border-radius:10px;background:#16203f;border:2px solid #34437a;font-size:14px;min-width:96px}.pzc.on{background:#1d4a7a;border-color:#6ac8ff}.pzp{letter-spacing:.3em;font-size:18px;color:#7dffb2;margin-top:8px}#pH p{margin:6px 0;text-align:left;font-size:13px;color:#cfe0ff}.pzm{display:flex;gap:8px;justify-content:center;margin-top:12px}
 body.cut::before,body.cut::after{content:"";position:fixed;left:0;right:0;height:11vh;background:#000;z-index:5;pointer-events:none}body.cut::before{top:0}body.cut::after{bottom:0}body.cut #hud{visibility:hidden}
-#bNaut{right:176px;bottom:8px;width:54px;height:54px;font-size:24px;border-color:#6ac8ff}body:not(.touch) #bNaut{display:none}.prow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.prow small{color:var(--dim)}.reel{display:inline-grid;place-items:center;width:74px;height:74px;margin:4px;border-radius:14px;background:#10183a;border:2px solid #4a5a9a;font-size:40px}.pzb:disabled{opacity:.45}
+#bNaut{right:176px;bottom:8px;width:54px;height:54px;font-size:24px;border-color:#6ac8ff}#bForm{right:176px;bottom:68px;width:46px;height:46px;font-size:20px;border-color:#b06aff}body:not(.touch) #bNaut,body:not(.touch) #bForm{display:none}.prow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.prow small{color:var(--dim)}.reel{display:inline-grid;place-items:center;width:74px;height:74px;margin:4px;border-radius:14px;background:#10183a;border:2px solid #4a5a9a;font-size:40px}.pzb:disabled{opacity:.45}
 #mates i.pm{display:grid;place-items:center;font-size:18px;font-style:normal;background:#14203f}
 </style>
 </head>
@@ -130,7 +130,7 @@ body.cut::before,body.cut::after{content:"";position:fixed;left:0;right:0;height
   <div id="skills">
     <button id="bAtk" class="sb" aria-label="Angriff">⚔️</button><button id="bDodge" class="sb" aria-label="Ausweichen">💨<small>⇧</small></button>
     <button id="sk1" class="sb" aria-label="Funkenwirbel">🌀<small>1</small><div class="cd"></div></button><button id="sk2" class="sb" aria-label="Lichtstoß">✨<small>2</small><div class="cd"></div></button><button id="sk3" class="sb" aria-label="Heiltrank">🧪<small>3</small><em id="potn">0</em><div class="cd"></div></button>
-    <button id="bUse" class="sb" hidden aria-label="Interagieren">💬</button><button id="bNaut" class="sb" hidden aria-label="Nautilux">🚤</button>
+    <button id="bUse" class="sb" hidden aria-label="Interagieren">💬</button><button id="bNaut" class="sb" hidden aria-label="Nautilux">🚤</button><button id="bForm" class="sb" hidden aria-label="Nautilux-Form wechseln">🔄</button>
   </div>
 </div>
 <div id="banner"><h2 id="bh"></h2><p id="bp"></p></div>
@@ -842,7 +842,7 @@ function killE(e){e.dead=true;e.dt=0;e.tel.visible=false;e.atk=null;sfx('die');e
   if(e.k==='wolf'){S.kw++;if(S.side===1){S.sideK++;if(S.sideK>=4){S.side=2;sfx('quest');toast('✔ Wolfsplage: Kehre zu Boro zurück')}refreshQuest()}}
   if(e.k==='orun'){S.orun=1;S.boss=true;$('boss').hidden=true;banner('Orun besiegt','Der Riss beruhigt sich');S.blade2=true;toast('⚔ Weltenklinge erhalten (+8 Angriff)');if(S.stage<=6)setStage(7);for(const o of E)if(o.k==='rift'&&o.summoned&&!o.dead){o.hp=0;killE(o)}saveGame(true)}
   else if(e.boss){S.boss=true;$('boss').hidden=true;banner('Mondwolf besiegt','Ein Wächter erhebt sich');for(const o of E)if(o.k==='rift'&&o.summoned&&!o.dead){o.hp=0;killE(o)}saveGame(true);setTimeout(()=>cutscene('LUN_RIFT_VISION',spawnOrun),1500)}}
-function hurtP(dmg,fx,fz){if(pl.dead||pl.iframes>0||pl.hurtCd>0)return;dmg=Math.max(1,Math.round(dmg*(1+.35*(S.ng||0))*(naut.on&&S.fl.naut2?.6:1)));S.hp-=dmg;pl.hurtCd=.25;hurtFlash();sfx('hurt');dnum(pl.x,pl.y+2.3,pl.z,dmg,'p');camShake=.35;
+function hurtP(dmg,fx,fz){if(pl.dead||pl.iframes>0||pl.hurtCd>0)return;dmg=Math.max(1,Math.round(dmg*(1+.35*(S.ng||0))*(naut.on&&S.fl.naut2?NF[naut.f].dm:1)));S.hp-=dmg;pl.hurtCd=.25;hurtFlash();sfx('hurt');dnum(pl.x,pl.y+2.3,pl.z,dmg,'p');camShake=.35;
   const d=Math.hypot(pl.x-fx,pl.z-fz)||1;pl.kx+=(pl.x-fx)/d*5;pl.kz+=(pl.z-fz)/d*5;emit(pl.x,pl.y+1,pl.z,0xff6a7a,10,3,.5,.5,5);
   if(S.hp<=0){S.hp=0;pl.dead=true;pl.atk=-1;sfx('die');$('fade').style.opacity=1;setTimeout(respawn,1600)}}
 function respawn(){hallAbort();S.hp=maxHp();S.mp=maxMp();const lost=Math.floor(S.shards*.1);S.shards-=lost;pl.x=0;pl.z=WLD?9:8;pl.dead=false;pl.vx=pl.vz=0;pl.iframes=1.5;if(boss&&!boss.dead){boss.hp=boss.max;boss.awake=false;boss.st='idle';boss.x=boss.wake?boss.wake[0]:ARENA.x;boss.z=boss.wake?boss.wake[1]-6:ARENA.z-6;$('boss').hidden=true}
@@ -905,7 +905,7 @@ addEventListener('keydown',e=>{if(mode!=='play')return;if(e.repeat&&e.code!=='Ar
   if(puzOpen){if(e.code==='Escape'){e.preventDefault();closePuzzle()}return}
   if(menuOpen){if(e.code==='Escape'||e.code==='Tab'){e.preventDefault();toggleMenu(false)}return}
   if(dlg.on){if(['KeyE','Space','Enter'].includes(e.code)){e.preventDefault();dlgAdvance()}return}
-  switch(e.code){case'KeyJ':case'KeyK':startAttack();break;case'ShiftLeft':case'ShiftRight':case'Space':e.preventDefault();dodge();break;case'Digit1':skill1();break;case'Digit2':skill2();break;case'Digit3':case'KeyR':skill3();break;case'KeyE':interact();break;case'KeyV':toggleNaut();break;case'Escape':case'Tab':e.preventDefault();toggleMenu(true);break;case'KeyI':toggleMenu(true,'inv');break;case'KeyL':toggleMenu(true,'quest');break}});
+  switch(e.code){case'KeyJ':case'KeyK':startAttack();break;case'ShiftLeft':case'ShiftRight':case'Space':e.preventDefault();dodge();break;case'Digit1':skill1();break;case'Digit2':skill2();break;case'Digit3':case'KeyR':skill3();break;case'KeyE':interact();break;case'KeyV':toggleNaut();break;case'KeyB':cycleNaut();break;case'Escape':case'Tab':e.preventDefault();toggleMenu(true);break;case'KeyI':toggleMenu(true,'inv');break;case'KeyL':toggleMenu(true,'quest');break}});
 addEventListener('keyup',e=>{keys[e.code]=false});
 addEventListener('blur',()=>{for(const k in keys)keys[k]=false});
 cv.addEventListener('contextmenu',e=>e.preventDefault());
@@ -923,7 +923,7 @@ joyEl.addEventListener('pointerdown',e=>{initAudio();joy.id=e.pointerId;joyEl.se
 joyEl.addEventListener('pointermove',e=>{if(e.pointerId===joy.id)joyMove(e)});
 const joyEnd=e=>{if(e.pointerId===joy.id){joy.id=-1;joy.x=joy.y=0;knob.style.transform=''}};joyEl.addEventListener('pointerup',joyEnd);joyEl.addEventListener('pointercancel',joyEnd);
 function btn(id,fn){const b=$(id);b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();initAudio();if(mode==='play'&&!menuOpen&&!dlg.on)fn()})}
-btn('bAtk',()=>startAttack());btn('bDodge',()=>dodge());btn('sk1',()=>skill1());btn('sk2',()=>skill2());btn('sk3',()=>skill3());btn('bUse',()=>interact());btn('bNaut',()=>toggleNaut());
+btn('bAtk',()=>startAttack());btn('bDodge',()=>dodge());btn('sk1',()=>skill1());btn('sk2',()=>skill2());btn('sk3',()=>skill3());btn('bUse',()=>interact());btn('bNaut',()=>toggleNaut());btn('bForm',()=>cycleNaut());
 $('menuBtn').addEventListener('pointerdown',e=>{e.stopPropagation();initAudio();if(mode==='play'&&!dlg.on)toggleMenu(true)});
 
 /* ================= Kampf des Spielers ================= */
@@ -991,8 +991,8 @@ function updatePlayer(dt){
   pl.mv=clamp(Math.hypot(pl.vx,pl.vz)/6.4,0,1.3);
   if((ix||iy)&&pl.atk<0&&pl.dash<=0){const want=Math.atan2(pl.vx,pl.vz);pl.face+=ang(pl.face,want)*Math.min(1,dt*14)}
   let nx=pl.x+(pl.vx+pl.kx)*dt,nz=pl.z+(pl.vz+pl.kz)*dt;pl.kx*=Math.exp(-9*dt);pl.kz*=Math.exp(-9*dt);
-  if(!blocked(nx,nz)){pl.x=nx;pl.z=nz}else if(!blocked(nx,pl.z))pl.x=nx;else if(!blocked(pl.x,nz))pl.z=nz;
-  pushOut(pl,.5);pl.y+=(hgt(pl.x,pl.z)-pl.y)*Math.min(1,dt*18);if(Math.abs(pl.y-hgt(pl.x,pl.z))>1.5)pl.y=hgt(pl.x,pl.z);
+  if(!pBlocked(nx,nz)){pl.x=nx;pl.z=nz}else if(!pBlocked(nx,pl.z))pl.x=nx;else if(!pBlocked(pl.x,nz))pl.z=nz;
+  if(!nAir())pushOut(pl,.5);const ty=hgt(pl.x,pl.z)+naut.lift;pl.y+=(ty-pl.y)*Math.min(1,dt*18);if(Math.abs(pl.y-ty)>1.5)pl.y=ty;
   if(pl.atk>=0){pl.atkT+=dt;const du=ATD[pl.combo];if(!pl.hit&&pl.atkT>du*.42){pl.hit=true;doHit()}if(pl.atkT>=du){pl.atk=-1;pl.comboT=.55;if(pl.buf>0){pl.buf=0;startAttack()}}}
   pl.buf=Math.max(0,pl.buf-dt);
   S.mp=Math.min(maxMp(),S.mp+dt*1.6);if(S.hp<maxHp()&&zoneAt(pl.x,pl.z)==='village')S.hp=Math.min(maxHp(),S.hp+dt*1.2);
@@ -1439,23 +1439,43 @@ function openCasino(){if(S.cas.off)return say([['Zotik','Das Casino ist geschlos
     const br=document.createElement('div');br.className='pzr';for(const b of CAS.BETS)br.appendChild(pBtn('Einsatz '+b,()=>casSpin(b),!!casRoll||S.shards<b));W.appendChild(br);
     const i=document.createElement('div');i.style.cssText='font-size:12px;color:var(--dim);margin-top:6px';i.textContent='Drei gleiche: ⭐ ×25 · 💎 ×12 · 🔥 ×8 · 🌙/🍃 ×5 · Zwei gleiche: Einsatz zurück.';W.appendChild(i);
     const o=document.createElement('div');o.className='pzr';o.appendChild(pBtn('Casino ausschalten (Familienoption)',()=>{S.cas.off=true;closePuzzle();saveGame(true);toast('Casino geschlossen')},!!casRoll));W.appendChild(o)})}
-/* ---- Nautilux ---- */
-const naut={on:false,g:null,spin:null};
-const navM=()=>naut.on?(keys.ShiftLeft&&S.fl.naut2?2.6:1.9):1;
-function makeNaut(){const g=new T.Group(),br=M(0xc89a4a,{m:.6,r:.35}),dk=M(0x5a4a3a,{r:.6});
-  g.add(mk(G.sph,br,0,.9,0,1.5,.9,2.2));g.add(mk(G.sph,M(0x9ae8ff,{e:0x4ac8ff,ei:.8}),0,1.55,.55,.85,.62,.95,false));g.add(mk(G.box,dk,0,1.5,-1.9,.12,.95,.9));
+/* ---- Nautilux: Gleiter, U-Boot, Luftschiff, Riss-Form ---- */
+const naut={on:false,g:null,spin:null,f:0,ex:[],lift:0};
+const NF=[{n:'Gleiter',em:'🚤',ok:()=>!!S.fl.naut,sp:1.9,dm:.6},{n:'U-Boot',em:'🛥️',ok:()=>!!S.fl.naut&&chDone(4),sp:2,dm:.6},{n:'Luftschiff',em:'🎈',ok:()=>!!S.fl.naut&&chDone(7),sp:2.2,dm:.4},{n:'Riss-Form',em:'🔮',ok:()=>!!S.fl.naut&&chDone(10),sp:2.8,dm:.45}];
+const NHINT=['','Taucht in Tiefsee-Becken (blaue Wasserflächen) zu Schatztruhen.','Fliegt über Klippen zu Himmelstruhen auf hohen Felsen.','Rammt mit voller Kraft und ist am schnellsten.'];
+const navM=()=>naut.on?NF[naut.f].sp*(keys.ShiftLeft&&S.fl.naut2?1.37:1):1;
+const nAir=()=>naut.on&&naut.f===2,nSub=()=>naut.on&&naut.f===1;
+const poolB=(x,z)=>{const q=WLD&&WLD.pool;return !!q&&Math.hypot(x-q.x,z-q.z)<q.r};
+const pBlocked=(x,z)=>{if(nAir())return x<-128||x>128||z>76||z<-232||(z<-148&&(WLD?WLD.sealedNow():!lunOpen()));if(poolB(x,z))return !nSub();return blocked(x,z)};
+function makeNaut(){const g=new T.Group(),br=M(0xc89a4a,{m:.6,r:.35}),dk=M(0x5a4a3a,{r:.6}),gl=M(0x9ae8ff,{e:0x4ac8ff,ei:.8});
+  g.add(mk(G.sph,br,0,.9,0,1.5,.9,2.2));g.add(mk(G.sph,gl,0,1.55,.55,.85,.62,.95,false));g.add(mk(G.box,dk,0,1.5,-1.9,.12,.95,.9));
   for(const s of [-1,1])g.add(mk(G.box,dk,s*1.3,.7,-.2,.8,.1,.7));
   const pr=new T.Group();pr.position.set(0,.9,-2.3);for(let i=0;i<3;i++){const b=mk(G.box,dk,0,0,0,.14,1.1,.05,false);b.rotation.z=i*2.09;pr.add(b)}g.add(pr);naut.spin=pr;
-  g.add(glow(0x6ae8ff,3,0,.9,1.9,.7));g.visible=false;KEEPX.add(g);scene.add(g);return g}
-function mount(){if(naut.on||!S.fl.naut||dlg.on||pl.dead||inH)return;naut.on=true;if(!naut.g)naut.g=makeNaut();naut.g.visible=true;fox.root.visible=false;sfx('quest');toast('🚤 Nautilux: V zum Aussteigen'+(S.fl.naut2?' · Shift = Turbo':''))}
-function dismount(){if(!naut.on)return;naut.on=false;if(naut.g)naut.g.visible=false;fox.root.visible=true}
-function toggleNaut(){if(mode!=='play'||menuOpen)return;if(!S.fl.naut)return toast('Du hast noch keine Nautilux (Professorium, nach Kapitel 1)');naut.on?dismount():mount()}
+  g.add(glow(0x6ae8ff,3,0,.9,1.9,.7));
+  const sub=new T.Group();sub.add(mk(G.cyl0,dk,0,2.05,.2,.12,1,.12));sub.add(mk(G.box,dk,0,2.5,.38,.18,.14,.5));
+  for(const s of [-1,1]){const t=mk(G.cyl,br,s*1.05,.7,.3,.45,2.2,.45);t.rotation.x=Math.PI/2;sub.add(t)}sub.add(mk(G.sph,gl,0,1.1,1.25,.5,.5,.5,false));
+  const air=new T.Group();air.add(mk(G.sph,M(0xe8d8b0,{r:.7}),0,3.9,0,2.3,1.5,3.6));
+  for(const z of [-1.4,0,1.4]){const r=mk(G.tor,br,0,3.9,z*1.15,2.1+(1-Math.abs(z)*.2),2.1+(1-Math.abs(z)*.2),.1,false);air.add(r)}
+  for(const s of [-1,1])for(const z of [-.9,.9]){const c=mk(G.box,dk,s*.9,2.4,z,.05,2.2,.05,false);c.rotation.z=-s*.28;air.add(c)}
+  const rf=new T.Group();for(let k=0;k<6;k++){const a=k*1.047;rf.add(mk(G.oct,M(0xb06aff,{e:0xa050ff,ei:1.6}),Math.cos(a)*1.6,1.3+Math.sin(k*2)*.3,Math.sin(a)*2.2,.3,.8,.3,false))}rf.add(glow(0xb06aff,4.5,0,1,0,.6));
+  for(const x of [sub,air,rf]){x.visible=false;g.add(x)}naut.ex=[null,sub,air,rf];
+  g.visible=false;KEEPX.add(g);scene.add(g);return g}
+function nForm(i,fx){naut.f=i;if(naut.g)naut.ex.forEach((x,k)=>{if(x)x.visible=k===i});if(fx){sfx('quest');toast(`${NF[i].em} Nautilux: ${NF[i].n}`);emit(pl.x,pl.y+1.2,pl.z,i===3?0xb06aff:i===2?0xffe8b0:0x6ae8ff,24,5,.6,.6)}}
+function cycleNaut(){if(mode!=='play'||menuOpen||dlg.on||!S.fl.naut)return;let k=naut.f;for(let t=0;t<4;t++){k=(k+1)%4;if(NF[k].ok())break}if(k===naut.f)return toast('Noch keine weitere Form (Kapitel 4, 7 und 10 schalten sie frei)');
+  if(naut.f===1||naut.f===2)landSafe();nForm(k,true);if(!naut.on)mount()}
+function landSafe(){if(!blocked(pl.x,pl.z)&&!poolB(pl.x,pl.z))return;for(let r=2;r<90;r+=2)for(let a=0;a<16;a++){const x=pl.x+Math.cos(a*.3927)*r,z=pl.z+Math.sin(a*.3927)*r;if(!blocked(x,z)&&!poolB(x,z)){pl.x=x;pl.z=z;pl.y=hgt(x,z);return}}pl.x=0;pl.z=WLD?9:8}
+function mount(){if(naut.on||!S.fl.naut||dlg.on||pl.dead||inH)return;naut.on=true;if(!naut.g)naut.g=makeNaut();if(!NF[naut.f].ok())naut.f=0;nForm(naut.f,false);naut.g.visible=true;fox.root.visible=false;sfx('quest');toast(`${NF[naut.f].em} Nautilux (${NF[naut.f].n}): V aussteigen`+(NF.filter(f=>f.ok()).length>1?' · B Form wechseln':'')+(S.fl.naut2?' · Shift Turbo':''))}
+function dismount(){if(!naut.on)return;if(nAir()||nSub())landSafe();naut.on=false;if(naut.g)naut.g.visible=false;fox.root.visible=true;naut.lift=0}
+function toggleNaut(){if(mode!=='play'||menuOpen)return;if(!S.fl.naut)return toast('Du hast noch keine Nautilux (Professorium, nach Kapitel 1)');if(naut.on&&nAir()&&blocked(pl.x,pl.z))return toast('Hier kannst du nicht landen: zu steil');naut.on?dismount():mount()}
 function updNaut(dt){
   if(S.fl.naut&&!S.fl.naut2&&chDone(4))S.fl.naut2=1;
-  const bn=$('bNaut');if(bn.hidden===!!S.fl.naut)bn.hidden=!S.fl.naut;
-  if(!naut.on)return;if(dlg.on||pl.dead||inH||mode!=='play'){dismount();return}
-  const g=naut.g,sp=Math.hypot(pl.vx,pl.vz);g.position.set(pl.x,pl.y+.55+Math.sin(time*3)*.08,pl.z);g.rotation.set(sp*.012,pl.face,0);naut.spin.rotation.z+=dt*(8+sp);fox.root.visible=false;
-  if(sp>8)for(const e of E){if(e.dead||(e.boss&&!e.awake))continue;if(Math.hypot(e.x-pl.x,e.z-pl.z)<2.4+e.rad&&(!e.ramT||time-e.ramT>.7)){e.ramT=time;hurtE(e,atkV()*(S.fl.naut2?1.6:1.1),pl.vx*.1,pl.vz*.1,false);emit(e.x,pl.y+1,e.z,0x6ae8ff,10,4,.4,.5)}}}
+  if(S.fl.naut)for(let i=1;i<4;i++)if(NF[i].ok()&&!((S.fl.nfa||0)>>i&1)){S.fl.nfa=(S.fl.nfa||0)|1<<i;setTimeout(()=>{toast(`${NF[i].em} Die Nautilux verwandelt sich: ${NF[i].n}! ${NHINT[i]}`);sfx('level')},i*1500)}
+  const bn=$('bNaut'),bf=$('bForm');if(bn.hidden===!!S.fl.naut)bn.hidden=!S.fl.naut;const mf=!!S.fl.naut&&naut.on&&NF.filter(f=>f.ok()).length>1;if(bf.hidden===mf)bf.hidden=!mf;
+  const tl=nAir()?6:0;naut.lift+=(tl-naut.lift)*Math.min(1,dt*3);
+  if(!naut.on)return;if(dlg.on||pl.dead||inH||mode!=='play'){if(nAir()&&blocked(pl.x,pl.z)&&!pl.dead&&!inH&&mode==='play')return;dismount();return}
+  const g=naut.g,sp=Math.hypot(pl.vx,pl.vz),sb=nSub()&&poolB(pl.x,pl.z);g.position.set(pl.x,pl.y+.55+Math.sin(time*3)*.08-(sb?.7:0),pl.z);g.rotation.set(sp*.012,pl.face,Math.sin(time*1.3)*(nAir()?.06:0));naut.spin.rotation.z+=dt*(8+sp);fox.root.visible=false;
+  if(sb&&Math.random()<dt*14)emit(pl.x+(Math.random()-.5)*2,pl.y+.2,pl.z+(Math.random()-.5)*2,0xbfe9ff,1,1.2,.8,.35,-1);
+  if(sp>8&&!nAir()){const rm=naut.f===3?2.6:S.fl.naut2?1.6:1.1;for(const e of E){if(e.dead||(e.boss&&!e.awake))continue;if(Math.hypot(e.x-pl.x,e.z-pl.z)<2.4+e.rad&&(!e.ramT||time-e.ramT>.7)){e.ramT=time;hurtE(e,atkV()*rm,pl.vx*.1,pl.vz*.1,false);emit(e.x,pl.y+1,e.z,0x6ae8ff,10,4,.4,.5)}}}}
 /* ---- Nebenaufträge (Weltenriss) ---- */
 const SQD=[
  {id:'kael',who:'Kael',n:'Kaels Schwester',need:6,k:'b10',txt:()=>`Besiege 6 ${CHP[10].B[0]} in Elyndra`,offer:'Die Echos meiner Schwester werden klarer, seit der Kern ruht. Aber die Echokrieger zerreißen sie jedes Mal wieder. Besiege sechs von ihnen in Elyndra, dann kann ich sie vielleicht festhalten.',thanks:'Sie hat mir zugewunken. Nur kurz, aber sie hat gewinkt. Hier, nimm meinen Kompass.',gold:1500,trk:'Kaels Kompass'},
@@ -1479,7 +1499,7 @@ function sqTalk(who,shop){const q=SQD.find(x=>x.who===who),opts=[];
   say([[who,'Danke noch einmal, Zotik. Das war ein guter Auftrag.']],null,shop?opts.concat([{t:'Okay',fn:()=>{}}]):null)}
 function sqHTML(){const act=SQD.filter(q=>sqS(q).s>=1);if(!act.length)return '';let h='<h3>Nebenaufträge (Weltenriss)</h3>';for(const q of act){const s=sqS(q);h+=`<div class="row"><span>${s.s===3?'✅':s.s===2?'👉':'▫️'} ${q.n}<br><small style="color:var(--dim)">${s.s===3?'Erledigt':s.s===2?'Kehre zu '+q.who+' zurück':q.txt()+' ('+Math.min(sqProg(q),q.need)+'/'+q.need+')'}</small></span></div>`}return h}
 function extraHTML(){let h='';if(S.trk.length){h+='<h3>Andenken</h3>';for(const a of S.trk)h+=`<div class="row"><span>🎁 ${a}</span><span>+1,5 Angriff</span></div>`}
-  if(S.fl.naut)h+=`<div class="row"><span>🚤 Nautilux${S.fl.naut2?' (Tauchmodul)':''}</span><span>V</span></div>`;
+  if(S.fl.naut)h+=`<div class="row"><span>🚤 Nautilux: ${NF.filter(f=>f.ok()).map(f=>f.em+' '+f.n).join(' · ')}</span><span>V / B</span></div>`;
   if(S.hall)h+=`<div class="row"><span>🏛️ Halle der 100</span><span>${S.hall}/100</span></div>`;
   if(S.ng)h+=`<div class="row"><span>♻️ Neues Spiel+</span><span>Stufe ${S.ng}</span></div>`;return h}
 /* ---- Halle der 100 ---- */
@@ -1666,6 +1686,19 @@ function buildWorld(n){
     addNpc('f'+i,f[0],sp[0],sp[1],makeVillager(f[1]),n===11?()=>sqTalk(f[0],i===0):i===0?()=>say([[f[0],pick(f[2])]],null,[{t:'Handeln',fn:()=>openShop('Laden von '+f[0])},{t:'Später',fn:()=>{}}]):()=>say([[f[0],pick(f[2])]]),sp[2])});
   /* Truhen */
   [[-80,11,{shards:20+n*6,potions:1}],[-116,-12,{shards:30+n*8}],[-140,9,{shards:40+n*10,potions:2}]].forEach((q,i)=>{const id=n+'c'+i,x=pathx(q[0])+q[1],z=q[0],o={id,x,z,m:makeChest(),reward:q[2],pr:'Truhe öffnen'};o.m.position.set(x,h(x,z),z);o.m.rotation.y=rr(0,6);if(S.chests[id])o.m.visible=false;scene.add(o.m);chests.push(o);addCol(x,z,.7)});
+  /* Nautilux-Ziele: Tiefsee-Becken (U-Boot) und Himmelstruhen (Luftschiff) */
+  {const R2=mul32(9100+n*17);let pool=null;
+   for(let t=0;t<500&&!pool;t++){const x=(R2()*2-1)*90,z=-30-R2()*100;if(Math.hypot(x,z)<46||Math.abs(x-pathx(z))<22)continue;
+     let lo=1e9,hi=-1e9,bad=false;for(let a=0;a<9&&!bad;a++){const px=x+(a?Math.cos(a*.785)*8.5:0),pz=z+(a?Math.sin(a*.785)*8.5:0),hh=h(px,pz);if(blk(px,pz))bad=true;lo=Math.min(lo,hh);hi=Math.max(hi,hh)}
+     if(!bad&&hi-lo<1.3)pool={x,z,r:8,y:hi+.12}}
+   const addC=(id,x,z,y,rw,gl)=>{const o={id,x,z,m:makeChest(),reward:rw,pr:'Truhe öffnen'};o.m.position.set(x,y,z);o.m.rotation.y=rr(0,6);if(S.chests[id])o.m.visible=false;scene.add(o.m);chests.push(o);if(gl)scene.add(glow(gl,3.4,x,y+2.2,z,.55))};
+   if(pool){WLD.pool=pool;const wm=new T.MeshStandardMaterial({color:0x2a9ad8,transparent:true,opacity:.7,emissive:0x0a4a8a,emissiveIntensity:.5,roughness:.15,metalness:.2,depthWrite:false});
+     const w=mk(G.cyl,wm,pool.x,pool.y,pool.z,pool.r*2,.1,pool.r*2,false);scene.add(w);const rg=mk(G.tor,M(0xc89a4a,{m:.6,r:.4}),pool.x,pool.y,pool.z,pool.r*2,pool.r*2,.3,false);rg.rotation.x=Math.PI/2;scene.add(rg);
+     animObjs.push({fn(t){wm.opacity=.66+.08*Math.sin(t*2)}});
+     [[-2.6,1.4],[2.4,-1.8]].forEach((q,i)=>{const x=pool.x+q[0],z=pool.z+q[1];addC(n+'w'+i,x,z,h(x,z),{shards:60+n*15,potions:1},0x6ae8ff)})}
+   const hs=[];for(let gx=-120;gx<=120;gx+=4)for(let gz=-140;gz<=60;gz+=4){const hh=h(gx,gz);if(hh>9.4&&Math.hypot(gx,gz)>50&&Math.hypot(gx,gz+182)>70&&!blk(gx,gz)===false)hs.push([hh,gx,gz])}
+   hs.sort((a,b)=>b[0]-a[0]);const pk=[];for(const q of hs){if(pk.length>=2)break;if(pk.every(o=>Math.hypot(o[1]-q[1],o[2]-q[2])>35))pk.push(q)}
+   pk.forEach((q,i)=>addC(n+'s'+i,q[1],q[2],q[0],{shards:90+n*20,potions:2},0xffe08a))}
   if(n===2&&!S.party.includes('rovan')){const rz=-84,rx=pathx(rz)-6,ro=addNpc('rovan','Rovan',rx,rz,makeVillager(V(0x7a7a8a,0x3a3a4a,0x4a3a2a,{beard:1,wide:1.3,sc:1.12})),()=>say([['Rovan','Halt. Du bist nicht von hier. Der Wald weiß, dass du kommst.'],['Zotik','Du kennst den Weg zum Turm?'],['Rovan','Ich kenne jeden Pfad in diesen Wäldern. Und ich war dort, als alles zerbrach. Ich komme mit.']],()=>{joinParty('rovan');NPC.splice(NPC.indexOf(ro),1);ro.P.root.visible=false;ro.spr.visible=false}),0.5,()=>true)}
   /* Karte */
   WLD.mbg=(function(){const c=document.createElement('canvas');c.width=260;c.height=310;const x=c.getContext('2d'),im=x.createImageData(260,310),k=v=>{const q=new T.Color(v);return[q.r*255|0,q.g*255|0,q.b*255|0]},c2=k(P.g2),c1=k(P.g1),cp=k(P.path),ca=k(P.arena),cr=k(P.rock);
@@ -1674,7 +1707,7 @@ function buildWorld(n){
     x.putImageData(im,0,0);return c})();
   MBG=WLD.mbg;
   /* Zustand */
-  WLD.refresh=refresh;WLD.spawnMini=spawnMini;
+  WLD.refresh=refresh;WLD.spawnMini=spawnMini;WLD.sealedNow=sealed;
   if(cs().st===4)spawnMini();
   /* Siegel-Hinweis */
   let warnT=0;animObjs.push({fn(t,dt){warnT-=dt;if(mode==='play'&&sealed()&&pl.z<-138&&warnT<=0){warnT=4;toast('🔒 Ein Siegel versperrt den Weg. '+objText())}}});
@@ -1692,7 +1725,7 @@ function buildWorld(n){
     else if(s.st===2){s.k++;if(s.k>=5)stage(3);else refresh()}};
   WLD.zoneEnter=function(z){const s=cs();if(z==='forest'&&s.st===1)stage(2);if(z==='cave'&&!s.bd&&s.st>=5)WLD.ensureBoss()};
   WLD.ensureBoss=function(){if(boss||cs().bd)return;boss=spawnEnemy('x'+n,ARENA.x,ARENA.z-6);boss.face=0};
-  function finish(){const s=cs();s.fin=1;stage(7);if(n===4&&S.fl.naut&&!S.fl.naut2){S.fl.naut2=1;toast('🚤 Nautilux: Tauchmodul eingebaut (Shift = Turbo, Schild)')}gainXp(100+n*60);S.shards+=40+n*15;S.potions+=2;sfx('level');
+  function finish(){const s=cs();s.fin=1;stage(7);if(n===4&&S.fl.naut&&!S.fl.naut2)S.fl.naut2=1;gainXp(100+n*60);S.shards+=40+n*15;S.potions+=2;sfx('level');
     if(n<MAXCH){banner(`Kapitel ${n} geschafft`,`${CHP[n+1].name} ist jetzt im Weltentor offen`);toast(`🌍 ${CHP[n+1].name} freigeschaltet`)}else{banner('Hauptgeschichte geschafft','Alle Welten sind verbunden');toast('🏆 Elyndra: Die Reise ist vollendet')}
     refresh();saveGame(true)}
   function talkElder(){const s=cs(),st=s.st,nm=E1[0];
@@ -1776,7 +1809,7 @@ addEventListener('pagehide',()=>{if(mode==='play')saveGame(true)});
 ensureBoss();
 camTarget.set(0,2,12);
 requestAnimationFrame(frame);
-window.__zotik={PZD,CUT,openPuzzle,closePuzzle,cutscene,joinParty,CMP,lunOpen,spawnOrun,get puzOpen(){return puzOpen},get W(){return WLD},get ch(){return curCh},INT,CHP,switchWorld,travel,ARENA,herbs,chests,drops,projs,step:(dt,n)=>{for(let i=0;i<n;i++){time+=dt;for(const o of animObjs)o.fn(time,dt);update(dt);updParticles(dt)}},cam:(y,p,d)=>{camYaw=y;camPitch=p;camDist=d},S:()=>S,pl,E,NPC,begin,say,toast,setStage,hurtP,get boss(){return boss},camera,scene,renderer,skill1,skill2,startAttack,dodge,interact,keys};
+window.__zotik={get naut(){return naut},PZD,CUT,openPuzzle,closePuzzle,cutscene,joinParty,CMP,lunOpen,spawnOrun,get puzOpen(){return puzOpen},get W(){return WLD},get ch(){return curCh},INT,CHP,switchWorld,travel,ARENA,herbs,chests,drops,projs,step:(dt,n)=>{for(let i=0;i<n;i++){time+=dt;for(const o of animObjs)o.fn(time,dt);update(dt);updParticles(dt)}},cam:(y,p,d)=>{camYaw=y;camPitch=p;camDist=d},S:()=>S,pl,E,NPC,begin,say,toast,setStage,hurtP,get boss(){return boss},camera,scene,renderer,skill1,skill2,startAttack,dodge,interact,keys};
 })();
 </script>
 <script src="https://ricorewioriginal-collab.github.io/easygames/cloud/anmacha-cloud.js" data-game="zotik2" data-prefix="zotik2_save_" data-save-btn="#saveBtn" defer></script>
