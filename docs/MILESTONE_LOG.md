@@ -978,3 +978,7 @@ Owner: "bewegen, schlagen ist nicht synchron … man weiß nicht, wie was funkti
 - Schlag: Schwung und Ton starten sofort, der Treffer landet nach 30 % der Abklingzeit (passend zur Animation); die Animation wird auf ~80 % der Abklingzeit gedehnt; ein Druck kurz vor Ende der Abklingzeit (≤ 0,25 s) wird gemerkt. Headless (Tests) trifft weiterhin sofort.
 - Neues Spiel: nach dem Traum erscheint einmal die Kurzanleitung (Touch- oder Tastatur-Variante), Flag FLAG_QUICKSTART_SHOWN.
 - Test: test_w22_combat_sync (4). Nicht in Godot ausgeführt lokal; Prüfung durch CI.
+
+## W23 – Zotik-Generator leichter (2026-10-11)
+Owner: "der zotik generator screen hängt im web noch sehr, auf android ist er langsam".
+Messung im Browser-Nachbau (Software-GL): Titel 16 fps, Generator 7 fps. Auf Niedrig/Mittel wird die Vorschau jetzt mit 20 Bildern/s von Hand neu gezeichnet (UPDATE_ONCE), Zotik steht in stiller Pose (keine Skelett-Aktualisierung) und ohne Fell-/Gesichtsfeinheiten. Hoch bleibt unverändert. Test: test_w23_creator_cost (2).
