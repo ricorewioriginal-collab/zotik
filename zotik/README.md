@@ -39,7 +39,12 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
 
 ## Casino, Nautilux, Nebenaufträge, Halle der 100, NG+
 - **Golden Star Casino** in Valdoria (Kapitel 3): Kristallslots mit Einsätzen 10/50/100, nur virtuelle Splitter, abschaltbar (Familienoption, `cas.off`).
-- **Nautilux** (Professorium schenkt sie nach Kapitel 1, `fl.naut`): schwebendes Fahrzeug, V (am Handy 🚤) steigt ein und aus, rammt Gegner; nach Kapitel 4 mit Tauchmodul (Shift = Turbo). Steigt bei Dialog, Reise und Tod automatisch ab.
+- **Nautilux** (Professorium schenkt sie nach Kapitel 1, `fl.naut`; Vorlage: Master-Sheet „Professoriums modulares Fahrzeug, U-Boot und spätere Transformationen“): V (am Handy 🚤) steigt ein und aus, B (🔄) wechselt die Form. Sie verwandelt sich im Spielverlauf:
+  - **Gleiter** 🚤 (ab Kapitel 1): schnell, rammt Gegner.
+  - **U-Boot** 🛥️ (nach Kapitel 4): taucht in die blauen **Tiefsee-Becken** jeder Welt (zwei Truhen darin); Shift = Turbo.
+  - **Luftschiff** 🎈 (nach Kapitel 7): fliegt über Klippen zu **Himmelstruhen** auf hohen Felsen, nimmt wenig Schaden; Landen nur auf flachem Boden.
+  - **Riss-Form** 🔮 (nach Kapitel 10): am schnellsten, Rammen mit 2,6-fachem Schaden.
+  Steigt bei Dialog, Reise und Tod automatisch ab.
 - **Nebenaufträge** im Weltenriss-Hub (Sela, Nerea, Professorium, Kael, Eryn, Toren): zählen Gegner in Lunaris, Elaris, Aqualis, Elyndra, Erinnerungssplitter und Rissessenz; Belohnung sind Splitter und ein Andenken (+1,5 Angriff). Stand im Menü unter „Nebenaufträge“.
 - **Halle der 100**: 100 Prüfungen in Wellen, jede zehnte ein Bosskampf, Rang-Belohnungen (`hall`). Vereinfacht gegenüber dem alten Spiel (Wellen statt Arena-Rängen).
 - **Neues Spiel+**: nach einem Ende bei Veyra wählbar. Behält Stufe, Splitter, Waffen, Andenken, Nautilux, Gefährten, Halle und Nebenaufträge; Gegner mit +50 % Leben und +35 % Angriff je Stufe, Bosse mit Raserei-Phase.
