@@ -199,9 +199,16 @@ func update_weapon() -> void:
 
 
 ## Attack animation (light or strong).
-func swing(strong: bool = false) -> void:
+## The clip is stretched to fill about 80 % of the cooldown, so the blow looks as long as it is locked.
+func swing(strong: bool = false, cooldown: float = 0.0) -> void:
 	if rig and is_inside_tree():
-		rig.action("attack_strong" if strong else "attack", 1.8)
+		var key := "attack_strong" if strong else "attack"
+		var speed := 1.8
+		var clip_name: String = rig.states.get(key, "")
+		var clip: Animation = rig.anim.get_animation(clip_name) if rig.anim and rig.anim.has_animation(clip_name) else null
+		if clip and cooldown > 0.0:
+			speed = clampf(clip.length / (cooldown * 0.8), 0.8, 3.0)
+		rig.action(key, speed)
 
 
 func is_weapon_glowing() -> bool:

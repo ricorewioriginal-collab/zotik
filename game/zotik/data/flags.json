@@ -425,6 +425,9 @@
   "FLAG_END_D7_BOSS_DEFEATED": {
     "desc": "Dungeon-Boss Der Namenlose besiegt"
   },
+  "FLAG_QUICKSTART_SHOWN": {
+    "desc": "Die Kurzanleitung zum Spielstart wurde gezeigt"
+  },
   "FLAG_ENDING_CHOSEN": {
     "desc": "Das Ende der Hauptgeschichte wurde gewählt"
   },
