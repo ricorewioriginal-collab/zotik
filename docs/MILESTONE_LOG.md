@@ -8,7 +8,7 @@ Each milestone is a separate commit. Tests are executed with Godot 4.7 headless:
 See `docs/PHASE_1_AUDIT.md`.
 
 ## M01 Boot & Project Core – PASSED
-- New Godot 4.7 project `game/zotik/` (C-09). The legacy starter is untouched.
+- New Godot 4.7 project `zotik-old/` (C-09). The legacy starter is untouched.
 - Autoloads: `EventBus` (gameplay facts), `App` (version, scene switching with missing-scene guard).
 - Scenes: `boot` → `title` (Neues Spiel / Beenden) → `game_root` (World + UI layer).
 - Input map: legacy actions kept and extended with jump, interact, camera, use_item, menu, inventory, quest_log, puzzle_reset and puzzle_hint (C-07). Attack moved from Space to LMB/J because Space is now jump.

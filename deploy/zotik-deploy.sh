@@ -62,14 +62,14 @@ git clean --quiet -fd   # keeps ignored files, so the .godot import cache surviv
 
 # --- version: the Android version code must grow with every build, otherwise phones refuse the update
 COUNT=$(git rev-list --count HEAD)
-BASE=$(grep -m1 '^config/version=' game/zotik/project.godot | cut -d'"' -f2 | cut -d. -f1-2)
+BASE=$(grep -m1 '^config/version=' zotik-old/project.godot | cut -d'"' -f2 | cut -d. -f1-2)
 VERSION="$BASE.$COUNT"
-PRESETS=game/zotik/export_presets.cfg
+PRESETS=zotik-old/export_presets.cfg
 sed -i "s|^version/code=.*|version/code=$COUNT|; s|^version/name=.*|version/name=\"$VERSION\"|" "$PRESETS"
 
 # --- optional cloud-save OAuth client (same as the GitHub build)
 if [ -n "${GOOGLE_OAUTH_CLIENT_ID:-}" ] && [ -n "${GOOGLE_OAUTH_CLIENT_SECRET:-}" ]; then
-	sed -i "s|^const OAUTH_CLIENT_ID := \"\"|const OAUTH_CLIENT_ID := \"$GOOGLE_OAUTH_CLIENT_ID\"|; s|^const OAUTH_CLIENT_SECRET := \"\"|const OAUTH_CLIENT_SECRET := \"$GOOGLE_OAUTH_CLIENT_SECRET\"|" game/zotik/core/cloud_sync.gd
+	sed -i "s|^const OAUTH_CLIENT_ID := \"\"|const OAUTH_CLIENT_ID := \"$GOOGLE_OAUTH_CLIENT_ID\"|; s|^const OAUTH_CLIENT_SECRET := \"\"|const OAUTH_CLIENT_SECRET := \"$GOOGLE_OAUTH_CLIENT_SECRET\"|" zotik-old/core/cloud_sync.gd
 fi
 
 if [ "$RUN_TESTS" = 1 ]; then
@@ -78,14 +78,14 @@ if [ "$RUN_TESTS" = 1 ]; then
 fi
 
 log "importing project"
-"$GODOT" --headless --path game/zotik --import > "$STATE_DIR/last_import.log" 2>&1 || true
+"$GODOT" --headless --path zotik-old --import > "$STATE_DIR/last_import.log" 2>&1 || true
 
 OUT=$(mktemp -d "$STATE_DIR/build.XXXXXX")
 trap 'rm -rf "$OUT"' EXIT
 mkdir -p "$OUT/windows" "$OUT/linux" "$OUT/web" "$OUT/android" "$OUT/files"
 export_one() { # preset, release|debug, output path
 	log "exporting $1"
-	"$GODOT" --headless --path game/zotik "--export-$2" "$1" "$3" > "$STATE_DIR/last_export.log" 2>&1 || fail "export $1 failed, see $STATE_DIR/last_export.log"
+	"$GODOT" --headless --path zotik-old "--export-$2" "$1" "$3" > "$STATE_DIR/last_export.log" 2>&1 || fail "export $1 failed, see $STATE_DIR/last_export.log"
 	[ -s "$3" ] || fail "export $1 produced no file"
 }
 

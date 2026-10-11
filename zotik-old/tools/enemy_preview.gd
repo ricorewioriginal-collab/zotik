@@ -1,6 +1,6 @@
 extends SceneTree
 ## Renders every rigged enemy model in a row (needs a display, e.g. xvfb-run).
-## godot --path game/zotik -s res://tools/enemy_preview.gd -- <out_dir>
+## godot --path zotik-old -s res://tools/enemy_preview.gd -- <out_dir>
 
 func _initialize() -> void:
 	_run.call_deferred()

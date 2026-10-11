@@ -5,7 +5,7 @@
 - **Linux:** [ZOTIK-linux-x86_64.zip](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-linux-x86_64.zip), dann `ZOTIK.x86_64` starten.
 - **Android:** [ZOTIK-android-arm64.apk](https://github.com/ricorewioriginal-collab/zotik/releases/download/phase1-latest/ZOTIK-android-arm64.apk) auf dem Handy herunterladen und installieren. Dafür muss „Installation aus unbekannten Quellen“ erlaubt sein; die APK ist debug-signiert. Die Steuerung erfolgt per Touch: Stick links, Kamera rechts wischen, Aktionsknöpfe rechts unten.
 - **Browser:** Die Web-Version wird automatisch auf GitHub Pages veröffentlicht, sobald Pages einmalig aktiviert ist: *Settings → Pages → Build and deployment → Source: GitHub Actions*. Danach läuft sie unter `https://ricorewioriginal-collab.github.io/zotik/`.
-- Steuerung: F1 im Spiel blendet die Tastenhilfe ein und aus (Details in `game/zotik/README.md`).
+- Steuerung: F1 im Spiel blendet die Tastenhilfe ein und aus (Details in `zotik-old/README.md`).
 - Alle Grafiken, Sounds und Dialogtexte sind Platzhalter.
 
 Jeder Merge auf `main` baut die Downloads neu (Release `phase1-latest`).
@@ -39,3 +39,8 @@ Neue verbindliche Ergänzungen befinden sich in:
 - `22_GIFTCODES/` – öffentliche, Event- und exklusive Giftcodes
 - `20_CHAT_DECISIONS/` – Session-Addendum
 - `19_VISUAL_REFERENCES/` – Rätsel- und Weltkarten-Demo
+
+
+## Ordner
+- `zotik/`: neues Zotik (3D im Browser, Einzeldatei), Startseite der Pages-Seite.
+- `zotik-old/`: altes Godot-Zotik (frühere `game/zotik`), Web-Build unter `/zotik-old/`.
