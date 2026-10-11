@@ -699,7 +699,7 @@ function sfx(n){switch(n){
 
 /* ================= Spielstand ================= */
 let KEY='zotik2_save_slot1';const slotKey=n=>'zotik2_save_slot'+n;
-const DEF=()=>({v:1,ch:1,cd:{},x:0,z:13,ry:Math.PI,hp:100,mp:40,lvl:1,xp:0,shards:0,potions:2,herbs:0,stage:0,kr:0,kw:0,boss:false,got:{},side:0,sideK:0,blade:false,blade2:false,party:[],fl:{},pz:{},orun:0,chests:{},t:0,snd:true,cos:{fur:0,scarf:2,outfit:0}});
+const DEF=()=>({v:1,ch:1,cd:{},x:0,z:13,ry:Math.PI,hp:100,mp:40,lvl:1,xp:0,shards:0,potions:2,herbs:0,stage:0,kr:0,kw:0,boss:false,got:{},side:0,sideK:0,blade:false,blade2:false,party:[],fl:{},pz:{},orun:0,end:{s:[0,0,0,0,0,0,0],ess:0},ending:'',chests:{},t:0,snd:true,cos:{fur:0,scarf:2,outfit:0}});
 let S=DEF();
 function loadSave(k){try{const j=localStorage.getItem(k||KEY);if(!j)return null;const o=JSON.parse(j);if(!o||o.v!==1)return null;return Object.assign(DEF(),o)}catch(e){return null}}
 function slotInfo(n){try{const j=localStorage.getItem(slotKey(n));if(!j)return null;const o=JSON.parse(j);return o&&o.v===1?o:null}catch(e){return null}}
@@ -842,7 +842,7 @@ function killE(e){e.dead=true;e.dt=0;e.tel.visible=false;e.atk=null;sfx('die');e
 function hurtP(dmg,fx,fz){if(pl.dead||pl.iframes>0||pl.hurtCd>0)return;dmg=Math.max(1,Math.round(dmg));S.hp-=dmg;pl.hurtCd=.25;hurtFlash();sfx('hurt');dnum(pl.x,pl.y+2.3,pl.z,dmg,'p');camShake=.35;
   const d=Math.hypot(pl.x-fx,pl.z-fz)||1;pl.kx+=(pl.x-fx)/d*5;pl.kz+=(pl.z-fz)/d*5;emit(pl.x,pl.y+1,pl.z,0xff6a7a,10,3,.5,.5,5);
   if(S.hp<=0){S.hp=0;pl.dead=true;pl.atk=-1;sfx('die');$('fade').style.opacity=1;setTimeout(respawn,1600)}}
-function respawn(){S.hp=maxHp();S.mp=maxMp();const lost=Math.floor(S.shards*.1);S.shards-=lost;pl.x=0;pl.z=WLD?9:8;pl.dead=false;pl.vx=pl.vz=0;pl.iframes=1.5;if(boss&&!boss.dead){boss.hp=boss.max;boss.awake=false;boss.st='idle';boss.x=ARENA.x;boss.z=ARENA.z-6;$('boss').hidden=true}
+function respawn(){S.hp=maxHp();S.mp=maxMp();const lost=Math.floor(S.shards*.1);S.shards-=lost;pl.x=0;pl.z=WLD?9:8;pl.dead=false;pl.vx=pl.vz=0;pl.iframes=1.5;if(boss&&!boss.dead){boss.hp=boss.max;boss.awake=false;boss.st='idle';boss.x=boss.wake?boss.wake[0]:ARENA.x;boss.z=boss.wake?boss.wake[1]-6:ARENA.z-6;$('boss').hidden=true}
   for(const e of E){if(!e.dead&&!e.boss&&Math.hypot(e.x-pl.x,e.z-pl.z)<30){e.st='idle'}}
   $('fade').style.opacity=0;toast(lost?`Du erwachst ${WLD?'im Dorf':'am Brunnen'} (−${lost} Splitter)`:'Du erwachst '+(WLD?'im Dorf':'am Brunnen'));saveGame(true)}
 function moveE(e,dx,dz,sp,dt){const d=Math.hypot(dx,dz)||1,nx=e.x+dx/d*sp*dt,nz=e.z+dz/d*sp*dt;if(!blocked(nx,nz)){e.x=nx;e.z=nz}else if(!blocked(nx,e.z))e.x=nx;else if(!blocked(e.x,nz))e.z=nz;pushOut(e,e.rad)}
@@ -862,7 +862,7 @@ function updEnemy(e,dt){
   e.flash=Math.max(0,e.flash-dt);e.fl.material.opacity=e.flash*6;e.barT=Math.max(0,e.barT-dt);e.t+=dt;e.cd-=dt;e.howl-=dt;
   if(e.kx||e.kz){e.x+=e.kx*dt;e.z+=e.kz*dt;if(blocked(e.x,e.z)){e.x-=e.kx*dt;e.z-=e.kz*dt}e.kx*=Math.exp(-9*dt);e.kz*=Math.exp(-9*dt);if(Math.abs(e.kx)+Math.abs(e.kz)<.05)e.kx=e.kz=0}
   const toP=Math.atan2(pl.x-e.x,pl.z-e.z);let spd=0;
-  if(e.boss&&!e.awake){if(!pl.dead&&Math.hypot(pl.x-ARENA.x,pl.z-ARENA.z)<22){e.awake=true;e.st='chase';sfx('roar');$('boss').hidden=false;$('bossn').textContent=d.name;banner(d.name,d.sub||'');camShake=.6;if(d.intro)d.intro()}else{root.position.set(e.x,e.y,e.z);return}}
+  if(e.boss&&!e.awake){if(!pl.dead&&Math.hypot(pl.x-(e.wake?e.wake[0]:ARENA.x),pl.z-(e.wake?e.wake[1]:ARENA.z))<22){e.awake=true;e.st='chase';sfx('roar');$('boss').hidden=false;$('bossn').textContent=d.name;banner(d.name,d.sub||'');camShake=.6;if(d.intro)d.intro()}else{root.position.set(e.x,e.y,e.z);return}}
   if(e.boss&&!e.p2&&e.hp<e.max*.5){e.p2=true;sfx('roar');toast(d.p2t||'');camShake=.7;for(let i=0;i<2;i++){const a=i*3.1+Math.random(),r=spawnEnemy(d.minion||'rift',e.x+Math.cos(a)*6,e.z+Math.sin(a)*6);r.summoned=true;r.st='chase';r.hx=ARENA.x;r.hz=ARENA.z;r.hp=r.max=Math.round(r.max*.65)}}
   if(e.dash){const q=e.dash;q.t-=dt;const nx=e.x+q.vx*q.sp*dt,nz=e.z+q.vz*q.sp*dt;if(!blocked(nx,nz)){e.x=nx;e.z=nz}if(q.sp>15)emit(e.x,.6,e.z,0x9ab0ff,1,1,.3,.6);if(!q.hit&&Math.hypot(pl.x-e.x,pl.z-e.z)<2.8*d.sc/1.5){q.hit=true;hurtP(q.dmg||d.dmg,e.x,e.z)}if(q.t<=0)e.dash=null}
   switch(e.st){
@@ -1257,7 +1257,7 @@ function tintModel(m,hex,k){k=k??.5;const tc=new T.Color(hex),seen=new Map();
 const chCs=n=>S.cd[n]||(S.cd[n]={st:0,k:0,b:[0,0,0],ord:0,bd:0,fin:0});
 const chDone=n=>n===1?S.stage>=8:!!(S.cd[n]&&S.cd[n].fin);
 const chOpen=n=>n===1||chDone(n-1);
-const MAXCH=10;
+const MAXCH=11;
 /* ---- Welt wechseln ---- */
 const ARR=()=>({E,NPC,chests,herbs,COL,CAMCOL,HOUSES,animObjs,INT});
 function clearRuntime(){for(const p of projs)scene.remove(p.m);projs.length=0;for(const r of rings){scene.remove(r.m);r.m.material.dispose()}rings.length=0;for(const d of drops)scene.remove(d.m);drops.length=0;
@@ -1296,7 +1296,7 @@ function travel(n){
       if(n>=2){const s=chCs(n);if(!s.arr){s.arr=1;if(n===2)joinParty('lyra');setTimeout(()=>cutscene(cutOf(n).arr),1600)}}},120)},650)}
 function travelHTML(){let h='<h3>Weltentor</h3><p style="color:var(--dim);font-size:13px">Reise zu den Welten, die du schon geöffnet hast. Du kannst jederzeit zurückkehren.</p>';
   for(let n=1;n<=MAXCH;n++){const C=n===1?{name:'Lunaris',sub:'Der erste Riss'}:CHP[n],open=chOpen(n),dn=chDone(n),here=n===curCh;
-    h+=`<div class="row"><span>${dn?'✅':open?'🔓':'🔒'} Kapitel ${n}: ${C.name}<br><small style="color:var(--dim)">${open?C.sub:'Noch verschlossen'}</small></span><span>${here?'<small>hier</small>':open?`<button class="trv" data-n="${n}">Reisen</button>`:''}</span></div>`}
+    h+=`<div class="row"><span>${dn?'✅':open?'🔓':'🔒'} ${n>10?'Endspiel':'Kapitel '+n}: ${C.name}<br><small style="color:var(--dim)">${open?C.sub:'Noch verschlossen'}</small></span><span>${here?'<small>hier</small>':open?`<button class="trv" data-n="${n}">Reisen</button>`:''}</span></div>`}
   return h}
 /* ---- Tor zu den Welten (Lunaris & Kapitel) ---- */
 function portalAt(x,z,col){const y=hgt(x,z),g=new T.Group();g.position.set(x,y,z);
@@ -1318,7 +1318,7 @@ const PZD={"LUN_MOONGATE":{"name":"Mondtor","kind":"dials","hints":["Die drei Sc
 Object.assign(PORT,{'Erzähler':['📖','#c8c8e8'],Lyra:['📘','#6a8ad9'],Rovan:['🛡️','#7a6a5a'],Orun:['🔥','#ffb040'],Mirael:['✨','#c8a0ff'],'Wurzelkönigin':['🌿','#3aff7a'],'Kanalwächter':['⚙️','#5ac8e0'],Kharos:['🏜️','#ffa030'],Neryx:['🌊','#3a7aff'],Avarn:['❄️','#6ac8ff'],Magmarion:['🌋','#ff4a1a'],'Erinnerungshüter':['🌙','#c84aff'],Solyra:['⭐','#ffd0ff'],Elyon:['🔮','#fff0b0']});
 function cutscene(id,cb){const L=CUT[id];if(!L){cb&&cb();return}document.body.classList.add('cut');say(L.map(l=>l.slice()),()=>{document.body.classList.remove('cut');cb&&cb()})}
 const CODE={2:'ELA',3:'VAL',4:'SOL',5:'AQU',6:'FRO',7:'IGN',8:'NOC',9:'AST',10:'ELY'},PZK={2:'ELA_TURM',3:'VAL_VALVES',4:'SOL_MIRRORS',5:'AQU_CURRENTS',6:'FRO_ICE',7:'IGN_VALVES',8:'NOC_MEMORY',9:'AST_DIALS',10:'ELY_ECHO'};
-function cutOf(n){const ks=Object.keys(CUT).filter(k=>k.startsWith(CODE[n]+'_')),r={arr:CODE[n]+'_ARRIVAL'};r.def=ks.find(k=>k.endsWith('_DEFEAT'));const rest=ks.filter(k=>k!==r.arr&&k!==r.def);r.boss=rest[rest.length-1];r.mid=rest.length>1?rest[0]:null;return r}
+function cutOf(n){if(n===11)return{arr:'END_ARRIVAL'};const ks=Object.keys(CUT).filter(k=>k.startsWith(CODE[n]+'_')),r={arr:CODE[n]+'_ARRIVAL'};r.def=ks.find(k=>k.endsWith('_DEFEAT'));const rest=ks.filter(k=>k!==r.arr&&k!==r.def);r.boss=rest[rest.length-1];r.mid=rest.length>1?rest[0]:null;return r}
 function lyraBridge(cb){if(!S.fl.bridge){S.fl.bridge=1;saveGame(true);cutscene('LUN_LYRA_BRIDGE',cb)}else if(cb)cb()}
 /* ================= Rätsel-Oberfläche ================= */
 let puzOpen=false,puzCur=null;
@@ -1401,6 +1401,17 @@ function lunOpen(){return S.stage>=6||!!(S.pz.LUN_MOONGATE&&S.pz.LUN_RESONANCE_B
   let wt=0;animObjs.push({fn(t,dt){wt-=dt;if(mode==='play'&&!WLD&&!lunOpen()&&pl.z<-138&&wt<=0){wt=4;toast('🔒 Das Risstor ist versiegelt. '+objective())}}})
 })();
 
+Object.assign(CUT,{"END_WAECHTER":[["Erzähler","Der Boden gibt nach, und aus dem Riss steigt Der erste Wächter."],["Lyra","Der Wächter stand hier schon, bevor der Kern zerbrach."],["Zotik","Dann zeigen wir ihm, was wir seitdem gelernt haben."]],"END_WURZEL":[["Erzähler","Der Boden gibt nach, und aus dem Riss steigt Die Wurzel ohne Ende."],["Lyra","Die Wurzel ohne Ende – ein Echo der Wurzelkönigin, nur größer."],["Zotik","Diesmal ohne zu vergessen."]],"END_KOLOSS":[["Erzähler","Der Boden gibt nach, und aus dem Riss steigt Der Goldene Koloss."],["Lyra","So viel Gold, und er kann nichts davon behalten."],["Zotik","Er kann es gern abgeben."]],"END_SANDKOENIG":[["Erzähler","Der Boden gibt nach, und aus dem Riss steigt Der Sandkönig."],["Lyra","Kharos' Erinnerung, ohne Ketten – der Sandkönig."],["Zotik","Dann sorgen wir dafür, dass sie diesmal ruht."]],"END_ABYSS":[["Erzähler","Der Boden gibt nach, und aus dem Riss steigt Der Abyss."],["Lyra","Die Tiefe selbst hat sich erhoben – Neryx' Strudel, geboren aus dem Abgrund."],["Zotik","Haltet euch fest."]],"END_FROSTHERZ":[["Erzähler","Der Boden gibt nach, und aus dem Riss steigt Das Frostherz."],["Lyra","Avarns Winter, der nie getaut ist."],["Zotik","Dann bringen wir den Frühling."]],"END_FEUERKERN":[["Erzähler","Der Boden gibt nach, und aus dem Riss steigt Der Feuerkern."],["Lyra","Magmarions Glut, ohne den Berg, der sie hält."],["Zotik","Sie hat lange genug gebrannt."]],"END_ARRIVAL":[["Erzähler","Der Weltenriss. Hier laufen die Linien aller Welten zusammen – und manches, das sie zurückgelassen haben, wartet noch."],["Lyra","Der Kern hat sich beruhigt, aber der Riss ist geblieben. Er hält die Erinnerung an alles, was die Welten zurückgelassen haben."],["Lyra","Sieben Wächter der Anfänge, größer als je zuvor. Und eine Halle, die uns prüft."],["Nia","Dann prüfen wir uns eben."]],"ENDING_SEPARATE":[["Veyra","Dann bleiben die Welten, wie sie sind: getrennt, aber nicht mehr blind füreinander. Ich bewache die Splitter weiter."],["Erzähler","Die sieben Splitter ruhen wieder an ihren Orten. Die Wächter der Anfänge schlafen, und der Weltenstein bleibt offen für alle, die reisen wollen."],["Zotik","Dann reisen wir weiter."]],"ENDING_UNITE":[["Elyon","Dann lassen wir sie wachsen – langsam, Welt für Welt."],["Erzähler","Die Splitter fügen sich in den Kern. Die Grenzen zwischen den Welten werden dünn, und an manchen Orten stehen plötzlich Türen, wo keine waren."],["Lyra","Es wird Jahre dauern. Aber niemand muss mehr verloren gehen."],["Veyra","Ich hoffe, ihr habt recht."]],"ENDING_WEAVE":[["Zotik","Wir verbinden sie nicht. Wir hören ihnen zu."],["Erzähler","Zotiks Klang, so lange versiegelt, öffnet sich. Die sieben Töne antworten einer nach dem anderen, und zwischen den Welten spannen sich dünne Fäden aus Licht."],["Lyra","Ein Weltenhörer, der die Fäden hält. Das hat der Kern all die Jahre gebraucht."],["Veyra","Und das gibt dem Wort Bewahren einen neuen Sinn."]]});Object.assign(PZD,{"END_D1":{"name":"Siegel: Der verlorene Wald","kind":"dials","hints":["Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Der verlorene Wald). Probiere, was die Scheiben nacheinander zeigen.","Die erste Scheibe muss 1-mal gedreht werden.","Drehungen von links nach rechts: 1, 3, 2."],"cur":0,"sol":[1,3,2],"init":[0,0,0],"dial_count":3,"dial_states":4},"END_D2":{"name":"Siegel: Die Stadt ohne Bewohner","kind":"dials","hints":["Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Die Stadt ohne Bewohner). Probiere, was die Scheiben nacheinander zeigen.","Die erste Scheibe muss 2-mal gedreht werden.","Drehungen von links nach rechts: 2, 0, 1."],"cur":0,"sol":[2,0,1],"init":[0,0,0],"dial_count":3,"dial_states":4},"END_D3":{"name":"Siegel: Das Meer über dem Himmel","kind":"dials","hints":["Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Das Meer über dem Himmel). Probiere, was die Scheiben nacheinander zeigen.","Die erste Scheibe muss 3-mal gedreht werden.","Drehungen von links nach rechts: 3, 1, 0."],"cur":0,"sol":[3,1,0],"init":[0,0,0],"dial_count":3,"dial_states":4},"END_D4":{"name":"Siegel: Der ewige Vulkan","kind":"dials","hints":["Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Der ewige Vulkan). Probiere, was die Scheiben nacheinander zeigen.","Die erste Scheibe muss 0-mal gedreht werden.","Drehungen von links nach rechts: 0, 2, 3."],"cur":0,"sol":[0,2,3],"init":[0,0,0],"dial_count":3,"dial_states":4},"END_D5":{"name":"Siegel: Noctaris Null","kind":"dials","hints":["Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Noctaris Null). Probiere, was die Scheiben nacheinander zeigen.","Die erste Scheibe muss 2-mal gedreht werden.","Drehungen von links nach rechts: 2, 2, 1."],"cur":0,"sol":[2,2,1],"init":[0,0,0],"dial_count":3,"dial_states":4},"END_D6":{"name":"Siegel: Elyndra Vorher","kind":"dials","hints":["Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Elyndra Vorher). Probiere, was die Scheiben nacheinander zeigen.","Die erste Scheibe muss 1-mal gedreht werden.","Drehungen von links nach rechts: 1, 0, 3."],"cur":0,"sol":[1,0,3],"init":[0,0,0],"dial_count":3,"dial_states":4},"END_D7":{"name":"Siegel: Der Ort, den es nie gab","kind":"dials","hints":["Drei Scheiben mit vier Zeichen öffnen die Schatzkammer (Der Ort, den es nie gab). Probiere, was die Scheiben nacheinander zeigen.","Die erste Scheibe muss 3-mal gedreht werden.","Drehungen von links nach rechts: 3, 3, 2."],"cur":0,"sol":[3,3,2],"init":[0,0,0],"dial_count":3,"dial_states":4}});const EQ=[{"n":"Der erste Wächter","hp":1700,"a":35,"g":"Der Waldhüter","ghp":935,"ga":28,"dn":"Der verlorene Wald","c":13160680,"cut":"END_WAECHTER","pz":"END_D1"},{"n":"Die Wurzel ohne Ende","hp":1800,"a":36,"g":"Der leere Torwächter","ghp":990,"ga":28,"dn":"Die Stadt ohne Bewohner","c":4906890,"cut":"END_WURZEL","pz":"END_D2"},{"n":"Der Goldene Koloss","hp":1950,"a":37,"g":"Die Himmelsmuräne","ghp":1072,"ga":29,"dn":"Das Meer über dem Himmel","c":16764992,"cut":"END_KOLOSS","pz":"END_D3"},{"n":"Der Sandkönig","hp":2000,"a":38,"g":"Der Aschenkönig","ghp":1100,"ga":30,"dn":"Der ewige Vulkan","c":14721104,"cut":"END_SANDKOENIG","pz":"END_D4"},{"n":"Der Abyss","hp":2100,"a":39,"g":"Der Nullschatten","ghp":1155,"ga":31,"dn":"Noctaris Null","c":3832575,"cut":"END_ABYSS","pz":"END_D5"},{"n":"Das Frostherz","hp":2200,"a":40,"g":"Das Echo der Quelle","ghp":1210,"ga":32,"dn":"Elyndra Vorher","c":9101567,"cut":"END_FROSTHERZ","pz":"END_D6"},{"n":"Der Feuerkern","hp":2400,"a":42,"g":"Der Namenlose","ghp":1320,"ga":33,"dn":"Der Ort, den es nie gab","c":16734746,"cut":"END_FEUERKERN","pz":"END_D7"}];
+Object.assign(PORT,{Nia:['🏹','#d9a03a'],Veyra:['🔮','#d8c8ff'],Kael:['🗡️','#8a8aa8'],Eryn:['📜','#c8a0ff'],Toren:['⚔️','#c06030']});
+const ENDN={SEPARATE:'Getrennt bewahren',UNITE:'Vereint',WEAVE:'Verwoben'};
+CHP[11]=Object.assign({},CHP[10],{name:'Weltenriss',sub:'Wo alle Welten zusammenlaufen',at:'in der Riss-Halle',hubN:'Riss-Halle',wildN:'Die sieben Siegel',depthN:'Der Rissgrund',
+  sky:[[.04,.01,.08],[.22,.08,.36],[.8,.4,.7],[1,.7,.4],[1,.85,.95]],moon:0xffd8f0,fog:[0x2a1244,.0042],hemi:[0xe8b8ff,0x2a1840,.8],lite:[0xffe8f8,1.15],stars:1,expo:1.08,
+  pal:{g1:0x6a3a8a,g2:0x3a2058,path:0xd8b8e8,arena:0x4a2a6a,rock:0x6a5a8a},hub:[0xe8d8f0,0xd0b8e0,0x8a4ac8,0xc8a050],
+  trees:['crystal','spire','crystal'],leaf:[0xffc8f0,0xc8a0ff,0xffe890],trunk:0x6a5a8a,emis:0x402060,grass:[0x9a6ac8,0xc89ae8],glowc:[0xff9af0,0xffe890],flow:[0xffffff,0xff9af0],rift:0xff9af0,land:'ring',
+  elder:['Veyra',V(0xe0e0f0,0x8a8ab0,0xffffff,{sc:1,wide:1.05})],
+  A:['Rissgeist',240,34,0xff9af0],B:['Echo-Schemen',300,36,0xc8a0ff],M:['Rissschatten',700,38,0x8a4ac8,'Schatten des Risses'],X:['Riss-Echo',1700,38,0xffe890,'Der Rissgrund'],
+  d:{intro:[['Veyra','Der Weltenriss, Zotik. Hier laufen die Linien aller Welten zusammen.']],hint:'Besiege die Weltenbrecher an den sieben Siegeln im Norden.',gate:[],ret:[],after:['Der Riss hält die Erinnerung an alles.'],
+   folk:[['Kael',V(0x8a8aa8,0x3a3a5a,0xe0e0e0,{beard:1,wide:1.2,sc:1.08}),['Die Echos meiner Schwester werden klarer, seit der Kern ruht.','Wer die Siegel bricht, beruhigt den Riss.']],['Eryn',V(0xc8a0ff,0x5a3a8a,0xffffff,{sc:.95}),['Ich schreibe alles auf, woran ich mich sicher erinnere.','Sieben Siegel, sieben Dungeons, sieben Schätze.']],['Toren',V(0xc06030,0x5a3018,0x2a1c16,{wide:1.2,sc:1.05}),['Du bist weit gekommen, seit du das erste Mal ein Schwert gehalten hast.','Die Weltenbrecher sind größer als alles bisher.']]]}});
 function partyHTML(){if(!S.party.length)return '';let h='<h3>Gefährten</h3>';for(const id of S.party){const d=PARTY[id];h+=`<div class="row"><span>${d.em} ${d.n}</span><span>${d.heal?'heilt dich':d.melee?'Nahkampf':'Fernkampf'}</span></div>`}return h}
 
 /* ================= Welt bauen ================= */
@@ -1414,6 +1425,7 @@ function buildWorld(n){
     const dv=Math.hypot(x,z),da=Math.hypot(x,z+182),flat=Math.max(1-sm(26,46,dv),1-sm(26,36,da)),pf=(1-sm(2,7,Math.abs(x-pathx(z))))*(z<40&&z>-160?1:0);
     q=q*(1-flat*.93)*(1-pf*.72);let ring=sm(30,38,da)*(1-sm(64,92,da))*17;if(z>-182)ring*=sm(8,15,Math.abs(x));q+=ring;
     const ex=Math.max(0,Math.abs(x)-125)+Math.max(0,z-72);return q-ex*ex*.02};
+  if(n===11){const s0=cs();if(s0.st<7){s0.st=7;s0.bd=1;s0.k=5}}
   const sealed=()=>cs().st<5;
   const blk=(x,z)=>h(x,z)>8.5||x<-128||x>128||z>76||z<-232||(z<-148&&sealed());
   const zone=(x,z)=>z<-146?'cave':(z<-44?'forest':'village');
@@ -1485,8 +1497,8 @@ function buildWorld(n){
   {const L=new T.PointLight(C.glowc[1],1.8,60,1.3);L.position.set(0,6,-182);scene.add(L)}
   landmark(C.land,C);
   /* Rätselaltar */
-  const cut=cutOf(n),pzKey=PZK[n],pzd=PZD[pzKey],ALX=pathx(-118)+7*mir,ALZ=-118;
-  {const y=h(ALX,ALZ),gb=new T.Group();gb.position.set(ALX,y,ALZ);
+  const cut=cutOf(n),pzKey=PZK[n],pzd=PZD[pzKey]||{name:''},ALX=pathx(-118)+7*mir,ALZ=-118;
+  if(n<11){const y=h(ALX,ALZ),gb=new T.Group();gb.position.set(ALX,y,ALZ);
     gb.add(mk(G.cyl,M(0x6a6c8c,{r:.7}),0,.5,0,1.8,1,1.8));gb.add(mk(G.cyl0,M(0x8e93ae),0,1.7,0,.5,2.4,.5));
     const orb=mk(G.oct,M(0x4a4a60,{e:0x1a1a30,ei:.6,r:.3}),0,3.5,0,.8,1.2,.8);gb.add(orb);const gl=glow(C.rift,5,0,3.5,0,0);gb.add(gl);scene.add(gb);addCol(ALX,ALZ,1.2);
     animObjs.push({fn(t){const lit=!!S.pz[pzKey];orb.rotation.y=t*(lit?1.6:.5);orb.position.y=3.5+Math.sin(t*1.8)*.1;orb.material.emissive.setHex(lit?C.rift:0x1a1a30);orb.material.color.setHex(lit?C.rift:0x4a4a60);orb.material.emissiveIntensity=lit?1.8:.6;gl.material.opacity=lit?.8:0}});
@@ -1509,9 +1521,41 @@ function buildWorld(n){
   const place=(k,cnt,zr)=>{let c=0,t=0;while(c<cnt&&t++<500){const z=rr(zr[0],zr[1]),x=pathx(z)+rr(-32,32);if(blk(x,z)||Math.hypot(x,z+182)<36||Math.hypot(x,z)<36)continue;spawnEnemy(k,x,z);c++}};
   place('a'+n,12,[-58,-142]);place('b'+n,9,[-52,-146]);
   function spawnMini(){if(cs().st!==4||E.some(e=>e.mini&&!e.dead))return;const z=-136,x=pathx(z),e=spawnEnemy('m'+n,x,z);e.mini=true;e.summoned=true;e.st='chase'}
+  /* Endspiel: sieben Siegel */
+  const ES=S.end.s,endAll=()=>ES.every(v=>v===5),endDone=()=>ES.filter(v=>v===5).length;
+  const endObj=()=>S.ending?'Ende gewählt: '+ENDN[S.ending]+'. Erkunde den Weltenriss frei.':endAll()?'Sprich mit Veyra: Wähle das Schicksal der Welten.':`Besiege die Weltenbrecher an den sieben Siegeln (${endDone()}/7).`;
+  const endMenu=()=>{let h2='<h3>Endspiel: Der Weltenriss</h3>';EQ.forEach((q,i)=>{const v=ES[i];h2+=`<div class="row"><span>${v===5?'✅':v>=1?'👉':'▫️'} ${q.dn}<br><small style="color:var(--dim)">${v===0?q.n+' wartet am Siegel':v<=2?'Besiege '+q.n:v===3?'Besiege '+q.g:v===4?'Löse das Siegel-Rätsel':'Schatzkammer geöffnet'}</small></span></div>`});h2+=`<div class="row"><span>${S.ending?'✅':endAll()?'👉':'▫️'} Das Schicksal der Welten</span></div>`;return h2};
+  const stnEnemy=i=>E.find(e=>e.stn===i&&!e.dead);
+  function spawnFor(i,kind){if(stnEnemy(i))return;const q=EQ[i],z=stz(i),x=stx(i),e=spawnEnemy(kind+i,x,z-8);e.stn=i;e.gk=kind;e.wake=[x,z];e.boss=true;e.st='idle';boss=e}
+  const stz=i=>-58-14*i,stx=i=>pathx(stz(i))+(i%2?-16:16)*mir;
+  EQ.forEach((q,i)=>{
+    mkE('sb'+i,[q.n,q.hp,q.a,q.c],()=>tintModel(makeWolf(true),q.c,.5),{base:'wolf',spd:5.2,aggro:60,rng:4.6,wind:.7,cool:1.1,sc:2.2,xp:Math.round(q.hp*.25),sh:[60+i*10,90+i*14],boss:true,sub:'Weltenbrecher',p2t:q.n+' bäumt sich auf!',minion:'b'+n});
+    mkE('gd'+i,[q.g,q.ghp,q.ga,q.c],()=>tintModel(makeWolf(true),q.c,.3),{base:'wolf',spd:5.4,aggro:60,rng:4.2,wind:.7,cool:1.1,sc:1.8,xp:Math.round(q.ghp*.3),sh:[30+i*6,50+i*8],boss:true,sub:'Wächter von '+q.dn,p2t:q.g+' bäumt sich auf!',minion:'b'+n});
+    const x=stx(i),z=stz(i),y=h(x,z),g=new T.Group();g.position.set(x,y,z);
+    g.add(mk(G.cyl,M(0x6a6c8c,{r:.7}),0,.5,0,2,1,2));g.add(mk(G.cyl0,M(0x8e93ae),0,1.9,0,.55,2.8,.55));
+    const orb=mk(G.oct,M(q.c,{e:q.c,ei:1.2,r:.3}),0,4,0,.9,1.4,.9);g.add(orb);const gl=glow(q.c,6,0,4,0,.7);g.add(gl);scene.add(g);addCol(x,z,1.3);
+    animObjs.push({fn(t){const v=ES[i];orb.rotation.y=t*(v===5?.6:1.4);orb.position.y=4+Math.sin(t*1.8+i)*.12;orb.material.emissiveIntensity=v===5?.3:1.4+Math.sin(t*3)*.3;gl.material.opacity=v===5?.15:.7}});
+    INT.push({x,z,name:'Siegel: '+q.dn,pr:'Siegel prüfen',rad:4,vis:()=>true,talk(){stnTalk(i)}})});
+  function stnTalk(i){const q=EQ[i],v=ES[i];
+    if(v===0)return cutscene(q.cut,()=>{ES[i]=1;spawnFor(i,'sb');refresh();saveGame(true)});
+    if(v===1){if(stnEnemy(i))return toast('⚔ '+q.n+' ist noch nicht besiegt');spawnFor(i,'sb');return}
+    if(v===2||v===3){if(stnEnemy(i))return toast('⚔ '+(v===2?q.n:q.g)+' ist noch nicht besiegt');ES[i]=3;toast('Der Wächter von '+q.dn+' erwacht');spawnFor(i,'gd');refresh();return}
+    if(v===4){if(S.pz[q.pz])return vault(i);return openPuzzle(q.pz,()=>vault(i))}
+    toast('✔ Siegel gebrochen')}
+  function vault(i){const q=EQ[i];if(ES[i]===5)return;ES[i]=5;const sh=400+i*120;S.shards+=sh;S.potions+=2;gainXp(200+i*60);sfx('level');banner('Schatzkammer geöffnet',q.dn);toast(`💎 +${sh} Splitter · 🧪 +2`);
+    if(endAll())setTimeout(()=>toast('🌍 Alle Siegel gebrochen. Sprich mit Veyra.'),1800);refresh();saveGame(true)}
+  function endKill(e){const i=e.stn,q=EQ[i];$('boss').hidden=true;
+    if(e.gk==='sb'){ES[i]=2;S.end.ess++;banner(q.n+' besiegt','Rissessenz +1');toast('✨ Rissessenz: '+S.end.ess);setTimeout(()=>{if(WLD&&WLD.n===11&&ES[i]===2){ES[i]=3;toast('Der Wächter von '+q.dn+' erwacht');spawnFor(i,'gd');refresh()}},2600)}
+    else{ES[i]=4;banner(q.g+' besiegt','Das Siegel lässt sich lösen');toast('🧩 Löse das Siegel-Rätsel am Pfeiler')}
+    refresh();saveGame(true)}
+  function talkVeyra(){
+    if(!endAll())return say([['Veyra',`Sieben Siegel halten die Wächter der Anfänge (${endDone()}/7). Brich sie alle, dann sprechen wir über den Kern.`]]);
+    const pick1=id=>cutscene('ENDING_'+id,()=>{const first=!S.ending;S.ending=id;cs().fin=1;sfx('level');banner('Ende: '+ENDN[id],'Danke fürs Spielen, Zotik.');if(first){gainXp(500);S.shards+=1000;toast('🏆 Hauptgeschichte vollendet · 💎 +1000')}
+      refresh();saveGame(true);setTimeout(()=>say([['Erzähler','Ende: '+ENDN[id]+'. Die Welten stehen dir weiter offen: Reise, kämpfe und sammle, so lange du magst.']]),900)});
+    say([['Veyra',S.ending?'Du hast „'+ENDN[S.ending]+'“ gewählt. Willst du ein anderes Ende sehen?':'Der Kern wartet auf deine Antwort, Zotik. Was soll aus den Welten werden?']],null,[{t:'Getrennt bewahren',fn:()=>pick1('SEPARATE')},{t:'Vereinen',fn:()=>pick1('UNITE')},{t:'Verweben (Zuhören)',fn:()=>pick1('WEAVE')},{t:'Noch nicht',fn:()=>{}}])}
   /* Figuren */
   const E1=C.elder,spots=hubSpots.map(s=>[s[0]*mir,s[1],s[2]*mir]);
-  addNpc('elder',E1[0],spots[0][0],spots[0][1],makeVillager(E1[1]),talkElder,spots[0][2],()=>[0,6].includes(cs().st));
+  addNpc('elder',E1[0],spots[0][0],spots[0][1],makeVillager(E1[1]),talkElder,spots[0][2],()=>n===11?(endAll()&&!S.ending):[0,6].includes(cs().st));
   C.d.folk.forEach((f,i)=>{const sp=spots[i+1];
     if(n===2&&f[0]==='Nia'){if(!S.party.includes('nia')){const no=addNpc('nia','Nia',sp[0],sp[1],makeVillager(f[1]),()=>say([['Nia','Du bist also der Resonanzträger! Ich schreibe alles auf, was der Wald erzählt, und ich kann mit dem Bogen umgehen.'],['Nia','Nimm mich mit. Ich lasse dich nichts verpassen.'],['Zotik','Gern. Je mehr, desto besser.']],()=>{joinParty('nia');NPC.splice(NPC.indexOf(no),1);no.P.root.visible=false;no.spr.visible=false}),sp[2],()=>true)}return}
     addNpc('f'+i,f[0],sp[0],sp[1],makeVillager(f[1]),i===0?()=>say([[f[0],pick(f[2])]],null,[{t:'Handeln',fn:()=>openShop('Laden von '+f[0])},{t:'Später',fn:()=>{}}]):()=>say([[f[0],pick(f[2])]]),sp[2])});
@@ -1529,13 +1573,14 @@ function buildWorld(n){
   if(cs().st===4)spawnMini();
   /* Siegel-Hinweis */
   let warnT=0;animObjs.push({fn(t,dt){warnT-=dt;if(mode==='play'&&sealed()&&pl.z<-138&&warnT<=0){warnT=4;toast('🔒 Ein Siegel versperrt den Weg. '+objText())}}});
-  function objText(st){const s=cs();if(st===undefined)st=s.st;
+  function objText(st){const s=cs();if(n===11)return endObj();if(st===undefined)st=s.st;
     return[`Sprich mit ${E1[0]} ${C.at}.`,`Erkunde „${C.wildN}“ im Norden.`,`Vertreibe die Gegner im Norden (${Math.min(s.k,5)}/5).`,`Löse das Rätsel: ${pzd.name}.`,`Besiege ${C.M[0]}.`,`Stelle dich ${C.X[0]} („${C.depthN}“).`,`Berichte ${E1[0]} ${C.at}.`,`Kapitel ${n} geschafft! Erkunde ${C.name} frei.`][st]}
   function refresh(){const mm=document.querySelector('#mates .m'),mp=document.querySelector('#mates .p');if(mm)mm.hidden=true;if(mp)mp.hidden=true;
     $('qt').textContent=cs().fin?`Kapitel ${n} – ${C.name}`:C.sub;$('qo').textContent=objText();$('qo').style.whiteSpace='pre-line'}
   function stage(i){cs().st=i;sfx('quest');toast('📜 '+objText().replace(/ \(.*$/,''));refresh();saveGame(true)}
-  WLD.menuQuest=()=>{let h2=`<h3>Kapitel ${n}: ${C.name}</h3>`;const s=cs();for(let i=0;i<=Math.min(s.st,7);i++)h2+=`<div class="row"><span>${i<s.st?'✅':'👉'} ${objText(i)}</span></div>`;return h2};
+  WLD.menuQuest=()=>{if(n===11)return endMenu();let h2=`<h3>Kapitel ${n}: ${C.name}</h3>`;const s=cs();for(let i=0;i<=Math.min(s.st,7);i++)h2+=`<div class="row"><span>${i<s.st?'✅':'👉'} ${objText(i)}</span></div>`;return h2};
   WLD.kill=function(e){const s=cs();
+    if(e.stn!==undefined)return endKill(e);
     if(e.boss){s.bd=1;$('boss').hidden=true;banner(C.X[0]+' besiegt',C.name+' atmet auf');if(s.st<=5)stage(6);if(cut.def)setTimeout(()=>cutscene(cut.def),1500);for(const o of E)if(o.summoned&&!o.boss&&!o.mini&&!o.dead){o.hp=0;killE(o)}saveGame(true)}
     else if(e.mini){if(s.st<=4){banner(C.M[0]+' besiegt','Das Siegel bricht');sfx('level');stage(5)}}
     else if(s.st===2){s.k++;if(s.k>=5)stage(3);else refresh()}};
@@ -1545,6 +1590,7 @@ function buildWorld(n){
     if(n<MAXCH){banner(`Kapitel ${n} geschafft`,`${CHP[n+1].name} ist jetzt im Weltentor offen`);toast(`🌍 ${CHP[n+1].name} freigeschaltet`)}else{banner('Hauptgeschichte geschafft','Alle Welten sind verbunden');toast('🏆 Elyndra: Die Reise ist vollendet')}
     refresh();saveGame(true)}
   function talkElder(){const s=cs(),st=s.st,nm=E1[0];
+    if(n===11)return talkVeyra();
     if(st===0)return say(C.d.intro,()=>stage(1));
     if(st<=5)return say([[nm,C.d.hint]]);
     if(st===6)return say(C.d.ret,finish);
