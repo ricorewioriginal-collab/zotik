@@ -41,13 +41,24 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .sb:active{transform:scale(.93)}.sb small{position:absolute;left:5px;top:2px;font-size:11px;font-weight:600;color:var(--dim)}.sb em{position:absolute;right:5px;bottom:2px;font-size:11px;font-style:normal;font-weight:700;color:var(--gold)}
 .sb .cd{position:absolute;inset:0;background:rgba(0,0,10,.62);transform-origin:bottom;transform:scaleY(0)}
 #bAtk{right:0;bottom:0;width:92px;height:92px;font-size:38px;border-color:var(--gold);background:radial-gradient(circle,rgba(255,200,97,.35),var(--glass))}
-#bDodge{right:104px;bottom:6px}#sk1{right:0;bottom:104px;border-color:#ff9d4a}#sk2{right:72px;bottom:104px;border-color:#59b7ff}#sk3{right:144px;bottom:90px;border-color:#7dffb2}#bUse{right:104px;bottom:76px;width:58px;height:58px;border-color:var(--teal);background:rgba(20,80,70,.8)}
+#bDodge{right:104px;bottom:6px}#sk1{right:0;bottom:104px;border-color:#ff9d4a}#sk2{right:72px;bottom:104px;border-color:#59b7ff}#sk3{right:144px;bottom:90px;border-color:#7dffb2}#bUse,#bSkill{display:none}
+.bl{display:none}.pop{position:absolute;display:flex;gap:8px;flex-direction:column;align-items:flex-end;z-index:4}.pop button{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:99px;border:2px solid rgba(255,255,255,.28);background:rgba(28,22,56,.92);font-weight:600;font-size:14px;box-shadow:var(--sh)}.pop button i{font-style:normal;font-size:22px}.pop button:disabled{opacity:.45}
 #keys{position:absolute;left:max(14px,env(safe-area-inset-left));bottom:max(14px,env(safe-area-inset-bottom));font-size:12px;color:var(--dim);line-height:1.55;text-shadow:0 1px 3px #000}#keys b{display:inline-block;min-width:22px;padding:0 5px;margin-right:6px;text-align:center;border:1px solid var(--line);border-radius:6px;background:var(--glass);color:var(--ink)}
-body.touch #keys{display:none}body:not(.touch) #bUse{display:none}
-#joy{position:absolute;left:max(18px,env(safe-area-inset-left));bottom:max(22px,env(safe-area-inset-bottom));width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.22);touch-action:none;display:none}
-#joy i{position:absolute;left:50%;top:50%;width:58px;height:58px;margin:-29px 0 0 -29px;border-radius:50%;background:rgba(255,255,255,.3);border:2px solid rgba(255,255,255,.5)}
+body.touch #keys{display:none}
+#joy{position:absolute;left:max(18px,env(safe-area-inset-left));bottom:max(24px,env(safe-area-inset-bottom));width:148px;height:148px;border-radius:50%;background:radial-gradient(circle,rgba(40,32,80,.28),rgba(40,32,80,.55));border:3px solid rgba(255,255,255,.3);box-shadow:0 6px 22px rgba(0,0,0,.35);touch-action:none;display:none}
+#joy::before{content:"";position:absolute;inset:20px;border-radius:50%;border:2px dashed rgba(255,255,255,.28)}
+#joy i{position:absolute;left:50%;top:50%;width:66px;height:66px;margin:-33px 0 0 -33px;border-radius:50%;background:rgba(235,232,248,.85);box-shadow:0 3px 12px rgba(0,0,0,.4)}
 body.touch #joy{display:block}
 #menuBtn{width:42px;height:42px;border-radius:12px;font-size:20px;flex:none}
+body.touch #skills{width:236px;height:218px;right:max(12px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom))}
+body.touch #sk1,body.touch #sk2,body.touch #sk3{display:none}
+body.touch #bAtk,body.touch #bDodge,body.touch #bSkill,body.touch #bUse{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;width:72px;height:72px;font-size:25px;line-height:1.05;background:rgba(30,24,62,.72);border:3px solid rgba(255,255,255,.28)}
+body.touch .sb small{display:none}body.touch .sb .bl{display:block;font-size:11px;letter-spacing:-.2px;font-weight:600;color:#ddd6f5;text-shadow:0 1px 2px #000;margin-top:-1px;white-space:nowrap}
+body.touch #bAtk{right:0;bottom:0;width:92px;height:92px;font-size:38px;border-color:#ffd48a;background:linear-gradient(145deg,#ffb13a,#ff5a3a);box-shadow:0 6px 24px rgba(255,110,50,.5)}body.touch #bAtk .bl{font-size:14px;color:#fff}
+body.touch #bDodge{right:104px;bottom:6px;border-color:#9fd0ff}
+body.touch #bSkill{right:98px;bottom:84px;border-color:#7dffb2}body.touch #bSkill em{position:absolute;right:6px;top:3px;bottom:auto;font-size:12px}
+body.touch #bUse{right:4px;bottom:106px;border-color:var(--teal)}body.touch #bUse.idle{opacity:.5}
+
 #prompt{position:absolute;left:50%;bottom:28%;transform:translateX(-50%);padding:7px 16px;border-radius:999px;font-weight:600;font-size:15px;white-space:nowrap}
 #prompt b{color:var(--gold)}
 #banner{position:fixed;left:0;right:0;top:20%;text-align:center;z-index:4;pointer-events:none;opacity:0;transition:opacity .8s;text-shadow:0 2px 14px #000}
@@ -93,7 +104,7 @@ body.touch #joy{display:block}
 .mb{display:flex;gap:6px;flex:none;flex-wrap:wrap}.mb button{flex:1 1 auto;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(120,170,255,.15);font-weight:600;font-size:14px}.mb button.p{background:var(--gold);color:#2a1700;border-color:var(--gold)}
 #shopl{display:grid;gap:8px;margin-top:8px}#shopl button{display:flex;justify-content:space-between;padding:9px 14px;border-radius:12px;border:1px solid var(--line);background:rgba(120,170,255,.14);font-weight:600}#shopl button:disabled{opacity:.4}
 @media (max-height:480px){
-#mapbox{width:92px}#mm{width:92px;height:92px}#skills{transform:scale(.8);transform-origin:right bottom}#joy{width:104px;height:104px}
+#mapbox{width:92px}#mm{width:92px;height:92px}#skills{transform:scale(.82);transform-origin:right bottom}#joy{width:112px;height:112px}#joy i{width:52px;height:52px;margin:-26px 0 0 -26px}
 #lcol{width:min(232px,38vw);gap:5px}#party{grid-template-columns:48px 1fr;padding:5px 9px 6px 6px}#face{width:48px;height:48px}#mates{display:none}#menuBtn{width:38px;height:38px}
 #quest{right:calc(max(12px,env(safe-area-inset-right)) + 102px);top:max(12px,env(safe-area-inset-top));width:min(236px,31vw);padding:6px 10px}#quest b{font-size:13px}#quest span{font-size:12px}
 #hud:has(#boss:not([hidden])) #quest{display:none}#toast{top:96px}
@@ -111,7 +122,7 @@ body.touch #joy{display:block}
 .pzr{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}.pzb,.pzd,.pzn{font:inherit;color:#fff;background:#22305c;border:2px solid #4a5a9a;border-radius:12px;padding:10px 14px;cursor:pointer;min-width:64px}.pzd{font-size:30px;min-width:70px;min-height:70px;border-radius:50%}.pzn{font-size:15px;min-width:92px;min-height:60px}.pzn.on{background:#2f8a5a;border-color:#7dffb2}.pzb:active,.pzd:active,.pzn:active{transform:scale(.94)}
 .pzc{padding:8px 10px;border-radius:10px;background:#16203f;border:2px solid #34437a;font-size:14px;min-width:96px}.pzc.on{background:#1d4a7a;border-color:#6ac8ff}.pzp{letter-spacing:.3em;font-size:18px;color:#7dffb2;margin-top:8px}#pH p{margin:6px 0;text-align:left;font-size:13px;color:#cfe0ff}.pzm{display:flex;gap:8px;justify-content:center;margin-top:12px}
 body.cut::before,body.cut::after{content:"";position:fixed;left:0;right:0;height:11vh;background:#000;z-index:5;pointer-events:none}body.cut::before{top:0}body.cut::after{bottom:0}body.cut #hud{visibility:hidden}
-#bNaut{right:176px;bottom:8px;width:54px;height:54px;font-size:24px;border-color:#6ac8ff}#bForm{right:176px;bottom:68px;width:46px;height:46px;font-size:20px;border-color:#b06aff}body:not(.touch) #bNaut,body:not(.touch) #bForm{display:none}.prow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.prow small{color:var(--dim)}.reel{display:inline-grid;place-items:center;width:74px;height:74px;margin:4px;border-radius:14px;background:#10183a;border:2px solid #4a5a9a;font-size:40px}.pzb:disabled{opacity:.45}
+.prow{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.prow small{color:var(--dim)}.reel{display:inline-grid;place-items:center;width:74px;height:74px;margin:4px;border-radius:14px;background:#10183a;border:2px solid #4a5a9a;font-size:40px}.pzb:disabled{opacity:.45}
 #mates i.pm{display:grid;place-items:center;font-size:18px;font-style:normal;background:#14203f}
 </style>
 </head>
@@ -128,9 +139,10 @@ body.cut::before,body.cut::after{content:"";position:fixed;left:0;right:0;height
   <div id="keys"><div><b>WASD</b>Bewegen</div><div><b>Maus</b>Kamera (ziehen)</div><div><b>J / Klick</b>Angriff</div><div><b>Shift</b>Ausweichen</div><div><b>1 2 3</b>Fähigkeiten</div><div><b>E</b>Interagieren</div><div><b>Esc</b>Menü</div></div>
   <div id="joy" class="pi"><i></i></div>
   <div id="skills">
-    <button id="bAtk" class="sb" aria-label="Angriff">⚔️</button><button id="bDodge" class="sb" aria-label="Ausweichen">💨<small>⇧</small></button>
+    <button id="bAtk" class="sb" aria-label="Angriff">⚔️<span class="bl">Angriff</span></button><button id="bDodge" class="sb" aria-label="Ausweichen">💨<small>⇧</small><span class="bl">Ausweichen</span></button>
     <button id="sk1" class="sb" aria-label="Funkenwirbel">🌀<small>1</small><div class="cd"></div></button><button id="sk2" class="sb" aria-label="Lichtstoß">✨<small>2</small><div class="cd"></div></button><button id="sk3" class="sb" aria-label="Heiltrank">🧪<small>3</small><em id="potn">0</em><div class="cd"></div></button>
-    <button id="bUse" class="sb" hidden aria-label="Interagieren">💬</button><button id="bNaut" class="sb" hidden aria-label="Nautilux">🚤</button><button id="bForm" class="sb" hidden aria-label="Nautilux-Form wechseln">🔄</button>
+    <button id="bSkill" class="sb" aria-label="Fähigkeit"><span id="bSkI">🌀</span><span class="bl" id="bSkL">Wirbel</span><em id="bSkN" hidden></em><div class="cd"></div></button>
+    <button id="bUse" class="sb idle" aria-label="Aktion"><span id="bUseI">✋</span><span class="bl" id="bUseL">Aktion</span></button>
   </div>
 </div>
 <div id="banner"><h2 id="bh"></h2><p id="bp"></p></div>
@@ -919,12 +931,40 @@ const endDrag=e=>{if(drag&&drag.id===e.pointerId)drag=null};cv.addEventListener(
 cv.addEventListener('wheel',e=>{camDist=clamp(camDist+e.deltaY*.004,4.5,13)},{passive:true});
 /* Joystick */
 const joyEl=$('joy'),knob=joyEl.firstElementChild;
-function joyMove(e){const r=joyEl.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;let dx=(e.clientX-cx)/(r.width/2),dy=(e.clientY-cy)/(r.height/2);const l=Math.hypot(dx,dy);if(l>1){dx/=l;dy/=l}joy.x=dx;joy.y=dy;knob.style.transform=`translate(${dx*36}px,${dy*36}px)`}
+function joyMove(e){const r=joyEl.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;let dx=(e.clientX-cx)/(r.width/2),dy=(e.clientY-cy)/(r.height/2);const l=Math.hypot(dx,dy);if(l>1){dx/=l;dy/=l}joy.x=dx;joy.y=dy;const tr=(r.width-knob.offsetWidth)/2;knob.style.transform=`translate(${dx*tr}px,${dy*tr}px)`}
 joyEl.addEventListener('pointerdown',e=>{initAudio();joy.id=e.pointerId;joyEl.setPointerCapture(e.pointerId);joyMove(e)});
 joyEl.addEventListener('pointermove',e=>{if(e.pointerId===joy.id)joyMove(e)});
 const joyEnd=e=>{if(e.pointerId===joy.id){joy.id=-1;joy.x=joy.y=0;knob.style.transform=''}};joyEl.addEventListener('pointerup',joyEnd);joyEl.addEventListener('pointercancel',joyEnd);
 function btn(id,fn){const b=$(id);b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();initAudio();if(mode==='play'&&!menuOpen&&!dlg.on)fn()})}
-btn('bAtk',()=>startAttack());btn('bDodge',()=>dodge());btn('sk1',()=>skill1());btn('sk2',()=>skill2());btn('sk3',()=>skill3());btn('bUse',()=>interact());btn('bNaut',()=>toggleNaut());btn('bForm',()=>cycleNaut());
+/* Handy: Halten öffnet eine Auswahl (Fähigkeit bzw. Fahrzeug), Antippen löst aus */
+function holdBtn(id,tap,hold,rel){const b=$(id);let tm=0,held=false;
+  b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();initAudio();if(mode!=='play'||menuOpen||dlg.on)return;held=false;closePop();tm=setTimeout(()=>{held=true;hold()},380);if(rel)rel(true)});
+  const up=e=>{clearTimeout(tm);if(rel)rel(false);if(e.type==='pointerup'&&!held&&mode==='play'&&!menuOpen&&!dlg.on)tap()};b.addEventListener('pointerup',up);b.addEventListener('pointercancel',up);b.addEventListener('pointerleave',()=>{clearTimeout(tm)})}
+let popEl=null,popT=0;
+function closePop(){if(popEl){popEl.remove();popEl=null}clearTimeout(popT)}
+function openPop(anchor,items){closePop();const r=anchor.getBoundingClientRect(),d=document.createElement('div');d.className='pop pi';
+  for(const it of items){const b=document.createElement('button');b.innerHTML=`<i>${it.em}</i>${it.t}`;b.disabled=!!it.off;b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation()});b.addEventListener('pointerup',e=>{e.stopPropagation();closePop();it.fn()});d.appendChild(b)}
+  $('hud').appendChild(d);const w=d.offsetWidth,h=d.offsetHeight;d.style.left=Math.max(6,Math.min(innerWidth-w-6,r.right-w))+'px';d.style.top=Math.max(6,r.top-h-8)+'px';popEl=d;popT=setTimeout(closePop,5000)}
+document.addEventListener('pointerdown',e=>{if(popEl&&!popEl.contains(e.target))closePop()},true);
+const SKS=[{em:'🌀',n:'Funkenwirbel',s:'Wirbel',f:()=>skill1(),cd:'s1',cdt:2.6,mp:18},{em:'✨',n:'Lichtstoß',s:'Lichtstoß',f:()=>skill2(),cd:'s2',cdt:2.8,mp:22},{em:'🧪',n:'Heiltrank',s:'Trank',f:()=>skill3(),cd:'s3',cdt:1.5,mp:0}];
+const selSk=()=>Math.min(2,Math.max(0,S.fl.sk|0));
+function skillPop(){openPop($('bSkill'),SKS.map((k,i)=>({em:k.em,t:k.n+(k.mp?` · ${k.mp} MP`:` · ${S.potions}`),fn:()=>{S.fl.sk=i;k.f()}})))}
+function nautTo(k){if(!S.fl.naut||!NF[k]||!NF[k].ok())return;if(naut.f===1||naut.f===2)landSafe();if(!naut.on)mount();nForm(k,true)}
+function vehiclePop(){if(!S.fl.naut)return;const it=NF.map((f,i)=>({em:f.em,t:f.n,off:!f.ok(),fn:()=>nautTo(i)}));if(naut.on)it.push({em:'🚪',t:'Aussteigen',fn:()=>toggleNaut()});openPop($('bUse'),it)}
+holdBtn('bSkill',()=>SKS[selSk()].f(),skillPop);
+holdBtn('bUse',()=>{if(nearI)interact();else if(S.fl.naut)toggleNaut()},vehiclePop);
+{const b=$('bDodge'),end=()=>{keys.ShiftLeft=false};b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();initAudio();if(mode!=='play'||menuOpen||dlg.on)return;closePop();if(naut.on)keys.ShiftLeft=true;else dodge()});b.addEventListener('pointerup',end);b.addEventListener('pointercancel',end)}
+btn('bAtk',()=>startAttack());btn('sk1',()=>skill1());btn('sk2',()=>skill2());btn('sk3',()=>skill3());
+/* Beschriftung der Aktionstaste und der Fähigkeit */
+let luI='',luL='',lsI='';
+function useShort(o){const t=(o.pr||'Sprechen');return /Truhe/.test(t)?'Öffnen':/Rätsel/.test(t)?'Rätsel':/Weltentor/.test(t)?'Reisen':/Siegel/.test(t)?'Siegel':/Prüfung/.test(t)?'Antreten':/Kristallslots|Casino/.test(t)?'Spielen':t.split(' ')[0].slice(0,9)}
+function updTouchBtns(){if(!TOUCH)return;let i='✋',l='Aktion',idle=false;
+  if(nearI&&!dlg.on&&!pl.dead){i=/Truhe/.test(nearI.pr||'')?'📦':'💬';l=useShort(nearI)}
+  else if(S.fl.naut){if(naut.on){i=NF[naut.f].em;l='Aussteigen'}else{i='🚤';l='Einsteigen'}}else idle=true;
+  if(i!==luI){luI=i;$('bUseI').textContent=i}if(l!==luL){luL=l;$('bUseL').textContent=l;$('bUse').classList.toggle('idle',idle)}
+  const k=SKS[selSk()],t=k.em+'|'+(k.cd?S.potions:'');if(t!==lsI){lsI=t;$('bSkI').textContent=k.em;$('bSkL').textContent=k.s;const n=$('bSkN');n.hidden=selSk()!==2;n.textContent=S.potions}
+  const dl=naut.on?'Turbo':'Ausweichen';if($('bDodge').lastChild.textContent!==dl)$('bDodge').lastChild.textContent=dl;
+  const c=SKS[selSk()],v=pl.cd[c.cd]>0?pl.cd[c.cd]/c.cdt:0;$('bSkill').querySelector('.cd').style.transform=`scaleY(${v})`;$('bSkill').style.opacity=(c.mp&&S.mp<c.mp)?.55:1}
 $('menuBtn').addEventListener('pointerdown',e=>{e.stopPropagation();initAudio();if(mode==='play'&&!dlg.on)toggleMenu(true)});
 
 /* ================= Kampf des Spielers ================= */
@@ -957,7 +997,7 @@ function interact(){if(!nearI||dlg.on||pl.dead)return;const o=nearI;sfx('ui');
 function toggleMenu(on,tab){menuOpen=on;$('menu').hidden=!on;if(on){mState.shop=false;renderMenu(tab||'quest');sfx('ui')}else{saveGame(true)}if(!on)for(const k in keys)keys[k]=false}
 const TABS=[['quest','📜','Aufgaben'],['travel','🌍','Weltreise'],['inv','🎒','Inventar'],['skills','✨','Fähigkeiten'],['help','🎮','Steuerung']];
 function controlsHTML(){const K=(a,b)=>`<div><b>${a}</b><span>${b}</span></div>`;
-  return '<div class="ctl">'+(TOUCH?K('🕹','Stick links: Bewegen')+K('👆','Rechts wischen: Kamera')+K('⚔️','Angriff (Kombo)')+K('💨','Ausweichen')+K('🌀✨','Fähigkeiten')+K('🧪','Heiltrank')+K('💬','Sprechen / Öffnen')+K('☰','Menü'):K('WASD','Bewegen')+K('Maus','Kamera (ziehen)')+K('J','Angriff / Klick')+K('Shift','Ausweichen')+K('1 2 3','Fähigkeiten')+K('R','Heiltrank')+K('E','Sprechen / Öffnen')+K('Esc','Menü'))+'</div>'}
+  return '<div class="ctl">'+(TOUCH?K('🕹','Stick links: Bewegen')+K('👆','Rechts wischen: Kamera')+K('⚔️','Angriff (Kombo)')+K('💨','Ausweichen (Nautilux: Turbo halten)')+K('🌀','Fähigkeit: tippen = einsetzen, halten = wechseln (Wirbel, Lichtstoß, Trank)')+K('✋','Aktion: Sprechen, Öffnen, Einsteigen; halten = Nautilux-Form')+K('☰','Menü (oben links)'):K('WASD','Bewegen')+K('Maus','Kamera (ziehen)')+K('J','Angriff / Klick')+K('Shift','Ausweichen')+K('1 2 3','Fähigkeiten')+K('R','Heiltrank')+K('E','Sprechen / Öffnen')+K('Esc','Menü'))+'</div>'}
 function renderMenu(tab){mState.tab=tab;const t=$('tabs'),c=$('mcont');
   if(mState.shop){t.innerHTML='<b style="color:var(--gold)">🎒 '+(mState.shopName||'Finns Laden')+'</b>';c.innerHTML=`<div class="row"><span>Deine Splitter</span><span>💎 ${S.shards}</span></div><div class="row"><span>Heiltränke</span><span>🧪 ${S.potions}</span></div><div id="shopl"><button data-n="1" data-c="20"><span>🧪 Heiltrank</span><span>20 💎</span></button><button data-n="3" data-c="55"><span>🧪🧪🧪 3 Heiltränke</span><span>55 💎</span></button></div>`;
     c.querySelectorAll('#shopl button').forEach(b=>{b.disabled=S.shards<+b.dataset.c;b.onclick=()=>buy(+b.dataset.n,+b.dataset.c)});return}
@@ -1022,7 +1062,7 @@ function updateNpcs(dt){
   for(const c of chests){if(S.chests[c.id])continue;const d=Math.hypot(pl.x-c.x,pl.z-c.z);if(d<nd&&d<2.8){nd=d;nearI=c}}
   for(const c of INT){if(c.vis&&!c.vis())continue;const d=Math.hypot(pl.x-c.x,pl.z-c.z);if(d<nd&&d<(c.rad||3)){nd=d;nearI=c}}
   const pr=$('prompt');
-  if(nearI&&!dlg.on&&!pl.dead){pr.hidden=false;pr.innerHTML=TOUCH?(nearI.pr||'Sprechen'):`<b>E</b> ${nearI.pr||'Sprechen'}${nearI.name?': '+nearI.name:''}`;$('bUse').hidden=!TOUCH}else{pr.hidden=true;$('bUse').hidden=true}
+  if(nearI&&!dlg.on&&!pl.dead){pr.hidden=false;pr.innerHTML=TOUCH?(nearI.pr||'Sprechen'):`<b>E</b> ${nearI.pr||'Sprechen'}${nearI.name?': '+nearI.name:''}`;}else{pr.hidden=true}updTouchBtns();
   /* Kräuter & Drops */
   for(const h of herbs){if(S.got[h.id]){h.m.visible=false;continue}h.m.rotation.y=time*.5;h.m.children[h.m.children.length-1].material.opacity=.6+Math.sin(time*3)*.2;if(Math.hypot(pl.x-h.x,pl.z-h.z)<1.6&&!pl.dead){S.got[h.id]=1;h.m.visible=false;emit(h.x,hgt(h.x,h.z)+.6,h.z,0x8affc0,20,3,.8,.6,-2);giveHerb()}}
   for(let i=drops.length-1;i>=0;i--){const d=drops[i];d.t+=dt;const gy=hgt(d.x,d.z)+.35;
@@ -1471,7 +1511,6 @@ function toggleNaut(){if(mode!=='play'||menuOpen)return;if(!S.fl.naut)return toa
 function updNaut(dt){
   if(S.fl.naut&&!S.fl.naut2&&chDone(4))S.fl.naut2=1;
   if(S.fl.naut)for(let i=1;i<4;i++)if(NF[i].ok()&&!((S.fl.nfa||0)>>i&1)){S.fl.nfa=(S.fl.nfa||0)|1<<i;setTimeout(()=>{toast(`${NF[i].em} Die Nautilux verwandelt sich: ${NF[i].n}! ${NHINT[i]}`);sfx('level')},i*1500)}
-  const bn=$('bNaut'),bf=$('bForm');if(bn.hidden===!!S.fl.naut)bn.hidden=!S.fl.naut;const mf=!!S.fl.naut&&naut.on&&NF.filter(f=>f.ok()).length>1;if(bf.hidden===mf)bf.hidden=!mf;
   const tl=nAir()?6:0;naut.lift+=(tl-naut.lift)*Math.min(1,dt*3);
   if(!naut.on)return;if(dlg.on||pl.dead||inH||mode!=='play'){if(nAir()&&blocked(pl.x,pl.z)&&!pl.dead&&!inH&&mode==='play')return;dismount();return}
   const g=naut.g,sp=Math.hypot(pl.vx,pl.vz),sb=nSub()&&poolB(pl.x,pl.z);g.position.set(pl.x,pl.y+.55+Math.sin(time*3)*.08-(sb?.7:0),pl.z);g.rotation.set(sp*.012,pl.face,Math.sin(time*1.3)*(nAir()?.06:0));naut.spin.rotation.z+=dt*(8+sp);fox.root.visible=false;
