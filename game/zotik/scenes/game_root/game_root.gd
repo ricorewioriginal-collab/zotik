@@ -28,6 +28,7 @@ var bestiary_menu: BestiaryMenu
 var arena_menu: ArenaMenu
 var ngplus_menu: NgPlusMenu
 var ending_menu: EndingMenu
+var quickstart_menu: QuickStartMenu
 var casino_menu: CasinoMenu
 var arena_run: ArenaRun
 var touch: TouchControls
@@ -92,6 +93,9 @@ func _ready() -> void:
 	ending_menu = EndingMenu.new()
 	ui.add_child(ending_menu)
 	ending_menu.closed.connect(_update_control)
+	quickstart_menu = QuickStartMenu.new()
+	ui.add_child(quickstart_menu)
+	quickstart_menu.closed.connect(_update_control)
 	arena_run = ArenaRun.new()
 	add_child(arena_run)
 	touch = TouchControls.new()
@@ -134,16 +138,19 @@ func _on_dialogue_started(_id: String) -> void:
 	player.control_enabled = false
 
 
-func _on_dialogue_finished(_id: String) -> void:
+func _on_dialogue_finished(id: String) -> void:
 	# Wait two physics frames so the key that closed the dialogue cannot
 	# immediately re-trigger an interaction.
 	await get_tree().physics_frame
 	await get_tree().physics_frame
 	_update_control()
+	if id == "CUT_LUN_DREAM_001" and DisplayServer.get_name() != "headless" and not GameState.has_flag("FLAG_QUICKSTART_SHOWN"):
+		GameState.set_flag("FLAG_QUICKSTART_SHOWN")
+		open_menu(quickstart_menu)
 
 
 func is_menu_open() -> bool:
-	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or transfer_menu.visible or pause_menu.visible or ui.get_node("GuideMenu").visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible or ngplus_menu.visible or ending_menu.visible
+	return inventory_menu.visible or shop_menu.visible or quest_log.visible or save_menu.visible or transfer_menu.visible or pause_menu.visible or ui.get_node("GuideMenu").visible or world_map.visible or bounty_menu.visible or bestiary_menu.visible or arena_menu.visible or casino_menu.visible or ngplus_menu.visible or ending_menu.visible or quickstart_menu.visible
 
 
 func _on_menu_requested(m: String) -> void:

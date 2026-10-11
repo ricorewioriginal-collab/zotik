@@ -972,3 +972,9 @@ An audit of all quests, cutscenes, dialogues and the story docs (30 findings, se
 - After Elyon falls, his memory breaks open (CUT_ELY_ELYON_DEFEAT_001): eight researchers split the core (Elyon, Veyra, the Professorium, Lyra's mother and others), a child who could hear the core (Zotik) touched it, Veyra sealed his resonance, Zotik's dreams are his own sound.
 - After the report to Veyra the player chooses what becomes of the core (`EndingMenu`, effect `open_menu: ending`): Getrennt bewahren (Veyra), Wieder verbinden (Elyon) or Neu knüpfen (Zotik). Each sets `FLAG_ENDING_CHOSEN` plus its own flag, plays an epilogue and changes Veyra's later lines; postponing is possible (Veyra asks again), the choice is final per playthrough and reset by New Game+.
 - Placeholder texts; the endings change dialogue and epilogue only, not the world. Tests: `test_w20_endings` (4), `test_r13_elyndra` follows the new Veyra lines.
+
+## W22 – Kampf im Takt, Kurzanleitung (2026-10-11)
+Owner: "bewegen, schlagen ist nicht synchron … man weiß nicht, wie was funktioniert".
+- Schlag: Schwung und Ton starten sofort, der Treffer landet nach 30 % der Abklingzeit (passend zur Animation); die Animation wird auf ~80 % der Abklingzeit gedehnt; ein Druck kurz vor Ende der Abklingzeit (≤ 0,25 s) wird gemerkt. Headless (Tests) trifft weiterhin sofort.
+- Neues Spiel: nach dem Traum erscheint einmal die Kurzanleitung (Touch- oder Tastatur-Variante), Flag FLAG_QUICKSTART_SHOWN.
+- Test: test_w22_combat_sync (4). Nicht in Godot ausgeführt lokal; Prüfung durch CI.

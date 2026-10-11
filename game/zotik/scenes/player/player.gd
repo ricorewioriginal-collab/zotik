@@ -26,6 +26,14 @@ var dodge_dir := Vector3.ZERO
 var dead := false
 var current_interactable: Interactable
 var attack_cooldown := 0.0
+## The blow lands when the swing animation connects, not at the key press (W22): fraction of the
+## cooldown after which the hit is resolved. Headless runs (tests) resolve it immediately.
+const HIT_FRACTION := 0.3
+## A press shortly before the cooldown ends is remembered and fires the moment it is over.
+const ATTACK_BUFFER := 0.25
+var _hit_wait := -1.0
+var _hit_strong := false
+var _buffered := -1  # -1 none, 0 light, 1 strong
 var lock_target: Enemy
 
 ## Touch autopilot (A03): tap-to-walk, tap a person/chest to walk there and use
@@ -89,6 +97,14 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	invulnerable_time = maxf(0.0, invulnerable_time - delta)
 	attack_cooldown = maxf(0.0, attack_cooldown - delta)
+	if _hit_wait >= 0.0:
+		_hit_wait -= delta
+		if _hit_wait < 0.0:
+			_resolve_hit(_hit_strong)
+	if _buffered >= 0 and attack_cooldown <= 0.0:
+		var b := _buffered
+		_buffered = -1
+		attack(b == 1)
 	if lock_target and (not is_instance_valid(lock_target) or lock_target.is_dead() or lock_target.global_position.distance_to(global_position) > LOCK_RANGE):
 		set_lock(null)
 	if not is_on_floor():
@@ -138,9 +154,9 @@ func _physics_process(delta: float) -> void:
 	if control_enabled and not dead and current_interactable and Input.is_action_just_pressed("interact"):
 		current_interactable.interact(self)
 	if control_enabled and not dead and Input.is_action_just_pressed("attack"):
-		attack()
+		_press_attack(false)
 	if control_enabled and not dead and Input.is_action_just_pressed("strong_attack"):
-		attack(true)
+		_press_attack(true)
 	if control_enabled and not dead and Input.is_action_just_pressed("lock_on"):
 		set_lock(null if lock_target else nearest_enemy(LOCK_RANGE))
 	if control_enabled and not dead and Input.is_action_just_pressed("use_item"):
@@ -225,13 +241,39 @@ func move_direction(input: Vector2) -> Vector3:
 	return Vector3(input.x, 0.0, input.y).rotated(Vector3.UP, camera_pivot.rotation.y).normalized() * minf(input.length(), 1.0)
 
 
-## Melee attack against all enemies in a frontal cone. Returns hits.
-## A strong attack hits harder, drains more Break and interrupts telegraphs.
+## An attack key press: fires now, or is remembered when the cooldown is almost over.
+func _press_attack(strong: bool) -> void:
+	if attack_cooldown > 0.0 and attack_cooldown <= ATTACK_BUFFER and not is_dodging:
+		_buffered = 1 if strong else 0
+	else:
+		attack(strong)
+
+
+## Starts a melee attack: the swing plays and sounds now, the blow itself lands a moment later
+## (HIT_FRACTION of the cooldown) so that damage, sound and animation line up. Returns the hits when
+## they are resolved at once (headless), otherwise 0.
 func attack(strong: bool = false) -> int:
 	if attack_cooldown > 0.0 or is_dodging or dead:
 		return 0
 	var cb := Content.combat()
 	attack_cooldown = float(cb.get("strong_cooldown", 1.1)) if strong else float(stats.attack_cooldown)
+	if lock_target:
+		face(lock_target.global_position - global_position)
+	visual.swing(strong, attack_cooldown)
+	Sfx.play("swing_strong" if strong else "swing")
+	if DisplayServer.get_name() == "headless":
+		return _resolve_hit(strong)
+	_hit_wait = attack_cooldown * HIT_FRACTION
+	_hit_strong = strong
+	return 0
+
+
+## Applies the blow to everything in the frontal cone. Returns the hits.
+func _resolve_hit(strong: bool) -> int:
+	_hit_wait = -1.0
+	if dead:
+		return 0
+	var cb := Content.combat()
 	var power := int(round(Stats.attack() * (float(cb.get("strong_damage_mult", 1.6)) if strong else 1.0)))
 	var brk := float(cb.get("break_strong", 25)) if strong else float(cb.get("break_light", 8))
 	if lock_target:
@@ -249,8 +291,8 @@ func attack(strong: bool = false) -> int:
 			continue
 		e.take_hit(power, brk, strong)
 		hits += 1
-	visual.swing(strong)
-	Sfx.play("hit" if hits > 0 else ("swing_strong" if strong else "swing"))
+	if hits > 0:
+		Sfx.play("hit")
 	attacked.emit(hits)
 	return hits
 
