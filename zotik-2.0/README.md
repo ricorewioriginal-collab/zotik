@@ -13,3 +13,5 @@ Umbenennen in `zotik/`: nur den Ordner umbenennen, es gibt keine absoluten Pfade
 - Konsolen-Titelscreen nach dem Key-Art-Vorbild: Logo, Menü mit Leuchtbalken (Pfeiltasten/Enter oder Tippen), Untermenü „Steuerung".
 - HUD und Dialoge zeigen die Originalfiguren (Gesichter aus den Master-Sheets: Zotik, Mira, Professorium, Felli).
 - Menü, Aufgaben und Steuerung sind für Hoch- und Querformat kompakt (Tabs, scrollbar); Handy zeigt Touch-Steuerung statt Tastaturliste.
+- Ablauf: Startscreen („Tippen oder Taste drücken") → Ladebalken → Menü (Neues Spiel / Spiel laden / Steuerung) → Speicherplatz (3 Slots) → „Mein Zotik" (Fellton, Schal, Kleidung; nur bei neuem Spiel) → Spawn im Dorf.
+- Speicherstände: `zotik2_save_slot1` bis `zotik2_save_slot3`; die Auswahl wird im Spielstand (`cos`) gespeichert.
