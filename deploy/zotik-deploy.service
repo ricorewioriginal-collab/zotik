@@ -1,0 +1,12 @@
+[Unit]
+Description=ZOTIK: build and publish the Windows and Android apps when main changed
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=zotik-deploy
+Environment=HOME=/var/lib/zotik-deploy
+ExecStart=/usr/local/bin/zotik-deploy
+TimeoutStartSec=1h
+Nice=10
