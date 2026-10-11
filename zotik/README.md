@@ -2,6 +2,7 @@
 
 Moderne 3D-Neuaufbau-Variante von **Zotik – Die Splitter der Welten**: eine Datei (`index.html`), kein Build-Schritt, Three.js per CDN, Handy und PC.
 
+- **Alle 10 Kapitel**: Lunaris, Elaris, Valdoria, Solmera, Aqualis, Frosthain, Ignara, Noctaris, Astralis und Elyndra (siehe unten).
 - **Kapitel 1 Lunaris**: Dorf am Mondblick, Mondwald, Risshöhle mit Mondwolf-Alpha (Boss), Haupt- und Nebenquest, Händler, Truhen, Stufenaufstieg.
 - **Figuren nach den Master-Sheets** (`reference/approved/`): Zotik als aufrecht gehender oranger Fuchs mit grünem Schal, Weste, Reiseklinge mit Kristall und buschigem Schwanz mit heller Spitze; Mira (blaue Haare, Mondschmuck), Professorium (Fliegerbrille, Technikrucksack), Felli.
 - **Steuerung**: WASD/Stick bewegen, rechte Maustaste bzw. Wischen = Kamera, J/Klick = Angriff (3er-Kombo), Shift = Ausweichen, 1/2/3 = Funkenwirbel / Lichtstoß / Heiltrank, E = Sprechen, Esc = Menü.
@@ -16,6 +17,14 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
 - Ablauf: Startscreen („Tippen oder Taste drücken") → Ladebalken → Menü (Neues Spiel / Spiel laden / Steuerung) → Speicherplatz (3 Slots) → „Mein Zotik" (Fellton, Schal, Kleidung; nur bei neuem Spiel) → Spawn im Dorf.
 - Speicherstände: `zotik2_save_slot1` bis `zotik2_save_slot3`; die Auswahl wird im Spielstand (`cos`) gespeichert.
 - Häuser sind begehbar: Tür vorn, Innenraum mit Möbeln (Taverne, Schmiede, drei Wohnhäuser), Wandkollision, Dach und Wände blenden beim Betreten aus; in drei Häusern liegt eine Truhe.
+
+## Kapitel 2 bis 10 (Welten-Baukasten)
+- Nach Kapitel 1 öffnet das **Weltentor** (Standbild mit Ring im Dorf, `E`) das Menü „Weltreise". Jede Welt öffnet erst, wenn die vorige geschafft ist; man kann jederzeit zurückreisen.
+- Jede Welt hat eigene Palette, Himmel, Nebel, Bäume/Props, Wahrzeichen am Horizont, Dorf mit Ältester/Ältestem und drei Bewohnern (der erste handelt), vier Gegnerarten (Fernkämpfer, Nahkämpfer, Wächter, Boss) und Truhen.
+- Ablauf je Kapitel: mit der Ältesten sprechen → ins Umland gehen → 5 Gegner vertreiben → 3 Anlagen aktivieren (ab Kapitel 6 in Zahlenfolge) → Wächter besiegen (Siegel bricht) → Boss in der Arena → Bericht und Belohnung.
+- Namen, Gegner, Bosse und Aufgaben stammen aus dem alten Spiel (`zotik-old/data/*.json`): Wurzelkönigin, Kanalwächter, Kharos, Neryx, Avarn, Magmarion, Erinnerungshüter, Solyra, Elyon.
+- Fortschritt je Kapitel im Spielstand (`ch`, `cd`), alte Spielstände laden unverändert. Daten der Kapitel: `CHP` im Skript, Aufbau in `buildWorld`.
+- Noch nicht enthalten: Begleiter-Gruppe (z. B. Nia, Rovan, Lyra), Rätsel und Zwischensequenzen der alten Version.
 
 ## Grafikupdate (Oktober 2026)
 - Terrain: kleine prozedurale, gekachelte Bodenstruktur sowie feinere Farbvariation; Weg nach Lunaris mit flachen Randsteinen.
