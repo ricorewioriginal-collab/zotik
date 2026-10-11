@@ -45,6 +45,7 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
   - **Luftschiff** 🎈 (nach Kapitel 7): fliegt über Klippen zu **Himmelstruhen** auf hohen Felsen, nimmt wenig Schaden; Landen nur auf flachem Boden.
   - **Riss-Form** 🔮 (nach Kapitel 10): am schnellsten, Rammen mit 2,6-fachem Schaden.
   Steigt bei Dialog, Reise und Tod automatisch ab.
+- **Kollision**: Spielerbewegung läuft in Teilschritten (kein Durchtunneln bei Dash, Turbo oder niedriger Bildrate), Hindernisse werden in zwei Durchgängen aufgelöst, alle Felsen, Rissscherben, Risstor-Pfeiler und Hochhäuser sind fest, und auch das Luftschiff stößt an Häuser, Bäume und Felsen (es fliegt nur über Gelände und Klippen).
 - **Nebenaufträge** im Weltenriss-Hub (Sela, Nerea, Professorium, Kael, Eryn, Toren): zählen Gegner in Lunaris, Elaris, Aqualis, Elyndra, Erinnerungssplitter und Rissessenz; Belohnung sind Splitter und ein Andenken (+1,5 Angriff). Stand im Menü unter „Nebenaufträge“.
 - **Halle der 100**: 100 Prüfungen in Wellen, jede zehnte ein Bosskampf, Rang-Belohnungen (`hall`). Vereinfacht gegenüber dem alten Spiel (Wellen statt Arena-Rängen).
 - **Neues Spiel+**: nach einem Ende bei Veyra wählbar. Behält Stufe, Splitter, Waffen, Andenken, Nautilux, Gefährten, Halle und Nebenaufträge; Gegner mit +50 % Leben und +35 % Angriff je Stufe, Bosse mit Raserei-Phase.

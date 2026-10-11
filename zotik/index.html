@@ -183,7 +183,8 @@ const zoneAt=(x,z)=>WLD?WLD.zone(x,z):z<-146?'cave':(z<-44?'forest':'village');
 const COL=[];
 function addCol(x,z,r){COL.push({x,z,r})}
 const CAMCOL=[],HOUSES=[];let inH=null;
-function pushOut(o,r){
+function pushOut(o,r){for(let ps=0;ps<2;ps++){const x0=o.x,z0=o.z;pushOut1(o,r);if(o.x===x0&&o.z===z0)break}}
+function pushOut1(o,r){
   for(let k=0;k<HOUSES.length;k++){const H=HOUSES[k],ex0=o.x-H.x,ez0=o.z-H.z,lim=H.R+r+1;if(ex0*ex0+ez0*ez0>lim*lim)continue;
     for(let i=0;i<H.segs.length;i++){const q=H.segs[i],dx=o.x-q.wx,dz=o.z-q.wz,lx=dx*H.c-dz*H.s,lz=dx*H.s+dz*H.c,cx=lx<-q.hx?-q.hx:lx>q.hx?q.hx:lx,cz=lz<-q.hz?-q.hz:lz>q.hz?q.hz:lz,ex=lx-cx,ez=lz-cz,d2=ex*ex+ez*ez;
       if(d2<r*r){let nx,nz;if(d2>1e-6){const d=Math.sqrt(d2),k2=(r-d)/d;nx=ex*k2;nz=ez*k2}else{const px=q.hx-Math.abs(lx),pz=q.hz-Math.abs(lz);if(px<pz){nx=(lx<0?-1:1)*(px+r);nz=0}else{nz=(lz<0?-1:1)*(pz+r);nx=0}}
@@ -321,7 +322,7 @@ function nearPath(x,z,d){return z<44&&z>-160&&Math.abs(x-PATHX(z))<d}
   while(r<200&&tries++<4000){
     const x=wr(-120,120),z=wr(-226,60),h=hgt(x,z),da=Math.hypot(x-ARENA.x,z-ARENA.z);
     if(Math.hypot(x,z)<30||nearPath(x,z,3.5)||(da<31&&da>14))continue;
-    const s=wr(.5,2.4);put(iRock,x,h+s*.3,z,s*wr(.8,1.4),s*.75,s*wr(.8,1.4),WR()*6,pick([0x6a6b86,0x7a7794,0x585a78]),WR(),WR());if(s>1.3)addCol(x,z,s*.9);r++;
+    const s=wr(.5,2.4);put(iRock,x,h+s*.3,z,s*wr(.8,1.4),s*.75,s*wr(.8,1.4),WR()*6,pick([0x6a6b86,0x7a7794,0x585a78]),WR(),WR());if(s>.8)addCol(x,z,s*.85);r++;
   }
   let sh=0;tries=0;
   while(sh<260&&tries++<4000){
@@ -331,7 +332,7 @@ function nearPath(x,z,d){return z<44&&z>-160&&Math.abs(x-PATHX(z))<d}
   }
   for(let k=0;k<60;k++){ /* Rissscherben im Wald */
     const x=wr(-100,100),z=wr(-215,-45),h=hgt(x,z);if(nearPath(x,z,3)||Math.hypot(x-ARENA.x,z-ARENA.z)<30||h>6.5)continue;
-    const s=wr(.4,1.1);put(iCrys,x,h+s,z,s*.4,s*1.4,s*.4,WR()*6,pick([0x6ab0ff,0x9a7aff,0x58e6ff]),(WR()-.5)*.5,(WR()-.5)*.5);
+    const s=wr(.4,1.1);put(iCrys,x,h+s,z,s*.4,s*1.4,s*.4,WR()*6,pick([0x6ab0ff,0x9a7aff,0x58e6ff]),(WR()-.5)*.5,(WR()-.5)*.5);if(s>.7)addCol(x,z,s*.45);
   }
   /* Kristallkranz um die Arena */
   for(let k=0;k<26;k++){const a=k/26*Math.PI*2,rr=wr(25,30),x=ARENA.x+Math.cos(a)*rr,z=ARENA.z+Math.sin(a)*rr;if(z>ARENA.z+10&&Math.abs(x-ARENA.x)<10)continue;const s=wr(1.4,3.2),h=hgt(x,z);put(iCrys,x,h+s*.9,z,s*.45,s*1.5,s*.45,WR()*6,pick([0x5aa6ff,0x8a6cff,0x58d6ff]),(WR()-.5)*.4,(WR()-.5)*.4);addCol(x,z,s*.45)}
@@ -461,7 +462,7 @@ for(const [x,z] of [[-5,10],[5,10],[-6,-5],[6,-6],[-4,-30],[4,-33],[-6,-70]]){la
   g.add(mk(G.box,M(0x8e93ae),0,6.2,0,9.4,.8,1.1));g.add(mk(G.torus||G.tor,M(0xc8e4ff,{e:0x6ab0ff,ei:1.5}),0,7.4,0,1.3,1.3,1.3,false));g.add(glow(0x7ab8ff,9,0,7.4,0,.55));scene.add(g)})();
 /* Risstor zur Höhle */
 const RIFT=(function(){const z=-150,x=0,y=hgt(x,z),g=new T.Group();g.position.set(x,y,z);
-  for(const s of [-1,1]){const p=mk(G.cone0,M(0x55507a,{f:1}),s*6.5,5,0,2.6,10,2.6);p.rotation.z=-s*.12;g.add(p)}
+  for(const s of [-1,1]){const p=mk(G.cone0,M(0x55507a,{f:1}),s*6.5,5,0,2.6,10,2.6);p.rotation.z=-s*.12;g.add(p);addCol(x+s*6.5,z,1.5)}
   const ring=mk(G.tor,M(0xa66cff,{e:0x8a4cff,ei:2}),0,5.4,0,5.2,5.6,5.2,false);ring.material=ring.material;g.add(ring);
   const sw=mk(new T.CircleGeometry(1,28),new T.MeshBasicMaterial({color:0x9a6cff,transparent:true,opacity:.45,blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide}),0,5.4,0,4.6,5,1,false);g.add(sw);g.add(glow(0xa070ff,12,0,5.4,-1.5,.4));
   const L=new T.PointLight(0xa070ff,1.1,30,1.6);L.position.set(0,5,3);g.add(L);scene.add(g);
@@ -990,9 +991,9 @@ function updatePlayer(dt){
   else{const k=1-Math.exp(-14*dt);pl.vx+=(tx-pl.vx)*k;pl.vz+=(tz-pl.vz)*k}
   pl.mv=clamp(Math.hypot(pl.vx,pl.vz)/6.4,0,1.3);
   if((ix||iy)&&pl.atk<0&&pl.dash<=0){const want=Math.atan2(pl.vx,pl.vz);pl.face+=ang(pl.face,want)*Math.min(1,dt*14)}
-  let nx=pl.x+(pl.vx+pl.kx)*dt,nz=pl.z+(pl.vz+pl.kz)*dt;pl.kx*=Math.exp(-9*dt);pl.kz*=Math.exp(-9*dt);
-  if(!pBlocked(nx,nz)){pl.x=nx;pl.z=nz}else if(!pBlocked(nx,pl.z))pl.x=nx;else if(!pBlocked(pl.x,nz))pl.z=nz;
-  if(!nAir())pushOut(pl,.5);const ty=hgt(pl.x,pl.z)+naut.lift;pl.y+=(ty-pl.y)*Math.min(1,dt*18);if(Math.abs(pl.y-ty)>1.5)pl.y=ty;
+  const mvx=(pl.vx+pl.kx)*dt,mvz=(pl.vz+pl.kz)*dt,ns=Math.min(10,Math.max(1,Math.ceil(Math.hypot(mvx,mvz)/.3)));pl.kx*=Math.exp(-9*dt);pl.kz*=Math.exp(-9*dt);
+  for(let q=0;q<ns;q++){const nx=pl.x+mvx/ns,nz=pl.z+mvz/ns;if(!pBlocked(nx,nz)){pl.x=nx;pl.z=nz}else if(!pBlocked(nx,pl.z))pl.x=nx;else if(!pBlocked(pl.x,nz))pl.z=nz;pushOut(pl,.5)}
+  const ty=hgt(pl.x,pl.z)+naut.lift;pl.y+=(ty-pl.y)*Math.min(1,dt*18);if(Math.abs(pl.y-ty)>1.5)pl.y=ty;
   if(pl.atk>=0){pl.atkT+=dt;const du=ATD[pl.combo];if(!pl.hit&&pl.atkT>du*.42){pl.hit=true;doHit()}if(pl.atkT>=du){pl.atk=-1;pl.comboT=.55;if(pl.buf>0){pl.buf=0;startAttack()}}}
   pl.buf=Math.max(0,pl.buf-dt);
   S.mp=Math.min(maxMp(),S.mp+dt*1.6);if(S.hp<maxHp()&&zoneAt(pl.x,pl.z)==='village')S.hp=Math.min(maxHp(),S.hp+dt*1.2);
@@ -1579,13 +1580,13 @@ function buildWorld(n){
     put2(iGr,x,hh+.14*s,z,s*.6,s*.55*(.7+R()*.7),s*.6,R()*6,rp(C.grass),(R()-.5)*.3,(R()-.5)*.3)}
   for(let i=0;i<600;i++){const x=rr(-120,120),z=rr(-60,66),hh=h(x,z);if(Math.hypot(x,z)<8||np(x,z,2)||hh>5)continue;put2(iFl,x,hh+.22,z,.13,.13,.13,0,rp(C.flow))}
   let r=0;tries=0;while(r<200&&tries++<4000){const x=rr(-120,120),z=rr(-226,60),hh=h(x,z);if(Math.hypot(x,z)<30||np(x,z,3.5)||(Math.hypot(x,z+182)<31&&Math.hypot(x,z+182)>14))continue;
-    const s=rr(.5,2.4);put2(iRo,x,hh+s*.3,z,s*rr(.8,1.4),s*.75,s*rr(.8,1.4),R()*6,P.rock,R(),R());if(s>1.3)addCol(x,z,s*.9);r++}
+    const s=rr(.5,2.4);put2(iRo,x,hh+s*.3,z,s*rr(.8,1.4),s*.75,s*rr(.8,1.4),R()*6,P.rock,R(),R());if(s>.8)addCol(x,z,s*.85);r++}
   for(let k=0;k<26;k++){const ang=k/26*Math.PI*2,rad=rr(25,30),x=Math.cos(ang)*rad,z=-182+Math.sin(ang)*rad;if(z>-172&&Math.abs(x)<10)continue;const s=rr(1.4,3.2),hh=h(x,z);
     put2(iCr,x,hh+s*.9,z,s*.45,s*1.5,s*.45,R()*6,rp(C.glowc),(R()-.5)*.4,(R()-.5)*.4);addCol(x,z,s*.45)}
   for(let i=0;i<170;i++){const z=-145+i*1.04,sd=i%2?-1:1,x=pathx(z)+sd*(3.1+R()*.8),hh=h(x,z);if(hh>7)continue;const sc=.3+R()*.38;put2(iPa,x,hh+.055,z,sc,.07,sc*(.65+R()*.7),R()*6.28,i%5===0?0xb9acc0:P.path)}
   /* Gebäude-Skyline (Valdoria) */
   if(C.trees.includes('tower')){let t=0;tries=0;while(t<46&&tries++<2000){const x=rr(-120,120),z=rr(-220,60);if(!free(x,z,42)||Math.hypot(x,z)<42)continue;const w=rr(5,10),d=rr(5,10),hb=rr(8,24),bg=new T.Group();bg.position.set(x,h(x,z),z);bg.rotation.y=R()*3;
-    bg.add(mk(G.box,M(rp([0x5a5a70,0x6a5a60,0x4a5068]),{r:.9}),0,hb/2,0,w,hb,d));for(let j=0;j<Math.floor(hb/3);j++)bg.add(mk(G.box,M(0xffc060,{e:0xffa030,ei:1.1}),0,2+j*3,d/2+.03,w*.7,.7,.05,false));bg.add(mk(G.box,M(C.hub[2]),0,hb+.4,0,w+.5,.8,d+.5));scene.add(bg);addCol(x,z,Math.max(w,d)*.62);t++}}
+    bg.add(mk(G.box,M(rp([0x5a5a70,0x6a5a60,0x4a5068]),{r:.9}),0,hb/2,0,w,hb,d));for(let j=0;j<Math.floor(hb/3);j++)bg.add(mk(G.box,M(0xffc060,{e:0xffa030,ei:1.1}),0,2+j*3,d/2+.03,w*.7,.7,.05,false));bg.add(mk(G.box,M(C.hub[2]),0,hb+.4,0,w+.5,.8,d+.5));scene.add(bg);addCol(x,z,Math.hypot(w,d)/2);t++}}
   for(const im of INST){im.count=im.userData.n;im.instanceMatrix.needsUpdate=true;if(im.instanceColor)im.instanceColor.needsUpdate=true}
   /* Marktplatz: Mittelpunkt, Häuser, Laternen */
   {const gc=new T.Group();gc.position.set(0,h(0,0),0);const gl0=C.glowc[0];
@@ -1599,7 +1600,7 @@ function buildWorld(n){
   /* Tore: Waldrand & Siegel */
   {const z=-46,x=pathx(z),gg=new T.Group();gg.position.set(x,h(x,z),z);for(const s of [-1,1]){gg.add(mk(G.cyl0,M(0x8e93ae),s*4,3,0,.9,6,.9));gg.add(mk(G.oct,M(C.glowc[0],{e:C.glowc[0],ei:1.6}),s*4,6.6,0,.5,.8,.5));addCol(x+s*4,z,1)}
     gg.add(mk(G.box,M(0x8e93ae),0,6.2,0,9.4,.8,1.1));gg.add(mk(G.tor,M(0xc8e4ff,{e:C.glowc[0],ei:1.5}),0,7.4,0,1.3,1.3,1.3,false));gg.add(glow(C.glowc[0],9,0,7.4,0,.55));scene.add(gg)}
-  {const z=-150,gg=new T.Group();gg.position.set(0,h(0,z),z);for(const s of [-1,1]){const p=mk(G.cone0,M(P.rock,{f:1}),s*6.5,5,0,2.6,10,2.6);p.rotation.z=-s*.12;gg.add(p)}
+  {const z=-150,gg=new T.Group();gg.position.set(0,h(0,z),z);for(const s of [-1,1]){const p=mk(G.cone0,M(P.rock,{f:1}),s*6.5,5,0,2.6,10,2.6);p.rotation.z=-s*.12;gg.add(p);addCol(s*6.5,z,1.5)}
     const ring=mk(G.tor,M(C.rift,{e:C.rift,ei:2}),0,5.4,0,5.2,5.6,5.2,false);gg.add(ring);
     const sw=mk(new T.CircleGeometry(1,28),new T.MeshBasicMaterial({color:C.rift,transparent:true,opacity:.45,blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide}),0,5.4,-.4,4.6,5,1,false);gg.add(sw);gg.add(glow(C.rift,12,0,5.4,-1.5,.4));
     const L=new T.PointLight(C.rift,1.1,30,1.6);L.position.set(0,5,3);gg.add(L);scene.add(gg);
@@ -1809,7 +1810,7 @@ addEventListener('pagehide',()=>{if(mode==='play')saveGame(true)});
 ensureBoss();
 camTarget.set(0,2,12);
 requestAnimationFrame(frame);
-window.__zotik={get naut(){return naut},PZD,CUT,openPuzzle,closePuzzle,cutscene,joinParty,CMP,lunOpen,spawnOrun,get puzOpen(){return puzOpen},get W(){return WLD},get ch(){return curCh},INT,CHP,switchWorld,travel,ARENA,herbs,chests,drops,projs,step:(dt,n)=>{for(let i=0;i<n;i++){time+=dt;for(const o of animObjs)o.fn(time,dt);update(dt);updParticles(dt)}},cam:(y,p,d)=>{camYaw=y;camPitch=p;camDist=d},S:()=>S,pl,E,NPC,begin,say,toast,setStage,hurtP,get boss(){return boss},camera,scene,renderer,skill1,skill2,startAttack,dodge,interact,keys};
+window.__zotik={get naut(){return naut},pushOut,INST,blocked,hgt,pBlocked,COL,HOUSES,PZD,CUT,openPuzzle,closePuzzle,cutscene,joinParty,CMP,lunOpen,spawnOrun,get puzOpen(){return puzOpen},get W(){return WLD},get ch(){return curCh},INT,CHP,switchWorld,travel,ARENA,herbs,chests,drops,projs,step:(dt,n)=>{for(let i=0;i<n;i++){time+=dt;for(const o of animObjs)o.fn(time,dt);update(dt);updParticles(dt)}},cam:(y,p,d)=>{camYaw=y;camPitch=p;camDist=d},S:()=>S,pl,E,NPC,begin,say,toast,setStage,hurtP,get boss(){return boss},camera,scene,renderer,skill1,skill2,startAttack,dodge,interact,keys};
 })();
 </script>
 <script src="https://ricorewioriginal-collab.github.io/easygames/cloud/anmacha-cloud.js" data-game="zotik2" data-prefix="zotik2_save_" data-save-btn="#saveBtn" defer></script>
