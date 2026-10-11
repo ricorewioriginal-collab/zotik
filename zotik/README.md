@@ -30,7 +30,12 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
 - **Rätsel** (neue Oberfläche mit Hinweisen, Esc schließt): Lunaris hat Mondtor-Scheiben und Resonanzkristalle, die das Risstor öffnen; jede Welt hat ein eigenes Rätsel (Scheiben, Reihenfolge oder Ventile) vor dem Wächter. Daten `PZD` im Skript, Lösungen in `pz`.
 - **Zwischensequenzen** (Kinobalken, Sprecher mit Porträt): Traum zum Spielstart, Orun-Begegnung und Riss-Vision in Lunaris, Lyras Ankunft, je Welt Ankunft, Rätsel/Ruinen, Boss und Abschluss. Daten `CUT`.
 - **Orun** ist der zweite Boss in Lunaris (nach dem Mondwolf) und gibt die Weltenklinge (+8 Angriff).
-- Noch offen: das Endspiel (sieben Siegel-Dungeons, Enden).
+
+## Endspiel: Weltenriss (Kapitel 11)
+- Öffnet im Weltentor, sobald Elyndra geschafft ist (Ankunfts-Zwischensequenz, Hub mit Veyra, Kael, Eryn, Toren).
+- **Sieben Siegel** im Norden, je mit Zwischensequenz: Weltenbrecher (Der erste Wächter, Die Wurzel ohne Ende, Der Goldene Koloss, Der Sandkönig, Der Abyss, Das Frostherz, Der Feuerkern) → Wächter des Dungeons → Siegel-Rätsel (Scheiben) → Schatzkammer mit Splittern und Tränken. Fortschritt in `end`.
+- **Drei Enden** bei Veyra, wenn alle Siegel gebrochen sind: Getrennt bewahren, Vereinen, Verweben (jeweils mit Zwischensequenz, später änderbar). Gewählt wird in `ending`.
+- Vereinfacht gegenüber dem alten Spiel: Die Dungeons sind Siegel-Stationen mit Wächterkampf statt begehbarer Räume; Nebenaufträge der Figuren, Halle der 100 und NG+ fehlen noch.
 
 ## Grafikupdate (Oktober 2026)
 - Terrain: kleine prozedurale, gekachelte Bodenstruktur sowie feinere Farbvariation; Weg nach Lunaris mit flachen Randsteinen.
