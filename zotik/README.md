@@ -7,6 +7,7 @@ Moderne 3D-Neuaufbau-Variante von **Zotik – Die Splitter der Welten**: eine Da
 - **Figuren nach den Master-Sheets** (`reference/approved/`): Zotik als aufrecht gehender oranger Fuchs mit grünem Schal, Weste, Reiseklinge mit Kristall und buschigem Schwanz mit heller Spitze; Mira (blaue Haare, Mondschmuck), Professorium (Fliegerbrille, Technikrucksack), Felli.
 - **Steuerung**: WASD/Stick bewegen, rechte Maustaste bzw. Wischen = Kamera, J/Klick = Angriff (3er-Kombo), Shift = Ausweichen, 1/2/3 = Funkenwirbel / Lichtstoß / Heiltrank, E = Sprechen, Esc = Menü.
 - **Handy-Steuerung** (Gay-Life-Stil): runder Stick links, rechts max. 4 Tasten – Angriff (groß), Ausweichen (im Nautilux „Turbo"), Fähigkeit (Tippen = gewählte, Halten = Funkenwirbel/Lichtstoß/Heiltrank wählen) und Aktion (Sprechen/Öffnen bzw. Einsteigen/Aussteigen; Halten = Nautilux-Form wählen). Begleiter kämpfen automatisch.
+- **Leistung**: Props werden in Raster-Zellen gezeichnet (nur was im Bild bzw. im Schattenbereich liegt), die Qualität passt sich automatisch an die Bildrate an (Auflösung und Schatten-Takt sinken schrittweise und kehren zurück, wenn es wieder rund läuft).
 - **Speicherstand**: `localStorage`, Schlüssel `zotik2_save_slot1` (Autosave). Das Cloud-Skript aus easygames (`anmacha-cloud.js`, Spielname `zotik2`) hängt sich dort ein; das Godot-Zotik bleibt unberührt.
 
 Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Seite. Das alte Godot-Zotik liegt komplett in `zotik-old/` (Web-Build unter `/zotik-old/`).

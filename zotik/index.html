@@ -207,13 +207,23 @@ function pushOut1(o,r){
 /* ================= Renderer ================= */
 const cv=$('cv');
 const renderer=new T.WebGLRenderer({canvas:cv,antialias:!TOUCH,powerPreference:'high-performance'});
-renderer.setPixelRatio(Math.min(devicePixelRatio||1,TOUCH?1.6:2));
+const PR0=Math.min(devicePixelRatio||1,TOUCH?1.6:2);renderer.setPixelRatio(PR0);
 renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;
 renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
 const scene=new T.Scene();
 const FOG=new T.Color(0x2a3a86);
 scene.fog=new T.FogExp2(FOG,.0037);
 const camera=new T.PerspectiveCamera(58,1,.2,1800);
+/* Automatische Qualität: bricht die Bildrate ein, sinken Auflösung und Schatten-Takt schrittweise; läuft es wieder rund, geht es zurück. */
+const QPR=[1,.8,.65,.5],QSH=[1,2,3,3];let qLv=0,qEma=16.7,qBad=0,qGood=0,qUp=8,qLastUp=-99,shN=0;
+renderer.shadowMap.autoUpdate=false;
+function setQ(l){qLv=l;renderer.setPixelRatio(PR0*QPR[l]);renderer.setSize(innerWidth,innerHeight,false);const sh=l<3;if(moonL.castShadow!==sh)moonL.castShadow=sh}
+function qualityTick(rdt){
+  if(mode!=='play'||menuOpen||rdt>.25||rdt<=0)return;
+  qEma+=(rdt*1000-qEma)*.08;
+  if(qEma>27){qBad+=rdt;qGood=0}else if(qEma<19){qGood+=rdt;qBad=0}else{qBad=qGood=0}
+  if(qBad>1.5&&qLv<3){if(time-qLastUp<25)qUp=Math.min(qUp*2,120);setQ(qLv+1);qBad=0;qEma=20}
+  else if(qGood>qUp&&qLv>0){setQ(qLv-1);qGood=0;qEma=20;qLastUp=time}}
 function resize(){const w=innerWidth,h=innerHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=w/h<.8?70:58;camera.updateProjectionMatrix()}
 addEventListener('resize',resize);resize();
 
@@ -293,6 +303,26 @@ const terrain=(()=>{
 const _m=new T.Matrix4(),_q=new T.Quaternion(),_e=new T.Euler(),_p=new T.Vector3(),_s=new T.Vector3(),_c=new T.Color();
 function inst(geo,mat,n,cast){const im=new T.InstancedMesh(geo,mat,n);im.castShadow=!!cast;scene.add(im);im.userData.n=0;INST.push(im);return im}
 const INST=[];
+/* Instanzen in Raster-Zellen teilen: so schneidet die Kamera (und die Schattenkarte) alles Entfernte weg, statt jedes Mal ganz Lunaris zu zeichnen. */
+function chunkInst(list){
+  const CS=40,out=[];
+  for(const im of list.slice()){
+    const n=im.userData.n,A=im.instanceMatrix.array,K=im.instanceColor&&im.instanceColor.array,g0=im.geometry;
+    if(!g0.boundingSphere)g0.computeBoundingSphere();const gr=g0.boundingSphere.radius,bins=new Map;
+    for(let i=0;i<n;i++){const k=Math.floor(A[i*16+12]/CS)+','+Math.floor(A[i*16+14]/CS);let b=bins.get(k);if(!b)bins.set(k,b=[]);b.push(i)}
+    for(const b of bins.values()){
+      const g=new T.BufferGeometry();g.index=g0.index;for(const nm in g0.attributes)g.setAttribute(nm,g0.attributes[nm]);
+      const c=new T.InstancedMesh(g,im.material,b.length);c.castShadow=im.castShadow;c.receiveShadow=im.receiveShadow;c.frustumCulled=true;
+      let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,z0=1e9,z1=-1e9,ms=0;
+      b.forEach((si,j)=>{c.instanceMatrix.array.set(A.subarray(si*16,si*16+16),j*16);
+        const x=A[si*16+12],y=A[si*16+13],z=A[si*16+14];x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);z0=Math.min(z0,z);z1=Math.max(z1,z);
+        ms=Math.max(ms,Math.hypot(A[si*16],A[si*16+1],A[si*16+2]),Math.hypot(A[si*16+4],A[si*16+5],A[si*16+6]),Math.hypot(A[si*16+8],A[si*16+9],A[si*16+10]))});
+      if(K){c.instanceColor=new T.InstancedBufferAttribute(new Float32Array(b.length*3),3);b.forEach((si,j)=>c.instanceColor.array.set(K.subarray(si*3,si*3+3),j*3))}
+      const cx=(x0+x1)/2,cy=(y0+y1)/2,cz=(z0+z1)/2;
+      g.boundingSphere=new T.Sphere(new T.Vector3(cx,cy,cz),Math.hypot(x1-x0,y1-y0,z1-z0)/2+gr*ms+.5);
+      c.userData.n=b.length;scene.add(c);INST.push(c);out.push(c)}
+    scene.remove(im);const ix=INST.indexOf(im);if(ix>=0)INST.splice(ix,1);im.dispose()}
+  return out}
 function put(im,x,y,z,sx,sy,sz,ry,col,rx,rz){_e.set(rx||0,ry||0,rz||0);_q.setFromEuler(_e);_m.compose(_p.set(x,y,z),_q,_s.set(sx,sy,sz));const i=im.userData.n++;im.setMatrixAt(i,_m);if(col!==undefined)im.setColorAt(i,_c.set(col))}
 const TRUNK=new T.CylinderGeometry(.5,.8,1,7),CAN=new T.IcosahedronGeometry(1,1),PINE=new T.ConeGeometry(1,1,8);
 const iTrunk=inst(TRUNK,new T.MeshStandardMaterial({color:0xffffff,roughness:.9}),520,true);
@@ -354,6 +384,7 @@ function nearPath(x,z,d){return z<44&&z>-160&&Math.abs(x-PATHX(z))<d}
     const scale=.3+pathRand()*.38;put(iPave,x,h+.055,z,scale,.07,scale*(.65+pathRand()*.7),pathRand()*6.28,i%5===0?0xb9acc0:0xb9af9e)}
 })();
 for(const im of INST){im.count=im.userData.n;im.instanceMatrix.needsUpdate=true;if(im.instanceColor)im.instanceColor.needsUpdate=true}
+chunkInst(INST);
 
 /* ================= Dorf, Tore, schwebende Inseln ================= */
 const A=(g,m)=>(g.add(m),m);
@@ -964,7 +995,8 @@ function updTouchBtns(){if(!TOUCH)return;let i='✋',l='Aktion',idle=false;
   if(i!==luI){luI=i;$('bUseI').textContent=i}if(l!==luL){luL=l;$('bUseL').textContent=l;$('bUse').classList.toggle('idle',idle)}
   const k=SKS[selSk()],t=k.em+'|'+(k.cd?S.potions:'');if(t!==lsI){lsI=t;$('bSkI').textContent=k.em;$('bSkL').textContent=k.s;const n=$('bSkN');n.hidden=selSk()!==2;n.textContent=S.potions}
   const dl=naut.on?'Turbo':'Ausweichen';if($('bDodge').lastChild.textContent!==dl)$('bDodge').lastChild.textContent=dl;
-  const c=SKS[selSk()],v=pl.cd[c.cd]>0?pl.cd[c.cd]/c.cdt:0;$('bSkill').querySelector('.cd').style.transform=`scaleY(${v})`;$('bSkill').style.opacity=(c.mp&&S.mp<c.mp)?.55:1}
+  const c=SKS[selSk()],v=pl.cd[c.cd]>0?Math.round(pl.cd[c.cd]/c.cdt*50)/50:0;if(v!==lsCd){lsCd=v;$('bSkill').querySelector('.cd').style.transform=`scaleY(${v})`}const op=(c.mp&&S.mp<c.mp)?.55:1;if(op!==lsOp){lsOp=op;$('bSkill').style.opacity=op}}
+let lsCd=-1,lsOp=-1;
 $('menuBtn').addEventListener('pointerdown',e=>{e.stopPropagation();initAudio();if(mode==='play'&&!dlg.on)toggleMenu(true)});
 
 /* ================= Kampf des Spielers ================= */
@@ -1052,6 +1084,7 @@ function animPlayer(dt){
   const draw=pl.atk>=0||pl.spin>0||pl.sheath>0;f.handSword.visible=draw;f.backSword.visible=!draw;
   auraL.position.set(pl.x,pl.y+2.2,pl.z);
 }
+let lastPr='';
 function updateNpcs(dt){
   nearI=null;let nd=3.9;
   for(const n of NPC){n.t+=dt;const dx=pl.x-n.x,dz=pl.z-n.z,d=Math.hypot(dx,dz);
@@ -1062,7 +1095,7 @@ function updateNpcs(dt){
   for(const c of chests){if(S.chests[c.id])continue;const d=Math.hypot(pl.x-c.x,pl.z-c.z);if(d<nd&&d<2.8){nd=d;nearI=c}}
   for(const c of INT){if(c.vis&&!c.vis())continue;const d=Math.hypot(pl.x-c.x,pl.z-c.z);if(d<nd&&d<(c.rad||3)){nd=d;nearI=c}}
   const pr=$('prompt');
-  if(nearI&&!dlg.on&&!pl.dead){pr.hidden=false;pr.innerHTML=TOUCH?(nearI.pr||'Sprechen'):`<b>E</b> ${nearI.pr||'Sprechen'}${nearI.name?': '+nearI.name:''}`;}else{pr.hidden=true}updTouchBtns();
+  if(nearI&&!dlg.on&&!pl.dead){const h=TOUCH?(nearI.pr||'Sprechen'):`<b>E</b> ${nearI.pr||'Sprechen'}${nearI.name?': '+nearI.name:''}`;if(h!==lastPr){lastPr=h;pr.innerHTML=h}if(pr.hidden)pr.hidden=false}else if(!pr.hidden){pr.hidden=true}updTouchBtns();
   /* Kräuter & Drops */
   for(const h of herbs){if(S.got[h.id]){h.m.visible=false;continue}h.m.rotation.y=time*.5;h.m.children[h.m.children.length-1].material.opacity=.6+Math.sin(time*3)*.2;if(Math.hypot(pl.x-h.x,pl.z-h.z)<1.6&&!pl.dead){S.got[h.id]=1;h.m.visible=false;emit(h.x,hgt(h.x,h.z)+.6,h.z,0x8affc0,20,3,.8,.6,-2);giveHerb()}}
   for(let i=drops.length-1;i>=0;i--){const d=drops[i];d.t+=dt;const gy=hgt(d.x,d.z)+.35;
@@ -1093,6 +1126,7 @@ function updateCamera(dt){
 /* HUD */
 let lh=-1,lm=-1,lx=-1,ll=-1,lp=-1,lc=[];
 const eb=[];for(let i=0;i<6;i++){const d=document.createElement('div');d.className='eb';d.hidden=true;d.innerHTML='<i></i>';fxL.appendChild(d);eb.push(d)}
+let lo1=-1,lo2=-1;
 function updateHud(){
   const h=Math.round(S.hp),m=Math.floor(S.mp);
   if(h!==lh){lh=h;$('hpb').style.width=(S.hp/maxHp()*100)+'%';$('hpt').textContent=h+' / '+maxHp()}
@@ -1101,7 +1135,7 @@ function updateHud(){
   if(S.potions!==lp){lp=S.potions;$('potn').textContent=S.potions}
   const cds=[['sk1',pl.cd.s1,2.6],['sk2',pl.cd.s2,2.8],['sk3',pl.cd.s3,1.5]];
   cds.forEach((c,i)=>{const v=c[1]>0?c[1]/c[2]:0;if(Math.abs((lc[i]||0)-v)>.01){lc[i]=v;$(c[0]).querySelector('.cd').style.transform=`scaleY(${v})`}});
-  $('sk1').style.opacity=S.mp<18?.55:1;$('sk2').style.opacity=S.mp<22?.55:1;
+  const o1=S.mp<18?.55:1,o2=S.mp<22?.55:1;if(o1!==lo1){lo1=o1;$('sk1').style.opacity=o1}if(o2!==lo2){lo2=o2;$('sk2').style.opacity=o2}
   let k=0;
   for(const e of E){if(k>=eb.length)break;if(e.dead||e.boss||e.barT<=0)continue;const s=toScreen(e.x,e.m.root.position.y+1.9*e.d.sc,e.z);if(!s)continue;const d=eb[k++];d.hidden=false;d.style.left=s[0]+'px';d.style.top=s[1]+'px';d.firstChild.style.width=Math.max(0,e.hp/e.max*100)+'%'}
   for(;k<eb.length;k++)eb[k].hidden=true;
@@ -1138,7 +1172,7 @@ function update(dt){
   if(!frozen){for(const e of E){const dd=Math.abs(e.x-pl.x)+Math.abs(e.z-pl.z);if(dd<160||e.boss)updEnemy(e,dt)}updateProjs(dt);updCmp(dt)}
   updateNpcs(dt);updateFelli(dt);animPlayer(dt);dlgTick(dt);updateCamera(dt);
   moonL.position.set(pl.x+MOON_DIR.x*100,pl.y+MOON_DIR.y*100,pl.z+MOON_DIR.z*100);moonL.target.position.set(pl.x,pl.y,pl.z);
-  updateHud();checkZone();drawMapT+=dt;if(drawMapT>.05){drawMapT=0;drawMap()}
+  updateHud();checkZone();drawMapT+=dt;if(drawMapT>(TOUCH?.1:.05)){drawMapT=0;drawMap()}
   autoT+=dt;if(autoT>25){autoT=0;if(!pl.dead)saveGame(true)}
 }
 let drawMapT=0;
@@ -1150,11 +1184,12 @@ function titleCam(dt){const a=Math.sin(time*.1)*.7;fox.root.position.set(0,hgt(0
 function creatorCam(dt){const y=hgt(0,12);fox.root.position.set(0,y,12);fox.root.rotation.y=cr.rot;animFox(fox,time,0,-1);fox.backSword.visible=true;
   const asp=innerWidth/innerHeight;camera.position.set(0,y+1.15,12+(asp<.8?4.6:3.5));camera.lookAt(0,y+.95,12);if(asp>1.3)camera.translateX(1.1);else camera.translateY(-.55);moonL.position.set(MOON_DIR.x*100,MOON_DIR.y*100,12+MOON_DIR.z*100);moonL.target.position.set(0,0,12);auraL.position.set(0,2.5,12);felli.root.position.set(1.4,hgt(1.4,11),11);felli.root.rotation.y=-.5;for(const n of NPC){n.P.root.rotation.y=n.face;animHuman(n.P,time+n.t,0)}}
 function frame(now){
-  requestAnimationFrame(frame);let dt=Math.min((now-lastT)/1000,.05);lastT=now;time+=dt;
+  requestAnimationFrame(frame);const rdt=(now-lastT)/1000;let dt=Math.min(rdt,.05);lastT=now;time+=dt;qualityTick(rdt);
   for(const o of animObjs)o.fn(time,dt);
   if(mode==='title')titleCam(dt);else if(mode==='creator')creatorCam(dt);else if(!menuOpen)update(dt);
   ffMat.uniforms.t.value=time;ffMat.uniforms.cen.value.set(camTarget.x||0,(camTarget.y||2)-1.5,camTarget.z||12);ffMat.uniforms.k.value=innerHeight*.6;
   if(!menuOpen)updParticles(dt);
+  if(++shN>=QSH[qLv]){shN=0;renderer.shadowMap.needsUpdate=true}
   renderer.render(scene,camera);
   if(first){first=false;$('load').remove()}
 }
@@ -1626,7 +1661,8 @@ function buildWorld(n){
   /* Gebäude-Skyline (Valdoria) */
   if(C.trees.includes('tower')){let t=0;tries=0;while(t<46&&tries++<2000){const x=rr(-120,120),z=rr(-220,60);if(!free(x,z,42)||Math.hypot(x,z)<42)continue;const w=rr(5,10),d=rr(5,10),hb=rr(8,24),bg=new T.Group();bg.position.set(x,h(x,z),z);bg.rotation.y=R()*3;
     bg.add(mk(G.box,M(rp([0x5a5a70,0x6a5a60,0x4a5068]),{r:.9}),0,hb/2,0,w,hb,d));for(let j=0;j<Math.floor(hb/3);j++)bg.add(mk(G.box,M(0xffc060,{e:0xffa030,ei:1.1}),0,2+j*3,d/2+.03,w*.7,.7,.05,false));bg.add(mk(G.box,M(C.hub[2]),0,hb+.4,0,w+.5,.8,d+.5));scene.add(bg);addCol(x,z,Math.hypot(w,d)/2);t++}}
-  for(const im of INST){im.count=im.userData.n;im.instanceMatrix.needsUpdate=true;if(im.instanceColor)im.instanceColor.needsUpdate=true}
+  for(const im of ims){im.count=im.userData.n;im.instanceMatrix.needsUpdate=true;if(im.instanceColor)im.instanceColor.needsUpdate=true}
+  ims.splice(0,ims.length,...chunkInst(ims));
   /* Marktplatz: Mittelpunkt, Häuser, Laternen */
   {const gc=new T.Group();gc.position.set(0,h(0,0),0);const gl0=C.glowc[0];
     gc.add(mk(G.cyl,M(0x8d93b0,{r:.6}),0,.3,0,3.2,.6,3.2));gc.add(mk(G.cyl,M(gl0,{e:gl0,ei:.9,r:.2,t:.8}),0,.6,0,2.8,.06,2.8,false));gc.add(mk(G.cyl,M(0x9aa0be),0,1.1,0,.45,1.2,.45));
@@ -1849,7 +1885,7 @@ addEventListener('pagehide',()=>{if(mode==='play')saveGame(true)});
 ensureBoss();
 camTarget.set(0,2,12);
 requestAnimationFrame(frame);
-window.__zotik={get naut(){return naut},pushOut,INST,blocked,hgt,pBlocked,COL,HOUSES,PZD,CUT,openPuzzle,closePuzzle,cutscene,joinParty,CMP,lunOpen,spawnOrun,get puzOpen(){return puzOpen},get W(){return WLD},get ch(){return curCh},INT,CHP,switchWorld,travel,ARENA,herbs,chests,drops,projs,step:(dt,n)=>{for(let i=0;i<n;i++){time+=dt;for(const o of animObjs)o.fn(time,dt);update(dt);updParticles(dt)}},cam:(y,p,d)=>{camYaw=y;camPitch=p;camDist=d},S:()=>S,pl,E,NPC,begin,say,toast,setStage,hurtP,get boss(){return boss},camera,scene,renderer,skill1,skill2,startAttack,dodge,interact,keys};
+window.__zotik={get qLv(){return qLv},setQ,get naut(){return naut},pushOut,INST,blocked,hgt,pBlocked,COL,HOUSES,PZD,CUT,openPuzzle,closePuzzle,cutscene,joinParty,CMP,lunOpen,spawnOrun,get puzOpen(){return puzOpen},get W(){return WLD},get ch(){return curCh},INT,CHP,switchWorld,travel,ARENA,herbs,chests,drops,projs,step:(dt,n)=>{for(let i=0;i<n;i++){time+=dt;for(const o of animObjs)o.fn(time,dt);update(dt);updParticles(dt)}},cam:(y,p,d)=>{camYaw=y;camPitch=p;camDist=d},S:()=>S,pl,E,NPC,begin,say,toast,setStage,hurtP,get boss(){return boss},camera,scene,renderer,skill1,skill2,startAttack,dodge,interact,keys};
 })();
 </script>
 <script src="https://ricorewioriginal-collab.github.io/easygames/cloud/anmacha-cloud.js" data-game="zotik2" data-prefix="zotik2_save_" data-save-btn="#saveBtn" defer></script>
