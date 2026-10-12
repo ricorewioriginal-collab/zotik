@@ -982,3 +982,8 @@ Owner: "bewegen, schlagen ist nicht synchron … man weiß nicht, wie was funkti
 ## W23 – Zotik-Generator leichter (2026-10-11)
 Owner: "der zotik generator screen hängt im web noch sehr, auf android ist er langsam".
 Messung im Browser-Nachbau (Software-GL): Titel 16 fps, Generator 7 fps. Auf Niedrig/Mittel wird die Vorschau jetzt mit 20 Bildern/s von Hand neu gezeichnet (UPDATE_ONCE), Zotik steht in stiller Pose (keine Skelett-Aktualisierung) und ohne Fell-/Gesichtsfeinheiten. Hoch bleibt unverändert. Test: test_w23_creator_cost (2).
+
+## WEB-KH-LUFIA – Browser-Zotik: Kingdom-Hearts- und Lufia-Elemente (2026-10-13)
+Owner: „Elemente aus Lufia und Kingdom Hearts … richtig verdrahtet“, alle acht gewählten Systeme in einem Pull Request.
+Befehlsleiste, Zielerfassung, Reaktionsbefehle, Team-Angriffe, Rissform/Sternform, Ausrüstung + IP, Felli als Kapselmonster, Werkzeug-Ruinen, Uralte Höhle.
+Plan, Annahmen und Ergebnisse: `docs/WEB_KH_LUFIA_PLAN.md`. Regression und Systemtests im Headless-Browser ausgeführt, ohne Fehler.
