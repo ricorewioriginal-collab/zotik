@@ -67,3 +67,11 @@ Prüfung: Inline-JavaScript syntaktisch geprüft; vollständiger Weltaufbau mit 
 - Der Gastgeber rechnet die Gegner, der Gast schickt seine Treffer. Weltwechsel (Weltentor), Halle der 100 und Neues Spiel+ löst nur der Gastgeber aus; der Gast folgt automatisch.
 - Gespeichert wird nur beim Gastgeber (der Gast schreibt keinen Spielstand; Geschichtsfortschritt landet im Spielstand des Gastgebers).
 - Technik: PeerJS (WebRTC) über cdnjs, kein eigener Server, kein TURN. Hinter manchen Mobilfunk- oder Firmennetzen kommt keine direkte Verbindung zustande.
+
+## Wartung (Oktober 2026)
+- Rätsel zeigen ihren Hinweis sofort (📜), Scheiben sind beschriftet (z. B. Himmelsrichtung, Jahreszeit), Säulen benannt, Resonanzkristalle hörbar (🔊).
+- Gesprächsantworten per Tastatur: 1–9 oder Pfeiltasten + Enter/E.
+- Casino ist bei neuen Spielständen aus; ein-/ausschalten im Menü „Steuerung“ → Optionen.
+- Gefährten laufen seitlich neben Zotik statt zwischen Kamera und Spieler.
+- Weniger Draw-Calls (statische Teile von Häusern, Figuren, Inseln und Wahrzeichen werden verschmolzen); Weltwechsel gibt Grafikspeicher wieder frei.
+- `window.__zotik` (Test-Zugang) gibt es nur noch auf localhost oder mit `?debug` in der Adresse.
