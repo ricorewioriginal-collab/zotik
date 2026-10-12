@@ -59,3 +59,11 @@ Ordner: Dieses Spiel liegt jetzt in `zotik/` und ist die Startseite der Pages-Se
 - Etwas klareres Mondlicht und weniger dichter Fernnebel. Speicherformat, Kollisionen und Weltpositionen bleiben gleich.
 
 Prüfung: Inline-JavaScript syntaktisch geprüft; vollständiger Weltaufbau mit Three.js r128 und simuliertem Renderer geprüft. Alle zehn Instancing-Gruppen bleiben innerhalb ihrer Kapazität, und die 592 Kollisionskreise entsprechen exakt dem vorherigen Stand. Ein echter Browser- oder Handytest war in dieser Umgebung nicht möglich.
+
+## Koop: zu zweit spielen
+- Gastgeber: Pause-Menü → Reiter „Koop“ → „Raum öffnen“. Es erscheinen ein 4-stelliger Code, ein QR-Code und ein Link (`#join=CODE`).
+- Mitspieler: Titelmenü → „Mitspielen“ → Code eintippen (oder QR-Code scannen / Link öffnen). Der zweite Zotik hat andere Fell-, Schal- und Kleidungsfarben und ein Namensschild.
+- Beide sind in derselben Welt: Gegner, Bosse, Truhen, Rätsel, Begleiter und der Geschichtsstand (Stufen, Kapitel, Aufgaben) werden gemeinsam abgeglichen. Leben, Mana, Erfahrung, Splitter und Tränke behält jeder für sich.
+- Der Gastgeber rechnet die Gegner, der Gast schickt seine Treffer. Weltwechsel (Weltentor), Halle der 100 und Neues Spiel+ löst nur der Gastgeber aus; der Gast folgt automatisch.
+- Gespeichert wird nur beim Gastgeber (der Gast schreibt keinen Spielstand; Geschichtsfortschritt landet im Spielstand des Gastgebers).
+- Technik: PeerJS (WebRTC) über cdnjs, kein eigener Server, kein TURN. Hinter manchen Mobilfunk- oder Firmennetzen kommt keine direkte Verbindung zustande.
