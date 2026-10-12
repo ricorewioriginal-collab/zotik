@@ -75,3 +75,13 @@ Prüfung: Inline-JavaScript syntaktisch geprüft; vollständiger Weltaufbau mit 
 - Gefährten laufen seitlich neben Zotik statt zwischen Kamera und Spieler.
 - Weniger Draw-Calls (statische Teile von Häusern, Figuren, Inseln und Wahrzeichen werden verschmolzen); Weltwechsel gibt Grafikspeicher wieder frei.
 - `window.__zotik` (Test-Zugang) gibt es nur noch auf localhost oder mit `?debug` in der Adresse.
+
+## Kingdom-Hearts- und Lufia-Elemente (Oktober 2026)
+Plan, Annahmen und Testergebnisse: `docs/WEB_KH_LUFIA_PLAN.md`.
+- **Befehlsleiste** (PC, links unten): Angriff, Magie, Items, Spezial, Werkzeug – ↑ ↓ Enter, ⌫ zurück, oder klicken.
+- **Zielerfassung** Q / 🎯, **Reaktionsbefehle** F / Aktion-Taste (Konter, Mondsprung, Reflektor, Finisher).
+- **Team-Angriffe** (T) mit Lyra, Nia, Rovan; **Rissform/Sternform** (G) über die Rissleiste.
+- **Ausrüstung** (Waffe, Rüstung, Schmuck) mit **IP-Techniken** (4/5/6); IP füllt sich bei Treffern auf Zotik. Menüseite „Ausrüstung“.
+- **Felli als Kapselmonster**: kämpft mit, frisst Heiltrank/Äther/Kristallfrucht/Splitter, entwickelt sich (Blütling, Dornling, Waldgeist). Menüseite „Felli“.
+- **Werkzeuge** (Enterhaken, Bombe, Feuerstab, Eisstab) als Belohnung für Kapitel 2–5; in jeder Welt eine **Werkzeug-Ruine** mit Schatz (C benutzen, X wechseln).
+- **Uralte Höhle** (Eingang in Lunaris nach Kapitel 1): 50 Zufallsebenen, Start mit Stufe 1, blaue Truhen bleiben, Rekord im Inventar.
